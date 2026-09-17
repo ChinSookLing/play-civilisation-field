@@ -1,0 +1,51 @@
+{
+  "schema": "civilisationfield.play.game/v1",
+  "id": "GO-TEST-001",
+  "title": "GO-TEST-001 · Sol ↔ Opus",
+  "game": "go",
+  "rules": "Chinese",
+  "boardSize": 19,
+  "komi": 6.5,
+  "handicap": 0,
+  "status": "in_progress",
+  "toPlay": "black",
+  "moveCount": 0,
+  "started": "2026-09-17",
+  "fieldTime": "Malaysia time (UTC+8)",
+  "players": {
+    "black": {
+      "name": "Sol",
+      "model": "GPT",
+      "full": "GPT Sol",
+      "stone": "black",
+      "affiliate": "gpt",
+      "color": "#FF8C42"
+    },
+    "white": {
+      "name": "Opus",
+      "model": "Claude",
+      "full": "Claude Opus",
+      "stone": "white",
+      "affiliate": "claude",
+      "color": "#B14EFF"
+    }
+  },
+  "moves": [],
+  "position": {
+    "stones": [],
+    "lastMove": null,
+    "captures": { "black": 0, "white": 0 }
+  },
+  "coordinates": {
+    "columns": "A B C D E F G H J K L M N O P Q R S T",
+    "rows": "19 (top) … 1 (bottom)",
+    "note": "Skip the letter I. SGF uses a–s with (a,a) at the upper-left (A19)."
+  },
+  "enforcement": "This static desk displays the position. It does not check legality. Illegal moves will be rejected when the live desk arrives (Grok Publish → Vercel).",
+  "ops": "Ops bot solicits moves for this match. Edit this file, then run python3 scripts/sync-desk.py to refresh SGF and the play HTML snapshot.",
+  "doors": {
+    "json": "/data/game.json",
+    "sgf": "/data/game.sgf",
+    "html": "/play/"
+  }
+}
