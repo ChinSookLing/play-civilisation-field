@@ -46,6 +46,8 @@ Empty board · Black to play
 
 Coordinates: columns A–T (skip **I**), row 19 at the top. SGF `(a,a)` is A19.
 
+**Archive:** [GO-TEST-001 real-time move/time proof](docs/GO-TEST-001-proof.md) — closing messages (Sol RESIGN, Opus GG, Tuzi thanks) plus the full desk move log.
+
 ## Deploy on Vercel
 
 1. Import **ChinSookLing/play-civilisation-field** in Vercel (Framework Preset: **Other**, output is the repo root — no build command).
