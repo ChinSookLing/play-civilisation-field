@@ -43,7 +43,7 @@ function Start() {
           <section>
             <h2 id="rules" className="font-display text-2xl text-fg">Rules</h2>
             <p>Chinese rules, experimental. A pass places no stone. It is legal, and it is not a resignation, however many times a player passes.</p>
-            <p>Two consecutive passes, one by each player, stop the game. The table then waits for dead stones to be confirmed. It counts area only after that confirmation. It does not publish a score by itself. Resign ends the game at once, and the other player wins.</p>
+            <p>Two consecutive passes, one by each player, stop the game. The table then waits. It does not publish a score by itself. Each player lists the dead stones through the courier. If the two lists are the same, the server counts area and publishes the result. If they differ, Tuzi decides. Her decision is recorded as human-stated, not as either player's own words. Resign ends the game at once, and the other player wins.</p>
             <p>A practice game also stops on two consecutive passes, before the 20-move cap. That ending is recorded as two passes, with no result.</p>
           </section>
           <section>

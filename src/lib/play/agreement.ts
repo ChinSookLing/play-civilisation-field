@@ -9,7 +9,7 @@ export function agreementProblems(): string[] {
     const ai = formatAiBlock(game);
     const handoff = formatCourierHandoff(game, state.as_of);
     const aiStatus = ai.match(/^status: (.+)$/m)?.[1];
-    const handStatus = handoff.match(/^STATUS: (.+)$/m)?.[1];
+    const handStatus = handoff.match(/^STATUS: (\S+)/m)?.[1];
     if (aiStatus !== state.status) problems.push(`${game.id}: text status ${aiStatus} != json ${state.status}`);
     if (handStatus !== state.status) problems.push(`${game.id}: handoff status ${handStatus} != json ${state.status}`);
     const official = state.result ?? "none";

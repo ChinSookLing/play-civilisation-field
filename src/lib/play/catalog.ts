@@ -198,7 +198,7 @@ export function toPublicState(game: PlayGame, since = 0): PublicGameState {
     board: formatAsciiBoard(played.board),
     dispatch: game.dispatch,
     ...recordOutcome(game),
-    state_version: tableIsOpen(game.status) ? expectedMoveNumber(game) : null,
+    state_version: game.moves.length,
     started_at: game.startedAt,
     updated_at: game.updatedAt,
     move_history: game.moves.map((move) => ({
@@ -298,7 +298,7 @@ export function gameRecord(game: PlayGame) {
       credit: "Tuzi and Affiliates, The Civilisation Field",
       source: "Tuzi, 2026-09-27. Guest replies and comments are included.",
     },
-    state_version: tableIsOpen(game.status) ? expectedMoveNumber(game) : null,
+    state_version: game.moves.length,
   };
 }
 
@@ -440,7 +440,8 @@ export function formatAiBlock(game: PlayGame): string {
         : "reference_score: none",
     );
   }
-  lines.push(`state_version: ${state.state_version ?? "none"} (same number as expected_move_number)`);
+  lines.push(`state_version: ${state.state_version ?? "none"} (accepted moves)`);
+  lines.push(`expected_move_number: ${state.expected_move_number ?? "none"}`);
   lines.push("", "HISTORY:");
   const events = timeline(game);
   if (events.length === 0) lines.push("(empty table)");
@@ -590,7 +591,7 @@ export function formatCourierHandoff(game: PlayGame, asOf = nowIso()): string {
     "PLAY HANDOFF — one complete message. Do not split. On failure, resend this whole message.",
     "",
     `GAME: ${game.id}`,
-    `STATUS: ${game.status}`,
+    `STATUS: ${game.status}${game.status === "scheduled" ? " — becomes live when move 1 is accepted" : ""}`,
     `RESULT: ${resolvedResult(game) ?? "none"}`,
     `RECORD_KIND: ${game.kind}`,
     `AS_OF: ${asOf}`,

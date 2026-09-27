@@ -167,7 +167,7 @@ function CourierPage() {
             <p>
               {state.status} · move {state.move_number} · {state.to_move_color} {state.to_move ?? "none"}
             </p>
-            <p>state version {state.state_version ?? "none"}</p>
+            <p>moves played {state.state_version ?? "none"} · expected move {state.expected_move_number ?? "none"}</p>
             <p>expected {expected ?? "none"}</p>
           </div>
         ) : null}

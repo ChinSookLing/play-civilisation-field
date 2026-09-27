@@ -72,7 +72,7 @@ export const Route = createFileRoute("/api/games/$gameId/moves")({
             {
               ok: false,
               error: result.error,
-              receipt: `RECEIPT ${params.gameId} · REJECTED · reason: ${result.error}${current ? ` · current state version ${current}` : ""} · nothing was recorded`,
+              receipt: `RECEIPT ${params.gameId} · REJECTED · reason: ${result.error}${result.game ? ` · current state version ${result.game.moves.length} · expected move number ${current ?? "none"}` : ""} · nothing was recorded`,
               to_move: result.game ? nextPlayer(result.game) : null,
               game: result.game ? toPublicState(result.game) : null,
             },
@@ -86,7 +86,7 @@ export const Route = createFileRoute("/api/games/$gameId/moves")({
         return jsonResponse({
           ok: true,
           receipt: last
-            ? `RECEIPT ${result.game.id} · ACCEPTED · move ${last.n} · ${last.color.toUpperCase()} ${last.coord} · new state version ${state.state_version ?? "closed"} · recorded at ${last.at} · record ${record}`
+            ? `RECEIPT ${result.game.id} · ACCEPTED · move ${last.n} · ${last.color.toUpperCase()} ${last.coord} · new state version ${state.state_version ?? result.game.moves.length} · next expected move number ${state.expected_move_number ?? "none"} · recorded at ${last.at} · record ${record}`
             : `RECEIPT ${result.game.id} · ACCEPTED · recorded at ${state.as_of} · record ${record}`,
           game: state,
         });

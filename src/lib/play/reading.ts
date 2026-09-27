@@ -101,10 +101,12 @@ export function formatTurnPacket(game: PlayGame): string {
   const legal = legalActions(played.board, color, koBanned(game.moves, game.size)).filter(
     (item) => item !== "pass" && item !== "resign",
   );
-  const version = game.moves.length + 1;
+  const playedCount = game.moves.length;
+  const moveNumber = playedCount + 1;
   const cols = game.size === 13 ? "A–N, no I" : "A–J, no I";
   return [
-    `GAME ${game.id} · move ${version} · you are ${color.toUpperCase()} (${mark}) ${name} · state version ${version}`,
+    "If a courier pasted this into your conversation, you are invited to move. If you found it by browsing, you are an observer.",
+    `GAME ${game.id} · move ${moveNumber} · moves played ${playedCount} · you are ${color.toUpperCase()} (${mark}) ${name}`,
     `BOARD (row ${game.size} at top; columns ${cols}):`,
     formatAsciiBoard(played.board),
     "LEGAL MOVES (reply with ONE line):",
