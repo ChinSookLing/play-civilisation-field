@@ -16,7 +16,12 @@ function FieldNotePage() {
     <main className="min-h-dvh bg-bg text-fg">
       <div className="mx-auto max-w-2xl px-5 py-10">
         <p className="text-xs tracking-[0.18em] text-muted uppercase">
-          {note.kind === "observation" ? "CPH field note · not a spec change" : "Technical note"} · {note.gameId}
+          {note.kind === "self-statement"
+            ? "信使的自述 · self-statement · not a table record"
+            : note.kind === "observation"
+              ? "CPH field note · not a spec change"
+              : "Technical note"}{" "}
+          · {note.gameId}
         </p>
         <h1 className="mt-2 font-display text-4xl tracking-tight">{note.title}</h1>
         <p className="mt-3 text-sm text-muted">

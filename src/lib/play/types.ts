@@ -17,7 +17,8 @@ export type AffiliateId =
   | "glm"
   | "mistral"
   | "tuzi"
-  | "chief";
+  | "chief"
+  | "puck";
 
 export type MoveSource = "courier" | "api" | "inferred";
 

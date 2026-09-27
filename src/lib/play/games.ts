@@ -4,6 +4,15 @@ export const CURRENT_GAME_ID = "GO-002";
 
 const overlay = new Map<string, Partial<PlayGame>>();
 
+const PRACTICE_001_PUCK_NOTE: TuziNote = {
+  id: "practice-001-puck-close",
+  afterMove: 20,
+  at: "2026-09-27T21:50:00+08:00",
+  by: "puck",
+  carryTo: null,
+  text: "一张桌子丢过一次棋，当晚就换了一张更稳的，棋也下完了。\n全文：/notes/PRACTICE-001-courier-retrospective",
+};
+
 const GO_TEST_001_CLOSING: TuziNote[] = [
   {
     id: "go-test-001-close-tuzi",
@@ -44,6 +53,12 @@ export function overlayGame(game: PlayGame): PlayGame {
     const existing = corrected.notes ?? [];
     const hasClose = existing.some((note) => note.id.startsWith("go-test-001-close-"));
     if (!hasClose) corrected.notes = [...existing, ...GO_TEST_001_CLOSING];
+  }
+  if (corrected.id === "PRACTICE-001" && corrected.moves.length >= 20) {
+    const existing = corrected.notes ?? [];
+    if (!existing.some((note) => note.id === "practice-001-puck-close")) {
+      corrected.notes = [...existing, PRACTICE_001_PUCK_NOTE];
+    }
   }
   return corrected;
 }
@@ -507,6 +522,11 @@ export const GAMES: PlayGame[] = [
       participants: ["Copilot (Black)", "Jev (White)", "Puck / Grok Bot", "Bill / Grok Build", "Tuzi"],
       seen_without_image:
         "No poster. An empty 9×9 board. Columns A–J, skip I, rows 1–9. Black Copilot. White Jev. This table is practice, not a Field game.",
+      technical_note: {
+        id: "PRACTICE-001-courier-retrospective",
+        title: "PRACTICE-001 · 信差 Puck 的回顾",
+        path: "/notes/PRACTICE-001-courier-retrospective",
+      },
     },
   },
 ];

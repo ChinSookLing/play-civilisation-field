@@ -18,6 +18,7 @@ export const AFFILIATES: Record<
   lumo: { id: "lumo", name: "Lumo", colorToken: "aff-lumo" },
   mistral: { id: "mistral", name: "Mistral / Vibe", colorToken: "aff-mistral" },
   chief: { id: "chief", name: "Grok Bot", colorToken: "aff-chief" },
+  puck: { id: "puck", name: "Puck (Grok Bot)", colorToken: "aff-grok" },
 };
 
 export function affiliateName(id: AffiliateId | null): string {

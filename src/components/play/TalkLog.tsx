@@ -17,6 +17,7 @@ const EDGE: Record<string, string> = {
   deepseek: "border-aff-deepseek",
   gemini: "border-aff-gemini",
   jev: "border-aff-jev",
+  puck: "border-aff-grok",
   gpt: "border-aff-gpt",
   grok: "border-aff-grok",
   copilot: "border-aff-copilot",
@@ -117,7 +118,11 @@ export function TalkLog({ game, events, waiting }: Props) {
                   <span>{noteSpeaker(game, event.note.by)}</span>
                 </p>
                 <p className="mt-0.5 text-sm text-muted">
-                  {(event.note.by ?? "tuzi") === "tuzi" ? "via Grok Bot" : "终局 · closing"}
+                  {(event.note.by ?? "tuzi") === "tuzi"
+                    ? "via Grok Bot"
+                    : event.note.by === "puck"
+                      ? "信使的自述 · self-statement"
+                      : "终局 · closing"}
                 </p>
                 <p className="mt-0.5 font-mono text-sm tabular-nums text-muted">
                   {formatMytLong(event.note.at)}
