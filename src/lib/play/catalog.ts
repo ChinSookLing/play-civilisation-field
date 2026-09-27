@@ -94,7 +94,7 @@ export function colorLabel(game: PlayGame, color: "black" | "white"): string {
 
 export function recordOutcome(game: PlayGame): {
   result: string | null;
-  end_reason: "resign" | "pass-pass" | "timeout" | "score" | "practice cap" | null;
+  end_reason: "resign" | "pass-pass" | "two passes" | "timeout" | "score" | "practice cap" | null;
   reference_score: { value: string; method: string; note: string } | null;
 } {
   if (game.status !== "finished") {
@@ -105,6 +105,9 @@ export function recordOutcome(game: PlayGame): {
   const withoutReference = stored.replace(/\s*Reference:\s*.+$/, "").trim();
   if (game.kind === "PRACTICE" && withoutReference === "no result (practice)") {
     return { result: "no result (practice)", end_reason: "practice cap", reference_score: null };
+  }
+  if (game.kind === "PRACTICE" && withoutReference === "two passes") {
+    return { result: "no result (practice)", end_reason: "two passes", reference_score: null };
   }
   const last = game.moves.at(-1);
   let end_reason: "resign" | "pass-pass" | "timeout" | "score" | null = null;
@@ -979,7 +982,11 @@ export function submitMove(id: string, input: SubmitMoveInput): SubmitMoveResult
   let status: PlayGame["status"] = "live";
   let result: string | null = null;
   let dispatch = `Grok Bot is carrying the board to ${nextLabel}… Waiting for ${nextLabel}.`;
-  if (game.kind === "PRACTICE" && moves.length >= 20) {
+  if (game.kind === "PRACTICE" && bothPassed) {
+    status = "finished";
+    result = "two passes";
+    dispatch = "Two consecutive passes. The practice ends. No result. Not a Field record.";
+  } else if (game.kind === "PRACTICE" && moves.length >= 20) {
     status = "finished";
     result = "no result (practice)";
     dispatch = "Practice cap. 20 moves. No result. Not a Field record.";

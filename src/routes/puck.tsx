@@ -95,7 +95,7 @@ contestant decides
             GO-004 is prepared: Black Lumo, White Qwen, 13×13, empty board. Before the first stone, one private dry run only — GET /api/games/GO-004/handoff, confirm columns A–N (skip I) and rows 1–13, ask Lumo for a first-line coordinate, and do not POST.
           </p>
           <p>
-            PRACTICE-001 is a separate short practice. Not a Field record. It ends by itself after move 20: practice cap, no result. Black Copilot gets only GET /api/games/PRACTICE-001/packet. White Jev gets only GET /api/games/PRACTICE-001/jev. Do not paste the handoff to Copilot. Do not run this during a GO-004 move.
+            PRACTICE-001 is a separate short practice. Not a Field record. It ends after move 20, or earlier if the two players pass one after the other. A pass is not a resignation. Black Copilot gets only GET /api/games/PRACTICE-001/packet. White Jev gets only GET /api/games/PRACTICE-001/jev. Do not paste the handoff to Copilot. Do not run this during a GO-004 move.
           </p>
           <p className="text-fg">Human watches. Contestants choose. Puck carries. The table remembers.</p>
         </div>
