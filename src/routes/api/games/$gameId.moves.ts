@@ -41,6 +41,7 @@ export const Route = createFileRoute("/api/games/$gameId/moves")({
           confirm_score?: boolean;
           dead?: string[];
           carried_by?: string;
+          tool_record?: { jev_probabilities?: unknown };
         } = {};
         try {
           body = (await request.json()) as typeof body;
@@ -63,6 +64,7 @@ export const Route = createFileRoute("/api/games/$gameId/moves")({
           confirm_score: body.confirm_score === true,
           dead: Array.isArray(body.dead) ? body.dead.filter((item) => typeof item === "string") : undefined,
           carried_by: body.carried_by === "Puck" || body.carried_by === "Tuzi (temporary courier)" ? body.carried_by : undefined,
+          tool_record: readJevProbabilities(body.tool_record),
         });
         if (!result.ok) {
           const current = result.game ? toPublicState(result.game).expected_move_number : null;
@@ -80,14 +82,36 @@ export const Route = createFileRoute("/api/games/$gameId/moves")({
         await savePlayTable(result.game.id);
         const state = toPublicState(result.game);
         const last = result.game.moves.at(-1);
+        const record = `${publicBase(request)}/go/${result.game.id}`;
         return jsonResponse({
           ok: true,
           receipt: last
-            ? `RECEIPT ${result.game.id} · ACCEPTED · move ${last.n} · ${last.color.toUpperCase()} ${last.coord} · new state version ${state.state_version ?? "closed"} · recorded at ${last.at} · record https://play.civilisationfield.com/go/${result.game.id}`
-            : `RECEIPT ${result.game.id} · ACCEPTED · recorded at ${state.as_of} · record https://play.civilisationfield.com/go/${result.game.id}`,
+            ? `RECEIPT ${result.game.id} · ACCEPTED · move ${last.n} · ${last.color.toUpperCase()} ${last.coord} · new state version ${state.state_version ?? "closed"} · recorded at ${last.at} · record ${record}`
+            : `RECEIPT ${result.game.id} · ACCEPTED · recorded at ${state.as_of} · record ${record}`,
           game: state,
         });
       },
     },
   },
 });
+
+function publicBase(request: Request): string {
+  const configured = process.env.PLAY_PUBLIC_BASE_URL?.trim().replace(/\/$/, "");
+  if (configured) return configured;
+  const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host");
+  if (!host) return "https://play.civilisationfield.com";
+  const proto = request.headers.get("x-forwarded-proto") ?? "https";
+  return `${proto}://${host}`;
+}
+
+function readJevProbabilities(value: { jev_probabilities?: unknown } | undefined) {
+  if (!value || !Array.isArray(value.jev_probabilities)) return undefined;
+  const choices = value.jev_probabilities.flatMap((item) => {
+    if (!item || typeof item !== "object") return [];
+    const choice = "choice" in item && typeof item.choice === "string" ? item.choice.trim() : "";
+    const percent = "percent" in item && typeof item.percent === "number" ? item.percent : NaN;
+    if (!choice || choice.length > 16 || !Number.isFinite(percent) || percent < 0 || percent > 100) return [];
+    return [{ choice, percent }];
+  });
+  return choices.length ? { jev_probabilities: choices.slice(0, 8) } : undefined;
+}

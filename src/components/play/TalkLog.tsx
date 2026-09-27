@@ -80,6 +80,15 @@ export function TalkLog({ game, events, waiting }: Props) {
                     「{displayComment(event.move.talk)}」
                   </p>
                 ) : null}
+                {event.move.tool_record?.jev_probabilities.length ? (
+                  <p className="mt-1 text-sm leading-snug text-muted">
+                    TypeSafe 概率 · 工具记录，不是 Jev 的话
+                    <br />
+                    {event.move.tool_record.jev_probabilities
+                      .map((item) => `${item.choice} ${item.percent}%`)
+                      .join(" · ")}
+                  </p>
+                ) : null}
               </li>
             ) : (
               <li

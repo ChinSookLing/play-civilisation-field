@@ -326,6 +326,7 @@ function publicMove(game: PlayGame, move: PlayMove) {
     source,
     coord_source: move.coord_source ?? (source === "inferred" ? "inferred" : "raw"),
     ...(move.carried_by ? { carried_by: move.carried_by } : {}),
+    ...(move.tool_record ? { tool_record: { source: "TypeSafe" as const, note: "工具记录，不是 Jev 的话", jev_probabilities: move.tool_record.jev_probabilities } } : {}),
     raw_fidelity: source === "inferred" ? ("unverified" as const) : ("verified" as const),
     coordinate_evidence: courierCorrection ? ("human-stated" as const) : ("tool-record" as const),
     ...(courierCorrection
@@ -347,7 +348,11 @@ function publicMove(game: PlayGame, move: PlayMove) {
 
 export function displayComment(text: string | undefined): string | null {
   if (!text?.trim()) return null;
-  const lines = text.replace(/\r\n/g, "\n").split("\n");
+  const lines = text
+    .replace(/\r\n/g, "\n")
+    .split("\n")
+    .filter((line) => !/^\s*\[TypeSafe\b/.test(line));
+  if (!lines.length || !lines.join("\n").trim()) return null;
   const first = lines[0]!
     .trim()
     .replace(/^\*+|\*+$/g, "")
@@ -357,7 +362,7 @@ export function displayComment(text: string | undefined): string | null {
     const rest = lines.slice(1).join("\n").trim();
     return rest || null;
   }
-  return text.trim();
+  return lines.join("\n").trim();
 }
 
 export function gameFromPublic(seed: PlayGame, state: PublicGameState): PlayGame {
@@ -738,6 +743,7 @@ export type SubmitMoveInput = {
   confirm_score?: boolean;
   dead?: string[];
   carried_by?: string;
+  tool_record?: { jev_probabilities: Array<{ choice: string; percent: number }> };
 };
 
 export type SubmitMoveResult =
@@ -942,6 +948,7 @@ export function submitMove(id: string, input: SubmitMoveInput): SubmitMoveResult
           source,
           coord_source: "raw",
           ...(input.carried_by ? { carried_by: input.carried_by } : {}),
+          ...(input.tool_record ? { tool_record: input.tool_record } : {}),
         },
       ],
     });
@@ -974,6 +981,7 @@ export function submitMove(id: string, input: SubmitMoveInput): SubmitMoveResult
     source,
     coord_source: "raw",
     ...(input.carried_by ? { carried_by: input.carried_by } : {}),
+    ...(input.tool_record ? { tool_record: input.tool_record } : {}),
   };
   const moves = [...game.moves, move];
   const bothPassed = coord === "pass" && last?.coord === "pass";

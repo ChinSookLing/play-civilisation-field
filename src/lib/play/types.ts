@@ -34,6 +34,9 @@ export type PlayMove = {
   source?: MoveSource;
   coord_source?: "raw" | "courier" | "inferred";
   carried_by?: string;
+  tool_record?: {
+    jev_probabilities: Array<{ choice: string; percent: number }>;
+  };
 };
 
 export type ContestantSessions = Partial<Record<AffiliateId, string>>;
@@ -160,6 +163,11 @@ export type PublicGameState = {
     evidence_source?: string;
     coordinate_note?: string;
     raw_response_evidence: "self-statement" | { value: null; reason: string };
+    tool_record?: {
+      source: "TypeSafe";
+      note: string;
+      jev_probabilities: Array<{ choice: string; percent: number }>;
+    };
   }>;
   tuzi_notes: Array<{
     id: string;

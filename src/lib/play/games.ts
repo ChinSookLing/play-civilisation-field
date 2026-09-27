@@ -37,7 +37,9 @@ export function overlayGame(game: PlayGame): PlayGame {
   if (merged.moves.length === 0 && merged.status === "live") {
     merged = { ...merged, status: "scheduled" };
   }
-  const corrected = correctPractice001(correctGo004(correctGo003(correctGo002(correctGo001(correctGoTest001(merged))))));
+  const corrected = correctPracticeJev(
+    correctPractice001(correctGo004(correctGo003(correctGo002(correctGo001(correctGoTest001(merged)))))),
+  );
   if (corrected.id === "GO-TEST-001" && corrected.moves.length >= 71) {
     const existing = corrected.notes ?? [];
     const hasClose = existing.some((note) => note.id.startsWith("go-test-001-close-"));
@@ -168,6 +170,81 @@ function correctGo003(game: PlayGame): PlayGame {
   });
   if (same) return game;
   return { ...game, notes };
+}
+
+const PRACTICE_001_JEV: Record<number, Array<{ choice: string; percent: number }>> = {
+  2: [
+    { choice: "pass", percent: 35 },
+    { choice: "F5", percent: 14 },
+    { choice: "E6", percent: 12 },
+    { choice: "D5", percent: 7 },
+  ],
+  4: [
+    { choice: "pass", percent: 33 },
+    { choice: "D5", percent: 9 },
+    { choice: "E6", percent: 6 },
+    { choice: "F5", percent: 6 },
+  ],
+  6: [
+    { choice: "pass", percent: 32 },
+    { choice: "E6", percent: 9 },
+    { choice: "G5", percent: 9 },
+    { choice: "resign", percent: 7 },
+  ],
+  8: [
+    { choice: "pass", percent: 45 },
+    { choice: "resign", percent: 12 },
+    { choice: "E6", percent: 7 },
+    { choice: "D5", percent: 4 },
+  ],
+  10: [
+    { choice: "pass", percent: 42 },
+    { choice: "resign", percent: 17 },
+    { choice: "E6", percent: 7 },
+    { choice: "F6", percent: 3 },
+  ],
+  12: [
+    { choice: "pass", percent: 53 },
+    { choice: "resign", percent: 21 },
+    { choice: "D5", percent: 3 },
+    { choice: "F6", percent: 3 },
+  ],
+  14: [
+    { choice: "pass", percent: 45 },
+    { choice: "resign", percent: 38 },
+    { choice: "D4", percent: 2 },
+    { choice: "A6", percent: 2 },
+  ],
+  16: [
+    { choice: "pass", percent: 60 },
+    { choice: "resign", percent: 25 },
+    { choice: "C5", percent: 5 },
+    { choice: "D5", percent: 2 },
+  ],
+  18: [
+    { choice: "pass", percent: 81 },
+    { choice: "D5", percent: 5 },
+    { choice: "resign", percent: 4 },
+    { choice: "E4", percent: 3 },
+  ],
+  20: [
+    { choice: "pass", percent: 74 },
+    { choice: "resign", percent: 7 },
+    { choice: "E4", percent: 6 },
+    { choice: "D4", percent: 3 },
+  ],
+};
+
+function correctPracticeJev(game: PlayGame): PlayGame {
+  if (game.id !== "PRACTICE-001") return game;
+  let changed = false;
+  const moves = game.moves.map((move) => {
+    const known = PRACTICE_001_JEV[move.n];
+    if (!known || move.player !== "jev" || move.tool_record) return move;
+    changed = true;
+    return { ...move, tool_record: { jev_probabilities: known } };
+  });
+  return changed ? { ...game, moves } : game;
 }
 
 function correctPractice001(game: PlayGame): PlayGame {
