@@ -33,7 +33,10 @@ const GO_TEST_001_CLOSING: TuziNote[] = [
 
 export function overlayGame(game: PlayGame): PlayGame {
   const extra = overlay.get(game.id);
-  const merged = extra ? { ...game, ...extra } : { ...game };
+  let merged: PlayGame = extra ? { ...game, ...extra } : { ...game };
+  if (merged.moves.length === 0 && merged.status === "live") {
+    merged = { ...merged, status: "scheduled" };
+  }
   const corrected = correctPractice001(correctGo004(correctGo003(correctGo002(correctGo001(correctGoTest001(merged))))));
   if (corrected.id === "GO-TEST-001" && corrected.moves.length >= 71) {
     const existing = corrected.notes ?? [];
@@ -195,7 +198,7 @@ export const GAMES: PlayGame[] = [
   {
     id: "GO-TEST-001",
     number: 1,
-    status: "live",
+    status: "scheduled",
     kind: "TEST",
     rules: "Chinese experimental 9x9",
     komi: 7.5,
@@ -234,7 +237,7 @@ export const GAMES: PlayGame[] = [
   {
     id: "GO-001",
     number: 1,
-    status: "live",
+    status: "scheduled",
     kind: "FIELD",
     rules: "Chinese experimental 9x9",
     komi: 7.5,
@@ -271,7 +274,7 @@ export const GAMES: PlayGame[] = [
   {
     id: "GO-002",
     number: 2,
-    status: "live",
+    status: "scheduled",
     kind: "FIELD",
     rules: "Chinese experimental 9x9",
     komi: 7.5,
@@ -319,7 +322,7 @@ export const GAMES: PlayGame[] = [
   {
     id: "GO-003",
     number: 3,
-    status: "live",
+    status: "scheduled",
     kind: "FIELD",
     rules: "Chinese experimental 9x9",
     komi: 7.5,

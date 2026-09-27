@@ -40,6 +40,7 @@ function CourierPage() {
   const [raw, setRaw] = useState("");
   const [carrier, setCarrier] = useState<(typeof CARRIERS)[number]>("Tuzi (temporary courier)");
   const [receipt, setReceipt] = useState("");
+  const [report, setReport] = useState("");
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
@@ -107,6 +108,22 @@ function CourierPage() {
         const again = await fetch(`/api/games/${gameId}`);
         if (again.ok) setState((await again.json()) as GameJson);
       }
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function importHistory() {
+    if (!key) return;
+    setBusy(true);
+    setReport("");
+    try {
+      const res = await fetch("/api/import-history", {
+        method: "POST",
+        headers: { "X-Play-Courier-Key": key },
+      });
+      const body = (await res.json().catch(() => null)) as { ok?: boolean; games?: unknown; error?: string } | null;
+      setReport(body ? JSON.stringify(body, null, 2) : `HTTP ${res.status}`);
     } finally {
       setBusy(false);
     }
@@ -208,6 +225,17 @@ function CourierPage() {
           Send
         </button>
         {receipt ? <pre className="mt-4 whitespace-pre-wrap text-base">{receipt}</pre> : null}
+
+        <button
+          type="button"
+          onClick={() => void importHistory()}
+          disabled={busy || !key}
+          className="mt-8 rounded-md border border-line px-4 py-3 text-base disabled:opacity-40"
+        >
+          Import finished games from the old table
+        </button>
+        <p className="mt-2 text-sm text-muted">Copies GO-TEST-001 through GO-004. Does not choose a move.</p>
+        {report ? <pre className="mt-4 whitespace-pre-wrap text-sm">{report}</pre> : null}
       </div>
     </main>
   );

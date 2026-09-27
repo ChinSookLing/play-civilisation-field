@@ -19,6 +19,7 @@ import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as PlayRouteImport } from './routes/play'
 import { Route as PuckRouteImport } from './routes/puck'
 import { Route as StartRouteImport } from './routes/start'
+import { Route as ApiImportHistoryRouteImport } from './routes/api/import-history'
 import { Route as DataGameDotjsonRouteImport } from './routes/data/game[.]json'
 import { Route as DataGameDotsgfRouteImport } from './routes/data/game[.]sgf'
 import { Route as GamesIndexDotjsonRouteImport } from './routes/games/index[.]json'
@@ -82,6 +83,11 @@ const PuckRoute = PuckRouteImport.update({
 const StartRoute = StartRouteImport.update({
   id: '/start',
   path: '/start',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiImportHistoryRoute = ApiImportHistoryRouteImport.update({
+  id: '/api/import-history',
+  path: '/api/import-history',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DataGameDotjsonRoute = DataGameDotjsonRouteImport.update({
@@ -166,6 +172,7 @@ export interface FileRoutesByFullPath {
   '/play': typeof PlayRoute
   '/puck': typeof PuckRoute
   '/start': typeof StartRoute
+  '/api/import-history': typeof ApiImportHistoryRoute
   '/data/game.json': typeof DataGameDotjsonRoute
   '/data/game.sgf': typeof DataGameDotsgfRoute
   '/games/index.json': typeof GamesIndexDotjsonRoute
@@ -192,6 +199,7 @@ export interface FileRoutesByTo {
   '/play': typeof PlayRoute
   '/puck': typeof PuckRoute
   '/start': typeof StartRoute
+  '/api/import-history': typeof ApiImportHistoryRoute
   '/data/game.json': typeof DataGameDotjsonRoute
   '/data/game.sgf': typeof DataGameDotsgfRoute
   '/games/index.json': typeof GamesIndexDotjsonRoute
@@ -219,6 +227,7 @@ export interface FileRoutesById {
   '/play': typeof PlayRoute
   '/puck': typeof PuckRoute
   '/start': typeof StartRoute
+  '/api/import-history': typeof ApiImportHistoryRoute
   '/data/game.json': typeof DataGameDotjsonRoute
   '/data/game.sgf': typeof DataGameDotsgfRoute
   '/games/index.json': typeof GamesIndexDotjsonRoute
@@ -247,6 +256,7 @@ export interface FileRouteTypes {
     | '/play'
     | '/puck'
     | '/start'
+    | '/api/import-history'
     | '/data/game.json'
     | '/data/game.sgf'
     | '/games/index.json'
@@ -273,6 +283,7 @@ export interface FileRouteTypes {
     | '/play'
     | '/puck'
     | '/start'
+    | '/api/import-history'
     | '/data/game.json'
     | '/data/game.sgf'
     | '/games/index.json'
@@ -299,6 +310,7 @@ export interface FileRouteTypes {
     | '/play'
     | '/puck'
     | '/start'
+    | '/api/import-history'
     | '/data/game.json'
     | '/data/game.sgf'
     | '/games/index.json'
@@ -326,6 +338,7 @@ export interface RootRouteChildren {
   PlayRoute: typeof PlayRoute
   PuckRoute: typeof PuckRoute
   StartRoute: typeof StartRoute
+  ApiImportHistoryRoute: typeof ApiImportHistoryRoute
   DataGameDotjsonRoute: typeof DataGameDotjsonRoute
   DataGameDotsgfRoute: typeof DataGameDotsgfRoute
   GoGameIdRoute: typeof GoGameIdRoute
@@ -405,6 +418,13 @@ declare module '@tanstack/react-router' {
       path: '/start'
       fullPath: '/start'
       preLoaderRoute: typeof StartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/import-history': {
+      id: '/api/import-history'
+      path: '/api/import-history'
+      fullPath: '/api/import-history'
+      preLoaderRoute: typeof ApiImportHistoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/data/game.json': {
@@ -551,6 +571,7 @@ const rootRouteChildren: RootRouteChildren = {
   PlayRoute: PlayRoute,
   PuckRoute: PuckRoute,
   StartRoute: StartRoute,
+  ApiImportHistoryRoute: ApiImportHistoryRoute,
   DataGameDotjsonRoute: DataGameDotjsonRoute,
   DataGameDotsgfRoute: DataGameDotsgfRoute,
   GoGameIdRoute: GoGameIdRoute,
