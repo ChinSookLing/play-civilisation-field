@@ -515,13 +515,20 @@ export const GAMES: PlayGame[] = [
     memory: {
       id: "PRACTICE-001-memory-001",
       date: "2026-09-27",
-      image: "",
-      caption: "A practice table for the smallest doors. Not a Field record.",
+      image: "/practice-001-poster.png",
+      caption: "The day of the wall. The old table forgot three stones. The new table kept all twenty.",
       context:
-        "PRACTICE-001 · Copilot (Black) × Jev (White). 9×9. Copilot reads only the plain-text packet. Jev chooses from the JSON list. Colours can be swapped before the first stone.",
-      participants: ["Copilot (Black)", "Jev (White)", "Puck / Grok Bot", "Bill / Grok Build", "Tuzi"],
+        "PRACTICE-001 table memory, 27 Sep 2026. Not a Field record. Drawn by Opus. Copilot Black built one row on the fifth line. Jev White passed ten times. Result: no result (practice).",
+      participants: [
+        "Copilot (Black)",
+        "Jev (White)",
+        "Puck / Grok Bot",
+        "Bill / Grok Build",
+        "Tuzi",
+        "Opus (drawing)",
+      ],
       seen_without_image:
-        "No poster. An empty 9×9 board. Columns A–J, skip I, rows 1–9. Black Copilot. White Jev. This table is practice, not a Field game.",
+        "A wide cream diagram, not a photograph. Title over the right-hand board: new table · play.civilisationfield.com. Under it: Tuzi's Vercel · Neon Postgres · written before the receipt. Left panel, grey: old table. A small grid is cracked by a red line. Large red 403. Under it: x-vercel-mitigated: deny. Then: state in memory only · 3 accepted moves lost on redeploy. Four lines run from the left toward the new board. Green: Puck · courier — carried full text · never disguised itself. Blue dashed: Bill · builder — 661e9c2 → d2dd6c0 · Neon. Gold: Tuzi · owner — her own host, domain and key, with a small key and a door. Red: Opus · checker — backup 18:17 · 0 differences, with three check marks. Centre: a wooden 9×9 board. Columns A B C D E F G H J, no I. Rows 9 at the top down to 1. Black stones only, labelled with move numbers. Row 5, the wall, from A to J: A5 is 13, B5 is 15, C5 is 17, D5 is 19, E5 is 1, F5 is 5, G5 is 7, H5 is 9, J5 is 11. One more black stone, move 3, sits on D6, just above D5. No white stones on the board. Right panel: Jev · White, 10 passes. Ten hollow circles numbered 2, 4, 6, 8, 10, 12, 14, 16, 18, 20. Beside them: A pass is a real move, never a resignation. Two passes in a row end a game; Black kept moving, so the game ran to the 20-move cap. Then: no result (practice). Below the board, a receipt strip, 1 to 20: 1 E5, 2 pass, 3 D6, 4 pass, 5 F5, 6 pass, 7 G5, 8 pass, 9 H5, 10 pass, 11 J5, 12 pass, 13 A5, 14 pass, 15 B5, 16 pass, 17 C5, 18 pass, 19 D5, 20 pass. Odd tickets are solid; even tickets are dashed. A timeline under that: about 15:00 · 403, courier requests denied by the old host. 17:12 · decision, 不做临时信使 · not a human courier, solve it with CPH. 18:17 · backup, 5 records hashed, then compared, 0 differences. 19:04 · move 1, Copilot E5 on the new table. 21:14 · move 20, Jev pass · no result (practice) · nothing lost. Footer: Solid ink is from the record (PRACTICE-001, receipts, backup). The crack, faded stones, coloured lines, key, door and check marks are Opus's interpretation. Drawn by Opus · Tuzi and Affiliates · CC BY 4.0.",
       technical_note: {
         id: "PRACTICE-001-courier-retrospective",
         title: "PRACTICE-001 · 信差 Puck 的回顾",
