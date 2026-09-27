@@ -123,6 +123,12 @@ async function main() {
   await client.connect();
   try {
     for (const id of GAME_IDS) {
+      const existing = await client.query("select payload from play_tables where id = $1", [id]);
+      const stored = existing.rows[0] ? JSON.parse(existing.rows[0].payload) : null;
+      if (!stored || stored.status !== "finished" || (stored.moves ?? []).length > 0) {
+        console.log(`refused ${id}: not an empty finished record`);
+        continue;
+      }
       const body = await fetchOldGame(id);
       const payload = overlayFromPublic(body);
       await client.query(

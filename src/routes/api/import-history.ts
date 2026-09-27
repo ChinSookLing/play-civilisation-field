@@ -16,6 +16,18 @@ export const Route = createFileRoute("/api/import-history")({
         const report = [];
         for (const id of GAME_IDS) {
           try {
+            const current = await loadGameById(id);
+            if (!current || current.status !== "finished" || current.moves.length > 0) {
+              report.push({
+                id,
+                ok: true,
+                refused: true,
+                moves: current?.moves.length ?? 0,
+                status: current?.status ?? null,
+                differences: ["refused: only an empty finished record can be replaced"],
+              });
+              continue;
+            }
             const oldGame = await fetchOldGame(id);
             setOverlay(id, overlayFromPublic(oldGame));
             await savePlayTable(id);
