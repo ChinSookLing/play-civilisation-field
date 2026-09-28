@@ -39,6 +39,7 @@ export const Route = createFileRoute("/api/games/$gameId/moves")({
           reason?: string;
           expected_move_number?: number;
           confirm_score?: boolean;
+          record_unresolved?: boolean;
           dead?: string[];
           carried_by?: string;
           tool_record?: { jev_probabilities?: unknown };
@@ -62,6 +63,7 @@ export const Route = createFileRoute("/api/games/$gameId/moves")({
           expected_move_number:
             typeof body.expected_move_number === "number" ? body.expected_move_number : undefined,
           confirm_score: body.confirm_score === true,
+          record_unresolved: body.record_unresolved === true,
           dead: Array.isArray(body.dead) ? body.dead.filter((item) => typeof item === "string") : undefined,
           carried_by: body.carried_by === "Puck" || body.carried_by === "Tuzi (temporary courier)" ? body.carried_by : undefined,
           tool_record: readJevProbabilities(body.tool_record),
@@ -83,11 +85,13 @@ export const Route = createFileRoute("/api/games/$gameId/moves")({
         const state = toPublicState(result.game);
         const last = result.game.moves.at(-1);
         const record = `${publicBase(request)}/go/${result.game.id}`;
-        const receipt = body.confirm_score
-          ? `RECEIPT ${result.game.id} · SCORE PUBLISHED · ${state.result ?? "none"} · this cannot be sent again · record ${record}`
-          : last
-            ? `RECEIPT ${result.game.id} · ACCEPTED · move ${last.n} · ${last.color.toUpperCase()} ${last.coord} · new state version ${state.state_version ?? result.game.moves.length} · next expected move number ${state.expected_move_number ?? "none"} · recorded at ${last.at} · record ${record}`
-            : `RECEIPT ${result.game.id} · ACCEPTED · recorded at ${state.as_of} · record ${record}`;
+        const receipt = body.record_unresolved
+          ? `RECEIPT ${result.game.id} · NO RESULT · unresolved · Tuzi · human-stated · a score cannot be published after this · record ${record}`
+          : body.confirm_score
+            ? `RECEIPT ${result.game.id} · SCORE PUBLISHED · ${state.result ?? "none"} · this cannot be sent again · record ${record}`
+            : last
+              ? `RECEIPT ${result.game.id} · ACCEPTED · move ${last.n} · ${last.color.toUpperCase()} ${last.coord} · new state version ${state.state_version ?? result.game.moves.length} · next expected move number ${state.expected_move_number ?? "none"} · recorded at ${last.at} · record ${record}`
+              : `RECEIPT ${result.game.id} · ACCEPTED · recorded at ${state.as_of} · record ${record}`;
         return jsonResponse({
           ok: true,
           receipt,

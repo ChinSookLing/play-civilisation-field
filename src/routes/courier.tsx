@@ -59,6 +59,7 @@ function CourierPage() {
   const [deadText, setDeadText] = useState("");
   const [preview, setPreview] = useState<ScorePreview | null>(null);
   const [acceptOnce, setAcceptOnce] = useState(false);
+  const [acceptUnresolved, setAcceptUnresolved] = useState(false);
 
   useEffect(() => {
     const saved = sessionStorage.getItem(KEY_NAME);
@@ -181,6 +182,36 @@ function CourierPage() {
       const body = (await res.json().catch(() => null)) as { receipt?: string; error?: string } | null;
       setReceipt(body?.receipt ?? body?.error ?? `HTTP ${res.status}`);
       if (res.ok) {
+        setPreview(null);
+        setAcceptOnce(false);
+        const again = await fetch(`/api/games/${gameId}`);
+        if (again.ok) setState((await again.json()) as GameJson);
+      }
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function recordNoResult() {
+    if (!key || !acceptUnresolved) return;
+    setBusy(true);
+    setReceipt("");
+    try {
+      const res = await fetch(`/api/games/${gameId}/moves`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Play-Courier-Key": key,
+        },
+        body: JSON.stringify({
+          record_unresolved: true,
+          session_id: `play-${gameId}-tuzi`,
+        }),
+      });
+      const body = (await res.json().catch(() => null)) as { receipt?: string; error?: string } | null;
+      setReceipt(body?.receipt ?? body?.error ?? `HTTP ${res.status}`);
+      if (res.ok) {
+        setAcceptUnresolved(false);
         setPreview(null);
         setAcceptOnce(false);
         const again = await fetch(`/api/games/${gameId}`);
@@ -345,6 +376,35 @@ function CourierPage() {
             ) : preview?.error ? (
               <p className="mt-3 text-base">{preview.error}</p>
             ) : null}
+            <div className="mt-8 border-t border-line pt-4">
+              <h3 className="font-display text-xl">Record no result</h3>
+              <p className="mt-2 text-sm text-muted">This does not publish a score. Nothing is sent until you press the button below.</p>
+              <div className="mt-3 space-y-1 text-base">
+                <p>Game: {state.game_id}</p>
+                <p>Submitting identity: play-{state.game_id}-tuzi</p>
+                <p>Status: finished</p>
+                <p>Result: no result</p>
+                <p>End reason: unresolved</p>
+                <p>Tuzi · human-stated. 双方 pass 之后棋盘冻结，没下完的对杀就不替棋手补上结局。</p>
+                <p className="mt-3 text-fg">One time. After this, Publish the result is refused.</p>
+              </div>
+              <label className="mt-3 flex items-start gap-2 text-sm">
+                <input
+                  type="checkbox"
+                  checked={acceptUnresolved}
+                  onChange={(event) => setAcceptUnresolved(event.target.checked)}
+                />
+                <span>Tuzi decided not to score the unfinished fights. Record no result.</span>
+              </label>
+              <button
+                type="button"
+                onClick={() => void recordNoResult()}
+                disabled={busy || !acceptUnresolved || !key}
+                className="mt-3 rounded-md bg-fg px-4 py-3 text-base text-bg disabled:opacity-40"
+              >
+                Record no result
+              </button>
+            </div>
           </section>
         ) : null}
       </div>

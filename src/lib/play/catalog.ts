@@ -94,13 +94,16 @@ export function colorLabel(game: PlayGame, color: "black" | "white"): string {
 
 export function recordOutcome(game: PlayGame): {
   result: string | null;
-  end_reason: "resign" | "pass-pass" | "two passes" | "timeout" | "score" | "practice cap" | null;
+  end_reason: "resign" | "pass-pass" | "two passes" | "timeout" | "score" | "practice cap" | "unresolved" | null;
   reference_score: { value: string; method: string; note: string } | null;
 } {
   if (game.status !== "finished") {
     return { result: null, end_reason: null, reference_score: null };
   }
   const stored = game.result ?? "";
+  if (stored.trim() === "no result") {
+    return { result: "no result", end_reason: "unresolved", reference_score: null };
+  }
   const referenceText = stored.match(/Reference:\s*(.+)$/)?.[1]?.trim() ?? null;
   const withoutReference = stored.replace(/\s*Reference:\s*.+$/, "").trim();
   if (game.kind === "PRACTICE" && withoutReference === "no result (practice)") {
@@ -742,6 +745,7 @@ export type SubmitMoveInput = {
   reason?: string;
   expected_move_number?: number;
   confirm_score?: boolean;
+  record_unresolved?: boolean;
   dead?: string[];
   carried_by?: string;
   tool_record?: { jev_probabilities: Array<{ choice: string; percent: number }> };
@@ -775,6 +779,10 @@ export function submitMove(id: string, input: SubmitMoveInput): SubmitMoveResult
   if (!game) return { ok: false, error: "not found", game: null, status: 404 };
   if (game.kind !== "TEST" && game.kind !== "FIELD" && game.kind !== "PRACTICE") {
     return { ok: false, error: "this table is not writable", game, status: 403 };
+  }
+
+  if (input.record_unresolved) {
+    return recordUnresolved(game, input);
   }
 
   if (input.confirm_score) {
@@ -1044,6 +1052,36 @@ export function previewScore(
   const scored = scoredWithDead(game, dead);
   if (!scored.ok) return { ok: false, error: scored.error, status: 422 };
   return { ...scored, session_id: `play-${game.id}-tuzi` };
+}
+
+const TUZI_UNRESOLVED_REASON = "双方 pass 之后棋盘冻结，没下完的对杀就不替棋手补上结局。";
+
+function recordUnresolved(game: PlayGame, input: SubmitMoveInput): SubmitMoveResult {
+  if (game.status !== "scoring") {
+    return { ok: false, error: "table is not in scoring", game, status: 409 };
+  }
+  const sessionId = input.session_id?.trim();
+  const tuziSession = `play-${game.id}-tuzi`;
+  if (sessionId !== tuziSession) {
+    return { ok: false, error: `unresolved needs ${tuziSession}`, game, status: 403 };
+  }
+  const at = nowIso();
+  const note: TuziNote = {
+    id: `unresolved-${game.id}`,
+    afterMove: game.moves.length,
+    at,
+    by: "tuzi",
+    carryTo: null,
+    text: `Tuzi · human-stated. ${TUZI_UNRESOLVED_REASON}`,
+  };
+  writeOverlay(game.id, {
+    status: "finished",
+    result: "no result",
+    dispatch: "No result. Tuzi froze the board after both passes. Unfinished fights were not scored. This cannot be replaced by a score.",
+    notes: [...game.notes, note],
+    updatedAt: at,
+  });
+  return { ok: true, game: getGame(game.id)! };
 }
 
 function confirmScore(game: PlayGame, input: SubmitMoveInput): SubmitMoveResult {

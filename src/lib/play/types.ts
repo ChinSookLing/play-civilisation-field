@@ -122,7 +122,7 @@ export type PublicGameState = {
   board: string;
   dispatch: string;
   result: string | null;
-  end_reason: "resign" | "pass-pass" | "two passes" | "timeout" | "score" | "practice cap" | null;
+  end_reason: "resign" | "pass-pass" | "two passes" | "timeout" | "score" | "practice cap" | "unresolved" | null;
   reference_score: { value: string; method: string; note: string } | null;
   state_version: number | null;
   started_at: string | null;
