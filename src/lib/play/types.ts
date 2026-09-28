@@ -60,6 +60,11 @@ export type TableMemory = {
   participants: string[];
   seen_without_image: string;
   closings?: Array<{ title: string; text: string }>;
+  desk?: {
+    title: string;
+    intro: string;
+    sections: Array<{ title: string; text: string }>;
+  };
   feel?: {
     title: string;
     by: string;

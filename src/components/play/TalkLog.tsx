@@ -118,11 +118,13 @@ export function TalkLog({ game, events, waiting }: Props) {
                   <span>{noteSpeaker(game, event.note.by)}</span>
                 </p>
                 <p className="mt-0.5 text-sm text-muted">
-                  {(event.note.by ?? "tuzi") === "tuzi"
-                    ? "via Grok Bot"
-                    : event.note.by === "puck"
-                      ? "信使的自述 · self-statement"
-                      : "终局 · closing"}
+                  {event.note.id === "go-004-move-3-false-reject"
+                    ? "human-stated · not a move"
+                    : (event.note.by ?? "tuzi") === "tuzi"
+                      ? "via Grok Bot"
+                      : event.note.by === "puck"
+                        ? "信使的自述 · self-statement"
+                        : "终局 · closing"}
                 </p>
                 <p className="mt-0.5 font-mono text-sm tabular-nums text-muted">
                   {formatMytLong(event.note.at)}

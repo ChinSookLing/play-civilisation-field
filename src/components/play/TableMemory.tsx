@@ -11,6 +11,18 @@ export function TableMemory({ gameId, memory }: Props) {
     <>
       <p className="text-xs tracking-[0.18em] text-muted uppercase">Table Memory</p>
       <p className="mt-1 text-sm text-muted">What happened here.</p>
+      {memory.desk ? (
+        <div className="mt-4">
+          <h2 className="font-display text-2xl text-fg">{memory.desk.title}</h2>
+          <p className="mt-3 whitespace-pre-wrap text-base leading-relaxed text-fg">{memory.desk.intro}</p>
+          {memory.desk.sections.map((section) => (
+            <div key={section.title} className="mt-6 border-t border-line pt-4">
+              <h3 className="font-display text-xl text-fg">{section.title}</h3>
+              <p className="mt-3 whitespace-pre-wrap text-base leading-relaxed text-fg">{section.text}</p>
+            </div>
+          ))}
+        </div>
+      ) : null}
       {memory.closings ? null : memory.image ? (
         <img
           src={memory.image}
@@ -109,6 +121,12 @@ function aiBlock(gameId: string, memory: Memory) {
   if (memory.closings) {
     for (const closing of memory.closings) {
       lines.push("", closing.title, closing.text);
+    }
+  }
+  if (memory.desk) {
+    lines.push("", memory.desk.title, memory.desk.intro);
+    for (const section of memory.desk.sections) {
+      lines.push("", section.title, section.text);
     }
   }
   if (memory.feel) {

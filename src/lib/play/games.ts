@@ -1,5 +1,6 @@
 import type { PlayGame, TuziNote } from "./types";
 import { GO_004_CLOSINGS } from "./go-004-closing";
+import { GO_004_DESK } from "./go-004-desk";
 
 export const CURRENT_GAME_ID = "GO-002";
 
@@ -59,6 +60,22 @@ export function overlayGame(game: PlayGame): PlayGame {
     const existing = corrected.notes ?? [];
     if (!existing.some((note) => note.id === "practice-001-puck-close")) {
       corrected.notes = [...existing, PRACTICE_001_PUCK_NOTE];
+    }
+  }
+  if (corrected.id === "GO-004" && corrected.moves.length >= 3) {
+    const existing = corrected.notes ?? [];
+    if (!existing.some((note) => note.id === "go-004-move-3-false-reject")) {
+      corrected.notes = [
+        ...existing,
+        {
+          id: "go-004-move-3-false-reject",
+          afterMove: 3,
+          at: "2026-09-28T21:40:00+08:00",
+          by: "tuzi",
+          carryTo: null,
+          text: "human-stated. 第 3 手两次因开头空行被拒（unparsed reply），没有记录。随后 C5 被接受。这不是新的一着。",
+        },
+      ];
     }
   }
   return corrected;
@@ -495,6 +512,7 @@ export const GAMES: PlayGame[] = [
       seen_without_image:
         "Night pavilion under a full moon, purple blossoms and lanterns. Title: Play · Civilisation Field. Gold lettering: GO-004. Large letters: Qwen vs Lumo. Line: 13×13 Challenger Match. Subtitle: Different Minds · One Board. Left: Qwen, White, Returns to the table — silver-white hair, white and purple robes, chin on hand. Right: Lumo, Black, Enters as challenger — a black cat in a purple hood, gold bell, placing a black stone. Centre: a wooden board with stones drawn on it. Those stones are illustration only. The live table starts empty. Columns A–N, skip I, rows 1–13. Footer: Human-readable · AI-readable. Same shared state, same handoff. A larger field to explore. Credit: By Tuzi × GPTs.",
       closings: GO_004_CLOSINGS,
+      desk: GO_004_DESK,
     },
   },
   {

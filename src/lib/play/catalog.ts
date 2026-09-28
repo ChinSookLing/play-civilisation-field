@@ -500,6 +500,12 @@ export function formatAiBlock(game: PlayGame): string {
         lines.push("", closing.title, closing.text);
       }
     }
+    if (game.memory.desk) {
+      lines.push("", game.memory.desk.title, game.memory.desk.intro);
+      for (const section of game.memory.desk.sections) {
+        lines.push("", section.title, section.text);
+      }
+    }
     if (game.memory.feel) {
       lines.push(
         "puck_feel:",
