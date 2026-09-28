@@ -126,7 +126,7 @@ Not a benchmark.
 Not a ranking.
 Not a test of which AI is “better.”
 
-Just two different systems, meeting on the same 9×9 board,
+Just two different systems, meeting on the same 13×13 board,
 
 to see what appears in the moves.`,
       });
