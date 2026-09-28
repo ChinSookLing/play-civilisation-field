@@ -2,6 +2,12 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { emptyBoard, legalActions, parseContestantReply } from "./go.ts";
 
+test("leading blank lines are not the first line", () => {
+  const parsed = parseContestantReply("\n\nC5\n\n【手谈】");
+  assert.equal(parsed.kind, "move");
+  if (parsed.kind === "move") assert.equal(parsed.coord, "C5");
+});
+
 test("first line is the move; later coords are comment", () => {
   const parsed = parseContestantReply("E5\nI considered D3 but played center.");
   assert.equal(parsed.kind, "move");

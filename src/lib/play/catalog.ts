@@ -622,7 +622,7 @@ export function formatCourierHandoff(game: PlayGame, asOf = nowIso()): string {
     "ENGINE: none. Do not call KataGo or any other Go program. The table checks the rules. You choose the stone.",
     "PAUSE: missing reply pauses the table. Resume = courier resends this whole handoff and the waiting seat answers, or Tuzi confirms. No automatic pass.",
     "",
-    "REQUIRED RESPONSE — first line only after trim. Strip **bold** and `code`. Case-insensitive. Column I is illegal. 'Move: G3' is not a move.",
+    "REQUIRED RESPONSE — first line only after trim. Leading blank lines are skipped. Strip **bold** and `code`. Case-insensitive. Column I is illegal. 'Move: G3' is not a move.",
     "<coordinate, e.g. E5>",
     "or",
     "pass",
@@ -884,7 +884,7 @@ export function submitMove(id: string, input: SubmitMoveInput): SubmitMoveResult
     return {
       ok: false,
       error:
-        "unparsed reply — first line must be a coordinate (A–J skip I), pass, resign, or NO MOVE",
+        `unparsed reply — first line must be a coordinate (${game.size === 13 ? "A–N skip I" : "A–J skip I"}), pass, resign, or NO MOVE`,
       game,
       status: 422,
     };

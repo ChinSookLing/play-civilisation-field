@@ -42,8 +42,10 @@ export function parseContestantReply(raw: string, size = SIZE): ContestantReply 
   const text = raw.replace(/^\uFEFF/, "").replace(/\r\n/g, "\n");
   const stripped = text.replace(/^```[a-zA-Z0-9]*\n?/, "").replace(/\n?```$/, "");
   const lines = stripped.split("\n");
-  const first = normalizeFirstLine(lines[0] ?? "");
-  const rest = lines.slice(1).join("\n").trim();
+  let index = 0;
+  while (index < lines.length && normalizeFirstLine(lines[index] ?? "") === "") index += 1;
+  const first = normalizeFirstLine(lines[index] ?? "");
+  const rest = lines.slice(index + 1).join("\n").trim();
   if (!first) return { kind: "unparsed", firstLine: "" };
   if (/^NO\s*MOVE\b/i.test(first)) {
     const inline = first.replace(/^NO\s*MOVE\s*:?\s*/i, "").trim();
