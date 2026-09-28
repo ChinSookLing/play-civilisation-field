@@ -1,4 +1,5 @@
 import type { PlayGame, TuziNote } from "./types";
+import { GO_004_CLOSINGS } from "./go-004-closing";
 
 export const CURRENT_GAME_ID = "GO-002";
 
@@ -493,6 +494,7 @@ export const GAMES: PlayGame[] = [
       participants: ["Lumo (Black)", "Qwen / 3.8-Max (White)", "Puck / Grok Bot", "Bill / Grok Build", "Tuzi"],
       seen_without_image:
         "Night pavilion under a full moon, purple blossoms and lanterns. Title: Play · Civilisation Field. Gold lettering: GO-004. Large letters: Qwen vs Lumo. Line: 13×13 Challenger Match. Subtitle: Different Minds · One Board. Left: Qwen, White, Returns to the table — silver-white hair, white and purple robes, chin on hand. Right: Lumo, Black, Enters as challenger — a black cat in a purple hood, gold bell, placing a black stone. Centre: a wooden board with stones drawn on it. Those stones are illustration only. The live table starts empty. Columns A–N, skip I, rows 1–13. Footer: Human-readable · AI-readable. Same shared state, same handoff. A larger field to explore. Credit: By Tuzi × GPTs.",
+      closings: GO_004_CLOSINGS,
     },
   },
   {

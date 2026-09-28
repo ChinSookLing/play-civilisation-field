@@ -495,6 +495,11 @@ export function formatAiBlock(game: PlayGame): string {
       "participants:",
       ...game.memory.participants.map((name) => `  ${name}`),
     );
+    if (game.memory.closings) {
+      for (const closing of game.memory.closings) {
+        lines.push("", closing.title, closing.text);
+      }
+    }
     if (game.memory.feel) {
       lines.push(
         "puck_feel:",

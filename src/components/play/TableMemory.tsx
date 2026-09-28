@@ -7,11 +7,11 @@ type Props = {
 };
 
 export function TableMemory({ gameId, memory }: Props) {
-  return (
-    <section className="mt-6 border border-line bg-panel px-4 py-4">
+  const body = (
+    <>
       <p className="text-xs tracking-[0.18em] text-muted uppercase">Table Memory</p>
       <p className="mt-1 text-sm text-muted">What happened here.</p>
-      {memory.image ? (
+      {memory.closings ? null : memory.image ? (
         <img
           src={memory.image}
           alt={memory.caption}
@@ -68,7 +68,28 @@ export function TableMemory({ gameId, memory }: Props) {
       <pre className="mt-3 overflow-x-auto font-mono text-xs leading-relaxed text-muted whitespace-pre">
         {aiBlock(gameId, memory)}
       </pre>
-    </section>
+    </>
+  );
+  if (!memory.closings?.length) {
+    return <section className="mt-6 border border-line bg-panel px-4 py-4">{body}</section>;
+  }
+  return (
+    <>
+      {memory.image ? (
+        <img
+          src={memory.image}
+          alt={memory.caption}
+          className="mt-6 w-full rounded-md border border-line"
+        />
+      ) : null}
+      {memory.closings.map((closing) => (
+        <section key={closing.title} className="mt-6 border border-line bg-panel px-4 py-4">
+          <h2 className="font-display text-2xl text-fg">{closing.title}</h2>
+          <p className="mt-3 whitespace-pre-wrap text-base leading-relaxed text-fg">{closing.text}</p>
+        </section>
+      ))}
+      <section className="mt-6 border border-line bg-panel px-4 py-4">{body}</section>
+    </>
   );
 }
 
@@ -85,6 +106,11 @@ function aiBlock(gameId: string, memory: Memory) {
     "participants:",
     ...memory.participants.map((name) => `  ${name}`),
   ];
+  if (memory.closings) {
+    for (const closing of memory.closings) {
+      lines.push("", closing.title, closing.text);
+    }
+  }
   if (memory.feel) {
     lines.push(
       "",

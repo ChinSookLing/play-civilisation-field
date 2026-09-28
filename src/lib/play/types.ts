@@ -59,6 +59,7 @@ export type TableMemory = {
   context: string;
   participants: string[];
   seen_without_image: string;
+  closings?: Array<{ title: string; text: string }>;
   feel?: {
     title: string;
     by: string;
