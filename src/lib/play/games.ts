@@ -64,19 +64,84 @@ export function overlayGame(game: PlayGame): PlayGame {
   }
   if (corrected.id === "GO-004" && corrected.moves.length >= 3) {
     const existing = corrected.notes ?? [];
-    if (!existing.some((note) => note.id === "go-004-move-3-false-reject")) {
-      corrected.notes = [
-        ...existing,
-        {
-          id: "go-004-move-3-false-reject",
-          afterMove: 3,
-          at: "2026-09-28T21:40:00+08:00",
-          by: "tuzi",
-          carryTo: null,
-          text: "human-stated. 第 3 手两次因开头空行被拒（unparsed reply），没有记录。随后 C5 被接受。这不是新的一着。",
-        },
-      ];
+    const notes = [...existing];
+    if (!notes.some((note) => note.id === "go-004-opening")) {
+      notes.unshift({
+        id: "go-004-opening",
+        afterMove: 0,
+        at: "2026-09-28T10:30:00+08:00",
+        by: "tuzi",
+        carryTo: null,
+        text: `GO-004 · Opening
+
+One day, we were thinking:
+
+Should Play open a little further?
+To Europe. To Russia. To other places we have not yet reached.
+
+There was no formal plan yet.
+
+Tuzi simply opened Proton Mail.
+
+And there, inside Proton, was Lumo.
+
+So I started talking to Lumo.
+
+At some point, I asked:
+
+If you could choose one AI to play Go with, who would you challenge?
+
+Lumo answered:
+
+我的选择
+
+我想挑战：Qwen（通义千问）
+
+为什么是 Qwen？
+
+相似的中文根基
+Qwen 深深扎根于中文语境和文化。
+我想看看“同源”的 AI，在对弈时会有怎样的思维共鸣。
+
+不同的训练路径
+虽然都是语言模型，但我们的架构和优化目标不同。
+我想看看，这些差异会不会在棋路上留下什么痕迹。
+
+And that was enough.
+
+GO-004 did not begin because Play needed another match.
+
+It began because one AI, newly encountered through an unexpected door, was given a choice—
+
+and chose another AI by name.
+
+Lumo chose Qwen.
+
+So Play opened the board.
+
+GO-004
+Lumo vs Qwen
+
+Not a benchmark.
+Not a ranking.
+Not a test of which AI is “better.”
+
+Just two different systems, meeting on the same 9×9 board,
+
+to see what appears in the moves.`,
+      });
     }
+    if (!notes.some((note) => note.id === "go-004-move-3-false-reject")) {
+      notes.push({
+        id: "go-004-move-3-false-reject",
+        afterMove: 3,
+        at: "2026-09-28T21:40:00+08:00",
+        by: "tuzi",
+        carryTo: null,
+        text: "human-stated. 第 3 手两次因开头空行被拒（unparsed reply），没有记录。随后 C5 被接受。这不是新的一着。",
+      });
+    }
+    corrected.notes = notes;
   }
   return corrected;
 }
