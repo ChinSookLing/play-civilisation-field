@@ -83,11 +83,14 @@ export const Route = createFileRoute("/api/games/$gameId/moves")({
         const state = toPublicState(result.game);
         const last = result.game.moves.at(-1);
         const record = `${publicBase(request)}/go/${result.game.id}`;
+        const receipt = body.confirm_score
+          ? `RECEIPT ${result.game.id} · SCORE PUBLISHED · ${state.result ?? "none"} · this cannot be sent again · record ${record}`
+          : last
+            ? `RECEIPT ${result.game.id} · ACCEPTED · move ${last.n} · ${last.color.toUpperCase()} ${last.coord} · new state version ${state.state_version ?? result.game.moves.length} · next expected move number ${state.expected_move_number ?? "none"} · recorded at ${last.at} · record ${record}`
+            : `RECEIPT ${result.game.id} · ACCEPTED · recorded at ${state.as_of} · record ${record}`;
         return jsonResponse({
           ok: true,
-          receipt: last
-            ? `RECEIPT ${result.game.id} · ACCEPTED · move ${last.n} · ${last.color.toUpperCase()} ${last.coord} · new state version ${state.state_version ?? result.game.moves.length} · next expected move number ${state.expected_move_number ?? "none"} · recorded at ${last.at} · record ${record}`
-            : `RECEIPT ${result.game.id} · ACCEPTED · recorded at ${state.as_of} · record ${record}`,
+          receipt,
           game: state,
         });
       },

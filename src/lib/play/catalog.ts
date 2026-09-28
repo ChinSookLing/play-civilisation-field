@@ -1017,6 +1017,35 @@ export function submitMove(id: string, input: SubmitMoveInput): SubmitMoveResult
   return { ok: true, game: getGame(game.id)! };
 }
 
+function scoredWithDead(
+  game: PlayGame,
+  dead: string[] | undefined,
+): { ok: true; dead: string[]; result: string; scoreText: string; komi: number } | { ok: false; error: string } {
+  const played = replayMoves(game.moves, game.size);
+  const listed = (dead ?? []).map((coord) => coord.trim().toUpperCase()).filter(Boolean);
+  const lifted = liftStones(played.board, listed);
+  if (lifted.error) return { ok: false, error: lifted.error };
+  const score = chineseAreaScore(lifted.board, game.komi);
+  const deadLabel = listed.join(", ") || "none marked";
+  return {
+    ok: true,
+    dead: listed,
+    scoreText: score.text,
+    komi: game.komi,
+    result: `${score.text} · dead ${deadLabel}`,
+  };
+}
+
+export function previewScore(
+  game: PlayGame,
+  dead: string[] | undefined,
+): { ok: true; dead: string[]; result: string; scoreText: string; komi: number; session_id: string } | { ok: false; error: string; status: number } {
+  if (game.status !== "scoring") return { ok: false, error: "table is not in scoring", status: 409 };
+  const scored = scoredWithDead(game, dead);
+  if (!scored.ok) return { ok: false, error: scored.error, status: 422 };
+  return { ...scored, session_id: `play-${game.id}-tuzi` };
+}
+
 function confirmScore(game: PlayGame, input: SubmitMoveInput): SubmitMoveResult {
   if (game.status !== "scoring" && game.status !== "finished") {
     return { ok: false, error: "table is not in scoring", game, status: 409 };
@@ -1038,14 +1067,11 @@ function confirmScore(game: PlayGame, input: SubmitMoveInput): SubmitMoveResult 
       status: 403,
     };
   }
-  const played = replayMoves(game.moves, game.size);
-  const lifted = liftStones(played.board, input.dead ?? []);
-  if (lifted.error) return { ok: false, error: lifted.error, game, status: 422 };
-  const score = chineseAreaScore(lifted.board, game.komi);
-  const dead = (input.dead ?? []).map((c) => c.toUpperCase()).join(", ") || "none marked";
+  const scored = scoredWithDead(game, input.dead);
+  if (!scored.ok) return { ok: false, error: scored.error, game, status: 422 };
   writeOverlay(game.id, {
     status: "finished",
-    result: `${score.text} · dead ${dead}`,
+    result: scored.result,
     dispatch: "Score published after dead-stone confirmation. The table is quiet.",
     updatedAt: nowIso(),
   });

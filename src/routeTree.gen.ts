@@ -33,6 +33,7 @@ import { Route as ApiGamesGameIdJevRouteImport } from './routes/api/games/$gameI
 import { Route as ApiGamesGameIdMovesRouteImport } from './routes/api/games/$gameId.moves'
 import { Route as ApiGamesGameIdNotesRouteImport } from './routes/api/games/$gameId.notes'
 import { Route as ApiGamesGameIdPacketRouteImport } from './routes/api/games/$gameId.packet'
+import { Route as ApiGamesGameIdScorePreviewRouteImport } from './routes/api/games/$gameId.score-preview'
 import { Route as ApiGamesGameIdSgfRouteImport } from './routes/api/games/$gameId.sgf'
 
 const IndexRoute = IndexRouteImport.update({
@@ -155,6 +156,12 @@ const ApiGamesGameIdPacketRoute = ApiGamesGameIdPacketRouteImport.update({
   path: '/packet',
   getParentRoute: () => ApiGamesGameIdRoute,
 } as any)
+const ApiGamesGameIdScorePreviewRoute =
+  ApiGamesGameIdScorePreviewRouteImport.update({
+    id: '/score-preview',
+    path: '/score-preview',
+    getParentRoute: () => ApiGamesGameIdRoute,
+  } as any)
 const ApiGamesGameIdSgfRoute = ApiGamesGameIdSgfRouteImport.update({
   id: '/sgf',
   path: '/sgf',
@@ -186,6 +193,7 @@ export interface FileRoutesByFullPath {
   '/api/games/$gameId/moves': typeof ApiGamesGameIdMovesRoute
   '/api/games/$gameId/notes': typeof ApiGamesGameIdNotesRoute
   '/api/games/$gameId/packet': typeof ApiGamesGameIdPacketRoute
+  '/api/games/$gameId/score-preview': typeof ApiGamesGameIdScorePreviewRoute
   '/api/games/$gameId/sgf': typeof ApiGamesGameIdSgfRoute
 }
 export interface FileRoutesByTo {
@@ -213,6 +221,7 @@ export interface FileRoutesByTo {
   '/api/games/$gameId/moves': typeof ApiGamesGameIdMovesRoute
   '/api/games/$gameId/notes': typeof ApiGamesGameIdNotesRoute
   '/api/games/$gameId/packet': typeof ApiGamesGameIdPacketRoute
+  '/api/games/$gameId/score-preview': typeof ApiGamesGameIdScorePreviewRoute
   '/api/games/$gameId/sgf': typeof ApiGamesGameIdSgfRoute
 }
 export interface FileRoutesById {
@@ -241,6 +250,7 @@ export interface FileRoutesById {
   '/api/games/$gameId/moves': typeof ApiGamesGameIdMovesRoute
   '/api/games/$gameId/notes': typeof ApiGamesGameIdNotesRoute
   '/api/games/$gameId/packet': typeof ApiGamesGameIdPacketRoute
+  '/api/games/$gameId/score-preview': typeof ApiGamesGameIdScorePreviewRoute
   '/api/games/$gameId/sgf': typeof ApiGamesGameIdSgfRoute
 }
 export interface FileRouteTypes {
@@ -270,6 +280,7 @@ export interface FileRouteTypes {
     | '/api/games/$gameId/moves'
     | '/api/games/$gameId/notes'
     | '/api/games/$gameId/packet'
+    | '/api/games/$gameId/score-preview'
     | '/api/games/$gameId/sgf'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -297,6 +308,7 @@ export interface FileRouteTypes {
     | '/api/games/$gameId/moves'
     | '/api/games/$gameId/notes'
     | '/api/games/$gameId/packet'
+    | '/api/games/$gameId/score-preview'
     | '/api/games/$gameId/sgf'
   id:
     | '__root__'
@@ -324,6 +336,7 @@ export interface FileRouteTypes {
     | '/api/games/$gameId/moves'
     | '/api/games/$gameId/notes'
     | '/api/games/$gameId/packet'
+    | '/api/games/$gameId/score-preview'
     | '/api/games/$gameId/sgf'
   fileRoutesById: FileRoutesById
 }
@@ -518,6 +531,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiGamesGameIdPacketRouteImport
       parentRoute: typeof ApiGamesGameIdRoute
     }
+    '/api/games/$gameId/score-preview': {
+      id: '/api/games/$gameId/score-preview'
+      path: '/score-preview'
+      fullPath: '/api/games/$gameId/score-preview'
+      preLoaderRoute: typeof ApiGamesGameIdScorePreviewRouteImport
+      parentRoute: typeof ApiGamesGameIdRoute
+    }
     '/api/games/$gameId/sgf': {
       id: '/api/games/$gameId/sgf'
       path: '/sgf'
@@ -544,6 +564,7 @@ interface ApiGamesGameIdRouteChildren {
   ApiGamesGameIdMovesRoute: typeof ApiGamesGameIdMovesRoute
   ApiGamesGameIdNotesRoute: typeof ApiGamesGameIdNotesRoute
   ApiGamesGameIdPacketRoute: typeof ApiGamesGameIdPacketRoute
+  ApiGamesGameIdScorePreviewRoute: typeof ApiGamesGameIdScorePreviewRoute
   ApiGamesGameIdSgfRoute: typeof ApiGamesGameIdSgfRoute
 }
 
@@ -553,6 +574,7 @@ const ApiGamesGameIdRouteChildren: ApiGamesGameIdRouteChildren = {
   ApiGamesGameIdMovesRoute: ApiGamesGameIdMovesRoute,
   ApiGamesGameIdNotesRoute: ApiGamesGameIdNotesRoute,
   ApiGamesGameIdPacketRoute: ApiGamesGameIdPacketRoute,
+  ApiGamesGameIdScorePreviewRoute: ApiGamesGameIdScorePreviewRoute,
   ApiGamesGameIdSgfRoute: ApiGamesGameIdSgfRoute,
 }
 

@@ -16,6 +16,21 @@ type GameJson = {
   white_seat?: string | null;
   sessions?: Record<string, string>;
   courier_handoff?: string;
+  komi?: number;
+  rules?: string;
+};
+
+type ScorePreview = {
+  ok?: boolean;
+  error?: string;
+  game_id?: string;
+  session_id?: string;
+  dead?: string[];
+  rules?: string;
+  komi?: number;
+  score?: string;
+  result_if_published?: string;
+  warning?: string;
 };
 
 export const Route = createFileRoute("/courier")({
@@ -35,12 +50,15 @@ export const Route = createFileRoute("/courier")({
 function CourierPage() {
   const [key, setKey] = useState("");
   const [games, setGames] = useState<string[]>(["PRACTICE-001", "GO-004"]);
-  const [gameId, setGameId] = useState("PRACTICE-001");
+  const [gameId, setGameId] = useState("GO-004");
   const [state, setState] = useState<GameJson | null>(null);
   const [raw, setRaw] = useState("");
   const [carrier, setCarrier] = useState<(typeof CARRIERS)[number]>("Tuzi (temporary courier)");
   const [receipt, setReceipt] = useState("");
   const [busy, setBusy] = useState(false);
+  const [deadText, setDeadText] = useState("");
+  const [preview, setPreview] = useState<ScorePreview | null>(null);
+  const [acceptOnce, setAcceptOnce] = useState(false);
 
   useEffect(() => {
     const saved = sessionStorage.getItem(KEY_NAME);
@@ -103,7 +121,68 @@ function CourierPage() {
       });
       const body = (await res.json().catch(() => null)) as { receipt?: string; error?: string } | null;
       setReceipt(body?.receipt ?? body?.error ?? `HTTP ${res.status}`);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function deadList() {
+    return deadText
+      .split(/[\s,]+/)
+      .map((item) => item.trim().toUpperCase())
+      .filter(Boolean);
+  }
+
+  function changeDead(value: string) {
+    setDeadText(value);
+    setPreview(null);
+    setAcceptOnce(false);
+  }
+
+  async function showScore() {
+    if (!key) return;
+    setBusy(true);
+    setReceipt("");
+    setPreview(null);
+    setAcceptOnce(false);
+    try {
+      const res = await fetch(`/api/games/${gameId}/score-preview`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Play-Courier-Key": key,
+        },
+        body: JSON.stringify({ dead: deadList() }),
+      });
+      const body = (await res.json().catch(() => null)) as ScorePreview | null;
+      setPreview(body ?? { ok: false, error: `HTTP ${res.status}` });
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function publishScore() {
+    if (!key || !preview?.ok || !acceptOnce || !preview.session_id) return;
+    setBusy(true);
+    setReceipt("");
+    try {
+      const res = await fetch(`/api/games/${gameId}/moves`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Play-Courier-Key": key,
+        },
+        body: JSON.stringify({
+          confirm_score: true,
+          session_id: preview.session_id,
+          dead: preview.dead ?? [],
+        }),
+      });
+      const body = (await res.json().catch(() => null)) as { receipt?: string; error?: string } | null;
+      setReceipt(body?.receipt ?? body?.error ?? `HTTP ${res.status}`);
       if (res.ok) {
+        setPreview(null);
+        setAcceptOnce(false);
         const again = await fetch(`/api/games/${gameId}`);
         if (again.ok) setState((await again.json()) as GameJson);
       }
@@ -143,6 +222,8 @@ function CourierPage() {
             setGameId(event.target.value);
             setState(null);
             setReceipt("");
+            setPreview(null);
+            setAcceptOnce(false);
           }}
           className="mt-1 w-full rounded-md border border-line bg-bg px-3 py-3 text-base"
         >
@@ -208,6 +289,64 @@ function CourierPage() {
           Send
         </button>
         {receipt ? <pre className="mt-4 whitespace-pre-wrap text-base">{receipt}</pre> : null}
+
+        {state?.status === "scoring" ? (
+          <section className="mt-8 border border-line px-4 py-4">
+            <h2 className="font-display text-2xl">Confirm the score</h2>
+            <p className="mt-2 text-sm text-muted">
+              Nothing is sent until you press Publish. Showing the score does not record it.
+            </p>
+            <label className="mt-4 block text-sm text-muted" htmlFor="dead-stones">
+              Dead stones, if both lists agreed. Leave empty only when the agreed list is empty.
+            </label>
+            <textarea
+              id="dead-stones"
+              value={deadText}
+              onChange={(event) => changeDead(event.target.value)}
+              rows={3}
+              placeholder="D4, K10"
+              className="mt-1 w-full rounded-md border border-line bg-bg px-3 py-3 text-base"
+            />
+            <button
+              type="button"
+              onClick={() => void showScore()}
+              disabled={busy || !key}
+              className="mt-3 rounded-md border border-line px-4 py-3 text-base"
+            >
+              Show the score
+            </button>
+            {preview?.ok ? (
+              <div className="mt-4 space-y-1 text-base">
+                <p>Game: {preview.game_id}</p>
+                <p>Submitting identity: {preview.session_id}</p>
+                <p>Dead stones: {preview.dead?.length ? preview.dead.join(", ") : "none marked"}</p>
+                <p>{preview.rules}</p>
+                <p>Komi {preview.komi}</p>
+                <p>{preview.score}</p>
+                <p className="text-sm text-muted">This line would be stored: {preview.result_if_published}</p>
+                <p className="mt-3 text-fg">{preview.warning}</p>
+                <label className="mt-3 flex items-start gap-2 text-sm">
+                  <input
+                    type="checkbox"
+                    checked={acceptOnce}
+                    onChange={(event) => setAcceptOnce(event.target.checked)}
+                  />
+                  <span>Tuzi has compared the two lists. Publish this result once. It cannot be undone.</span>
+                </label>
+                <button
+                  type="button"
+                  onClick={() => void publishScore()}
+                  disabled={busy || !acceptOnce}
+                  className="mt-3 rounded-md bg-fg px-4 py-3 text-base text-bg disabled:opacity-40"
+                >
+                  Publish the result
+                </button>
+              </div>
+            ) : preview?.error ? (
+              <p className="mt-3 text-base">{preview.error}</p>
+            ) : null}
+          </section>
+        ) : null}
       </div>
     </main>
   );
