@@ -41,6 +41,10 @@ export function gamesIndexText(): string {
     "Each game: " + ORIGIN + "/go/<id> and " + ORIGIN + "/api/games/<id>",
     "",
     "The result line is the official result. A reference count, when one exists, is not the result.",
+    "",
+    "This list is 棋 · Games only.",
+    "心 · Psyche, 聚 · Gathering and 文 · Salon are not open and are not in this list.",
+    "聚 is planned for a day in October 2026. The day is not fixed.",
   ];
   return lines.join("\n");
 }
