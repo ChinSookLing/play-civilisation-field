@@ -60,6 +60,23 @@ export function gamesIndexText(): string {
   return lines.join("\n");
 }
 
+export function recordsText(): string {
+  const lines = ["PLAY RECORD INDEX", ""];
+  for (const game of listGames()) {
+    const outcome = recordOutcome(game);
+    lines.push(game.id);
+    lines.push(`URL: ${ORIGIN}/go/${game.id}`);
+    lines.push(`JSON: ${ORIGIN}/api/games/${game.id}`);
+    lines.push(`RECORD_KIND: ${game.kind}`);
+    lines.push(`MACHINE_STATUS: ${machineStatus(game.status)}`);
+    lines.push(`TABLE_STATUS: ${game.status}`);
+    lines.push(`RESULT_STATUS: ${resultStatus(game)}`);
+    lines.push(`RESULT: ${outcome.result ?? "none"}`);
+    lines.push("");
+  }
+  return lines.join("\n").trim() + "\n";
+}
+
 export function gamesIndexJson() {
   return {
     record_version: "0.4",

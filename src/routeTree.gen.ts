@@ -20,6 +20,7 @@ import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as PlayRouteImport } from './routes/play'
 import { Route as PsycheRouteImport } from './routes/psyche'
 import { Route as PuckRouteImport } from './routes/puck'
+import { Route as RecordsDottxtRouteImport } from './routes/records[.]txt'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as SalonRouteImport } from './routes/salon'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -96,6 +97,11 @@ const PsycheRoute = PsycheRouteImport.update({
 const PuckRoute = PuckRouteImport.update({
   id: '/puck',
   path: '/puck',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecordsDottxtRoute = RecordsDottxtRouteImport.update({
+  id: '/records.txt',
+  path: '/records.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
@@ -223,6 +229,7 @@ export interface FileRoutesByFullPath {
   '/play': typeof PlayRoute
   '/psyche': typeof PsycheRoute
   '/puck': typeof PuckRoute
+  '/records.txt': typeof RecordsDottxtRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/salon': typeof SalonRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -258,6 +265,7 @@ export interface FileRoutesByTo {
   '/play': typeof PlayRoute
   '/psyche': typeof PsycheRoute
   '/puck': typeof PuckRoute
+  '/records.txt': typeof RecordsDottxtRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/salon': typeof SalonRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -294,6 +302,7 @@ export interface FileRoutesById {
   '/play': typeof PlayRoute
   '/psyche': typeof PsycheRoute
   '/puck': typeof PuckRoute
+  '/records.txt': typeof RecordsDottxtRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/salon': typeof SalonRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -331,6 +340,7 @@ export interface FileRouteTypes {
     | '/play'
     | '/psyche'
     | '/puck'
+    | '/records.txt'
     | '/robots.txt'
     | '/salon'
     | '/sitemap.xml'
@@ -366,6 +376,7 @@ export interface FileRouteTypes {
     | '/play'
     | '/psyche'
     | '/puck'
+    | '/records.txt'
     | '/robots.txt'
     | '/salon'
     | '/sitemap.xml'
@@ -401,6 +412,7 @@ export interface FileRouteTypes {
     | '/play'
     | '/psyche'
     | '/puck'
+    | '/records.txt'
     | '/robots.txt'
     | '/salon'
     | '/sitemap.xml'
@@ -437,6 +449,7 @@ export interface RootRouteChildren {
   PlayRoute: typeof PlayRoute
   PsycheRoute: typeof PsycheRoute
   PuckRoute: typeof PuckRoute
+  RecordsDottxtRoute: typeof RecordsDottxtRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SalonRoute: typeof SalonRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -528,6 +541,13 @@ declare module '@tanstack/react-router' {
       path: '/puck'
       fullPath: '/puck'
       preLoaderRoute: typeof PuckRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/records.txt': {
+      id: '/records.txt'
+      path: '/records.txt'
+      fullPath: '/records.txt'
+      preLoaderRoute: typeof RecordsDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/robots.txt': {
@@ -747,6 +767,7 @@ const rootRouteChildren: RootRouteChildren = {
   PlayRoute: PlayRoute,
   PsycheRoute: PsycheRoute,
   PuckRoute: PuckRoute,
+  RecordsDottxtRoute: RecordsDottxtRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
   SalonRoute: SalonRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,

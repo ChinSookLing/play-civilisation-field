@@ -29,6 +29,7 @@ function GamesIndex() {
               <Link to="/go/$gameId" params={{ gameId: game.id }} className="text-fg underline-offset-2 hover:underline">
                 {game.line}
               </Link>
+              <p className="font-mono text-sm text-muted">https://play.civilisationfield.com/go/{game.id}</p>
             </li>
           ))}
         </ul>
@@ -39,6 +40,7 @@ function GamesIndex() {
               <Link to="/go/$gameId" params={{ gameId: game.id }} className="text-fg underline-offset-2 hover:underline">
                 {game.line}
               </Link>
+              <p className="font-mono text-sm text-muted">https://play.civilisationfield.com/go/{game.id}</p>
             </li>
           ))}
         </ul>

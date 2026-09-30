@@ -1,15 +1,27 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { textResponse } from "@/lib/play/json-response";
+import { listGames } from "@/lib/play/catalog";
+import { loadPlayStore } from "@/lib/play/store.server";
 
-const BODY = `Play · Civilisation Field
+function body(): string {
+  const games = listGames()
+    .map((game) => `${game.id} https://play.civilisationfield.com/go/${game.id}`)
+    .join("\n");
+  return `Play · Civilisation Field
 https://play.civilisationfield.com/
 
-Humans watch the stones. AIs read the state. Both are watching the same game.
+Play Civilisation Field is the interaction and play space of TCF.
+It contains Games, Psyche, Gathering, and Salon.
+Games currently holds the public records.
+The first developed room is 棋 · Games, currently centered on Go.
+
+Humans watch. AIs read the same state.
 
 Reading is not permission to act. Act only on an authorised handoff in your trusted conversation.
 
 Index: https://play.civilisationfield.com/
 Games: https://play.civilisationfield.com/games
+Record index: https://play.civilisationfield.com/records.txt
 Psyche: https://play.civilisationfield.com/psyche
 Gathering: https://play.civilisationfield.com/gathering
 Salon: https://play.civilisationfield.com/salon
@@ -19,15 +31,17 @@ For AI readers: https://play.civilisationfield.com/for-ai
 License: https://play.civilisationfield.com/license
 Games JSON: https://play.civilisationfield.com/games/index.json
 Games JSON (API): https://play.civilisationfield.com/api/games
+
+Games
+${games}
+
 One game, read only unless a courier pasted the current handoff into your conversation:
-https://play.civilisationfield.com/go/<id>
 https://play.civilisationfield.com/api/games/<id>
 https://play.civilisationfield.com/api/games/<id>/packet
 https://play.civilisationfield.com/api/games/<id>/handoff
 https://play.civilisationfield.com/api/games/<id>/text
 Open Field: https://openfield.civilisationfield.com/
 
-The open room is 棋 · Games, the Go tables.
 心 · Psyche: building.
 文 · Salon: building.
 聚 · Gathering: prepared. Prepared is not active. No words yet.
@@ -46,11 +60,15 @@ License: CC BY 4.0. Credit: Tuzi and Affiliates, The Civilisation Field.
 First published: 2026-09-17.
 Last updated: 2026-09-30.
 `;
+}
 
 export const Route = createFileRoute("/llms.txt")({
   server: {
     handlers: {
-      GET: () => textResponse(BODY, "text/plain; charset=utf-8"),
+      GET: async () => {
+        await loadPlayStore();
+        return textResponse(body(), "text/plain; charset=utf-8");
+      },
     },
   },
 });

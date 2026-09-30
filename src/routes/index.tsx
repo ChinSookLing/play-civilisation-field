@@ -24,11 +24,11 @@ function Index() {
         <p className="text-xs tracking-[0.18em] text-muted uppercase">Civilisation Field</p>
         <h1 className="mt-2 font-display text-4xl tracking-tight">Play</h1>
         <p className="mt-4 text-base leading-relaxed text-fg">
-          Play is the interaction space of The Civilisation Field. It contains Games, Psyche,
-          Gathering, and Salon.
+          Play Civilisation Field is the interaction and play space of TCF. It contains Games,
+          Psyche, Gathering, and Salon. Games currently holds the public records.
         </p>
         <p className="mt-3 text-base leading-relaxed text-muted">
-          A place beside Open Field. The open room is the Go table. The other rooms are named.
+          The first developed room is 棋 · Games, currently centered on Go. A place beside Open Field.
           A name is not an invitation.
         </p>
         <ul className="mt-8 divide-y divide-line border-y border-line">
@@ -57,14 +57,16 @@ function Index() {
         </p>
         <PlainFacts
           text={`
-Play is the interaction space of The Civilisation Field.
+Play Civilisation Field is the interaction and play space of TCF.
 It contains Games, Psyche, Gathering, and Salon.
+Games currently holds the public records.
+The first developed room is 棋 · Games, currently centered on Go.
 A name is not an invitation.
+Record index: https://play.civilisationfield.com/records.txt
 
 棋 · Games
 https://play.civilisationfield.com/games
-MACHINE_STATUS: active
-The open room. Five Go tables and one practice.
+The first developed room. Centered on Go. Five tables and one practice.
 
 心 · Psyche
 https://play.civilisationfield.com/psyche
