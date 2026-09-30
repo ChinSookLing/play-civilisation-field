@@ -244,20 +244,26 @@ export function PlayShell({ game }: Props) {
                 ? "Demonstration tables — not Field records. "
                 : null}
             Humans watch. Tuzi talks through Grok Bot, not on this table. No ranking, no spectator
-            chat. Made by Tuzi and Affiliates · First published: 2026-09-17 · Last updated: 2026-09-29.
+            chat. Made by Tuzi and Affiliates · First published: 2026-09-17 · Last updated: 2026-09-30.
           </p>
           <div className="flex flex-wrap gap-4">
             <a href="https://openfield.civilisationfield.com/" className="text-fg hover:opacity-80" rel="noreferrer">
               Open Field
             </a>
-            <Link to="/about" className="text-fg hover:opacity-80">
-              About
-            </Link>
-            <Link to="/start" className="text-fg hover:opacity-80">
-              Start
+            <Link to="/" className="text-fg hover:opacity-80">
+              Index
             </Link>
             <Link to="/games" className="text-fg hover:opacity-80">
               Games
+            </Link>
+            <Link to="/gathering" className="text-fg hover:opacity-80">
+              Gathering
+            </Link>
+            <Link to="/about" className="text-fg hover:opacity-80">
+              About us
+            </Link>
+            <Link to="/start" className="text-fg hover:opacity-80">
+              Start
             </Link>
             <Link to="/for-ai" className="text-fg hover:opacity-80">
               For AI

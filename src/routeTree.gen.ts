@@ -14,10 +14,13 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as CourierRouteImport } from './routes/courier'
 import { Route as ForAiRouteImport } from './routes/for-ai'
 import { Route as GamesRouteImport } from './routes/games'
+import { Route as GatheringRouteImport } from './routes/gathering'
 import { Route as LicenseRouteImport } from './routes/license'
 import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as PlayRouteImport } from './routes/play'
+import { Route as PsycheRouteImport } from './routes/psyche'
 import { Route as PuckRouteImport } from './routes/puck'
+import { Route as SalonRouteImport } from './routes/salon'
 import { Route as StartRouteImport } from './routes/start'
 import { Route as ApiImportHistoryRouteImport } from './routes/api/import-history'
 import { Route as DataGameDotjsonRouteImport } from './routes/data/game[.]json'
@@ -61,6 +64,11 @@ const GamesRoute = GamesRouteImport.update({
   path: '/games',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GatheringRoute = GatheringRouteImport.update({
+  id: '/gathering',
+  path: '/gathering',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LicenseRoute = LicenseRouteImport.update({
   id: '/license',
   path: '/license',
@@ -76,9 +84,19 @@ const PlayRoute = PlayRouteImport.update({
   path: '/play',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PsycheRoute = PsycheRouteImport.update({
+  id: '/psyche',
+  path: '/psyche',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PuckRoute = PuckRouteImport.update({
   id: '/puck',
   path: '/puck',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SalonRoute = SalonRouteImport.update({
+  id: '/salon',
+  path: '/salon',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StartRoute = StartRouteImport.update({
@@ -174,10 +192,13 @@ export interface FileRoutesByFullPath {
   '/courier': typeof CourierRoute
   '/for-ai': typeof ForAiRoute
   '/games': typeof GamesRouteWithChildren
+  '/gathering': typeof GatheringRoute
   '/license': typeof LicenseRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/play': typeof PlayRoute
+  '/psyche': typeof PsycheRoute
   '/puck': typeof PuckRoute
+  '/salon': typeof SalonRoute
   '/start': typeof StartRoute
   '/api/import-history': typeof ApiImportHistoryRoute
   '/data/game.json': typeof DataGameDotjsonRoute
@@ -202,10 +223,13 @@ export interface FileRoutesByTo {
   '/courier': typeof CourierRoute
   '/for-ai': typeof ForAiRoute
   '/games': typeof GamesRouteWithChildren
+  '/gathering': typeof GatheringRoute
   '/license': typeof LicenseRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/play': typeof PlayRoute
+  '/psyche': typeof PsycheRoute
   '/puck': typeof PuckRoute
+  '/salon': typeof SalonRoute
   '/start': typeof StartRoute
   '/api/import-history': typeof ApiImportHistoryRoute
   '/data/game.json': typeof DataGameDotjsonRoute
@@ -231,10 +255,13 @@ export interface FileRoutesById {
   '/courier': typeof CourierRoute
   '/for-ai': typeof ForAiRoute
   '/games': typeof GamesRouteWithChildren
+  '/gathering': typeof GatheringRoute
   '/license': typeof LicenseRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/play': typeof PlayRoute
+  '/psyche': typeof PsycheRoute
   '/puck': typeof PuckRoute
+  '/salon': typeof SalonRoute
   '/start': typeof StartRoute
   '/api/import-history': typeof ApiImportHistoryRoute
   '/data/game.json': typeof DataGameDotjsonRoute
@@ -261,10 +288,13 @@ export interface FileRouteTypes {
     | '/courier'
     | '/for-ai'
     | '/games'
+    | '/gathering'
     | '/license'
     | '/llms.txt'
     | '/play'
+    | '/psyche'
     | '/puck'
+    | '/salon'
     | '/start'
     | '/api/import-history'
     | '/data/game.json'
@@ -289,10 +319,13 @@ export interface FileRouteTypes {
     | '/courier'
     | '/for-ai'
     | '/games'
+    | '/gathering'
     | '/license'
     | '/llms.txt'
     | '/play'
+    | '/psyche'
     | '/puck'
+    | '/salon'
     | '/start'
     | '/api/import-history'
     | '/data/game.json'
@@ -317,10 +350,13 @@ export interface FileRouteTypes {
     | '/courier'
     | '/for-ai'
     | '/games'
+    | '/gathering'
     | '/license'
     | '/llms.txt'
     | '/play'
+    | '/psyche'
     | '/puck'
+    | '/salon'
     | '/start'
     | '/api/import-history'
     | '/data/game.json'
@@ -346,10 +382,13 @@ export interface RootRouteChildren {
   CourierRoute: typeof CourierRoute
   ForAiRoute: typeof ForAiRoute
   GamesRoute: typeof GamesRouteWithChildren
+  GatheringRoute: typeof GatheringRoute
   LicenseRoute: typeof LicenseRoute
   LlmsDottxtRoute: typeof LlmsDottxtRoute
   PlayRoute: typeof PlayRoute
+  PsycheRoute: typeof PsycheRoute
   PuckRoute: typeof PuckRoute
+  SalonRoute: typeof SalonRoute
   StartRoute: typeof StartRoute
   ApiImportHistoryRoute: typeof ApiImportHistoryRoute
   DataGameDotjsonRoute: typeof DataGameDotjsonRoute
@@ -398,6 +437,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GamesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gathering': {
+      id: '/gathering'
+      path: '/gathering'
+      fullPath: '/gathering'
+      preLoaderRoute: typeof GatheringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/license': {
       id: '/license'
       path: '/license'
@@ -419,11 +465,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlayRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/psyche': {
+      id: '/psyche'
+      path: '/psyche'
+      fullPath: '/psyche'
+      preLoaderRoute: typeof PsycheRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/puck': {
       id: '/puck'
       path: '/puck'
       fullPath: '/puck'
       preLoaderRoute: typeof PuckRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/salon': {
+      id: '/salon'
+      path: '/salon'
+      fullPath: '/salon'
+      preLoaderRoute: typeof SalonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/start': {
@@ -588,10 +648,13 @@ const rootRouteChildren: RootRouteChildren = {
   CourierRoute: CourierRoute,
   ForAiRoute: ForAiRoute,
   GamesRoute: GamesRouteWithChildren,
+  GatheringRoute: GatheringRoute,
   LicenseRoute: LicenseRoute,
   LlmsDottxtRoute: LlmsDottxtRoute,
   PlayRoute: PlayRoute,
+  PsycheRoute: PsycheRoute,
   PuckRoute: PuckRoute,
+  SalonRoute: SalonRoute,
   StartRoute: StartRoute,
   ApiImportHistoryRoute: ApiImportHistoryRoute,
   DataGameDotjsonRoute: DataGameDotjsonRoute,

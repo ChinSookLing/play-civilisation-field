@@ -1,6 +1,27 @@
 import { createServerFn } from "@tanstack/react-start";
 import type { PlayGame } from "./types";
 
+export type GameLink = {
+  id: string;
+  kind: string;
+  line: string;
+  href: string;
+};
+
+export const loadGamesLinksFn = createServerFn({ method: "GET" }).handler(async (): Promise<GameLink[]> => {
+  const { loadPlayStore } = await import("./store.server");
+  const { listGames } = await import("./catalog");
+  const { gameIndexLine } = await import("./reading");
+  await loadPlayStore();
+  return listGames().map((game) => ({
+    id: game.id,
+    kind: game.kind,
+    line: gameIndexLine(game),
+    href: `/go/${game.id}`,
+  }));
+});
+
+
 export const loadGamesIndexTextFn = createServerFn({ method: "GET" }).handler(async (): Promise<string> => {
   const { loadPlayStore } = await import("./store.server");
   const { gamesIndexText } = await import("./reading");

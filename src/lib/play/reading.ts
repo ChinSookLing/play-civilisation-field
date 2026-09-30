@@ -43,8 +43,9 @@ export function gamesIndexText(): string {
     "The result line is the official result. A reference count, when one exists, is not the result.",
     "",
     "This list is 棋 · Games only.",
-    "心 · Psyche, 聚 · Gathering and 文 · Salon are not open and are not in this list.",
-    "聚 is planned for a day in October 2026. The day is not fixed.",
+    "心 · Psyche: building. No test and no answers.",
+    "文 · Salon: building. No piece yet.",
+    "聚 · Gathering: the dinner screen is prepared. It has not started. No words are kept.",
   ];
   return lines.join("\n");
 }
