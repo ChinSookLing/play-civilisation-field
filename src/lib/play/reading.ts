@@ -1,6 +1,7 @@
 import { affiliateName } from "./affiliates";
 import { formatAsciiBoard, koBanned, legalActions, replayMoves } from "./go";
 import { listGames, recordOutcome } from "./catalog";
+import { machineStatus, resultStatus } from "./machine";
 import type { PlayGame } from "./types";
 
 const ORIGIN = "https://play.civilisationfield.com";
@@ -41,6 +42,10 @@ export function gamesIndexText(): string {
     "Each game: " + ORIGIN + "/go/<id> and " + ORIGIN + "/api/games/<id>",
     "",
     "The result line is the official result. A reference count, when one exists, is not the result.",
+    "MACHINE_STATUS is the shared word: building, prepared, active, paused, finished, archived.",
+    "TABLE_STATUS is the table's own word: scheduled, live, scoring, paused, finished, abandoned.",
+    "result_status is none, pending, or final. final can be a decided no-result. It is not a score.",
+    "prepared is not active.",
     "",
     "This list is 棋 · Games only.",
     "心 · Psyche: building. No test and no answers.",
@@ -77,6 +82,8 @@ function indexRow(game: PlayGame) {
     white: game.white ? affiliateName(game.white) : null,
     date: gameWhen(game),
     status: game.status,
+    machine_status: machineStatus(game.status),
+    result_status: resultStatus(game),
     result: outcome.result,
     end_reason: outcome.end_reason,
     line: gameIndexLine(game),

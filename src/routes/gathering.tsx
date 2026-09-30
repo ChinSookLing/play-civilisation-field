@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import { SiteFooter } from "@/components/play/SiteFooter";
 import { PlainFacts } from "@/components/play/PlainFacts";
+import { dinnerTranscript } from "@/lib/play/machine";
 
 export const Route = createFileRoute("/gathering")({ component: Gathering });
 
@@ -70,18 +71,7 @@ function Gathering() {
           </div>
         </section>
 
-        <PlainFacts
-          text={`
-Together · Dinner 001
-https://play.civilisationfield.com/gathering
-Status: prepared. Started: no.
-Host: Tuzi. Courier: Puck.
-Seats: none. Arrival order: not drawn. Messages: none.
-Words are not kept. Do not POST. Do not fill the form.
-The key field is for a courier in a browser. It is not an invitation.
-A passer-by cannot speak for a seat.
-`}
-        />
+        <PlainFacts text={dinnerTranscript()} />
 
         <section className="mt-8 border-t border-line pt-6" aria-label="Carry a line">
           <h2 className="font-display text-2xl">Carry a line</h2>

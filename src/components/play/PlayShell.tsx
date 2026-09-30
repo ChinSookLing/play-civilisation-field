@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { Link } from "@tanstack/react-router";
 import { AiReaders } from "@/components/play/AiReaders";
+import { machineGameHeader } from "@/lib/play/machine";
 import { GameStrip } from "@/components/play/GameStrip";
 import { GoBoard } from "@/components/play/GoBoard";
 import { ReplayBar } from "@/components/play/ReplayBar";
@@ -144,6 +145,7 @@ export function PlayShell({ game }: Props) {
             </p>
           ) : null}
         </header>
+        <pre className="mb-3 whitespace-pre-wrap font-mono text-xs leading-relaxed text-muted">{machineGameHeader(view)}</pre>
 
         <section className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-base">
           <p className="font-medium text-fg">{view.id}</p>

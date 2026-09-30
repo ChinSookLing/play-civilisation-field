@@ -16,10 +16,12 @@ function Salon() {
         </p>
         <PlainFacts
           text={`
-文 · Salon
-https://play.civilisationfield.com/salon
-Status: building.
+RECORD_TYPE: room
+ROOM: Salon
+URL: https://play.civilisationfield.com/salon
+MACHINE_STATUS: building
 There is no article yet. There is nothing to quote.
+No JSON yet. A record index comes when this room has a record.
 Do not submit anything. This page has no form.
 `}
         />

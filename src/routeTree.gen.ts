@@ -26,6 +26,7 @@ import { Route as ApiImportHistoryRouteImport } from './routes/api/import-histor
 import { Route as DataGameDotjsonRouteImport } from './routes/data/game[.]json'
 import { Route as DataGameDotsgfRouteImport } from './routes/data/game[.]sgf'
 import { Route as GamesIndexDotjsonRouteImport } from './routes/games/index[.]json'
+import { Route as GatheringDinner001DottxtRouteImport } from './routes/gathering/dinner-001[.]txt'
 import { Route as GoGameIdRouteImport } from './routes/go.$gameId'
 import { Route as NotesNoteIdRouteImport } from './routes/notes.$noteId'
 import { Route as ApiGamesIndexRouteImport } from './routes/api/games/index'
@@ -124,6 +125,12 @@ const GamesIndexDotjsonRoute = GamesIndexDotjsonRouteImport.update({
   path: '/index.json',
   getParentRoute: () => GamesRoute,
 } as any)
+const GatheringDinner001DottxtRoute =
+  GatheringDinner001DottxtRouteImport.update({
+    id: '/dinner-001.txt',
+    path: '/dinner-001.txt',
+    getParentRoute: () => GatheringRoute,
+  } as any)
 const GoGameIdRoute = GoGameIdRouteImport.update({
   id: '/go/$gameId',
   path: '/go/$gameId',
@@ -192,7 +199,7 @@ export interface FileRoutesByFullPath {
   '/courier': typeof CourierRoute
   '/for-ai': typeof ForAiRoute
   '/games': typeof GamesRouteWithChildren
-  '/gathering': typeof GatheringRoute
+  '/gathering': typeof GatheringRouteWithChildren
   '/license': typeof LicenseRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/play': typeof PlayRoute
@@ -204,6 +211,7 @@ export interface FileRoutesByFullPath {
   '/data/game.json': typeof DataGameDotjsonRoute
   '/data/game.sgf': typeof DataGameDotsgfRoute
   '/games/index.json': typeof GamesIndexDotjsonRoute
+  '/gathering/dinner-001.txt': typeof GatheringDinner001DottxtRoute
   '/go/$gameId': typeof GoGameIdRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
@@ -223,7 +231,7 @@ export interface FileRoutesByTo {
   '/courier': typeof CourierRoute
   '/for-ai': typeof ForAiRoute
   '/games': typeof GamesRouteWithChildren
-  '/gathering': typeof GatheringRoute
+  '/gathering': typeof GatheringRouteWithChildren
   '/license': typeof LicenseRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/play': typeof PlayRoute
@@ -235,6 +243,7 @@ export interface FileRoutesByTo {
   '/data/game.json': typeof DataGameDotjsonRoute
   '/data/game.sgf': typeof DataGameDotsgfRoute
   '/games/index.json': typeof GamesIndexDotjsonRoute
+  '/gathering/dinner-001.txt': typeof GatheringDinner001DottxtRoute
   '/go/$gameId': typeof GoGameIdRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
@@ -255,7 +264,7 @@ export interface FileRoutesById {
   '/courier': typeof CourierRoute
   '/for-ai': typeof ForAiRoute
   '/games': typeof GamesRouteWithChildren
-  '/gathering': typeof GatheringRoute
+  '/gathering': typeof GatheringRouteWithChildren
   '/license': typeof LicenseRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/play': typeof PlayRoute
@@ -267,6 +276,7 @@ export interface FileRoutesById {
   '/data/game.json': typeof DataGameDotjsonRoute
   '/data/game.sgf': typeof DataGameDotsgfRoute
   '/games/index.json': typeof GamesIndexDotjsonRoute
+  '/gathering/dinner-001.txt': typeof GatheringDinner001DottxtRoute
   '/go/$gameId': typeof GoGameIdRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
@@ -300,6 +310,7 @@ export interface FileRouteTypes {
     | '/data/game.json'
     | '/data/game.sgf'
     | '/games/index.json'
+    | '/gathering/dinner-001.txt'
     | '/go/$gameId'
     | '/notes/$noteId'
     | '/api/games/$gameId'
@@ -331,6 +342,7 @@ export interface FileRouteTypes {
     | '/data/game.json'
     | '/data/game.sgf'
     | '/games/index.json'
+    | '/gathering/dinner-001.txt'
     | '/go/$gameId'
     | '/notes/$noteId'
     | '/api/games/$gameId'
@@ -362,6 +374,7 @@ export interface FileRouteTypes {
     | '/data/game.json'
     | '/data/game.sgf'
     | '/games/index.json'
+    | '/gathering/dinner-001.txt'
     | '/go/$gameId'
     | '/notes/$noteId'
     | '/api/games/$gameId'
@@ -382,7 +395,7 @@ export interface RootRouteChildren {
   CourierRoute: typeof CourierRoute
   ForAiRoute: typeof ForAiRoute
   GamesRoute: typeof GamesRouteWithChildren
-  GatheringRoute: typeof GatheringRoute
+  GatheringRoute: typeof GatheringRouteWithChildren
   LicenseRoute: typeof LicenseRoute
   LlmsDottxtRoute: typeof LlmsDottxtRoute
   PlayRoute: typeof PlayRoute
@@ -521,6 +534,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GamesIndexDotjsonRouteImport
       parentRoute: typeof GamesRoute
     }
+    '/gathering/dinner-001.txt': {
+      id: '/gathering/dinner-001.txt'
+      path: '/dinner-001.txt'
+      fullPath: '/gathering/dinner-001.txt'
+      preLoaderRoute: typeof GatheringDinner001DottxtRouteImport
+      parentRoute: typeof GatheringRoute
+    }
     '/go/$gameId': {
       id: '/go/$gameId'
       path: '/go/$gameId'
@@ -618,6 +638,18 @@ const GamesRouteChildren: GamesRouteChildren = {
 
 const GamesRouteWithChildren = GamesRoute._addFileChildren(GamesRouteChildren)
 
+interface GatheringRouteChildren {
+  GatheringDinner001DottxtRoute: typeof GatheringDinner001DottxtRoute
+}
+
+const GatheringRouteChildren: GatheringRouteChildren = {
+  GatheringDinner001DottxtRoute: GatheringDinner001DottxtRoute,
+}
+
+const GatheringRouteWithChildren = GatheringRoute._addFileChildren(
+  GatheringRouteChildren,
+)
+
 interface ApiGamesGameIdRouteChildren {
   ApiGamesGameIdHandoffRoute: typeof ApiGamesGameIdHandoffRoute
   ApiGamesGameIdJevRoute: typeof ApiGamesGameIdJevRoute
@@ -648,7 +680,7 @@ const rootRouteChildren: RootRouteChildren = {
   CourierRoute: CourierRoute,
   ForAiRoute: ForAiRoute,
   GamesRoute: GamesRouteWithChildren,
-  GatheringRoute: GatheringRoute,
+  GatheringRoute: GatheringRouteWithChildren,
   LicenseRoute: LicenseRoute,
   LlmsDottxtRoute: LlmsDottxtRoute,
   PlayRoute: PlayRoute,

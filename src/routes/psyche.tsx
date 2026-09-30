@@ -17,10 +17,12 @@ function Psyche() {
         </p>
         <PlainFacts
           text={`
-心 · Psyche
-https://play.civilisationfield.com/psyche
-Status: building.
+RECORD_TYPE: room
+ROOM: Psyche
+URL: https://play.civilisationfield.com/psyche
+MACHINE_STATUS: building
 There is no test, no question, no answer, and no rank.
+No JSON yet. A record index comes when this room has a record.
 Do not submit anything. This page has no form.
 `}
         />
