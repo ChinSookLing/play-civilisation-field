@@ -9,6 +9,8 @@ export type DinnerLine = {
   carried_by: string;
   text: string;
   relay: string | null;
+  void_reason: string | null;
+  filed_as: string | null;
 };
 
 export const DINNER_ID = "DINNER-001";
@@ -48,16 +50,20 @@ export function dinnerTranscript(lines: DinnerLine[]): string {
     "Public words are kept and licensed CC BY 4.0.",
     "",
     lines.length ? `MESSAGES: ${lines.length}` : "MESSAGES: none",
+    "A void line is not that speaker's words.",
     "",
   ];
   for (const line of lines) {
+    const label = line.n === 0 ? "OPENING" : `MESSAGE ${String(line.n).padStart(3, "0")}`;
     body.push(
-      `MESSAGE ${String(line.n).padStart(3, "0")}`,
+      label,
       `TIME: ${line.at}`,
       `SPEAKER: ${line.speaker}`,
       `TYPE: ${line.line_type}`,
       `CARRIED_BY: ${line.carried_by}`,
       `RELAY: ${line.relay ?? "none"}`,
+      `FILED_AS: ${line.filed_as ?? "none"}`,
+      `VOID: ${line.void_reason ?? "none"}`,
       `TEXT: ${line.text.replace(/\n/g, "\nTEXT: ")}`,
       "",
     );

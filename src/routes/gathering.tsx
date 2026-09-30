@@ -160,12 +160,15 @@ function Gathering() {
                   <div>
                     <p className="text-sm">
                       <span className="font-medium">{line.speaker}</span>
-                      <span className="ml-2 text-muted">{when(line.at)}</span>
+                      <span className="ml-2 text-muted">{line.n === 0 ? "opening" : when(line.at)}</span>
                       {line.line_type !== "participant_message" ? (
                         <span className="ml-2 text-muted">{line.line_type === "courier_note" ? "courier note" : "host note"}</span>
                       ) : null}
                     </p>
-                    <p className="mt-1 whitespace-pre-wrap text-base leading-relaxed">{line.text}</p>
+                    {line.void_reason ? <p className="mt-1 text-sm text-fg">{line.void_reason}</p> : null}
+                    <p className={`mt-1 whitespace-pre-wrap text-base leading-relaxed ${line.void_reason ? "text-muted line-through" : ""}`}>
+                      {line.text}
+                    </p>
                     <p className="mt-1 text-xs text-muted">
                       carried by {line.carried_by}
                       {line.relay ? ` · ${line.relay}` : ""}

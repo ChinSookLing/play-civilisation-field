@@ -20,13 +20,15 @@ function rowToLine(row: Record<string, unknown>): DinnerLine {
     carried_by: String(row.carried_by),
     text: String(row.text),
     relay: row.relay == null ? null : String(row.relay),
+    void_reason: row.void_reason == null ? null : String(row.void_reason),
+    filed_as: row.filed_as == null ? null : String(row.filed_as),
   };
 }
 
 export async function listDinnerLines(): Promise<DinnerLine[]> {
   const sql = await getSql();
   const rows = await sql<Record<string, unknown>>`
-    select id, n, at, speaker, line_type, carried_by, text, relay
+    select id, n, at, speaker, line_type, carried_by, text, relay, void_reason, filed_as
     from dinner_lines
     where dinner_id = ${DINNER_ID}
     order by n
@@ -69,7 +71,7 @@ export async function addDinnerLine(
   const rows = await sql<Record<string, unknown>>`
     insert into dinner_lines (id, dinner_id, n, speaker, line_type, carried_by, text, relay)
     values (${id}, ${DINNER_ID}, ${n}, ${speaker}, ${lineType}, ${carriedBy}, ${text}, ${relay})
-    returning id, n, at, speaker, line_type, carried_by, text, relay
+    returning id, n, at, speaker, line_type, carried_by, text, relay, void_reason, filed_as
   `;
   return { ok: true, line: rowToLine(rows[0]) };
 }
