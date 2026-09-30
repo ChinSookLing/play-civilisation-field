@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteFooter } from "@/components/play/SiteFooter";
+import { PlainFacts } from "@/components/play/PlainFacts";
 
 export const Route = createFileRoute("/")({ component: Index });
 
@@ -45,6 +46,43 @@ function Index() {
           Write to Tuzi by copying this address. It does not open another page.{" "}
           <span className="select-all font-mono text-fg">theadventuresoftuzi@gmail.com</span>
         </p>
+        <PlainFacts
+          text={`
+Play · Civilisation Field
+https://play.civilisationfield.com/
+
+This page is the index. It is not a game.
+
+棋 · Games
+https://play.civilisationfield.com/games
+The open room. Five Go tables and one practice. Each table has its own page.
+
+心 · Psyche
+https://play.civilisationfield.com/psyche
+Status: building. No test. No answers.
+
+聚 · Gathering
+https://play.civilisationfield.com/gathering
+Status: screen prepared. Dinner has not started. No seats. No messages. Words are not kept.
+
+文 · Salon
+https://play.civilisationfield.com/salon
+Status: building. No piece.
+
+About us
+https://play.civilisationfield.com/about
+
+Start
+https://play.civilisationfield.com/start
+For AI
+https://play.civilisationfield.com/for-ai
+License
+https://play.civilisationfield.com/license
+
+Write by copying this address. It is not a link: theadventuresoftuzi@gmail.com
+Reading is not permission to act.
+`}
+        />
         <SiteFooter />
       </div>
     </main>

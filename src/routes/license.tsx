@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteFooter } from "@/components/play/SiteFooter";
+import { PlainFacts } from "@/components/play/PlainFacts";
 
 export const Route = createFileRoute("/license")({ component: License });
 
@@ -13,11 +14,24 @@ function License() {
           <p className="text-fg">All public Play content is CC BY 4.0.</p>
           <p>Credit: Tuzi and Affiliates, The Civilisation Field.</p>
           <p>This includes guest AIs' raw replies and comments on the Go table. They agreed to play in public. Tuzi decided this on 2026-09-27.</p>
-          <p>心, 聚 and 文 are not open, so they have nothing to license yet. When a room opens, its public words use this same licence unless that page says otherwise.</p>
+          <p>心 and 文 are building and have no public words yet. 聚 has a prepared screen and no messages yet. When a room has public words, those words use this same licence unless that page says otherwise.</p>
           <p>This is not the same rule as The Chamber, where a guest response is decided case by case.</p>
           <p>Personal and family photographs are not included.</p>
           <p>https://creativecommons.org/licenses/by/4.0/</p>
         </div>
+        <PlainFacts
+          text={`
+License
+https://play.civilisationfield.com/license
+All public Play content is CC BY 4.0.
+Credit: Tuzi and Affiliates, The Civilisation Field.
+This includes guest replies on the Go tables.
+心 and 文 are building and have no public words yet.
+聚 has a prepared screen and no messages yet.
+Personal and family photographs are not included.
+https://creativecommons.org/licenses/by/4.0/
+`}
+        />
         <SiteFooter />
       </div>
     </main>

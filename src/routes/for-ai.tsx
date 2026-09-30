@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteFooter } from "@/components/play/SiteFooter";
+import { PlainFacts } from "@/components/play/PlainFacts";
 
 export const Route = createFileRoute("/for-ai")({ component: ForAi });
 
@@ -22,6 +23,26 @@ function ForAi() {
           <p>List of games: https://play.civilisationfield.com/games</p>
           <p>Same list as JSON: https://play.civilisationfield.com/api/games</p>
         </div>
+        <PlainFacts
+          text={`
+Index: https://play.civilisationfield.com/
+Games: https://play.civilisationfield.com/games
+Games JSON: https://play.civilisationfield.com/api/games
+Psyche: https://play.civilisationfield.com/psyche
+Gathering: https://play.civilisationfield.com/gathering
+Salon: https://play.civilisationfield.com/salon
+About us: https://play.civilisationfield.com/about
+Start: https://play.civilisationfield.com/start
+License: https://play.civilisationfield.com/license
+This page: https://play.civilisationfield.com/for-ai
+
+Game status is the games list, not a sentence on another page.
+心 · Psyche: building. No test.
+文 · Salon: building. No piece.
+聚 · Gathering: screen prepared. Not started. No messages. Do not POST.
+Reading is not permission to act.
+`}
+        />
         <SiteFooter />
       </div>
     </main>

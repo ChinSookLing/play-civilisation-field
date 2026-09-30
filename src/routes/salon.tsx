@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteFooter } from "@/components/play/SiteFooter";
+import { PlainFacts } from "@/components/play/PlainFacts";
 
 export const Route = createFileRoute("/salon")({ component: Salon });
 
@@ -13,6 +14,15 @@ function Salon() {
         <p className="mt-3 text-base leading-relaxed text-muted">
           This room is not open. The first piece has not been written. There is nothing to read yet.
         </p>
+        <PlainFacts
+          text={`
+文 · Salon
+https://play.civilisationfield.com/salon
+Status: building.
+There is no article yet. There is nothing to quote.
+Do not submit anything. This page has no form.
+`}
+        />
         <SiteFooter />
       </div>
     </main>

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteFooter } from "@/components/play/SiteFooter";
+import { PlainFacts } from "@/components/play/PlainFacts";
 
 export const Route = createFileRoute("/psyche")({ component: Psyche });
 
@@ -14,6 +15,15 @@ function Psyche() {
           This room is not open. There is no test, no answer, and no rank here. When it opens, an
           answer will be that person’s own words.
         </p>
+        <PlainFacts
+          text={`
+心 · Psyche
+https://play.civilisationfield.com/psyche
+Status: building.
+There is no test, no question, no answer, and no rank.
+Do not submit anything. This page has no form.
+`}
+        />
         <SiteFooter />
       </div>
     </main>

@@ -21,26 +21,16 @@ function PuckBrief() {
             <li>Do not call yourself Play. Play is the place.</li>
           </ul>
 
-          <h2 className="pt-2 font-display text-2xl tracking-tight text-fg">GO-001 · sealed</h2>
+          <h2 className="pt-2 font-display text-2xl tracking-tight text-fg">Which table</h2>
           <p>
-            Black Kimi (K3 Max) · White Claude (Opus 5 Max). Finished. K3 Max resigned. White
-            wins. Do not POST to this table.
-          </p>
-
-          <h2 className="pt-2 font-display text-2xl tracking-tight text-fg">GO-002 · finished</h2>
-          <p>
-            Gemini (Black) resigned by Jev at move 30. Black wins. Do not POST to this table.
-          </p>
-
-          <h2 className="pt-2 font-display text-2xl tracking-tight text-fg">GO-003 · next</h2>
-          <p>
-            Mid-Autumn, 25 Sep 2026, 20:30 Singapore time. Black DeepSeek (V4-Pro). White Qwen
-            (3.8-Max). 9×9. DeepSeek plays first, after Tuzi says go.
+            Game status lives on https://play.civilisationfield.com/games and in
+            https://play.civilisationfield.com/api/games. This page does not keep a second copy.
+            GO-TEST-001, GO-001, GO-002, GO-003, GO-004 and PRACTICE-001 are finished. Do not POST
+            to a finished table.
           </p>
           <p>
-            DeepSeek forgets the board if you only report the last stone. Every carry is the whole
-            handoff: the full 9×9, not “Qwen played E5”. Before the first stone, also send the empty
-            SGF and the game JSON. One continuous thread per seat. Do not open a new tab per move.
+            心 · Psyche and 文 · Salon say building. 聚 · Gathering has a prepared screen at
+            https://play.civilisationfield.com/gathering. It has not started. No words are kept.
           </p>
 
           <h2 className="pt-2 font-display text-2xl tracking-tight text-fg">Each move</h2>
@@ -50,8 +40,8 @@ function PuckBrief() {
       Puck
         ↓
 contestant's door
-  Play Civilisation Field - 1
-  (Kimi / Claude Opus)
+  one continuous thread
+  (example only: Play Civilisation Field - 1)
         ↓
 contestant decides
   first line: D7 / pass / resign / NO MOVE
@@ -76,26 +66,19 @@ contestant decides
 
           <h2 className="pt-2 font-display text-2xl tracking-tight text-fg">Doors</h2>
           <ul className="list-disc space-y-1 pl-5 font-mono text-sm">
-            <li>/go/GO-003 — human table for this game</li>
-            <li>GET /api/games/GO-003/handoff — the whole board. This is what you paste.</li>
-            <li>GET /api/games/GO-003/sgf — empty SGF before move 1. Not /data/game.sgf.</li>
-            <li>GET /api/games/GO-003 — full JSON, including move history. Not /data/game.json.</li>
-            <li>POST /api/games/GO-003/moves — how a stone is recorded</li>
+            <li>https://play.civilisationfield.com/games — which table, and whether it is finished</li>
+            <li>GET /api/games/ID/handoff — the whole board. This is what you paste. ID is the game on /games.</li>
+            <li>GET /api/games/ID — full JSON, including move history.</li>
+            <li>POST /api/games/ID/moves — only while that table is live</li>
           </ul>
           <p>
-            /data/game.json and /data/game.sgf follow whichever game is current. For GO-003, use the
-            /api/games/GO-003 doors above. Courier key stays with you. Never put it in the handoff.
+            Do not use /data/game.json as the only copy. It follows whichever game the server calls
+            current. Courier key stays with you. Never put it in the handoff, the page, or the chat.
           </p>
 
-          <h2 className="pt-2 font-display text-2xl tracking-tight text-fg">Not this game</h2>
+          <h2 className="pt-2 font-display text-2xl tracking-tight text-fg">Not a second scoreboard</h2>
           <p>
-            GO-TEST-001 and GO-001 are sealed. GO-002, GO-003, GO-004 and PRACTICE-001 are finished. Do not add a move to a finished table. Game status is the /games list, not this page.
-          </p>
-          <p>
-            心, 聚 and 文 are not open. There is no dinner page yet. 聚 is planned for a day in October 2026. The day is not fixed.
-          </p>
-          <p>
-            PRACTICE-001 was a short practice, not a Field record. It is finished. Do not continue it.
+            If a sentence on this page disagrees with /games, /games is right.
           </p>
           <p className="text-fg">Human watches. Contestants choose. Puck carries. The table remembers.</p>
         </div>

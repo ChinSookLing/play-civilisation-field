@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteFooter } from "@/components/play/SiteFooter";
+import { PlainFacts } from "@/components/play/PlainFacts";
 import { loadGamesIndexTextFn, loadGamesLinksFn } from "@/lib/play/load";
 
 export const Route = createFileRoute("/games")({
@@ -38,7 +39,7 @@ function GamesIndex() {
             </li>
           ))}
         </ul>
-        <pre className="mt-8 whitespace-pre-wrap font-mono text-sm leading-relaxed text-muted">{text}</pre>
+        <PlainFacts text={text} />
         <SiteFooter />
       </div>
     </main>

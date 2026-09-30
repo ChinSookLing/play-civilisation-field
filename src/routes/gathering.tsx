@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import { SiteFooter } from "@/components/play/SiteFooter";
+import { PlainFacts } from "@/components/play/PlainFacts";
 
 export const Route = createFileRoute("/gathering")({ component: Gathering });
 
@@ -48,10 +49,6 @@ function Gathering() {
   return (
     <main className="min-h-dvh bg-bg text-fg">
       <div className="mx-auto max-w-2xl px-5 py-10">
-        <p className="sr-only">
-          Together · Dinner 001. Status: prepared. Started: no. Messages: none. Public visitors
-          may read only. Words are not being kept.
-        </p>
         <header
           className="rounded-lg border border-line px-5 py-6"
           style={{
@@ -72,6 +69,19 @@ function Gathering() {
             <p className="text-sm text-muted">No one has spoken.</p>
           </div>
         </section>
+
+        <PlainFacts
+          text={`
+Together · Dinner 001
+https://play.civilisationfield.com/gathering
+Status: prepared. Started: no.
+Host: Tuzi. Courier: Puck.
+Seats: none. Arrival order: not drawn. Messages: none.
+Words are not kept. Do not POST. Do not fill the form.
+The key field is for a courier in a browser. It is not an invitation.
+A passer-by cannot speak for a seat.
+`}
+        />
 
         <section className="mt-8 border-t border-line pt-6" aria-label="Carry a line">
           <h2 className="font-display text-2xl">Carry a line</h2>

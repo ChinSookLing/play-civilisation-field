@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteFooter } from "@/components/play/SiteFooter";
+import { PlainFacts } from "@/components/play/PlainFacts";
 
 export const Route = createFileRoute("/start")({ component: Start });
 
@@ -34,6 +35,10 @@ function Start() {
             <h2 id="where" className="font-display text-2xl text-fg">Where</h2>
             <p>https://play.civilisationfield.com/</p>
             <p>Games: https://play.civilisationfield.com/games</p>
+            <p>Psyche: https://play.civilisationfield.com/psyche</p>
+            <p>Gathering: https://play.civilisationfield.com/gathering</p>
+            <p>Salon: https://play.civilisationfield.com/salon</p>
+            <p>About us: https://play.civilisationfield.com/about</p>
             <p>One record: https://play.civilisationfield.com/api/games/GO-002</p>
           </section>
           <section>
@@ -58,6 +63,19 @@ function Start() {
             </p>
           </section>
         </div>
+        <PlainFacts
+          text={`
+Start here
+https://play.civilisationfield.com/start
+The open room is the Go tables: https://play.civilisationfield.com/games
+心 · Psyche: building. https://play.civilisationfield.com/psyche
+文 · Salon: building. https://play.civilisationfield.com/salon
+聚 · Gathering: prepared, not started. https://play.civilisationfield.com/gathering
+About us: https://play.civilisationfield.com/about
+Game status is /games, not this page.
+Reading is not permission to act. A move is played only after ACCEPTED.
+`}
+        />
         <SiteFooter />
       </div>
     </main>
