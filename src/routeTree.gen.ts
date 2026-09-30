@@ -20,7 +20,9 @@ import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as PlayRouteImport } from './routes/play'
 import { Route as PsycheRouteImport } from './routes/psyche'
 import { Route as PuckRouteImport } from './routes/puck'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as SalonRouteImport } from './routes/salon'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as StartRouteImport } from './routes/start'
 import { Route as ApiImportHistoryRouteImport } from './routes/api/import-history'
 import { Route as DataGameDotjsonRouteImport } from './routes/data/game[.]json'
@@ -39,6 +41,7 @@ import { Route as ApiGamesGameIdNotesRouteImport } from './routes/api/games/$gam
 import { Route as ApiGamesGameIdPacketRouteImport } from './routes/api/games/$gameId.packet'
 import { Route as ApiGamesGameIdScorePreviewRouteImport } from './routes/api/games/$gameId.score-preview'
 import { Route as ApiGamesGameIdSgfRouteImport } from './routes/api/games/$gameId.sgf'
+import { Route as ApiGamesGameIdTextRouteImport } from './routes/api/games/$gameId.text'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -95,9 +98,19 @@ const PuckRoute = PuckRouteImport.update({
   path: '/puck',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SalonRoute = SalonRouteImport.update({
   id: '/salon',
   path: '/salon',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StartRoute = StartRouteImport.update({
@@ -192,6 +205,11 @@ const ApiGamesGameIdSgfRoute = ApiGamesGameIdSgfRouteImport.update({
   path: '/sgf',
   getParentRoute: () => ApiGamesGameIdRoute,
 } as any)
+const ApiGamesGameIdTextRoute = ApiGamesGameIdTextRouteImport.update({
+  id: '/text',
+  path: '/text',
+  getParentRoute: () => ApiGamesGameIdRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -205,7 +223,9 @@ export interface FileRoutesByFullPath {
   '/play': typeof PlayRoute
   '/psyche': typeof PsycheRoute
   '/puck': typeof PuckRoute
+  '/robots.txt': typeof RobotsDottxtRoute
   '/salon': typeof SalonRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/start': typeof StartRoute
   '/api/import-history': typeof ApiImportHistoryRoute
   '/data/game.json': typeof DataGameDotjsonRoute
@@ -224,6 +244,7 @@ export interface FileRoutesByFullPath {
   '/api/games/$gameId/packet': typeof ApiGamesGameIdPacketRoute
   '/api/games/$gameId/score-preview': typeof ApiGamesGameIdScorePreviewRoute
   '/api/games/$gameId/sgf': typeof ApiGamesGameIdSgfRoute
+  '/api/games/$gameId/text': typeof ApiGamesGameIdTextRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -237,7 +258,9 @@ export interface FileRoutesByTo {
   '/play': typeof PlayRoute
   '/psyche': typeof PsycheRoute
   '/puck': typeof PuckRoute
+  '/robots.txt': typeof RobotsDottxtRoute
   '/salon': typeof SalonRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/start': typeof StartRoute
   '/api/import-history': typeof ApiImportHistoryRoute
   '/data/game.json': typeof DataGameDotjsonRoute
@@ -256,6 +279,7 @@ export interface FileRoutesByTo {
   '/api/games/$gameId/packet': typeof ApiGamesGameIdPacketRoute
   '/api/games/$gameId/score-preview': typeof ApiGamesGameIdScorePreviewRoute
   '/api/games/$gameId/sgf': typeof ApiGamesGameIdSgfRoute
+  '/api/games/$gameId/text': typeof ApiGamesGameIdTextRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -270,7 +294,9 @@ export interface FileRoutesById {
   '/play': typeof PlayRoute
   '/psyche': typeof PsycheRoute
   '/puck': typeof PuckRoute
+  '/robots.txt': typeof RobotsDottxtRoute
   '/salon': typeof SalonRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/start': typeof StartRoute
   '/api/import-history': typeof ApiImportHistoryRoute
   '/data/game.json': typeof DataGameDotjsonRoute
@@ -289,6 +315,7 @@ export interface FileRoutesById {
   '/api/games/$gameId/packet': typeof ApiGamesGameIdPacketRoute
   '/api/games/$gameId/score-preview': typeof ApiGamesGameIdScorePreviewRoute
   '/api/games/$gameId/sgf': typeof ApiGamesGameIdSgfRoute
+  '/api/games/$gameId/text': typeof ApiGamesGameIdTextRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -304,7 +331,9 @@ export interface FileRouteTypes {
     | '/play'
     | '/psyche'
     | '/puck'
+    | '/robots.txt'
     | '/salon'
+    | '/sitemap.xml'
     | '/start'
     | '/api/import-history'
     | '/data/game.json'
@@ -323,6 +352,7 @@ export interface FileRouteTypes {
     | '/api/games/$gameId/packet'
     | '/api/games/$gameId/score-preview'
     | '/api/games/$gameId/sgf'
+    | '/api/games/$gameId/text'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -336,7 +366,9 @@ export interface FileRouteTypes {
     | '/play'
     | '/psyche'
     | '/puck'
+    | '/robots.txt'
     | '/salon'
+    | '/sitemap.xml'
     | '/start'
     | '/api/import-history'
     | '/data/game.json'
@@ -355,6 +387,7 @@ export interface FileRouteTypes {
     | '/api/games/$gameId/packet'
     | '/api/games/$gameId/score-preview'
     | '/api/games/$gameId/sgf'
+    | '/api/games/$gameId/text'
   id:
     | '__root__'
     | '/'
@@ -368,7 +401,9 @@ export interface FileRouteTypes {
     | '/play'
     | '/psyche'
     | '/puck'
+    | '/robots.txt'
     | '/salon'
+    | '/sitemap.xml'
     | '/start'
     | '/api/import-history'
     | '/data/game.json'
@@ -387,6 +422,7 @@ export interface FileRouteTypes {
     | '/api/games/$gameId/packet'
     | '/api/games/$gameId/score-preview'
     | '/api/games/$gameId/sgf'
+    | '/api/games/$gameId/text'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -401,7 +437,9 @@ export interface RootRouteChildren {
   PlayRoute: typeof PlayRoute
   PsycheRoute: typeof PsycheRoute
   PuckRoute: typeof PuckRoute
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
   SalonRoute: typeof SalonRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StartRoute: typeof StartRoute
   ApiImportHistoryRoute: typeof ApiImportHistoryRoute
   DataGameDotjsonRoute: typeof DataGameDotjsonRoute
@@ -492,11 +530,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PuckRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/salon': {
       id: '/salon'
       path: '/salon'
       fullPath: '/salon'
       preLoaderRoute: typeof SalonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/start': {
@@ -625,6 +677,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiGamesGameIdSgfRouteImport
       parentRoute: typeof ApiGamesGameIdRoute
     }
+    '/api/games/$gameId/text': {
+      id: '/api/games/$gameId/text'
+      path: '/text'
+      fullPath: '/api/games/$gameId/text'
+      preLoaderRoute: typeof ApiGamesGameIdTextRouteImport
+      parentRoute: typeof ApiGamesGameIdRoute
+    }
   }
 }
 
@@ -658,6 +717,7 @@ interface ApiGamesGameIdRouteChildren {
   ApiGamesGameIdPacketRoute: typeof ApiGamesGameIdPacketRoute
   ApiGamesGameIdScorePreviewRoute: typeof ApiGamesGameIdScorePreviewRoute
   ApiGamesGameIdSgfRoute: typeof ApiGamesGameIdSgfRoute
+  ApiGamesGameIdTextRoute: typeof ApiGamesGameIdTextRoute
 }
 
 const ApiGamesGameIdRouteChildren: ApiGamesGameIdRouteChildren = {
@@ -668,6 +728,7 @@ const ApiGamesGameIdRouteChildren: ApiGamesGameIdRouteChildren = {
   ApiGamesGameIdPacketRoute: ApiGamesGameIdPacketRoute,
   ApiGamesGameIdScorePreviewRoute: ApiGamesGameIdScorePreviewRoute,
   ApiGamesGameIdSgfRoute: ApiGamesGameIdSgfRoute,
+  ApiGamesGameIdTextRoute: ApiGamesGameIdTextRoute,
 }
 
 const ApiGamesGameIdRouteWithChildren = ApiGamesGameIdRoute._addFileChildren(
@@ -686,7 +747,9 @@ const rootRouteChildren: RootRouteChildren = {
   PlayRoute: PlayRoute,
   PsycheRoute: PsycheRoute,
   PuckRoute: PuckRoute,
+  RobotsDottxtRoute: RobotsDottxtRoute,
   SalonRoute: SalonRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   StartRoute: StartRoute,
   ApiImportHistoryRoute: ApiImportHistoryRoute,
   DataGameDotjsonRoute: DataGameDotjsonRoute,

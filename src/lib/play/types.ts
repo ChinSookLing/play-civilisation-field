@@ -199,8 +199,26 @@ export type PlayRecord = {
   board_size: string;
   komi: number;
   roles: {
-    black: { name: string | null; evidence: string; source: string };
-    white: { name: string | null; evidence: string; source: string };
+    black: {
+      name: string | null;
+      name_evidence: "site-record" | null;
+      vendor: null;
+      vendor_reason: string;
+      model: string | null;
+      model_evidence: "seat label written on this game" | null;
+      persona: string | null;
+      persona_evidence: "name used at this table" | null;
+    };
+    white: {
+      name: string | null;
+      name_evidence: "site-record" | null;
+      vendor: null;
+      vendor_reason: string;
+      model: string | null;
+      model_evidence: "seat label written on this game" | null;
+      persona: string | null;
+      persona_evidence: "name used at this table" | null;
+    };
     courier: { name: string; evidence: string; source: string };
     referee: { name: string; evidence: string; source: string };
     builder: { name: string; evidence: string; source: string };

@@ -3,7 +3,10 @@ import { SiteFooter } from "@/components/play/SiteFooter";
 import { PlainFacts } from "@/components/play/PlainFacts";
 import { loadGamesIndexTextFn, loadGamesLinksFn } from "@/lib/play/load";
 
+import { pageMeta } from "@/lib/play/page-meta";
+
 export const Route = createFileRoute("/games")({
+  head: () => pageMeta("Games · Play · Civilisation Field", "Five Go tables and one practice. Each links to its own record."),
   loader: async () => {
     const [links, text] = await Promise.all([loadGamesLinksFn(), loadGamesIndexTextFn()]);
     return { links, text };

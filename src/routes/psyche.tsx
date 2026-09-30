@@ -2,7 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteFooter } from "@/components/play/SiteFooter";
 import { PlainFacts } from "@/components/play/PlainFacts";
 
-export const Route = createFileRoute("/psyche")({ component: Psyche });
+import { pageMeta } from "@/lib/play/page-meta";
+
+export const Route = createFileRoute("/psyche")({
+  head: () => pageMeta("Psyche · Play · Civilisation Field", "Building. No test and no answers."),
+  component: Psyche,
+});
 
 function Psyche() {
   return (

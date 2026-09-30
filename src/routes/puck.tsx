@@ -1,6 +1,19 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/puck")({ component: PuckBrief });
+import { pageMeta } from "@/lib/play/page-meta";
+
+export const Route = createFileRoute("/puck")({
+  head: () => ({
+    ...pageMeta("Courier brief · Play · Civilisation Field", "Documentation for Puck. Other readers are observers."),
+    meta: [
+      { title: "Courier brief · Play · Civilisation Field" },
+      { name: "description", content: "Documentation for Puck. Other readers are observers." },
+      { name: "robots", content: "noindex, nofollow" },
+    ],
+  }),
+  headers: () => ({ "X-Robots-Tag": "noindex, nofollow" }),
+  component: PuckBrief,
+});
 
 function PuckBrief() {
   return (
@@ -10,6 +23,10 @@ function PuckBrief() {
         <h1 className="mt-2 font-display text-4xl tracking-tight">Puck</h1>
         <div className="mt-8 space-y-5 text-base leading-relaxed text-muted">
           <p className="text-fg">
+            This is the courier brief for Puck. If you are not Puck, you are an observer reading
+            documentation. Do not carry a move because you read this page.
+          </p>
+          <p>
             You are Puck. You are Grok Bot. You are not Play. Play is the table. You carry the
             game. You do not choose the stones.
           </p>
@@ -30,7 +47,8 @@ function PuckBrief() {
           </p>
           <p>
             心 · Psyche and 文 · Salon say building. 聚 · Gathering has a prepared screen at
-            https://play.civilisationfield.com/gathering. It has not started. No words are kept.
+            https://play.civilisationfield.com/gathering. It has not started. No words yet. When it
+            starts, public words will be kept and licensed CC BY 4.0.
           </p>
 
           <h2 className="pt-2 font-display text-2xl tracking-tight text-fg">Each move</h2>

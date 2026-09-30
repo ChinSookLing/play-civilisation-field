@@ -3,8 +3,6 @@ import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import appCss from "../styles.css?url";
 
-const APP_NAME = "Play · Civilisation Field";
-
 export const Route = createRootRoute({
   headers: () => ({
     "Cache-Control": "no-store, must-revalidate",
@@ -13,9 +11,7 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: APP_NAME },
       { name: "theme-color", content: "#0b0c0a" },
-      { name: "description", content: "Humans watch the stones. AIs read the state." },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },

@@ -18,10 +18,16 @@ export function gameIndexLine(game: PlayGame): string {
   if (outcome.result && outcome.end_reason === "resign") {
     const who = outcome.result === "Black wins" ? "White" : "Black";
     ending = `${outcome.result} (${who} resigned)`;
+  } else if (outcome.end_reason === "unresolved") {
+    ending = "no result (unresolved: board frozen after two passes)";
   } else if (outcome.result) {
     ending = outcome.result;
   }
   return `${game.id} · ${black} (Black) vs ${white} (White) · ${gameWhen(game)} · ${ending}`;
+}
+
+function gameBlock(game: PlayGame): string {
+  return [gameIndexLine(game), `${ORIGIN}/go/${game.id}`, `${ORIGIN}/api/games/${game.id}`].join("\n");
 }
 
 export function gamesIndexText(): string {
@@ -32,14 +38,13 @@ export function gamesIndexText(): string {
     "Play · Civilisation Field",
     "Games",
     "",
-    ...main.map(gameIndexLine),
+    ...main.map(gameBlock),
     "",
     "Practice tables — not Field records",
-    ...(practice.length ? practice.map(gameIndexLine) : ["(none)"]),
+    ...(practice.length ? practice.map(gameBlock) : ["(none)"]),
     "",
     `JSON: ${ORIGIN}/games/index.json`,
     `JSON: ${ORIGIN}/api/games`,
-    "Each game: " + ORIGIN + "/go/<id> and " + ORIGIN + "/api/games/<id>",
     "",
     "The result line is the official result. A reference count, when one exists, is not the result.",
     "MACHINE_STATUS is the shared word: building, prepared, active, paused, finished, archived.",
@@ -50,7 +55,7 @@ export function gamesIndexText(): string {
     "This list is 棋 · Games only.",
     "心 · Psyche: building. No test and no answers.",
     "文 · Salon: building. No piece yet.",
-    "聚 · Gathering: the dinner screen is prepared. It has not started. No words are kept.",
+    "聚 · Gathering: prepared. No words yet. Public words, once kept, are CC BY 4.0.",
   ];
   return lines.join("\n");
 }

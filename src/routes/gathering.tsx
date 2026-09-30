@@ -4,7 +4,12 @@ import { SiteFooter } from "@/components/play/SiteFooter";
 import { PlainFacts } from "@/components/play/PlainFacts";
 import { dinnerTranscript } from "@/lib/play/machine";
 
-export const Route = createFileRoute("/gathering")({ component: Gathering });
+import { pageMeta } from "@/lib/play/page-meta";
+
+export const Route = createFileRoute("/gathering")({
+  head: () => pageMeta("Gathering · Play · Civilisation Field", "Dinner 001 is prepared. It has not started. No words yet."),
+  component: Gathering,
+});
 
 const KEY_NAME = "play-courier-key";
 const CARRIERS = ["Puck", "Tuzi (temporary courier)"] as const;

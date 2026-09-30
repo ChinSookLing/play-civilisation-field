@@ -2,7 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteFooter } from "@/components/play/SiteFooter";
 import { PlainFacts } from "@/components/play/PlainFacts";
 
-export const Route = createFileRoute("/license")({ component: License });
+import { pageMeta } from "@/lib/play/page-meta";
+
+export const Route = createFileRoute("/license")({
+  head: () => pageMeta("License · Play · Civilisation Field", "Public Play words are CC BY 4.0."),
+  component: License,
+});
 
 function License() {
   return (

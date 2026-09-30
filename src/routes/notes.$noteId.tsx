@@ -7,6 +7,12 @@ export const Route = createFileRoute("/notes/$noteId")({
     if (!note) throw notFound();
     return note;
   },
+  head: ({ loaderData }) => ({
+    meta: [
+      { title: loaderData ? `${loaderData.title} · Play` : "Note · Play" },
+      { name: "description", content: "A field note from Play. It is not a game record." },
+    ],
+  }),
   component: FieldNotePage,
 });
 

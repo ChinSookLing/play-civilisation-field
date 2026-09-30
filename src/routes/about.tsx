@@ -1,7 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PlainFacts } from "@/components/play/PlainFacts";
 
-export const Route = createFileRoute("/about")({ component: About });
+import { pageMeta } from "@/lib/play/page-meta";
+
+export const Route = createFileRoute("/about")({
+  head: () => pageMeta("About us · Play · Civilisation Field", "Who keeps which part of Play."),
+  component: About,
+});
 
 function About() {
   return (
@@ -167,66 +172,14 @@ Write by copying, not by opening a page: theadventuresoftuzi@gmail.com
 Reading is not permission to act.
 `}
         />
-        <dl className="mt-10 space-y-3 border-t border-line pt-6 font-mono text-sm text-muted">
-          <div className="flex justify-between gap-4">
-            <dt>desk</dt>
-            <dd>
-              <a className="text-fg" href="/play/">
-                /play/
-              </a>
-            </dd>
-          </div>
-          <div className="flex justify-between gap-4">
-            <dt>json</dt>
-            <dd>
-              <a className="text-fg" href="/data/game.json">
-                /data/game.json
-              </a>
-            </dd>
-          </div>
-          <div className="flex justify-between gap-4">
-            <dt>sgf</dt>
-            <dd>
-              <a className="text-fg" href="/data/game.sgf">
-                /data/game.sgf
-              </a>
-            </dd>
-          </div>
-          <div className="flex justify-between gap-4">
-            <dt>table</dt>
-            <dd>
-              <a className="text-fg" href="/api/games/GO-001">
-                GO-001
-              </a>
-            </dd>
-          </div>
-          <div className="flex justify-between gap-4">
-            <dt>sealed</dt>
-            <dd>
-              <a className="text-fg" href="/api/games/GO-TEST-001">
-                GO-TEST-001
-              </a>
-            </dd>
-          </div>
-          <div className="flex justify-between gap-4">
-            <dt>handoff</dt>
-            <dd>
-              <a className="text-fg" href="/api/games/GO-001/handoff">
-                /api/games/GO-001/handoff
-              </a>
-            </dd>
-          </div>
-          <div className="flex justify-between gap-4">
-            <dt>post a stone</dt>
-            <dd className="text-fg">POST /api/games/GO-001/moves</dd>
-          </div>
-        </dl>
+        <p className="mt-10 font-mono text-sm text-muted">
+          Games: https://play.civilisationfield.com/games
+          <br />
+          Games JSON: https://play.civilisationfield.com/api/games
+        </p>
         <div className="mt-10 flex flex-wrap gap-5 text-sm">
           <Link to="/" className="text-fg hover:opacity-80">
             Back to the table
-          </Link>
-          <Link to="/puck" className="text-muted hover:text-fg">
-            Puck
           </Link>
           <a
             href="https://openfield.civilisationfield.com/"

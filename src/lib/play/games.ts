@@ -138,10 +138,21 @@ to see what appears in the moves.`,
         at: "2026-09-28T21:40:00+08:00",
         by: "tuzi",
         carryTo: null,
-        text: "human-stated. 第 3 手两次因开头空行被拒（unparsed reply），没有记录。随后 C5 被接受。这不是新的一着。",
+        text: "human-stated. 第 3 手两次因开头空行被拒（unparsed reply），没有记录。随后 C5 被接受。这不是新的一着。\nEnglish: Move 3 was rejected twice because the copied reply began with blank lines. Nothing was recorded. C5 was then accepted. This note is not a new move.",
       });
     }
-    corrected.notes = notes;
+    corrected.notes = notes.map((note) => {
+      let text = note.text;
+      if (note.id === "go-004-move-3-false-reject" && !text.includes("English:")) {
+        text +=
+          "\nEnglish: Move 3 was rejected twice because the copied reply began with blank lines. Nothing was recorded. C5 was then accepted. This note is not a new move.";
+      }
+      if (text.includes("双方 pass 之后棋盘冻结") && !text.includes("English:")) {
+        text +=
+          "\nEnglish: After both players passed, Tuzi froze the board. Unfinished fights were not played out, and no score was published.";
+      }
+      return text === note.text ? note : { ...note, text };
+    });
   }
   return corrected;
 }

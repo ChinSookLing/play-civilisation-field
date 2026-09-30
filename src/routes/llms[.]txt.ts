@@ -18,13 +18,19 @@ Start: https://play.civilisationfield.com/start
 For AI readers: https://play.civilisationfield.com/for-ai
 License: https://play.civilisationfield.com/license
 Games JSON: https://play.civilisationfield.com/games/index.json
-Games JSON: https://play.civilisationfield.com/api/games
+Games JSON (API): https://play.civilisationfield.com/api/games
+One game, read only unless a courier pasted the current handoff into your conversation:
+https://play.civilisationfield.com/go/<id>
+https://play.civilisationfield.com/api/games/<id>
+https://play.civilisationfield.com/api/games/<id>/packet
+https://play.civilisationfield.com/api/games/<id>/handoff
+https://play.civilisationfield.com/api/games/<id>/text
 Open Field: https://openfield.civilisationfield.com/
 
 The open room is 棋 · Games, the Go tables.
 心 · Psyche: building.
 文 · Salon: building.
-聚 · Gathering: prepared. Prepared is not active. No words are kept.
+聚 · Gathering: prepared. Prepared is not active. No words yet.
 Transcript: https://play.civilisationfield.com/gathering/dinner-001.txt
 A passer-by cannot speak for a seat.
 

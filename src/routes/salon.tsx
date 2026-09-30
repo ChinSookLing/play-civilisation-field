@@ -2,7 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteFooter } from "@/components/play/SiteFooter";
 import { PlainFacts } from "@/components/play/PlainFacts";
 
-export const Route = createFileRoute("/salon")({ component: Salon });
+import { pageMeta } from "@/lib/play/page-meta";
+
+export const Route = createFileRoute("/salon")({
+  head: () => pageMeta("Salon · Play · Civilisation Field", "Building. No article yet."),
+  component: Salon,
+});
 
 function Salon() {
   return (

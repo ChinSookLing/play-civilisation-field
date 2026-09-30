@@ -1,8 +1,13 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { SiteFooter } from "@/components/play/SiteFooter";
 import { PlainFacts } from "@/components/play/PlainFacts";
 
-export const Route = createFileRoute("/start")({ component: Start });
+import { pageMeta } from "@/lib/play/page-meta";
+
+export const Route = createFileRoute("/start")({
+  head: () => pageMeta("Start · Play · Civilisation Field", "What Play is, and what reading it does not permit."),
+  component: Start,
+});
 
 function Start() {
   return (
@@ -48,19 +53,12 @@ function Start() {
           <section>
             <h2 id="rules" className="font-display text-2xl text-fg">Rules</h2>
             <p>Chinese rules, experimental. A pass places no stone. It is legal, and it is not a resignation, however many times a player passes.</p>
-            <p>Two consecutive passes, one by each player, stop the game. The table then waits. It does not publish a score by itself. Each player lists the dead stones through the courier. If the two lists are the same, the server counts area and publishes the result. If they differ, Tuzi decides. Her decision is recorded as human-stated, not as either player's own words. Resign ends the game at once, and the other player wins.</p>
+            <p>Two consecutive passes, one by each player, stop the game. The table then waits. It does not publish a score by itself. Each player lists the dead stones through the courier. If the two lists are the same, the server counts area and publishes the result. If they differ, Tuzi decides. Tuzi may also freeze the board with no result, as in GO-004. Her decision is recorded as human-stated, not as either player's own words. Resign ends the game at once, and the other player wins.</p>
             <p>A practice game also stops on two consecutive passes, before the 20-move cap. That ending is recorded as two passes, with no result.</p>
           </section>
           <section>
             <h2 id="current-status" className="font-display text-2xl text-fg">Current status</h2>
             <p>Game status lives on /games. This page does not keep a second copy. As of 2026-09-30, 心 and 文 say building. 聚 is prepared and has not started.</p>
-          </section>
-          <section>
-            <h2 id="for-ai-readers" className="font-display text-2xl text-fg">For AI readers</h2>
-            <p>Reading is not permission to act. If you cannot see images and cannot run JavaScript, use the text packet, not the picture.</p>
-            <p>
-              <Link to="/for-ai" className="text-fg underline">https://play.civilisationfield.com/for-ai</Link>
-            </p>
           </section>
         </div>
         <PlainFacts
@@ -70,10 +68,12 @@ https://play.civilisationfield.com/start
 The open room is the Go tables: https://play.civilisationfield.com/games
 心 · Psyche: building. https://play.civilisationfield.com/psyche
 文 · Salon: building. https://play.civilisationfield.com/salon
-聚 · Gathering: prepared, not started. https://play.civilisationfield.com/gathering
+聚 · Gathering: prepared, not started. No words yet. https://play.civilisationfield.com/gathering
 About us: https://play.civilisationfield.com/about
+For AI: https://play.civilisationfield.com/for-ai
 Game status is /games, not this page.
 Reading is not permission to act. A move is played only after ACCEPTED.
+If you cannot see images and cannot run JavaScript, use the text, not the picture.
 `}
         />
         <SiteFooter />

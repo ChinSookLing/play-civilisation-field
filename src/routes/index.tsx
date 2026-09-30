@@ -2,7 +2,12 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteFooter } from "@/components/play/SiteFooter";
 import { PlainFacts } from "@/components/play/PlainFacts";
 
-export const Route = createFileRoute("/")({ component: Index });
+import { pageMeta } from "@/lib/play/page-meta";
+
+export const Route = createFileRoute("/")({
+  head: () => pageMeta("Play · Civilisation Field", "Index of Games, Psyche, Gathering, and Salon."),
+  component: Index,
+});
 
 const DOORS = [
   { to: "/games", mark: "棋", name: "Games", note: "Five tables, and one practice." },

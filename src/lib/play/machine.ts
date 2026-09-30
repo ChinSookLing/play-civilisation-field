@@ -1,4 +1,4 @@
-import { affiliateName } from "./affiliates";
+import { seatLine } from "./seat";
 import { recordOutcome } from "./catalog";
 import type { GameStatus, PlayGame } from "./types";
 
@@ -29,8 +29,8 @@ export function machineGameHeader(game: PlayGame): string {
     `ENDING: ${outcome.end_reason ?? "none"}`,
     `RULES: ${game.rules}`,
     `KOMI: ${game.komi}`,
-    `BLACK: ${game.black ? affiliateName(game.black) : "empty"}`,
-    `WHITE: ${game.white ? affiliateName(game.white) : "empty"}`,
+    `BLACK: ${seatLine(game, game.black)}`,
+    `WHITE: ${seatLine(game, game.white)}`,
     "COURIER: Puck",
     "HUMAN_HOST: Tuzi",
     "MACHINE_STATUS is the shared word. TABLE_STATUS is this table's own word.",
@@ -57,7 +57,8 @@ export function dinnerTranscript(): string {
     "A courier note is not a participant's words.",
     "A host note is not a participant's words.",
     "",
-    "No messages have been kept.",
+    "No words yet.",
+    "When the dinner starts, public words will be kept on this page and licensed CC BY 4.0.",
     "Do not POST.",
   ].join("\n");
 }
