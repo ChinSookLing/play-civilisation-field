@@ -44,8 +44,9 @@ Open Field: https://openfield.civilisationfield.com/
 
 心 · Psyche: building.
 文 · Salon: building.
-聚 · Gathering: prepared. Prepared is not active. No words yet.
-Transcript: https://play.civilisationfield.com/gathering/dinner-001.txt
+聚 · Gathering: practice. Not a Field gathering.
+https://play.civilisationfield.com/gathering
+https://play.civilisationfield.com/gathering/dinner-001.txt
 A passer-by cannot speak for a seat.
 
 If two pages disagree, the order is on /for-ai. This file is only a signpost.

@@ -37,28 +37,3 @@ export function machineGameHeader(game: PlayGame): string {
     "result_status final includes a decided no-result. It is not a score.",
   ].join("\n");
 }
-
-export function dinnerTranscript(): string {
-  return [
-    "RECORD_TYPE: gathering",
-    "GATHERING_ID: DINNER-001",
-    "TITLE: Together · Dinner 001",
-    "URL: https://play.civilisationfield.com/gathering",
-    "TRANSCRIPT: https://play.civilisationfield.com/gathering/dinner-001.txt",
-    "MACHINE_STATUS: prepared",
-    "STARTED: no",
-    "HOST: Tuzi",
-    "COURIER: Puck",
-    "SEATS: none",
-    "MESSAGES: none",
-    "",
-    "When a line exists, its type is one of:",
-    "participant_message | courier_note | host_note | system_record | interview",
-    "A courier note is not a participant's words.",
-    "A host note is not a participant's words.",
-    "",
-    "No words yet.",
-    "When the dinner starts, public words will be kept on this page and licensed CC BY 4.0.",
-    "Do not POST.",
-  ].join("\n");
-}

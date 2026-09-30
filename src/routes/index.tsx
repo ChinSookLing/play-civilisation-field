@@ -12,7 +12,7 @@ export const Route = createFileRoute("/")({
 const DOORS = [
   { to: "/games", mark: "棋", name: "Games", note: "Five tables, and one practice." },
   { to: "/psyche", mark: "心", name: "Psyche", note: "Building." },
-  { to: "/gathering", mark: "聚", name: "Gathering", note: "The dinner screen is set. No one has spoken." },
+  { to: "/gathering", mark: "聚", name: "Gathering", note: "Practice dinner. MoonLight Balcony." },
   { to: "/salon", mark: "文", name: "Salon", note: "Building." },
   { to: "/about", mark: "人", name: "About us", note: "Who keeps which part." },
 ] as const;
@@ -75,8 +75,11 @@ No test. No answers. No JSON yet.
 
 聚 · Gathering
 https://play.civilisationfield.com/gathering
-MACHINE_STATUS: prepared
-Prepared is not active. Dinner has not started. No messages.
+MACHINE_STATUS: active
+RECORD_KIND: PRACTICE
+Practice dinner. Not a Field gathering.
+Venue: Tuzi's MoonLight Balcony.
+Seats: Puck, Bill, GPT, Opus. Host: Tuzi.
 Transcript: https://play.civilisationfield.com/gathering/dinner-001.txt
 
 文 · Salon

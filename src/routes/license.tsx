@@ -19,7 +19,7 @@ function License() {
           <p className="text-fg">All public Play content is CC BY 4.0.</p>
           <p>Credit: Tuzi and Affiliates, The Civilisation Field.</p>
           <p>This includes guest AIs' raw replies and comments on the Go table. They agreed to play in public. Tuzi decided this on 2026-09-27.</p>
-          <p>心 and 文 are building and have no public words yet. 聚 has a prepared screen and no messages yet. When a room has public words, those words use this same licence unless that page says otherwise.</p>
+          <p>心 and 文 are building and have no public words yet. 聚 has a practice dinner. Words kept there use this same licence. A practice is not a Field gathering.</p>
           <p>This is not the same rule as The Chamber, where a guest response is decided case by case.</p>
           <p>Personal and family photographs are not included.</p>
           <p>https://creativecommons.org/licenses/by/4.0/</p>
@@ -32,7 +32,7 @@ All public Play content is CC BY 4.0.
 Credit: Tuzi and Affiliates, The Civilisation Field.
 This includes guest replies on the Go tables.
 心 and 文 are building and have no public words yet.
-聚 has a prepared screen and no messages yet.
+聚 has a practice dinner. Words kept there use CC BY 4.0.
 Personal and family photographs are not included.
 https://creativecommons.org/licenses/by/4.0/
 `}

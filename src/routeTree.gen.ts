@@ -43,6 +43,7 @@ import { Route as ApiGamesGameIdPacketRouteImport } from './routes/api/games/$ga
 import { Route as ApiGamesGameIdScorePreviewRouteImport } from './routes/api/games/$gameId.score-preview'
 import { Route as ApiGamesGameIdSgfRouteImport } from './routes/api/games/$gameId.sgf'
 import { Route as ApiGamesGameIdTextRouteImport } from './routes/api/games/$gameId.text'
+import { Route as ApiGatheringDinner001LinesRouteImport } from './routes/api/gathering/dinner-001.lines'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -216,6 +217,12 @@ const ApiGamesGameIdTextRoute = ApiGamesGameIdTextRouteImport.update({
   path: '/text',
   getParentRoute: () => ApiGamesGameIdRoute,
 } as any)
+const ApiGatheringDinner001LinesRoute =
+  ApiGatheringDinner001LinesRouteImport.update({
+    id: '/api/gathering/dinner-001/lines',
+    path: '/api/gathering/dinner-001/lines',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -252,6 +259,7 @@ export interface FileRoutesByFullPath {
   '/api/games/$gameId/score-preview': typeof ApiGamesGameIdScorePreviewRoute
   '/api/games/$gameId/sgf': typeof ApiGamesGameIdSgfRoute
   '/api/games/$gameId/text': typeof ApiGamesGameIdTextRoute
+  '/api/gathering/dinner-001/lines': typeof ApiGatheringDinner001LinesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -288,6 +296,7 @@ export interface FileRoutesByTo {
   '/api/games/$gameId/score-preview': typeof ApiGamesGameIdScorePreviewRoute
   '/api/games/$gameId/sgf': typeof ApiGamesGameIdSgfRoute
   '/api/games/$gameId/text': typeof ApiGamesGameIdTextRoute
+  '/api/gathering/dinner-001/lines': typeof ApiGatheringDinner001LinesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -325,6 +334,7 @@ export interface FileRoutesById {
   '/api/games/$gameId/score-preview': typeof ApiGamesGameIdScorePreviewRoute
   '/api/games/$gameId/sgf': typeof ApiGamesGameIdSgfRoute
   '/api/games/$gameId/text': typeof ApiGamesGameIdTextRoute
+  '/api/gathering/dinner-001/lines': typeof ApiGatheringDinner001LinesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -363,6 +373,7 @@ export interface FileRouteTypes {
     | '/api/games/$gameId/score-preview'
     | '/api/games/$gameId/sgf'
     | '/api/games/$gameId/text'
+    | '/api/gathering/dinner-001/lines'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -399,6 +410,7 @@ export interface FileRouteTypes {
     | '/api/games/$gameId/score-preview'
     | '/api/games/$gameId/sgf'
     | '/api/games/$gameId/text'
+    | '/api/gathering/dinner-001/lines'
   id:
     | '__root__'
     | '/'
@@ -435,6 +447,7 @@ export interface FileRouteTypes {
     | '/api/games/$gameId/score-preview'
     | '/api/games/$gameId/sgf'
     | '/api/games/$gameId/text'
+    | '/api/gathering/dinner-001/lines'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -462,6 +475,7 @@ export interface RootRouteChildren {
   ApiGamesGameIdRoute: typeof ApiGamesGameIdRouteWithChildren
   ApiGamesCurrentRoute: typeof ApiGamesCurrentRoute
   ApiGamesIndexRoute: typeof ApiGamesIndexRoute
+  ApiGatheringDinner001LinesRoute: typeof ApiGatheringDinner001LinesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -704,6 +718,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiGamesGameIdTextRouteImport
       parentRoute: typeof ApiGamesGameIdRoute
     }
+    '/api/gathering/dinner-001/lines': {
+      id: '/api/gathering/dinner-001/lines'
+      path: '/api/gathering/dinner-001/lines'
+      fullPath: '/api/gathering/dinner-001/lines'
+      preLoaderRoute: typeof ApiGatheringDinner001LinesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -780,6 +801,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiGamesGameIdRoute: ApiGamesGameIdRouteWithChildren,
   ApiGamesCurrentRoute: ApiGamesCurrentRoute,
   ApiGamesIndexRoute: ApiGamesIndexRoute,
+  ApiGatheringDinner001LinesRoute: ApiGatheringDinner001LinesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

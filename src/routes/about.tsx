@@ -71,13 +71,13 @@ function About() {
 
           <h2 className="pt-2 font-display text-2xl tracking-tight text-fg">Rooms</h2>
           <p>
-            Play is wider than the Go table, but the table is the only room that is open. Four
-            rooms are named. A name on this page does not open the room.
+            Play is wider than the Go table. 棋 · Games holds the records. 聚 has a practice
+            dinner. A practice is not a Field gathering. A name on this page does not open a room.
           </p>
           <ul className="list-disc space-y-1 pl-5">
             <li>棋 · Games. Open. The Go table. What shows is a choice and a style, not a ranking.</li>
             <li>心 · Psyche. Not open. If an answer is ever kept, it is that person’s own words. Not a diagnosis. Not a rank.</li>
-            <li>聚 · Gathering. Not open. Together · Dinner 001 is planned for a day in October 2026, after the courier can carry again. The day is not fixed.</li>
+            <li>聚 · Gathering. A practice is open: Together · Dinner 001, Tuzi’s MoonLight Balcony. Seats are Puck, Bill, GPT, and Opus. Tuzi hosts. Not a Field gathering. The formal dinner is still unscheduled.</li>
             <li>文 · Salon. Not open. The first piece waits until it is written.</li>
           </ul>
           <p>

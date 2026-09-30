@@ -55,7 +55,7 @@ export function gamesIndexText(): string {
     "This list is 棋 · Games only.",
     "心 · Psyche: building. No test and no answers.",
     "文 · Salon: building. No piece yet.",
-    "聚 · Gathering: prepared. No words yet. Public words, once kept, are CC BY 4.0.",
+    "聚 · Gathering: practice dinner. Not a Field gathering. https://play.civilisationfield.com/gathering",
   ];
   return lines.join("\n");
 }

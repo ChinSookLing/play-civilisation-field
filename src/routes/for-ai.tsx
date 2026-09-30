@@ -74,7 +74,7 @@ A courier note is not a participant's words.
 
 心 · Psyche: building. No record yet.
 文 · Salon: building. No record yet.
-聚 · Gathering: prepared. Not started. No messages. Do not POST.
+聚 · Gathering: practice dinner, active. Not a Field gathering. https://play.civilisationfield.com/gathering
 `}
         />
         <SiteFooter />
