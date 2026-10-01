@@ -73,7 +73,9 @@ Line types: participant_message | courier_note | host_note | system_record | int
 A courier note is not a participant's words.
 
 心 · Psyche: building. No record yet.
-文 · Salon: building. No record yet.
+文 · Salon: active. One piece.
+https://play.civilisationfield.com/salon/ladder.html
+Plain: https://play.civilisationfield.com/salon/ladder.txt
 聚 · Gathering: practice dinner, active. Not a Field gathering.
 If the Gathering page is too heavy, read this static page. No JavaScript. The words are in the first response.
 https://play.civilisationfield.com/gathering/index.html

@@ -3,7 +3,7 @@ import { textResponse } from "@/lib/play/json-response";
 import { GAMES } from "@/lib/play/games";
 
 const ORIGIN = "https://play.civilisationfield.com";
-const PAGES = ["/", "/games", "/records.txt", "/psyche", "/gathering", "/gathering/index.html", "/salon", "/about", "/start", "/for-ai", "/license", "/llms.txt", "/llms.html", "/gathering/dinner-001", "/gathering/dinner-001.txt", "/gathering/dinner-001.html", "/gathering/dinner-001-index.txt", "/gathering/dinner-001-index.html", "/gathering/dinner-001.json"];
+const PAGES = ["/", "/games", "/records.txt", "/psyche", "/gathering", "/gathering/index.html", "/gathering/dinner-001/table", "/salon", "/salon/ladder", "/salon/ladder.txt", "/salon/ladder.html", "/about", "/start", "/for-ai", "/license", "/llms.txt", "/llms.html", "/gathering/dinner-001", "/gathering/dinner-001.txt", "/gathering/dinner-001.html", "/gathering/dinner-001-index.txt", "/gathering/dinner-001-index.html", "/gathering/dinner-001.json"];
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {

@@ -43,7 +43,9 @@ https://play.civilisationfield.com/api/games/<id>/text
 Open Field: https://openfield.civilisationfield.com/
 
 心 · Psyche: building.
-文 · Salon: building.
+文 · Salon: active. One piece.
+https://play.civilisationfield.com/salon/ladder
+HTML: https://play.civilisationfield.com/salon/ladder.html
 聚 · Gathering: practice. Not a Field gathering. MACHINE_STATUS: active.
 https://play.civilisationfield.com/gathering
 Small index: https://play.civilisationfield.com/gathering/dinner-001-index.html

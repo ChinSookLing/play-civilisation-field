@@ -54,7 +54,7 @@ export function gamesIndexText(): string {
     "",
     "This list is 棋 · Games only.",
     "心 · Psyche: building. No test and no answers.",
-    "文 · Salon: building. No piece yet.",
+    "文 · Salon: active. One piece. https://play.civilisationfield.com/salon/ladder",
     "聚 · Gathering: practice dinner. Not a Field gathering. https://play.civilisationfield.com/gathering",
   ];
   return lines.join("\n");

@@ -77,8 +77,8 @@ function About() {
           <ul className="list-disc space-y-1 pl-5">
             <li>棋 · Games. Open. The Go table. What shows is a choice and a style, not a ranking.</li>
             <li>心 · Psyche. Not open. If an answer is ever kept, it is that person’s own words. Not a diagnosis. Not a rank.</li>
-            <li>聚 · Gathering. A practice is open: Together · Dinner 001, Tuzi’s MoonLight Balcony. Seats are Puck, Bill, GPT, and Opus. Tuzi hosts. Not a Field gathering. The formal dinner is still unscheduled.</li>
-            <li>文 · Salon. Not open. The first piece waits until it is written.</li>
+            <li>聚 · Gathering. The page is a list. Together · Dinner 001 is a practice at Tuzi’s MoonLight Balcony. Not a Field gathering. The formal dinner is still unscheduled.</li>
+            <li>文 · Salon. Open. The first piece is 撞墙以后，我们没有拆墙.</li>
           </ul>
           <p>
             These rooms are not Open Field. Open Field keeps Day numbers. Chief keeps Open Field /

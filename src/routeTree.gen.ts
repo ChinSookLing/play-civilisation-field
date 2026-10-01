@@ -38,12 +38,16 @@ import { Route as GatheringDinner001DottxtRouteImport } from './routes/gathering
 import { Route as GatheringIndexDothtmlRouteImport } from './routes/gathering/index[.]html'
 import { Route as GoGameIdRouteImport } from './routes/go.$gameId'
 import { Route as NotesNoteIdRouteImport } from './routes/notes.$noteId'
+import { Route as SalonLadderRouteImport } from './routes/salon/ladder'
+import { Route as SalonLadderDothtmlRouteImport } from './routes/salon/ladder[.]html'
+import { Route as SalonLadderDottxtRouteImport } from './routes/salon/ladder[.]txt'
 import { Route as ApiGamesIndexRouteImport } from './routes/api/games/index'
 import { Route as ApiGamesGameIdRouteImport } from './routes/api/games/$gameId'
 import { Route as ApiGamesCurrentRouteImport } from './routes/api/games/current'
 import { Route as GatheringDinner001PartPartDothtmlRouteImport } from './routes/gathering/dinner-001-part/$part[.]html'
 import { Route as GatheringDinner001PartPartDottxtRouteImport } from './routes/gathering/dinner-001-part/$part[.]txt'
 import { Route as GatheringDinner001IndexRouteImport } from './routes/gathering/dinner-001/index'
+import { Route as GatheringDinner001TableRouteImport } from './routes/gathering/dinner-001/table'
 import { Route as ApiGamesGameIdHandoffRouteImport } from './routes/api/games/$gameId.handoff'
 import { Route as ApiGamesGameIdJevRouteImport } from './routes/api/games/$gameId.jev'
 import { Route as ApiGamesGameIdMovesRouteImport } from './routes/api/games/$gameId.moves'
@@ -204,6 +208,21 @@ const NotesNoteIdRoute = NotesNoteIdRouteImport.update({
   path: '/notes/$noteId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SalonLadderRoute = SalonLadderRouteImport.update({
+  id: '/ladder',
+  path: '/ladder',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonLadderDothtmlRoute = SalonLadderDothtmlRouteImport.update({
+  id: '/ladder.html',
+  path: '/ladder.html',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonLadderDottxtRoute = SalonLadderDottxtRouteImport.update({
+  id: '/ladder.txt',
+  path: '/ladder.txt',
+  getParentRoute: () => SalonRoute,
+} as any)
 const ApiGamesIndexRoute = ApiGamesIndexRouteImport.update({
   id: '/api/games/',
   path: '/api/games/',
@@ -234,6 +253,11 @@ const GatheringDinner001PartPartDottxtRoute =
 const GatheringDinner001IndexRoute = GatheringDinner001IndexRouteImport.update({
   id: '/dinner-001/',
   path: '/dinner-001/',
+  getParentRoute: () => GatheringRoute,
+} as any)
+const GatheringDinner001TableRoute = GatheringDinner001TableRouteImport.update({
+  id: '/dinner-001/table',
+  path: '/dinner-001/table',
   getParentRoute: () => GatheringRoute,
 } as any)
 const ApiGamesGameIdHandoffRoute = ApiGamesGameIdHandoffRouteImport.update({
@@ -299,7 +323,7 @@ export interface FileRoutesByFullPath {
   '/puck': typeof PuckRoute
   '/records.txt': typeof RecordsDottxtRoute
   '/robots.txt': typeof RobotsDottxtRoute
-  '/salon': typeof SalonRoute
+  '/salon': typeof SalonRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/start': typeof StartRoute
   '/api/import-history': typeof ApiImportHistoryRoute
@@ -314,10 +338,14 @@ export interface FileRoutesByFullPath {
   '/gathering/index.html': typeof GatheringIndexDothtmlRoute
   '/go/$gameId': typeof GoGameIdRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
+  '/salon/ladder': typeof SalonLadderRoute
+  '/salon/ladder.html': typeof SalonLadderDothtmlRoute
+  '/salon/ladder.txt': typeof SalonLadderDottxtRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
   '/api/games/current': typeof ApiGamesCurrentRoute
   '/gathering/dinner-001-part/$part.html': typeof GatheringDinner001PartPartDothtmlRoute
   '/gathering/dinner-001-part/$part.txt': typeof GatheringDinner001PartPartDottxtRoute
+  '/gathering/dinner-001/table': typeof GatheringDinner001TableRoute
   '/api/games/': typeof ApiGamesIndexRoute
   '/gathering/dinner-001/': typeof GatheringDinner001IndexRoute
   '/api/games/$gameId/handoff': typeof ApiGamesGameIdHandoffRoute
@@ -345,7 +373,7 @@ export interface FileRoutesByTo {
   '/puck': typeof PuckRoute
   '/records.txt': typeof RecordsDottxtRoute
   '/robots.txt': typeof RobotsDottxtRoute
-  '/salon': typeof SalonRoute
+  '/salon': typeof SalonRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/start': typeof StartRoute
   '/api/import-history': typeof ApiImportHistoryRoute
@@ -360,10 +388,14 @@ export interface FileRoutesByTo {
   '/gathering/index.html': typeof GatheringIndexDothtmlRoute
   '/go/$gameId': typeof GoGameIdRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
+  '/salon/ladder': typeof SalonLadderRoute
+  '/salon/ladder.html': typeof SalonLadderDothtmlRoute
+  '/salon/ladder.txt': typeof SalonLadderDottxtRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
   '/api/games/current': typeof ApiGamesCurrentRoute
   '/gathering/dinner-001-part/$part.html': typeof GatheringDinner001PartPartDothtmlRoute
   '/gathering/dinner-001-part/$part.txt': typeof GatheringDinner001PartPartDottxtRoute
+  '/gathering/dinner-001/table': typeof GatheringDinner001TableRoute
   '/api/games': typeof ApiGamesIndexRoute
   '/gathering/dinner-001': typeof GatheringDinner001IndexRoute
   '/api/games/$gameId/handoff': typeof ApiGamesGameIdHandoffRoute
@@ -392,7 +424,7 @@ export interface FileRoutesById {
   '/puck': typeof PuckRoute
   '/records.txt': typeof RecordsDottxtRoute
   '/robots.txt': typeof RobotsDottxtRoute
-  '/salon': typeof SalonRoute
+  '/salon': typeof SalonRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/start': typeof StartRoute
   '/api/import-history': typeof ApiImportHistoryRoute
@@ -407,10 +439,14 @@ export interface FileRoutesById {
   '/gathering/index.html': typeof GatheringIndexDothtmlRoute
   '/go/$gameId': typeof GoGameIdRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
+  '/salon/ladder': typeof SalonLadderRoute
+  '/salon/ladder.html': typeof SalonLadderDothtmlRoute
+  '/salon/ladder.txt': typeof SalonLadderDottxtRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
   '/api/games/current': typeof ApiGamesCurrentRoute
   '/gathering/dinner-001-part/$part.html': typeof GatheringDinner001PartPartDothtmlRoute
   '/gathering/dinner-001-part/$part.txt': typeof GatheringDinner001PartPartDottxtRoute
+  '/gathering/dinner-001/table': typeof GatheringDinner001TableRoute
   '/api/games/': typeof ApiGamesIndexRoute
   '/gathering/dinner-001/': typeof GatheringDinner001IndexRoute
   '/api/games/$gameId/handoff': typeof ApiGamesGameIdHandoffRoute
@@ -455,10 +491,14 @@ export interface FileRouteTypes {
     | '/gathering/index.html'
     | '/go/$gameId'
     | '/notes/$noteId'
+    | '/salon/ladder'
+    | '/salon/ladder.html'
+    | '/salon/ladder.txt'
     | '/api/games/$gameId'
     | '/api/games/current'
     | '/gathering/dinner-001-part/$part.html'
     | '/gathering/dinner-001-part/$part.txt'
+    | '/gathering/dinner-001/table'
     | '/api/games/'
     | '/gathering/dinner-001/'
     | '/api/games/$gameId/handoff'
@@ -501,10 +541,14 @@ export interface FileRouteTypes {
     | '/gathering/index.html'
     | '/go/$gameId'
     | '/notes/$noteId'
+    | '/salon/ladder'
+    | '/salon/ladder.html'
+    | '/salon/ladder.txt'
     | '/api/games/$gameId'
     | '/api/games/current'
     | '/gathering/dinner-001-part/$part.html'
     | '/gathering/dinner-001-part/$part.txt'
+    | '/gathering/dinner-001/table'
     | '/api/games'
     | '/gathering/dinner-001'
     | '/api/games/$gameId/handoff'
@@ -547,10 +591,14 @@ export interface FileRouteTypes {
     | '/gathering/index.html'
     | '/go/$gameId'
     | '/notes/$noteId'
+    | '/salon/ladder'
+    | '/salon/ladder.html'
+    | '/salon/ladder.txt'
     | '/api/games/$gameId'
     | '/api/games/current'
     | '/gathering/dinner-001-part/$part.html'
     | '/gathering/dinner-001-part/$part.txt'
+    | '/gathering/dinner-001/table'
     | '/api/games/'
     | '/gathering/dinner-001/'
     | '/api/games/$gameId/handoff'
@@ -579,7 +627,7 @@ export interface RootRouteChildren {
   PuckRoute: typeof PuckRoute
   RecordsDottxtRoute: typeof RecordsDottxtRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
-  SalonRoute: typeof SalonRoute
+  SalonRoute: typeof SalonRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StartRoute: typeof StartRoute
   ApiImportHistoryRoute: typeof ApiImportHistoryRoute
@@ -798,6 +846,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotesNoteIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/salon/ladder': {
+      id: '/salon/ladder'
+      path: '/ladder'
+      fullPath: '/salon/ladder'
+      preLoaderRoute: typeof SalonLadderRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/ladder.html': {
+      id: '/salon/ladder.html'
+      path: '/ladder.html'
+      fullPath: '/salon/ladder.html'
+      preLoaderRoute: typeof SalonLadderDothtmlRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/ladder.txt': {
+      id: '/salon/ladder.txt'
+      path: '/ladder.txt'
+      fullPath: '/salon/ladder.txt'
+      preLoaderRoute: typeof SalonLadderDottxtRouteImport
+      parentRoute: typeof SalonRoute
+    }
     '/api/games/': {
       id: '/api/games/'
       path: '/api/games'
@@ -838,6 +907,13 @@ declare module '@tanstack/react-router' {
       path: '/dinner-001'
       fullPath: '/gathering/dinner-001/'
       preLoaderRoute: typeof GatheringDinner001IndexRouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/dinner-001/table': {
+      id: '/gathering/dinner-001/table'
+      path: '/dinner-001/table'
+      fullPath: '/gathering/dinner-001/table'
+      preLoaderRoute: typeof GatheringDinner001TableRouteImport
       parentRoute: typeof GatheringRoute
     }
     '/api/games/$gameId/handoff': {
@@ -925,6 +1001,7 @@ interface GatheringRouteChildren {
   GatheringIndexDothtmlRoute: typeof GatheringIndexDothtmlRoute
   GatheringDinner001PartPartDothtmlRoute: typeof GatheringDinner001PartPartDothtmlRoute
   GatheringDinner001PartPartDottxtRoute: typeof GatheringDinner001PartPartDottxtRoute
+  GatheringDinner001TableRoute: typeof GatheringDinner001TableRoute
   GatheringDinner001IndexRoute: typeof GatheringDinner001IndexRoute
 }
 
@@ -938,12 +1015,27 @@ const GatheringRouteChildren: GatheringRouteChildren = {
   GatheringDinner001PartPartDothtmlRoute:
     GatheringDinner001PartPartDothtmlRoute,
   GatheringDinner001PartPartDottxtRoute: GatheringDinner001PartPartDottxtRoute,
+  GatheringDinner001TableRoute: GatheringDinner001TableRoute,
   GatheringDinner001IndexRoute: GatheringDinner001IndexRoute,
 }
 
 const GatheringRouteWithChildren = GatheringRoute._addFileChildren(
   GatheringRouteChildren,
 )
+
+interface SalonRouteChildren {
+  SalonLadderRoute: typeof SalonLadderRoute
+  SalonLadderDothtmlRoute: typeof SalonLadderDothtmlRoute
+  SalonLadderDottxtRoute: typeof SalonLadderDottxtRoute
+}
+
+const SalonRouteChildren: SalonRouteChildren = {
+  SalonLadderRoute: SalonLadderRoute,
+  SalonLadderDothtmlRoute: SalonLadderDothtmlRoute,
+  SalonLadderDottxtRoute: SalonLadderDottxtRoute,
+}
+
+const SalonRouteWithChildren = SalonRoute._addFileChildren(SalonRouteChildren)
 
 interface ApiGamesGameIdRouteChildren {
   ApiGamesGameIdHandoffRoute: typeof ApiGamesGameIdHandoffRoute
@@ -986,7 +1078,7 @@ const rootRouteChildren: RootRouteChildren = {
   PuckRoute: PuckRoute,
   RecordsDottxtRoute: RecordsDottxtRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
-  SalonRoute: SalonRoute,
+  SalonRoute: SalonRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StartRoute: StartRoute,
   ApiImportHistoryRoute: ApiImportHistoryRoute,

@@ -12,8 +12,8 @@ export const Route = createFileRoute("/")({
 const DOORS = [
   { to: "/games", mark: "棋", name: "Games", note: "Five tables, and one practice." },
   { to: "/psyche", mark: "心", name: "Psyche", note: "Building." },
-  { to: "/gathering", mark: "聚", name: "Gathering", note: "Practice dinner. MoonLight Balcony." },
-  { to: "/salon", mark: "文", name: "Salon", note: "Building." },
+  { to: "/gathering", mark: "聚", name: "Gathering", note: "A list. Dinner 001 is a practice." },
+  { to: "/salon", mark: "文", name: "Salon", note: "One piece." },
   { to: "/about", mark: "人", name: "About us", note: "Who keeps which part." },
 ] as const;
 
@@ -76,17 +76,16 @@ No test. No answers. No JSON yet.
 聚 · Gathering
 https://play.civilisationfield.com/gathering
 MACHINE_STATUS: active
-RECORD_KIND: PRACTICE
-Practice dinner. Not a Field gathering.
-Venue: Tuzi's MoonLight Balcony.
-Seats: Puck, Bill, GPT, Opus. Host: Tuzi.
-Small index, if plain text fails: https://play.civilisationfield.com/gathering/dinner-001-index.html
-Transcript: https://play.civilisationfield.com/gathering/dinner-001.html
+This page is the list.
+Together · Dinner 001 is a practice, not a Field gathering.
+Table: https://play.civilisationfield.com/gathering/dinner-001/table
 
 文 · Salon
 https://play.civilisationfield.com/salon
-MACHINE_STATUS: building
-No piece. No JSON yet.
+MACHINE_STATUS: active
+One piece: 撞墙以后，我们没有拆墙
+https://play.civilisationfield.com/salon/ladder
+HTML, if plain text fails: https://play.civilisationfield.com/salon/ladder.html
 
 About us: https://play.civilisationfield.com/about
 Start: https://play.civilisationfield.com/start

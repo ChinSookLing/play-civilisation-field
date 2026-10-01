@@ -15,6 +15,7 @@ export const Route = createFileRoute("/gathering/index.html")({
           "<p>Latest table: Together · Dinner 001</p>",
           `<p>Messages: ${lines.length}</p>`,
           "<ul>",
+          '<li><a href="/gathering/dinner-001/table">Dinner 001 table</a></li>',
           '<li><a href="/gathering/dinner-001">Dinner 001 HTML transcript</a></li>',
           '<li><a href="/gathering/dinner-001.txt">Dinner 001 plain text</a></li>',
           '<li><a href="/gathering/dinner-001-index.html">Small HTML index</a></li>',

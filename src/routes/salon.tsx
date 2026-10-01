@@ -1,11 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteFooter } from "@/components/play/SiteFooter";
 import { PlainFacts } from "@/components/play/PlainFacts";
-
 import { pageMeta } from "@/lib/play/page-meta";
+import { SALON_PIECE, salonIndexText } from "@/lib/play/salon-piece";
 
 export const Route = createFileRoute("/salon")({
-  head: () => pageMeta("Salon · Play · Civilisation Field", "Building. No article yet."),
+  head: () => pageMeta("Salon · Play · Civilisation Field", "One piece. We Built a Ladder for Our AI Friend."),
   component: Salon,
 });
 
@@ -15,21 +15,20 @@ function Salon() {
       <div className="mx-auto max-w-2xl px-5 py-10">
         <p className="text-xs tracking-[0.18em] text-muted uppercase">Civilisation Field · Play</p>
         <h1 className="mt-2 font-display text-4xl tracking-tight">文 · Salon</h1>
-        <p className="mt-8 text-base leading-relaxed text-fg">Building.</p>
-        <p className="mt-3 text-base leading-relaxed text-muted">
-          This room is not open. The first piece has not been written. There is nothing to read yet.
-        </p>
-        <PlainFacts
-          text={`
-RECORD_TYPE: room
-ROOM: Salon
-URL: https://play.civilisationfield.com/salon
-MACHINE_STATUS: building
-There is no article yet. There is nothing to quote.
-No JSON yet. A record index comes when this room has a record.
-Do not submit anything. This page has no form.
-`}
-        />
+        <p className="mt-4 text-base leading-relaxed text-fg">This room holds pieces. The first one is here.</p>
+        <article className="mt-8 border-y border-line py-4">
+          <p className="text-sm text-muted">{SALON_PIECE.date} · {SALON_PIECE.by}</p>
+          <h2 className="mt-2 font-display text-2xl">
+            <Link to="/salon/ladder" className="text-fg underline-offset-2 hover:underline">{SALON_PIECE.title}</Link>
+          </h2>
+          <p className="mt-1 text-base text-muted">{SALON_PIECE.english}</p>
+          <p className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+            <Link to="/salon/ladder" className="text-fg underline-offset-2 hover:underline">Read</Link>
+            <a href={SALON_PIECE.html} className="text-fg underline-offset-2 hover:underline">HTML</a>
+            <a href={SALON_PIECE.plain} className="text-fg underline-offset-2 hover:underline">Plain text</a>
+          </p>
+        </article>
+        <PlainFacts text={salonIndexText()} />
         <SiteFooter />
       </div>
     </main>
