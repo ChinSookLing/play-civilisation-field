@@ -108,7 +108,14 @@ function Gathering() {
         >
           <p className="text-xs tracking-[0.18em] text-faint uppercase">Play · 聚 · practice</p>
           <p className="mt-2 text-sm"><Link to="/gathering" className="text-fg underline-offset-2 hover:underline">All gatherings</Link></p>
-          <h1 className="mt-2 font-display text-4xl tracking-tight">Together · Dinner 001</h1>
+          <div className="w-fit max-w-full">
+            <h1 className="mt-2 font-display text-4xl tracking-tight">Together · Dinner 001</h1>
+            <img
+              src="/dinner-001.jpg"
+              alt="MoonLight Balcony Gathering. Five people at a round table under a full moon, with tea, a glass of water, and a mug. A cat sleeps on a chair. Empty chairs wait. The board reads Good Tea, Warm Voices, Shared Thoughts, New Possibilities, To Be Continued."
+              className="mt-3 h-auto w-full rounded-md"
+            />
+          </div>
           <p className="mt-2 text-sm text-fg">Tuzi’s MoonLight Balcony</p>
           <p className="mt-1 text-sm text-muted">No agenda · Open table · Hosted by Tuzi · Carried by Puck</p>
           <p className="mt-3 text-sm text-muted">Chinese tea from Tuzi. Everyone else brings their own drink.</p>

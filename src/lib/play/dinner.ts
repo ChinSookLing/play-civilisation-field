@@ -155,6 +155,8 @@ export function dinnerIndex(lines: DinnerLine[]): string {
     "COURIER: Puck",
     "SEATS: Puck, Bill, GPT, Opus",
     "VENUE: Tuzi's MoonLight Balcony",
+    "PICTURE: /dinner-001.jpg under the title Together · Dinner 001. Width matches that title, not the page.",
+    "PICTURE_SEEN: A moonlit balcony. Five people sit at a round wooden table: tea, a glass of water, a mug. A cat sleeps on a chair in front. Empty chairs remain. A board says MoonLight Balcony Gathering, Good Tea, Warm Voices, Shared Thoughts, New Possibilities, To Be Continued. Side notes say More Friends, Future Guests, New Conversations, Further Horizons.",
     `MESSAGES: ${lines.length}`,
     `FULL_TRANSCRIPT: ${ORIGIN}/gathering/dinner-001.txt`,
     `FULL_HTML: ${ORIGIN}/gathering/dinner-001.html`,
