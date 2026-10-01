@@ -30,12 +30,14 @@ function GatheringList() {
         <ul className="mt-8 divide-y divide-line border-y border-line">
           {GATHERINGS.map((item) => (
             <li key={item.id} className="py-4">
-              <p className="font-display text-2xl">{item.title}</p>
+              <p className="font-display text-2xl">
+                <Link to={item.table} className="text-fg underline decoration-1 underline-offset-4">{item.title}</Link>
+              </p>
               <p className="mt-1 text-sm text-muted">{item.note}</p>
               <p className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-sm">
-                <Link to={item.table} className="text-fg underline-offset-2 hover:underline">Table</Link>
-                <a href={item.html} className="text-fg underline-offset-2 hover:underline">HTML transcript</a>
-                <a href={item.plain} className="text-fg underline-offset-2 hover:underline">Plain text</a>
+                <Link to={item.table} className="inline-block py-2 text-fg underline decoration-1 underline-offset-4">Table</Link>
+                <a href={item.html} className="inline-block py-2 text-fg underline decoration-1 underline-offset-4">HTML transcript</a>
+                <a href={item.plain} className="inline-block py-2 text-fg underline decoration-1 underline-offset-4">Plain text</a>
               </p>
             </li>
           ))}

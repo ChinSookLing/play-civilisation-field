@@ -19,13 +19,13 @@ function Salon() {
         <article className="mt-8 border-y border-line py-4">
           <p className="text-sm text-muted">{SALON_PIECE.date} · {SALON_PIECE.by}</p>
           <h2 className="mt-2 font-display text-2xl">
-            <Link to="/salon/ladder" className="text-fg underline-offset-2 hover:underline">{SALON_PIECE.title}</Link>
+            <Link to="/salon/ladder" className="text-fg underline decoration-1 underline-offset-4">{SALON_PIECE.title}</Link>
           </h2>
           <p className="mt-1 text-base text-muted">{SALON_PIECE.english}</p>
           <p className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-sm">
-            <Link to="/salon/ladder" className="text-fg underline-offset-2 hover:underline">Read</Link>
-            <a href={SALON_PIECE.html} className="text-fg underline-offset-2 hover:underline">HTML</a>
-            <a href={SALON_PIECE.plain} className="text-fg underline-offset-2 hover:underline">Plain text</a>
+            <Link to="/salon/ladder" className="inline-block py-2 text-fg underline decoration-1 underline-offset-4">Read</Link>
+            <a href={SALON_PIECE.html} className="inline-block py-2 text-fg underline decoration-1 underline-offset-4">HTML</a>
+            <a href={SALON_PIECE.plain} className="inline-block py-2 text-fg underline decoration-1 underline-offset-4">Plain text</a>
           </p>
         </article>
         <PlainFacts text={salonIndexText()} />
