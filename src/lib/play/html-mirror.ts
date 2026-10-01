@@ -17,6 +17,7 @@ export function htmlMirror(options: {
   textUrl: string;
   text: string;
   also?: { href: string; label: string }[];
+  lead?: string;
 }): string {
   const links = [
     `<p>Plain text, same words: <a href="${escapeAttr(options.textUrl)}">${escapeText(options.textUrl)}</a></p>`,
@@ -35,6 +36,7 @@ export function htmlMirror(options: {
 <body>
 <main>
 <h1>${escapeText(options.title)}</h1>
+${options.lead ?? ""}
 ${links}
 <pre>${escapeText(options.text.trim())}</pre>
 </main>
