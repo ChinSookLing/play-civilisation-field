@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import { SiteFooter } from "@/components/play/SiteFooter";
 import { PlainFacts } from "@/components/play/PlainFacts";
-import { dinnerTranscript, PRACTICE_SEATS, type DinnerLine, type DinnerLineType } from "@/lib/play/dinner";
+import { dinnerIndex, dinnerTranscript, PRACTICE_SEATS, type DinnerLine, type DinnerLineType } from "@/lib/play/dinner";
 import { loadDinnerLinesFn } from "@/lib/play/load";
 import { pageMeta } from "@/lib/play/page-meta";
 
@@ -99,6 +99,7 @@ function Gathering() {
   return (
     <main className="min-h-dvh bg-bg text-fg">
       <div className="mx-auto max-w-2xl px-5 py-10">
+        <PlainFacts text={dinnerIndex(lines)} />
         <header
           className="rounded-lg border border-line px-5 py-6"
           style={{

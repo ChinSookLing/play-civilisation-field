@@ -80,6 +80,7 @@ RECORD_KIND: PRACTICE
 Practice dinner. Not a Field gathering.
 Venue: Tuzi's MoonLight Balcony.
 Seats: Puck, Bill, GPT, Opus. Host: Tuzi.
+Small index: https://play.civilisationfield.com/gathering/dinner-001-index.txt
 Transcript: https://play.civilisationfield.com/gathering/dinner-001.txt
 
 文 · Salon

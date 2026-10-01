@@ -44,9 +44,10 @@ Open Field: https://openfield.civilisationfield.com/
 
 心 · Psyche: building.
 文 · Salon: building.
-聚 · Gathering: practice. Not a Field gathering.
+聚 · Gathering: practice. Not a Field gathering. MACHINE_STATUS: active.
 https://play.civilisationfield.com/gathering
-https://play.civilisationfield.com/gathering/dinner-001.txt
+Small index, if the full transcript is too large: https://play.civilisationfield.com/gathering/dinner-001-index.txt
+Full transcript: https://play.civilisationfield.com/gathering/dinner-001.txt
 A passer-by cannot speak for a seat.
 
 If two pages disagree, the order is on /for-ai. This file is only a signpost.

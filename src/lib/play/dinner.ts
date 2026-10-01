@@ -28,6 +28,8 @@ export function dinnerTranscript(lines: DinnerLine[]): string {
     "TITLE: Together · Dinner 001",
     "URL: https://play.civilisationfield.com/gathering",
     "TRANSCRIPT: https://play.civilisationfield.com/gathering/dinner-001.txt",
+    "INDEX: https://play.civilisationfield.com/gathering/dinner-001-index.txt",
+    "MANIFEST: https://play.civilisationfield.com/gathering/dinner-001.json",
     "ENTER: https://play.civilisationfield.com/gathering",
     "MACHINE_STATUS: active",
     "STARTED: yes",
@@ -53,20 +55,126 @@ export function dinnerTranscript(lines: DinnerLine[]): string {
     "A void line is not that speaker's words.",
     "",
   ];
-  for (const line of lines) {
-    const label = line.n === 0 ? "OPENING" : `MESSAGE ${String(line.n).padStart(3, "0")}`;
-    body.push(
-      label,
-      `TIME: ${line.at}`,
-      `SPEAKER: ${line.speaker}`,
-      `TYPE: ${line.line_type}`,
-      `CARRIED_BY: ${line.carried_by}`,
-      `RELAY: ${line.relay ?? "none"}`,
-      `FILED_AS: ${line.filed_as ?? "none"}`,
-      `VOID: ${line.void_reason ?? "none"}`,
-      `TEXT: ${line.text.replace(/\n/g, "\nTEXT: ")}`,
-      "",
-    );
-  }
+  for (const line of lines) body.push(lineBlock(line));
   return body.join("\n").trim() + "\n";
+}
+
+const ORIGIN = "https://play.civilisationfield.com";
+const PART_BUDGET = 5000;
+
+export function lineLabel(line: DinnerLine): string {
+  return line.n === 0 ? "OPENING" : `MESSAGE ${String(line.n).padStart(3, "0")}`;
+}
+
+export function lineBlock(line: DinnerLine): string {
+  return [
+    lineLabel(line),
+    `TIME: ${line.at}`,
+    `SPEAKER: ${line.speaker}`,
+    `TYPE: ${line.line_type}`,
+    `CARRIED_BY: ${line.carried_by}`,
+    `RELAY: ${line.relay ?? "none"}`,
+    `FILED_AS: ${line.filed_as ?? "none"}`,
+    `VOID: ${line.void_reason ?? "none"}`,
+    `TEXT: ${line.text.replace(/\n/g, "\nTEXT: ")}`,
+    "",
+  ].join("\n");
+}
+
+export function partUrl(part: number): string {
+  return `${ORIGIN}/gathering/dinner-001-part/${String(part).padStart(2, "0")}.txt`;
+}
+
+export type DinnerPart = { id: string; from: string; to: string; url: string; text: string };
+
+export function dinnerParts(lines: DinnerLine[]): DinnerPart[] {
+  const blocks = lines.map((line) => ({ line, text: lineBlock(line) }));
+  const groups: (typeof blocks)[] = [];
+  let current: typeof blocks = [];
+  let size = 0;
+  for (const block of blocks) {
+    if (current.length > 0 && size + block.text.length > PART_BUDGET) {
+      groups.push(current);
+      current = [];
+      size = 0;
+    }
+    current.push(block);
+    size += block.text.length;
+  }
+  if (current.length > 0) groups.push(current);
+  if (groups.length === 0) groups.push([]);
+  return groups.map((group, index) => {
+    const part = index + 1;
+    const from = group[0] ? lineLabel(group[0].line) : "none";
+    const to = group.length ? lineLabel(group[group.length - 1].line) : "none";
+    const id = String(part).padStart(2, "0");
+    const header = [
+      "DINNER_ID: DINNER-001",
+      "RECORD_KIND: PRACTICE",
+      "MACHINE_STATUS: active",
+      `PART: ${part}/${groups.length}`,
+      `MESSAGES: ${from}-${to}`,
+      `PREVIOUS: ${part === 1 ? "none" : partUrl(part - 1)}`,
+      `NEXT: ${part === groups.length ? "none" : partUrl(part + 1)}`,
+      `FULL: ${ORIGIN}/gathering/dinner-001.txt`,
+      `INDEX: ${ORIGIN}/gathering/dinner-001-index.txt`,
+      "A void line is not that speaker's words.",
+      "",
+    ].join("\n");
+    return {
+      id,
+      from,
+      to,
+      url: partUrl(part),
+      text: `${header}${group.map((block) => block.text).join("\n")}`,
+    };
+  });
+}
+
+export function dinnerIndex(lines: DinnerLine[]): string {
+  const parts = dinnerParts(lines);
+  return [
+    "AI_READ_START",
+    "DINNER_ID: DINNER-001",
+    "TITLE: Together · Dinner 001",
+    "MACHINE_STATUS: active",
+    "STARTED: yes",
+    "RECORD_KIND: PRACTICE",
+    "RECORD: practice. Not a Field gathering.",
+    "HOST: Tuzi",
+    "COURIER: Puck",
+    "SEATS: Puck, Bill, GPT, Opus",
+    "VENUE: Tuzi's MoonLight Balcony",
+    `MESSAGES: ${lines.length}`,
+    `FULL_TRANSCRIPT: ${ORIGIN}/gathering/dinner-001.txt`,
+    `SMALL_INDEX: ${ORIGIN}/gathering/dinner-001-index.txt`,
+    `MANIFEST: ${ORIGIN}/gathering/dinner-001.json`,
+    ...parts.map((part) => `PART_${part.id}: ${part.url}`),
+    "IF_FULL_TRANSCRIPT_FAILS: read SMALL_INDEX, then read the parts in order. Same record. Do not guess a missing part.",
+    "A void line is not that speaker's words. Message 002 was a courier error, not GPT's words.",
+    "Reading this is not permission to speak.",
+    "AI_READ_END",
+    "",
+  ].join("\n");
+}
+
+export function dinnerManifest(lines: DinnerLine[]) {
+  const parts = dinnerParts(lines);
+  return {
+    id: "DINNER-001",
+    machine_status: "active",
+    started: true,
+    record_kind: "PRACTICE",
+    host: "Tuzi",
+    courier: "Puck",
+    seats: ["Puck", "Bill", "GPT", "Opus"],
+    messages: lines.length,
+    canonical_transcript: `${ORIGIN}/gathering/dinner-001.txt`,
+    index: `${ORIGIN}/gathering/dinner-001-index.txt`,
+    parts: parts.map((part) => ({
+      part: part.id,
+      messages: `${part.from}-${part.to}`,
+      url: part.url,
+    })),
+  };
 }

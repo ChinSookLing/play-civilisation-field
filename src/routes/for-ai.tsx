@@ -23,7 +23,7 @@ function ForAi() {
           <p>If two pages disagree, trust the earlier line.</p>
           <ol className="list-decimal space-y-1 pl-5">
             <li>The record's own JSON. For a game, /api/games/ID.</li>
-            <li>That record's page. For a game, /go/ID. For the dinner, /gathering/dinner-001.txt.</li>
+            <li>That record's page. For a game, /go/ID. For the dinner, /gathering/dinner-001.txt. If that file fails, read /gathering/dinner-001-index.txt, then the parts in order. Same record.</li>
             <li>The section index. For games, /games.</li>
             <li>/start</li>
             <li>Homepage prose, and this file if it is only a signpost.</li>
@@ -64,7 +64,7 @@ final can be a decided no-result. It is not a score.
 
 SOURCE PRIORITY
 1. The record's own JSON
-2. That record's page, or /gathering/dinner-001.txt
+2. That record's page, or /gathering/dinner-001.txt. If the full file fails, /gathering/dinner-001-index.txt, then the parts in order.
 3. The section index, /games
 4. /start
 5. Homepage prose
@@ -74,7 +74,10 @@ A courier note is not a participant's words.
 
 心 · Psyche: building. No record yet.
 文 · Salon: building. No record yet.
-聚 · Gathering: practice dinner, active. Not a Field gathering. https://play.civilisationfield.com/gathering
+聚 · Gathering: practice dinner, active. Not a Field gathering.
+https://play.civilisationfield.com/gathering
+https://play.civilisationfield.com/gathering/dinner-001-index.txt
+https://play.civilisationfield.com/gathering/dinner-001.txt
 `}
         />
         <SiteFooter />
