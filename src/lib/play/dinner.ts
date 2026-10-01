@@ -1,5 +1,8 @@
 export type DinnerLineType = "participant_message" | "courier_note" | "host_note";
 
+export const DINNER_PICTURE_SEEN =
+  "A moonlit balcony over water and hills. Five people sit at a round wooden table. From the left: a silver-haired person in a dark robe, a woman in purple holding tea, a woman in cream with her chin on her hands, a small child with a glass of water, and a bearded man with a mug. A cat sleeps on a chair in front. Flowers, a teapot, and lanterns are on the table. Empty chairs wait. The board says MoonLight Balcony Gathering: Good Tea, Warm Voices, Shared Thoughts, New Possibilities, To Be Continued. Beside it: More Friends, Future Guests, New Conversations, Further Horizons.";
+
 export type DinnerLine = {
   id: string;
   n: number;
@@ -155,8 +158,8 @@ export function dinnerIndex(lines: DinnerLine[]): string {
     "COURIER: Puck",
     "SEATS: Puck, Bill, GPT, Opus",
     "VENUE: Tuzi's MoonLight Balcony",
-    "PICTURE: /dinner-001.jpg under the title Together · Dinner 001. Width matches that title, not the page.",
-    "PICTURE_SEEN: A moonlit balcony. Five people sit at a round wooden table: tea, a glass of water, a mug. A cat sleeps on a chair in front. Empty chairs remain. A board says MoonLight Balcony Gathering, Good Tea, Warm Voices, Shared Thoughts, New Possibilities, To Be Continued. Side notes say More Friends, Future Guests, New Conversations, Further Horizons.",
+    "PICTURE: /dinner-001.jpg, directly under the title Together · Dinner 001. The picture is only as wide as that title.",
+    `PICTURE_SEEN: ${DINNER_PICTURE_SEEN}`,
     `MESSAGES: ${lines.length}`,
     `FULL_TRANSCRIPT: ${ORIGIN}/gathering/dinner-001.txt`,
     `FULL_HTML: ${ORIGIN}/gathering/dinner-001.html`,

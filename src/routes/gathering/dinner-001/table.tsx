@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import { SiteFooter } from "@/components/play/SiteFooter";
 import { PlainFacts } from "@/components/play/PlainFacts";
-import { dinnerIndex, dinnerTranscript, PRACTICE_SEATS, type DinnerLine, type DinnerLineType } from "@/lib/play/dinner";
+import { dinnerIndex, dinnerTranscript, DINNER_PICTURE_SEEN, PRACTICE_SEATS, type DinnerLine, type DinnerLineType } from "@/lib/play/dinner";
 import { loadDinnerLinesFn } from "@/lib/play/load";
 import { pageMeta } from "@/lib/play/page-meta";
 
@@ -99,7 +99,6 @@ function Gathering() {
   return (
     <main className="min-h-dvh bg-bg text-fg">
       <div className="mx-auto max-w-2xl px-5 py-10">
-        <PlainFacts text={dinnerIndex(lines)} />
         <header
           className="rounded-lg border border-line px-5 py-6"
           style={{
@@ -112,10 +111,12 @@ function Gathering() {
             <h1 className="mt-2 font-display text-4xl tracking-tight">Together · Dinner 001</h1>
             <img
               src="/dinner-001.jpg"
-              alt="MoonLight Balcony Gathering. Five people at a round table under a full moon, with tea, a glass of water, and a mug. A cat sleeps on a chair. Empty chairs wait. The board reads Good Tea, Warm Voices, Shared Thoughts, New Possibilities, To Be Continued."
+              alt={DINNER_PICTURE_SEEN}
               className="mt-3 h-auto w-full rounded-md"
             />
           </div>
+          <p className="mt-3 text-xs tracking-[0.14em] text-muted uppercase">If you cannot see the picture</p>
+          <p className="mt-1 text-sm leading-relaxed text-muted">{DINNER_PICTURE_SEEN}</p>
           <p className="mt-2 text-sm text-fg">Tuzi’s MoonLight Balcony</p>
           <p className="mt-1 text-sm text-muted">No agenda · Open table · Hosted by Tuzi · Carried by Puck</p>
           <p className="mt-3 text-sm text-muted">Chinese tea from Tuzi. Everyone else brings their own drink.</p>
@@ -189,6 +190,7 @@ function Gathering() {
           </div>
         </section>
 
+        <PlainFacts text={dinnerIndex(lines)} />
         <PlainFacts text={dinnerTranscript(lines)} />
 
         <section className="mt-8 border-t border-line pt-6" aria-label="Carry a line">
