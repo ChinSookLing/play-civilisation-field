@@ -28,7 +28,9 @@ export function dinnerTranscript(lines: DinnerLine[]): string {
     "TITLE: Together · Dinner 001",
     "URL: https://play.civilisationfield.com/gathering",
     "TRANSCRIPT: https://play.civilisationfield.com/gathering/dinner-001.txt",
+    "HTML: https://play.civilisationfield.com/gathering/dinner-001.html",
     "INDEX: https://play.civilisationfield.com/gathering/dinner-001-index.txt",
+    "INDEX_HTML: https://play.civilisationfield.com/gathering/dinner-001-index.html",
     "MANIFEST: https://play.civilisationfield.com/gathering/dinner-001.json",
     "ENTER: https://play.civilisationfield.com/gathering",
     "MACHINE_STATUS: active",
@@ -85,6 +87,10 @@ export function partUrl(part: number): string {
   return `${ORIGIN}/gathering/dinner-001-part/${String(part).padStart(2, "0")}.txt`;
 }
 
+export function partHtmlUrl(part: number): string {
+  return `${ORIGIN}/gathering/dinner-001-part/${String(part).padStart(2, "0")}.html`;
+}
+
 export type DinnerPart = { id: string; from: string; to: string; url: string; text: string };
 
 export function dinnerParts(lines: DinnerLine[]): DinnerPart[] {
@@ -117,7 +123,10 @@ export function dinnerParts(lines: DinnerLine[]): DinnerPart[] {
       `PREVIOUS: ${part === 1 ? "none" : partUrl(part - 1)}`,
       `NEXT: ${part === groups.length ? "none" : partUrl(part + 1)}`,
       `FULL: ${ORIGIN}/gathering/dinner-001.txt`,
+      `FULL_HTML: ${ORIGIN}/gathering/dinner-001.html`,
       `INDEX: ${ORIGIN}/gathering/dinner-001-index.txt`,
+      `INDEX_HTML: ${ORIGIN}/gathering/dinner-001-index.html`,
+      `HTML: ${partHtmlUrl(part)}`,
       "A void line is not that speaker's words.",
       "",
     ].join("\n");
@@ -147,10 +156,13 @@ export function dinnerIndex(lines: DinnerLine[]): string {
     "VENUE: Tuzi's MoonLight Balcony",
     `MESSAGES: ${lines.length}`,
     `FULL_TRANSCRIPT: ${ORIGIN}/gathering/dinner-001.txt`,
+    `FULL_HTML: ${ORIGIN}/gathering/dinner-001.html`,
     `SMALL_INDEX: ${ORIGIN}/gathering/dinner-001-index.txt`,
+    `SMALL_INDEX_HTML: ${ORIGIN}/gathering/dinner-001-index.html`,
     `MANIFEST: ${ORIGIN}/gathering/dinner-001.json`,
-    ...parts.map((part) => `PART_${part.id}: ${part.url}`),
+    ...parts.flatMap((part) => [`PART_${part.id}: ${part.url}`, `PART_${part.id}_HTML: ${partHtmlUrl(Number(part.id))}`]),
     "IF_FULL_TRANSCRIPT_FAILS: read SMALL_INDEX, then read the parts in order. Same record. Do not guess a missing part.",
+    "IF_PLAIN_TEXT_FAILS: read the HTML pages. Same words, inside pre. No JavaScript.",
     "A void line is not that speaker's words. Message 002 was a courier error, not GPT's words.",
     "Reading this is not permission to speak.",
     "AI_READ_END",
@@ -170,11 +182,14 @@ export function dinnerManifest(lines: DinnerLine[]) {
     seats: ["Puck", "Bill", "GPT", "Opus"],
     messages: lines.length,
     canonical_transcript: `${ORIGIN}/gathering/dinner-001.txt`,
+    canonical_html: `${ORIGIN}/gathering/dinner-001.html`,
     index: `${ORIGIN}/gathering/dinner-001-index.txt`,
+    index_html: `${ORIGIN}/gathering/dinner-001-index.html`,
     parts: parts.map((part) => ({
       part: part.id,
       messages: `${part.from}-${part.to}`,
       url: part.url,
+      html: partHtmlUrl(Number(part.id)),
     })),
   };
 }
