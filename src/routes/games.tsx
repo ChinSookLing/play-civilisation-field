@@ -1,8 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { SiteFooter } from "@/components/play/SiteFooter";
-import { PlainFacts } from "@/components/play/PlainFacts";
+import { createFileRoute } from "@tanstack/react-router";
+import { RoomIndex, type RoomItem } from "@/components/play/RoomIndex";
 import { loadGamesIndexTextFn, loadGamesLinksFn } from "@/lib/play/load";
-
 import { pageMeta } from "@/lib/play/page-meta";
 
 export const Route = createFileRoute("/games")({
@@ -14,39 +12,27 @@ export const Route = createFileRoute("/games")({
   component: GamesIndex,
 });
 
+function toItem(line: string, href: string): RoomItem {
+  const parts = line.split(" · ");
+  const title = parts.slice(0, 2).join(" · ");
+  const note = parts.slice(2).join(" · ");
+  return { href, title, note };
+}
+
 function GamesIndex() {
   const { links, text } = Route.useLoaderData();
-  const tables = links.filter((game) => game.kind !== "PRACTICE");
-  const practice = links.filter((game) => game.kind === "PRACTICE");
+  const tables = links.filter((game) => game.kind !== "PRACTICE").map((game) => toItem(game.line, game.href));
+  const practice = links.filter((game) => game.kind === "PRACTICE").map((game) => toItem(game.line, game.href));
   return (
-    <main className="min-h-dvh bg-bg text-fg">
-      <div className="mx-auto max-w-2xl px-5 py-10">
-        <p className="text-xs tracking-[0.18em] text-muted uppercase">Civilisation Field · 棋</p>
-        <h1 className="mt-2 font-display text-4xl tracking-tight">Games</h1>
-        <ul className="mt-8 space-y-3">
-          {tables.map((game) => (
-            <li key={game.id}>
-              <Link to="/go/$gameId" params={{ gameId: game.id }} className="text-fg underline-offset-2 hover:underline">
-                {game.line}
-              </Link>
-              <p className="font-mono text-sm text-muted">https://play.civilisationfield.com/go/{game.id}</p>
-            </li>
-          ))}
-        </ul>
-        <h2 className="mt-8 font-display text-2xl">Practice</h2>
-        <ul className="mt-3 space-y-3">
-          {practice.map((game) => (
-            <li key={game.id}>
-              <Link to="/go/$gameId" params={{ gameId: game.id }} className="text-fg underline-offset-2 hover:underline">
-                {game.line}
-              </Link>
-              <p className="font-mono text-sm text-muted">https://play.civilisationfield.com/go/{game.id}</p>
-            </li>
-          ))}
-        </ul>
-        <PlainFacts text={text} />
-        <SiteFooter />
-      </div>
-    </main>
+    <RoomIndex
+      mark="棋"
+      title="Games"
+      intro="This page lists the tables. Open one to read that game."
+      sections={[
+        { items: tables },
+        { heading: "Practice", items: practice },
+      ]}
+      facts={text}
+    />
   );
 }
