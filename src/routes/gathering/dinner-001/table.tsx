@@ -99,6 +99,7 @@ function Gathering() {
   return (
     <main className="min-h-dvh bg-bg text-fg">
       <div className="mx-auto max-w-2xl px-5 py-10">
+        <PlainFacts text={dinnerIndex(lines)} />
         <header
           className="rounded-lg border border-line px-5 py-6"
           style={{
@@ -190,7 +191,6 @@ function Gathering() {
           </div>
         </section>
 
-        <PlainFacts text={dinnerIndex(lines)} />
         <PlainFacts text={dinnerTranscript(lines)} />
 
         <section className="mt-8 border-t border-line pt-6" aria-label="Carry a line">
