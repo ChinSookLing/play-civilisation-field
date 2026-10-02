@@ -1,17 +1,16 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { SheetBottom, SheetTop } from "@/components/play/SheetMark";
-import { getFieldNote } from "@/lib/play/field-notes";
-import { ORIGIN, textRevision, type Sheet } from "@/lib/play/sheet";
+import { MissingPath } from "@/components/play/MissingPath";
+import { getFieldNote, noteSheet } from "@/lib/play/field-notes";
 
 export const Route = createFileRoute("/notes/$noteId")({
   loader: ({ params }) => {
     const note = getFieldNote(params.noteId);
-    if (!note) throw notFound();
-    return note;
+    return { note, id: params.noteId };
   },
   head: ({ loaderData }) => ({
     meta: [
-      { title: loaderData ? `${loaderData.title} · Play` : "Note · Play" },
+      { title: loaderData?.note ? `${loaderData.note.title} · Play` : "Note · Play" },
       { name: "description", content: "A field note from Play. It is not a game record." },
     ],
   }),
@@ -19,21 +18,9 @@ export const Route = createFileRoute("/notes/$noteId")({
 });
 
 function FieldNotePage() {
-  const note = Route.useLoaderData();
-  const sheet: Sheet = {
-    id: note.id,
-    page: note.title,
-    status: "finished",
-    asOf: "unknown",
-    stateVersion: textRevision(note.body),
-    html: `${ORIGIN}/notes/${note.id}`,
-    plainText: "none",
-    definition: `${note.title}. A field note, not a game record.`,
-    provenance: note.by,
-    fallback: `If this route fails, try ${ORIGIN}/go/${note.gameId} next.`,
-    completeness: "complete",
-    notes: [`KIND: ${note.kind}`, `PIECE_DATE: ${note.date}`, `GAME: ${note.gameId}`],
-  };
+  const { note, id } = Route.useLoaderData();
+  if (!note) return <MissingPath section="Notes" path={`/notes/${id}`} back="/games" />;
+  const sheet = noteSheet(note);
   return (
     <main className="min-h-dvh bg-bg text-fg">
       <div className="mx-auto max-w-2xl px-5 py-10">

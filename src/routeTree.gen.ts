@@ -11,26 +11,38 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AboutDottxtRouteImport } from './routes/about[.]txt'
 import { Route as CourierRouteImport } from './routes/courier'
 import { Route as ForAiRouteImport } from './routes/for-ai'
+import { Route as ForAiDottxtRouteImport } from './routes/for-ai[.]txt'
 import { Route as GamesRouteImport } from './routes/games'
+import { Route as GamesDottxtRouteImport } from './routes/games[.]txt'
 import { Route as GatheringRouteImport } from './routes/gathering'
+import { Route as GatheringDottxtRouteImport } from './routes/gathering[.]txt'
+import { Route as HomeDottxtRouteImport } from './routes/home[.]txt'
 import { Route as LicenseRouteImport } from './routes/license'
+import { Route as LicenseDottxtRouteImport } from './routes/license[.]txt'
 import { Route as LlmsDothtmlRouteImport } from './routes/llms[.]html'
 import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as PlayRouteImport } from './routes/play'
 import { Route as PsycheRouteImport } from './routes/psyche'
+import { Route as PsycheDottxtRouteImport } from './routes/psyche[.]txt'
 import { Route as PuckRouteImport } from './routes/puck'
+import { Route as PuckDottxtRouteImport } from './routes/puck[.]txt'
 import { Route as RecordsDottxtRouteImport } from './routes/records[.]txt'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as SalonRouteImport } from './routes/salon'
+import { Route as SalonDottxtRouteImport } from './routes/salon[.]txt'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as StartRouteImport } from './routes/start'
+import { Route as StartDottxtRouteImport } from './routes/start[.]txt'
 import { Route as ApiImportHistoryRouteImport } from './routes/api/import-history'
 import { Route as DataGameDotjsonRouteImport } from './routes/data/game[.]json'
 import { Route as DataGameDotsgfRouteImport } from './routes/data/game[.]sgf'
+import { Route as GamesSplatRouteImport } from './routes/games/$'
 import { Route as GamesIndexDotjsonRouteImport } from './routes/games/index[.]json'
 import { Route as GatheringIndexRouteImport } from './routes/gathering/index'
+import { Route as GatheringSplatRouteImport } from './routes/gathering/$'
 import { Route as GatheringBreakfast002DothtmlRouteImport } from './routes/gathering/breakfast-002[.]html'
 import { Route as GatheringBreakfast002DottxtRouteImport } from './routes/gathering/breakfast-002[.]txt'
 import { Route as GatheringDinner001IndexDothtmlRouteImport } from './routes/gathering/dinner-001-index[.]html'
@@ -41,7 +53,9 @@ import { Route as GatheringDinner001DottxtRouteImport } from './routes/gathering
 import { Route as GatheringIndexDothtmlRouteImport } from './routes/gathering/index[.]html'
 import { Route as GoGameIdRouteImport } from './routes/go.$gameId'
 import { Route as NotesNoteIdRouteImport } from './routes/notes.$noteId'
+import { Route as NotesNoteIdDottxtRouteImport } from './routes/notes.$noteId[.]txt'
 import { Route as SalonIndexRouteImport } from './routes/salon/index'
+import { Route as SalonSplatRouteImport } from './routes/salon/$'
 import { Route as SalonLadderRouteImport } from './routes/salon/ladder'
 import { Route as SalonLadderDothtmlRouteImport } from './routes/salon/ladder[.]html'
 import { Route as SalonLadderDottxtRouteImport } from './routes/salon/ladder[.]txt'
@@ -75,6 +89,11 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutDottxtRoute = AboutDottxtRouteImport.update({
+  id: '/about.txt',
+  path: '/about.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CourierRoute = CourierRouteImport.update({
   id: '/courier',
   path: '/courier',
@@ -85,9 +104,19 @@ const ForAiRoute = ForAiRouteImport.update({
   path: '/for-ai',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ForAiDottxtRoute = ForAiDottxtRouteImport.update({
+  id: '/for-ai.txt',
+  path: '/for-ai.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GamesRoute = GamesRouteImport.update({
   id: '/games',
   path: '/games',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GamesDottxtRoute = GamesDottxtRouteImport.update({
+  id: '/games.txt',
+  path: '/games.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GatheringRoute = GatheringRouteImport.update({
@@ -95,9 +124,24 @@ const GatheringRoute = GatheringRouteImport.update({
   path: '/gathering',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GatheringDottxtRoute = GatheringDottxtRouteImport.update({
+  id: '/gathering.txt',
+  path: '/gathering.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HomeDottxtRoute = HomeDottxtRouteImport.update({
+  id: '/home.txt',
+  path: '/home.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LicenseRoute = LicenseRouteImport.update({
   id: '/license',
   path: '/license',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LicenseDottxtRoute = LicenseDottxtRouteImport.update({
+  id: '/license.txt',
+  path: '/license.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LlmsDothtmlRoute = LlmsDothtmlRouteImport.update({
@@ -120,9 +164,19 @@ const PsycheRoute = PsycheRouteImport.update({
   path: '/psyche',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PsycheDottxtRoute = PsycheDottxtRouteImport.update({
+  id: '/psyche.txt',
+  path: '/psyche.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PuckRoute = PuckRouteImport.update({
   id: '/puck',
   path: '/puck',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PuckDottxtRoute = PuckDottxtRouteImport.update({
+  id: '/puck.txt',
+  path: '/puck.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RecordsDottxtRoute = RecordsDottxtRouteImport.update({
@@ -140,6 +194,11 @@ const SalonRoute = SalonRouteImport.update({
   path: '/salon',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SalonDottxtRoute = SalonDottxtRouteImport.update({
+  id: '/salon.txt',
+  path: '/salon.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -148,6 +207,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const StartRoute = StartRouteImport.update({
   id: '/start',
   path: '/start',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StartDottxtRoute = StartDottxtRouteImport.update({
+  id: '/start.txt',
+  path: '/start.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiImportHistoryRoute = ApiImportHistoryRouteImport.update({
@@ -165,6 +229,11 @@ const DataGameDotsgfRoute = DataGameDotsgfRouteImport.update({
   path: '/data/game.sgf',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GamesSplatRoute = GamesSplatRouteImport.update({
+  id: '/$',
+  path: '/$',
+  getParentRoute: () => GamesRoute,
+} as any)
 const GamesIndexDotjsonRoute = GamesIndexDotjsonRouteImport.update({
   id: '/index.json',
   path: '/index.json',
@@ -173,6 +242,11 @@ const GamesIndexDotjsonRoute = GamesIndexDotjsonRouteImport.update({
 const GatheringIndexRoute = GatheringIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => GatheringRoute,
+} as any)
+const GatheringSplatRoute = GatheringSplatRouteImport.update({
+  id: '/$',
+  path: '/$',
   getParentRoute: () => GatheringRoute,
 } as any)
 const GatheringBreakfast002DothtmlRoute =
@@ -232,9 +306,19 @@ const NotesNoteIdRoute = NotesNoteIdRouteImport.update({
   path: '/notes/$noteId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NotesNoteIdDottxtRoute = NotesNoteIdDottxtRouteImport.update({
+  id: '/notes/$noteId.txt',
+  path: '/notes/$noteId.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SalonIndexRoute = SalonIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonSplatRoute = SalonSplatRouteImport.update({
+  id: '/$',
+  path: '/$',
   getParentRoute: () => SalonRoute,
 } as any)
 const SalonLadderRoute = SalonLadderRouteImport.update({
@@ -358,25 +442,37 @@ const ApiGatheringDinner001LinesRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/about.txt': typeof AboutDottxtRoute
   '/courier': typeof CourierRoute
   '/for-ai': typeof ForAiRoute
+  '/for-ai.txt': typeof ForAiDottxtRoute
   '/games': typeof GamesRouteWithChildren
+  '/games.txt': typeof GamesDottxtRoute
   '/gathering': typeof GatheringRouteWithChildren
+  '/gathering.txt': typeof GatheringDottxtRoute
+  '/home.txt': typeof HomeDottxtRoute
   '/license': typeof LicenseRoute
+  '/license.txt': typeof LicenseDottxtRoute
   '/llms.html': typeof LlmsDothtmlRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/play': typeof PlayRoute
   '/psyche': typeof PsycheRoute
+  '/psyche.txt': typeof PsycheDottxtRoute
   '/puck': typeof PuckRoute
+  '/puck.txt': typeof PuckDottxtRoute
   '/records.txt': typeof RecordsDottxtRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/salon': typeof SalonRouteWithChildren
+  '/salon.txt': typeof SalonDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/start': typeof StartRoute
+  '/start.txt': typeof StartDottxtRoute
   '/api/import-history': typeof ApiImportHistoryRoute
   '/data/game.json': typeof DataGameDotjsonRoute
   '/data/game.sgf': typeof DataGameDotsgfRoute
+  '/games/$': typeof GamesSplatRoute
   '/games/index.json': typeof GamesIndexDotjsonRoute
+  '/gathering/$': typeof GatheringSplatRoute
   '/gathering/breakfast-002.html': typeof GatheringBreakfast002DothtmlRoute
   '/gathering/breakfast-002.txt': typeof GatheringBreakfast002DottxtRoute
   '/gathering/dinner-001-index.html': typeof GatheringDinner001IndexDothtmlRoute
@@ -387,6 +483,8 @@ export interface FileRoutesByFullPath {
   '/gathering/index.html': typeof GatheringIndexDothtmlRoute
   '/go/$gameId': typeof GoGameIdRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
+  '/notes/$noteId.txt': typeof NotesNoteIdDottxtRoute
+  '/salon/$': typeof SalonSplatRoute
   '/salon/ladder': typeof SalonLadderRoute
   '/salon/ladder.html': typeof SalonLadderDothtmlRoute
   '/salon/ladder.txt': typeof SalonLadderDottxtRoute
@@ -415,23 +513,35 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/about.txt': typeof AboutDottxtRoute
   '/courier': typeof CourierRoute
   '/for-ai': typeof ForAiRoute
+  '/for-ai.txt': typeof ForAiDottxtRoute
   '/games': typeof GamesRouteWithChildren
+  '/games.txt': typeof GamesDottxtRoute
+  '/gathering.txt': typeof GatheringDottxtRoute
+  '/home.txt': typeof HomeDottxtRoute
   '/license': typeof LicenseRoute
+  '/license.txt': typeof LicenseDottxtRoute
   '/llms.html': typeof LlmsDothtmlRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/play': typeof PlayRoute
   '/psyche': typeof PsycheRoute
+  '/psyche.txt': typeof PsycheDottxtRoute
   '/puck': typeof PuckRoute
+  '/puck.txt': typeof PuckDottxtRoute
   '/records.txt': typeof RecordsDottxtRoute
   '/robots.txt': typeof RobotsDottxtRoute
+  '/salon.txt': typeof SalonDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/start': typeof StartRoute
+  '/start.txt': typeof StartDottxtRoute
   '/api/import-history': typeof ApiImportHistoryRoute
   '/data/game.json': typeof DataGameDotjsonRoute
   '/data/game.sgf': typeof DataGameDotsgfRoute
+  '/games/$': typeof GamesSplatRoute
   '/games/index.json': typeof GamesIndexDotjsonRoute
+  '/gathering/$': typeof GatheringSplatRoute
   '/gathering/breakfast-002.html': typeof GatheringBreakfast002DothtmlRoute
   '/gathering/breakfast-002.txt': typeof GatheringBreakfast002DottxtRoute
   '/gathering/dinner-001-index.html': typeof GatheringDinner001IndexDothtmlRoute
@@ -442,6 +552,8 @@ export interface FileRoutesByTo {
   '/gathering/index.html': typeof GatheringIndexDothtmlRoute
   '/go/$gameId': typeof GoGameIdRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
+  '/notes/$noteId.txt': typeof NotesNoteIdDottxtRoute
+  '/salon/$': typeof SalonSplatRoute
   '/salon/ladder': typeof SalonLadderRoute
   '/salon/ladder.html': typeof SalonLadderDothtmlRoute
   '/salon/ladder.txt': typeof SalonLadderDottxtRoute
@@ -471,25 +583,37 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/about.txt': typeof AboutDottxtRoute
   '/courier': typeof CourierRoute
   '/for-ai': typeof ForAiRoute
+  '/for-ai.txt': typeof ForAiDottxtRoute
   '/games': typeof GamesRouteWithChildren
+  '/games.txt': typeof GamesDottxtRoute
   '/gathering': typeof GatheringRouteWithChildren
+  '/gathering.txt': typeof GatheringDottxtRoute
+  '/home.txt': typeof HomeDottxtRoute
   '/license': typeof LicenseRoute
+  '/license.txt': typeof LicenseDottxtRoute
   '/llms.html': typeof LlmsDothtmlRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/play': typeof PlayRoute
   '/psyche': typeof PsycheRoute
+  '/psyche.txt': typeof PsycheDottxtRoute
   '/puck': typeof PuckRoute
+  '/puck.txt': typeof PuckDottxtRoute
   '/records.txt': typeof RecordsDottxtRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/salon': typeof SalonRouteWithChildren
+  '/salon.txt': typeof SalonDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/start': typeof StartRoute
+  '/start.txt': typeof StartDottxtRoute
   '/api/import-history': typeof ApiImportHistoryRoute
   '/data/game.json': typeof DataGameDotjsonRoute
   '/data/game.sgf': typeof DataGameDotsgfRoute
+  '/games/$': typeof GamesSplatRoute
   '/games/index.json': typeof GamesIndexDotjsonRoute
+  '/gathering/$': typeof GatheringSplatRoute
   '/gathering/breakfast-002.html': typeof GatheringBreakfast002DothtmlRoute
   '/gathering/breakfast-002.txt': typeof GatheringBreakfast002DottxtRoute
   '/gathering/dinner-001-index.html': typeof GatheringDinner001IndexDothtmlRoute
@@ -500,6 +624,8 @@ export interface FileRoutesById {
   '/gathering/index.html': typeof GatheringIndexDothtmlRoute
   '/go/$gameId': typeof GoGameIdRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
+  '/notes/$noteId.txt': typeof NotesNoteIdDottxtRoute
+  '/salon/$': typeof SalonSplatRoute
   '/salon/ladder': typeof SalonLadderRoute
   '/salon/ladder.html': typeof SalonLadderDothtmlRoute
   '/salon/ladder.txt': typeof SalonLadderDottxtRoute
@@ -530,25 +656,37 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/about.txt'
     | '/courier'
     | '/for-ai'
+    | '/for-ai.txt'
     | '/games'
+    | '/games.txt'
     | '/gathering'
+    | '/gathering.txt'
+    | '/home.txt'
     | '/license'
+    | '/license.txt'
     | '/llms.html'
     | '/llms.txt'
     | '/play'
     | '/psyche'
+    | '/psyche.txt'
     | '/puck'
+    | '/puck.txt'
     | '/records.txt'
     | '/robots.txt'
     | '/salon'
+    | '/salon.txt'
     | '/sitemap.xml'
     | '/start'
+    | '/start.txt'
     | '/api/import-history'
     | '/data/game.json'
     | '/data/game.sgf'
+    | '/games/$'
     | '/games/index.json'
+    | '/gathering/$'
     | '/gathering/breakfast-002.html'
     | '/gathering/breakfast-002.txt'
     | '/gathering/dinner-001-index.html'
@@ -559,6 +697,8 @@ export interface FileRouteTypes {
     | '/gathering/index.html'
     | '/go/$gameId'
     | '/notes/$noteId'
+    | '/notes/$noteId.txt'
+    | '/salon/$'
     | '/salon/ladder'
     | '/salon/ladder.html'
     | '/salon/ladder.txt'
@@ -587,23 +727,35 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/about.txt'
     | '/courier'
     | '/for-ai'
+    | '/for-ai.txt'
     | '/games'
+    | '/games.txt'
+    | '/gathering.txt'
+    | '/home.txt'
     | '/license'
+    | '/license.txt'
     | '/llms.html'
     | '/llms.txt'
     | '/play'
     | '/psyche'
+    | '/psyche.txt'
     | '/puck'
+    | '/puck.txt'
     | '/records.txt'
     | '/robots.txt'
+    | '/salon.txt'
     | '/sitemap.xml'
     | '/start'
+    | '/start.txt'
     | '/api/import-history'
     | '/data/game.json'
     | '/data/game.sgf'
+    | '/games/$'
     | '/games/index.json'
+    | '/gathering/$'
     | '/gathering/breakfast-002.html'
     | '/gathering/breakfast-002.txt'
     | '/gathering/dinner-001-index.html'
@@ -614,6 +766,8 @@ export interface FileRouteTypes {
     | '/gathering/index.html'
     | '/go/$gameId'
     | '/notes/$noteId'
+    | '/notes/$noteId.txt'
+    | '/salon/$'
     | '/salon/ladder'
     | '/salon/ladder.html'
     | '/salon/ladder.txt'
@@ -642,25 +796,37 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/about.txt'
     | '/courier'
     | '/for-ai'
+    | '/for-ai.txt'
     | '/games'
+    | '/games.txt'
     | '/gathering'
+    | '/gathering.txt'
+    | '/home.txt'
     | '/license'
+    | '/license.txt'
     | '/llms.html'
     | '/llms.txt'
     | '/play'
     | '/psyche'
+    | '/psyche.txt'
     | '/puck'
+    | '/puck.txt'
     | '/records.txt'
     | '/robots.txt'
     | '/salon'
+    | '/salon.txt'
     | '/sitemap.xml'
     | '/start'
+    | '/start.txt'
     | '/api/import-history'
     | '/data/game.json'
     | '/data/game.sgf'
+    | '/games/$'
     | '/games/index.json'
+    | '/gathering/$'
     | '/gathering/breakfast-002.html'
     | '/gathering/breakfast-002.txt'
     | '/gathering/dinner-001-index.html'
@@ -671,6 +837,8 @@ export interface FileRouteTypes {
     | '/gathering/index.html'
     | '/go/$gameId'
     | '/notes/$noteId'
+    | '/notes/$noteId.txt'
+    | '/salon/$'
     | '/salon/ladder'
     | '/salon/ladder.html'
     | '/salon/ladder.txt'
@@ -700,26 +868,37 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AboutDottxtRoute: typeof AboutDottxtRoute
   CourierRoute: typeof CourierRoute
   ForAiRoute: typeof ForAiRoute
+  ForAiDottxtRoute: typeof ForAiDottxtRoute
   GamesRoute: typeof GamesRouteWithChildren
+  GamesDottxtRoute: typeof GamesDottxtRoute
   GatheringRoute: typeof GatheringRouteWithChildren
+  GatheringDottxtRoute: typeof GatheringDottxtRoute
+  HomeDottxtRoute: typeof HomeDottxtRoute
   LicenseRoute: typeof LicenseRoute
+  LicenseDottxtRoute: typeof LicenseDottxtRoute
   LlmsDothtmlRoute: typeof LlmsDothtmlRoute
   LlmsDottxtRoute: typeof LlmsDottxtRoute
   PlayRoute: typeof PlayRoute
   PsycheRoute: typeof PsycheRoute
+  PsycheDottxtRoute: typeof PsycheDottxtRoute
   PuckRoute: typeof PuckRoute
+  PuckDottxtRoute: typeof PuckDottxtRoute
   RecordsDottxtRoute: typeof RecordsDottxtRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SalonRoute: typeof SalonRouteWithChildren
+  SalonDottxtRoute: typeof SalonDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StartRoute: typeof StartRoute
+  StartDottxtRoute: typeof StartDottxtRoute
   ApiImportHistoryRoute: typeof ApiImportHistoryRoute
   DataGameDotjsonRoute: typeof DataGameDotjsonRoute
   DataGameDotsgfRoute: typeof DataGameDotsgfRoute
   GoGameIdRoute: typeof GoGameIdRoute
   NotesNoteIdRoute: typeof NotesNoteIdRoute
+  NotesNoteIdDottxtRoute: typeof NotesNoteIdDottxtRoute
   ApiGamesGameIdRoute: typeof ApiGamesGameIdRouteWithChildren
   ApiGamesCurrentRoute: typeof ApiGamesCurrentRoute
   ApiGamesIndexRoute: typeof ApiGamesIndexRoute
@@ -743,6 +922,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about.txt': {
+      id: '/about.txt'
+      path: '/about.txt'
+      fullPath: '/about.txt'
+      preLoaderRoute: typeof AboutDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/courier': {
       id: '/courier'
       path: '/courier'
@@ -757,11 +943,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ForAiRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/for-ai.txt': {
+      id: '/for-ai.txt'
+      path: '/for-ai.txt'
+      fullPath: '/for-ai.txt'
+      preLoaderRoute: typeof ForAiDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/games': {
       id: '/games'
       path: '/games'
       fullPath: '/games'
       preLoaderRoute: typeof GamesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/games.txt': {
+      id: '/games.txt'
+      path: '/games.txt'
+      fullPath: '/games.txt'
+      preLoaderRoute: typeof GamesDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gathering': {
@@ -771,11 +971,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GatheringRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gathering.txt': {
+      id: '/gathering.txt'
+      path: '/gathering.txt'
+      fullPath: '/gathering.txt'
+      preLoaderRoute: typeof GatheringDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/home.txt': {
+      id: '/home.txt'
+      path: '/home.txt'
+      fullPath: '/home.txt'
+      preLoaderRoute: typeof HomeDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/license': {
       id: '/license'
       path: '/license'
       fullPath: '/license'
       preLoaderRoute: typeof LicenseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/license.txt': {
+      id: '/license.txt'
+      path: '/license.txt'
+      fullPath: '/license.txt'
+      preLoaderRoute: typeof LicenseDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/llms.html': {
@@ -806,11 +1027,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PsycheRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/psyche.txt': {
+      id: '/psyche.txt'
+      path: '/psyche.txt'
+      fullPath: '/psyche.txt'
+      preLoaderRoute: typeof PsycheDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/puck': {
       id: '/puck'
       path: '/puck'
       fullPath: '/puck'
       preLoaderRoute: typeof PuckRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/puck.txt': {
+      id: '/puck.txt'
+      path: '/puck.txt'
+      fullPath: '/puck.txt'
+      preLoaderRoute: typeof PuckDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/records.txt': {
@@ -834,6 +1069,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SalonRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/salon.txt': {
+      id: '/salon.txt'
+      path: '/salon.txt'
+      fullPath: '/salon.txt'
+      preLoaderRoute: typeof SalonDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -846,6 +1088,13 @@ declare module '@tanstack/react-router' {
       path: '/start'
       fullPath: '/start'
       preLoaderRoute: typeof StartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/start.txt': {
+      id: '/start.txt'
+      path: '/start.txt'
+      fullPath: '/start.txt'
+      preLoaderRoute: typeof StartDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/import-history': {
@@ -869,6 +1118,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DataGameDotsgfRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/games/$': {
+      id: '/games/$'
+      path: '/$'
+      fullPath: '/games/$'
+      preLoaderRoute: typeof GamesSplatRouteImport
+      parentRoute: typeof GamesRoute
+    }
     '/games/index.json': {
       id: '/games/index.json'
       path: '/index.json'
@@ -881,6 +1137,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/gathering/'
       preLoaderRoute: typeof GatheringIndexRouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/$': {
+      id: '/gathering/$'
+      path: '/$'
+      fullPath: '/gathering/$'
+      preLoaderRoute: typeof GatheringSplatRouteImport
       parentRoute: typeof GatheringRoute
     }
     '/gathering/breakfast-002.html': {
@@ -953,11 +1216,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotesNoteIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/notes/$noteId.txt': {
+      id: '/notes/$noteId.txt'
+      path: '/notes/$noteId.txt'
+      fullPath: '/notes/$noteId.txt'
+      preLoaderRoute: typeof NotesNoteIdDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/salon/': {
       id: '/salon/'
       path: '/'
       fullPath: '/salon/'
       preLoaderRoute: typeof SalonIndexRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/$': {
+      id: '/salon/$'
+      path: '/$'
+      fullPath: '/salon/$'
+      preLoaderRoute: typeof SalonSplatRouteImport
       parentRoute: typeof SalonRoute
     }
     '/salon/ladder': {
@@ -1118,16 +1395,19 @@ declare module '@tanstack/react-router' {
 }
 
 interface GamesRouteChildren {
+  GamesSplatRoute: typeof GamesSplatRoute
   GamesIndexDotjsonRoute: typeof GamesIndexDotjsonRoute
 }
 
 const GamesRouteChildren: GamesRouteChildren = {
+  GamesSplatRoute: GamesSplatRoute,
   GamesIndexDotjsonRoute: GamesIndexDotjsonRoute,
 }
 
 const GamesRouteWithChildren = GamesRoute._addFileChildren(GamesRouteChildren)
 
 interface GatheringRouteChildren {
+  GatheringSplatRoute: typeof GatheringSplatRoute
   GatheringBreakfast002DothtmlRoute: typeof GatheringBreakfast002DothtmlRoute
   GatheringBreakfast002DottxtRoute: typeof GatheringBreakfast002DottxtRoute
   GatheringDinner001IndexDothtmlRoute: typeof GatheringDinner001IndexDothtmlRoute
@@ -1146,6 +1426,7 @@ interface GatheringRouteChildren {
 }
 
 const GatheringRouteChildren: GatheringRouteChildren = {
+  GatheringSplatRoute: GatheringSplatRoute,
   GatheringBreakfast002DothtmlRoute: GatheringBreakfast002DothtmlRoute,
   GatheringBreakfast002DottxtRoute: GatheringBreakfast002DottxtRoute,
   GatheringDinner001IndexDothtmlRoute: GatheringDinner001IndexDothtmlRoute,
@@ -1169,6 +1450,7 @@ const GatheringRouteWithChildren = GatheringRoute._addFileChildren(
 )
 
 interface SalonRouteChildren {
+  SalonSplatRoute: typeof SalonSplatRoute
   SalonLadderRoute: typeof SalonLadderRoute
   SalonLadderDothtmlRoute: typeof SalonLadderDothtmlRoute
   SalonLadderDottxtRoute: typeof SalonLadderDottxtRoute
@@ -1176,6 +1458,7 @@ interface SalonRouteChildren {
 }
 
 const SalonRouteChildren: SalonRouteChildren = {
+  SalonSplatRoute: SalonSplatRoute,
   SalonLadderRoute: SalonLadderRoute,
   SalonLadderDothtmlRoute: SalonLadderDothtmlRoute,
   SalonLadderDottxtRoute: SalonLadderDottxtRoute,
@@ -1213,26 +1496,37 @@ const ApiGamesGameIdRouteWithChildren = ApiGamesGameIdRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AboutDottxtRoute: AboutDottxtRoute,
   CourierRoute: CourierRoute,
   ForAiRoute: ForAiRoute,
+  ForAiDottxtRoute: ForAiDottxtRoute,
   GamesRoute: GamesRouteWithChildren,
+  GamesDottxtRoute: GamesDottxtRoute,
   GatheringRoute: GatheringRouteWithChildren,
+  GatheringDottxtRoute: GatheringDottxtRoute,
+  HomeDottxtRoute: HomeDottxtRoute,
   LicenseRoute: LicenseRoute,
+  LicenseDottxtRoute: LicenseDottxtRoute,
   LlmsDothtmlRoute: LlmsDothtmlRoute,
   LlmsDottxtRoute: LlmsDottxtRoute,
   PlayRoute: PlayRoute,
   PsycheRoute: PsycheRoute,
+  PsycheDottxtRoute: PsycheDottxtRoute,
   PuckRoute: PuckRoute,
+  PuckDottxtRoute: PuckDottxtRoute,
   RecordsDottxtRoute: RecordsDottxtRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
   SalonRoute: SalonRouteWithChildren,
+  SalonDottxtRoute: SalonDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StartRoute: StartRoute,
+  StartDottxtRoute: StartDottxtRoute,
   ApiImportHistoryRoute: ApiImportHistoryRoute,
   DataGameDotjsonRoute: DataGameDotjsonRoute,
   DataGameDotsgfRoute: DataGameDotsgfRoute,
   GoGameIdRoute: GoGameIdRoute,
   NotesNoteIdRoute: NotesNoteIdRoute,
+  NotesNoteIdDottxtRoute: NotesNoteIdDottxtRoute,
   ApiGamesGameIdRoute: ApiGamesGameIdRouteWithChildren,
   ApiGamesCurrentRoute: ApiGamesCurrentRoute,
   ApiGamesIndexRoute: ApiGamesIndexRoute,

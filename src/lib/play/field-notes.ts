@@ -1,3 +1,6 @@
+import { pageAsOf } from "./page-times";
+import { ORIGIN, textRevision, type Sheet } from "./sheet";
+
 export type FieldNote = {
   id: string;
   gameId: string;
@@ -7,6 +10,23 @@ export type FieldNote = {
   kind: "technical" | "observation" | "self-statement";
   body: string;
 };
+
+export function noteSheet(note: FieldNote): Sheet {
+  return {
+    id: note.id,
+    page: note.title,
+    status: "finished",
+    asOf: pageAsOf("NOTES"),
+    stateVersion: textRevision(note.body),
+    html: `${ORIGIN}/notes/${note.id}`,
+    plainText: `${ORIGIN}/notes/${note.id}.txt`,
+    definition: `${note.title}. A field note, not a game record.`,
+    provenance: note.by,
+    fallback: `If this route fails, try ${ORIGIN}/go/${note.gameId} next.`,
+    completeness: "complete",
+    notes: [`KIND: ${note.kind}`, `PIECE_DATE: ${note.date}`, `GAME: ${note.gameId}`],
+  };
+}
 
 export const FIELD_NOTES: Record<string, FieldNote> = {
   "GO-002-courier-path": {

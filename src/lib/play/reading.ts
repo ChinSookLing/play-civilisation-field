@@ -43,7 +43,7 @@ export function gamesIndexText(): string {
     "The result line is the official result. A reference count, when one exists, is not the result.",
     "prepared is not active.",
   ].join("\n");
-  return sheetWrap({ ...gamesRoomSheet(), stateVersion: textRevision(record) }, record);
+  return sheetWrap(gamesRoomSheet(), record);
 }
 
 export function recordsText(extra?: {

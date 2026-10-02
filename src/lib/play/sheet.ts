@@ -47,16 +47,21 @@ export function textRevision(text: string): string {
   return (hash >>> 0).toString(16).padStart(8, "0");
 }
 
+export function completenessWord(sheet: Sheet): "COMPLETE" | "PARTIAL" {
+  return sheet.completeness === "partial — do not act" ? "PARTIAL" : "COMPLETE";
+}
+
+export function statusLine(sheet: Sheet): string {
+  return `STATUS: ${sheet.status} · ${completenessWord(sheet)} · AS_OF: ${sheet.asOf}`;
+}
+
 export function sheetLabel(sheet: Sheet): string {
-  const lines = [
+  return [
     `PAGE: ${sheet.page} · ID: ${sheet.id}`,
-    `STATUS: ${sheet.status} · AS_OF: ${sheet.asOf}`,
-    `COMPLETENESS: ${sheet.completeness ?? "complete"}`,
+    statusLine(sheet),
     `FOR: ${sheet.audience ?? "Observers: read only"}`,
     `PLAIN_TEXT: ${sheet.plainText}`,
-  ];
-  if (sheet.json) lines.push(`JSON: ${sheet.json}`);
-  return lines.join("\n");
+  ].join("\n");
 }
 
 export function sheetMeta(sheet: Sheet): string {
@@ -64,12 +69,12 @@ export function sheetMeta(sheet: Sheet): string {
     `ID: ${sheet.id}`,
     `DEFINITION: ${sheet.definition}`,
     `URL: ${sheet.html}`,
-    `STATUS: ${sheet.status}`,
+    `STATUS: ${sheet.status} · ${completenessWord(sheet)} · AS_OF: ${sheet.asOf}`,
     "STATUS_WORDS: building, prepared, active, paused, finished.",
     `AS_OF: ${sheet.asOf}`,
-    "AS_OF_MEANS: time of the last change to this record",
+    "AS_OF_MEANS: time of the last change to this record. On a static page, that is the last git commit of the page source, in +08:00.",
     `STATE_VERSION: ${sheet.stateVersion}`,
-    `COMPLETENESS: ${sheet.completeness ?? "complete"}`,
+    `COMPLETENESS: ${completenessWord(sheet)}`,
     `HTML: ${sheet.html}`,
     `PLAIN_TEXT: ${sheet.plainText}`,
     `JSON: ${sheet.json ?? "none"}`,
@@ -99,4 +104,9 @@ export function sheetWrap(sheet: Sheet, record: string): string {
     `END ${sheet.id}`,
     "",
   ].join("\n");
+}
+
+export function pageText(sheet: Sheet): string {
+  const record = [sheet.definition, ...(sheet.notes ?? [])].filter(Boolean).join("\n");
+  return sheetWrap(sheet, record);
 }

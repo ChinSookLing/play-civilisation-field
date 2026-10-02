@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 import { SheetBottom, SheetTop } from "@/components/play/SheetMark";
 import { pageMeta } from "@/lib/play/page-meta";
-import { ORIGIN, textRevision, type Sheet } from "@/lib/play/sheet";
+import { puckSheet } from "@/lib/play/page-sheets";
 
 export const Route = createFileRoute("/puck")({
   head: () => ({
@@ -18,20 +18,7 @@ export const Route = createFileRoute("/puck")({
 });
 
 function PuckBrief() {
-  const sheet: Sheet = {
-    id: "PUCK",
-    page: "Courier brief",
-    status: "active",
-    asOf: "unknown",
-    stateVersion: textRevision("puck-brief"),
-    html: `${ORIGIN}/puck`,
-    plainText: "none",
-    audience: "Observers: read only. This page does not make the reader the courier.",
-    definition: "Documentation of the courier. Puck carries lines. Puck does not choose stones.",
-    provenance: "Written for Puck. Other readers are observers.",
-    fallback: `If this route fails, try ${ORIGIN}/for-ai next.`,
-    completeness: "complete",
-  };
+  const sheet = puckSheet();
   return (
     <main className="min-h-dvh bg-bg text-fg">
       <div className="mx-auto max-w-2xl px-5 py-10">

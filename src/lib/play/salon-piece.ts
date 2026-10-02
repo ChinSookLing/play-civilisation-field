@@ -1,3 +1,4 @@
+import { pageAsOf } from "./page-times";
 import { sheetWrap, type Sheet } from "./sheet";
 
 export const SALON_PIECE = {
@@ -81,7 +82,7 @@ export function salonSheet(): Sheet {
     id: "ladder",
     page: SALON_PIECE.title,
     status: "active",
-    asOf: "unknown",
+    asOf: pageAsOf("ladder"),
     stateVersion: revision,
     html: SALON_PIECE.url,
     plainText: SALON_PIECE.plain,
