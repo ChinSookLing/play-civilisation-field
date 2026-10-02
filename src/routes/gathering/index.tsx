@@ -20,7 +20,9 @@ function GatheringList() {
             {
               href: "/gathering/dinner-001/table",
               title: "Together · Dinner 001",
-              note: "Practice. Tuzi’s MoonLight Balcony. Not a Field gathering.",
+              status: "Practice. Not a Field gathering.",
+              note: "Tuzi’s MoonLight Balcony. Read who spoke.",
+              light: "/gathering/dinner-001.html",
             },
           ],
         },

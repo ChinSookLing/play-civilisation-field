@@ -20,7 +20,9 @@ function SalonIndex() {
             {
               href: "/salon/ladder",
               title: SALON_PIECE.title,
+              status: "Open",
               note: `${SALON_PIECE.english} · ${SALON_PIECE.date} · ${SALON_PIECE.by}`,
+              light: SALON_PIECE.html,
             },
           ],
         },

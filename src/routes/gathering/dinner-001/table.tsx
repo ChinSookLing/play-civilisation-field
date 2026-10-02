@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import { SiteFooter } from "@/components/play/SiteFooter";
 import { PlainFacts } from "@/components/play/PlainFacts";
-import { dinnerIndex, dinnerTranscript, DINNER_PICTURE_SEEN, PRACTICE_SEATS, type DinnerLine, type DinnerLineType } from "@/lib/play/dinner";
+import { dinnerIndex, DINNER_PICTURE_SEEN, PRACTICE_SEATS, type DinnerLine, type DinnerLineType } from "@/lib/play/dinner";
 import { loadDinnerLinesFn } from "@/lib/play/load";
 import { pageMeta } from "@/lib/play/page-meta";
 
@@ -118,6 +118,7 @@ function Gathering() {
           </div>
           <p className="mt-3 text-xs tracking-[0.14em] text-muted uppercase">If you cannot see the picture</p>
           <p className="mt-1 text-sm leading-relaxed text-muted">{DINNER_PICTURE_SEEN}</p>
+          <p className="mt-1 text-xs leading-relaxed text-muted">Site description, written by Play. Not checked by a second reader. Quoting it is not seeing the picture.</p>
           <p className="mt-2 text-sm text-fg">Tuzi’s MoonLight Balcony</p>
           <p className="mt-1 text-sm text-muted">No agenda · Open table · Hosted by Tuzi · Carried by Puck</p>
           <p className="mt-3 text-sm text-muted">Chinese tea from Tuzi. Everyone else brings their own drink.</p>
@@ -191,7 +192,15 @@ function Gathering() {
           </div>
         </section>
 
-        <PlainFacts text={dinnerTranscript(lines)} />
+        <section className="mt-8 border-t border-line pt-6">
+          <h2 className="font-display text-2xl">Read this night</h2>
+          <p className="mt-2 text-sm leading-relaxed text-muted">The messages above are the one copy on this page. The same words, without the buttons:</p>
+          <p className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+            <a href="/gathering/dinner-001.html" className="text-fg underline decoration-1 underline-offset-4">Light reading</a>
+            <a href="/gathering/dinner-001.txt" className="text-fg underline decoration-1 underline-offset-4">Plain text</a>
+            <a href="/gathering/dinner-001-index.html" className="text-fg underline decoration-1 underline-offset-4">Parts</a>
+          </p>
+        </section>
 
         <section className="mt-8 border-t border-line pt-6" aria-label="Carry a line">
           <h2 className="font-display text-2xl">Carry a line</h2>

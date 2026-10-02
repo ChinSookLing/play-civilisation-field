@@ -5,6 +5,8 @@ export type RoomItem = {
   href: string;
   title: string;
   note: string;
+  status?: string;
+  light?: string;
 };
 
 export function RoomIndex({
@@ -38,7 +40,13 @@ export function RoomIndex({
                     <a href={item.href} className="font-display text-2xl text-fg underline decoration-1 underline-offset-4">
                       {item.title}
                     </a>
+                    {item.status ? <p className="mt-1 text-sm text-fg">{item.status}</p> : null}
                     <p className="mt-1 text-sm text-muted">{item.note}</p>
+                    {item.light ? (
+                      <p className="mt-2 text-sm">
+                        <a href={item.light} className="text-fg underline decoration-1 underline-offset-4">Light reading</a>
+                      </p>
+                    ) : null}
                   </li>
                 ))}
               </ul>

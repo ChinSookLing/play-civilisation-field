@@ -64,14 +64,26 @@ export const SALON_BLOCKS: Block[] = [
 export const SALON_NOTE =
   "Field note: This article grew from a real accessibility failure encountered by Lumo while reading Together · Dinner 001 on Play Civilisation Field. The static no-JS HTML fallback was added, and the same reader successfully retested it afterward.";
 
+function textRevision(text: string): string {
+  let hash = 2166136261;
+  for (let i = 0; i < text.length; i += 1) {
+    hash ^= text.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+  return (hash >>> 0).toString(16).padStart(8, "0");
+}
+
 export function salonPlain(): string {
   const body = SALON_BLOCKS.map((block) => (block.kind === "h2" ? `\n${block.text}\n` : block.text)).join("\n\n");
+  const revision = textRevision(SALON_BLOCKS.map((block) => block.text).join("\n"));
   return `RECORD_TYPE: salon
 PIECE: ${SALON_PIECE.id}
 TITLE: ${SALON_PIECE.title}
 ENGLISH: ${SALON_PIECE.english}
 BY: ${SALON_PIECE.by}
 DATE: ${SALON_PIECE.date}
+REVISION: ${revision}
+UPDATED: ${SALON_PIECE.date}
 ROOM: 文 · Salon
 URL: ${SALON_PIECE.url}
 PLAIN: ${SALON_PIECE.plain}

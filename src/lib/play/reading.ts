@@ -52,7 +52,7 @@ export function gamesIndexText(): string {
     "result_status is none, pending, or final. final can be a decided no-result. It is not a score.",
     "prepared is not active.",
     "",
-    "This list is 棋 · Games only.",
+    "This list is 棋 · Games only. The whole site, including the dinner and the Salon piece, is https://play.civilisationfield.com/records.txt",
     "心 · Psyche: building. No test and no answers.",
     "文 · Salon: active. One piece. https://play.civilisationfield.com/salon/ladder",
     "聚 · Gathering: practice dinner. Not a Field gathering. https://play.civilisationfield.com/gathering",
@@ -60,21 +60,53 @@ export function gamesIndexText(): string {
   return lines.join("\n");
 }
 
-export function recordsText(): string {
-  const lines = ["PLAY RECORD INDEX", ""];
+export function recordsText(dinner?: { messages: number; revision: string; updated: string }): string {
+  const lines = [
+    "PLAY RECORD INDEX",
+    "This index lists Games, Gathering, and Salon. Psyche has no record yet.",
+    "Each block is one record. Formats are doors to the same words.",
+    "",
+  ];
   for (const game of listGames()) {
     const outcome = recordOutcome(game);
-    lines.push(game.id);
+    lines.push(`RECORD_ID: ${game.id}`);
+    lines.push("TYPE: game");
+    lines.push(`TITLE: ${gameIndexLine(game)}`);
+    lines.push(`STATUS: ${machineStatus(game.status)}`);
     lines.push(`URL: ${ORIGIN}/go/${game.id}`);
-    lines.push(`JSON: ${ORIGIN}/api/games/${game.id}`);
-    lines.push(`RECORD_KIND: ${game.kind}`);
-    lines.push(`MACHINE_STATUS: ${machineStatus(game.status)}`);
-    lines.push(`TABLE_STATUS: ${game.status}`);
+    lines.push(`FORMATS: ${ORIGIN}/go/${game.id} | ${ORIGIN}/api/games/${game.id} | ${ORIGIN}/api/games/${game.id}/text`);
     lines.push(`RESULT_STATUS: ${resultStatus(game)}`);
     lines.push(`RESULT: ${outcome.result ?? "none"}`);
     lines.push("");
   }
-  return lines.join("\n").trim() + "\n";
+  lines.push("RECORD_ID: DINNER-001");
+  lines.push("TYPE: gathering");
+  lines.push("TITLE: Together · Dinner 001");
+  lines.push("STATUS: active");
+  lines.push(`MESSAGES: ${dinner?.messages ?? "read the dinner index"}`);
+  if (dinner) {
+    lines.push(`REVISION: ${dinner.revision}`);
+    lines.push(`UPDATED: ${dinner.updated}`);
+  }
+  lines.push(`URL: ${ORIGIN}/gathering/dinner-001/table`);
+  lines.push(
+    `FORMATS: ${ORIGIN}/gathering/dinner-001.txt | ${ORIGIN}/gathering/dinner-001.html | ${ORIGIN}/gathering/dinner-001-index.txt | ${ORIGIN}/gathering/dinner-001-index.html | ${ORIGIN}/gathering/dinner-001.json`,
+  );
+  lines.push("RECORD: practice. Not a Field gathering.");
+  lines.push("");
+  lines.push("RECORD_ID: ladder");
+  lines.push("TYPE: salon");
+  lines.push("TITLE: 撞墙以后，我们没有拆墙");
+  lines.push("STATUS: active");
+  lines.push(`URL: ${ORIGIN}/salon/ladder`);
+  lines.push(`FORMATS: ${ORIGIN}/salon/ladder | ${ORIGIN}/salon/ladder.txt | ${ORIGIN}/salon/ladder.html`);
+  lines.push("");
+  lines.push("ROOM: Psyche");
+  lines.push("RECORDS: none");
+  lines.push("STATUS: building");
+  lines.push(`URL: ${ORIGIN}/psyche`);
+  lines.push("");
+  return lines.join("\n");
 }
 
 export function gamesIndexJson() {

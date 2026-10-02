@@ -16,7 +16,8 @@ function toItem(line: string, href: string): RoomItem {
   const parts = line.split(" · ");
   const title = parts.slice(0, 2).join(" · ");
   const note = parts.slice(2).join(" · ");
-  return { href, title, note };
+  const id = href.split("/").pop() ?? "";
+  return { href, title, note, status: "Record", light: `/api/games/${id}/text` };
 }
 
 function GamesIndex() {
