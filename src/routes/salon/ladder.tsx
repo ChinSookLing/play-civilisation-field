@@ -1,8 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { SiteFooter } from "@/components/play/SiteFooter";
-import { PlainFacts } from "@/components/play/PlainFacts";
+import { SheetBottom, SheetTop } from "@/components/play/SheetMark";
 import { pageMeta } from "@/lib/play/page-meta";
-import { SALON_BLOCKS, SALON_NOTE, SALON_PIECE, salonPlain } from "@/lib/play/salon-piece";
+import { SALON_BLOCKS, SALON_NOTE, SALON_PIECE, salonSheet } from "@/lib/play/salon-piece";
 
 export const Route = createFileRoute("/salon/ladder")({
   head: () => pageMeta(`${SALON_PIECE.english} · Salon · Play`, SALON_PIECE.title),
@@ -13,6 +12,7 @@ function Ladder() {
   return (
     <main className="min-h-dvh bg-bg text-fg">
       <div className="mx-auto max-w-2xl px-5 py-10">
+        <SheetTop sheet={salonSheet()} />
         <p className="text-sm"><Link to="/salon" className="text-fg underline-offset-2 hover:underline">文 · Salon</Link></p>
         <h1 className="mt-4 font-display text-4xl tracking-tight">{SALON_PIECE.title}</h1>
         <p className="mt-2 text-lg text-muted">{SALON_PIECE.english}</p>
@@ -29,8 +29,7 @@ function Ladder() {
           <p className="text-sm text-muted">文 · Salon · The Civilisation Field</p>
           <p className="text-sm text-muted">{SALON_NOTE}</p>
         </article>
-        <PlainFacts text={salonPlain()} />
-        <SiteFooter />
+        <SheetBottom sheet={salonSheet()} />
       </div>
     </main>
   );

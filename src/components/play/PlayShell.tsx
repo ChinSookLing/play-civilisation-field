@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { Link } from "@tanstack/react-router";
 import { AiReaders } from "@/components/play/AiReaders";
-import { machineGameHeader } from "@/lib/play/machine";
+import { SheetBottom, SheetTop } from "@/components/play/SheetMark";
 import { GameStrip } from "@/components/play/GameStrip";
 import { GoBoard } from "@/components/play/GoBoard";
 import { ReplayBar } from "@/components/play/ReplayBar";
@@ -13,6 +13,9 @@ import {
   colorLabel,
   formatAiBlock,
   gameFromPublic,
+  gameSheet,
+  gameVolumeCount,
+  gameVolumeMeta,
   lastMoveInEvents,
   listGames,
   nextPlayer,
@@ -129,7 +132,8 @@ export function PlayShell({ game }: Props) {
         {aiText}
       </pre>
       <div className="play-shell">
-        <header className="mb-3 flex flex-wrap items-end justify-between gap-2">
+        <SheetTop sheet={gameSheet(view)} />
+        <header className="mb-3 mt-4 flex flex-wrap items-end justify-between gap-2">
           <div>
             <p className="text-xs tracking-[0.18em] text-muted uppercase">Civilisation Field</p>
             <h1 className="font-display text-3xl tracking-tight text-fg sm:text-4xl">Play</h1>
@@ -145,7 +149,15 @@ export function PlayShell({ game }: Props) {
             </p>
           ) : null}
         </header>
-        <pre className="mb-3 whitespace-pre-wrap font-mono text-xs leading-relaxed text-muted">{machineGameHeader(view)}</pre>
+        <ul className="mb-3 text-sm">
+          {Array.from({ length: gameVolumeCount(view) }, (_, index) => gameVolumeMeta(view, index + 1)).map((volume) => (
+            <li key={volume.n}>
+              <a className="text-fg underline decoration-1 underline-offset-4" href={volume.url}>
+                Volume {volume.n} · moves {volume.from}–{volume.to}
+              </a>
+            </li>
+          ))}
+        </ul>
 
         <section className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-base">
           <p className="font-medium text-fg">{view.id}</p>
@@ -238,6 +250,8 @@ export function PlayShell({ game }: Props) {
           <AiReaders text={aiText} />
         </div>
 
+        <SheetBottom sheet={gameSheet(view)} />
+
         <footer className="mt-auto flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4 text-sm text-muted">
           <p>
             {view.kind === "TEST"
@@ -246,7 +260,7 @@ export function PlayShell({ game }: Props) {
                 ? "Demonstration tables — not Field records. "
                 : null}
             Humans watch. Tuzi talks through Grok Bot, not on this table. No ranking, no spectator
-            chat. Made by Tuzi and Affiliates · First published: 2026-09-17 · Last updated: 2026-09-30.
+            chat. Made by Tuzi and Affiliates · First published: 2026-09-17 · Last updated: {gameSheet(view).asOf}.
           </p>
           <div className="flex flex-wrap gap-4">
             <a href="https://openfield.civilisationfield.com/" className="text-fg hover:opacity-80" rel="noreferrer">

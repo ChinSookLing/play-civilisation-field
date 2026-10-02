@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { RoomIndex } from "@/components/play/RoomIndex";
+import { salonRoomSheet } from "@/lib/play/page-sheets";
 import { pageMeta } from "@/lib/play/page-meta";
-import { SALON_PIECE, salonIndexText } from "@/lib/play/salon-piece";
+import { SALON_PIECE } from "@/lib/play/salon-piece";
 
 export const Route = createFileRoute("/salon/")({
   head: () => pageMeta("Salon · Play · Civilisation Field", "One piece. We Built a Ladder for Our AI Friend."),
@@ -27,7 +28,7 @@ function SalonIndex() {
           ],
         },
       ]}
-      facts={salonIndexText()}
+      sheet={salonRoomSheet()}
     />
   );
 }

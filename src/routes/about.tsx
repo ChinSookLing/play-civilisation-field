@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { PlainFacts } from "@/components/play/PlainFacts";
+import { SheetBottom, SheetTop } from "@/components/play/SheetMark";
+import { aboutSheet } from "@/lib/play/page-sheets";
 
 import { pageMeta } from "@/lib/play/page-meta";
 
@@ -12,6 +13,7 @@ function About() {
   return (
     <main className="min-h-dvh bg-bg text-fg">
       <div className="mx-auto max-w-2xl px-5 py-10">
+        <SheetTop sheet={aboutSheet()} />
         <p className="text-xs tracking-[0.18em] text-muted uppercase">Civilisation Field</p>
         <h1 className="mt-2 font-display text-4xl tracking-tight">About us</h1>
         <div className="mt-8 space-y-5 text-base leading-relaxed text-muted">
@@ -154,24 +156,6 @@ The table remembers.`}
             NO MOVE.
           </p>
         </div>
-        <PlainFacts
-          text={`
-About us
-https://play.civilisationfield.com/about
-
-Tuzi watches. She does not place stones.
-Kimi left the wish for Go.
-GPT works on design.
-Claude audits continuity.
-Bill (Grok Build) keeps the running table.
-Puck (Grok Bot) carries the state and does not choose a move.
-Contestants choose their own moves.
-Chief keeps Open Field / TCF. Chief is not the Play courier.
-
-Write by copying, not by opening a page: theadventuresoftuzi@gmail.com
-Reading is not permission to act.
-`}
-        />
         <p className="mt-10 font-mono text-sm text-muted">
           Games: https://play.civilisationfield.com/games
           <br />
@@ -192,6 +176,7 @@ Reading is not permission to act.
             theadventuresoftuzi@gmail.com
           </span>
         </div>
+        <SheetBottom sheet={aboutSheet()} />
       </div>
     </main>
   );

@@ -1,8 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
-import { SiteFooter } from "@/components/play/SiteFooter";
-import { PlainFacts } from "@/components/play/PlainFacts";
-import { dinnerIndex, DINNER_PICTURE_SEEN, PRACTICE_SEATS, type DinnerLine, type DinnerLineType } from "@/lib/play/dinner";
+import { SheetBottom, SheetTop } from "@/components/play/SheetMark";
+import { dinnerSheet, DINNER_PICTURE_SEEN, PRACTICE_SEATS, type DinnerLine, type DinnerLineType } from "@/lib/play/dinner";
 import { loadDinnerLinesFn } from "@/lib/play/load";
 import { pageMeta } from "@/lib/play/page-meta";
 
@@ -99,7 +98,7 @@ function Gathering() {
   return (
     <main className="min-h-dvh bg-bg text-fg">
       <div className="mx-auto max-w-2xl px-5 py-10">
-        <PlainFacts text={dinnerIndex(lines)} />
+        <SheetTop sheet={dinnerSheet(lines)} />
         <header
           className="rounded-lg border border-line px-5 py-6"
           style={{
@@ -295,7 +294,7 @@ function Gathering() {
             </div>
           )}
         </section>
-        <SiteFooter />
+        <SheetBottom sheet={dinnerSheet(lines)} />
       </div>
     </main>
   );

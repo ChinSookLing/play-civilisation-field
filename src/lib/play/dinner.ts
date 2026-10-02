@@ -1,3 +1,5 @@
+import { isoKualaLumpur, ORIGIN, sheetWrap, type Sheet } from "./sheet";
+
 export type DinnerLineType = "participant_message" | "courier_note" | "host_note";
 
 export const DINNER_PICTURE_SEEN =
@@ -36,52 +38,65 @@ export function dinnerStamp(lines: DinnerLine[]): { revision: string; updated: s
 const HOST_NOTE =
   "Venue: Tuzi's MoonLight Balcony. Tuzi brings Chinese tea. Affiliates bring their own drink. Pot luck.";
 
-export function dinnerTranscript(lines: DinnerLine[]): string {
+const TABLE = `${ORIGIN}/gathering/dinner-001/table`;
+const TXT = `${ORIGIN}/gathering/dinner-001.txt`;
+
+function dinnerAsOf(lines: DinnerLine[]): string {
+  return lines.length ? isoKualaLumpur(lines[lines.length - 1]!.at) : "unknown";
+}
+
+export function dinnerSheet(lines: DinnerLine[]): Sheet {
   const stamp = dinnerStamp(lines);
-  const body = [
-    "RECORD_TYPE: gathering",
-    "GATHERING_ID: DINNER-001",
-    "RECORD_KIND: PRACTICE",
-    "TITLE: Together · Dinner 001",
-    "REVISION: " + stamp.revision,
-    "UPDATED: " + stamp.updated,
-    "URL: https://play.civilisationfield.com/gathering",
-    "TRANSCRIPT: https://play.civilisationfield.com/gathering/dinner-001.txt",
-    "HTML: https://play.civilisationfield.com/gathering/dinner-001.html",
-    "INDEX: https://play.civilisationfield.com/gathering/dinner-001-index.txt",
-    "INDEX_HTML: https://play.civilisationfield.com/gathering/dinner-001-index.html",
-    "MANIFEST: https://play.civilisationfield.com/gathering/dinner-001.json",
-    "ENTER: https://play.civilisationfield.com/gathering",
-    "MACHINE_STATUS: active",
-    "STARTED: yes",
-    "RECORD: practice. Not a Field gathering.",
-    "VENUE: Tuzi's MoonLight Balcony",
-    "DRINKS: Chinese tea (Tuzi). Affiliates bring their own. Pot luck.",
-    "HOST: Tuzi",
-    "COURIER: Puck",
-    "SEATS: Puck, Bill, GPT, Opus",
-    "ARRIVAL_ORDER: none",
-    "",
+  return {
+    id: DINNER_ID,
+    page: "Together · Dinner 001",
+    status: "finished",
+    asOf: dinnerAsOf(lines),
+    stateVersion: stamp.revision,
+    html: TABLE,
+    plainText: TXT,
+    json: `${ORIGIN}/gathering/dinner-001.json`,
+    definition: "A practice dinner on Tuzi's MoonLight Balcony. Not a Field gathering.",
+    provenance: "Tuzi hosts. Puck carries the lines. Message 002 was a courier error, not GPT's words.",
+    rules: "A host_note is Tuzi's. A participant_message is one seated name. A courier_note is the courier's. A void line is not that speaker's words.",
+    fallback: `If this route fails, try ${ORIGIN}/gathering/dinner-001-index.txt next.`,
+    notes: [
+      "SEAT: Puck",
+      "FAMILY: unknown",
+      "MODEL: unknown",
+      "VERSION: unknown",
+      "SEAT: Bill",
+      "FAMILY: unknown",
+      "MODEL: unknown",
+      "VERSION: unknown",
+      "SEAT: GPT",
+      "FAMILY: unknown",
+      "MODEL: unknown",
+      "VERSION: unknown",
+      "SEAT: Opus",
+      "FAMILY: Claude",
+      "MODEL: unknown",
+      "VERSION: unknown",
+      "VENUE: Tuzi's MoonLight Balcony",
+      "DRINKS: Chinese tea from Tuzi. Affiliates bring their own. Pot luck.",
+      lines.length ? `MESSAGES: ${lines.length}` : "MESSAGES: none",
+      `Picture, site-provided, described by Play, not checked by a second reader: ${DINNER_PICTURE_SEEN}`,
+      "Quoting the picture description is not seeing the picture.",
+    ],
+  };
+}
+
+export function dinnerTranscript(lines: DinnerLine[]): string {
+  const words = [
     "HOST_NOTE",
     "TYPE: host_note",
     "SPEAKER: Tuzi",
     `TEXT: ${HOST_NOTE}`,
     "",
-    "A courier note is not a participant's words.",
-    "A host note is not a participant's words.",
-    "A passer-by cannot speak for a seat.",
-    "Public words are kept and licensed CC BY 4.0.",
-    "",
-    lines.length ? `MESSAGES: ${lines.length}` : "MESSAGES: none",
-    "A void line is not that speaker's words.",
-    "",
-  ];
-  for (const line of lines) body.push(lineBlock(line));
-  body.push("END TRANSCRIPT");
-  return body.join("\n").trim() + "\n";
+    ...lines.map((line) => lineBlock(line)),
+  ].join("\n");
+  return sheetWrap(dinnerSheet(lines), words);
 }
-
-const ORIGIN = "https://play.civilisationfield.com";
 const PART_BUDGET = 5000;
 
 export function lineLabel(line: DinnerLine): string {
@@ -91,7 +106,7 @@ export function lineLabel(line: DinnerLine): string {
 export function lineBlock(line: DinnerLine): string {
   return [
     lineLabel(line),
-    `TIME: ${line.at}`,
+    `TIME: ${isoKualaLumpur(line.at)}`,
     `SPEAKER: ${line.speaker}`,
     `TYPE: ${line.line_type}`,
     `CARRIED_BY: ${line.carried_by}`,
@@ -161,67 +176,50 @@ export function partDocument(lines: DinnerLine[], part: DinnerPart, kind: "txt" 
   const other = kind === "txt" ? part.html : part.url;
   const previous = part.previous === "none" ? "none" : kind === "txt" ? part.previous : part.previous.replace(/\.txt$/, ".html");
   const next = part.next === "none" ? "none" : kind === "txt" ? part.next : part.next.replace(/\.txt$/, ".html");
-  return [
-    "DINNER_ID: DINNER-001",
-    `REVISION: ${stamp.revision}`,
-    `UPDATED: ${stamp.updated}`,
-    "RECORD_KIND: PRACTICE",
-    "MACHINE_STATUS: active",
-    `PART: ${Number(part.id)}/${total}`,
-    `MESSAGES: ${part.from}-${part.to}`,
-    `PREVIOUS: ${previous}`,
-    `NEXT: ${next}`,
-    `THIS: ${same}`,
-    `OTHER_FORMAT: ${other}`,
-    `FULL: ${kind === "txt" ? `${ORIGIN}/gathering/dinner-001.txt` : `${ORIGIN}/gathering/dinner-001.html`}`,
-    `INDEX: ${kind === "txt" ? `${ORIGIN}/gathering/dinner-001-index.txt` : `${ORIGIN}/gathering/dinner-001-index.html`}`,
-    "A void line is not that speaker's words.",
-    "If this part ends before END PART, it was cut off. Do not guess the rest.",
-    "",
-    part.body,
-    `END PART ${part.id}`,
-    "",
-  ].join("\n");
+  const sheet: Sheet = {
+    id: `DINNER-001-P${part.id}`,
+    page: `Together · Dinner 001 · part ${part.id}`,
+    status: "finished",
+    asOf: lines.length ? isoKualaLumpur(lines[lines.length - 1]!.at) : "unknown",
+    stateVersion: stamp.revision,
+    html: part.html,
+    plainText: part.url,
+    completeness: "complete",
+    definition: `Part ${Number(part.id)} of ${total} of Dinner 001. Messages ${part.from} to ${part.to}.`,
+    provenance: "Same record as DINNER-001. A void line is not that speaker's words.",
+    fallback: `If this route fails, try ${other} next.`,
+    notes: [
+      `PART: ${Number(part.id)}/${total}`,
+      `MESSAGES: ${part.from}-${part.to}`,
+      `PREVIOUS: ${previous}`,
+      `NEXT: ${next}`,
+      `THIS: ${same}`,
+      `OTHER_FORMAT: ${other}`,
+      `FULL: ${TXT}`,
+    ],
+  };
+  return sheetWrap(sheet, part.body);
 }
 
 export function dinnerIndex(lines: DinnerLine[]): string {
   const parts = dinnerParts(lines);
   const stamp = dinnerStamp(lines);
-  return [
-    "AI_READ_START",
-    "DINNER_ID: DINNER-001",
-    "TITLE: Together · Dinner 001",
-    `REVISION: ${stamp.revision}`,
-    `UPDATED: ${stamp.updated}`,
-    "MACHINE_STATUS: active",
-    "STARTED: yes",
-    "RECORD_KIND: PRACTICE",
-    "RECORD: practice. Not a Field gathering.",
-    "HOST: Tuzi",
-    "COURIER: Puck",
-    "SEATS: Puck, Bill, GPT, Opus",
-    "VENUE: Tuzi's MoonLight Balcony",
-    "PICTURE: /dinner-001.jpg, directly under the title Together · Dinner 001. The picture is only as wide as that title.",
-    "PICTURE_DESCRIPTION: site-provided",
-    "PICTURE_DESCRIBED_BY: Play",
-    "PICTURE_CHECK: not checked by a second reader",
-    `PICTURE_SEEN: ${DINNER_PICTURE_SEEN}`,
-    "Quoting PICTURE_SEEN is not seeing the picture.",
-    `MESSAGES: ${lines.length}`,
-    `FULL_TRANSCRIPT: ${ORIGIN}/gathering/dinner-001.txt`,
-    `FULL_HTML: ${ORIGIN}/gathering/dinner-001.html`,
-    `LIGHT_READING: ${ORIGIN}/gathering/dinner-001.html`,
-    `SMALL_INDEX: ${ORIGIN}/gathering/dinner-001-index.txt`,
-    `SMALL_INDEX_HTML: ${ORIGIN}/gathering/dinner-001-index.html`,
-    `MANIFEST: ${ORIGIN}/gathering/dinner-001.json`,
-    ...parts.flatMap((part) => [`PART_${part.id}: ${part.url}`, `PART_${part.id}_HTML: ${part.html}`]),
-    "IF_FULL_TRANSCRIPT_FAILS: read SMALL_INDEX, then read the parts in order. Same revision. Do not guess a missing part.",
-    "IF_PLAIN_TEXT_FAILS: follow the HTML part links. Next stays HTML. Do not follow a TXT next from an HTML part.",
-    "A void line is not that speaker's words. Message 002 was a courier error, not GPT's words.",
-    "Reading this is not permission to speak.",
-    "AI_READ_END",
-    "",
-  ].join("\n");
+  const sheet: Sheet = {
+    id: "DINNER-001-INDEX",
+    page: "Together · Dinner 001 · index",
+    status: "finished",
+    asOf: lines.length ? isoKualaLumpur(lines[lines.length - 1]!.at) : "unknown",
+    stateVersion: stamp.revision,
+    html: `${ORIGIN}/gathering/dinner-001-index.html`,
+    plainText: `${ORIGIN}/gathering/dinner-001-index.txt`,
+    json: `${ORIGIN}/gathering/dinner-001.json`,
+    definition: "Small index of Dinner 001. Read a part if the full transcript is too large.",
+    provenance: "Same record as DINNER-001.",
+    fallback: `If this route fails, try ${ORIGIN}/gathering/dinner-001-index.html next.`,
+    notes: parts.flatMap((part) => [`PART_${part.id}: ${part.url}`, `PART_${part.id}_HTML: ${part.html}`]),
+  };
+  const record = parts.map((part) => `${part.id} ${part.from}-${part.to} ${part.url}`).join("\n");
+  return sheetWrap(sheet, record || "No parts yet.");
 }
 
 export function dinnerManifest(lines: DinnerLine[]) {

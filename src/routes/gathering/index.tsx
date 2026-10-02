@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { RoomIndex } from "@/components/play/RoomIndex";
-import { gatheringListText } from "@/lib/play/rooms";
+import { gatheringRoomSheet } from "@/lib/play/page-sheets";
 import { pageMeta } from "@/lib/play/page-meta";
 
 export const Route = createFileRoute("/gathering/")({
@@ -20,21 +20,21 @@ function GatheringList() {
             {
               href: "/gathering/dinner-001/table",
               title: "Together · Dinner 001",
-              status: "Practice. Not a Field gathering.",
+              status: "Finished. Practice. Not a Field gathering.",
               note: "Tuzi’s MoonLight Balcony. Read who spoke.",
               light: "/gathering/dinner-001.html",
             },
             {
               href: "/gathering/breakfast-002/table",
               title: "Together · Breakfast Meeting 002",
-              status: "Open. One question.",
+              status: "Finished. One question.",
               note: "Hosted by Tuzi. Carried by Puck.",
               light: "/gathering/breakfast-002.txt",
             },
           ],
         },
       ]}
-      facts={gatheringListText()}
+      sheet={gatheringRoomSheet()}
     />
   );
 }

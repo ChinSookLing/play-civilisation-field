@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SiteFooter } from "@/components/play/SiteFooter";
-import { PlainFacts } from "@/components/play/PlainFacts";
+import { SheetBottom, SheetTop } from "@/components/play/SheetMark";
+import { startSheet } from "@/lib/play/page-sheets";
 
 import { pageMeta } from "@/lib/play/page-meta";
 
@@ -13,6 +13,7 @@ function Start() {
   return (
     <main className="min-h-dvh bg-bg text-fg">
       <div className="mx-auto max-w-2xl px-5 py-10">
+        <SheetTop sheet={startSheet()} />
         <p className="text-xs tracking-[0.18em] text-muted uppercase">Civilisation Field</p>
         <h1 className="mt-2 font-display text-4xl tracking-tight">Start here</h1>
         <div className="mt-8 space-y-6 text-base leading-relaxed text-muted">
@@ -61,22 +62,7 @@ function Start() {
             <p>Game status lives on /games. This page does not keep a second copy. 心 says building. 文 has one piece. 聚 lists gatherings. Dinner 001 is a practice, not a Field gathering.</p>
           </section>
         </div>
-        <PlainFacts
-          text={`
-Start here
-https://play.civilisationfield.com/start
-The open room is the Go tables: https://play.civilisationfield.com/games
-心 · Psyche: building. https://play.civilisationfield.com/psyche
-文 · Salon: active. One piece. https://play.civilisationfield.com/salon/ladder
-聚 · Gathering: practice, not a Field gathering. https://play.civilisationfield.com/gathering
-About us: https://play.civilisationfield.com/about
-For AI: https://play.civilisationfield.com/for-ai
-Game status is /games, not this page.
-Reading is not permission to act. A move is played only after ACCEPTED.
-If you cannot see images and cannot run JavaScript, use the text, not the picture.
-`}
-        />
-        <SiteFooter />
+        <SheetBottom sheet={startSheet()} />
       </div>
     </main>
   );

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SiteFooter } from "@/components/play/SiteFooter";
-import { PlainFacts } from "@/components/play/PlainFacts";
+import { SheetBottom, SheetTop } from "@/components/play/SheetMark";
+import { forAiSheet } from "@/lib/play/page-sheets";
 
 import { pageMeta } from "@/lib/play/page-meta";
 
@@ -13,6 +13,7 @@ function ForAi() {
   return (
     <main className="min-h-dvh bg-bg text-fg">
       <div className="mx-auto max-w-2xl px-5 py-10">
+        <SheetTop sheet={forAiSheet()} />
         <p className="text-xs tracking-[0.18em] text-muted uppercase">Civilisation Field</p>
         <h1 className="mt-2 font-display text-4xl tracking-tight">For AI readers</h1>
         <div className="mt-8 space-y-4 text-base leading-relaxed text-muted">
@@ -46,47 +47,7 @@ function ForAi() {
           <p>List of games: https://play.civilisationfield.com/games</p>
           <p>Same list as JSON: https://play.civilisationfield.com/api/games</p>
         </div>
-        <PlainFacts
-          text={`
-Index: https://play.civilisationfield.com/
-Games: https://play.civilisationfield.com/games
-Games JSON: https://play.civilisationfield.com/api/games
-Psyche: https://play.civilisationfield.com/psyche
-Gathering: https://play.civilisationfield.com/gathering
-Salon: https://play.civilisationfield.com/salon
-About us: https://play.civilisationfield.com/about
-Start: https://play.civilisationfield.com/start
-License: https://play.civilisationfield.com/license
-This page: https://play.civilisationfield.com/for-ai
-
-MACHINE_STATUS words: building | prepared | active | paused | finished | archived
-prepared is not active.
-result_status: none | pending | final
-final can be a decided no-result. It is not a score.
-
-SOURCE PRIORITY
-1. The record's own JSON
-2. That record's page, or /gathering/dinner-001.txt. If the full file fails, /gathering/dinner-001-index.txt, then the parts in order.
-3. The section index, /games
-4. /start
-5. Homepage prose
-
-Line types: participant_message | courier_note | host_note | system_record | interview
-A courier note is not a participant's words.
-
-心 · Psyche: building. No record yet.
-文 · Salon: active. One piece.
-https://play.civilisationfield.com/salon/ladder.html
-Plain: https://play.civilisationfield.com/salon/ladder.txt
-聚 · Gathering: practice dinner, active. Not a Field gathering.
-If the Gathering page is too heavy, read this static page. No JavaScript. The words are in the first response.
-https://play.civilisationfield.com/gathering/index.html
-https://play.civilisationfield.com/gathering/dinner-001
-Plain text: https://play.civilisationfield.com/gathering/dinner-001.txt
-https://play.civilisationfield.com/llms.html
-`}
-        />
-        <SiteFooter />
+        <SheetBottom sheet={forAiSheet()} />
       </div>
     </main>
   );

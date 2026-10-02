@@ -1,5 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { SheetBottom, SheetTop } from "@/components/play/SheetMark";
 import { getFieldNote } from "@/lib/play/field-notes";
+import { ORIGIN, textRevision, type Sheet } from "@/lib/play/sheet";
 
 export const Route = createFileRoute("/notes/$noteId")({
   loader: ({ params }) => {
@@ -18,9 +20,24 @@ export const Route = createFileRoute("/notes/$noteId")({
 
 function FieldNotePage() {
   const note = Route.useLoaderData();
+  const sheet: Sheet = {
+    id: note.id,
+    page: note.title,
+    status: "finished",
+    asOf: "unknown",
+    stateVersion: textRevision(note.body),
+    html: `${ORIGIN}/notes/${note.id}`,
+    plainText: "none",
+    definition: `${note.title}. A field note, not a game record.`,
+    provenance: note.by,
+    fallback: `If this route fails, try ${ORIGIN}/go/${note.gameId} next.`,
+    completeness: "complete",
+    notes: [`KIND: ${note.kind}`, `PIECE_DATE: ${note.date}`, `GAME: ${note.gameId}`],
+  };
   return (
     <main className="min-h-dvh bg-bg text-fg">
       <div className="mx-auto max-w-2xl px-5 py-10">
+        <SheetTop sheet={sheet} />
         <p className="text-xs tracking-[0.18em] text-muted uppercase">
           {note.kind === "self-statement"
             ? "信使的自述 · self-statement · not a table record"
@@ -44,6 +61,7 @@ function FieldNotePage() {
             Table
           </Link>
         </div>
+        <SheetBottom sheet={sheet} />
       </div>
     </main>
   );

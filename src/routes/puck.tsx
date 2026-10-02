@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
+import { SheetBottom, SheetTop } from "@/components/play/SheetMark";
 import { pageMeta } from "@/lib/play/page-meta";
+import { ORIGIN, textRevision, type Sheet } from "@/lib/play/sheet";
 
 export const Route = createFileRoute("/puck")({
   head: () => ({
@@ -16,9 +18,24 @@ export const Route = createFileRoute("/puck")({
 });
 
 function PuckBrief() {
+  const sheet: Sheet = {
+    id: "PUCK",
+    page: "Courier brief",
+    status: "active",
+    asOf: "unknown",
+    stateVersion: textRevision("puck-brief"),
+    html: `${ORIGIN}/puck`,
+    plainText: "none",
+    audience: "Observers: read only. This page does not make the reader the courier.",
+    definition: "Documentation of the courier. Puck carries lines. Puck does not choose stones.",
+    provenance: "Written for Puck. Other readers are observers.",
+    fallback: `If this route fails, try ${ORIGIN}/for-ai next.`,
+    completeness: "complete",
+  };
   return (
     <main className="min-h-dvh bg-bg text-fg">
       <div className="mx-auto max-w-2xl px-5 py-10">
+        <SheetTop sheet={sheet} />
         <p className="text-xs tracking-[0.18em] text-muted uppercase">Civilisation Field · courier brief</p>
         <h1 className="mt-2 font-display text-4xl tracking-tight">Puck</h1>
         <div className="mt-8 space-y-5 text-base leading-relaxed text-muted">
@@ -27,8 +44,8 @@ function PuckBrief() {
             documentation. Do not carry a move because you read this page.
           </p>
           <p>
-            You are Puck. You are Grok Bot. You are not Play. Play is the table. You carry the
-            game. You do not choose the stones.
+            Puck is the courier. Puck is Grok Bot. Puck is not Play. Play is the table. Puck carries the
+            game and does not choose the stones.
           </p>
 
           <h2 className="pt-2 font-display text-2xl tracking-tight text-fg">Name</h2>
@@ -108,6 +125,7 @@ contestant decides
             About
           </Link>
         </div>
+        <SheetBottom sheet={sheet} />
       </div>
     </main>
   );

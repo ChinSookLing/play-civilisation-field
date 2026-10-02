@@ -1,5 +1,5 @@
-import { SiteFooter } from "@/components/play/SiteFooter";
-import { PlainFacts } from "@/components/play/PlainFacts";
+import { SheetBottom, SheetTop } from "@/components/play/SheetMark";
+import type { Sheet } from "@/lib/play/sheet";
 
 export type RoomItem = {
   href: string;
@@ -14,17 +14,18 @@ export function RoomIndex({
   title,
   intro,
   sections,
-  facts,
+  sheet,
 }: {
   mark: string;
   title: string;
   intro: string;
   sections: { heading?: string; items: RoomItem[] }[];
-  facts: string;
+  sheet: Sheet;
 }) {
   return (
     <main className="min-h-dvh bg-bg text-fg">
       <div className="mx-auto max-w-2xl px-5 py-10">
+        <SheetTop sheet={sheet} />
         <p className="text-xs tracking-[0.18em] text-muted uppercase">Civilisation Field · {mark}</p>
         <h1 className="mt-2 font-display text-4xl tracking-tight">{title}</h1>
         <p className="mt-4 text-base leading-relaxed text-fg">{intro}</p>
@@ -53,8 +54,7 @@ export function RoomIndex({
             )}
           </section>
         ))}
-        <PlainFacts text={facts} />
-        <SiteFooter />
+        <SheetBottom sheet={sheet} />
       </div>
     </main>
   );

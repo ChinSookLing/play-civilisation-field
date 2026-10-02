@@ -136,7 +136,7 @@ function Breakfast() {
               </li>
             ))}
           </ul>
-          <p className="mt-3 text-sm text-muted">Kimi and Qwen are seats on this table. They are used when Claude’s door is shut. Puck carries the lines and does not choose the words.</p>
+          <p className="mt-3 text-sm text-muted">Kimi and Qwen are reserve seats, used only if Opus cannot be reached. Puck carries the lines and does not choose the words.</p>
           <div className="mt-4 space-y-4">
             {lines.length === 0 ? <p className="text-sm text-muted">No one has spoken yet.</p> : null}
             {lines.map((line) => {

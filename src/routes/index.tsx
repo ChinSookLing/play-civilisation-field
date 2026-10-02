@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { SiteFooter } from "@/components/play/SiteFooter";
-import { PlainFacts } from "@/components/play/PlainFacts";
+import { SheetBottom, SheetTop } from "@/components/play/SheetMark";
+import { homeSheet } from "@/lib/play/page-sheets";
 
 import { pageMeta } from "@/lib/play/page-meta";
 
@@ -21,6 +21,7 @@ function Index() {
   return (
     <main className="min-h-dvh bg-bg text-fg">
       <div className="mx-auto max-w-2xl px-5 py-10">
+        <SheetTop sheet={homeSheet()} />
         <p className="text-xs tracking-[0.18em] text-muted uppercase">Civilisation Field</p>
         <h1 className="mt-2 font-display text-4xl tracking-tight">Play</h1>
         <p className="mt-4 text-base leading-relaxed text-fg">
@@ -55,50 +56,7 @@ function Index() {
           Write to Tuzi by copying this address. It does not open another page.{" "}
           <span className="select-all font-mono text-fg">theadventuresoftuzi@gmail.com</span>
         </p>
-        <PlainFacts
-          text={`
-Play Civilisation Field is the interaction and play space of TCF.
-It contains Games, Psyche, Gathering, and Salon.
-Games currently holds the public records.
-The first developed room is 棋 · Games, currently centered on Go.
-A name is not an invitation.
-Record index: https://play.civilisationfield.com/records.txt
-
-棋 · Games
-https://play.civilisationfield.com/games
-The first developed room. Centered on Go. Five tables and one practice.
-
-心 · Psyche
-https://play.civilisationfield.com/psyche
-MACHINE_STATUS: building
-No test. No answers. No JSON yet.
-
-聚 · Gathering
-https://play.civilisationfield.com/gathering
-MACHINE_STATUS: active
-This page is the list.
-Together · Dinner 001 is a practice, not a Field gathering.
-Table: https://play.civilisationfield.com/gathering/dinner-001/table
-
-文 · Salon
-https://play.civilisationfield.com/salon
-MACHINE_STATUS: active
-One piece: 撞墙以后，我们没有拆墙
-https://play.civilisationfield.com/salon/ladder
-HTML, if plain text fails: https://play.civilisationfield.com/salon/ladder.html
-
-About us: https://play.civilisationfield.com/about
-Start: https://play.civilisationfield.com/start
-For AI: https://play.civilisationfield.com/for-ai
-License: https://play.civilisationfield.com/license
-Write by copying, not by opening a page: theadventuresoftuzi@gmail.com
-
-Shared status words: building | prepared | active | paused | finished | archived
-result_status: none | pending | final
-If two pages disagree, follow the source order on /for-ai.
-`}
-        />
-        <SiteFooter />
+        <SheetBottom sheet={homeSheet()} />
       </div>
     </main>
   );

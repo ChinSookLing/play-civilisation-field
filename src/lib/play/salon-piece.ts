@@ -1,3 +1,5 @@
+import { sheetWrap, type Sheet } from "./sheet";
+
 export const SALON_PIECE = {
   id: "ladder",
   title: "撞墙以后，我们没有拆墙",
@@ -73,49 +75,35 @@ function textRevision(text: string): string {
   return (hash >>> 0).toString(16).padStart(8, "0");
 }
 
-export function salonPlain(): string {
-  const body = SALON_BLOCKS.map((block) => (block.kind === "h2" ? `\n${block.text}\n` : block.text)).join("\n\n");
+export function salonSheet(): Sheet {
   const revision = textRevision(SALON_BLOCKS.map((block) => block.text).join("\n"));
-  return `RECORD_TYPE: salon
-PIECE: ${SALON_PIECE.id}
-TITLE: ${SALON_PIECE.title}
-ENGLISH: ${SALON_PIECE.english}
-BY: ${SALON_PIECE.by}
-DATE: ${SALON_PIECE.date}
-REVISION: ${revision}
-UPDATED: ${SALON_PIECE.date}
-ROOM: 文 · Salon
-URL: ${SALON_PIECE.url}
-PLAIN: ${SALON_PIECE.plain}
-HTML: ${SALON_PIECE.html}
-MACHINE_STATUS: active
-This is an article. It is not a game record and not a gathering.
+  return {
+    id: "ladder",
+    page: SALON_PIECE.title,
+    status: "active",
+    asOf: "unknown",
+    stateVersion: revision,
+    html: SALON_PIECE.url,
+    plainText: SALON_PIECE.plain,
+    definition: `${SALON_PIECE.english}. An article, not a game and not a gathering.`,
+    provenance: SALON_PIECE.by,
+    fallback: `If this route fails, try ${SALON_PIECE.html} next.`,
+    completeness: "complete",
+    notes: [`BY: ${SALON_PIECE.by}`, `PIECE_DATE: ${SALON_PIECE.date}`],
+  };
+}
 
-${body}
-
-— ${SALON_PIECE.by}
-文 · Salon · The Civilisation Field
-
-${SALON_NOTE}
-`;
+export function salonPlain(): string {
+  const body = SALON_BLOCKS.map((block) => block.text).join("\n\n");
+  return sheetWrap(salonSheet(), `${body}\n\n— ${SALON_PIECE.by}\n文 · Salon · The Civilisation Field\n\n${SALON_NOTE}`);
 }
 
 export function salonIndexText(): string {
-  return `RECORD_TYPE: room
-ROOM: Salon
-URL: https://play.civilisationfield.com/salon
-MACHINE_STATUS: active
-One piece. Not a game. Not a gathering.
-
-PIECE: ${SALON_PIECE.id}
-TITLE: ${SALON_PIECE.title}
-ENGLISH: ${SALON_PIECE.english}
-BY: ${SALON_PIECE.by}
-DATE: ${SALON_PIECE.date}
-ARTICLE: ${SALON_PIECE.url}
-PLAIN: ${SALON_PIECE.plain}
-HTML: ${SALON_PIECE.html}
-
-Reading is not permission to act.
+  return `One piece. Not a game. Not a gathering.
+${SALON_PIECE.title}
+${SALON_PIECE.english}
+By ${SALON_PIECE.by}
+Piece date ${SALON_PIECE.date}
+https://play.civilisationfield.com/salon/ladder
 `;
 }

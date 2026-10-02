@@ -48,6 +48,7 @@ import { Route as SalonLadderDottxtRouteImport } from './routes/salon/ladder[.]t
 import { Route as ApiGamesIndexRouteImport } from './routes/api/games/index'
 import { Route as ApiGamesGameIdRouteImport } from './routes/api/games/$gameId'
 import { Route as ApiGamesCurrentRouteImport } from './routes/api/games/current'
+import { Route as GatheringBreakfast002IndexRouteImport } from './routes/gathering/breakfast-002/index'
 import { Route as GatheringBreakfast002TableRouteImport } from './routes/gathering/breakfast-002/table'
 import { Route as GatheringDinner001PartPartDothtmlRouteImport } from './routes/gathering/dinner-001-part/$part[.]html'
 import { Route as GatheringDinner001PartPartDottxtRouteImport } from './routes/gathering/dinner-001-part/$part[.]txt'
@@ -266,6 +267,12 @@ const ApiGamesCurrentRoute = ApiGamesCurrentRouteImport.update({
   path: '/api/games/current',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GatheringBreakfast002IndexRoute =
+  GatheringBreakfast002IndexRouteImport.update({
+    id: '/breakfast-002/',
+    path: '/breakfast-002/',
+    getParentRoute: () => GatheringRoute,
+  } as any)
 const GatheringBreakfast002TableRoute =
   GatheringBreakfast002TableRouteImport.update({
     id: '/breakfast-002/table',
@@ -392,6 +399,7 @@ export interface FileRoutesByFullPath {
   '/gathering/dinner-001-part/$part.txt': typeof GatheringDinner001PartPartDottxtRoute
   '/gathering/dinner-001/table': typeof GatheringDinner001TableRoute
   '/api/games/': typeof ApiGamesIndexRoute
+  '/gathering/breakfast-002/': typeof GatheringBreakfast002IndexRoute
   '/gathering/dinner-001/': typeof GatheringDinner001IndexRoute
   '/api/games/$gameId/handoff': typeof ApiGamesGameIdHandoffRoute
   '/api/games/$gameId/jev': typeof ApiGamesGameIdJevRoute
@@ -446,6 +454,7 @@ export interface FileRoutesByTo {
   '/gathering/dinner-001-part/$part.txt': typeof GatheringDinner001PartPartDottxtRoute
   '/gathering/dinner-001/table': typeof GatheringDinner001TableRoute
   '/api/games': typeof ApiGamesIndexRoute
+  '/gathering/breakfast-002': typeof GatheringBreakfast002IndexRoute
   '/gathering/dinner-001': typeof GatheringDinner001IndexRoute
   '/api/games/$gameId/handoff': typeof ApiGamesGameIdHandoffRoute
   '/api/games/$gameId/jev': typeof ApiGamesGameIdJevRoute
@@ -503,6 +512,7 @@ export interface FileRoutesById {
   '/gathering/dinner-001-part/$part.txt': typeof GatheringDinner001PartPartDottxtRoute
   '/gathering/dinner-001/table': typeof GatheringDinner001TableRoute
   '/api/games/': typeof ApiGamesIndexRoute
+  '/gathering/breakfast-002/': typeof GatheringBreakfast002IndexRoute
   '/gathering/dinner-001/': typeof GatheringDinner001IndexRoute
   '/api/games/$gameId/handoff': typeof ApiGamesGameIdHandoffRoute
   '/api/games/$gameId/jev': typeof ApiGamesGameIdJevRoute
@@ -561,6 +571,7 @@ export interface FileRouteTypes {
     | '/gathering/dinner-001-part/$part.txt'
     | '/gathering/dinner-001/table'
     | '/api/games/'
+    | '/gathering/breakfast-002/'
     | '/gathering/dinner-001/'
     | '/api/games/$gameId/handoff'
     | '/api/games/$gameId/jev'
@@ -615,6 +626,7 @@ export interface FileRouteTypes {
     | '/gathering/dinner-001-part/$part.txt'
     | '/gathering/dinner-001/table'
     | '/api/games'
+    | '/gathering/breakfast-002'
     | '/gathering/dinner-001'
     | '/api/games/$gameId/handoff'
     | '/api/games/$gameId/jev'
@@ -671,6 +683,7 @@ export interface FileRouteTypes {
     | '/gathering/dinner-001-part/$part.txt'
     | '/gathering/dinner-001/table'
     | '/api/games/'
+    | '/gathering/breakfast-002/'
     | '/gathering/dinner-001/'
     | '/api/games/$gameId/handoff'
     | '/api/games/$gameId/jev'
@@ -989,6 +1002,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiGamesCurrentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gathering/breakfast-002/': {
+      id: '/gathering/breakfast-002/'
+      path: '/breakfast-002'
+      fullPath: '/gathering/breakfast-002/'
+      preLoaderRoute: typeof GatheringBreakfast002IndexRouteImport
+      parentRoute: typeof GatheringRoute
+    }
     '/gathering/breakfast-002/table': {
       id: '/gathering/breakfast-002/table'
       path: '/breakfast-002/table'
@@ -1121,6 +1141,7 @@ interface GatheringRouteChildren {
   GatheringDinner001PartPartDothtmlRoute: typeof GatheringDinner001PartPartDothtmlRoute
   GatheringDinner001PartPartDottxtRoute: typeof GatheringDinner001PartPartDottxtRoute
   GatheringDinner001TableRoute: typeof GatheringDinner001TableRoute
+  GatheringBreakfast002IndexRoute: typeof GatheringBreakfast002IndexRoute
   GatheringDinner001IndexRoute: typeof GatheringDinner001IndexRoute
 }
 
@@ -1139,6 +1160,7 @@ const GatheringRouteChildren: GatheringRouteChildren = {
     GatheringDinner001PartPartDothtmlRoute,
   GatheringDinner001PartPartDottxtRoute: GatheringDinner001PartPartDottxtRoute,
   GatheringDinner001TableRoute: GatheringDinner001TableRoute,
+  GatheringBreakfast002IndexRoute: GatheringBreakfast002IndexRoute,
   GatheringDinner001IndexRoute: GatheringDinner001IndexRoute,
 }
 

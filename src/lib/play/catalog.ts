@@ -14,6 +14,7 @@ import {
 } from "./go";
 import { CURRENT_GAME_ID, GAMES, overlayGame, writeOverlay } from "./games";
 import { machineGameHeader } from "./machine";
+import { isoKualaLumpur, ORIGIN, sheetWrap, textRevision, type Sheet } from "./sheet";
 import { seatLine, seatProfile } from "./seat";
 import type {
   AffiliateId,
@@ -421,6 +422,80 @@ export function formatGameSlice(game: PlayGame, from: number, to: number): strin
   }
   if (total === 0) lines.push("(no moves)");
   return lines.join("\n");
+}
+
+const VOLUME_SIZE = 40;
+
+export function gameVolumeCount(game: PlayGame): number {
+  return Math.max(1, Math.ceil(game.moves.length / VOLUME_SIZE));
+}
+
+export function gameVolumeMeta(game: PlayGame, n: number) {
+  const from = game.moves.length ? (n - 1) * VOLUME_SIZE + 1 : 0;
+  const to = game.moves.length ? Math.min(game.moves.length, n * VOLUME_SIZE) : 0;
+  return {
+    n,
+    from,
+    to,
+    url: `${ORIGIN}/api/games/${game.id}/text?volume=${n}`,
+  };
+}
+
+export function gameSheet(game: PlayGame): Sheet {
+  const volumes = Array.from({ length: gameVolumeCount(game) }, (_, index) => gameVolumeMeta(game, index + 1));
+  const black = seatProfile(game, game.black);
+  const white = seatProfile(game, game.white);
+  const seat = (who: "Black" | "White", profile: ReturnType<typeof seatProfile>) => [
+    `SEAT: ${profile.name ?? "unknown"}`,
+    `COLOUR: ${who}`,
+    "FAMILY: unknown",
+    `MODEL: ${profile.model ?? "unknown"}`,
+    "VERSION: unknown",
+  ];
+  return {
+    id: game.id,
+    page: `${game.id} · ${black.name ?? "unknown"} vs ${white.name ?? "unknown"}`,
+    status: game.status === "live" ? "active" : game.status === "scoring" || game.status === "paused" ? "paused" : game.status === "finished" ? "finished" : game.status === "abandoned" ? "finished" : "prepared",
+    asOf: isoKualaLumpur(game.updatedAt),
+    stateVersion: textRevision(`${game.id}:${game.updatedAt}:${game.moves.length}:${game.status}`),
+    html: `${ORIGIN}/go/${game.id}`,
+    plainText: `${ORIGIN}/api/games/${game.id}/text`,
+    json: `${ORIGIN}/api/games/${game.id}`,
+    definition: `${game.id}, ${game.size} by ${game.size}, ${game.rules}, komi ${game.komi}.`,
+    provenance: "The table records the moves. Puck carries them. Tuzi hosts.",
+    rules: "Reading this page is not a turn. A move is kept only after the table accepts it.",
+    fallback: `If this route fails, try ${ORIGIN}/api/games/${game.id}/text?volume=1 next.`,
+    notes: [
+      ...seat("Black", black),
+      ...seat("White", white),
+      `VOLUMES: ${volumes.length}`,
+      ...volumes.map((volume) => `VOLUME_${volume.n}: ${volume.url} · moves ${volume.from}-${volume.to}`),
+    ],
+  };
+}
+
+export function formatGameVolumeIndex(game: PlayGame): string {
+  const volumes = Array.from({ length: gameVolumeCount(game) }, (_, index) => gameVolumeMeta(game, index + 1));
+  const record = volumes.map((volume) => `${volume.n} moves ${volume.from}-${volume.to} ${volume.url}`).join("\n");
+  return sheetWrap(gameSheet(game), record);
+}
+
+export function formatGameVolume(game: PlayGame, n: number): string {
+  const volume = gameVolumeMeta(game, n);
+  const parent = gameSheet(game);
+  const sheet: Sheet = {
+    ...parent,
+    id: `${game.id}-V${String(n).padStart(2, "0")}`,
+    page: `${game.id} · volume ${n}`,
+    plainText: volume.url,
+    definition: `Moves ${volume.from} to ${volume.to} of ${game.id}.`,
+    fallback: `If this route fails, try ${ORIGIN}/api/games/${game.id}/text next.`,
+    notes: [`PART: ${n}/${gameVolumeCount(game)}`, `MOVES: ${volume.from}-${volume.to}`],
+  };
+  const lines = game.moves
+    .filter((move) => move.n >= volume.from && move.n <= volume.to)
+    .map((move) => `${move.n} ${affiliateName(move.player)} ${move.coord}`);
+  return sheetWrap(sheet, lines.join("\n") || "No moves in this volume.");
 }
 
 export function formatAiBlock(game: PlayGame): string {
