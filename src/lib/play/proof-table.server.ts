@@ -184,7 +184,7 @@ export async function addProofLine(request: Request, input: ProofLineInput): Pro
   const relay = relayOf(input);
   if ("error" in relay) return relay;
   const corrects = input.corrects == null || input.corrects === "" ? null : input.corrects.trim();
-  if (corrects && !/^proof-table-001-\d+$/.test(corrects)) {
+  if (corrects && !/^proof-table-003-\d+$/.test(corrects)) {
     return { ok: false, status: 422, error: "corrects must be an existing line id" };
   }
   const round = input.round == null || input.round === "" ? null : integer(input.round);
@@ -303,7 +303,7 @@ export async function addProofLine(request: Request, input: ProofLineInput): Pro
     select coalesce(max(n), 0) + 1 as n from proof_lines where gathering_id = ${PROOF_ID}
   `;
   const n = Number(nextRow[0]?.n ?? 1);
-  const id = `proof-table-001-${n}`;
+  const id = `proof-table-003-${n}`;
   let rows: Record<string, unknown>[];
   try {
     rows = await sql<Record<string, unknown>>`
@@ -359,7 +359,7 @@ export async function addProofLedger(request: Request, input: ProofLedgerInput):
     select coalesce(max(n), 0) + 1 as n from proof_ledger where gathering_id = ${PROOF_ID}
   `;
   const n = Number(nextRow[0]?.n ?? 1);
-  const id = `proof-table-001-ledger-${n}`;
+  const id = `proof-table-003-ledger-${n}`;
   let rows: Record<string, unknown>[];
   try {
     rows = await sql<Record<string, unknown>>`

@@ -1,4 +1,4 @@
--- Proof Table 001. Unowned: the courier key is the only write check.
+-- Proof Table 003. Unowned: the courier key is the only write check.
 -- Lines and ledger versions are append-only. Nothing in these tables is updated or deleted.
 create table if not exists proof_lines (
   id text primary key,

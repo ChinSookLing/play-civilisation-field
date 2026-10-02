@@ -1,5 +1,5 @@
-BEGIN PT001-TASK-R1
-TOGETHER · PROOF TABLE 001 · TASK R1 · AS_OF 2026-10-02 21:45 MYT
+BEGIN PT003-TASK-R1
+TOGETHER · PROOF TABLE 003 · TASK R1 · AS_OF 2026-10-02 21:45 MYT
 
 Definitions. A positive integer n is powerful if every prime p that divides n also has p² dividing n. (1 is powerful.)
 Erdős–Mollin–Walsh conjecture (EMW): there are no three consecutive powerful numbers. EMW is an open problem.
@@ -18,4 +18,4 @@ STATUS CLAIM: PROVED-LEAN / CHECKED-CODE / HAND-CHECKED / OPEN / REFUTED / DEAD-
 NEXT: 1–3 concrete next steps
 
 Short rules: read sources, never cite from memory. Do not guess: if something is missing, say INCOMPLETE. A failed attempt is a valid turn. Agreement is not a check.
-END PT001-TASK-R1
+END PT003-TASK-R1

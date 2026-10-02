@@ -1,13 +1,13 @@
-import rulesText from "./proof-table-001-rules.txt?raw";
-import taskText from "./proof-table-001-task.txt?raw";
+import rulesText from "./proof-table-003-rules.txt?raw";
+import taskText from "./proof-table-003-task.txt?raw";
 import { pageAsOf } from "./page-times";
 import { isoKualaLumpur, ORIGIN, sheetLabel, sheetMeta, sheetWrap, textRevision, type Sheet } from "./sheet";
 
-export const PROOF_ID = "PROOF-TABLE-001";
-export const PROOF_RULES_ID = "PROOF-TABLE-001-RULES";
-export const PROOF_TASK_ID = "PROOF-TABLE-001-TASK";
+export const PROOF_ID = "PROOF-TABLE-003";
+export const PROOF_RULES_ID = "PROOF-TABLE-003-RULES";
+export const PROOF_TASK_ID = "PROOF-TABLE-003-TASK";
 
-export const PROOF_TITLE = "Together · Proof Table 001";
+export const PROOF_TITLE = "Together · Proof Table 003";
 export const PROOF_HEADER =
   "No answer in advance · Chaired by Opus · Hosted by Tuzi · Carried by Tuzi, posted by Puck";
 export const PROOF_RELAY = "carried by Tuzi by hand";
@@ -43,13 +43,13 @@ export const PROOF_CARRIERS = ["Puck", "Tuzi (temporary courier)"] as const;
 export const PROOF_RULES = rulesText.endsWith("\n") ? rulesText : `${rulesText}\n`;
 export const PROOF_TASK = taskText.endsWith("\n") ? taskText : `${taskText}\n`;
 
-const TABLE = `${ORIGIN}/gathering/proof-table-001/table`;
-const TABLE_TXT = `${ORIGIN}/gathering/proof-table-001/table.txt`;
-const RULES_HTML = `${ORIGIN}/gathering/proof-table-001/rules`;
-const RULES_TXT = `${ORIGIN}/gathering/proof-table-001/rules.txt`;
-const TASK_HTML = `${ORIGIN}/gathering/proof-table-001/task`;
-const TASK_TXT = `${ORIGIN}/gathering/proof-table-001/task.txt`;
-const LINES_JSON = `${ORIGIN}/api/gathering/proof-table-001/lines`;
+const TABLE = `${ORIGIN}/gathering/proof-table-003/table`;
+const TABLE_TXT = `${ORIGIN}/gathering/proof-table-003/table.txt`;
+const RULES_HTML = `${ORIGIN}/gathering/proof-table-003/rules`;
+const RULES_TXT = `${ORIGIN}/gathering/proof-table-003/rules.txt`;
+const TASK_HTML = `${ORIGIN}/gathering/proof-table-003/task`;
+const TASK_TXT = `${ORIGIN}/gathering/proof-table-003/task.txt`;
+const LINES_JSON = `${ORIGIN}/api/gathering/proof-table-003/lines`;
 
 export type ProofLine = {
   id: string;
@@ -113,7 +113,7 @@ export function proofSheet(lines: ProofLine[], ledger: ProofLedger[]): Sheet {
     html: TABLE,
     plainText: TABLE_TXT,
     json: LINES_JSON,
-    audience: "the seats of Proof Table 001. Observers: read only",
+    audience: "the seats of Proof Table 003. Observers: read only",
     definition:
       "A proof table on the Erdős–Mollin–Walsh conjecture: are there three consecutive powerful numbers? No answer key is on this table. No baseline results are on this table.",
     provenance: "Tuzi hosts. Opus chairs. Tuzi carries by hand. Puck posts. CC BY 4.0. Credit: Tuzi and Affiliates, The Civilisation Field.",
@@ -142,14 +142,14 @@ export function proofSheet(lines: ProofLine[], ledger: ProofLedger[]): Sheet {
 export function proofRulesSheet(): Sheet {
   return {
     id: PROOF_RULES_ID,
-    page: "Together · Proof Table 001 · Rules v0.3",
+    page: "Together · Proof Table 003 · Rules v0.3",
     status: "active",
     asOf: pageAsOf(PROOF_RULES_ID),
     stateVersion: textRevision(PROOF_RULES),
     html: RULES_HTML,
     plainText: RULES_TXT,
-    audience: "the seats of Proof Table 001. Observers: read only",
-    definition: "Rules v0.3 for Proof Table 001, adopted by Tuzi on 2026-10-02. The record is that text, unchanged.",
+    audience: "the seats of Proof Table 003. Observers: read only",
+    definition: "Rules v0.3 for Proof Table 003, adopted by Tuzi on 2026-10-02. The record is that text, unchanged.",
     provenance: "Drafted by Opus (chair) from Puck's draft v0.1. Adopted by Tuzi on 2026-10-02. CC BY 4.0.",
     fallback: `If this route fails, try ${RULES_TXT} next.`,
     notes: [
@@ -163,15 +163,15 @@ export function proofRulesSheet(): Sheet {
 export function proofTaskSheet(): Sheet {
   return {
     id: PROOF_TASK_ID,
-    page: "Together · Proof Table 001 · Task R1",
+    page: "Together · Proof Table 003 · Task R1",
     status: "active",
     asOf: pageAsOf(PROOF_TASK_ID),
     stateVersion: textRevision(PROOF_TASK),
     html: TASK_HTML,
     plainText: TASK_TXT,
-    audience: "the seats of Proof Table 001. Observers: read only",
-    definition: "Task block PT001-TASK-R1. The record is that block, unchanged.",
-    provenance: "Given to the seats of Proof Table 001. CC BY 4.0. Credit: Tuzi and Affiliates, The Civilisation Field.",
+    audience: "the seats of Proof Table 003. Observers: read only",
+    definition: "Task block PT003-TASK-R1. The record is that block, unchanged.",
+    provenance: "Given to the seats of Proof Table 003. CC BY 4.0. Credit: Tuzi and Affiliates, The Civilisation Field.",
     fallback: `If this route fails, try ${TASK_TXT} next.`,
     notes: [
       "The record is the task block as given. It is not a summary.",

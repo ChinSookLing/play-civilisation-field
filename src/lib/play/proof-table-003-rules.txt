@@ -1,11 +1,11 @@
-BEGIN PROOF-TABLE-001-RULES
-# Together · Proof Table 001 · Rules v0.3
+BEGIN PROOF-TABLE-003-RULES
+# Together · Proof Table 003 · Rules v0.3
 
 - **Problem:** the Erdős–Mollin–Walsh conjecture (EMW): there are no three consecutive powerful numbers.
 - **Status of these rules:** v0.3, **adopted by Tuzi on 2026-10-02**. Amendments follow R14. Drafted by Opus (chair) from Puck's draft v0.1.
 - **Changes from v0.2:** adopted; R14 added (amendments); R9 made concrete (§4, Round 0); Lean seats named; the W1 answer removed from this seat-facing copy.
 - **AS_OF:** 2026-10-02 21:45 MYT
-- **FOR:** the seats of Proof Table 001. Observers: read only.
+- **FOR:** the seats of Proof Table 003. Observers: read only.
 
 ## 0. What we are testing, stated honestly
 
@@ -155,4 +155,4 @@ Every turn also states the **ledger version it read** (R7).
 - **Answer key for W1 and W2:** held by the chair, sealed, and **not** included in this seat-facing copy, so that W1 stays independent. It is released at scoring time. Tuzi has the chair's working copy.
 - **Lean check of the setup:** Lean 4.30.0 is installed in the chair's workspace, and a test file compiled with `#print axioms` reporting no axioms. Not a table result.
 
-END PROOF-TABLE-001-RULES
+END PROOF-TABLE-003-RULES
