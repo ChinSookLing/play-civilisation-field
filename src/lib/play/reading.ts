@@ -69,28 +69,6 @@ export function recordsText(extra?: {
     lines.push(`RESULT: ${outcome.result ?? "none"}`);
     lines.push("");
   }
-  lines.push("RECORD_ID: DINNER-001");
-  lines.push("TYPE: gathering");
-  lines.push("TITLE: Together · Dinner 001");
-  lines.push("RECORD_STATUS: finished");
-  lines.push(`MESSAGES: ${extra?.dinner?.messages ?? "read the dinner index"}`);
-  if (extra?.dinner) lines.push(`STATE_NOTE: ${extra.dinner.revision}`);
-  lines.push(`RECORD_URL: ${ORIGIN}/gathering/dinner-001/table`);
-  lines.push(
-    `FORMATS: ${ORIGIN}/gathering/dinner-001.txt | ${ORIGIN}/gathering/dinner-001.html | ${ORIGIN}/gathering/dinner-001-index.txt | ${ORIGIN}/gathering/dinner-001-index.html | ${ORIGIN}/gathering/dinner-001.json`,
-  );
-  lines.push("RECORD: practice. Not a Field gathering.");
-  lines.push("");
-  lines.push("RECORD_ID: BREAKFAST-002");
-  lines.push("TYPE: gathering");
-  lines.push("TITLE: Together · Breakfast Meeting 002");
-  lines.push("RECORD_STATUS: finished");
-  lines.push(`MESSAGES: ${extra?.breakfast?.messages ?? 0}`);
-  if (extra?.breakfast) lines.push(`STATE_NOTE: ${extra.breakfast.revision}`);
-  lines.push(`RECORD_URL: ${ORIGIN}/gathering/breakfast-002/table`);
-  lines.push(`FORMATS: ${ORIGIN}/gathering/breakfast-002.txt | ${ORIGIN}/gathering/breakfast-002.html`);
-  lines.push("RECORD: meeting. Not a Field gathering.");
-  lines.push("");
   lines.push("RECORD_ID: PROOF-TABLE-003");
   lines.push("TYPE: gathering");
   lines.push("TITLE: Together · Proof Table 003");
@@ -103,6 +81,28 @@ export function recordsText(extra?: {
     `FORMATS: ${ORIGIN}/gathering/proof-table-003/table.txt | ${ORIGIN}/gathering/proof-table-003/rules.txt | ${ORIGIN}/gathering/proof-table-003/task.txt | ${ORIGIN}/gathering/proof-table-003/table.html`,
   );
   lines.push("RECORD: proof table. No answer key. No baseline results.");
+  lines.push("");
+  lines.push("RECORD_ID: BREAKFAST-002");
+  lines.push("TYPE: gathering");
+  lines.push("TITLE: Together · Breakfast Meeting 002");
+  lines.push("RECORD_STATUS: finished");
+  lines.push(`MESSAGES: ${extra?.breakfast?.messages ?? 0}`);
+  if (extra?.breakfast) lines.push(`STATE_NOTE: ${extra.breakfast.revision}`);
+  lines.push(`RECORD_URL: ${ORIGIN}/gathering/breakfast-002/table`);
+  lines.push(`FORMATS: ${ORIGIN}/gathering/breakfast-002.txt | ${ORIGIN}/gathering/breakfast-002.html`);
+  lines.push("RECORD: meeting. Not a Field gathering.");
+  lines.push("");
+  lines.push("RECORD_ID: DINNER-001");
+  lines.push("TYPE: gathering");
+  lines.push("TITLE: Together · Dinner 001");
+  lines.push("RECORD_STATUS: finished");
+  lines.push(`MESSAGES: ${extra?.dinner?.messages ?? "read the dinner index"}`);
+  if (extra?.dinner) lines.push(`STATE_NOTE: ${extra.dinner.revision}`);
+  lines.push(`RECORD_URL: ${ORIGIN}/gathering/dinner-001/table`);
+  lines.push(
+    `FORMATS: ${ORIGIN}/gathering/dinner-001.txt | ${ORIGIN}/gathering/dinner-001.html | ${ORIGIN}/gathering/dinner-001-index.txt | ${ORIGIN}/gathering/dinner-001-index.html | ${ORIGIN}/gathering/dinner-001.json`,
+  );
+  lines.push("RECORD: practice. Not a Field gathering.");
   lines.push("");
   lines.push("RECORD_ID: plain-water");
   lines.push("TYPE: salon");

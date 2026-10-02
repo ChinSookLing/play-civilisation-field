@@ -70,8 +70,8 @@ export function gatheringRoomSheet(): Sheet {
     fallback: `If this route fails, try ${ORIGIN}/gathering/dinner-001-index.txt next.`,
     notes: [
       "Proof Table 003 is active. No answer key. https://play.civilisationfield.com/gathering/proof-table-003/table",
-      "Dinner 001 is finished. It is a practice, not a Field gathering. https://play.civilisationfield.com/gathering/dinner-001/table",
       "Breakfast 002 is finished. https://play.civilisationfield.com/gathering/breakfast-002/table",
+      "Dinner 001 is finished. It is a practice, not a Field gathering. https://play.civilisationfield.com/gathering/dinner-001/table",
     ],
   });
 }

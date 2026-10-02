@@ -69,14 +69,14 @@ https://play.civilisationfield.com/salon/ladder
 Light page: https://play.civilisationfield.com/salon/ladder.html
 聚 · Gathering: practice. Not a Field gathering.
 https://play.civilisationfield.com/gathering
-Small index: https://play.civilisationfield.com/gathering/dinner-001-index.html
-Full transcript: https://play.civilisationfield.com/gathering/dinner-001.txt
-Breakfast 002 is finished: https://play.civilisationfield.com/gathering/breakfast-002.txt
 Proof Table 003 is active. No answer key. No baseline results.
 https://play.civilisationfield.com/gathering/proof-table-003/table
 Plain text: https://play.civilisationfield.com/gathering/proof-table-003/table.txt
 Rules: https://play.civilisationfield.com/gathering/proof-table-003/rules.txt
 Task: https://play.civilisationfield.com/gathering/proof-table-003/task.txt
+Breakfast 002 is finished: https://play.civilisationfield.com/gathering/breakfast-002.txt
+Dinner 001 is finished: https://play.civilisationfield.com/gathering/dinner-001.txt
+Small index: https://play.civilisationfield.com/gathering/dinner-001-index.html
 A passer-by cannot speak for a seat.
 
 If two pages disagree, the order is on /for-ai. This file is only a signpost.
