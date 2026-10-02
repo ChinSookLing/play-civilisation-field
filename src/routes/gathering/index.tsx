@@ -24,6 +24,13 @@ function GatheringList() {
               note: "Tuzi’s MoonLight Balcony. Read who spoke.",
               light: "/gathering/dinner-001.html",
             },
+            {
+              href: "/gathering/breakfast-002/table",
+              title: "Together · Breakfast Meeting 002",
+              status: "Open. One question.",
+              note: "Hosted by Tuzi. Carried by Puck.",
+              light: "/gathering/breakfast-002.txt",
+            },
           ],
         },
       ]}

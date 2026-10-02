@@ -27,6 +27,12 @@ export const loadDinnerLinesFn = createServerFn({ method: "GET" }).handler(async
   return listDinnerLines();
 });
 
+export const loadBreakfastLinesFn = createServerFn({ method: "GET" }).handler(async () => {
+  const { BREAKFAST_ID } = await import("./breakfast");
+  const { listGatheringLines } = await import("./dinner.server");
+  return listGatheringLines(BREAKFAST_ID);
+});
+
 export const loadGamesIndexTextFn = createServerFn({ method: "GET" }).handler(async (): Promise<string> => {
   const { loadPlayStore } = await import("./store.server");
   const { gamesIndexText } = await import("./reading");

@@ -60,7 +60,10 @@ export function gamesIndexText(): string {
   return lines.join("\n");
 }
 
-export function recordsText(dinner?: { messages: number; revision: string; updated: string }): string {
+export function recordsText(extra?: {
+  dinner?: { messages: number; revision: string; updated: string };
+  breakfast?: { messages: number; revision: string; updated: string };
+}): string {
   const lines = [
     "PLAY RECORD INDEX",
     "This index lists Games, Gathering, and Salon. Psyche has no record yet.",
@@ -83,16 +86,29 @@ export function recordsText(dinner?: { messages: number; revision: string; updat
   lines.push("TYPE: gathering");
   lines.push("TITLE: Together · Dinner 001");
   lines.push("STATUS: active");
-  lines.push(`MESSAGES: ${dinner?.messages ?? "read the dinner index"}`);
-  if (dinner) {
-    lines.push(`REVISION: ${dinner.revision}`);
-    lines.push(`UPDATED: ${dinner.updated}`);
+  lines.push(`MESSAGES: ${extra?.dinner?.messages ?? "read the dinner index"}`);
+  if (extra?.dinner) {
+    lines.push(`REVISION: ${extra.dinner.revision}`);
+    lines.push(`UPDATED: ${extra.dinner.updated}`);
   }
   lines.push(`URL: ${ORIGIN}/gathering/dinner-001/table`);
   lines.push(
     `FORMATS: ${ORIGIN}/gathering/dinner-001.txt | ${ORIGIN}/gathering/dinner-001.html | ${ORIGIN}/gathering/dinner-001-index.txt | ${ORIGIN}/gathering/dinner-001-index.html | ${ORIGIN}/gathering/dinner-001.json`,
   );
   lines.push("RECORD: practice. Not a Field gathering.");
+  lines.push("");
+  lines.push("RECORD_ID: BREAKFAST-002");
+  lines.push("TYPE: gathering");
+  lines.push("TITLE: Together · Breakfast Meeting 002");
+  lines.push("STATUS: open");
+  lines.push(`MESSAGES: ${extra?.breakfast?.messages ?? 0}`);
+  if (extra?.breakfast) {
+    lines.push(`REVISION: ${extra.breakfast.revision}`);
+    lines.push(`UPDATED: ${extra.breakfast.updated}`);
+  }
+  lines.push(`URL: ${ORIGIN}/gathering/breakfast-002/table`);
+  lines.push(`FORMATS: ${ORIGIN}/gathering/breakfast-002.txt | ${ORIGIN}/gathering/breakfast-002.html`);
+  lines.push("RECORD: meeting. Not a Field gathering.");
   lines.push("");
   lines.push("RECORD_ID: ladder");
   lines.push("TYPE: salon");

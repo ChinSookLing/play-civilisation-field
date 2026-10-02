@@ -31,6 +31,8 @@ import { Route as DataGameDotjsonRouteImport } from './routes/data/game[.]json'
 import { Route as DataGameDotsgfRouteImport } from './routes/data/game[.]sgf'
 import { Route as GamesIndexDotjsonRouteImport } from './routes/games/index[.]json'
 import { Route as GatheringIndexRouteImport } from './routes/gathering/index'
+import { Route as GatheringBreakfast002DothtmlRouteImport } from './routes/gathering/breakfast-002[.]html'
+import { Route as GatheringBreakfast002DottxtRouteImport } from './routes/gathering/breakfast-002[.]txt'
 import { Route as GatheringDinner001IndexDothtmlRouteImport } from './routes/gathering/dinner-001-index[.]html'
 import { Route as GatheringDinner001IndexDottxtRouteImport } from './routes/gathering/dinner-001-index[.]txt'
 import { Route as GatheringDinner001DothtmlRouteImport } from './routes/gathering/dinner-001[.]html'
@@ -46,6 +48,7 @@ import { Route as SalonLadderDottxtRouteImport } from './routes/salon/ladder[.]t
 import { Route as ApiGamesIndexRouteImport } from './routes/api/games/index'
 import { Route as ApiGamesGameIdRouteImport } from './routes/api/games/$gameId'
 import { Route as ApiGamesCurrentRouteImport } from './routes/api/games/current'
+import { Route as GatheringBreakfast002TableRouteImport } from './routes/gathering/breakfast-002/table'
 import { Route as GatheringDinner001PartPartDothtmlRouteImport } from './routes/gathering/dinner-001-part/$part[.]html'
 import { Route as GatheringDinner001PartPartDottxtRouteImport } from './routes/gathering/dinner-001-part/$part[.]txt'
 import { Route as GatheringDinner001IndexRouteImport } from './routes/gathering/dinner-001/index'
@@ -58,6 +61,7 @@ import { Route as ApiGamesGameIdPacketRouteImport } from './routes/api/games/$ga
 import { Route as ApiGamesGameIdScorePreviewRouteImport } from './routes/api/games/$gameId.score-preview'
 import { Route as ApiGamesGameIdSgfRouteImport } from './routes/api/games/$gameId.sgf'
 import { Route as ApiGamesGameIdTextRouteImport } from './routes/api/games/$gameId.text'
+import { Route as ApiGatheringBreakfast002LinesRouteImport } from './routes/api/gathering/breakfast-002.lines'
 import { Route as ApiGatheringDinner001LinesRouteImport } from './routes/api/gathering/dinner-001.lines'
 
 const IndexRoute = IndexRouteImport.update({
@@ -170,6 +174,18 @@ const GatheringIndexRoute = GatheringIndexRouteImport.update({
   path: '/',
   getParentRoute: () => GatheringRoute,
 } as any)
+const GatheringBreakfast002DothtmlRoute =
+  GatheringBreakfast002DothtmlRouteImport.update({
+    id: '/breakfast-002.html',
+    path: '/breakfast-002.html',
+    getParentRoute: () => GatheringRoute,
+  } as any)
+const GatheringBreakfast002DottxtRoute =
+  GatheringBreakfast002DottxtRouteImport.update({
+    id: '/breakfast-002.txt',
+    path: '/breakfast-002.txt',
+    getParentRoute: () => GatheringRoute,
+  } as any)
 const GatheringDinner001IndexDothtmlRoute =
   GatheringDinner001IndexDothtmlRouteImport.update({
     id: '/dinner-001-index.html',
@@ -250,6 +266,12 @@ const ApiGamesCurrentRoute = ApiGamesCurrentRouteImport.update({
   path: '/api/games/current',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GatheringBreakfast002TableRoute =
+  GatheringBreakfast002TableRouteImport.update({
+    id: '/breakfast-002/table',
+    path: '/breakfast-002/table',
+    getParentRoute: () => GatheringRoute,
+  } as any)
 const GatheringDinner001PartPartDothtmlRoute =
   GatheringDinner001PartPartDothtmlRouteImport.update({
     id: '/dinner-001-part/$part.html',
@@ -313,6 +335,12 @@ const ApiGamesGameIdTextRoute = ApiGamesGameIdTextRouteImport.update({
   path: '/text',
   getParentRoute: () => ApiGamesGameIdRoute,
 } as any)
+const ApiGatheringBreakfast002LinesRoute =
+  ApiGatheringBreakfast002LinesRouteImport.update({
+    id: '/api/gathering/breakfast-002/lines',
+    path: '/api/gathering/breakfast-002/lines',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiGatheringDinner001LinesRoute =
   ApiGatheringDinner001LinesRouteImport.update({
     id: '/api/gathering/dinner-001/lines',
@@ -342,6 +370,8 @@ export interface FileRoutesByFullPath {
   '/data/game.json': typeof DataGameDotjsonRoute
   '/data/game.sgf': typeof DataGameDotsgfRoute
   '/games/index.json': typeof GamesIndexDotjsonRoute
+  '/gathering/breakfast-002.html': typeof GatheringBreakfast002DothtmlRoute
+  '/gathering/breakfast-002.txt': typeof GatheringBreakfast002DottxtRoute
   '/gathering/dinner-001-index.html': typeof GatheringDinner001IndexDothtmlRoute
   '/gathering/dinner-001-index.txt': typeof GatheringDinner001IndexDottxtRoute
   '/gathering/dinner-001.html': typeof GatheringDinner001DothtmlRoute
@@ -357,6 +387,7 @@ export interface FileRoutesByFullPath {
   '/salon/': typeof SalonIndexRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
   '/api/games/current': typeof ApiGamesCurrentRoute
+  '/gathering/breakfast-002/table': typeof GatheringBreakfast002TableRoute
   '/gathering/dinner-001-part/$part.html': typeof GatheringDinner001PartPartDothtmlRoute
   '/gathering/dinner-001-part/$part.txt': typeof GatheringDinner001PartPartDottxtRoute
   '/gathering/dinner-001/table': typeof GatheringDinner001TableRoute
@@ -370,6 +401,7 @@ export interface FileRoutesByFullPath {
   '/api/games/$gameId/score-preview': typeof ApiGamesGameIdScorePreviewRoute
   '/api/games/$gameId/sgf': typeof ApiGamesGameIdSgfRoute
   '/api/games/$gameId/text': typeof ApiGamesGameIdTextRoute
+  '/api/gathering/breakfast-002/lines': typeof ApiGatheringBreakfast002LinesRoute
   '/api/gathering/dinner-001/lines': typeof ApiGatheringDinner001LinesRoute
 }
 export interface FileRoutesByTo {
@@ -392,6 +424,8 @@ export interface FileRoutesByTo {
   '/data/game.json': typeof DataGameDotjsonRoute
   '/data/game.sgf': typeof DataGameDotsgfRoute
   '/games/index.json': typeof GamesIndexDotjsonRoute
+  '/gathering/breakfast-002.html': typeof GatheringBreakfast002DothtmlRoute
+  '/gathering/breakfast-002.txt': typeof GatheringBreakfast002DottxtRoute
   '/gathering/dinner-001-index.html': typeof GatheringDinner001IndexDothtmlRoute
   '/gathering/dinner-001-index.txt': typeof GatheringDinner001IndexDottxtRoute
   '/gathering/dinner-001.html': typeof GatheringDinner001DothtmlRoute
@@ -407,6 +441,7 @@ export interface FileRoutesByTo {
   '/salon': typeof SalonIndexRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
   '/api/games/current': typeof ApiGamesCurrentRoute
+  '/gathering/breakfast-002/table': typeof GatheringBreakfast002TableRoute
   '/gathering/dinner-001-part/$part.html': typeof GatheringDinner001PartPartDothtmlRoute
   '/gathering/dinner-001-part/$part.txt': typeof GatheringDinner001PartPartDottxtRoute
   '/gathering/dinner-001/table': typeof GatheringDinner001TableRoute
@@ -420,6 +455,7 @@ export interface FileRoutesByTo {
   '/api/games/$gameId/score-preview': typeof ApiGamesGameIdScorePreviewRoute
   '/api/games/$gameId/sgf': typeof ApiGamesGameIdSgfRoute
   '/api/games/$gameId/text': typeof ApiGamesGameIdTextRoute
+  '/api/gathering/breakfast-002/lines': typeof ApiGatheringBreakfast002LinesRoute
   '/api/gathering/dinner-001/lines': typeof ApiGatheringDinner001LinesRoute
 }
 export interface FileRoutesById {
@@ -445,6 +481,8 @@ export interface FileRoutesById {
   '/data/game.json': typeof DataGameDotjsonRoute
   '/data/game.sgf': typeof DataGameDotsgfRoute
   '/games/index.json': typeof GamesIndexDotjsonRoute
+  '/gathering/breakfast-002.html': typeof GatheringBreakfast002DothtmlRoute
+  '/gathering/breakfast-002.txt': typeof GatheringBreakfast002DottxtRoute
   '/gathering/dinner-001-index.html': typeof GatheringDinner001IndexDothtmlRoute
   '/gathering/dinner-001-index.txt': typeof GatheringDinner001IndexDottxtRoute
   '/gathering/dinner-001.html': typeof GatheringDinner001DothtmlRoute
@@ -460,6 +498,7 @@ export interface FileRoutesById {
   '/salon/': typeof SalonIndexRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
   '/api/games/current': typeof ApiGamesCurrentRoute
+  '/gathering/breakfast-002/table': typeof GatheringBreakfast002TableRoute
   '/gathering/dinner-001-part/$part.html': typeof GatheringDinner001PartPartDothtmlRoute
   '/gathering/dinner-001-part/$part.txt': typeof GatheringDinner001PartPartDottxtRoute
   '/gathering/dinner-001/table': typeof GatheringDinner001TableRoute
@@ -473,6 +512,7 @@ export interface FileRoutesById {
   '/api/games/$gameId/score-preview': typeof ApiGamesGameIdScorePreviewRoute
   '/api/games/$gameId/sgf': typeof ApiGamesGameIdSgfRoute
   '/api/games/$gameId/text': typeof ApiGamesGameIdTextRoute
+  '/api/gathering/breakfast-002/lines': typeof ApiGatheringBreakfast002LinesRoute
   '/api/gathering/dinner-001/lines': typeof ApiGatheringDinner001LinesRoute
 }
 export interface FileRouteTypes {
@@ -499,6 +539,8 @@ export interface FileRouteTypes {
     | '/data/game.json'
     | '/data/game.sgf'
     | '/games/index.json'
+    | '/gathering/breakfast-002.html'
+    | '/gathering/breakfast-002.txt'
     | '/gathering/dinner-001-index.html'
     | '/gathering/dinner-001-index.txt'
     | '/gathering/dinner-001.html'
@@ -514,6 +556,7 @@ export interface FileRouteTypes {
     | '/salon/'
     | '/api/games/$gameId'
     | '/api/games/current'
+    | '/gathering/breakfast-002/table'
     | '/gathering/dinner-001-part/$part.html'
     | '/gathering/dinner-001-part/$part.txt'
     | '/gathering/dinner-001/table'
@@ -527,6 +570,7 @@ export interface FileRouteTypes {
     | '/api/games/$gameId/score-preview'
     | '/api/games/$gameId/sgf'
     | '/api/games/$gameId/text'
+    | '/api/gathering/breakfast-002/lines'
     | '/api/gathering/dinner-001/lines'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -549,6 +593,8 @@ export interface FileRouteTypes {
     | '/data/game.json'
     | '/data/game.sgf'
     | '/games/index.json'
+    | '/gathering/breakfast-002.html'
+    | '/gathering/breakfast-002.txt'
     | '/gathering/dinner-001-index.html'
     | '/gathering/dinner-001-index.txt'
     | '/gathering/dinner-001.html'
@@ -564,6 +610,7 @@ export interface FileRouteTypes {
     | '/salon'
     | '/api/games/$gameId'
     | '/api/games/current'
+    | '/gathering/breakfast-002/table'
     | '/gathering/dinner-001-part/$part.html'
     | '/gathering/dinner-001-part/$part.txt'
     | '/gathering/dinner-001/table'
@@ -577,6 +624,7 @@ export interface FileRouteTypes {
     | '/api/games/$gameId/score-preview'
     | '/api/games/$gameId/sgf'
     | '/api/games/$gameId/text'
+    | '/api/gathering/breakfast-002/lines'
     | '/api/gathering/dinner-001/lines'
   id:
     | '__root__'
@@ -601,6 +649,8 @@ export interface FileRouteTypes {
     | '/data/game.json'
     | '/data/game.sgf'
     | '/games/index.json'
+    | '/gathering/breakfast-002.html'
+    | '/gathering/breakfast-002.txt'
     | '/gathering/dinner-001-index.html'
     | '/gathering/dinner-001-index.txt'
     | '/gathering/dinner-001.html'
@@ -616,6 +666,7 @@ export interface FileRouteTypes {
     | '/salon/'
     | '/api/games/$gameId'
     | '/api/games/current'
+    | '/gathering/breakfast-002/table'
     | '/gathering/dinner-001-part/$part.html'
     | '/gathering/dinner-001-part/$part.txt'
     | '/gathering/dinner-001/table'
@@ -629,6 +680,7 @@ export interface FileRouteTypes {
     | '/api/games/$gameId/score-preview'
     | '/api/games/$gameId/sgf'
     | '/api/games/$gameId/text'
+    | '/api/gathering/breakfast-002/lines'
     | '/api/gathering/dinner-001/lines'
   fileRoutesById: FileRoutesById
 }
@@ -658,6 +710,7 @@ export interface RootRouteChildren {
   ApiGamesGameIdRoute: typeof ApiGamesGameIdRouteWithChildren
   ApiGamesCurrentRoute: typeof ApiGamesCurrentRoute
   ApiGamesIndexRoute: typeof ApiGamesIndexRoute
+  ApiGatheringBreakfast002LinesRoute: typeof ApiGatheringBreakfast002LinesRoute
   ApiGatheringDinner001LinesRoute: typeof ApiGatheringDinner001LinesRoute
 }
 
@@ -817,6 +870,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GatheringIndexRouteImport
       parentRoute: typeof GatheringRoute
     }
+    '/gathering/breakfast-002.html': {
+      id: '/gathering/breakfast-002.html'
+      path: '/breakfast-002.html'
+      fullPath: '/gathering/breakfast-002.html'
+      preLoaderRoute: typeof GatheringBreakfast002DothtmlRouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/breakfast-002.txt': {
+      id: '/gathering/breakfast-002.txt'
+      path: '/breakfast-002.txt'
+      fullPath: '/gathering/breakfast-002.txt'
+      preLoaderRoute: typeof GatheringBreakfast002DottxtRouteImport
+      parentRoute: typeof GatheringRoute
+    }
     '/gathering/dinner-001-index.html': {
       id: '/gathering/dinner-001-index.html'
       path: '/dinner-001-index.html'
@@ -922,6 +989,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiGamesCurrentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gathering/breakfast-002/table': {
+      id: '/gathering/breakfast-002/table'
+      path: '/breakfast-002/table'
+      fullPath: '/gathering/breakfast-002/table'
+      preLoaderRoute: typeof GatheringBreakfast002TableRouteImport
+      parentRoute: typeof GatheringRoute
+    }
     '/gathering/dinner-001-part/$part.html': {
       id: '/gathering/dinner-001-part/$part.html'
       path: '/dinner-001-part/$part.html'
@@ -1006,6 +1080,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiGamesGameIdTextRouteImport
       parentRoute: typeof ApiGamesGameIdRoute
     }
+    '/api/gathering/breakfast-002/lines': {
+      id: '/api/gathering/breakfast-002/lines'
+      path: '/api/gathering/breakfast-002/lines'
+      fullPath: '/api/gathering/breakfast-002/lines'
+      preLoaderRoute: typeof ApiGatheringBreakfast002LinesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/gathering/dinner-001/lines': {
       id: '/api/gathering/dinner-001/lines'
       path: '/api/gathering/dinner-001/lines'
@@ -1027,6 +1108,8 @@ const GamesRouteChildren: GamesRouteChildren = {
 const GamesRouteWithChildren = GamesRoute._addFileChildren(GamesRouteChildren)
 
 interface GatheringRouteChildren {
+  GatheringBreakfast002DothtmlRoute: typeof GatheringBreakfast002DothtmlRoute
+  GatheringBreakfast002DottxtRoute: typeof GatheringBreakfast002DottxtRoute
   GatheringDinner001IndexDothtmlRoute: typeof GatheringDinner001IndexDothtmlRoute
   GatheringDinner001IndexDottxtRoute: typeof GatheringDinner001IndexDottxtRoute
   GatheringDinner001DothtmlRoute: typeof GatheringDinner001DothtmlRoute
@@ -1034,6 +1117,7 @@ interface GatheringRouteChildren {
   GatheringDinner001DottxtRoute: typeof GatheringDinner001DottxtRoute
   GatheringIndexDothtmlRoute: typeof GatheringIndexDothtmlRoute
   GatheringIndexRoute: typeof GatheringIndexRoute
+  GatheringBreakfast002TableRoute: typeof GatheringBreakfast002TableRoute
   GatheringDinner001PartPartDothtmlRoute: typeof GatheringDinner001PartPartDothtmlRoute
   GatheringDinner001PartPartDottxtRoute: typeof GatheringDinner001PartPartDottxtRoute
   GatheringDinner001TableRoute: typeof GatheringDinner001TableRoute
@@ -1041,6 +1125,8 @@ interface GatheringRouteChildren {
 }
 
 const GatheringRouteChildren: GatheringRouteChildren = {
+  GatheringBreakfast002DothtmlRoute: GatheringBreakfast002DothtmlRoute,
+  GatheringBreakfast002DottxtRoute: GatheringBreakfast002DottxtRoute,
   GatheringDinner001IndexDothtmlRoute: GatheringDinner001IndexDothtmlRoute,
   GatheringDinner001IndexDottxtRoute: GatheringDinner001IndexDottxtRoute,
   GatheringDinner001DothtmlRoute: GatheringDinner001DothtmlRoute,
@@ -1048,6 +1134,7 @@ const GatheringRouteChildren: GatheringRouteChildren = {
   GatheringDinner001DottxtRoute: GatheringDinner001DottxtRoute,
   GatheringIndexDothtmlRoute: GatheringIndexDothtmlRoute,
   GatheringIndexRoute: GatheringIndexRoute,
+  GatheringBreakfast002TableRoute: GatheringBreakfast002TableRoute,
   GatheringDinner001PartPartDothtmlRoute:
     GatheringDinner001PartPartDothtmlRoute,
   GatheringDinner001PartPartDottxtRoute: GatheringDinner001PartPartDottxtRoute,
@@ -1127,6 +1214,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiGamesGameIdRoute: ApiGamesGameIdRouteWithChildren,
   ApiGamesCurrentRoute: ApiGamesCurrentRoute,
   ApiGamesIndexRoute: ApiGamesIndexRoute,
+  ApiGatheringBreakfast002LinesRoute: ApiGatheringBreakfast002LinesRoute,
   ApiGatheringDinner001LinesRoute: ApiGatheringDinner001LinesRoute,
 }
 export const routeTree = rootRouteImport
