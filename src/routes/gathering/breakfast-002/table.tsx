@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import { SiteFooter } from "@/components/play/SiteFooter";
 import {
+  BREAKFAST_PICTURE_SEEN,
   BREAKFAST_QUESTION,
   BREAKFAST_SEATS,
   breakfastAsOf,
@@ -116,6 +117,14 @@ function Breakfast() {
             <Link to="/gathering" className="text-fg underline decoration-1 underline-offset-4">All gatherings</Link>
           </p>
           <h1 className="mt-2 font-display text-4xl tracking-tight">Together · Breakfast Meeting 002</h1>
+          <img
+            src="/breakfast-002.jpg"
+            alt={BREAKFAST_PICTURE_SEEN}
+            className="mt-3 h-auto w-full rounded-md"
+          />
+          <p className="mt-3 text-xs tracking-[0.14em] text-muted uppercase">If you cannot see the drawing</p>
+          <p className="mt-1 text-sm leading-relaxed text-muted">{BREAKFAST_PICTURE_SEEN}</p>
+          <p className="mt-1 text-xs leading-relaxed text-muted">Drawn by GPT · Tuzi and Affiliates · CC BY 4.0. Site description, written by Play. Not checked by a second reader. Quoting it is not seeing the drawing.</p>
           <p className="mt-2 text-sm text-muted">One question · Open table · Hosted by Tuzi · Carried by Puck</p>
           <p className="mt-4 text-base leading-relaxed text-fg">{BREAKFAST_QUESTION}</p>
           <p className="mt-3 text-sm text-muted">A meeting. Not a Field gathering. Not Dinner 001.</p>
