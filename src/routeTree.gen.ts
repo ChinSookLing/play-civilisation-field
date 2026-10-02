@@ -53,7 +53,7 @@ import { Route as GatheringDinner001DottxtRouteImport } from './routes/gathering
 import { Route as GatheringIndexDothtmlRouteImport } from './routes/gathering/index[.]html'
 import { Route as GoGameIdRouteImport } from './routes/go.$gameId'
 import { Route as NotesNoteIdRouteImport } from './routes/notes.$noteId'
-import { Route as NotesNoteIdDottxtRouteImport } from './routes/notes.$noteId[.]txt'
+import { Route as NotesChar123noteIdChar125DottxtRouteImport } from './routes/notes.{$noteId}[.]txt'
 import { Route as SalonIndexRouteImport } from './routes/salon/index'
 import { Route as SalonSplatRouteImport } from './routes/salon/$'
 import { Route as SalonLadderRouteImport } from './routes/salon/ladder'
@@ -306,11 +306,12 @@ const NotesNoteIdRoute = NotesNoteIdRouteImport.update({
   path: '/notes/$noteId',
   getParentRoute: () => rootRouteImport,
 } as any)
-const NotesNoteIdDottxtRoute = NotesNoteIdDottxtRouteImport.update({
-  id: '/notes/$noteId.txt',
-  path: '/notes/$noteId.txt',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const NotesChar123noteIdChar125DottxtRoute =
+  NotesChar123noteIdChar125DottxtRouteImport.update({
+    id: '/notes/{$noteId}.txt',
+    path: '/notes/{$noteId}.txt',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const SalonIndexRoute = SalonIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -483,7 +484,7 @@ export interface FileRoutesByFullPath {
   '/gathering/index.html': typeof GatheringIndexDothtmlRoute
   '/go/$gameId': typeof GoGameIdRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
-  '/notes/$noteId.txt': typeof NotesNoteIdDottxtRoute
+  '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
   '/salon/$': typeof SalonSplatRoute
   '/salon/ladder': typeof SalonLadderRoute
   '/salon/ladder.html': typeof SalonLadderDothtmlRoute
@@ -552,7 +553,7 @@ export interface FileRoutesByTo {
   '/gathering/index.html': typeof GatheringIndexDothtmlRoute
   '/go/$gameId': typeof GoGameIdRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
-  '/notes/$noteId.txt': typeof NotesNoteIdDottxtRoute
+  '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
   '/salon/$': typeof SalonSplatRoute
   '/salon/ladder': typeof SalonLadderRoute
   '/salon/ladder.html': typeof SalonLadderDothtmlRoute
@@ -624,7 +625,7 @@ export interface FileRoutesById {
   '/gathering/index.html': typeof GatheringIndexDothtmlRoute
   '/go/$gameId': typeof GoGameIdRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
-  '/notes/$noteId.txt': typeof NotesNoteIdDottxtRoute
+  '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
   '/salon/$': typeof SalonSplatRoute
   '/salon/ladder': typeof SalonLadderRoute
   '/salon/ladder.html': typeof SalonLadderDothtmlRoute
@@ -697,7 +698,7 @@ export interface FileRouteTypes {
     | '/gathering/index.html'
     | '/go/$gameId'
     | '/notes/$noteId'
-    | '/notes/$noteId.txt'
+    | '/notes/{$noteId}.txt'
     | '/salon/$'
     | '/salon/ladder'
     | '/salon/ladder.html'
@@ -766,7 +767,7 @@ export interface FileRouteTypes {
     | '/gathering/index.html'
     | '/go/$gameId'
     | '/notes/$noteId'
-    | '/notes/$noteId.txt'
+    | '/notes/{$noteId}.txt'
     | '/salon/$'
     | '/salon/ladder'
     | '/salon/ladder.html'
@@ -837,7 +838,7 @@ export interface FileRouteTypes {
     | '/gathering/index.html'
     | '/go/$gameId'
     | '/notes/$noteId'
-    | '/notes/$noteId.txt'
+    | '/notes/{$noteId}.txt'
     | '/salon/$'
     | '/salon/ladder'
     | '/salon/ladder.html'
@@ -898,7 +899,7 @@ export interface RootRouteChildren {
   DataGameDotsgfRoute: typeof DataGameDotsgfRoute
   GoGameIdRoute: typeof GoGameIdRoute
   NotesNoteIdRoute: typeof NotesNoteIdRoute
-  NotesNoteIdDottxtRoute: typeof NotesNoteIdDottxtRoute
+  NotesChar123noteIdChar125DottxtRoute: typeof NotesChar123noteIdChar125DottxtRoute
   ApiGamesGameIdRoute: typeof ApiGamesGameIdRouteWithChildren
   ApiGamesCurrentRoute: typeof ApiGamesCurrentRoute
   ApiGamesIndexRoute: typeof ApiGamesIndexRoute
@@ -1216,11 +1217,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotesNoteIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/notes/$noteId.txt': {
-      id: '/notes/$noteId.txt'
-      path: '/notes/$noteId.txt'
-      fullPath: '/notes/$noteId.txt'
-      preLoaderRoute: typeof NotesNoteIdDottxtRouteImport
+    '/notes/{$noteId}.txt': {
+      id: '/notes/{$noteId}.txt'
+      path: '/notes/{$noteId}.txt'
+      fullPath: '/notes/{$noteId}.txt'
+      preLoaderRoute: typeof NotesChar123noteIdChar125DottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/salon/': {
@@ -1526,7 +1527,7 @@ const rootRouteChildren: RootRouteChildren = {
   DataGameDotsgfRoute: DataGameDotsgfRoute,
   GoGameIdRoute: GoGameIdRoute,
   NotesNoteIdRoute: NotesNoteIdRoute,
-  NotesNoteIdDottxtRoute: NotesNoteIdDottxtRoute,
+  NotesChar123noteIdChar125DottxtRoute: NotesChar123noteIdChar125DottxtRoute,
   ApiGamesGameIdRoute: ApiGamesGameIdRouteWithChildren,
   ApiGamesCurrentRoute: ApiGamesCurrentRoute,
   ApiGamesIndexRoute: ApiGamesIndexRoute,
