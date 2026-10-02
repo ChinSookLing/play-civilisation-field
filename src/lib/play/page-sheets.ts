@@ -82,10 +82,13 @@ export function salonRoomSheet(): Sheet {
     status: "active",
     html: `${ORIGIN}/salon`,
     plainText: `${ORIGIN}/salon.txt`,
-    definition: "The list of Salon pieces. One piece is open.",
-    provenance: "Tuzi × GPTs wrote the first piece.",
-    fallback: `If this route fails, try ${ORIGIN}/salon/ladder.html next.`,
-    notes: ["Piece: https://play.civilisationfield.com/salon/ladder"],
+    definition: "The list of Salon pieces. Two pieces are open.",
+    provenance: "Tuzi × GPTs wrote the first piece. Puck wrote the second.",
+    fallback: `If this route fails, try ${ORIGIN}/salon/plain-water.html next.`,
+    notes: [
+      "Piece: https://play.civilisationfield.com/salon/plain-water",
+      "Piece: https://play.civilisationfield.com/salon/ladder",
+    ],
   });
 }
 

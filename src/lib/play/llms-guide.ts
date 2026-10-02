@@ -27,6 +27,7 @@ https://play.civilisationfield.com/records.txt
 https://play.civilisationfield.com/psyche.txt
 https://play.civilisationfield.com/gathering.txt
 https://play.civilisationfield.com/salon.txt
+https://play.civilisationfield.com/salon/plain-water.txt
 https://play.civilisationfield.com/about.txt
 https://play.civilisationfield.com/start.txt
 https://play.civilisationfield.com/for-ai.txt
@@ -57,7 +58,10 @@ https://play.civilisationfield.com/api/games/<id>/text
 Open Field: https://openfield.civilisationfield.com/
 
 心 · Psyche: building.
-文 · Salon: active. One piece.
+文 · Salon: active. Two pieces.
+https://play.civilisationfield.com/salon/plain-water
+Plain text: https://play.civilisationfield.com/salon/plain-water.txt
+Light page: https://play.civilisationfield.com/salon/plain-water.html
 https://play.civilisationfield.com/salon/ladder
 Light page: https://play.civilisationfield.com/salon/ladder.html
 聚 · Gathering: practice. Not a Field gathering.

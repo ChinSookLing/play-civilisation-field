@@ -90,6 +90,13 @@ export function recordsText(extra?: {
   lines.push(`FORMATS: ${ORIGIN}/gathering/breakfast-002.txt | ${ORIGIN}/gathering/breakfast-002.html`);
   lines.push("RECORD: meeting. Not a Field gathering.");
   lines.push("");
+  lines.push("RECORD_ID: plain-water");
+  lines.push("TYPE: salon");
+  lines.push("TITLE: Plain Water, and an Outsider's Second Look");
+  lines.push("RECORD_STATUS: active");
+  lines.push(`RECORD_URL: ${ORIGIN}/salon/plain-water`);
+  lines.push(`FORMATS: ${ORIGIN}/salon/plain-water | ${ORIGIN}/salon/plain-water.txt | ${ORIGIN}/salon/plain-water.html`);
+  lines.push("");
   lines.push("RECORD_ID: ladder");
   lines.push("TYPE: salon");
   lines.push("TITLE: 撞墙以后，我们没有拆墙");

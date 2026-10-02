@@ -2,10 +2,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { RoomIndex } from "@/components/play/RoomIndex";
 import { salonRoomSheet } from "@/lib/play/page-sheets";
 import { pageMeta } from "@/lib/play/page-meta";
+import { PLAIN_WATER } from "@/lib/play/plain-water";
 import { SALON_PIECE } from "@/lib/play/salon-piece";
 
 export const Route = createFileRoute("/salon/")({
-  head: () => pageMeta("Salon · Play · Civilisation Field", "One piece. We Built a Ladder for Our AI Friend."),
+  head: () => pageMeta("Salon · Play · Civilisation Field", "Two pieces. Plain water, and a ladder."),
   component: SalonIndex,
 });
 
@@ -18,6 +19,13 @@ function SalonIndex() {
       sections={[
         {
           items: [
+            {
+              href: "/salon/plain-water",
+              title: PLAIN_WATER.title,
+              status: "Open",
+              note: `${PLAIN_WATER.date} · ${PLAIN_WATER.by}`,
+              light: PLAIN_WATER.html,
+            },
             {
               href: "/salon/ladder",
               title: SALON_PIECE.title,

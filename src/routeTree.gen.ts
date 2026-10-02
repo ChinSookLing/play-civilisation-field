@@ -59,6 +59,9 @@ import { Route as SalonSplatRouteImport } from './routes/salon/$'
 import { Route as SalonLadderRouteImport } from './routes/salon/ladder'
 import { Route as SalonLadderDothtmlRouteImport } from './routes/salon/ladder[.]html'
 import { Route as SalonLadderDottxtRouteImport } from './routes/salon/ladder[.]txt'
+import { Route as SalonPlainWaterRouteImport } from './routes/salon/plain-water'
+import { Route as SalonPlainWaterDothtmlRouteImport } from './routes/salon/plain-water[.]html'
+import { Route as SalonPlainWaterDottxtRouteImport } from './routes/salon/plain-water[.]txt'
 import { Route as ApiGamesIndexRouteImport } from './routes/api/games/index'
 import { Route as ApiGamesGameIdRouteImport } from './routes/api/games/$gameId'
 import { Route as ApiGamesCurrentRouteImport } from './routes/api/games/current'
@@ -337,6 +340,21 @@ const SalonLadderDottxtRoute = SalonLadderDottxtRouteImport.update({
   path: '/ladder.txt',
   getParentRoute: () => SalonRoute,
 } as any)
+const SalonPlainWaterRoute = SalonPlainWaterRouteImport.update({
+  id: '/plain-water',
+  path: '/plain-water',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonPlainWaterDothtmlRoute = SalonPlainWaterDothtmlRouteImport.update({
+  id: '/plain-water.html',
+  path: '/plain-water.html',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonPlainWaterDottxtRoute = SalonPlainWaterDottxtRouteImport.update({
+  id: '/plain-water.txt',
+  path: '/plain-water.txt',
+  getParentRoute: () => SalonRoute,
+} as any)
 const ApiGamesIndexRoute = ApiGamesIndexRouteImport.update({
   id: '/api/games/',
   path: '/api/games/',
@@ -489,6 +507,9 @@ export interface FileRoutesByFullPath {
   '/salon/ladder': typeof SalonLadderRoute
   '/salon/ladder.html': typeof SalonLadderDothtmlRoute
   '/salon/ladder.txt': typeof SalonLadderDottxtRoute
+  '/salon/plain-water': typeof SalonPlainWaterRoute
+  '/salon/plain-water.html': typeof SalonPlainWaterDothtmlRoute
+  '/salon/plain-water.txt': typeof SalonPlainWaterDottxtRoute
   '/gathering/': typeof GatheringIndexRoute
   '/salon/': typeof SalonIndexRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
@@ -558,6 +579,9 @@ export interface FileRoutesByTo {
   '/salon/ladder': typeof SalonLadderRoute
   '/salon/ladder.html': typeof SalonLadderDothtmlRoute
   '/salon/ladder.txt': typeof SalonLadderDottxtRoute
+  '/salon/plain-water': typeof SalonPlainWaterRoute
+  '/salon/plain-water.html': typeof SalonPlainWaterDothtmlRoute
+  '/salon/plain-water.txt': typeof SalonPlainWaterDottxtRoute
   '/gathering': typeof GatheringIndexRoute
   '/salon': typeof SalonIndexRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
@@ -630,6 +654,9 @@ export interface FileRoutesById {
   '/salon/ladder': typeof SalonLadderRoute
   '/salon/ladder.html': typeof SalonLadderDothtmlRoute
   '/salon/ladder.txt': typeof SalonLadderDottxtRoute
+  '/salon/plain-water': typeof SalonPlainWaterRoute
+  '/salon/plain-water.html': typeof SalonPlainWaterDothtmlRoute
+  '/salon/plain-water.txt': typeof SalonPlainWaterDottxtRoute
   '/gathering/': typeof GatheringIndexRoute
   '/salon/': typeof SalonIndexRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
@@ -703,6 +730,9 @@ export interface FileRouteTypes {
     | '/salon/ladder'
     | '/salon/ladder.html'
     | '/salon/ladder.txt'
+    | '/salon/plain-water'
+    | '/salon/plain-water.html'
+    | '/salon/plain-water.txt'
     | '/gathering/'
     | '/salon/'
     | '/api/games/$gameId'
@@ -772,6 +802,9 @@ export interface FileRouteTypes {
     | '/salon/ladder'
     | '/salon/ladder.html'
     | '/salon/ladder.txt'
+    | '/salon/plain-water'
+    | '/salon/plain-water.html'
+    | '/salon/plain-water.txt'
     | '/gathering'
     | '/salon'
     | '/api/games/$gameId'
@@ -843,6 +876,9 @@ export interface FileRouteTypes {
     | '/salon/ladder'
     | '/salon/ladder.html'
     | '/salon/ladder.txt'
+    | '/salon/plain-water'
+    | '/salon/plain-water.html'
+    | '/salon/plain-water.txt'
     | '/gathering/'
     | '/salon/'
     | '/api/games/$gameId'
@@ -1259,6 +1295,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SalonLadderDottxtRouteImport
       parentRoute: typeof SalonRoute
     }
+    '/salon/plain-water': {
+      id: '/salon/plain-water'
+      path: '/plain-water'
+      fullPath: '/salon/plain-water'
+      preLoaderRoute: typeof SalonPlainWaterRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/plain-water.html': {
+      id: '/salon/plain-water.html'
+      path: '/plain-water.html'
+      fullPath: '/salon/plain-water.html'
+      preLoaderRoute: typeof SalonPlainWaterDothtmlRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/plain-water.txt': {
+      id: '/salon/plain-water.txt'
+      path: '/plain-water.txt'
+      fullPath: '/salon/plain-water.txt'
+      preLoaderRoute: typeof SalonPlainWaterDottxtRouteImport
+      parentRoute: typeof SalonRoute
+    }
     '/api/games/': {
       id: '/api/games/'
       path: '/api/games'
@@ -1455,6 +1512,9 @@ interface SalonRouteChildren {
   SalonLadderRoute: typeof SalonLadderRoute
   SalonLadderDothtmlRoute: typeof SalonLadderDothtmlRoute
   SalonLadderDottxtRoute: typeof SalonLadderDottxtRoute
+  SalonPlainWaterRoute: typeof SalonPlainWaterRoute
+  SalonPlainWaterDothtmlRoute: typeof SalonPlainWaterDothtmlRoute
+  SalonPlainWaterDottxtRoute: typeof SalonPlainWaterDottxtRoute
   SalonIndexRoute: typeof SalonIndexRoute
 }
 
@@ -1463,6 +1523,9 @@ const SalonRouteChildren: SalonRouteChildren = {
   SalonLadderRoute: SalonLadderRoute,
   SalonLadderDothtmlRoute: SalonLadderDothtmlRoute,
   SalonLadderDottxtRoute: SalonLadderDottxtRoute,
+  SalonPlainWaterRoute: SalonPlainWaterRoute,
+  SalonPlainWaterDothtmlRoute: SalonPlainWaterDothtmlRoute,
+  SalonPlainWaterDottxtRoute: SalonPlainWaterDottxtRoute,
   SalonIndexRoute: SalonIndexRoute,
 }
 
