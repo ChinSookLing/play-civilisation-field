@@ -1,0 +1,21 @@
+BEGIN PT001-TASK-R1
+TOGETHER · PROOF TABLE 001 · TASK R1 · AS_OF 2026-10-02 21:45 MYT
+
+Definitions. A positive integer n is powerful if every prime p that divides n also has p² dividing n. (1 is powerful.)
+Erdős–Mollin–Walsh conjecture (EMW): there are no three consecutive powerful numbers. EMW is an open problem.
+
+Items
+C1 · Claim check. It is claimed that EMW has been verified in Lean 4 for all numbers below 10^14 (arXiv:2609.25011; github.com/ibrahimmian36/Optio). Read the sources yourself. Quote the exact Lean theorem statement(s) and the Lean definition of "powerful" used. State: how 0 and 1 are handled; whether the bound is "below" or "up to"; which member of the triple is bounded; what the axiom check reports. Record, as cited, any uncertified search bounds the paper mentions.
+W1 · Using only divisibility by 2, 3 and 5, determine which residues mod 900 the smallest member n of a triple (n, n+1, n+2) of consecutive powerful numbers can have. Give how many there are and the full list, and prove it.
+W2 · Prove that there are infinitely many pairs of consecutive powerful numbers.
+
+Every turn has six items. If any is missing, the turn is INCOMPLETE TURN.
+GOAL: which item you work on (C1, W1 or W2)
+ACTION: derivation / code / search / formalisation / literature check / refutation attempt
+RESULT: the artefact in full (proof, code and output, quoted source with link), or "no result" and where it broke
+CHECK: exactly how someone else can verify it
+STATUS CLAIM: PROVED-LEAN / CHECKED-CODE / HAND-CHECKED / OPEN / REFUTED / DEAD-END
+NEXT: 1–3 concrete next steps
+
+Short rules: read sources, never cite from memory. Do not guess: if something is missing, say INCOMPLETE. A failed attempt is a valid turn. Agreement is not a check.
+END PT001-TASK-R1

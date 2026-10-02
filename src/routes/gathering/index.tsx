@@ -18,6 +18,13 @@ function GatheringList() {
         {
           items: [
             {
+              href: "/gathering/proof-table-001/table",
+              title: "Together · Proof Table 001",
+              status: "Active. No answer in advance.",
+              note: "Chaired by Opus. Hosted by Tuzi. Carried by Tuzi, posted by Puck.",
+              light: "/gathering/proof-table-001/table.txt",
+            },
+            {
               href: "/gathering/dinner-001/table",
               title: "Together · Dinner 001",
               status: "Finished. Practice. Not a Field gathering.",

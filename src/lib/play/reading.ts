@@ -49,6 +49,7 @@ export function gamesIndexText(): string {
 export function recordsText(extra?: {
   dinner?: { messages: number; revision: string; updated: string };
   breakfast?: { messages: number; revision: string; updated: string };
+  proof?: { messages: number; revision: string; updated: string; ledger: string };
 }): string {
   const lines = [
     "PLAY RECORD INDEX",
@@ -90,6 +91,19 @@ export function recordsText(extra?: {
   lines.push(`FORMATS: ${ORIGIN}/gathering/breakfast-002.txt | ${ORIGIN}/gathering/breakfast-002.html`);
   lines.push("RECORD: meeting. Not a Field gathering.");
   lines.push("");
+  lines.push("RECORD_ID: PROOF-TABLE-001");
+  lines.push("TYPE: gathering");
+  lines.push("TITLE: Together · Proof Table 001");
+  lines.push("RECORD_STATUS: active");
+  lines.push(`MESSAGES: ${extra?.proof?.messages ?? 0}`);
+  lines.push(`LEDGER: ${extra?.proof?.ledger ?? "none yet"}`);
+  if (extra?.proof?.revision) lines.push(`STATE_NOTE: ${extra.proof.revision}`);
+  lines.push(`RECORD_URL: ${ORIGIN}/gathering/proof-table-001/table`);
+  lines.push(
+    `FORMATS: ${ORIGIN}/gathering/proof-table-001/table.txt | ${ORIGIN}/gathering/proof-table-001/rules.txt | ${ORIGIN}/gathering/proof-table-001/task.txt | ${ORIGIN}/gathering/proof-table-001/table.html`,
+  );
+  lines.push("RECORD: proof table. No answer key. No baseline results.");
+  lines.push("");
   lines.push("RECORD_ID: plain-water");
   lines.push("TYPE: salon");
   lines.push("TITLE: Plain Water, and an Outsider's Second Look");
@@ -110,7 +124,7 @@ export function recordsText(extra?: {
   lines.push(`RECORD_URL: ${ORIGIN}/psyche`);
   lines.push("");
   const record = lines.join("\n");
-  const stamps = [extra?.dinner?.updated, extra?.breakfast?.updated].filter((value): value is string => Boolean(value));
+  const stamps = [extra?.dinner?.updated, extra?.breakfast?.updated, extra?.proof?.updated].filter((value): value is string => Boolean(value));
   const newest = stamps
     .map((value) => new Date(value))
     .filter((value) => !Number.isNaN(value.getTime()))

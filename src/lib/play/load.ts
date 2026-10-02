@@ -33,6 +33,12 @@ export const loadBreakfastLinesFn = createServerFn({ method: "GET" }).handler(as
   return listGatheringLines(BREAKFAST_ID);
 });
 
+export const loadProofTableFn = createServerFn({ method: "GET" }).handler(async () => {
+  const { listProofLedger, listProofLines } = await import("./proof-table.server");
+  const [lines, ledger] = await Promise.all([listProofLines(), listProofLedger()]);
+  return { lines, ledger };
+});
+
 export const loadGamesIndexTextFn = createServerFn({ method: "GET" }).handler(async (): Promise<string> => {
   const { loadPlayStore } = await import("./store.server");
   const { gamesIndexText } = await import("./reading");

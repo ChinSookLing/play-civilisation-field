@@ -51,6 +51,8 @@ import { Route as GatheringDinner001DothtmlRouteImport } from './routes/gatherin
 import { Route as GatheringDinner001DotjsonRouteImport } from './routes/gathering/dinner-001[.]json'
 import { Route as GatheringDinner001DottxtRouteImport } from './routes/gathering/dinner-001[.]txt'
 import { Route as GatheringIndexDothtmlRouteImport } from './routes/gathering/index[.]html'
+import { Route as GatheringProofTable001DothtmlRouteImport } from './routes/gathering/proof-table-001[.]html'
+import { Route as GatheringProofTable001DottxtRouteImport } from './routes/gathering/proof-table-001[.]txt'
 import { Route as GoGameIdRouteImport } from './routes/go.$gameId'
 import { Route as NotesNoteIdRouteImport } from './routes/notes.$noteId'
 import { Route as NotesChar123noteIdChar125DottxtRouteImport } from './routes/notes.{$noteId}[.]txt'
@@ -71,6 +73,16 @@ import { Route as GatheringDinner001PartPartDothtmlRouteImport } from './routes/
 import { Route as GatheringDinner001PartPartDottxtRouteImport } from './routes/gathering/dinner-001-part/$part[.]txt'
 import { Route as GatheringDinner001IndexRouteImport } from './routes/gathering/dinner-001/index'
 import { Route as GatheringDinner001TableRouteImport } from './routes/gathering/dinner-001/table'
+import { Route as GatheringProofTable001IndexRouteImport } from './routes/gathering/proof-table-001/index'
+import { Route as GatheringProofTable001RulesRouteImport } from './routes/gathering/proof-table-001/rules'
+import { Route as GatheringProofTable001RulesDothtmlRouteImport } from './routes/gathering/proof-table-001/rules[.]html'
+import { Route as GatheringProofTable001RulesDottxtRouteImport } from './routes/gathering/proof-table-001/rules[.]txt'
+import { Route as GatheringProofTable001TableRouteImport } from './routes/gathering/proof-table-001/table'
+import { Route as GatheringProofTable001TableDothtmlRouteImport } from './routes/gathering/proof-table-001/table[.]html'
+import { Route as GatheringProofTable001TableDottxtRouteImport } from './routes/gathering/proof-table-001/table[.]txt'
+import { Route as GatheringProofTable001TaskRouteImport } from './routes/gathering/proof-table-001/task'
+import { Route as GatheringProofTable001TaskDothtmlRouteImport } from './routes/gathering/proof-table-001/task[.]html'
+import { Route as GatheringProofTable001TaskDottxtRouteImport } from './routes/gathering/proof-table-001/task[.]txt'
 import { Route as ApiGamesGameIdHandoffRouteImport } from './routes/api/games/$gameId.handoff'
 import { Route as ApiGamesGameIdJevRouteImport } from './routes/api/games/$gameId.jev'
 import { Route as ApiGamesGameIdMovesRouteImport } from './routes/api/games/$gameId.moves'
@@ -81,6 +93,8 @@ import { Route as ApiGamesGameIdSgfRouteImport } from './routes/api/games/$gameI
 import { Route as ApiGamesGameIdTextRouteImport } from './routes/api/games/$gameId.text'
 import { Route as ApiGatheringBreakfast002LinesRouteImport } from './routes/api/gathering/breakfast-002.lines'
 import { Route as ApiGatheringDinner001LinesRouteImport } from './routes/api/gathering/dinner-001.lines'
+import { Route as ApiGatheringProofTable001LedgerRouteImport } from './routes/api/gathering/proof-table-001.ledger'
+import { Route as ApiGatheringProofTable001LinesRouteImport } from './routes/api/gathering/proof-table-001.lines'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -299,6 +313,18 @@ const GatheringIndexDothtmlRoute = GatheringIndexDothtmlRouteImport.update({
   path: '/index.html',
   getParentRoute: () => GatheringRoute,
 } as any)
+const GatheringProofTable001DothtmlRoute =
+  GatheringProofTable001DothtmlRouteImport.update({
+    id: '/proof-table-001.html',
+    path: '/proof-table-001.html',
+    getParentRoute: () => GatheringRoute,
+  } as any)
+const GatheringProofTable001DottxtRoute =
+  GatheringProofTable001DottxtRouteImport.update({
+    id: '/proof-table-001.txt',
+    path: '/proof-table-001.txt',
+    getParentRoute: () => GatheringRoute,
+  } as any)
 const GoGameIdRoute = GoGameIdRouteImport.update({
   id: '/go/$gameId',
   path: '/go/$gameId',
@@ -404,6 +430,66 @@ const GatheringDinner001TableRoute = GatheringDinner001TableRouteImport.update({
   path: '/dinner-001/table',
   getParentRoute: () => GatheringRoute,
 } as any)
+const GatheringProofTable001IndexRoute =
+  GatheringProofTable001IndexRouteImport.update({
+    id: '/proof-table-001/',
+    path: '/proof-table-001/',
+    getParentRoute: () => GatheringRoute,
+  } as any)
+const GatheringProofTable001RulesRoute =
+  GatheringProofTable001RulesRouteImport.update({
+    id: '/proof-table-001/rules',
+    path: '/proof-table-001/rules',
+    getParentRoute: () => GatheringRoute,
+  } as any)
+const GatheringProofTable001RulesDothtmlRoute =
+  GatheringProofTable001RulesDothtmlRouteImport.update({
+    id: '/proof-table-001/rules.html',
+    path: '/proof-table-001/rules.html',
+    getParentRoute: () => GatheringRoute,
+  } as any)
+const GatheringProofTable001RulesDottxtRoute =
+  GatheringProofTable001RulesDottxtRouteImport.update({
+    id: '/proof-table-001/rules.txt',
+    path: '/proof-table-001/rules.txt',
+    getParentRoute: () => GatheringRoute,
+  } as any)
+const GatheringProofTable001TableRoute =
+  GatheringProofTable001TableRouteImport.update({
+    id: '/proof-table-001/table',
+    path: '/proof-table-001/table',
+    getParentRoute: () => GatheringRoute,
+  } as any)
+const GatheringProofTable001TableDothtmlRoute =
+  GatheringProofTable001TableDothtmlRouteImport.update({
+    id: '/proof-table-001/table.html',
+    path: '/proof-table-001/table.html',
+    getParentRoute: () => GatheringRoute,
+  } as any)
+const GatheringProofTable001TableDottxtRoute =
+  GatheringProofTable001TableDottxtRouteImport.update({
+    id: '/proof-table-001/table.txt',
+    path: '/proof-table-001/table.txt',
+    getParentRoute: () => GatheringRoute,
+  } as any)
+const GatheringProofTable001TaskRoute =
+  GatheringProofTable001TaskRouteImport.update({
+    id: '/proof-table-001/task',
+    path: '/proof-table-001/task',
+    getParentRoute: () => GatheringRoute,
+  } as any)
+const GatheringProofTable001TaskDothtmlRoute =
+  GatheringProofTable001TaskDothtmlRouteImport.update({
+    id: '/proof-table-001/task.html',
+    path: '/proof-table-001/task.html',
+    getParentRoute: () => GatheringRoute,
+  } as any)
+const GatheringProofTable001TaskDottxtRoute =
+  GatheringProofTable001TaskDottxtRouteImport.update({
+    id: '/proof-table-001/task.txt',
+    path: '/proof-table-001/task.txt',
+    getParentRoute: () => GatheringRoute,
+  } as any)
 const ApiGamesGameIdHandoffRoute = ApiGamesGameIdHandoffRouteImport.update({
   id: '/handoff',
   path: '/handoff',
@@ -457,6 +543,18 @@ const ApiGatheringDinner001LinesRoute =
     path: '/api/gathering/dinner-001/lines',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiGatheringProofTable001LedgerRoute =
+  ApiGatheringProofTable001LedgerRouteImport.update({
+    id: '/api/gathering/proof-table-001/ledger',
+    path: '/api/gathering/proof-table-001/ledger',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiGatheringProofTable001LinesRoute =
+  ApiGatheringProofTable001LinesRouteImport.update({
+    id: '/api/gathering/proof-table-001/lines',
+    path: '/api/gathering/proof-table-001/lines',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -500,6 +598,8 @@ export interface FileRoutesByFullPath {
   '/gathering/dinner-001.json': typeof GatheringDinner001DotjsonRoute
   '/gathering/dinner-001.txt': typeof GatheringDinner001DottxtRoute
   '/gathering/index.html': typeof GatheringIndexDothtmlRoute
+  '/gathering/proof-table-001.html': typeof GatheringProofTable001DothtmlRoute
+  '/gathering/proof-table-001.txt': typeof GatheringProofTable001DottxtRoute
   '/go/$gameId': typeof GoGameIdRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
@@ -518,9 +618,19 @@ export interface FileRoutesByFullPath {
   '/gathering/dinner-001-part/$part.html': typeof GatheringDinner001PartPartDothtmlRoute
   '/gathering/dinner-001-part/$part.txt': typeof GatheringDinner001PartPartDottxtRoute
   '/gathering/dinner-001/table': typeof GatheringDinner001TableRoute
+  '/gathering/proof-table-001/rules': typeof GatheringProofTable001RulesRoute
+  '/gathering/proof-table-001/rules.html': typeof GatheringProofTable001RulesDothtmlRoute
+  '/gathering/proof-table-001/rules.txt': typeof GatheringProofTable001RulesDottxtRoute
+  '/gathering/proof-table-001/table': typeof GatheringProofTable001TableRoute
+  '/gathering/proof-table-001/table.html': typeof GatheringProofTable001TableDothtmlRoute
+  '/gathering/proof-table-001/table.txt': typeof GatheringProofTable001TableDottxtRoute
+  '/gathering/proof-table-001/task': typeof GatheringProofTable001TaskRoute
+  '/gathering/proof-table-001/task.html': typeof GatheringProofTable001TaskDothtmlRoute
+  '/gathering/proof-table-001/task.txt': typeof GatheringProofTable001TaskDottxtRoute
   '/api/games/': typeof ApiGamesIndexRoute
   '/gathering/breakfast-002/': typeof GatheringBreakfast002IndexRoute
   '/gathering/dinner-001/': typeof GatheringDinner001IndexRoute
+  '/gathering/proof-table-001/': typeof GatheringProofTable001IndexRoute
   '/api/games/$gameId/handoff': typeof ApiGamesGameIdHandoffRoute
   '/api/games/$gameId/jev': typeof ApiGamesGameIdJevRoute
   '/api/games/$gameId/moves': typeof ApiGamesGameIdMovesRoute
@@ -531,6 +641,8 @@ export interface FileRoutesByFullPath {
   '/api/games/$gameId/text': typeof ApiGamesGameIdTextRoute
   '/api/gathering/breakfast-002/lines': typeof ApiGatheringBreakfast002LinesRoute
   '/api/gathering/dinner-001/lines': typeof ApiGatheringDinner001LinesRoute
+  '/api/gathering/proof-table-001/ledger': typeof ApiGatheringProofTable001LedgerRoute
+  '/api/gathering/proof-table-001/lines': typeof ApiGatheringProofTable001LinesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -572,6 +684,8 @@ export interface FileRoutesByTo {
   '/gathering/dinner-001.json': typeof GatheringDinner001DotjsonRoute
   '/gathering/dinner-001.txt': typeof GatheringDinner001DottxtRoute
   '/gathering/index.html': typeof GatheringIndexDothtmlRoute
+  '/gathering/proof-table-001.html': typeof GatheringProofTable001DothtmlRoute
+  '/gathering/proof-table-001.txt': typeof GatheringProofTable001DottxtRoute
   '/go/$gameId': typeof GoGameIdRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
@@ -590,9 +704,19 @@ export interface FileRoutesByTo {
   '/gathering/dinner-001-part/$part.html': typeof GatheringDinner001PartPartDothtmlRoute
   '/gathering/dinner-001-part/$part.txt': typeof GatheringDinner001PartPartDottxtRoute
   '/gathering/dinner-001/table': typeof GatheringDinner001TableRoute
+  '/gathering/proof-table-001/rules': typeof GatheringProofTable001RulesRoute
+  '/gathering/proof-table-001/rules.html': typeof GatheringProofTable001RulesDothtmlRoute
+  '/gathering/proof-table-001/rules.txt': typeof GatheringProofTable001RulesDottxtRoute
+  '/gathering/proof-table-001/table': typeof GatheringProofTable001TableRoute
+  '/gathering/proof-table-001/table.html': typeof GatheringProofTable001TableDothtmlRoute
+  '/gathering/proof-table-001/table.txt': typeof GatheringProofTable001TableDottxtRoute
+  '/gathering/proof-table-001/task': typeof GatheringProofTable001TaskRoute
+  '/gathering/proof-table-001/task.html': typeof GatheringProofTable001TaskDothtmlRoute
+  '/gathering/proof-table-001/task.txt': typeof GatheringProofTable001TaskDottxtRoute
   '/api/games': typeof ApiGamesIndexRoute
   '/gathering/breakfast-002': typeof GatheringBreakfast002IndexRoute
   '/gathering/dinner-001': typeof GatheringDinner001IndexRoute
+  '/gathering/proof-table-001': typeof GatheringProofTable001IndexRoute
   '/api/games/$gameId/handoff': typeof ApiGamesGameIdHandoffRoute
   '/api/games/$gameId/jev': typeof ApiGamesGameIdJevRoute
   '/api/games/$gameId/moves': typeof ApiGamesGameIdMovesRoute
@@ -603,6 +727,8 @@ export interface FileRoutesByTo {
   '/api/games/$gameId/text': typeof ApiGamesGameIdTextRoute
   '/api/gathering/breakfast-002/lines': typeof ApiGatheringBreakfast002LinesRoute
   '/api/gathering/dinner-001/lines': typeof ApiGatheringDinner001LinesRoute
+  '/api/gathering/proof-table-001/ledger': typeof ApiGatheringProofTable001LedgerRoute
+  '/api/gathering/proof-table-001/lines': typeof ApiGatheringProofTable001LinesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -647,6 +773,8 @@ export interface FileRoutesById {
   '/gathering/dinner-001.json': typeof GatheringDinner001DotjsonRoute
   '/gathering/dinner-001.txt': typeof GatheringDinner001DottxtRoute
   '/gathering/index.html': typeof GatheringIndexDothtmlRoute
+  '/gathering/proof-table-001.html': typeof GatheringProofTable001DothtmlRoute
+  '/gathering/proof-table-001.txt': typeof GatheringProofTable001DottxtRoute
   '/go/$gameId': typeof GoGameIdRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
@@ -665,9 +793,19 @@ export interface FileRoutesById {
   '/gathering/dinner-001-part/$part.html': typeof GatheringDinner001PartPartDothtmlRoute
   '/gathering/dinner-001-part/$part.txt': typeof GatheringDinner001PartPartDottxtRoute
   '/gathering/dinner-001/table': typeof GatheringDinner001TableRoute
+  '/gathering/proof-table-001/rules': typeof GatheringProofTable001RulesRoute
+  '/gathering/proof-table-001/rules.html': typeof GatheringProofTable001RulesDothtmlRoute
+  '/gathering/proof-table-001/rules.txt': typeof GatheringProofTable001RulesDottxtRoute
+  '/gathering/proof-table-001/table': typeof GatheringProofTable001TableRoute
+  '/gathering/proof-table-001/table.html': typeof GatheringProofTable001TableDothtmlRoute
+  '/gathering/proof-table-001/table.txt': typeof GatheringProofTable001TableDottxtRoute
+  '/gathering/proof-table-001/task': typeof GatheringProofTable001TaskRoute
+  '/gathering/proof-table-001/task.html': typeof GatheringProofTable001TaskDothtmlRoute
+  '/gathering/proof-table-001/task.txt': typeof GatheringProofTable001TaskDottxtRoute
   '/api/games/': typeof ApiGamesIndexRoute
   '/gathering/breakfast-002/': typeof GatheringBreakfast002IndexRoute
   '/gathering/dinner-001/': typeof GatheringDinner001IndexRoute
+  '/gathering/proof-table-001/': typeof GatheringProofTable001IndexRoute
   '/api/games/$gameId/handoff': typeof ApiGamesGameIdHandoffRoute
   '/api/games/$gameId/jev': typeof ApiGamesGameIdJevRoute
   '/api/games/$gameId/moves': typeof ApiGamesGameIdMovesRoute
@@ -678,6 +816,8 @@ export interface FileRoutesById {
   '/api/games/$gameId/text': typeof ApiGamesGameIdTextRoute
   '/api/gathering/breakfast-002/lines': typeof ApiGatheringBreakfast002LinesRoute
   '/api/gathering/dinner-001/lines': typeof ApiGatheringDinner001LinesRoute
+  '/api/gathering/proof-table-001/ledger': typeof ApiGatheringProofTable001LedgerRoute
+  '/api/gathering/proof-table-001/lines': typeof ApiGatheringProofTable001LinesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -723,6 +863,8 @@ export interface FileRouteTypes {
     | '/gathering/dinner-001.json'
     | '/gathering/dinner-001.txt'
     | '/gathering/index.html'
+    | '/gathering/proof-table-001.html'
+    | '/gathering/proof-table-001.txt'
     | '/go/$gameId'
     | '/notes/$noteId'
     | '/notes/{$noteId}.txt'
@@ -741,9 +883,19 @@ export interface FileRouteTypes {
     | '/gathering/dinner-001-part/$part.html'
     | '/gathering/dinner-001-part/$part.txt'
     | '/gathering/dinner-001/table'
+    | '/gathering/proof-table-001/rules'
+    | '/gathering/proof-table-001/rules.html'
+    | '/gathering/proof-table-001/rules.txt'
+    | '/gathering/proof-table-001/table'
+    | '/gathering/proof-table-001/table.html'
+    | '/gathering/proof-table-001/table.txt'
+    | '/gathering/proof-table-001/task'
+    | '/gathering/proof-table-001/task.html'
+    | '/gathering/proof-table-001/task.txt'
     | '/api/games/'
     | '/gathering/breakfast-002/'
     | '/gathering/dinner-001/'
+    | '/gathering/proof-table-001/'
     | '/api/games/$gameId/handoff'
     | '/api/games/$gameId/jev'
     | '/api/games/$gameId/moves'
@@ -754,6 +906,8 @@ export interface FileRouteTypes {
     | '/api/games/$gameId/text'
     | '/api/gathering/breakfast-002/lines'
     | '/api/gathering/dinner-001/lines'
+    | '/api/gathering/proof-table-001/ledger'
+    | '/api/gathering/proof-table-001/lines'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -795,6 +949,8 @@ export interface FileRouteTypes {
     | '/gathering/dinner-001.json'
     | '/gathering/dinner-001.txt'
     | '/gathering/index.html'
+    | '/gathering/proof-table-001.html'
+    | '/gathering/proof-table-001.txt'
     | '/go/$gameId'
     | '/notes/$noteId'
     | '/notes/{$noteId}.txt'
@@ -813,9 +969,19 @@ export interface FileRouteTypes {
     | '/gathering/dinner-001-part/$part.html'
     | '/gathering/dinner-001-part/$part.txt'
     | '/gathering/dinner-001/table'
+    | '/gathering/proof-table-001/rules'
+    | '/gathering/proof-table-001/rules.html'
+    | '/gathering/proof-table-001/rules.txt'
+    | '/gathering/proof-table-001/table'
+    | '/gathering/proof-table-001/table.html'
+    | '/gathering/proof-table-001/table.txt'
+    | '/gathering/proof-table-001/task'
+    | '/gathering/proof-table-001/task.html'
+    | '/gathering/proof-table-001/task.txt'
     | '/api/games'
     | '/gathering/breakfast-002'
     | '/gathering/dinner-001'
+    | '/gathering/proof-table-001'
     | '/api/games/$gameId/handoff'
     | '/api/games/$gameId/jev'
     | '/api/games/$gameId/moves'
@@ -826,6 +992,8 @@ export interface FileRouteTypes {
     | '/api/games/$gameId/text'
     | '/api/gathering/breakfast-002/lines'
     | '/api/gathering/dinner-001/lines'
+    | '/api/gathering/proof-table-001/ledger'
+    | '/api/gathering/proof-table-001/lines'
   id:
     | '__root__'
     | '/'
@@ -869,6 +1037,8 @@ export interface FileRouteTypes {
     | '/gathering/dinner-001.json'
     | '/gathering/dinner-001.txt'
     | '/gathering/index.html'
+    | '/gathering/proof-table-001.html'
+    | '/gathering/proof-table-001.txt'
     | '/go/$gameId'
     | '/notes/$noteId'
     | '/notes/{$noteId}.txt'
@@ -887,9 +1057,19 @@ export interface FileRouteTypes {
     | '/gathering/dinner-001-part/$part.html'
     | '/gathering/dinner-001-part/$part.txt'
     | '/gathering/dinner-001/table'
+    | '/gathering/proof-table-001/rules'
+    | '/gathering/proof-table-001/rules.html'
+    | '/gathering/proof-table-001/rules.txt'
+    | '/gathering/proof-table-001/table'
+    | '/gathering/proof-table-001/table.html'
+    | '/gathering/proof-table-001/table.txt'
+    | '/gathering/proof-table-001/task'
+    | '/gathering/proof-table-001/task.html'
+    | '/gathering/proof-table-001/task.txt'
     | '/api/games/'
     | '/gathering/breakfast-002/'
     | '/gathering/dinner-001/'
+    | '/gathering/proof-table-001/'
     | '/api/games/$gameId/handoff'
     | '/api/games/$gameId/jev'
     | '/api/games/$gameId/moves'
@@ -900,6 +1080,8 @@ export interface FileRouteTypes {
     | '/api/games/$gameId/text'
     | '/api/gathering/breakfast-002/lines'
     | '/api/gathering/dinner-001/lines'
+    | '/api/gathering/proof-table-001/ledger'
+    | '/api/gathering/proof-table-001/lines'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -941,6 +1123,8 @@ export interface RootRouteChildren {
   ApiGamesIndexRoute: typeof ApiGamesIndexRoute
   ApiGatheringBreakfast002LinesRoute: typeof ApiGatheringBreakfast002LinesRoute
   ApiGatheringDinner001LinesRoute: typeof ApiGatheringDinner001LinesRoute
+  ApiGatheringProofTable001LedgerRoute: typeof ApiGatheringProofTable001LedgerRoute
+  ApiGatheringProofTable001LinesRoute: typeof ApiGatheringProofTable001LinesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1239,6 +1423,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GatheringIndexDothtmlRouteImport
       parentRoute: typeof GatheringRoute
     }
+    '/gathering/proof-table-001.html': {
+      id: '/gathering/proof-table-001.html'
+      path: '/proof-table-001.html'
+      fullPath: '/gathering/proof-table-001.html'
+      preLoaderRoute: typeof GatheringProofTable001DothtmlRouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/proof-table-001.txt': {
+      id: '/gathering/proof-table-001.txt'
+      path: '/proof-table-001.txt'
+      fullPath: '/gathering/proof-table-001.txt'
+      preLoaderRoute: typeof GatheringProofTable001DottxtRouteImport
+      parentRoute: typeof GatheringRoute
+    }
     '/go/$gameId': {
       id: '/go/$gameId'
       path: '/go/$gameId'
@@ -1379,6 +1577,76 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GatheringDinner001TableRouteImport
       parentRoute: typeof GatheringRoute
     }
+    '/gathering/proof-table-001/': {
+      id: '/gathering/proof-table-001/'
+      path: '/proof-table-001'
+      fullPath: '/gathering/proof-table-001/'
+      preLoaderRoute: typeof GatheringProofTable001IndexRouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/proof-table-001/rules': {
+      id: '/gathering/proof-table-001/rules'
+      path: '/proof-table-001/rules'
+      fullPath: '/gathering/proof-table-001/rules'
+      preLoaderRoute: typeof GatheringProofTable001RulesRouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/proof-table-001/rules.html': {
+      id: '/gathering/proof-table-001/rules.html'
+      path: '/proof-table-001/rules.html'
+      fullPath: '/gathering/proof-table-001/rules.html'
+      preLoaderRoute: typeof GatheringProofTable001RulesDothtmlRouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/proof-table-001/rules.txt': {
+      id: '/gathering/proof-table-001/rules.txt'
+      path: '/proof-table-001/rules.txt'
+      fullPath: '/gathering/proof-table-001/rules.txt'
+      preLoaderRoute: typeof GatheringProofTable001RulesDottxtRouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/proof-table-001/table': {
+      id: '/gathering/proof-table-001/table'
+      path: '/proof-table-001/table'
+      fullPath: '/gathering/proof-table-001/table'
+      preLoaderRoute: typeof GatheringProofTable001TableRouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/proof-table-001/table.html': {
+      id: '/gathering/proof-table-001/table.html'
+      path: '/proof-table-001/table.html'
+      fullPath: '/gathering/proof-table-001/table.html'
+      preLoaderRoute: typeof GatheringProofTable001TableDothtmlRouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/proof-table-001/table.txt': {
+      id: '/gathering/proof-table-001/table.txt'
+      path: '/proof-table-001/table.txt'
+      fullPath: '/gathering/proof-table-001/table.txt'
+      preLoaderRoute: typeof GatheringProofTable001TableDottxtRouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/proof-table-001/task': {
+      id: '/gathering/proof-table-001/task'
+      path: '/proof-table-001/task'
+      fullPath: '/gathering/proof-table-001/task'
+      preLoaderRoute: typeof GatheringProofTable001TaskRouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/proof-table-001/task.html': {
+      id: '/gathering/proof-table-001/task.html'
+      path: '/proof-table-001/task.html'
+      fullPath: '/gathering/proof-table-001/task.html'
+      preLoaderRoute: typeof GatheringProofTable001TaskDothtmlRouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/proof-table-001/task.txt': {
+      id: '/gathering/proof-table-001/task.txt'
+      path: '/proof-table-001/task.txt'
+      fullPath: '/gathering/proof-table-001/task.txt'
+      preLoaderRoute: typeof GatheringProofTable001TaskDottxtRouteImport
+      parentRoute: typeof GatheringRoute
+    }
     '/api/games/$gameId/handoff': {
       id: '/api/games/$gameId/handoff'
       path: '/handoff'
@@ -1449,6 +1717,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiGatheringDinner001LinesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/gathering/proof-table-001/ledger': {
+      id: '/api/gathering/proof-table-001/ledger'
+      path: '/api/gathering/proof-table-001/ledger'
+      fullPath: '/api/gathering/proof-table-001/ledger'
+      preLoaderRoute: typeof ApiGatheringProofTable001LedgerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/gathering/proof-table-001/lines': {
+      id: '/api/gathering/proof-table-001/lines'
+      path: '/api/gathering/proof-table-001/lines'
+      fullPath: '/api/gathering/proof-table-001/lines'
+      preLoaderRoute: typeof ApiGatheringProofTable001LinesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -1474,13 +1756,25 @@ interface GatheringRouteChildren {
   GatheringDinner001DotjsonRoute: typeof GatheringDinner001DotjsonRoute
   GatheringDinner001DottxtRoute: typeof GatheringDinner001DottxtRoute
   GatheringIndexDothtmlRoute: typeof GatheringIndexDothtmlRoute
+  GatheringProofTable001DothtmlRoute: typeof GatheringProofTable001DothtmlRoute
+  GatheringProofTable001DottxtRoute: typeof GatheringProofTable001DottxtRoute
   GatheringIndexRoute: typeof GatheringIndexRoute
   GatheringBreakfast002TableRoute: typeof GatheringBreakfast002TableRoute
   GatheringDinner001PartPartDothtmlRoute: typeof GatheringDinner001PartPartDothtmlRoute
   GatheringDinner001PartPartDottxtRoute: typeof GatheringDinner001PartPartDottxtRoute
   GatheringDinner001TableRoute: typeof GatheringDinner001TableRoute
+  GatheringProofTable001RulesRoute: typeof GatheringProofTable001RulesRoute
+  GatheringProofTable001RulesDothtmlRoute: typeof GatheringProofTable001RulesDothtmlRoute
+  GatheringProofTable001RulesDottxtRoute: typeof GatheringProofTable001RulesDottxtRoute
+  GatheringProofTable001TableRoute: typeof GatheringProofTable001TableRoute
+  GatheringProofTable001TableDothtmlRoute: typeof GatheringProofTable001TableDothtmlRoute
+  GatheringProofTable001TableDottxtRoute: typeof GatheringProofTable001TableDottxtRoute
+  GatheringProofTable001TaskRoute: typeof GatheringProofTable001TaskRoute
+  GatheringProofTable001TaskDothtmlRoute: typeof GatheringProofTable001TaskDothtmlRoute
+  GatheringProofTable001TaskDottxtRoute: typeof GatheringProofTable001TaskDottxtRoute
   GatheringBreakfast002IndexRoute: typeof GatheringBreakfast002IndexRoute
   GatheringDinner001IndexRoute: typeof GatheringDinner001IndexRoute
+  GatheringProofTable001IndexRoute: typeof GatheringProofTable001IndexRoute
 }
 
 const GatheringRouteChildren: GatheringRouteChildren = {
@@ -1493,14 +1787,31 @@ const GatheringRouteChildren: GatheringRouteChildren = {
   GatheringDinner001DotjsonRoute: GatheringDinner001DotjsonRoute,
   GatheringDinner001DottxtRoute: GatheringDinner001DottxtRoute,
   GatheringIndexDothtmlRoute: GatheringIndexDothtmlRoute,
+  GatheringProofTable001DothtmlRoute: GatheringProofTable001DothtmlRoute,
+  GatheringProofTable001DottxtRoute: GatheringProofTable001DottxtRoute,
   GatheringIndexRoute: GatheringIndexRoute,
   GatheringBreakfast002TableRoute: GatheringBreakfast002TableRoute,
   GatheringDinner001PartPartDothtmlRoute:
     GatheringDinner001PartPartDothtmlRoute,
   GatheringDinner001PartPartDottxtRoute: GatheringDinner001PartPartDottxtRoute,
   GatheringDinner001TableRoute: GatheringDinner001TableRoute,
+  GatheringProofTable001RulesRoute: GatheringProofTable001RulesRoute,
+  GatheringProofTable001RulesDothtmlRoute:
+    GatheringProofTable001RulesDothtmlRoute,
+  GatheringProofTable001RulesDottxtRoute:
+    GatheringProofTable001RulesDottxtRoute,
+  GatheringProofTable001TableRoute: GatheringProofTable001TableRoute,
+  GatheringProofTable001TableDothtmlRoute:
+    GatheringProofTable001TableDothtmlRoute,
+  GatheringProofTable001TableDottxtRoute:
+    GatheringProofTable001TableDottxtRoute,
+  GatheringProofTable001TaskRoute: GatheringProofTable001TaskRoute,
+  GatheringProofTable001TaskDothtmlRoute:
+    GatheringProofTable001TaskDothtmlRoute,
+  GatheringProofTable001TaskDottxtRoute: GatheringProofTable001TaskDottxtRoute,
   GatheringBreakfast002IndexRoute: GatheringBreakfast002IndexRoute,
   GatheringDinner001IndexRoute: GatheringDinner001IndexRoute,
+  GatheringProofTable001IndexRoute: GatheringProofTable001IndexRoute,
 }
 
 const GatheringRouteWithChildren = GatheringRoute._addFileChildren(
@@ -1596,6 +1907,8 @@ const rootRouteChildren: RootRouteChildren = {
   ApiGamesIndexRoute: ApiGamesIndexRoute,
   ApiGatheringBreakfast002LinesRoute: ApiGatheringBreakfast002LinesRoute,
   ApiGatheringDinner001LinesRoute: ApiGatheringDinner001LinesRoute,
+  ApiGatheringProofTable001LedgerRoute: ApiGatheringProofTable001LedgerRoute,
+  ApiGatheringProofTable001LinesRoute: ApiGatheringProofTable001LinesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
