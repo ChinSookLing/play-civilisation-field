@@ -1,9 +1,9 @@
 import { Link } from "@tanstack/react-router";
 
-export function SiteFooter() {
+export function SiteFooter({ updated }: { updated?: string }) {
   return (
     <footer className="mt-10 border-t border-line pt-4 text-sm text-muted">
-      <p>Made by Tuzi and Affiliates · First published: 2026-09-17 · Last updated: 2026-09-30</p>
+      <p>Made by Tuzi and Affiliates · First published: 2026-09-17 · Last updated: {updated ?? "2026-09-30"}</p>
       <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
         <Link to="/" className="text-fg hover:underline">Index</Link>
         <Link to="/games" className="text-fg hover:underline">棋 Games</Link>

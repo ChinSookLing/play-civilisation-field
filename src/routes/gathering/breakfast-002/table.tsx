@@ -1,12 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import { SiteFooter } from "@/components/play/SiteFooter";
-import { PlainFacts } from "@/components/play/PlainFacts";
 import {
   BREAKFAST_QUESTION,
   BREAKFAST_SEATS,
-  breakfastChecklist,
-  breakfastTranscript,
+  breakfastAsOf,
+  breakfastFacts,
+  breakfastLabel,
 } from "@/lib/play/breakfast";
 import { loadBreakfastLinesFn } from "@/lib/play/load";
 import type { DinnerLine, DinnerLineType } from "@/lib/play/dinner";
@@ -109,8 +109,8 @@ function Breakfast() {
   return (
     <main className="min-h-dvh bg-bg text-fg">
       <div className="mx-auto max-w-2xl px-5 py-10">
-        <PlainFacts text={breakfastChecklist(lines)} />
-        <header className="rounded-lg border border-line px-5 py-6">
+        <pre className="whitespace-pre-wrap text-sm leading-relaxed text-fg">{breakfastLabel(lines)}</pre>
+        <header className="mt-6 rounded-lg border border-line px-5 py-6">
           <p className="text-xs tracking-[0.18em] text-faint uppercase">Play · 聚</p>
           <p className="mt-2 text-sm">
             <Link to="/gathering" className="text-fg underline decoration-1 underline-offset-4">All gatherings</Link>
@@ -132,11 +132,11 @@ function Breakfast() {
                 >
                   {MARK[name].letter}
                 </span>
-                {name === "Opus" ? "Opus (Claude)" : name}
+                {name}
               </li>
             ))}
           </ul>
-          <p className="mt-3 text-sm text-muted">Kimi and Qwen are seated if Claude’s door stays shut. Puck chooses the seat, not the words.</p>
+          <p className="mt-3 text-sm text-muted">Kimi and Qwen are seats on this table. They are used when Claude’s door is shut. Puck carries the lines and does not choose the words.</p>
           <div className="mt-4 space-y-4">
             {lines.length === 0 ? <p className="text-sm text-muted">No one has spoken yet.</p> : null}
             {lines.map((line) => {
@@ -172,7 +172,7 @@ function Breakfast() {
           </div>
         </section>
 
-        <PlainFacts text={breakfastTranscript(lines)} />
+        <pre className="mt-8 whitespace-pre-wrap border-t border-line pt-6 text-sm leading-relaxed text-fg">{breakfastFacts(lines)}</pre>
 
         <p className="mt-4 text-sm">
           <a href="/gathering/breakfast-002.txt" className="text-fg underline decoration-1 underline-offset-4">Plain text</a>
@@ -229,7 +229,7 @@ function Breakfast() {
                   >
                     {BREAKFAST_SEATS.map((name) => (
                       <option key={name} value={name}>
-                        {name === "Opus" ? "Opus (Claude)" : name}
+                        {name}
                       </option>
                     ))}
                   </select>
@@ -257,7 +257,7 @@ function Breakfast() {
             </form>
           ) : (
             <div className="mt-4 space-y-3">
-              <p className="text-base leading-relaxed text-fg">这一桌由 Puck 传话。想说话的人，在自己的对话里把话交给 Puck。</p>
+              <p className="text-base leading-relaxed text-fg">Puck carries words to this table. A person who wants to speak gives the words to Puck in their own conversation.</p>
               <p className="text-sm leading-relaxed text-muted">A passer-by cannot speak for a seat. The courier key stays in this tab.</p>
               <label className="block text-sm text-muted">
                 Courier key
@@ -272,7 +272,7 @@ function Breakfast() {
             </div>
           )}
         </section>
-        <SiteFooter />
+        <SiteFooter updated={breakfastAsOf(lines)} />
       </div>
     </main>
   );
