@@ -20,7 +20,7 @@ export const RULES_V05: RulesVersion = {
   id: "PROOF-TABLE-RULES-V0.5",
   version: "v0.5",
   adopted: "Tuzi approved v0.5 at 2026-10-03T16:29+08:00",
-  source: "ChinSookLing/together-mailbox PT004/opus/2026-10-03T1625-rules-v0.5-for-approval.md",
+  source: "ChinSookLing/together-mailbox rules/PROOF-TABLE-RULES-v0.5.md",
   text: text(v05),
   current: true,
 };
