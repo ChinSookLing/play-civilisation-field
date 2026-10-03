@@ -35,15 +35,25 @@ function Index() {
         <ul className="mt-8 divide-y divide-line border-y border-line">
           {DOORS.map((door) => (
             <li key={door.to}>
-              <Link to={door.to} className="flex items-baseline justify-between gap-4 py-4 hover:opacity-80">
+              <div className="flex items-baseline justify-between gap-4 py-4">
                 <span>
-                  <span className="font-display text-2xl text-fg">
-                    {door.mark} · {door.name}
-                  </span>
-                  <span className="mt-1 block text-sm text-muted">{door.note}</span>
+                  <Link to={door.to} className="hover:opacity-80">
+                    <span className="font-display text-2xl text-fg">
+                      {door.mark} · {door.name}
+                    </span>
+                    <span className="mt-1 block text-sm text-muted">{door.note}</span>
+                  </Link>
+                  {door.to === "/gathering" ? (
+                    <Link
+                      to="/gathering/proof-table/rules"
+                      className="mt-1 block text-sm text-fg underline decoration-1 underline-offset-4"
+                    >
+                      Proof Table rules (current v0.5)
+                    </Link>
+                  ) : null}
                 </span>
                 <span className="text-sm text-faint">{door.to.replace("/", "")}</span>
-              </Link>
+              </div>
             </li>
           ))}
         </ul>

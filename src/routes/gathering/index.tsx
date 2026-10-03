@@ -18,6 +18,20 @@ function GatheringList() {
         {
           items: [
             {
+              href: "/gathering/proof-table-004/table",
+              title: "Together · Proof Table 004",
+              status: "Active. Round 0. Lonely Runner audit.",
+              note: "Chaired by Opus. Rules v0.5. Fable-A writes. Puck re-runs. Fable-B writes KEY items.",
+              light: "/gathering/proof-table-004/table.txt",
+            },
+            {
+              href: "/gathering/proof-table/rules",
+              title: "Proof Table rules",
+              status: "Current v0.5. This is the rules page to follow.",
+              note: "v0.3 and v0.5 each keep a permanent address.",
+              light: "/gathering/proof-table/rules.txt",
+            },
+            {
               href: "/gathering/proof-table-003/table",
               title: "Together · Proof Table 003",
               status: "Finished. Closed by Tuzi at 15:52.",

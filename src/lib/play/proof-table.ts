@@ -25,7 +25,7 @@ export const PROOF_SEATS = [
   "GLM",
 ] as const;
 
-export const PROOF_LINE_TYPES = ["host_note", "chair_summary", "turn", "courier_note"] as const;
+export const PROOF_LINE_TYPES = ["host_note", "chair_summary", "turn", "courier_note", "rerun_record", "read_record"] as const;
 export type ProofLineType = (typeof PROOF_LINE_TYPES)[number];
 
 export const PROOF_STATUS_CLAIMS = [
@@ -33,12 +33,38 @@ export const PROOF_STATUS_CLAIMS = [
   "CHECKED-CODE",
   "HAND-CHECKED",
   "OPEN",
+  "OPEN (ran once)",
   "REFUTED",
   "DEAD-END",
 ] as const;
 export type ProofStatusClaim = (typeof PROOF_STATUS_CLAIMS)[number];
 
 export const PROOF_CARRIERS = ["Puck", "Tuzi (temporary courier)"] as const;
+
+export type ProofTableSpec = {
+  id: string;
+  slug: string;
+  seats: readonly string[];
+  lineTypes: readonly ProofLineType[];
+  statusClaims: readonly string[];
+  relayDefault: string;
+};
+
+export const PROOF_003_SPEC: ProofTableSpec = {
+  id: PROOF_ID,
+  slug: "proof-table-003",
+  seats: PROOF_SEATS,
+  lineTypes: ["host_note", "chair_summary", "turn", "courier_note"],
+  statusClaims: [
+    "PROVED-LEAN",
+    "CHECKED-CODE",
+    "HAND-CHECKED",
+    "OPEN",
+    "REFUTED",
+    "DEAD-END",
+  ],
+  relayDefault: PROOF_RELAY,
+};
 
 export const PROOF_RULES = rulesText.endsWith("\n") ? rulesText : `${rulesText}\n`;
 export const PROOF_TASK = taskText.endsWith("\n") ? taskText : `${taskText}\n`;
@@ -47,6 +73,7 @@ const TABLE = `${ORIGIN}/gathering/proof-table-003/table`;
 const TABLE_TXT = `${ORIGIN}/gathering/proof-table-003/table.txt`;
 const RULES_HTML = `${ORIGIN}/gathering/proof-table-003/rules`;
 const RULES_TXT = `${ORIGIN}/gathering/proof-table-003/rules.txt`;
+const RULES_V03 = `${ORIGIN}/gathering/proof-table/rules/v0.3`;
 const TASK_HTML = `${ORIGIN}/gathering/proof-table-003/task`;
 const TASK_TXT = `${ORIGIN}/gathering/proof-table-003/task.txt`;
 const LINES_JSON = `${ORIGIN}/api/gathering/proof-table-003/lines`;
@@ -127,7 +154,7 @@ export function proofSheet(lines: ProofLine[], ledger: ProofLedger[]): Sheet {
       "HOST: Tuzi",
       "COURIER: Puck carries, with Tuzi's approval when needed. Puck posts.",
       `RELAY_DEFAULT: ${PROOF_RELAY}`,
-      `RULES: ${RULES_TXT}`,
+      `RULES: ${RULES_V03}`,
       `TASK: ${TASK_TXT}`,
       ...PROOF_SEATS.map((name) => `SEAT: ${name}`),
       "Kimi and Qwen speak only when the chair assigns them a turn.",
@@ -178,7 +205,7 @@ export function proofTaskSheet(): Sheet {
       "The record is the task block as given. It is not a summary.",
       "No answer key is on this page. No baseline results are on this page.",
       `TABLE: ${TABLE}`,
-      `RULES: ${RULES_TXT}`,
+      `RULES: ${RULES_V03}`,
     ],
   };
 }
@@ -260,7 +287,7 @@ export function proofRecord(lines: ProofLine[], ledger: ProofLedger[]): string {
   return [
     `HEADER: ${PROOF_HEADER}`,
     "LICENSE: CC BY 4.0. Credit: Tuzi and Affiliates, The Civilisation Field.",
-    `RULES: ${RULES_TXT}`,
+    `RULES: ${RULES_V03}`,
     `TASK_PAGE: ${TASK_TXT}`,
     "",
     PROOF_TASK.trimEnd(),

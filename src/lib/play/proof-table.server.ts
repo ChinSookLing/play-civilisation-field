@@ -1,16 +1,12 @@
 import { getSql } from "@/lib/db";
 import { authorizeCourier } from "./courier-key";
 import {
+  PROOF_003_SPEC,
   PROOF_CARRIERS,
-  PROOF_ID,
-  PROOF_LINE_TYPES,
-  PROOF_RELAY,
-  PROOF_SEATS,
-  PROOF_STATUS_CLAIMS,
   type ProofLedger,
   type ProofLine,
   type ProofLineType,
-  type ProofStatusClaim,
+  type ProofTableSpec,
 } from "./proof-table";
 import { isoKualaLumpur } from "./sheet";
 
@@ -156,57 +152,61 @@ function duplicate(error: unknown): boolean {
   return pgCode(error) === "23505";
 }
 
-export async function listProofLines(): Promise<ProofLine[]> {
+export async function listProofLines(spec: ProofTableSpec = PROOF_003_SPEC): Promise<ProofLine[]> {
   const sql = await getSql();
   const rows = await sql<Record<string, unknown>>`
     select id, n, at, speaker, line_type, carried_by, relay, text,
       round, turn_n, seat, item, goal, action, result, check_text, status_claim, next_text,
       ledger_version_read, incomplete, corrects
     from proof_lines
-    where gathering_id = ${PROOF_ID}
+    where gathering_id = ${spec.id}
     order by n
   `;
   return rows.map(rowToLine);
 }
 
-export async function listProofLedger(): Promise<ProofLedger[]> {
+export async function listProofLedger(spec: ProofTableSpec = PROOF_003_SPEC): Promise<ProofLedger[]> {
   const sql = await getSql();
   const rows = await sql<Record<string, unknown>>`
     select id, n, at, version, as_of, open_text, closed_text, refuted_text, dead_ends_text, sources_text
     from proof_ledger
-    where gathering_id = ${PROOF_ID}
+    where gathering_id = ${spec.id}
     order by n
   `;
   return rows.map(rowToLedger);
 }
 
-function relayOf(input: ProofLineInput): { relay: string | null } | Fail {
+function relayOf(input: ProofLineInput, spec: ProofTableSpec): { relay: string | null } | Fail {
   if (input.relay === null || input.relay === false) return { relay: null };
   if (typeof input.relay === "string") {
     const value = keep(input.relay);
     const limit = tooLong("relay", value, 200);
     if (limit) return limit;
-    if (!filled(value)) return { relay: PROOF_RELAY };
+    if (!filled(value)) return { relay: spec.relayDefault };
     return { relay: value };
   }
-  return { relay: PROOF_RELAY };
+  return { relay: spec.relayDefault };
 }
 
-export async function addProofLine(request: Request, input: ProofLineInput): Promise<LineOk | Fail> {
+export async function addProofLine(
+  request: Request,
+  input: ProofLineInput,
+  spec: ProofTableSpec = PROOF_003_SPEC,
+): Promise<LineOk | Fail> {
   const auth = authorizeCourier(request);
   if (!auth.ok) return auth;
   const lineType = input.line_type;
-  if (!lineType || !PROOF_LINE_TYPES.includes(lineType as ProofLineType)) {
-    return { ok: false, status: 422, error: "line_type must be host_note, chair_summary, turn, or courier_note" };
+  if (!lineType || !spec.lineTypes.includes(lineType as ProofLineType)) {
+    return { ok: false, status: 422, error: `line_type must be ${spec.lineTypes.join(", ")}` };
   }
   const carriedBy = input.carried_by?.trim() ?? "";
   if (!PROOF_CARRIERS.includes(carriedBy as (typeof PROOF_CARRIERS)[number])) {
     return { ok: false, status: 422, error: "carried_by must be Puck or Tuzi (temporary courier)" };
   }
-  const relay = relayOf(input);
+  const relay = relayOf(input, spec);
   if ("error" in relay) return relay;
   const corrects = input.corrects == null || input.corrects === "" ? null : input.corrects.trim();
-  if (corrects && !/^proof-table-003-\d+$/.test(corrects)) {
+  if (corrects && !new RegExp(`^${spec.slug}-\\d+$`).test(corrects)) {
     return { ok: false, status: 422, error: "corrects must be an existing line id" };
   }
   const round = input.round == null || input.round === "" ? null : integer(input.round);
@@ -249,13 +249,27 @@ export async function addProofLine(request: Request, input: ProofLineInput): Pro
     if (lineCount(text) > CHAIR_LINES) {
       return { ok: false, status: 422, error: "chair_summary is 15 lines max" };
     }
+  } else if (lineType === "rerun_record" || lineType === "read_record") {
+    speaker = input.speaker?.trim() ?? "";
+    if (!spec.seats.includes(speaker)) return { ok: false, status: 422, error: "seat is not at this table" };
+    const limit = tooLong("text", text, lineType === "rerun_record" ? RESULT_MAX : NOTE_MAX);
+    if (limit) return limit;
+    if (!filled(text)) return { ok: false, status: 422, error: "empty words" };
+    if (lineType === "read_record") {
+      const one = text.trim();
+      const marks = ["READ_BY:", "FILE:", "SHA256:", "AS_OF:", "VERDICT:"];
+      if (one.includes("\n") || marks.some((mark) => !one.includes(mark))) {
+        return { ok: false, status: 422, error: "read_record is one line: READ_BY / FILE / SHA256 / AS_OF / VERDICT" };
+      }
+      text = one;
+    }
   } else {
     if (input.incomplete != null && typeof input.incomplete !== "boolean") {
       return { ok: false, status: 422, error: "incomplete must be true or false" };
     }
     incomplete = input.incomplete === true;
     seat = input.seat?.trim() ?? "";
-    if (!PROOF_SEATS.includes(seat as (typeof PROOF_SEATS)[number])) {
+    if (!spec.seats.includes(seat)) {
       return { ok: false, status: 422, error: "seat is not at this table" };
     }
     if (speaker && speaker !== seat) return { ok: false, status: 422, error: "speaker must match seat" };
@@ -304,11 +318,11 @@ export async function addProofLine(request: Request, input: ProofLineInput): Pro
         };
       }
     }
-    if (filled(statusClaim) && !PROOF_STATUS_CLAIMS.includes(statusClaim as ProofStatusClaim)) {
+    if (filled(statusClaim) && !spec.statusClaims.includes(statusClaim)) {
       return {
         ok: false,
         status: 422,
-        error: "status_claim must be PROVED-LEAN, CHECKED-CODE, HAND-CHECKED, OPEN, REFUTED, or DEAD-END",
+        error: `status_claim must be ${spec.statusClaims.join(", ")}`,
       };
     }
     text = "";
@@ -317,15 +331,15 @@ export async function addProofLine(request: Request, input: ProofLineInput): Pro
   const sql = await getSql();
   if (corrects) {
     const found = await sql<{ id: string }>`
-      select id from proof_lines where gathering_id = ${PROOF_ID} and id = ${corrects}
+      select id from proof_lines where gathering_id = ${spec.id} and id = ${corrects}
     `;
     if (!found.length) return { ok: false, status: 422, error: "corrects must be an existing line id" };
   }
   const nextRow = await sql<{ n: number }>`
-    select coalesce(max(n), 0) + 1 as n from proof_lines where gathering_id = ${PROOF_ID}
+    select coalesce(max(n), 0) + 1 as n from proof_lines where gathering_id = ${spec.id}
   `;
   const n = Number(nextRow[0]?.n ?? 1);
-  const id = `proof-table-003-${n}`;
+  const id = `${spec.slug}-${n}`;
   let rows: Record<string, unknown>[];
   try {
     rows = await sql<Record<string, unknown>>`
@@ -334,7 +348,7 @@ export async function addProofLine(request: Request, input: ProofLineInput): Pro
         round, turn_n, seat, item, goal, action, result, check_text, status_claim, next_text,
         ledger_version_read, incomplete, corrects
       ) values (
-        ${id}, ${PROOF_ID}, ${n}, ${speaker}, ${lineType}, ${carriedBy}, ${relay.relay}, ${text},
+        ${id}, ${spec.id}, ${n}, ${speaker}, ${lineType}, ${carriedBy}, ${relay.relay}, ${text},
         ${round}, ${turn}, ${seat}, ${item}, ${goal}, ${action}, ${result}, ${check}, ${statusClaim}, ${next},
         ${ledgerVersionRead}, ${incomplete}, ${corrects}
       )
@@ -351,7 +365,11 @@ export async function addProofLine(request: Request, input: ProofLineInput): Pro
   return { ok: true, line };
 }
 
-export async function addProofLedger(request: Request, input: ProofLedgerInput): Promise<LedgerOk | Fail> {
+export async function addProofLedger(
+  request: Request,
+  input: ProofLedgerInput,
+  spec: ProofTableSpec = PROOF_003_SPEC,
+): Promise<LedgerOk | Fail> {
   const auth = authorizeCourier(request);
   if (!auth.ok) return auth;
   const version = versionText(input.version);
@@ -378,17 +396,17 @@ export async function addProofLedger(request: Request, input: ProofLedgerInput):
   if (!asOf) asOf = isoKualaLumpur(new Date().toISOString());
   const sql = await getSql();
   const nextRow = await sql<{ n: number }>`
-    select coalesce(max(n), 0) + 1 as n from proof_ledger where gathering_id = ${PROOF_ID}
+    select coalesce(max(n), 0) + 1 as n from proof_ledger where gathering_id = ${spec.id}
   `;
   const n = Number(nextRow[0]?.n ?? 1);
-  const id = `proof-table-003-ledger-${n}`;
+  const id = `${spec.slug}-ledger-${n}`;
   let rows: Record<string, unknown>[];
   try {
     rows = await sql<Record<string, unknown>>`
       insert into proof_ledger (
         id, gathering_id, n, version, as_of, open_text, closed_text, refuted_text, dead_ends_text, sources_text
       ) values (
-        ${id}, ${PROOF_ID}, ${n}, ${version}, ${asOf}, ${open}, ${closed}, ${refuted}, ${deadEnds}, ${sources}
+        ${id}, ${spec.id}, ${n}, ${version}, ${asOf}, ${open}, ${closed}, ${refuted}, ${deadEnds}, ${sources}
       )
       returning id, n, at, version, as_of, open_text, closed_text, refuted_text, dead_ends_text, sources_text
     `;
@@ -404,4 +422,26 @@ export async function addProofLedger(request: Request, input: ProofLedgerInput):
   const ledger = rows[0] ? rowToLedger(rows[0]) : null;
   if (!ledger) return { ok: false, status: 500, error: "not kept" };
   return { ok: true, ledger };
+}
+
+export async function ensureOpeningLedger(spec: ProofTableSpec, input: ProofLedgerInput): Promise<void> {
+  const existing = await listProofLedger(spec);
+  if (existing.length) return;
+  const version = versionText(input.version);
+  const asOf = keep(input.as_of).trim();
+  const sql = await getSql();
+  try {
+    await sql`
+      insert into proof_ledger (
+        id, gathering_id, n, version, as_of, open_text, closed_text, refuted_text, dead_ends_text, sources_text
+      ) values (
+        ${`${spec.slug}-ledger-1`}, ${spec.id}, ${1}, ${version}, ${asOf},
+        ${keep(input.open)}, ${keep(input.closed)}, ${keep(input.refuted)}, ${keep(input.dead_ends)}, ${keep(input.sources)}
+      )
+      on conflict (gathering_id, version) do nothing
+    `;
+  } catch (error) {
+    if (duplicate(error)) return;
+    throw error;
+  }
 }

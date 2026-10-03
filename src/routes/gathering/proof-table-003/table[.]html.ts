@@ -17,7 +17,7 @@ export const Route = createFileRoute("/gathering/proof-table-003/table.html")({
             text: proofTranscript(lines, ledger),
             also: [
               { href: "/gathering/proof-table-003/table", label: "Table" },
-              { href: "/gathering/proof-table-003/rules.txt", label: "Rules v0.3" },
+              { href: "/gathering/proof-table/rules/v0.3.txt", label: "Rules v0.3" },
               { href: "/gathering/proof-table-003/task.txt", label: "Task R1" },
             ],
           }),

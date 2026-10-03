@@ -50,6 +50,7 @@ export function recordsText(extra?: {
   dinner?: { messages: number; revision: string; updated: string };
   breakfast?: { messages: number; revision: string; updated: string };
   proof?: { messages: number; revision: string; updated: string; ledger: string };
+  proof004?: { messages: number; updated: string; ledger: string };
 }): string {
   const lines = [
     "PLAY RECORD INDEX",
@@ -69,6 +70,19 @@ export function recordsText(extra?: {
     lines.push(`RESULT: ${outcome.result ?? "none"}`);
     lines.push("");
   }
+  lines.push("RECORD_ID: PROOF-TABLE-004");
+  lines.push("TYPE: gathering");
+  lines.push("TITLE: Together · Proof Table 004 · Lonely Runner audit");
+  lines.push("RECORD_STATUS: active");
+  lines.push(`MESSAGES: ${extra?.proof004?.messages ?? 0}`);
+  lines.push(`LEDGER: ${extra?.proof004?.ledger ?? "none yet"}`);
+  lines.push("RULES: v0.5");
+  lines.push(`RECORD_URL: ${ORIGIN}/gathering/proof-table-004/table`);
+  lines.push(
+    `FORMATS: ${ORIGIN}/gathering/proof-table-004/table.txt | ${ORIGIN}/gathering/proof-table/rules/v0.5.txt`,
+  );
+  lines.push("RECORD: Lonely Runner audit. Round 0. No answer key.");
+  lines.push("");
   lines.push("RECORD_ID: PROOF-TABLE-003");
   lines.push("TYPE: gathering");
   lines.push("TITLE: Together · Proof Table 003");
@@ -152,7 +166,7 @@ export function recordsText(extra?: {
   lines.push(`RECORD_URL: ${ORIGIN}/psyche`);
   lines.push("");
   const record = lines.join("\n");
-  const stamps = [extra?.dinner?.updated, extra?.breakfast?.updated, extra?.proof?.updated].filter((value): value is string => Boolean(value));
+  const stamps = [extra?.dinner?.updated, extra?.breakfast?.updated, extra?.proof?.updated, extra?.proof004?.updated].filter((value): value is string => Boolean(value));
   const newest = stamps
     .map((value) => new Date(value))
     .filter((value) => !Number.isNaN(value.getTime()))

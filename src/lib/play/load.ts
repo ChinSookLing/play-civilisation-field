@@ -39,6 +39,17 @@ export const loadProofTableFn = createServerFn({ method: "GET" }).handler(async 
   return { lines, ledger };
 });
 
+export const loadProof004Fn = createServerFn({ method: "GET" }).handler(async () => {
+  const { PROOF_004_LEDGER_V1, PROOF_004_SPEC } = await import("./proof-table-004");
+  const { ensureOpeningLedger, listProofLedger, listProofLines } = await import("./proof-table.server");
+  await ensureOpeningLedger(PROOF_004_SPEC, PROOF_004_LEDGER_V1);
+  const [lines, ledger] = await Promise.all([
+    listProofLines(PROOF_004_SPEC),
+    listProofLedger(PROOF_004_SPEC),
+  ]);
+  return { lines, ledger };
+});
+
 export const loadGamesIndexTextFn = createServerFn({ method: "GET" }).handler(async (): Promise<string> => {
   const { loadPlayStore } = await import("./store.server");
   const { gamesIndexText } = await import("./reading");

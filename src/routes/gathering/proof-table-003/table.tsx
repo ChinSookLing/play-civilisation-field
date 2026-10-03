@@ -212,7 +212,7 @@ function ProofTable() {
             A proof table. There is no answer key on this page, and no baseline results.
           </p>
           <p className="mt-3 text-sm">
-            <Link to="/gathering/proof-table-003/rules" className="text-fg underline decoration-1 underline-offset-4">
+            <Link to="/gathering/proof-table/rules/v0.3" className="text-fg underline decoration-1 underline-offset-4">
               Rules v0.3
             </Link>
             <Link to="/gathering/proof-table-003/task" className="ml-4 text-fg underline decoration-1 underline-offset-4">
