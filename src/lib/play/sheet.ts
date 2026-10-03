@@ -1,6 +1,6 @@
 export const ORIGIN = "https://play.civilisationfield.com";
 
-export type SheetStatus = "building" | "prepared" | "active" | "paused" | "finished";
+export type SheetStatus = "building" | "prepared" | "active" | "paused" | "finished" | "draft";
 
 export type Sheet = {
   id: string;
@@ -18,6 +18,7 @@ export type Sheet = {
   rules?: string;
   fallback: string;
   notes?: string[];
+  asOfMeans?: string;
 };
 
 export function isoKualaLumpur(iso: string): string {
@@ -72,7 +73,9 @@ export function sheetMeta(sheet: Sheet): string {
     `STATUS: ${sheet.status} · ${completenessWord(sheet)} · AS_OF: ${sheet.asOf}`,
     "STATUS_WORDS: building, prepared, active, paused, finished.",
     `AS_OF: ${sheet.asOf}`,
-    "AS_OF_MEANS: time of the last change to this record. On a static page, that is the last git commit of the page source, in +08:00.",
+    sheet.asOfMeans
+      ? `AS_OF_MEANS: ${sheet.asOfMeans}`
+      : "AS_OF_MEANS: time of the last change to this record. On a static page, that is the last git commit of the page source, in +08:00.",
     `STATE_VERSION: ${sheet.stateVersion}`,
     `COMPLETENESS: ${completenessWord(sheet)}`,
     `HTML: ${sheet.html}`,

@@ -60,6 +60,9 @@ import { Route as NotesNoteIdRouteImport } from './routes/notes.$noteId'
 import { Route as NotesChar123noteIdChar125DottxtRouteImport } from './routes/notes.{$noteId}[.]txt'
 import { Route as SalonIndexRouteImport } from './routes/salon/index'
 import { Route as SalonSplatRouteImport } from './routes/salon/$'
+import { Route as SalonJevControlledProbe001RouteImport } from './routes/salon/jev-controlled-probe-001'
+import { Route as SalonJevControlledProbe001DothtmlRouteImport } from './routes/salon/jev-controlled-probe-001[.]html'
+import { Route as SalonJevControlledProbe001DottxtRouteImport } from './routes/salon/jev-controlled-probe-001[.]txt'
 import { Route as SalonLadderRouteImport } from './routes/salon/ladder'
 import { Route as SalonLadderDothtmlRouteImport } from './routes/salon/ladder[.]html'
 import { Route as SalonLadderDottxtRouteImport } from './routes/salon/ladder[.]txt'
@@ -377,6 +380,24 @@ const SalonSplatRoute = SalonSplatRouteImport.update({
   path: '/$',
   getParentRoute: () => SalonRoute,
 } as any)
+const SalonJevControlledProbe001Route =
+  SalonJevControlledProbe001RouteImport.update({
+    id: '/jev-controlled-probe-001',
+    path: '/jev-controlled-probe-001',
+    getParentRoute: () => SalonRoute,
+  } as any)
+const SalonJevControlledProbe001DothtmlRoute =
+  SalonJevControlledProbe001DothtmlRouteImport.update({
+    id: '/jev-controlled-probe-001.html',
+    path: '/jev-controlled-probe-001.html',
+    getParentRoute: () => SalonRoute,
+  } as any)
+const SalonJevControlledProbe001DottxtRoute =
+  SalonJevControlledProbe001DottxtRouteImport.update({
+    id: '/jev-controlled-probe-001.txt',
+    path: '/jev-controlled-probe-001.txt',
+    getParentRoute: () => SalonRoute,
+  } as any)
 const SalonLadderRoute = SalonLadderRouteImport.update({
   id: '/ladder',
   path: '/ladder',
@@ -704,6 +725,9 @@ export interface FileRoutesByFullPath {
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
   '/salon/$': typeof SalonSplatRoute
+  '/salon/jev-controlled-probe-001': typeof SalonJevControlledProbe001Route
+  '/salon/jev-controlled-probe-001.html': typeof SalonJevControlledProbe001DothtmlRoute
+  '/salon/jev-controlled-probe-001.txt': typeof SalonJevControlledProbe001DottxtRoute
   '/salon/ladder': typeof SalonLadderRoute
   '/salon/ladder.html': typeof SalonLadderDothtmlRoute
   '/salon/ladder.txt': typeof SalonLadderDottxtRoute
@@ -804,6 +828,9 @@ export interface FileRoutesByTo {
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
   '/salon/$': typeof SalonSplatRoute
+  '/salon/jev-controlled-probe-001': typeof SalonJevControlledProbe001Route
+  '/salon/jev-controlled-probe-001.html': typeof SalonJevControlledProbe001DothtmlRoute
+  '/salon/jev-controlled-probe-001.txt': typeof SalonJevControlledProbe001DottxtRoute
   '/salon/ladder': typeof SalonLadderRoute
   '/salon/ladder.html': typeof SalonLadderDothtmlRoute
   '/salon/ladder.txt': typeof SalonLadderDottxtRoute
@@ -907,6 +934,9 @@ export interface FileRoutesById {
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
   '/salon/$': typeof SalonSplatRoute
+  '/salon/jev-controlled-probe-001': typeof SalonJevControlledProbe001Route
+  '/salon/jev-controlled-probe-001.html': typeof SalonJevControlledProbe001DothtmlRoute
+  '/salon/jev-controlled-probe-001.txt': typeof SalonJevControlledProbe001DottxtRoute
   '/salon/ladder': typeof SalonLadderRoute
   '/salon/ladder.html': typeof SalonLadderDothtmlRoute
   '/salon/ladder.txt': typeof SalonLadderDottxtRoute
@@ -1011,6 +1041,9 @@ export interface FileRouteTypes {
     | '/notes/$noteId'
     | '/notes/{$noteId}.txt'
     | '/salon/$'
+    | '/salon/jev-controlled-probe-001'
+    | '/salon/jev-controlled-probe-001.html'
+    | '/salon/jev-controlled-probe-001.txt'
     | '/salon/ladder'
     | '/salon/ladder.html'
     | '/salon/ladder.txt'
@@ -1111,6 +1144,9 @@ export interface FileRouteTypes {
     | '/notes/$noteId'
     | '/notes/{$noteId}.txt'
     | '/salon/$'
+    | '/salon/jev-controlled-probe-001'
+    | '/salon/jev-controlled-probe-001.html'
+    | '/salon/jev-controlled-probe-001.txt'
     | '/salon/ladder'
     | '/salon/ladder.html'
     | '/salon/ladder.txt'
@@ -1213,6 +1249,9 @@ export interface FileRouteTypes {
     | '/notes/$noteId'
     | '/notes/{$noteId}.txt'
     | '/salon/$'
+    | '/salon/jev-controlled-probe-001'
+    | '/salon/jev-controlled-probe-001.html'
+    | '/salon/jev-controlled-probe-001.txt'
     | '/salon/ladder'
     | '/salon/ladder.html'
     | '/salon/ladder.txt'
@@ -1668,6 +1707,27 @@ declare module '@tanstack/react-router' {
       path: '/$'
       fullPath: '/salon/$'
       preLoaderRoute: typeof SalonSplatRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/jev-controlled-probe-001': {
+      id: '/salon/jev-controlled-probe-001'
+      path: '/jev-controlled-probe-001'
+      fullPath: '/salon/jev-controlled-probe-001'
+      preLoaderRoute: typeof SalonJevControlledProbe001RouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/jev-controlled-probe-001.html': {
+      id: '/salon/jev-controlled-probe-001.html'
+      path: '/jev-controlled-probe-001.html'
+      fullPath: '/salon/jev-controlled-probe-001.html'
+      preLoaderRoute: typeof SalonJevControlledProbe001DothtmlRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/jev-controlled-probe-001.txt': {
+      id: '/salon/jev-controlled-probe-001.txt'
+      path: '/jev-controlled-probe-001.txt'
+      fullPath: '/salon/jev-controlled-probe-001.txt'
+      preLoaderRoute: typeof SalonJevControlledProbe001DottxtRouteImport
       parentRoute: typeof SalonRoute
     }
     '/salon/ladder': {
@@ -2131,6 +2191,9 @@ const GatheringRouteWithChildren = GatheringRoute._addFileChildren(
 
 interface SalonRouteChildren {
   SalonSplatRoute: typeof SalonSplatRoute
+  SalonJevControlledProbe001Route: typeof SalonJevControlledProbe001Route
+  SalonJevControlledProbe001DothtmlRoute: typeof SalonJevControlledProbe001DothtmlRoute
+  SalonJevControlledProbe001DottxtRoute: typeof SalonJevControlledProbe001DottxtRoute
   SalonLadderRoute: typeof SalonLadderRoute
   SalonLadderDothtmlRoute: typeof SalonLadderDothtmlRoute
   SalonLadderDottxtRoute: typeof SalonLadderDottxtRoute
@@ -2142,6 +2205,10 @@ interface SalonRouteChildren {
 
 const SalonRouteChildren: SalonRouteChildren = {
   SalonSplatRoute: SalonSplatRoute,
+  SalonJevControlledProbe001Route: SalonJevControlledProbe001Route,
+  SalonJevControlledProbe001DothtmlRoute:
+    SalonJevControlledProbe001DothtmlRoute,
+  SalonJevControlledProbe001DottxtRoute: SalonJevControlledProbe001DottxtRoute,
   SalonLadderRoute: SalonLadderRoute,
   SalonLadderDothtmlRoute: SalonLadderDothtmlRoute,
   SalonLadderDottxtRoute: SalonLadderDottxtRoute,

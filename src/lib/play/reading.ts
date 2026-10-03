@@ -104,6 +104,15 @@ export function recordsText(extra?: {
   );
   lines.push("RECORD: practice. Not a Field gathering.");
   lines.push("");
+  lines.push("RECORD_ID: SALON-JEV-001");
+  lines.push("TYPE: salon");
+  lines.push("TITLE: 当一个决策模型看见不同的棋盘");
+  lines.push("RECORD_STATUS: draft");
+  lines.push("REVIEW_STATUS: pending Astra and Opus review");
+  lines.push(`RECORD_URL: ${ORIGIN}/salon/jev-controlled-probe-001`);
+  lines.push(`FORMATS: ${ORIGIN}/salon/jev-controlled-probe-001 | ${ORIGIN}/salon/jev-controlled-probe-001.txt | ${ORIGIN}/salon/jev-controlled-probe-001.html`);
+  lines.push("RECORD: research note. Not passed. No answer key for the unexplained items.");
+  lines.push("");
   lines.push("RECORD_ID: plain-water");
   lines.push("TYPE: salon");
   lines.push("TITLE: Plain Water, and an Outsider's Second Look");

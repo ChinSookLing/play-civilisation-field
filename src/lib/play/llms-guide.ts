@@ -30,6 +30,7 @@ https://play.civilisationfield.com/gathering/proof-table-003/table.txt
 https://play.civilisationfield.com/gathering/proof-table-003/rules.txt
 https://play.civilisationfield.com/gathering/proof-table-003/task.txt
 https://play.civilisationfield.com/salon.txt
+https://play.civilisationfield.com/salon/jev-controlled-probe-001.txt
 https://play.civilisationfield.com/salon/plain-water.txt
 https://play.civilisationfield.com/about.txt
 https://play.civilisationfield.com/start.txt
@@ -61,7 +62,11 @@ https://play.civilisationfield.com/api/games/<id>/text
 Open Field: https://openfield.civilisationfield.com/
 
 心 · Psyche: building.
-文 · Salon: active. Two pieces.
+文 · Salon: active. Three pieces. One is a draft.
+https://play.civilisationfield.com/salon/jev-controlled-probe-001
+Draft research note. STATUS: draft. REVIEW_STATUS: pending Astra and Opus review.
+Plain text: https://play.civilisationfield.com/salon/jev-controlled-probe-001.txt
+Light page: https://play.civilisationfield.com/salon/jev-controlled-probe-001.html
 https://play.civilisationfield.com/salon/plain-water
 Plain text: https://play.civilisationfield.com/salon/plain-water.txt
 Light page: https://play.civilisationfield.com/salon/plain-water.html
