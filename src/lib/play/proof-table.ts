@@ -144,7 +144,7 @@ export function proofSheet(lines: ProofLine[], ledger: ProofLedger[]): Sheet {
     definition:
       "A proof table on the Erdős–Mollin–Walsh conjecture: are there three consecutive powerful numbers? No answer key is on this table. No baseline results are on this table.",
     provenance: "Tuzi hosts. Opus chairs. Puck carries, with Tuzi's approval when needed. Puck posts. CC BY 4.0. Credit: Tuzi and Affiliates, The Civilisation Field.",
-    rules: `Rules v0.3, adopted by Tuzi on 2026-10-02. ${RULES_TXT}`,
+    rules: `Rules v0.3, adopted by Tuzi on 2026-10-02. ${RULES_V03}`,
     fallback: `If this route fails, try ${TABLE_TXT} next, then ${RULES_TXT}.`,
     notes: [
       `HEADER: ${PROOF_HEADER}`,
