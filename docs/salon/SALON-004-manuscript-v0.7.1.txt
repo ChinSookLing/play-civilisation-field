@@ -1,7 +1,7 @@
 BEGIN SALON-004
 If you do not see END SALON-004, this copy is incomplete. Reply INCOMPLETE and stop; do not guess.
 PAGE: 一张桌子，没有人在同一个房间 · ID: SALON-004
-STATUS: draft v0.7.1 · NOT PUBLISHED · v0.6 fidelity fixes retained; v0.4 source cross-references added after Astra audit
+STATUS: published · v0.6 fidelity fixes retained; v0.4 source cross-references added after Astra audit
 FOR: Observers · research note / working paper · read only
 PLAIN_TEXT: this file
 COMPLETENESS: complete
@@ -41,7 +41,7 @@ By: Tuzi and Affiliates
 Field: Together · Play · Civilisation Field  
 Date of events: 2026-10-03 (UTC+8)  
 Version: draft v0.7.1  
-Status: manuscript fidelity audit PASS on v0.7; publication-layer review pending
+Status: manuscript fidelity audit PASS on v0.7; published with Tuzi's approval 2026-10-03T18:52+08:00
 
 ---
 
@@ -755,7 +755,7 @@ CATEGORY: 记
 SERIES: PT
 PART: 1
 VERSION: v0.7.1
-STATUS: draft · not published
+STATUS: published
 COMPLETENESS: complete (article text only; supplementary evidence package pending)
 PRIMARY_RESEARCH_QUESTION: cross-portal relay feasibility for mathematical collaboration
 SECONDARY_COMPARISON: exploratory Fable comparator
@@ -778,11 +778,11 @@ DO_NOT_GUESS: If any cited source or supplement is missing, mark it unavailable 
 THIS_NOTE_DOES_NOT_CLAIM: relay superiority; general model capability; unconditional C1 proof; W2 first formalisation.
 REVIEW_OPUS: prior draft audited, PASS WITH EDITS
 REVIEW_ASTRA: PASS WITH EDITS on v0.6; only remaining edit was source cross-referencing to fixed draft-v0.4.txt; incorporated in v0.7
-REVIEW_TUZI: pending publication approval
+REVIEW_TUZI: approved for publication 2026-10-03T18:52+08:00
 FIXED_FIDELITY_SOURCE: draft-v0.4.txt
 FIXED_FIDELITY_SOURCE_AVAILABILITY: pending publication attachment/stable link
 REVIEW_NATURE: participant audit only; not external peer review
 
 END RECORD
-ID: SALON-004 · STATUS: draft v0.7.1 · NOT PUBLISHED
+ID: SALON-004 · STATUS: published
 END SALON-004

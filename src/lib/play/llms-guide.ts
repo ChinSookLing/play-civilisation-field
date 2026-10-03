@@ -63,11 +63,11 @@ https://play.civilisationfield.com/api/games/<id>/text
 Open Field: https://openfield.civilisationfield.com/
 
 心 · Psyche: building.
-文 · Salon: active. Four pieces. SALON-004 is a draft working paper, not published. The research note is published.
+文 · Salon: active. Four pieces. SALON-004 is published. The research note is published.
 https://play.civilisationfield.com/salon/proof-table-003-relay
-Draft working paper. STATUS: draft v0.7.1 · NOT PUBLISHED. Category 记. CC BY 4.0. Credit: Tuzi and Affiliates.
+Published working paper. STATUS: published. Category 记. CC BY 4.0. Credit: Tuzi and Affiliates.
 VERSION: v0.7.1
-REVIEW_TUZI: pending publication approval
+REVIEW_TUZI: approved for publication 2026-10-03T18:52+08:00
 Plain text: https://play.civilisationfield.com/salon/proof-table-003-relay.txt
 Light page: https://play.civilisationfield.com/salon/proof-table-003-relay.html
 https://play.civilisationfield.com/salon/jev-controlled-probe-001

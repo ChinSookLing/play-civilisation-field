@@ -8,7 +8,7 @@ import { JEV_ENGLISH, JEV_SLUG, JEV_TITLE } from "@/lib/play/salon-jev";
 import { SALON_004_ENGLISH, SALON_004_SLUG, SALON_004_TITLE } from "@/lib/play/salon-004";
 
 export const Route = createFileRoute("/salon/")({
-  head: () => pageMeta("Salon · Play · Civilisation Field", "Four pieces. SALON-004 is a draft. The research note is published."),
+  head: () => pageMeta("Salon · Play · Civilisation Field", "Four pieces. SALON-004 is published. The research note is published."),
   component: SalonIndex,
 });
 
@@ -25,7 +25,7 @@ function SalonIndex() {
               href: `/salon/${SALON_004_SLUG}`,
               id: "SALON-004",
               title: SALON_004_TITLE,
-              status: "Draft v0.7.1. Not published.",
+              status: "Published.",
               note: `${SALON_004_ENGLISH} · 记 · 2026-10-03 · Tuzi and Affiliates · CC BY 4.0`,
               light: `/salon/${SALON_004_SLUG}.html`,
             },

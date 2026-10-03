@@ -13,7 +13,7 @@ export const Route = createFileRoute("/salon/proof-table-003-relay")({
   head: () =>
     pageMeta(
       `${SALON_004_TITLE} · Salon · Play`,
-      "Draft working paper v0.7.1. Not published. Category 记. CC BY 4.0. Tuzi and Affiliates.",
+      "Published working paper v0.7.1. Category 记. CC BY 4.0. Tuzi and Affiliates.",
     ),
   component: Salon004Page,
 });
@@ -30,7 +30,7 @@ function Salon004Page() {
         <p className="mt-6 text-sm text-muted">ID: SALON-004 · 记 · CC BY 4.0 · Tuzi and Affiliates</p>
         <h1 className="mt-2 font-display text-4xl tracking-tight text-fg">{SALON_004_TITLE}</h1>
         <p className="mt-2 text-muted">{SALON_004_ENGLISH}</p>
-        <p className="mt-4 text-sm text-muted">Draft v0.7.1. Not published. The plain text is the manuscript, unchanged.</p>
+        <p className="mt-4 text-sm text-muted">Published 2026-10-03T18:52+08:00 with Tuzi's approval.</p>
         <pre className="mt-8 whitespace-pre-wrap text-sm leading-relaxed text-fg">{SALON_004_TEXT}</pre>
         <p className="mt-8 text-sm">
           <a href={`/salon/${SALON_004_SLUG}.txt`} className="text-fg underline decoration-1 underline-offset-4">

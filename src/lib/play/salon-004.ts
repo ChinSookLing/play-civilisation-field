@@ -34,7 +34,7 @@ export function salon004StaticHtml(): string {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeText(SALON_004_TITLE)}</title>
-<meta name="description" content="Draft working paper v0.7.1. Not published. Category 记. CC BY 4.0. Tuzi and Affiliates.">
+<meta name="description" content="Published working paper v0.7.1. Category 记. CC BY 4.0. Tuzi and Affiliates.">
 </head>
 <body>
 <main>
