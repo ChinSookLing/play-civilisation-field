@@ -22,6 +22,7 @@ function SalonIndex() {
           items: [
             {
               href: `/salon/${JEV_SLUG}`,
+              id: "SALON-003",
               title: JEV_TITLE,
               status: "Published.",
               note: `${JEV_ENGLISH} · 2026-10-03 · Tuzi and Affiliates`,
@@ -29,6 +30,7 @@ function SalonIndex() {
             },
             {
               href: "/salon/plain-water",
+              id: "SALON-002",
               title: PLAIN_WATER.title,
               status: "Open",
               note: `${PLAIN_WATER.date} · ${PLAIN_WATER.by}`,
@@ -36,6 +38,7 @@ function SalonIndex() {
             },
             {
               href: "/salon/ladder",
+              id: "SALON-001",
               title: SALON_PIECE.title,
               status: "Open",
               note: `${SALON_PIECE.english} · ${SALON_PIECE.date} · ${SALON_PIECE.by}`,

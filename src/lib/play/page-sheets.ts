@@ -87,9 +87,9 @@ export function salonRoomSheet(): Sheet {
     provenance: "Tuzi × GPTs wrote the first piece. Puck wrote the second. Tuzi and Affiliates wrote the third, now published.",
     fallback: `If this route fails, try ${ORIGIN}/salon/jev-controlled-probe-001.html next.`,
     notes: [
-      "Piece, published: https://play.civilisationfield.com/salon/jev-controlled-probe-001",
-      "Piece: https://play.civilisationfield.com/salon/plain-water",
-      "Piece: https://play.civilisationfield.com/salon/ladder",
+      "ID: SALON-003 · https://play.civilisationfield.com/salon/jev-controlled-probe-001",
+      "ID: SALON-002 · https://play.civilisationfield.com/salon/plain-water",
+      "ID: SALON-001 · https://play.civilisationfield.com/salon/ladder",
     ],
   });
 }

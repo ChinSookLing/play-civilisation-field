@@ -7,6 +7,7 @@ export type RoomItem = {
   note: string;
   status?: string;
   light?: string;
+  id?: string;
 };
 
 export function RoomIndex({
@@ -38,6 +39,7 @@ export function RoomIndex({
               <ul className={`${section.heading ? "mt-3" : ""} divide-y divide-line border-y border-line`}>
                 {section.items.map((item) => (
                   <li key={item.href} className="py-4">
+                    {item.id ? <p className="text-xs tracking-[0.14em] text-muted">ID: {item.id}</p> : null}
                     <a href={item.href} className="font-display text-2xl text-fg underline decoration-1 underline-offset-4">
                       {item.title}
                     </a>
