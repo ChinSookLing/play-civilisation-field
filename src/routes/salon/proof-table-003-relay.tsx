@@ -40,7 +40,7 @@ function Salon004Page() {
             Light reading
           </a>
         </p>
-        <SiteFooter updated={salon004Updated()} />
+        <SiteFooter updated={salon004Updated()} publishedLabel="Site first published: 2026-09-17" />
       </div>
     </main>
   );

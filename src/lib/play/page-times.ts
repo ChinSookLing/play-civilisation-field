@@ -12,7 +12,7 @@ export const PAGE_COMMITTED_AT: Record<string, string> = {
   "GAMES": "2026-10-02T02:57:54+00:00",
   "PSYCHE": "2026-10-02T02:57:54+00:00",
   "GATHERING": "2026-10-03T06:40:02+00:00",
-  "SALON": "2026-10-03T10:12:40+00:00",
+  "SALON": "2026-10-03T10:34:34+00:00",
   "ladder": "2026-10-02T02:57:54+00:00",
   "PUCK": "2026-10-02T02:57:54+00:00",
   "LLMS": "2026-10-03T10:12:40+00:00",
@@ -21,7 +21,7 @@ export const PAGE_COMMITTED_AT: Record<string, string> = {
   "PROOF-TABLE-003-RULES": "2026-10-02T15:23:45+00:00",
   "PROOF-TABLE-003-TASK": "2026-10-02T15:23:45+00:00",
   "SALON-JEV-001": "2026-10-03T04:19:28+00:00",
-  "SALON-004": "2026-10-03T10:12:40+00:00",
+  "SALON-004": "2026-10-03T10:34:34+00:00",
 };
 
 export function pageAsOf(id: string): string {
