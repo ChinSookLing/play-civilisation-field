@@ -87,7 +87,7 @@ https://play.civilisationfield.com/salon/ladder
 Light page: https://play.civilisationfield.com/salon/ladder.html
 聚 · Gathering: practice. Not a Field gathering.
 https://play.civilisationfield.com/gathering
-Proof Table 003 is active. No answer key. No baseline results.
+Proof Table 003 is finished. Tuzi approved the close at 2026-10-03T15:52+08:00. No answer key. No baseline results.
 https://play.civilisationfield.com/gathering/proof-table-003/table
 Plain text: https://play.civilisationfield.com/gathering/proof-table-003/table.txt
 Rules: https://play.civilisationfield.com/gathering/proof-table-003/rules.txt

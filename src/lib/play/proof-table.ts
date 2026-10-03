@@ -107,7 +107,7 @@ export function proofSheet(lines: ProofLine[], ledger: ProofLedger[]): Sheet {
   return {
     id: PROOF_ID,
     page: PROOF_TITLE,
-    status: "active",
+    status: "finished",
     asOf: proofAsOf(lines, ledger),
     stateVersion: proofRevision(lines, ledger),
     html: TABLE,
@@ -132,6 +132,7 @@ export function proofSheet(lines: ProofLine[], ledger: ProofLedger[]): Sheet {
       ...PROOF_SEATS.map((name) => `SEAT: ${name}`),
       "Kimi and Qwen speak only when the chair assigns them a turn.",
       current ? `LEDGER_VERSION: ${current.version}` : "LEDGER_VERSION: none yet",
+      "CLOSED: Tuzi approved closing this table at 2026-10-03T15:52+08:00. The status word is finished. Ledger versions and lines stay as posted.",
       "No answer key is on this page. No baseline results are on this page.",
       "A line is kept as given. A correction is a new line. The old line stays, with a mark. Nothing is deleted.",
       "Posting order may differ from turn number. The wall keeps the order the lines were accepted.",

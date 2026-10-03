@@ -72,7 +72,8 @@ export function recordsText(extra?: {
   lines.push("RECORD_ID: PROOF-TABLE-003");
   lines.push("TYPE: gathering");
   lines.push("TITLE: Together · Proof Table 003");
-  lines.push("RECORD_STATUS: active");
+  lines.push("RECORD_STATUS: finished");
+  lines.push("CLOSED: Tuzi approved closing this table at 2026-10-03T15:52+08:00.");
   lines.push(`MESSAGES: ${extra?.proof?.messages ?? 0}`);
   lines.push(`LEDGER: ${extra?.proof?.ledger ?? "none yet"}`);
   if (extra?.proof?.revision) lines.push(`STATE_NOTE: ${extra.proof.revision}`);
