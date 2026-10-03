@@ -69,6 +69,9 @@ import { Route as SalonLadderDottxtRouteImport } from './routes/salon/ladder[.]t
 import { Route as SalonPlainWaterRouteImport } from './routes/salon/plain-water'
 import { Route as SalonPlainWaterDothtmlRouteImport } from './routes/salon/plain-water[.]html'
 import { Route as SalonPlainWaterDottxtRouteImport } from './routes/salon/plain-water[.]txt'
+import { Route as SalonProofTable003RelayRouteImport } from './routes/salon/proof-table-003-relay'
+import { Route as SalonProofTable003RelayDothtmlRouteImport } from './routes/salon/proof-table-003-relay[.]html'
+import { Route as SalonProofTable003RelayDottxtRouteImport } from './routes/salon/proof-table-003-relay[.]txt'
 import { Route as ApiGamesIndexRouteImport } from './routes/api/games/index'
 import { Route as ApiGamesGameIdRouteImport } from './routes/api/games/$gameId'
 import { Route as ApiGamesCurrentRouteImport } from './routes/api/games/current'
@@ -428,6 +431,23 @@ const SalonPlainWaterDottxtRoute = SalonPlainWaterDottxtRouteImport.update({
   path: '/plain-water.txt',
   getParentRoute: () => SalonRoute,
 } as any)
+const SalonProofTable003RelayRoute = SalonProofTable003RelayRouteImport.update({
+  id: '/proof-table-003-relay',
+  path: '/proof-table-003-relay',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonProofTable003RelayDothtmlRoute =
+  SalonProofTable003RelayDothtmlRouteImport.update({
+    id: '/proof-table-003-relay.html',
+    path: '/proof-table-003-relay.html',
+    getParentRoute: () => SalonRoute,
+  } as any)
+const SalonProofTable003RelayDottxtRoute =
+  SalonProofTable003RelayDottxtRouteImport.update({
+    id: '/proof-table-003-relay.txt',
+    path: '/proof-table-003-relay.txt',
+    getParentRoute: () => SalonRoute,
+  } as any)
 const ApiGamesIndexRoute = ApiGamesIndexRouteImport.update({
   id: '/api/games/',
   path: '/api/games/',
@@ -734,6 +754,9 @@ export interface FileRoutesByFullPath {
   '/salon/plain-water': typeof SalonPlainWaterRoute
   '/salon/plain-water.html': typeof SalonPlainWaterDothtmlRoute
   '/salon/plain-water.txt': typeof SalonPlainWaterDottxtRoute
+  '/salon/proof-table-003-relay': typeof SalonProofTable003RelayRoute
+  '/salon/proof-table-003-relay.html': typeof SalonProofTable003RelayDothtmlRoute
+  '/salon/proof-table-003-relay.txt': typeof SalonProofTable003RelayDottxtRoute
   '/gathering/': typeof GatheringIndexRoute
   '/salon/': typeof SalonIndexRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
@@ -837,6 +860,9 @@ export interface FileRoutesByTo {
   '/salon/plain-water': typeof SalonPlainWaterRoute
   '/salon/plain-water.html': typeof SalonPlainWaterDothtmlRoute
   '/salon/plain-water.txt': typeof SalonPlainWaterDottxtRoute
+  '/salon/proof-table-003-relay': typeof SalonProofTable003RelayRoute
+  '/salon/proof-table-003-relay.html': typeof SalonProofTable003RelayDothtmlRoute
+  '/salon/proof-table-003-relay.txt': typeof SalonProofTable003RelayDottxtRoute
   '/gathering': typeof GatheringIndexRoute
   '/salon': typeof SalonIndexRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
@@ -943,6 +969,9 @@ export interface FileRoutesById {
   '/salon/plain-water': typeof SalonPlainWaterRoute
   '/salon/plain-water.html': typeof SalonPlainWaterDothtmlRoute
   '/salon/plain-water.txt': typeof SalonPlainWaterDottxtRoute
+  '/salon/proof-table-003-relay': typeof SalonProofTable003RelayRoute
+  '/salon/proof-table-003-relay.html': typeof SalonProofTable003RelayDothtmlRoute
+  '/salon/proof-table-003-relay.txt': typeof SalonProofTable003RelayDottxtRoute
   '/gathering/': typeof GatheringIndexRoute
   '/salon/': typeof SalonIndexRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
@@ -1050,6 +1079,9 @@ export interface FileRouteTypes {
     | '/salon/plain-water'
     | '/salon/plain-water.html'
     | '/salon/plain-water.txt'
+    | '/salon/proof-table-003-relay'
+    | '/salon/proof-table-003-relay.html'
+    | '/salon/proof-table-003-relay.txt'
     | '/gathering/'
     | '/salon/'
     | '/api/games/$gameId'
@@ -1153,6 +1185,9 @@ export interface FileRouteTypes {
     | '/salon/plain-water'
     | '/salon/plain-water.html'
     | '/salon/plain-water.txt'
+    | '/salon/proof-table-003-relay'
+    | '/salon/proof-table-003-relay.html'
+    | '/salon/proof-table-003-relay.txt'
     | '/gathering'
     | '/salon'
     | '/api/games/$gameId'
@@ -1258,6 +1293,9 @@ export interface FileRouteTypes {
     | '/salon/plain-water'
     | '/salon/plain-water.html'
     | '/salon/plain-water.txt'
+    | '/salon/proof-table-003-relay'
+    | '/salon/proof-table-003-relay.html'
+    | '/salon/proof-table-003-relay.txt'
     | '/gathering/'
     | '/salon/'
     | '/api/games/$gameId'
@@ -1772,6 +1810,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SalonPlainWaterDottxtRouteImport
       parentRoute: typeof SalonRoute
     }
+    '/salon/proof-table-003-relay': {
+      id: '/salon/proof-table-003-relay'
+      path: '/proof-table-003-relay'
+      fullPath: '/salon/proof-table-003-relay'
+      preLoaderRoute: typeof SalonProofTable003RelayRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/proof-table-003-relay.html': {
+      id: '/salon/proof-table-003-relay.html'
+      path: '/proof-table-003-relay.html'
+      fullPath: '/salon/proof-table-003-relay.html'
+      preLoaderRoute: typeof SalonProofTable003RelayDothtmlRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/proof-table-003-relay.txt': {
+      id: '/salon/proof-table-003-relay.txt'
+      path: '/proof-table-003-relay.txt'
+      fullPath: '/salon/proof-table-003-relay.txt'
+      preLoaderRoute: typeof SalonProofTable003RelayDottxtRouteImport
+      parentRoute: typeof SalonRoute
+    }
     '/api/games/': {
       id: '/api/games/'
       path: '/api/games'
@@ -2200,6 +2259,9 @@ interface SalonRouteChildren {
   SalonPlainWaterRoute: typeof SalonPlainWaterRoute
   SalonPlainWaterDothtmlRoute: typeof SalonPlainWaterDothtmlRoute
   SalonPlainWaterDottxtRoute: typeof SalonPlainWaterDottxtRoute
+  SalonProofTable003RelayRoute: typeof SalonProofTable003RelayRoute
+  SalonProofTable003RelayDothtmlRoute: typeof SalonProofTable003RelayDothtmlRoute
+  SalonProofTable003RelayDottxtRoute: typeof SalonProofTable003RelayDottxtRoute
   SalonIndexRoute: typeof SalonIndexRoute
 }
 
@@ -2215,6 +2277,9 @@ const SalonRouteChildren: SalonRouteChildren = {
   SalonPlainWaterRoute: SalonPlainWaterRoute,
   SalonPlainWaterDothtmlRoute: SalonPlainWaterDothtmlRoute,
   SalonPlainWaterDottxtRoute: SalonPlainWaterDottxtRoute,
+  SalonProofTable003RelayRoute: SalonProofTable003RelayRoute,
+  SalonProofTable003RelayDothtmlRoute: SalonProofTable003RelayDothtmlRoute,
+  SalonProofTable003RelayDottxtRoute: SalonProofTable003RelayDottxtRoute,
   SalonIndexRoute: SalonIndexRoute,
 }
 
