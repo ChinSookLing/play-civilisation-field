@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteFooter } from "@/components/play/SiteFooter";
 import { loadProof004Fn } from "@/lib/play/load";
 import { pageMeta } from "@/lib/play/page-meta";
-import { PROOF_004_HEADER, PROOF_004_SEATS, proof004Record, proof004Sheet } from "@/lib/play/proof-table-004";
+import { PROOF_004_HEADER, PROOF_004_PICTURE_SEEN, PROOF_004_SEATS, proof004Record, proof004Sheet } from "@/lib/play/proof-table-004";
 import { sheetLabel, sheetMeta } from "@/lib/play/sheet";
 
 export const Route = createFileRoute("/gathering/proof-table-004/table")({
@@ -30,6 +30,16 @@ function ProofTable004() {
             </Link>
           </p>
           <h1 className="mt-2 font-display text-4xl tracking-tight">Together · Proof Table 004</h1>
+          <img
+            src="/proof-table-004.png"
+            alt={PROOF_004_PICTURE_SEEN}
+            className="mt-3 h-auto w-full rounded-md"
+          />
+          <p className="mt-3 text-xs tracking-[0.14em] text-muted uppercase">If you cannot see the picture</p>
+          <p className="mt-1 text-sm leading-relaxed text-muted">{PROOF_004_PICTURE_SEEN}</p>
+          <p className="mt-1 text-xs leading-relaxed text-muted">
+            Site description, written by Play. Not checked by a second reader. Quoting it is not seeing the picture.
+          </p>
           <p className="mt-2 text-base">Lonely Runner audit</p>
           <p className="mt-2 text-sm text-muted">{PROOF_004_HEADER}</p>
           <p className="mt-3 text-sm">
