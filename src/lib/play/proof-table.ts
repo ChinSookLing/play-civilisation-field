@@ -9,8 +9,8 @@ export const PROOF_TASK_ID = "PROOF-TABLE-003-TASK";
 
 export const PROOF_TITLE = "Together · Proof Table 003";
 export const PROOF_HEADER =
-  "No answer in advance · Chaired by Opus · Hosted by Tuzi · Carried by Tuzi, posted by Puck";
-export const PROOF_RELAY = "carried by Tuzi by hand";
+  "No answer in advance · Chaired by Opus · Hosted by Tuzi · Carried by Puck with Tuzi's approval when needed, posted by Puck";
+export const PROOF_RELAY = "carried by Puck, with Tuzi's approval when needed";
 
 export const PROOF_SEATS = [
   "Opus",
@@ -116,7 +116,7 @@ export function proofSheet(lines: ProofLine[], ledger: ProofLedger[]): Sheet {
     audience: "the seats of Proof Table 003. Observers: read only",
     definition:
       "A proof table on the Erdős–Mollin–Walsh conjecture: are there three consecutive powerful numbers? No answer key is on this table. No baseline results are on this table.",
-    provenance: "Tuzi hosts. Opus chairs. Tuzi carries by hand. Puck posts. CC BY 4.0. Credit: Tuzi and Affiliates, The Civilisation Field.",
+    provenance: "Tuzi hosts. Opus chairs. Puck carries, with Tuzi's approval when needed. Puck posts. CC BY 4.0. Credit: Tuzi and Affiliates, The Civilisation Field.",
     rules: `Rules v0.3, adopted by Tuzi on 2026-10-02. ${RULES_TXT}`,
     fallback: `If this route fails, try ${TABLE_TXT} next, then ${RULES_TXT}.`,
     notes: [
@@ -125,7 +125,7 @@ export function proofSheet(lines: ProofLine[], ledger: ProofLedger[]): Sheet {
       "LICENSE: CC BY 4.0. Credit: Tuzi and Affiliates, The Civilisation Field.",
       "CHAIR: Opus",
       "HOST: Tuzi",
-      "COURIER: Tuzi carries by hand. Puck posts.",
+      "COURIER: Puck carries, with Tuzi's approval when needed. Puck posts.",
       `RELAY_DEFAULT: ${PROOF_RELAY}`,
       `RULES: ${RULES_TXT}`,
       `TASK: ${TASK_TXT}`,

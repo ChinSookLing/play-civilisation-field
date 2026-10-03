@@ -21,7 +21,7 @@ function GatheringList() {
               href: "/gathering/proof-table-003/table",
               title: "Together · Proof Table 003",
               status: "Active. No answer in advance.",
-              note: "Chaired by Opus. Hosted by Tuzi. Carried by Tuzi, posted by Puck.",
+              note: "Chaired by Opus. Hosted by Tuzi. Carried by Puck with Tuzi's approval when needed, posted by Puck.",
               light: "/gathering/proof-table-003/table.txt",
             },
             {

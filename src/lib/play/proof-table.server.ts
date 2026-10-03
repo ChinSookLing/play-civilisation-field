@@ -60,8 +60,15 @@ function iso(value: unknown): string {
 }
 
 function keep(value: unknown): string {
+  if (typeof value === "number" && Number.isFinite(value)) return String(value);
   if (typeof value !== "string") return "";
-  return value.replace(/\r\n/g, "\n");
+  return value.replace(/\u0000/g, "").replace(/\r\n/g, "\n");
+}
+
+function versionText(value: unknown): string {
+  if (typeof value === "number" && Number.isFinite(value)) return String(value);
+  if (typeof value === "string") return value.trim();
+  return "";
 }
 
 function filled(value: string): boolean {
@@ -130,8 +137,23 @@ function asBool(value: unknown): boolean {
   return value === true || value === 1 || value === "t" || value === "true";
 }
 
+function pgCode(error: unknown): string {
+  const found = codeOf(error);
+  if (found) return found;
+  if (typeof error === "object" && error !== null && "cause" in error) return codeOf((error as { cause?: unknown }).cause);
+  return "";
+}
+
+function codeOf(error: unknown): string {
+  if (typeof error === "object" && error !== null && "code" in error) {
+    const code = (error as { code?: unknown }).code;
+    if (typeof code === "string") return code;
+  }
+  return "";
+}
+
 function duplicate(error: unknown): boolean {
-  return typeof error === "object" && error !== null && "code" in error && (error as { code?: string }).code === "23505";
+  return pgCode(error) === "23505";
 }
 
 export async function listProofLines(): Promise<ProofLine[]> {
@@ -332,7 +354,7 @@ export async function addProofLine(request: Request, input: ProofLineInput): Pro
 export async function addProofLedger(request: Request, input: ProofLedgerInput): Promise<LedgerOk | Fail> {
   const auth = authorizeCourier(request);
   if (!auth.ok) return auth;
-  const version = input.version?.trim() ?? "";
+  const version = versionText(input.version);
   if (!version || /[\r\n]/.test(version) || version.length > 80) {
     return { ok: false, status: 422, error: "version is required" };
   }
@@ -372,7 +394,12 @@ export async function addProofLedger(request: Request, input: ProofLedgerInput):
     `;
   } catch (error) {
     if (duplicate(error)) return { ok: false, status: 409, error: "that ledger version is already kept" };
-    throw error;
+    if (pgCode(error) === "22021" || pgCode(error) === "22P05") {
+      return { ok: false, status: 422, error: "a field contains a character this table cannot store" };
+    }
+    const message = error instanceof Error ? error.message.split("\n")[0] : "";
+    const brief = message.replace(/\s+/g, " ").slice(0, 180);
+    return { ok: false, status: 500, error: brief ? `not kept: ${brief}` : "not kept" };
   }
   const ledger = rows[0] ? rowToLedger(rows[0]) : null;
   if (!ledger) return { ok: false, status: 500, error: "not kept" };
