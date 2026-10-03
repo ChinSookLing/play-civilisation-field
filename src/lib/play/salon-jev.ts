@@ -4,7 +4,7 @@ import { ORIGIN, sheetLabel, sheetMeta, sheetWrap, textRevision, type Sheet } fr
 
 export const JEV_ID = "SALON-JEV-001";
 export const JEV_SLUG = "jev-controlled-probe-001";
-export const JEV_AS_OF = "2026-10-03T11:14:07+08:00";
+export const JEV_AS_OF = "2026-10-03T11:44:28+08:00";
 export const JEV_TITLE = "当一个决策模型看见不同的棋盘";
 export const JEV_ENGLISH = "When a Decision Model Sees the Board Differently";
 
@@ -49,6 +49,10 @@ function kindFor(level: 2 | 3, text: string, prev?: JevKind): JevKind | undefine
   return prev;
 }
 
+function isInterpretationCue(line: string): boolean {
+  return line.startsWith("**INTERPRETATION ·");
+}
+
 export function jevBlocks(): JevBlock[] {
   const blocks: JevBlock[] = [];
   let kind: JevKind | undefined;
@@ -90,10 +94,12 @@ export function jevBlocks(): JevBlock[] {
     while (index < lines.length) {
       const current = lines[index] ?? "";
       if (current.trim() === "" || current.startsWith("#") || current.startsWith("- ")) break;
+      if (isInterpretationCue(current) && para.length > 0) break;
+      if (isInterpretationCue(current)) kind = "interpretation";
       para.push(current);
       index += 1;
     }
-    blocks.push({ tag: "p", text: para.join("\n"), kind });
+    if (para.length > 0) blocks.push({ tag: "p", text: para.join("\n"), kind });
   }
   return blocks;
 }
@@ -126,6 +132,7 @@ export function jevSheet(): Sheet {
     html: PAGE,
     plainText: TXT,
     completeness: "complete",
+    statusWords: "draft, in-review, published, withdrawn",
     audience: "Observers · research note · read only",
     definition: "A research note reporting three rounds of controlled Jev probes.",
     provenance:
@@ -147,7 +154,10 @@ export function jevSheet(): Sheet {
       "SOURCE_OF_TRUTH: one article record",
       `LIGHT: ${LIGHT}`,
       "RAW_DATA: not yet public",
-      "REVIEW_STATUS: pending Astra and Opus review",
+      "REVIEW_OPUS: chair audit of draft 2026-10-03 · PASS WITH EDITS · edits applied",
+      "REVIEW_ASTRA: content review of live TXT (fetched 2026-10-03 11:39 +08:00) · PASS WITH EDITS · edits applied in v3",
+      "REVIEW_R31_MANIFEST: pending (Astra)",
+      "REVIEW_LIVE_HTML: not yet verified",
       "CONTRIBUTOR_ROLES: Tuzi = host, relay, approval; Puck = execution, records, operational verification; Opus = chair, experimental design, interpretation; Astra = independent review, design gate; GPT = synthesis, application analysis, drafting",
       "LIMIT: Do not treat noul as independently calibrated probability.",
       ...JEV_DOES_NOT_CLAIM.map((line) => `THIS NOTE DOES NOT CLAIM: ${line}`),
@@ -210,7 +220,7 @@ export function jevStaticHtml(): string {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeText(JEV_TITLE)}</title>
-<meta name="description" content="Draft research note. Pending Astra and Opus review. Not a passed paper.">
+<meta name="description" content="Draft research note. Not a passed paper. Manifest and live HTML still open.">
 </head>
 <body>
 <main>

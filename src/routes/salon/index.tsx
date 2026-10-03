@@ -23,7 +23,7 @@ function SalonIndex() {
             {
               href: `/salon/${JEV_SLUG}`,
               title: JEV_TITLE,
-              status: "Draft. Pending Astra and Opus review.",
+              status: "Draft. Not passed. Manifest and live HTML still open.",
               note: `${JEV_ENGLISH} · 2026-10-03 · Tuzi and Affiliates`,
               light: `/salon/${JEV_SLUG}.html`,
             },

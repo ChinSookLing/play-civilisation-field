@@ -19,7 +19,7 @@ export const Route = createFileRoute("/salon/jev-controlled-probe-001")({
   head: () =>
     pageMeta(
       `${JEV_TITLE} · Salon · Play`,
-      "Draft research note on the Jev probes. Pending Astra and Opus review.",
+      "Draft research note on the Jev probes. Not passed. Manifest and live HTML still open.",
     ),
   component: JevPage,
 });

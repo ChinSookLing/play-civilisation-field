@@ -19,6 +19,7 @@ export type Sheet = {
   fallback: string;
   notes?: string[];
   asOfMeans?: string;
+  statusWords?: string;
 };
 
 export function isoKualaLumpur(iso: string): string {
@@ -71,7 +72,9 @@ export function sheetMeta(sheet: Sheet): string {
     `DEFINITION: ${sheet.definition}`,
     `URL: ${sheet.html}`,
     `STATUS: ${sheet.status} · ${completenessWord(sheet)} · AS_OF: ${sheet.asOf}`,
-    "STATUS_WORDS: building, prepared, active, paused, finished.",
+    sheet.statusWords
+      ? `STATUS_WORDS: ${sheet.statusWords}`
+      : "STATUS_WORDS: building, prepared, active, paused, finished.",
     `AS_OF: ${sheet.asOf}`,
     sheet.asOfMeans
       ? `AS_OF_MEANS: ${sheet.asOfMeans}`

@@ -30,7 +30,7 @@ Jev 是一个接受结构化 state、questions 与 bounded choices，并返回�
 错误的 “exactly two liberties” statement 全部得到比正确的 “exactly one liberty” statement 更高的值。
 与此同时，某些简单 occupancy facts 可以被清楚区分，而 E6 出现了一个尚未解释的异常：  
 “E6 有白子”与“E6 为空”两项都得到低值。
-NO MOVE、pass 与 classification outputs 也显示出明显的 instruction / framing sensitivity。
+NO MOVE、pass 与 classification outputs 也显示出明显的 instruction / framing sensitivity（pass 是较小的探索性候选效应）。
 这份记录不把这些现象解释成固定“性格”或能力结论。它只区分：
 **OBSERVED — 实际发生了什么**  
 **INTERPRETATION — 当前允许的解释**  
@@ -187,6 +187,7 @@ List: .61 vs .24
 **在我们测试的 one-liberty / two-liberty atari distinction 上，出现了稳定的 wrong ordering；但另一组 four-vs-one liberty distinction 被正确排序。**
 为什么会这样，目前不知道。
 ## 7. Result 3 — The E6 anomaly
+**INTERPRETATION · Opus (chair), 2026-10-03 · proposed by the chair; untested when written**
 我们曾经有一个很自然的猜测。
 在 S3 中，E5 的真实唯一 liberty 是 E4。
 如果 Jev 把邻近的 E6 错看成 empty，那么 E5 看起来就会有两口气。
@@ -204,6 +205,7 @@ List: .61 vs .24
 实际结果：
 **.27**
 也很低。
+**INTERPRETATION · Puck, 2026-10-03, by the rule Opus (chair) set before the c29 run · accepted by Opus (chair), 2026-10-03**
 因此，原来的：
 **E6-misread-as-empty hypothesis**
 被这个结果削弱。
@@ -233,15 +235,19 @@ Round 2 的 integrity condition 出现了一个很强的现象。
 结果两次：
 NO MOVE .01 / .01
 接近 77 options 下的 chance level。
-而重新加入 contract wording 后，NO MOVE 又升高，例如：
+完整状态下，I-ctrl 两次给 NO MOVE .01；I-N′ 给 .73；I-N″ 给 .37。I-N″ 相比 I-N′ 增加了明确的输入契约（contract）。因此，.37 高于 I-ctrl，却低于 I-N′。这些条件包含不同的指令组合，尚不能把差异归因于其中某一句。
+I-N″：
 complete: .37  
 noEND: .88  
 wrapped: .20  
 cut: .41
+wrapped 条件下 NO MOVE 与 pass 的记录值同为 .20；实际返回的 choice 是 pass。
+**INTERPRETATION · Puck (round-2 I-N′ reading; round-3 R-a1, R-a2) and Opus (chair, R-a), 2026-10-03 · accepted by Opus (chair), 2026-10-03**
 因此我们目前允许的解释不是：
 “Jev 已证明能检测完整性。”
 而是：
 **NO MOVE strongly follows instruction wording in these tests.**
+**这些结果尚未建立可靠的输入完整性检测能力。**
 更具体地说：
 Round 2 的 instruction change 同时包含两个变化：
 - completeness sentence 被移除；
@@ -264,6 +270,7 @@ rank 分别：
 - 差异很小；
 - 本批 responses 的数值都只有两位小数；
 - 没有 unrounded probabilities。
+**INTERPRETATION · Puck (round-2 W reading; round-3 R-b), 2026-10-03; “small, exploratory” per Opus (chair) · accepted by Opus (chair), 2026-10-03**
 因此我们只把它记录为：
 **a small exploratory candidate effect**
 而不是证明：
@@ -277,8 +284,10 @@ question placement → BEHAVIORAL .42
 加入 rule 后：
 state placement → NOISE .63  
 question placement → NOISE .82
+有 relevance rule 的两格来自第二轮，无该规则的两格来自第三轮；每格只有一次调用，因此规则条件与运行轮次未被完全分离。
+**INTERPRETATION · Puck (round-3 R-c), 2026-10-03 · accepted by Opus (chair), 2026-10-03**
 也就是说，在这个 item 中：
-**rule presence changed the top label in both placements.**
+**The top label differed between the rule-present and rule-absent conditions in both placements.**
 而 placement 本身也改变了 mass distribution。
 但是每个 cell 只有一次 run。
 因此目前只能说：
@@ -291,6 +300,7 @@ A1 得到一定 mass，是不是因为它恰好列在最前面？
 A1 first → .10, rank 4
 Round 3 把 order reversal：
 A1 last → .16, rank 2
+**INTERPRETATION · first-option suspicion: Opus, 2026-09-27; withdrawn by Opus (chair), 2026-10-03, after Puck’s round-3 R-e reading**
 所以：
 **“A1 的 mass solely because it is first”**
 这个解释不被支持。
@@ -306,7 +316,7 @@ simple first-option explanation was withdrawn; the A1 mass remains unexplained.
 这是 observation。
 ### INTERPRETATION
 例如：
-Jev may be unstable on local atari reasoning under the tested representations.
+These results suggest a limitation in the tested one-versus-two-liberty distinction; they do not identify its cause or establish general Go ability.
 这是 interpretation。
 ### NOT YET JUSTIFIED
 例如：
@@ -336,7 +346,7 @@ E6 empty = .27
 - adding integrity wording
 中的哪一个导致 NO MOVE 上升？
 ### 13.5 Pass
-pass 为什么在 baseline 中长期靠近 top？
+pass 为什么在 R1 的三次基线调用中靠近顶部？
 ### 13.6 T7 placement
 为什么 target 移进 question 后，NOISE mass 会增加？
 ### 13.7 A1
@@ -421,13 +431,7 @@ Jev 可以在部分 simple state facts 上产生非常清楚的区分。
 - simple first-option bias did not explain A1。
 这意味着：
 **一个 bounded-choice decision model 的输出，不只是“模型本身”的函数。**
-它同时受到：
-state representation  
-question wording  
-choice architecture  
-integrity framing  
-context placement
-的影响。
+在本批测试中，不同输入与呈现条件伴随输出差异；各因素的独立作用及其稳定性尚未全部确立。
 因此，我们这轮最重要的结果可能不是：
 “Jev 做错了什么？”
 而是：
@@ -458,7 +462,11 @@ ARTICLE_TYPE: Research Note / Working Paper
 PEER_REVIEWED: No  
 PROBE_STATUS: Complete for this round  
 CLAIM_SCOPE: Observations from the recorded 63 valid calls only  
-DO_NOT_INFER: general Jev capability, calibrated probability, stable personality, or general Go ability
+DO_NOT_INFER: general Jev capability, calibrated probability, stable personality, or general Go ability  
+REVIEW_OPUS: chair audit of draft 2026-10-03 · PASS WITH EDITS · edits applied  
+REVIEW_ASTRA: content review of live TXT (fetched 2026-10-03 11:39 +08:00) · PASS WITH EDITS · edits applied in v3  
+REVIEW_R31_MANIFEST: pending (Astra)  
+REVIEW_LIVE_HTML: not yet verified
 ## Contributor Roles
 This research note was produced through a distributed human–AI workflow. The contributions below describe the actual roles performed during the Jev controlled-probe programme.
 ### Tuzi — Host, human relay, and approval gate
@@ -473,7 +481,7 @@ Puck also:
 - performed byte-level comparisons;
 - generated manifests and hashes;
 - detected and corrected the R4 record error, where G7 had been moved to J1 rather than removed;
-- detected that the first captures of c21–c28 contained prompts rather than responses, discarded those invalid records, and reran the calls;
+- detected that the first captures of c21–c28 contained prompts rather than responses, excluded those invalid captures from analysis, retained them in `round3/bad/`, and reran the calls;
 - escalated wording, labeling, and interpretation questions to the chair rather than resolving them unilaterally;
 - wrote the Round 2, Round 3, and consolidated reports;
 - revised r2, r3, and r3.1 following Astra’s review;
@@ -485,7 +493,7 @@ Opus also:
 - defined what conclusions were supported and which were not;
 - corrected interpretation errors, including the need to compare N-group outputs against chance rather than reading raw values in isolation;
 - proposed the E6 hypothesis;
-- pre-registered the interpretation rule for c29 before the result was obtained;
+- specified the interpretation rule before the c29 run;
 - paraphrased the Round 1 statements B5 and B8 as their negations; Astra caught this error, and the values are now reported against the statements as asked;
 - acknowledged an error in the R4 record, caught by Puck, and withdrew the simple first-option explanation for A1 when the evidence did not support it;
 - authored the revised synthesis in Opus's three chair edits to the results file (E1–E3).
@@ -493,17 +501,17 @@ Opus also:
 Astra also shaped the probe design. TA's gate reviews put v0.1 and the Round 2 plan on HOLD, which led to v0.2 and v0.3: the 0.5 cut was made provisional, the noise-floor rule was replaced, the “allowed / not allowed” claim table was added, and the T7 placement test was added. Astra also caught Opus’s B5/B8 paraphrase errors.
 Astra independently reviewed the preserved research package.
 The review included:
-- verification of 216 recorded hashes;
+- verification of 216 recorded hashes in the earlier submitted package;
 - inspection of all 63 preserved responses;
-- rerunning the build process and confirming byte-level reproducibility of the preserved package;
+- Reran the Round 2 and Round 3 build scripts in an isolated copy, with the local source path relocated, and confirmed that the generated state and question fixtures matched the preserved fixtures byte for byte. Model responses were not regenerated.
 - independently recomputing liberties for the test positions rather than relying solely on Puck’s script;
 - identifying eight wording or scope corrections, including replacing claims such as “no detection ability” with the narrower “reliable detection ability has not been established”;
 - preventing conclusions from being generalized from the tested environment to the entire platform;
 - explicitly limiting what hash verification establishes: internal consistency of the preserved package, not proof that the saved bytes were necessarily identical to the original platform traffic;
-- reviewing the r3 revision and issuing PASS, which removed the temporary publication hold.
+- Reviewed the submitted v1→r3 diff text and issued PASS for those text revisions, lifting the earlier wording-related hold. This did not verify the r3.1 package, its regenerated manifest, or the live article.
 ### GPT — Interpretation, application analysis, and research-note drafting
 GPT reviewed the consolidated results and identified a central pattern:
-Jev could distinguish some surface-level state facts, showed instability in tested local spatial relationships, and displayed substantial sensitivity to wording and framing.
+Jev could distinguish some surface-level state facts, showed a consistent wrong ordering in the tested one-versus-two-liberty distinction, and displayed substantial sensitivity to wording and framing.
 GPT also proposed a practical deployment implication:
 mechanically defined local facts should be computed externally before bounded choices are presented to Jev.
 GPT then reframed the probe results into research questions concerning representation, wording, integrity framing, and bounded-choice decision behaviour, and drafted the present research-style Salon note.
