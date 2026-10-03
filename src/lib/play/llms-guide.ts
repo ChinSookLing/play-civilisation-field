@@ -64,11 +64,11 @@ Open Field: https://openfield.civilisationfield.com/
 心 · Psyche: building.
 文 · Salon: active. Three pieces. One is a draft.
 https://play.civilisationfield.com/salon/jev-controlled-probe-001
-Draft research note. STATUS: draft. Not passed.
-REVIEW_OPUS: chair audit of draft 2026-10-03 · PASS WITH EDITS · edits applied
+Draft research note. STATUS: draft. Tuzi decides publication.
+REVIEW_OPUS: chair audit of draft 2026-10-03 · PASS WITH EDITS · edits applied; live audit 2026-10-03 ~11:55 +08:00 · PASS
 REVIEW_ASTRA: content review of live TXT (fetched 2026-10-03 11:39 +08:00) · PASS WITH EDITS · edits applied in v3
-REVIEW_R31_MANIFEST: pending (Astra)
-REVIEW_LIVE_HTML: not yet verified
+REVIEW_R31_MANIFEST: PASS (Astra, 2026-10-03; 227/227 hashes match; scope: internal consistency of the preserved package)
+REVIEW_LIVE_HTML: verified by Opus, 2026-10-03
 Plain text: https://play.civilisationfield.com/salon/jev-controlled-probe-001.txt
 Light page: https://play.civilisationfield.com/salon/jev-controlled-probe-001.html
 https://play.civilisationfield.com/salon/plain-water

@@ -108,13 +108,13 @@ export function recordsText(extra?: {
   lines.push("TYPE: salon");
   lines.push("TITLE: 当一个决策模型看见不同的棋盘");
   lines.push("RECORD_STATUS: draft");
-  lines.push("REVIEW_OPUS: chair audit of draft 2026-10-03 · PASS WITH EDITS · edits applied");
+  lines.push("REVIEW_OPUS: chair audit of draft 2026-10-03 · PASS WITH EDITS · edits applied; live audit 2026-10-03 ~11:55 +08:00 · PASS");
   lines.push("REVIEW_ASTRA: content review of live TXT (fetched 2026-10-03 11:39 +08:00) · PASS WITH EDITS · edits applied in v3");
-  lines.push("REVIEW_R31_MANIFEST: pending (Astra)");
-  lines.push("REVIEW_LIVE_HTML: not yet verified");
+  lines.push("REVIEW_R31_MANIFEST: PASS (Astra, 2026-10-03; 227/227 hashes match; scope: internal consistency of the preserved package)");
+  lines.push("REVIEW_LIVE_HTML: verified by Opus, 2026-10-03");
   lines.push(`RECORD_URL: ${ORIGIN}/salon/jev-controlled-probe-001`);
   lines.push(`FORMATS: ${ORIGIN}/salon/jev-controlled-probe-001 | ${ORIGIN}/salon/jev-controlled-probe-001.txt | ${ORIGIN}/salon/jev-controlled-probe-001.html`);
-  lines.push("RECORD: research note. Not passed. No answer key for the unexplained items.");
+  lines.push("RECORD: research note. Not published. Tuzi decides publication. No answer key for the unexplained items.");
   lines.push("");
   lines.push("RECORD_ID: plain-water");
   lines.push("TYPE: salon");

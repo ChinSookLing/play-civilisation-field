@@ -23,7 +23,7 @@ function SalonIndex() {
             {
               href: `/salon/${JEV_SLUG}`,
               title: JEV_TITLE,
-              status: "Draft. Not passed. Manifest and live HTML still open.",
+              status: "Draft. Tuzi decides publication.",
               note: `${JEV_ENGLISH} · 2026-10-03 · Tuzi and Affiliates`,
               light: `/salon/${JEV_SLUG}.html`,
             },

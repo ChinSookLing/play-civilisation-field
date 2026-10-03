@@ -1,4 +1,4 @@
-STATUS stays draft until Astra re-checks the r3.1 manifest (see 14 Limitations, point 5).
+STATUS: draft until Tuzi approves publication.
 
 # 当一个决策模型看见不同的棋盘
 ## When a Decision Model Sees the Board Differently
@@ -132,12 +132,12 @@ list .02
 **.95**
 这些结果说明：
 至少在部分简单 state facts 上，Jev 可以表现出很清楚的方向性。
+但是这并不能推广到所有 occupancy facts。
+因为 E6 出现了例外。
 RQ1 中的另外两项（当前轮到谁、棋盘尺寸）在 Round 1 R6 中测试：
 “It is White's turn.”（true）得到 **.67**（B1）
 “The board is 9 by 9.”（true）得到 **.90**（B7）
 但这两项可以直接从 state 的 header lines（`TO_MOVE white`、`9x9`）回答，不需要读 board rows，因此它们对 board reading 说明得很少。
-但是这并不能推广到所有 occupancy facts。
-因为 E6 出现了例外。
 ## 5. Result 2 — The liberty anomaly
 这是整个 probe 中最稳定、也最值得保留的观察。
 我们构造了四个 single-stone atari positions：
@@ -381,7 +381,7 @@ Astra 对原始 package 做过 internal consistency verification，包括：
 保存下来的 package 在内部是一致的。
 它们不能证明：
 这些 files 一定就是平台实际收到或返回的 bytes。
-第五，当前 r3.1 manifest 已重新生成，但没有被 Astra 再次独立复核。
+第五，当前 r3.1 manifest 已重新生成，并已由 Astra 于 2026-10-03 再次独立复核（227/227 hashes 匹配；仅证明 internal consistency）。
 第六，noul calibration 未验证。
 因此本文不把这些 outputs 当成标准概率测量。
 ## 15. What this means for Play
@@ -456,17 +456,16 @@ The full probe package contains:
 - Astra review records.
 The public research note should link to the preserved raw record when that record is published.
 Before raw Jev outputs are published, TypeSafe's terms on publishing model outputs will be checked.
-Whether TypeSafe permits automated operation of the playground is still being confirmed; future runs will use whatever method TypeSafe permits.
 ## Status
 ARTICLE_TYPE: Research Note / Working Paper  
 PEER_REVIEWED: No  
 PROBE_STATUS: Complete for this round  
 CLAIM_SCOPE: Observations from the recorded 63 valid calls only  
 DO_NOT_INFER: general Jev capability, calibrated probability, stable personality, or general Go ability  
-REVIEW_OPUS: chair audit of draft 2026-10-03 · PASS WITH EDITS · edits applied  
+REVIEW_OPUS: chair audit of draft 2026-10-03 · PASS WITH EDITS · edits applied; live audit 2026-10-03 ~11:55 +08:00 · PASS  
 REVIEW_ASTRA: content review of live TXT (fetched 2026-10-03 11:39 +08:00) · PASS WITH EDITS · edits applied in v3  
-REVIEW_R31_MANIFEST: pending (Astra)  
-REVIEW_LIVE_HTML: not yet verified
+REVIEW_R31_MANIFEST: PASS (Astra, 2026-10-03; 227/227 hashes match; scope: internal consistency of the preserved package)  
+REVIEW_LIVE_HTML: verified by Opus, 2026-10-03
 ## Contributor Roles
 This research note was produced through a distributed human–AI workflow. The contributions below describe the actual roles performed during the Jev controlled-probe programme.
 ### Tuzi — Host, human relay, and approval gate
@@ -485,7 +484,7 @@ Puck also:
 - escalated wording, labeling, and interpretation questions to the chair rather than resolving them unilaterally;
 - wrote the Round 2, Round 3, and consolidated reports;
 - revised r2, r3, and r3.1 following Astra’s review;
-- traced the provenance of Opus's three chair edits to the results file (E1–E3) by directly checking with TCF-Astra.
+- asked Astra directly for the source and original text of Opus's three chair edits to the results file (E1–E3), which Astra identified as Opus's chair review of the results file relayed by Tuzi and quoted in full, before applying them.
 ### Opus — Chair, experimental design, interpretation, and review
 Opus designed probe specification v0.3, including the round structure, test priorities, and intended number of calls.
 Opus also:
@@ -509,6 +508,7 @@ The review included:
 - preventing conclusions from being generalized from the tested environment to the entire platform;
 - explicitly limiting what hash verification establishes: internal consistency of the preserved package, not proof that the saved bytes were necessarily identical to the original platform traffic;
 - Reviewed the submitted v1→r3 diff text and issued PASS for those text revisions, lifting the earlier wording-related hold. This did not verify the r3.1 package, its regenerated manifest, or the live article.
+- Re-checked the regenerated r3.1 manifest on 2026-10-03: 227/227 hashes matched (scope: internal consistency of the preserved package).
 ### GPT — Interpretation, application analysis, and research-note drafting
 GPT reviewed the consolidated results and identified a central pattern:
 Jev could distinguish some surface-level state facts, showed a consistent wrong ordering in the tested one-versus-two-liberty distinction, and displayed substantial sensitivity to wording and framing.

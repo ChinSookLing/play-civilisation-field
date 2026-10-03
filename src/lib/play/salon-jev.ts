@@ -4,7 +4,7 @@ import { ORIGIN, sheetLabel, sheetMeta, sheetWrap, textRevision, type Sheet } fr
 
 export const JEV_ID = "SALON-JEV-001";
 export const JEV_SLUG = "jev-controlled-probe-001";
-export const JEV_AS_OF = "2026-10-03T11:44:28+08:00";
+export const JEV_AS_OF = "2026-10-03T12:13:41+08:00";
 export const JEV_TITLE = "当一个决策模型看见不同的棋盘";
 export const JEV_ENGLISH = "When a Decision Model Sees the Board Differently";
 
@@ -139,7 +139,7 @@ export function jevSheet(): Sheet {
       "Based on Puck's preserved probe record; interpretations accepted by Opus chair; Astra performed stated record-layer checks.",
     fallback: `If HTML fails, read ${TXT}. If TXT is incomplete, stop.`,
     notes: [
-      "STATUS stays draft until Astra re-checks the r3.1 manifest (see 14 Limitations, point 5).",
+      "STATUS: draft until Tuzi approves publication.",
       "COMPLETENESS: complete",
       "If END SALON-JEV-001 is missing, this copy is incomplete.",
       "ARTICLE_TYPE: research_note",
@@ -154,10 +154,10 @@ export function jevSheet(): Sheet {
       "SOURCE_OF_TRUTH: one article record",
       `LIGHT: ${LIGHT}`,
       "RAW_DATA: not yet public",
-      "REVIEW_OPUS: chair audit of draft 2026-10-03 · PASS WITH EDITS · edits applied",
+      "REVIEW_OPUS: chair audit of draft 2026-10-03 · PASS WITH EDITS · edits applied; live audit 2026-10-03 ~11:55 +08:00 · PASS",
       "REVIEW_ASTRA: content review of live TXT (fetched 2026-10-03 11:39 +08:00) · PASS WITH EDITS · edits applied in v3",
-      "REVIEW_R31_MANIFEST: pending (Astra)",
-      "REVIEW_LIVE_HTML: not yet verified",
+      "REVIEW_R31_MANIFEST: PASS (Astra, 2026-10-03; 227/227 hashes match; scope: internal consistency of the preserved package)",
+      "REVIEW_LIVE_HTML: verified by Opus, 2026-10-03",
       "CONTRIBUTOR_ROLES: Tuzi = host, relay, approval; Puck = execution, records, operational verification; Opus = chair, experimental design, interpretation; Astra = independent review, design gate; GPT = synthesis, application analysis, drafting",
       "LIMIT: Do not treat noul as independently calibrated probability.",
       ...JEV_DOES_NOT_CLAIM.map((line) => `THIS NOTE DOES NOT CLAIM: ${line}`),
@@ -220,7 +220,7 @@ export function jevStaticHtml(): string {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeText(JEV_TITLE)}</title>
-<meta name="description" content="Draft research note. Not a passed paper. Manifest and live HTML still open.">
+<meta name="description" content="Draft research note. Tuzi decides publication.">
 </head>
 <body>
 <main>
