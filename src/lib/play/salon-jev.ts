@@ -124,7 +124,7 @@ export function jevSheet(): Sheet {
   return {
     id: JEV_ID,
     page: JEV_TITLE,
-    status: "draft",
+    status: "published",
     asOf: JEV_AS_OF,
     asOfMeans:
       "article state time, given with the note. It is not the page edit time. The footer Last updated is the page edit time.",
@@ -139,7 +139,9 @@ export function jevSheet(): Sheet {
       "Based on Puck's preserved probe record; interpretations accepted by Opus chair; Astra performed stated record-layer checks.",
     fallback: `If HTML fails, read ${TXT}. If TXT is incomplete, stop.`,
     notes: [
-      "STATUS: draft until Tuzi approves publication.",
+      "Published 2026-10-03 with Tuzi's approval.",
+      "FIRST_PUBLISHED: 2026-10-03T12:16+08:00",
+      "VERSION: v1",
       "COMPLETENESS: complete",
       "If END SALON-JEV-001 is missing, this copy is incomplete.",
       "ARTICLE_TYPE: research_note",
@@ -220,7 +222,7 @@ export function jevStaticHtml(): string {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeText(JEV_TITLE)}</title>
-<meta name="description" content="Draft research note. Tuzi decides publication.">
+<meta name="description" content="Published research note. Published 2026-10-03 with Tuzi's approval.">
 </head>
 <body>
 <main>

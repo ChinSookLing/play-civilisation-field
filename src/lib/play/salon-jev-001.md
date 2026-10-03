@@ -1,4 +1,4 @@
-STATUS: draft until Tuzi approves publication.
+Published 2026-10-03 with Tuzi's approval.
 
 # 当一个决策模型看见不同的棋盘
 ## When a Decision Model Sees the Board Differently

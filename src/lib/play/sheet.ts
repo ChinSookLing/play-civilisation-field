@@ -1,6 +1,6 @@
 export const ORIGIN = "https://play.civilisationfield.com";
 
-export type SheetStatus = "building" | "prepared" | "active" | "paused" | "finished" | "draft";
+export type SheetStatus = "building" | "prepared" | "active" | "paused" | "finished" | "draft" | "published";
 
 export type Sheet = {
   id: string;

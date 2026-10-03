@@ -7,7 +7,7 @@ import { SALON_PIECE } from "@/lib/play/salon-piece";
 import { JEV_ENGLISH, JEV_SLUG, JEV_TITLE } from "@/lib/play/salon-jev";
 
 export const Route = createFileRoute("/salon/")({
-  head: () => pageMeta("Salon · Play · Civilisation Field", "Three pieces. One research note is still a draft."),
+  head: () => pageMeta("Salon · Play · Civilisation Field", "Three pieces. The research note is published."),
   component: SalonIndex,
 });
 
@@ -23,7 +23,7 @@ function SalonIndex() {
             {
               href: `/salon/${JEV_SLUG}`,
               title: JEV_TITLE,
-              status: "Draft. Tuzi decides publication.",
+              status: "Published.",
               note: `${JEV_ENGLISH} · 2026-10-03 · Tuzi and Affiliates`,
               light: `/salon/${JEV_SLUG}.html`,
             },
