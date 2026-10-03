@@ -76,10 +76,10 @@ export function recordsText(extra?: {
   lines.push("RECORD_STATUS: active");
   lines.push(`MESSAGES: ${extra?.proof004?.messages ?? 0}`);
   lines.push(`LEDGER: ${extra?.proof004?.ledger ?? "none yet"}`);
-  lines.push("RULES: v0.5");
+  lines.push("RULES: v0.5.1");
   lines.push(`RECORD_URL: ${ORIGIN}/gathering/proof-table-004/table`);
   lines.push(
-    `FORMATS: ${ORIGIN}/gathering/proof-table-004/table.txt | ${ORIGIN}/gathering/proof-table/rules/v0.5.txt`,
+    `FORMATS: ${ORIGIN}/gathering/proof-table-004/table.txt | ${ORIGIN}/gathering/proof-table/rules/v0.5.1.txt`,
   );
   lines.push("RECORD: Lonely Runner audit. Round 0. No answer key.");
   lines.push("");

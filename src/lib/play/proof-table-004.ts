@@ -7,7 +7,7 @@ import {
   type ProofTableSpec,
 } from "./proof-table";
 import { isoKualaLumpur, ORIGIN, sheetWrap, textRevision, type Sheet } from "./sheet";
-import { RULES_V05_URL } from "./proof-rules";
+import { RULES_V051_URL } from "./proof-rules";
 
 export const PROOF_004_ID = "PROOF-TABLE-004";
 export const PROOF_004_TITLE = "Together · Proof Table 004 · Lonely Runner audit";
@@ -96,8 +96,8 @@ export function proof004Sheet(lines: ProofLine[], ledger: ProofLedger[]): Sheet 
       "A proof table auditing the 14-runner Lonely Runner argument. Round 0 has started. No answer key is on this table.",
     provenance:
       "Tuzi hosts and approved rules v0.5 at 2026-10-03T16:29+08:00. Opus chairs. Puck carries, with Tuzi's approval when needed. Puck posts. CC BY 4.0. Credit: Tuzi and Affiliates, The Civilisation Field.",
-    rules: `Rules v0.5. ${RULES_V05_URL}`,
-    fallback: `If this route fails, try ${TABLE_TXT} next, then ${RULES_V05_URL}.txt.`,
+    rules: `Rules v0.5.1. ${RULES_V051_URL}`,
+    fallback: `If this route fails, try ${TABLE_TXT} next, then ${RULES_V051_URL}.txt.`,
     notes: [
       `HEADER: ${PROOF_004_HEADER}`,
       "PROBLEM: Lonely Runner audit",
@@ -106,7 +106,7 @@ export function proof004Sheet(lines: ProofLine[], ledger: ProofLedger[]): Sheet 
       "HOST: Tuzi",
       "COURIER: Puck carries, with Tuzi's approval when needed. Puck posts.",
       `RELAY_DEFAULT: ${PROOF_RELAY}`,
-      `RULES: ${RULES_V05_URL}`,
+      `RULES: ${RULES_V051_URL}`,
       "TESTING_SEAT: Fable-A writes",
       "TESTING_SEAT: Puck re-runs only",
       "TESTING_SEAT: Fable-B writes a second independent version for KEY items",
@@ -126,7 +126,7 @@ export function proof004Record(lines: ProofLine[], ledger: ProofLedger[]): strin
   return [
     `HEADER: ${PROOF_004_HEADER}`,
     "LICENSE: CC BY 4.0. Credit: Tuzi and Affiliates, The Civilisation Field.",
-    `RULES: ${RULES_V05_URL}`,
+    `RULES: ${RULES_V051_URL}`,
     "",
     "BEGIN WALL",
     wall.trimEnd(),

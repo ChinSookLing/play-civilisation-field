@@ -34,6 +34,9 @@ export function RulesView({ version, currentPage = false }: { version: RulesVers
           </a>
           {currentPage ? (
             <>
+              <Link to="/gathering/proof-table/rules/v0.5.1" className="ml-4 text-fg underline decoration-1 underline-offset-4">
+                v0.5.1
+              </Link>
               <Link to="/gathering/proof-table/rules/v0.5" className="ml-4 text-fg underline decoration-1 underline-offset-4">
                 v0.5
               </Link>

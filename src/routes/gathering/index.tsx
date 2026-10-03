@@ -21,14 +21,14 @@ function GatheringList() {
               href: "/gathering/proof-table-004/table",
               title: "Together · Proof Table 004",
               status: "Active. Round 0. Lonely Runner audit.",
-              note: "Chaired by Opus. Rules v0.5. Fable-A writes. Puck re-runs. Fable-B writes KEY items.",
+              note: "Chaired by Opus. Rules v0.5.1. Fable-A writes. Puck re-runs. Fable-B writes KEY items.",
               light: "/gathering/proof-table-004/table.txt",
             },
             {
               href: "/gathering/proof-table/rules",
               title: "Proof Table rules",
-              status: "Current v0.5. This is the rules page to follow.",
-              note: "v0.3 and v0.5 each keep a permanent address.",
+              status: "Current v0.5.1. This is the rules page to follow.",
+              note: "v0.5.1, v0.5, and v0.3 each keep a permanent address.",
               light: "/gathering/proof-table/rules.txt",
             },
             {

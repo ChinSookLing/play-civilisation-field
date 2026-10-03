@@ -125,6 +125,8 @@ import { Route as ApiGatheringProofTable004LinesRouteImport } from './routes/api
 import { Route as GatheringProofTableRulesV0Dot3RouteImport } from './routes/gathering/proof-table/rules/v0[.]3'
 import { Route as GatheringProofTableRulesV0Dot3DottxtRouteImport } from './routes/gathering/proof-table/rules/v0[.]3[.]txt'
 import { Route as GatheringProofTableRulesV0Dot5RouteImport } from './routes/gathering/proof-table/rules/v0[.]5'
+import { Route as GatheringProofTableRulesV0Dot5Dot1RouteImport } from './routes/gathering/proof-table/rules/v0[.]5[.]1'
+import { Route as GatheringProofTableRulesV0Dot5Dot1DottxtRouteImport } from './routes/gathering/proof-table/rules/v0[.]5[.]1[.]txt'
 import { Route as GatheringProofTableRulesV0Dot5DottxtRouteImport } from './routes/gathering/proof-table/rules/v0[.]5[.]txt'
 
 const IndexRoute = IndexRouteImport.update({
@@ -765,6 +767,18 @@ const GatheringProofTableRulesV0Dot5Route =
     path: '/v0.5',
     getParentRoute: () => GatheringProofTableRulesRoute,
   } as any)
+const GatheringProofTableRulesV0Dot5Dot1Route =
+  GatheringProofTableRulesV0Dot5Dot1RouteImport.update({
+    id: '/v0.5.1',
+    path: '/v0.5.1',
+    getParentRoute: () => GatheringProofTableRulesRoute,
+  } as any)
+const GatheringProofTableRulesV0Dot5Dot1DottxtRoute =
+  GatheringProofTableRulesV0Dot5Dot1DottxtRouteImport.update({
+    id: '/v0.5.1.txt',
+    path: '/v0.5.1.txt',
+    getParentRoute: () => GatheringProofTableRulesRoute,
+  } as any)
 const GatheringProofTableRulesV0Dot5DottxtRoute =
   GatheringProofTableRulesV0Dot5DottxtRouteImport.update({
     id: '/v0.5.txt',
@@ -889,6 +903,8 @@ export interface FileRoutesByFullPath {
   '/gathering/proof-table/rules/v0.3': typeof GatheringProofTableRulesV0Dot3Route
   '/gathering/proof-table/rules/v0.3.txt': typeof GatheringProofTableRulesV0Dot3DottxtRoute
   '/gathering/proof-table/rules/v0.5': typeof GatheringProofTableRulesV0Dot5Route
+  '/gathering/proof-table/rules/v0.5.1': typeof GatheringProofTableRulesV0Dot5Dot1Route
+  '/gathering/proof-table/rules/v0.5.1.txt': typeof GatheringProofTableRulesV0Dot5Dot1DottxtRoute
   '/gathering/proof-table/rules/v0.5.txt': typeof GatheringProofTableRulesV0Dot5DottxtRoute
 }
 export interface FileRoutesByTo {
@@ -1006,6 +1022,8 @@ export interface FileRoutesByTo {
   '/gathering/proof-table/rules/v0.3': typeof GatheringProofTableRulesV0Dot3Route
   '/gathering/proof-table/rules/v0.3.txt': typeof GatheringProofTableRulesV0Dot3DottxtRoute
   '/gathering/proof-table/rules/v0.5': typeof GatheringProofTableRulesV0Dot5Route
+  '/gathering/proof-table/rules/v0.5.1': typeof GatheringProofTableRulesV0Dot5Dot1Route
+  '/gathering/proof-table/rules/v0.5.1.txt': typeof GatheringProofTableRulesV0Dot5Dot1DottxtRoute
   '/gathering/proof-table/rules/v0.5.txt': typeof GatheringProofTableRulesV0Dot5DottxtRoute
 }
 export interface FileRoutesById {
@@ -1126,6 +1144,8 @@ export interface FileRoutesById {
   '/gathering/proof-table/rules/v0.3': typeof GatheringProofTableRulesV0Dot3Route
   '/gathering/proof-table/rules/v0.3.txt': typeof GatheringProofTableRulesV0Dot3DottxtRoute
   '/gathering/proof-table/rules/v0.5': typeof GatheringProofTableRulesV0Dot5Route
+  '/gathering/proof-table/rules/v0.5.1': typeof GatheringProofTableRulesV0Dot5Dot1Route
+  '/gathering/proof-table/rules/v0.5.1.txt': typeof GatheringProofTableRulesV0Dot5Dot1DottxtRoute
   '/gathering/proof-table/rules/v0.5.txt': typeof GatheringProofTableRulesV0Dot5DottxtRoute
 }
 export interface FileRouteTypes {
@@ -1247,6 +1267,8 @@ export interface FileRouteTypes {
     | '/gathering/proof-table/rules/v0.3'
     | '/gathering/proof-table/rules/v0.3.txt'
     | '/gathering/proof-table/rules/v0.5'
+    | '/gathering/proof-table/rules/v0.5.1'
+    | '/gathering/proof-table/rules/v0.5.1.txt'
     | '/gathering/proof-table/rules/v0.5.txt'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -1364,6 +1386,8 @@ export interface FileRouteTypes {
     | '/gathering/proof-table/rules/v0.3'
     | '/gathering/proof-table/rules/v0.3.txt'
     | '/gathering/proof-table/rules/v0.5'
+    | '/gathering/proof-table/rules/v0.5.1'
+    | '/gathering/proof-table/rules/v0.5.1.txt'
     | '/gathering/proof-table/rules/v0.5.txt'
   id:
     | '__root__'
@@ -1483,6 +1507,8 @@ export interface FileRouteTypes {
     | '/gathering/proof-table/rules/v0.3'
     | '/gathering/proof-table/rules/v0.3.txt'
     | '/gathering/proof-table/rules/v0.5'
+    | '/gathering/proof-table/rules/v0.5.1'
+    | '/gathering/proof-table/rules/v0.5.1.txt'
     | '/gathering/proof-table/rules/v0.5.txt'
   fileRoutesById: FileRoutesById
 }
@@ -2347,6 +2373,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GatheringProofTableRulesV0Dot5RouteImport
       parentRoute: typeof GatheringProofTableRulesRoute
     }
+    '/gathering/proof-table/rules/v0.5.1': {
+      id: '/gathering/proof-table/rules/v0.5.1'
+      path: '/v0.5.1'
+      fullPath: '/gathering/proof-table/rules/v0.5.1'
+      preLoaderRoute: typeof GatheringProofTableRulesV0Dot5Dot1RouteImport
+      parentRoute: typeof GatheringProofTableRulesRoute
+    }
+    '/gathering/proof-table/rules/v0.5.1.txt': {
+      id: '/gathering/proof-table/rules/v0.5.1.txt'
+      path: '/v0.5.1.txt'
+      fullPath: '/gathering/proof-table/rules/v0.5.1.txt'
+      preLoaderRoute: typeof GatheringProofTableRulesV0Dot5Dot1DottxtRouteImport
+      parentRoute: typeof GatheringProofTableRulesRoute
+    }
     '/gathering/proof-table/rules/v0.5.txt': {
       id: '/gathering/proof-table/rules/v0.5.txt'
       path: '/v0.5.txt'
@@ -2373,6 +2413,8 @@ interface GatheringProofTableRulesRouteChildren {
   GatheringProofTableRulesV0Dot3Route: typeof GatheringProofTableRulesV0Dot3Route
   GatheringProofTableRulesV0Dot3DottxtRoute: typeof GatheringProofTableRulesV0Dot3DottxtRoute
   GatheringProofTableRulesV0Dot5Route: typeof GatheringProofTableRulesV0Dot5Route
+  GatheringProofTableRulesV0Dot5Dot1Route: typeof GatheringProofTableRulesV0Dot5Dot1Route
+  GatheringProofTableRulesV0Dot5Dot1DottxtRoute: typeof GatheringProofTableRulesV0Dot5Dot1DottxtRoute
   GatheringProofTableRulesV0Dot5DottxtRoute: typeof GatheringProofTableRulesV0Dot5DottxtRoute
 }
 
@@ -2382,6 +2424,10 @@ const GatheringProofTableRulesRouteChildren: GatheringProofTableRulesRouteChildr
     GatheringProofTableRulesV0Dot3DottxtRoute:
       GatheringProofTableRulesV0Dot3DottxtRoute,
     GatheringProofTableRulesV0Dot5Route: GatheringProofTableRulesV0Dot5Route,
+    GatheringProofTableRulesV0Dot5Dot1Route:
+      GatheringProofTableRulesV0Dot5Dot1Route,
+    GatheringProofTableRulesV0Dot5Dot1DottxtRoute:
+      GatheringProofTableRulesV0Dot5Dot1DottxtRoute,
     GatheringProofTableRulesV0Dot5DottxtRoute:
       GatheringProofTableRulesV0Dot5DottxtRoute,
   }

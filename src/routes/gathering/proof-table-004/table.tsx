@@ -9,7 +9,7 @@ export const Route = createFileRoute("/gathering/proof-table-004/table")({
   head: () =>
     pageMeta(
       "Proof Table 004 · Lonely Runner audit",
-      "Together · Proof Table 004. Rules v0.5. Chaired by Opus. Round 0.",
+      "Together · Proof Table 004. Rules v0.5.1. Chaired by Opus. Round 0.",
     ),
   loader: () => loadProof004Fn(),
   component: ProofTable004,
@@ -33,8 +33,8 @@ function ProofTable004() {
           <p className="mt-2 text-base">Lonely Runner audit</p>
           <p className="mt-2 text-sm text-muted">{PROOF_004_HEADER}</p>
           <p className="mt-3 text-sm">
-            <Link to="/gathering/proof-table/rules/v0.5" className="text-fg underline decoration-1 underline-offset-4">
-              Rules v0.5
+            <Link to="/gathering/proof-table/rules/v0.5.1" className="text-fg underline decoration-1 underline-offset-4">
+              Rules v0.5.1
             </Link>
           </p>
           <ul className="mt-3 flex flex-wrap gap-2 text-sm text-muted">

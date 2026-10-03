@@ -48,7 +48,7 @@ function Index() {
                       to="/gathering/proof-table/rules"
                       className="mt-1 block text-sm text-fg underline decoration-1 underline-offset-4"
                     >
-                      Proof Table rules (current v0.5)
+                      Proof Table rules (current v0.5.1)
                     </Link>
                   ) : null}
                 </span>
