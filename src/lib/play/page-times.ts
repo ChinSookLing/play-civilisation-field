@@ -20,7 +20,7 @@ export const PAGE_COMMITTED_AT: Record<string, string> = {
   "NOTES": "2026-10-02T02:57:54+00:00",
   "PROOF-TABLE-003-RULES": "2026-10-02T15:23:45+00:00",
   "PROOF-TABLE-003-TASK": "2026-10-02T15:23:45+00:00",
-  "SALON-JEV-001": "2026-10-03T03:22:20+00:00",
+  "SALON-JEV-001": "2026-10-03T03:29:12+00:00",
 };
 
 export function pageAsOf(id: string): string {
