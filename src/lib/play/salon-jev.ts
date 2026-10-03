@@ -52,30 +52,48 @@ function kindFor(level: 2 | 3, text: string, prev?: JevKind): JevKind | undefine
 export function jevBlocks(): JevBlock[] {
   const blocks: JevBlock[] = [];
   let kind: JevKind | undefined;
-  for (const chunk of JEV_ARTICLE.split(/\n\n/u)) {
-    const lines = chunk.split("\n");
-    const first = lines[0] ?? "";
-    if (first.startsWith("### ")) {
-      const text = first.slice(4);
+  const lines = JEV_ARTICLE.split("\n");
+  let index = 0;
+  while (index < lines.length) {
+    const line = lines[index] ?? "";
+    if (line.trim() === "") {
+      index += 1;
+      continue;
+    }
+    if (line.startsWith("### ")) {
+      const text = line.slice(4);
       kind = kindFor(3, text, kind);
       blocks.push({ tag: "h3", text, kind });
+      index += 1;
       continue;
     }
-    if (first.startsWith("## ")) {
-      const text = first.slice(3);
+    if (line.startsWith("## ")) {
+      const text = line.slice(3);
       kind = kindFor(2, text, kind);
       blocks.push({ tag: "h2", text, kind });
+      index += 1;
       continue;
     }
-    if (first.startsWith("# ")) {
-      blocks.push({ tag: "h1", text: first.slice(2), kind });
+    if (line.startsWith("# ")) {
+      blocks.push({ tag: "h1", text: line.slice(2), kind });
+      index += 1;
       continue;
     }
-    if (lines.every((line) => line.startsWith("- "))) {
-      for (const line of lines) blocks.push({ tag: "li", text: line.slice(2), kind });
+    if (line.startsWith("- ")) {
+      while (index < lines.length && (lines[index] ?? "").startsWith("- ")) {
+        blocks.push({ tag: "li", text: (lines[index] ?? "").slice(2), kind });
+        index += 1;
+      }
       continue;
     }
-    blocks.push({ tag: "p", text: chunk, kind });
+    const para: string[] = [];
+    while (index < lines.length) {
+      const current = lines[index] ?? "";
+      if (current.trim() === "" || current.startsWith("#") || current.startsWith("- ")) break;
+      para.push(current);
+      index += 1;
+    }
+    blocks.push({ tag: "p", text: para.join("\n"), kind });
   }
   return blocks;
 }
@@ -149,7 +167,10 @@ export function jevUpdated(): string {
 }
 
 function escapeText(value: string): string {
-  return value.replace(/&/gu, "&").replace(/</gu, "<").replace(/>/gu, ">");
+  return value
+    .replace(/&/gu, "&" + "amp;")
+    .replace(/</gu, "&" + "lt;")
+    .replace(/>/gu, "&" + "gt;");
 }
 
 function inlineHtml(input: string): string {
