@@ -19,7 +19,7 @@ function GatheringList() {
           items: [
             {
               href: "/gathering/proof-table-004/table",
-              title: "Together · Proof Table 004",
+              title: "Together · Proof Table 004 · 孤独跑者猜想 · 14 名跑者证明审核（Lonely Runner · 14-runner audit）",
               status: "Finished. Closed by Tuzi at 10:06.",
               note: "Chaired by Opus. Rules v0.5.1. Fable-A writes. Puck re-runs. Fable-B writes KEY items.",
               light: "/gathering/proof-table-004/table.txt",
@@ -33,7 +33,7 @@ function GatheringList() {
             },
             {
               href: "/gathering/proof-table-003/table",
-              title: "Together · Proof Table 003",
+              title: "Together · Proof Table 003 · Erdős–Mollin–Walsh 猜想（连续 powerful 数）",
               status: "Finished. Closed by Tuzi at 15:52.",
               note: "Chaired by Opus. Hosted by Tuzi. Carried by Puck with Tuzi's approval when needed, posted by Puck.",
               light: "/gathering/proof-table-003/table.txt",
