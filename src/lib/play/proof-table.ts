@@ -25,7 +25,7 @@ export const PROOF_SEATS = [
   "GLM",
 ] as const;
 
-export const PROOF_LINE_TYPES = ["host_note", "chair_summary", "turn", "courier_note", "rerun_record", "read_record"] as const;
+export const PROOF_LINE_TYPES = ["host_note", "chair_summary", "chair_note", "turn", "courier_note", "rerun_record", "read_record"] as const;
 export type ProofLineType = (typeof PROOF_LINE_TYPES)[number];
 
 export const PROOF_STATUS_CLAIMS = [

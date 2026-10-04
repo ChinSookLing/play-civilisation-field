@@ -18,6 +18,13 @@ function GatheringList() {
         {
           items: [
             {
+              href: "/gathering/proof-table-005/table",
+              title: "Together · Proof Table 005 · 孤独跑者猜想 · 16 名跑者接力辩论 (Lonely Runner · 16-runner relay debate)",
+              status: "Prepared. The opening line is not posted.",
+              note: "A relay debate, not an audit. Chaired by Opus. Hosted by Tuzi. Carried by Puck. Rules v0.5.1.",
+              light: "/gathering/proof-table-005/table.txt",
+            },
+            {
               href: "/gathering/proof-table-004/table",
               title: "Together · Proof Table 004 · 孤独跑者猜想 · 14 名跑者证明审核（Lonely Runner · 14-runner audit）",
               status: "Finished. Closed by Tuzi at 10:06.",

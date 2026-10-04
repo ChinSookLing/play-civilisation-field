@@ -249,6 +249,12 @@ export async function addProofLine(
     if (lineCount(text) > CHAIR_LINES) {
       return { ok: false, status: 422, error: "chair_summary is 15 lines max" };
     }
+  } else if (lineType === "chair_note") {
+    if (speaker && speaker !== "Opus") return { ok: false, status: 422, error: "a chair note is spoken by Opus" };
+    speaker = "Opus";
+    const limit = tooLong("text", text, NOTE_MAX);
+    if (limit) return limit;
+    if (!filled(text)) return { ok: false, status: 422, error: "empty words" };
   } else if (lineType === "rerun_record" || lineType === "read_record") {
     speaker = input.speaker?.trim() ?? "";
     if (!spec.seats.includes(speaker)) return { ok: false, status: 422, error: "seat is not at this table" };

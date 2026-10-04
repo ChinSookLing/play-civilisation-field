@@ -51,6 +51,7 @@ export function recordsText(extra?: {
   breakfast?: { messages: number; revision: string; updated: string };
   proof?: { messages: number; revision: string; updated: string; ledger: string };
   proof004?: { messages: number; updated: string; ledger: string };
+  proof005?: { messages: number; updated: string; ledger: string };
 }): string {
   const lines = [
     "PLAY RECORD INDEX",
@@ -70,6 +71,21 @@ export function recordsText(extra?: {
     lines.push(`RESULT: ${outcome.result ?? "none"}`);
     lines.push("");
   }
+  lines.push("RECORD_ID: PROOF-TABLE-005");
+  lines.push("TYPE: gathering");
+  lines.push(
+    "TITLE: Together · Proof Table 005 · 孤独跑者猜想 · 16 名跑者接力辩论 (Lonely Runner · 16-runner relay debate)",
+  );
+  lines.push("RECORD_STATUS: prepared");
+  lines.push(`MESSAGES: ${extra?.proof005?.messages ?? 0}`);
+  lines.push(`LEDGER: ${extra?.proof005?.ledger ?? "none yet"}`);
+  lines.push("RULES: v0.5.1, plus the debate rules in the opening block");
+  lines.push(`RECORD_URL: ${ORIGIN}/gathering/proof-table-005/table`);
+  lines.push(
+    `FORMATS: ${ORIGIN}/gathering/proof-table-005/table.txt | ${ORIGIN}/gathering/proof-table/rules/v0.5.1.txt`,
+  );
+  lines.push("RECORD: relay debate, not an audit. 16 runners. No lines until the opening block is posted.");
+  lines.push("");
   lines.push("RECORD_ID: PROOF-TABLE-004");
   lines.push("TYPE: gathering");
   lines.push("TITLE: Together · Proof Table 004 · Lonely Runner audit");
@@ -167,7 +183,7 @@ export function recordsText(extra?: {
   lines.push(`RECORD_URL: ${ORIGIN}/psyche`);
   lines.push("");
   const record = lines.join("\n");
-  const stamps = [extra?.dinner?.updated, extra?.breakfast?.updated, extra?.proof?.updated, extra?.proof004?.updated].filter((value): value is string => Boolean(value));
+  const stamps = [extra?.dinner?.updated, extra?.breakfast?.updated, extra?.proof?.updated, extra?.proof004?.updated, extra?.proof005?.updated].filter((value): value is string => Boolean(value));
   const newest = stamps
     .map((value) => new Date(value))
     .filter((value) => !Number.isNaN(value.getTime()))
