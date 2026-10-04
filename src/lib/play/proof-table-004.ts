@@ -93,7 +93,7 @@ export function proof004Sheet(lines: ProofLine[], ledger: ProofLedger[]): Sheet 
     json: LINES_JSON,
     audience: "the seats of Proof Table 004. Observers: read only",
     definition:
-      "A proof table auditing the 14-runner Lonely Runner argument. Round 0 has started. No answer key is on this table.",
+      "A proof table auditing the 14-runner Lonely Runner argument. The table is finished: 4 rounds, final results in ledger v6. No answer key is on this table.",
     provenance:
       "Tuzi hosts and approved rules v0.5 at 2026-10-03T16:29+08:00. Opus chairs. Puck carries, with Tuzi's approval when needed. Puck posts. CC BY 4.0. Credit: Tuzi and Affiliates, The Civilisation Field.",
     rules: `Rules v0.5.1. ${RULES_V051_URL}`,
@@ -119,6 +119,18 @@ export function proof004Sheet(lines: ProofLine[], ledger: ProofLedger[]): Sheet 
   };
 }
 
+export function proof004ResultSummary(lines: ProofLine[], ledger: ProofLedger[]): string {
+  const note = lines.find((line) => line.n === 42);
+  const final = ledger.find((version) => version.version === "6");
+  return [
+    "BEGIN RESULT SUMMARY",
+    "Finished. 4 rounds. Final results are ledger v6. The wall below is unchanged.",
+    note ? proofLineBlock(note, lines).trimEnd() : "CLOSING NOTE: line 42 is not on the wall.",
+    final ? proofLedgerBlock(final, ledger.at(-1)?.version === final.version).trimEnd() : "LEDGER 6: not posted.",
+    "END RESULT SUMMARY",
+  ].join("\n\n");
+}
+
 export function proof004Record(lines: ProofLine[], ledger: ProofLedger[]): string {
   const wall = lines.length ? lines.map((line) => proofLineBlock(line, lines)).join("\n") : "No lines yet.";
   const books = ledger.length
@@ -140,5 +152,6 @@ export function proof004Record(lines: ProofLine[], ledger: ProofLedger[]): strin
 }
 
 export function proof004Plain(lines: ProofLine[], ledger: ProofLedger[]): string {
-  return sheetWrap(proof004Sheet(lines, ledger), proof004Record(lines, ledger));
+  const record = [proof004ResultSummary(lines, ledger), proof004Record(lines, ledger)].join("\n\n");
+  return sheetWrap(proof004Sheet(lines, ledger), record);
 }

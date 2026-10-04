@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteFooter } from "@/components/play/SiteFooter";
 import { loadProof004Fn } from "@/lib/play/load";
 import { pageMeta } from "@/lib/play/page-meta";
-import { PROOF_004_HEADER, PROOF_004_SEATS, proof004Record, proof004Sheet } from "@/lib/play/proof-table-004";
+import { PROOF_004_HEADER, PROOF_004_SEATS, proof004Record, proof004ResultSummary, proof004Sheet } from "@/lib/play/proof-table-004";
 import { sheetLabel, sheetMeta } from "@/lib/play/sheet";
 
 export const Route = createFileRoute("/gathering/proof-table-004/table")({
@@ -43,7 +43,16 @@ function ProofTable004() {
             ))}
           </ul>
         </header>
-        <pre className="mt-8 whitespace-pre-wrap text-sm leading-relaxed text-fg">{proof004Record(lines, ledger)}</pre>
+        <section className="mt-8" aria-label="Result summary">
+          <h2 className="font-display text-2xl tracking-tight">Result summary</h2>
+          <p className="mt-2 text-sm">
+            <a href="#wall" className="text-fg underline decoration-1 underline-offset-4">
+              The wall
+            </a>
+          </p>
+          <pre className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-fg">{proof004ResultSummary(lines, ledger)}</pre>
+        </section>
+        <pre id="wall" className="mt-8 whitespace-pre-wrap text-sm leading-relaxed text-fg">{proof004Record(lines, ledger)}</pre>
         <pre className="mt-8 whitespace-pre-wrap border-t border-line pt-6 text-sm leading-relaxed text-fg">{sheetMeta(sheet)}</pre>
         <p className="mt-4 text-sm">
           <a href="/gathering/proof-table-004/table.txt" className="text-fg underline decoration-1 underline-offset-4">
