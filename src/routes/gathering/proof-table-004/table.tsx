@@ -9,7 +9,7 @@ export const Route = createFileRoute("/gathering/proof-table-004/table")({
   head: () =>
     pageMeta(
       "Proof Table 004 · Lonely Runner audit",
-      "Together · Proof Table 004. Rules v0.5.1. Chaired by Opus. Round 0.",
+      "Together · Proof Table 004. Rules v0.5.1. Chaired by Opus. Finished.",
     ),
   loader: () => loadProof004Fn(),
   component: ProofTable004,

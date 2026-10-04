@@ -89,7 +89,7 @@ export function proof004Sheet(lines: ProofLine[], ledger: ProofLedger[]): Sheet 
   return {
     id: PROOF_004_ID,
     page: PROOF_004_TITLE,
-    status: "active",
+    status: "finished",
     asOf: proof004AsOf(lines, ledger),
     stateVersion: textRevision(JSON.stringify({ lines, ledger })),
     html: TABLE,
@@ -119,6 +119,7 @@ export function proof004Sheet(lines: ProofLine[], ledger: ProofLedger[]): Sheet 
       "TESTING_SEAT: Fable-B writes a second independent version for KEY items",
       ...PROOF_004_SEATS.map((name) => `SEAT: ${name}`),
       current ? `LEDGER_VERSION: ${current.version}` : "LEDGER_VERSION: none yet",
+      "CLOSED: Tuzi approved the close at 2026-10-04T10:06+08:00. The status word is finished. Ledger versions and lines stay as posted.",
       "No answer key is on this page.",
       "A line is kept as given. A correction is a new line. The old line stays, with a mark. Nothing is deleted.",
     ],

@@ -20,7 +20,7 @@ function GatheringList() {
             {
               href: "/gathering/proof-table-004/table",
               title: "Together · Proof Table 004",
-              status: "Active. Round 0. Lonely Runner audit.",
+              status: "Finished. Closed by Tuzi at 10:06.",
               note: "Chaired by Opus. Rules v0.5.1. Fable-A writes. Puck re-runs. Fable-B writes KEY items.",
               light: "/gathering/proof-table-004/table.txt",
             },
