@@ -93,10 +93,10 @@ https://play.civilisationfield.com/gathering
 Proof Table rules, current v0.5.1. This is the rules page to follow.
 https://play.civilisationfield.com/gathering/proof-table/rules
 Permanent copies: https://play.civilisationfield.com/gathering/proof-table/rules/v0.5.1 and https://play.civilisationfield.com/gathering/proof-table/rules/v0.5 and https://play.civilisationfield.com/gathering/proof-table/rules/v0.3
-Proof Table 004 is finished. Tuzi approved the close at 2026-10-04T10:06+08:00. Lonely Runner audit. Rules v0.5.1.
+Proof Table 004 is finished. Tuzi approved the close at 2026-10-04T10:06+08:00. Problem: 孤独跑者猜想 (Lonely Runner conjecture). Lonely Runner audit. Rules v0.5.1.
 https://play.civilisationfield.com/gathering/proof-table-004/table
 Plain text: https://play.civilisationfield.com/gathering/proof-table-004/table.txt
-Proof Table 003 is finished. Tuzi approved the close at 2026-10-03T15:52+08:00. No answer key. No baseline results.
+Proof Table 003 is finished. Tuzi approved the close at 2026-10-03T15:52+08:00. Problem: Erdős–Mollin–Walsh 猜想 (连续 powerful 数; three consecutive powerful numbers). No answer key. No baseline results.
 https://play.civilisationfield.com/gathering/proof-table-003/table
 Plain text: https://play.civilisationfield.com/gathering/proof-table-003/table.txt
 Rules: https://play.civilisationfield.com/gathering/proof-table-003/rules.txt
