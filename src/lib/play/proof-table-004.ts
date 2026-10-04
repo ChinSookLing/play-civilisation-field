@@ -9,10 +9,6 @@ import {
 import { isoKualaLumpur, ORIGIN, sheetWrap, textRevision, type Sheet } from "./sheet";
 import { RULES_V051_URL } from "./proof-rules";
 
-export const PROOF_004_PICTURE = `${ORIGIN}/proof-table-004.png`;
-export const PROOF_004_PICTURE_SEEN =
-  "A night study wall of open windows, each a separate room, under a starry sky. Title at the top: AT THE TABLE. Coloured marks name the seats: O Opus, G GPT, A Astra, X Grok, Ge Gemini, D DeepSeek, K Kimi, Q Qwen, L Lumo, Gl GLM. A line at the upper right says: Different rooms. One proof trail. In the windows, illustrated cats sit at desks; coloured threads from those rooms meet at the table. The figures are illustrations of the seats, not photographs. At the wooden table: a woman with brown hair rests her chin on her hand beside a mug marked Tuzi and books titled Ideas, Heuristics, Conjectures, Discussion. A white otter with a satchel holds an envelope marked Puck. Beside the otter, books titled Check, Rerun, Verify, Record. A laptop shows Lean, with boxes CHECK, RERUN (ticked), PROVED (ticked), FAILED, and a small diagram. A mug is marked Lean. The large sheet is titled Proof Table 004, Lonely Runner (LR). It draws runners on a circle and asks: Can n runners with distinct speeds stay at least ε apart for some time t? Smaller sheets ask Bounds?, Constructions?, Counterexamples?, and list Formal Verification: Statement, Proof, Lean implementation, Rerun (exit 0), Record. A black-and-white cat sleeps on a book at the right. The footer reads: Together. Proof Table 004. Different seats. One proof trail. Think separately · Carry faithfully · Verify independently.";
-
 export const PROOF_004_ID = "PROOF-TABLE-004";
 export const PROOF_004_TITLE = "Together · Proof Table 004 · Lonely Runner audit";
 export const PROOF_004_HEADER =
@@ -104,9 +100,6 @@ export function proof004Sheet(lines: ProofLine[], ledger: ProofLedger[]): Sheet 
     fallback: `If this route fails, try ${TABLE_TXT} next, then ${RULES_V051_URL}.txt.`,
     notes: [
       `HEADER: ${PROOF_004_HEADER}`,
-      `IMAGE: ${PROOF_004_PICTURE}`,
-      `Picture, site-provided, described by Play, not checked by a second reader: ${PROOF_004_PICTURE_SEEN}`,
-      "Quoting the picture description is not seeing the picture.",
       "PROBLEM: Lonely Runner audit",
       "LICENSE: CC BY 4.0. Credit: Tuzi and Affiliates, The Civilisation Field.",
       "CHAIR: Opus",
