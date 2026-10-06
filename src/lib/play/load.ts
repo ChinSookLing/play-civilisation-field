@@ -60,6 +60,16 @@ export const loadProof005Fn = createServerFn({ method: "GET" }).handler(async ()
   return { lines, ledger };
 });
 
+export const loadProof006Fn = createServerFn({ method: "GET" }).handler(async () => {
+  const { PROOF_006_SPEC } = await import("./proof-table-006");
+  const { listProofLedger, listProofLines } = await import("./proof-table.server");
+  const [lines, ledger] = await Promise.all([
+    listProofLines(PROOF_006_SPEC),
+    listProofLedger(PROOF_006_SPEC),
+  ]);
+  return { lines, ledger };
+});
+
 export const loadGamesIndexTextFn = createServerFn({ method: "GET" }).handler(async (): Promise<string> => {
   const { loadPlayStore } = await import("./store.server");
   const { gamesIndexText } = await import("./reading");

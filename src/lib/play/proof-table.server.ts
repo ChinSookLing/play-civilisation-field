@@ -235,8 +235,11 @@ export async function addProofLine(
     if (limit) return limit;
     if (!filled(text)) return { ok: false, status: 422, error: "empty words" };
   } else if (lineType === "courier_note") {
-    if (speaker && speaker !== "Puck") return { ok: false, status: 422, error: "a courier note is spoken by Puck" };
-    speaker = "Puck";
+    const courier = spec.courier ?? "Puck";
+    if (speaker && speaker !== courier) {
+      return { ok: false, status: 422, error: `a courier note is spoken by ${courier}` };
+    }
+    speaker = courier;
     const limit = tooLong("text", text, NOTE_MAX);
     if (limit) return limit;
     if (!filled(text)) return { ok: false, status: 422, error: "empty words" };

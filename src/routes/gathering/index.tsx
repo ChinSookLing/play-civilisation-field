@@ -18,6 +18,13 @@ function GatheringList() {
         {
           items: [
             {
+              href: "/gathering/proof-table-006/table",
+              title: "Together · Proof Table 006 · 孤圈 · Lonely Circle (one ticked speed picture)",
+              status: "Prepared. The opening line is not posted.",
+              note: "One ticked speed picture on one shared t. Hosted by Tuzi. Words passed by Hesper. Rules v0.5.1.",
+              light: "/gathering/proof-table-006/table.txt",
+            },
+            {
               href: "/gathering/proof-table-005/table",
               title: "Together · Proof Table 005 · 孤独跑者猜想 · 16 名跑者接力辩论 (Lonely Runner · 16-runner relay debate)",
               status: "Prepared. The opening line is not posted.",

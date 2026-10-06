@@ -107,6 +107,9 @@ import { Route as GatheringProofTable004TableDottxtRouteImport } from './routes/
 import { Route as GatheringProofTable005IndexRouteImport } from './routes/gathering/proof-table-005/index'
 import { Route as GatheringProofTable005TableRouteImport } from './routes/gathering/proof-table-005/table'
 import { Route as GatheringProofTable005TableDottxtRouteImport } from './routes/gathering/proof-table-005/table[.]txt'
+import { Route as GatheringProofTable006IndexRouteImport } from './routes/gathering/proof-table-006/index'
+import { Route as GatheringProofTable006TableRouteImport } from './routes/gathering/proof-table-006/table'
+import { Route as GatheringProofTable006TableDottxtRouteImport } from './routes/gathering/proof-table-006/table[.]txt'
 import { Route as GatheringProofTableRulesRouteImport } from './routes/gathering/proof-table/rules'
 import { Route as GatheringProofTableRulesDottxtRouteImport } from './routes/gathering/proof-table/rules[.]txt'
 import { Route as ApiGamesGameIdHandoffRouteImport } from './routes/api/games/$gameId.handoff'
@@ -127,6 +130,8 @@ import { Route as ApiGatheringProofTable004LedgerRouteImport } from './routes/ap
 import { Route as ApiGatheringProofTable004LinesRouteImport } from './routes/api/gathering/proof-table-004.lines'
 import { Route as ApiGatheringProofTable005LedgerRouteImport } from './routes/api/gathering/proof-table-005.ledger'
 import { Route as ApiGatheringProofTable005LinesRouteImport } from './routes/api/gathering/proof-table-005.lines'
+import { Route as ApiGatheringProofTable006LedgerRouteImport } from './routes/api/gathering/proof-table-006.ledger'
+import { Route as ApiGatheringProofTable006LinesRouteImport } from './routes/api/gathering/proof-table-006.lines'
 import { Route as GatheringProofTableRulesV0Dot3RouteImport } from './routes/gathering/proof-table/rules/v0[.]3'
 import { Route as GatheringProofTableRulesV0Dot3DottxtRouteImport } from './routes/gathering/proof-table/rules/v0[.]3[.]txt'
 import { Route as GatheringProofTableRulesV0Dot5RouteImport } from './routes/gathering/proof-table/rules/v0[.]5'
@@ -671,6 +676,24 @@ const GatheringProofTable005TableDottxtRoute =
     path: '/proof-table-005/table.txt',
     getParentRoute: () => GatheringRoute,
   } as any)
+const GatheringProofTable006IndexRoute =
+  GatheringProofTable006IndexRouteImport.update({
+    id: '/proof-table-006/',
+    path: '/proof-table-006/',
+    getParentRoute: () => GatheringRoute,
+  } as any)
+const GatheringProofTable006TableRoute =
+  GatheringProofTable006TableRouteImport.update({
+    id: '/proof-table-006/table',
+    path: '/proof-table-006/table',
+    getParentRoute: () => GatheringRoute,
+  } as any)
+const GatheringProofTable006TableDottxtRoute =
+  GatheringProofTable006TableDottxtRouteImport.update({
+    id: '/proof-table-006/table.txt',
+    path: '/proof-table-006/table.txt',
+    getParentRoute: () => GatheringRoute,
+  } as any)
 const GatheringProofTableRulesRoute =
   GatheringProofTableRulesRouteImport.update({
     id: '/proof-table/rules',
@@ -782,6 +805,18 @@ const ApiGatheringProofTable005LinesRoute =
   ApiGatheringProofTable005LinesRouteImport.update({
     id: '/api/gathering/proof-table-005/lines',
     path: '/api/gathering/proof-table-005/lines',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiGatheringProofTable006LedgerRoute =
+  ApiGatheringProofTable006LedgerRouteImport.update({
+    id: '/api/gathering/proof-table-006/ledger',
+    path: '/api/gathering/proof-table-006/ledger',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiGatheringProofTable006LinesRoute =
+  ApiGatheringProofTable006LinesRouteImport.update({
+    id: '/api/gathering/proof-table-006/lines',
+    path: '/api/gathering/proof-table-006/lines',
     getParentRoute: () => rootRouteImport,
   } as any)
 const GatheringProofTableRulesV0Dot3Route =
@@ -913,6 +948,8 @@ export interface FileRoutesByFullPath {
   '/gathering/proof-table-004/table.txt': typeof GatheringProofTable004TableDottxtRoute
   '/gathering/proof-table-005/table': typeof GatheringProofTable005TableRoute
   '/gathering/proof-table-005/table.txt': typeof GatheringProofTable005TableDottxtRoute
+  '/gathering/proof-table-006/table': typeof GatheringProofTable006TableRoute
+  '/gathering/proof-table-006/table.txt': typeof GatheringProofTable006TableDottxtRoute
   '/gathering/proof-table/rules': typeof GatheringProofTableRulesRouteWithChildren
   '/gathering/proof-table/rules.txt': typeof GatheringProofTableRulesDottxtRoute
   '/api/games/': typeof ApiGamesIndexRoute
@@ -922,6 +959,7 @@ export interface FileRoutesByFullPath {
   '/gathering/proof-table-003/': typeof GatheringProofTable003IndexRoute
   '/gathering/proof-table-004/': typeof GatheringProofTable004IndexRoute
   '/gathering/proof-table-005/': typeof GatheringProofTable005IndexRoute
+  '/gathering/proof-table-006/': typeof GatheringProofTable006IndexRoute
   '/api/games/$gameId/handoff': typeof ApiGamesGameIdHandoffRoute
   '/api/games/$gameId/jev': typeof ApiGamesGameIdJevRoute
   '/api/games/$gameId/moves': typeof ApiGamesGameIdMovesRoute
@@ -940,6 +978,8 @@ export interface FileRoutesByFullPath {
   '/api/gathering/proof-table-004/lines': typeof ApiGatheringProofTable004LinesRoute
   '/api/gathering/proof-table-005/ledger': typeof ApiGatheringProofTable005LedgerRoute
   '/api/gathering/proof-table-005/lines': typeof ApiGatheringProofTable005LinesRoute
+  '/api/gathering/proof-table-006/ledger': typeof ApiGatheringProofTable006LedgerRoute
+  '/api/gathering/proof-table-006/lines': typeof ApiGatheringProofTable006LinesRoute
   '/gathering/proof-table/rules/v0.3': typeof GatheringProofTableRulesV0Dot3Route
   '/gathering/proof-table/rules/v0.3.txt': typeof GatheringProofTableRulesV0Dot3DottxtRoute
   '/gathering/proof-table/rules/v0.5': typeof GatheringProofTableRulesV0Dot5Route
@@ -1037,6 +1077,8 @@ export interface FileRoutesByTo {
   '/gathering/proof-table-004/table.txt': typeof GatheringProofTable004TableDottxtRoute
   '/gathering/proof-table-005/table': typeof GatheringProofTable005TableRoute
   '/gathering/proof-table-005/table.txt': typeof GatheringProofTable005TableDottxtRoute
+  '/gathering/proof-table-006/table': typeof GatheringProofTable006TableRoute
+  '/gathering/proof-table-006/table.txt': typeof GatheringProofTable006TableDottxtRoute
   '/gathering/proof-table/rules': typeof GatheringProofTableRulesRouteWithChildren
   '/gathering/proof-table/rules.txt': typeof GatheringProofTableRulesDottxtRoute
   '/api/games': typeof ApiGamesIndexRoute
@@ -1046,6 +1088,7 @@ export interface FileRoutesByTo {
   '/gathering/proof-table-003': typeof GatheringProofTable003IndexRoute
   '/gathering/proof-table-004': typeof GatheringProofTable004IndexRoute
   '/gathering/proof-table-005': typeof GatheringProofTable005IndexRoute
+  '/gathering/proof-table-006': typeof GatheringProofTable006IndexRoute
   '/api/games/$gameId/handoff': typeof ApiGamesGameIdHandoffRoute
   '/api/games/$gameId/jev': typeof ApiGamesGameIdJevRoute
   '/api/games/$gameId/moves': typeof ApiGamesGameIdMovesRoute
@@ -1064,6 +1107,8 @@ export interface FileRoutesByTo {
   '/api/gathering/proof-table-004/lines': typeof ApiGatheringProofTable004LinesRoute
   '/api/gathering/proof-table-005/ledger': typeof ApiGatheringProofTable005LedgerRoute
   '/api/gathering/proof-table-005/lines': typeof ApiGatheringProofTable005LinesRoute
+  '/api/gathering/proof-table-006/ledger': typeof ApiGatheringProofTable006LedgerRoute
+  '/api/gathering/proof-table-006/lines': typeof ApiGatheringProofTable006LinesRoute
   '/gathering/proof-table/rules/v0.3': typeof GatheringProofTableRulesV0Dot3Route
   '/gathering/proof-table/rules/v0.3.txt': typeof GatheringProofTableRulesV0Dot3DottxtRoute
   '/gathering/proof-table/rules/v0.5': typeof GatheringProofTableRulesV0Dot5Route
@@ -1164,6 +1209,8 @@ export interface FileRoutesById {
   '/gathering/proof-table-004/table.txt': typeof GatheringProofTable004TableDottxtRoute
   '/gathering/proof-table-005/table': typeof GatheringProofTable005TableRoute
   '/gathering/proof-table-005/table.txt': typeof GatheringProofTable005TableDottxtRoute
+  '/gathering/proof-table-006/table': typeof GatheringProofTable006TableRoute
+  '/gathering/proof-table-006/table.txt': typeof GatheringProofTable006TableDottxtRoute
   '/gathering/proof-table/rules': typeof GatheringProofTableRulesRouteWithChildren
   '/gathering/proof-table/rules.txt': typeof GatheringProofTableRulesDottxtRoute
   '/api/games/': typeof ApiGamesIndexRoute
@@ -1173,6 +1220,7 @@ export interface FileRoutesById {
   '/gathering/proof-table-003/': typeof GatheringProofTable003IndexRoute
   '/gathering/proof-table-004/': typeof GatheringProofTable004IndexRoute
   '/gathering/proof-table-005/': typeof GatheringProofTable005IndexRoute
+  '/gathering/proof-table-006/': typeof GatheringProofTable006IndexRoute
   '/api/games/$gameId/handoff': typeof ApiGamesGameIdHandoffRoute
   '/api/games/$gameId/jev': typeof ApiGamesGameIdJevRoute
   '/api/games/$gameId/moves': typeof ApiGamesGameIdMovesRoute
@@ -1191,6 +1239,8 @@ export interface FileRoutesById {
   '/api/gathering/proof-table-004/lines': typeof ApiGatheringProofTable004LinesRoute
   '/api/gathering/proof-table-005/ledger': typeof ApiGatheringProofTable005LedgerRoute
   '/api/gathering/proof-table-005/lines': typeof ApiGatheringProofTable005LinesRoute
+  '/api/gathering/proof-table-006/ledger': typeof ApiGatheringProofTable006LedgerRoute
+  '/api/gathering/proof-table-006/lines': typeof ApiGatheringProofTable006LinesRoute
   '/gathering/proof-table/rules/v0.3': typeof GatheringProofTableRulesV0Dot3Route
   '/gathering/proof-table/rules/v0.3.txt': typeof GatheringProofTableRulesV0Dot3DottxtRoute
   '/gathering/proof-table/rules/v0.5': typeof GatheringProofTableRulesV0Dot5Route
@@ -1292,6 +1342,8 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-004/table.txt'
     | '/gathering/proof-table-005/table'
     | '/gathering/proof-table-005/table.txt'
+    | '/gathering/proof-table-006/table'
+    | '/gathering/proof-table-006/table.txt'
     | '/gathering/proof-table/rules'
     | '/gathering/proof-table/rules.txt'
     | '/api/games/'
@@ -1301,6 +1353,7 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-003/'
     | '/gathering/proof-table-004/'
     | '/gathering/proof-table-005/'
+    | '/gathering/proof-table-006/'
     | '/api/games/$gameId/handoff'
     | '/api/games/$gameId/jev'
     | '/api/games/$gameId/moves'
@@ -1319,6 +1372,8 @@ export interface FileRouteTypes {
     | '/api/gathering/proof-table-004/lines'
     | '/api/gathering/proof-table-005/ledger'
     | '/api/gathering/proof-table-005/lines'
+    | '/api/gathering/proof-table-006/ledger'
+    | '/api/gathering/proof-table-006/lines'
     | '/gathering/proof-table/rules/v0.3'
     | '/gathering/proof-table/rules/v0.3.txt'
     | '/gathering/proof-table/rules/v0.5'
@@ -1416,6 +1471,8 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-004/table.txt'
     | '/gathering/proof-table-005/table'
     | '/gathering/proof-table-005/table.txt'
+    | '/gathering/proof-table-006/table'
+    | '/gathering/proof-table-006/table.txt'
     | '/gathering/proof-table/rules'
     | '/gathering/proof-table/rules.txt'
     | '/api/games'
@@ -1425,6 +1482,7 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-003'
     | '/gathering/proof-table-004'
     | '/gathering/proof-table-005'
+    | '/gathering/proof-table-006'
     | '/api/games/$gameId/handoff'
     | '/api/games/$gameId/jev'
     | '/api/games/$gameId/moves'
@@ -1443,6 +1501,8 @@ export interface FileRouteTypes {
     | '/api/gathering/proof-table-004/lines'
     | '/api/gathering/proof-table-005/ledger'
     | '/api/gathering/proof-table-005/lines'
+    | '/api/gathering/proof-table-006/ledger'
+    | '/api/gathering/proof-table-006/lines'
     | '/gathering/proof-table/rules/v0.3'
     | '/gathering/proof-table/rules/v0.3.txt'
     | '/gathering/proof-table/rules/v0.5'
@@ -1542,6 +1602,8 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-004/table.txt'
     | '/gathering/proof-table-005/table'
     | '/gathering/proof-table-005/table.txt'
+    | '/gathering/proof-table-006/table'
+    | '/gathering/proof-table-006/table.txt'
     | '/gathering/proof-table/rules'
     | '/gathering/proof-table/rules.txt'
     | '/api/games/'
@@ -1551,6 +1613,7 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-003/'
     | '/gathering/proof-table-004/'
     | '/gathering/proof-table-005/'
+    | '/gathering/proof-table-006/'
     | '/api/games/$gameId/handoff'
     | '/api/games/$gameId/jev'
     | '/api/games/$gameId/moves'
@@ -1569,6 +1632,8 @@ export interface FileRouteTypes {
     | '/api/gathering/proof-table-004/lines'
     | '/api/gathering/proof-table-005/ledger'
     | '/api/gathering/proof-table-005/lines'
+    | '/api/gathering/proof-table-006/ledger'
+    | '/api/gathering/proof-table-006/lines'
     | '/gathering/proof-table/rules/v0.3'
     | '/gathering/proof-table/rules/v0.3.txt'
     | '/gathering/proof-table/rules/v0.5'
@@ -1624,6 +1689,8 @@ export interface RootRouteChildren {
   ApiGatheringProofTable004LinesRoute: typeof ApiGatheringProofTable004LinesRoute
   ApiGatheringProofTable005LedgerRoute: typeof ApiGatheringProofTable005LedgerRoute
   ApiGatheringProofTable005LinesRoute: typeof ApiGatheringProofTable005LinesRoute
+  ApiGatheringProofTable006LedgerRoute: typeof ApiGatheringProofTable006LedgerRoute
+  ApiGatheringProofTable006LinesRoute: typeof ApiGatheringProofTable006LinesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -2314,6 +2381,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GatheringProofTable005TableDottxtRouteImport
       parentRoute: typeof GatheringRoute
     }
+    '/gathering/proof-table-006/': {
+      id: '/gathering/proof-table-006/'
+      path: '/proof-table-006'
+      fullPath: '/gathering/proof-table-006/'
+      preLoaderRoute: typeof GatheringProofTable006IndexRouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/proof-table-006/table': {
+      id: '/gathering/proof-table-006/table'
+      path: '/proof-table-006/table'
+      fullPath: '/gathering/proof-table-006/table'
+      preLoaderRoute: typeof GatheringProofTable006TableRouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/proof-table-006/table.txt': {
+      id: '/gathering/proof-table-006/table.txt'
+      path: '/proof-table-006/table.txt'
+      fullPath: '/gathering/proof-table-006/table.txt'
+      preLoaderRoute: typeof GatheringProofTable006TableDottxtRouteImport
+      parentRoute: typeof GatheringRoute
+    }
     '/gathering/proof-table/rules': {
       id: '/gathering/proof-table/rules'
       path: '/proof-table/rules'
@@ -2454,6 +2542,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiGatheringProofTable005LinesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/gathering/proof-table-006/ledger': {
+      id: '/api/gathering/proof-table-006/ledger'
+      path: '/api/gathering/proof-table-006/ledger'
+      fullPath: '/api/gathering/proof-table-006/ledger'
+      preLoaderRoute: typeof ApiGatheringProofTable006LedgerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/gathering/proof-table-006/lines': {
+      id: '/api/gathering/proof-table-006/lines'
+      path: '/api/gathering/proof-table-006/lines'
+      fullPath: '/api/gathering/proof-table-006/lines'
+      preLoaderRoute: typeof ApiGatheringProofTable006LinesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gathering/proof-table/rules/v0.3': {
       id: '/gathering/proof-table/rules/v0.3'
       path: '/v0.3'
@@ -2580,6 +2682,8 @@ interface GatheringRouteChildren {
   GatheringProofTable004TableDottxtRoute: typeof GatheringProofTable004TableDottxtRoute
   GatheringProofTable005TableRoute: typeof GatheringProofTable005TableRoute
   GatheringProofTable005TableDottxtRoute: typeof GatheringProofTable005TableDottxtRoute
+  GatheringProofTable006TableRoute: typeof GatheringProofTable006TableRoute
+  GatheringProofTable006TableDottxtRoute: typeof GatheringProofTable006TableDottxtRoute
   GatheringProofTableRulesRoute: typeof GatheringProofTableRulesRouteWithChildren
   GatheringProofTableRulesDottxtRoute: typeof GatheringProofTableRulesDottxtRoute
   GatheringBreakfast002IndexRoute: typeof GatheringBreakfast002IndexRoute
@@ -2588,6 +2692,7 @@ interface GatheringRouteChildren {
   GatheringProofTable003IndexRoute: typeof GatheringProofTable003IndexRoute
   GatheringProofTable004IndexRoute: typeof GatheringProofTable004IndexRoute
   GatheringProofTable005IndexRoute: typeof GatheringProofTable005IndexRoute
+  GatheringProofTable006IndexRoute: typeof GatheringProofTable006IndexRoute
 }
 
 const GatheringRouteChildren: GatheringRouteChildren = {
@@ -2644,6 +2749,9 @@ const GatheringRouteChildren: GatheringRouteChildren = {
   GatheringProofTable005TableRoute: GatheringProofTable005TableRoute,
   GatheringProofTable005TableDottxtRoute:
     GatheringProofTable005TableDottxtRoute,
+  GatheringProofTable006TableRoute: GatheringProofTable006TableRoute,
+  GatheringProofTable006TableDottxtRoute:
+    GatheringProofTable006TableDottxtRoute,
   GatheringProofTableRulesRoute: GatheringProofTableRulesRouteWithChildren,
   GatheringProofTableRulesDottxtRoute: GatheringProofTableRulesDottxtRoute,
   GatheringBreakfast002IndexRoute: GatheringBreakfast002IndexRoute,
@@ -2652,6 +2760,7 @@ const GatheringRouteChildren: GatheringRouteChildren = {
   GatheringProofTable003IndexRoute: GatheringProofTable003IndexRoute,
   GatheringProofTable004IndexRoute: GatheringProofTable004IndexRoute,
   GatheringProofTable005IndexRoute: GatheringProofTable005IndexRoute,
+  GatheringProofTable006IndexRoute: GatheringProofTable006IndexRoute,
 }
 
 const GatheringRouteWithChildren = GatheringRoute._addFileChildren(
@@ -2768,6 +2877,8 @@ const rootRouteChildren: RootRouteChildren = {
   ApiGatheringProofTable004LinesRoute: ApiGatheringProofTable004LinesRoute,
   ApiGatheringProofTable005LedgerRoute: ApiGatheringProofTable005LedgerRoute,
   ApiGatheringProofTable005LinesRoute: ApiGatheringProofTable005LinesRoute,
+  ApiGatheringProofTable006LedgerRoute: ApiGatheringProofTable006LedgerRoute,
+  ApiGatheringProofTable006LinesRoute: ApiGatheringProofTable006LinesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -52,6 +52,7 @@ export function recordsText(extra?: {
   proof?: { messages: number; revision: string; updated: string; ledger: string };
   proof004?: { messages: number; updated: string; ledger: string };
   proof005?: { messages: number; updated: string; ledger: string };
+  proof006?: { messages: number; updated: string; ledger: string };
 }): string {
   const lines = [
     "PLAY RECORD INDEX",
@@ -71,6 +72,19 @@ export function recordsText(extra?: {
     lines.push(`RESULT: ${outcome.result ?? "none"}`);
     lines.push("");
   }
+  lines.push("RECORD_ID: PROOF-TABLE-006");
+  lines.push("TYPE: gathering");
+  lines.push("TITLE: Together · Proof Table 006 · 孤圈 · Lonely Circle (one ticked speed picture)");
+  lines.push("RECORD_STATUS: prepared");
+  lines.push(`MESSAGES: ${extra?.proof006?.messages ?? 0}`);
+  lines.push(`LEDGER: ${extra?.proof006?.ledger ?? "none yet"}`);
+  lines.push("RULES: v0.5.1");
+  lines.push(`RECORD_URL: ${ORIGIN}/gathering/proof-table-006/table`);
+  lines.push(
+    `FORMATS: ${ORIGIN}/gathering/proof-table-006/table.txt | ${ORIGIN}/gathering/proof-table/rules/v0.5.1.txt`,
+  );
+  lines.push("RECORD: one ticked speed picture on one shared t. Not every speed tuple. No lines until the opening line is posted.");
+  lines.push("");
   lines.push("RECORD_ID: PROOF-TABLE-005");
   lines.push("TYPE: gathering");
   lines.push(
@@ -183,7 +197,7 @@ export function recordsText(extra?: {
   lines.push(`RECORD_URL: ${ORIGIN}/psyche`);
   lines.push("");
   const record = lines.join("\n");
-  const stamps = [extra?.dinner?.updated, extra?.breakfast?.updated, extra?.proof?.updated, extra?.proof004?.updated, extra?.proof005?.updated].filter((value): value is string => Boolean(value));
+  const stamps = [extra?.dinner?.updated, extra?.breakfast?.updated, extra?.proof?.updated, extra?.proof004?.updated, extra?.proof005?.updated, extra?.proof006?.updated].filter((value): value is string => Boolean(value));
   const newest = stamps
     .map((value) => new Date(value))
     .filter((value) => !Number.isNaN(value.getTime()))

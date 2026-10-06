@@ -6,6 +6,7 @@ import { textResponse } from "@/lib/play/json-response";
 import { proofRevision } from "@/lib/play/proof-table";
 import { PROOF_004_LEDGER_V1, PROOF_004_SPEC } from "@/lib/play/proof-table-004";
 import { PROOF_005_SPEC } from "@/lib/play/proof-table-005";
+import { PROOF_006_SPEC } from "@/lib/play/proof-table-006";
 import { ensureOpeningLedger, listProofLedger, listProofLines } from "@/lib/play/proof-table.server";
 import { recordsText } from "@/lib/play/reading";
 import { loadPlayStore } from "@/lib/play/store.server";
@@ -22,11 +23,13 @@ export const Route = createFileRoute("/records.txt")({
           listProofLedger(),
         ]);
         await ensureOpeningLedger(PROOF_004_SPEC, PROOF_004_LEDGER_V1);
-        const [proof004Lines, proof004Ledger, proof005Lines, proof005Ledger] = await Promise.all([
+        const [proof004Lines, proof004Ledger, proof005Lines, proof005Ledger, proof006Lines, proof006Ledger] = await Promise.all([
           listProofLines(PROOF_004_SPEC),
           listProofLedger(PROOF_004_SPEC),
           listProofLines(PROOF_005_SPEC),
           listProofLedger(PROOF_005_SPEC),
+          listProofLines(PROOF_006_SPEC),
+          listProofLedger(PROOF_006_SPEC),
         ]);
         const proofTimes = [...proofLines.map((line) => line.at), ...proofLedger.map((version) => version.at)];
         const proofUpdated = proofTimes.sort().at(-1) ?? "";
@@ -49,6 +52,11 @@ export const Route = createFileRoute("/records.txt")({
               messages: proof005Lines.length,
               updated: [...proof005Lines.map((line) => line.at), ...proof005Ledger.map((version) => version.at)].sort().at(-1) ?? "",
               ledger: proof005Ledger.at(-1)?.version ?? "none yet",
+            },
+            proof006: {
+              messages: proof006Lines.length,
+              updated: [...proof006Lines.map((line) => line.at), ...proof006Ledger.map((version) => version.at)].sort().at(-1) ?? "",
+              ledger: proof006Ledger.at(-1)?.version ?? "none yet",
             },
           }),
           "text/plain; charset=utf-8",
