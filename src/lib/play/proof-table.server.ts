@@ -193,15 +193,23 @@ export async function addProofLine(
   input: ProofLineInput,
   spec: ProofTableSpec = PROOF_003_SPEC,
 ): Promise<LineOk | Fail> {
-  const auth = authorizeCourier(request);
+  const auth = authorizeCourier(request, spec.couriers ?? ["Puck"]);
   if (!auth.ok) return auth;
   const lineType = input.line_type;
   if (!lineType || !spec.lineTypes.includes(lineType as ProofLineType)) {
     return { ok: false, status: 422, error: `line_type must be ${spec.lineTypes.join(", ")}` };
   }
   const carriedBy = input.carried_by?.trim() ?? "";
-  if (!PROOF_CARRIERS.includes(carriedBy as (typeof PROOF_CARRIERS)[number])) {
-    return { ok: false, status: 422, error: "carried_by must be Puck or Tuzi (temporary courier)" };
+  const allowedCarriers: readonly string[] = auth.courier === "Hesper" ? ["Hesper"] : PROOF_CARRIERS;
+  if (!allowedCarriers.includes(carriedBy)) {
+    return {
+      ok: false,
+      status: 422,
+      error:
+        auth.courier === "Hesper"
+          ? "carried_by must be Hesper"
+          : "carried_by must be Puck or Tuzi (temporary courier)",
+    };
   }
   const relay = relayOf(input, spec);
   if ("error" in relay) return relay;
@@ -235,11 +243,10 @@ export async function addProofLine(
     if (limit) return limit;
     if (!filled(text)) return { ok: false, status: 422, error: "empty words" };
   } else if (lineType === "courier_note") {
-    const courier = spec.courier ?? "Puck";
-    if (speaker && speaker !== courier) {
-      return { ok: false, status: 422, error: `a courier note is spoken by ${courier}` };
+    if (speaker && speaker !== auth.courier) {
+      return { ok: false, status: 422, error: `a courier note is spoken by ${auth.courier}` };
     }
-    speaker = courier;
+    speaker = auth.courier;
     const limit = tooLong("text", text, NOTE_MAX);
     if (limit) return limit;
     if (!filled(text)) return { ok: false, status: 422, error: "empty words" };
@@ -379,7 +386,7 @@ export async function addProofLedger(
   input: ProofLedgerInput,
   spec: ProofTableSpec = PROOF_003_SPEC,
 ): Promise<LedgerOk | Fail> {
-  const auth = authorizeCourier(request);
+  const auth = authorizeCourier(request, spec.couriers ?? ["Puck"]);
   if (!auth.ok) return auth;
   const version = versionText(input.version);
   if (!version || /[\r\n]/.test(version) || version.length > 80) {

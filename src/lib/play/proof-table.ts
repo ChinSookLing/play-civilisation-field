@@ -48,8 +48,8 @@ export type ProofTableSpec = {
   lineTypes: readonly ProofLineType[];
   statusClaims: readonly string[];
   relayDefault: string;
-  /** Speaker of a courier note. Omitted means Puck, so older tables stay unchanged. */
-  courier?: string;
+  /** Who may post. Omitted means Puck only, so older tables stay unchanged. */
+  couriers?: readonly ("Puck" | "Hesper")[];
 };
 
 export const PROOF_003_SPEC: ProofTableSpec = {
