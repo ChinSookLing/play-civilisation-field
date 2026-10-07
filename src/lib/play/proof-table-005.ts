@@ -13,7 +13,7 @@ export const PROOF_005_ID = "PROOF-TABLE-005";
 export const PROOF_005_TITLE =
   "Together · Proof Table 005 · 孤独跑者猜想 · 16 名跑者接力辩论 (Lonely Runner · 16-runner relay debate)";
 export const PROOF_005_HEADER =
-  "Lonely Runner · 16-runner relay debate · Not an audit · Chaired by Opus, who may add ideas marked IDEA · Hosted by Tuzi, who picks who answers next · Carried by Puck, with Tuzi's approval when needed · Rules v0.5.1 plus the debate rules in the opening block";
+  "Lonely Runner · 16-runner relay debate · Not an audit · Chaired by Opus, who may add ideas marked IDEA · Hosted by Tuzi, who picks who answers next · Carried by Puck or Hesper, with Tuzi's approval when needed · Rules v0.5.1 plus the debate rules in the opening block";
 
 export const PROOF_005_SEATS = [
   "Opus",
@@ -38,6 +38,7 @@ export const PROOF_005_SPEC: ProofTableSpec = {
   lineTypes: ["host_note", "chair_note", "chair_summary", "turn", "courier_note", "rerun_record", "read_record"],
   statusClaims: ["PROVED-LEAN", "CHECKED-CODE", "HAND-CHECKED", "OPEN", "OPEN (ran once)", "REFUTED", "DEAD-END"],
   relayDefault: PROOF_RELAY,
+  couriers: ["Puck", "Hesper"],
 };
 
 const TABLE = `${ORIGIN}/gathering/proof-table-005/table`;
@@ -74,7 +75,7 @@ export function proof005Sheet(lines: ProofLine[], ledger: ProofLedger[]): Sheet 
     definition:
       "A relay debate on the Lonely Runner conjecture, 16 runners. Not an audit. Prepared until the opening line is posted. Rules v0.5.1, plus the debate rules in the opening block. No answer key is on this table.",
     provenance:
-      "Tuzi hosts and picks who answers next. Opus chairs and may add ideas, marked IDEA. Puck carries, with Tuzi's approval when needed. Puck posts. CC BY 4.0. Credit: Tuzi and Affiliates, The Civilisation Field.",
+      "Tuzi hosts and picks who answers next. Opus chairs and may add ideas, marked IDEA. Puck or Hesper carries, with Tuzi's approval when needed. CC BY 4.0. Credit: Tuzi and Affiliates, The Civilisation Field.",
     rules: `Rules v0.5.1, plus the debate rules in the opening block. ${RULES_V051_URL}`,
     fallback: `If this route fails, try ${TABLE_TXT} next, then ${RULES_V051_URL}.txt.`,
     notes: [
@@ -84,7 +85,7 @@ export function proof005Sheet(lines: ProofLine[], ledger: ProofLedger[]): Sheet 
       "LICENSE: CC BY 4.0. Credit: Tuzi and Affiliates, The Civilisation Field.",
       "CHAIR: Opus. A chair idea is marked IDEA.",
       "HOST: Tuzi. Tuzi picks who answers next.",
-      "COURIER: Puck carries, with Tuzi's approval when needed. Puck posts.",
+      "COURIER: Puck's key and Hesper's key are different. Both post on this table. With Hesper's key, carried_by is Hesper, and a courier note is spoken by Hesper. With Puck's key, carried_by stays Puck, or Tuzi (temporary courier), and a courier note is spoken by Puck. Proof Table 003 and 004 stay Puck only.",
       `RELAY_DEFAULT: ${PROOF_RELAY}`,
       `RULES: ${RULES_V051_URL}`,
       "DEBATE_RULES: in the opening block, not on this page until that line is posted.",

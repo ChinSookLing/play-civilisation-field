@@ -81,7 +81,7 @@ export function proof006Sheet(lines: ProofLine[], ledger: ProofLedger[]): Sheet 
       "PICTURE: Qwen locks the picture rules.",
       "CHECK: Astra checks the picture is the same math, and does not import prime gates.",
       "BUILD: Bill.",
-      "COURIER: Puck's key and Hesper's key are different. Hesper's key posts only on this table. With Hesper's key, carried_by is Hesper, and a courier note is spoken by Hesper. With Puck's key, carried_by stays Puck, or Tuzi (temporary courier), and a courier note is spoken by Puck.",
+      "COURIER: Puck's key and Hesper's key are different. Hesper's key posts on this table and on Proof Table 005. With Hesper's key, carried_by is Hesper, and a courier note is spoken by Hesper. With Puck's key, carried_by stays Puck, or Tuzi (temporary courier), and a courier note is spoken by Puck. Proof Table 003 and 004 stay Puck only.",
       `RELAY_DEFAULT: ${PROOF_006_RELAY}`,
       `RULES: ${RULES_V051_URL}`,
       "PICTURE_URL: https://chinsookling.github.io/geogarden/lonely-circle.html",
