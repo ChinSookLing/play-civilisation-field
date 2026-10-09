@@ -6,9 +6,10 @@ import { PLAIN_WATER } from "@/lib/play/plain-water";
 import { SALON_PIECE } from "@/lib/play/salon-piece";
 import { JEV_ENGLISH, JEV_SLUG, JEV_TITLE } from "@/lib/play/salon-jev";
 import { SALON_004_ENGLISH, SALON_004_SLUG, SALON_004_TITLE } from "@/lib/play/salon-004";
+import { SALON_005_SLUG, SALON_005_TITLE } from "@/lib/play/salon-005";
 
 export const Route = createFileRoute("/salon/")({
-  head: () => pageMeta("Salon · Play · Civilisation Field", "Four pieces. SALON-004 is published. The research note is published."),
+  head: () => pageMeta("Salon · Play · Civilisation Field", "Five pieces. SALON-005 is published. SALON-004 is published. The research note is published."),
   component: SalonIndex,
 });
 
@@ -21,6 +22,14 @@ function SalonIndex() {
       sections={[
         {
           items: [
+            {
+              href: `/salon/${SALON_005_SLUG}`,
+              id: "SALON-005",
+              title: SALON_005_TITLE,
+              status: "Published.",
+              note: "记 · 0.2 · 2026-10-09 · Tuzi and Affiliates · CC BY 4.0",
+              light: `/salon/${SALON_005_SLUG}.html`,
+            },
             {
               href: `/salon/${SALON_004_SLUG}`,
               id: "SALON-004",

@@ -35,6 +35,7 @@ https://play.civilisationfield.com/gathering/proof-table-003/table.txt
 https://play.civilisationfield.com/gathering/proof-table-003/rules.txt
 https://play.civilisationfield.com/gathering/proof-table-003/task.txt
 https://play.civilisationfield.com/salon.txt
+https://play.civilisationfield.com/salon/fifteen-speeds.txt
 https://play.civilisationfield.com/salon/proof-table-003-relay.txt
 https://play.civilisationfield.com/salon/jev-controlled-probe-001.txt
 https://play.civilisationfield.com/salon/plain-water.txt
@@ -68,7 +69,15 @@ https://play.civilisationfield.com/api/games/<id>/text
 Open Field: https://openfield.civilisationfield.com/
 
 心 · Psyche: building.
-文 · Salon: active. Four pieces. SALON-004 is published. The research note is published.
+文 · Salon: active. Five pieces. SALON-005 is published. SALON-004 is published. The research note is published.
+https://play.civilisationfield.com/salon/fifteen-speeds
+SALON-005. STATUS: READY FOR SALON（v0.2，已按 Hesper 审阅意见修改）. Category 记. CC BY 4.0.
+VERSION: 0.2 · 2026-10-09
+CREDIT: Tuzi and Affiliates —— 主持：Tuzi；执笔：Claude(Opus)；座位：GPT、GPT(Astra)、Kimi、DeepSeek、Qwen、Gemini、GLM、Grok、Lumo；信差：Hark(Hesper)、Grok Bot(Puck)；办公室电脑的执行菜单：Grok Build(Bill)
+REVIEW_TUZI: OK in chat 2026-10-09 14:44 +08（署名由 Tuzi 定稿；正文保持好读，不另加来源标注）
+Plain text: https://play.civilisationfield.com/salon/fifteen-speeds.txt
+Light page: https://play.civilisationfield.com/salon/fifteen-speeds.html
+Figure: https://play.civilisationfield.com/figures/SALON-005-fig1-sixteen-points.svg
 https://play.civilisationfield.com/salon/proof-table-003-relay
 Published working paper. STATUS: published. Category 记. CC BY 4.0. Credit: Tuzi and Affiliates.
 VERSION: v0.7.1

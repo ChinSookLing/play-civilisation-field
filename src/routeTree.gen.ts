@@ -72,6 +72,9 @@ import { Route as SalonPlainWaterDottxtRouteImport } from './routes/salon/plain-
 import { Route as SalonProofTable003RelayRouteImport } from './routes/salon/proof-table-003-relay'
 import { Route as SalonProofTable003RelayDothtmlRouteImport } from './routes/salon/proof-table-003-relay[.]html'
 import { Route as SalonProofTable003RelayDottxtRouteImport } from './routes/salon/proof-table-003-relay[.]txt'
+import { Route as SalonFifteenSpeedsRouteImport } from './routes/salon/fifteen-speeds'
+import { Route as SalonFifteenSpeedsDothtmlRouteImport } from './routes/salon/fifteen-speeds[.]html'
+import { Route as SalonFifteenSpeedsDottxtRouteImport } from './routes/salon/fifteen-speeds[.]txt'
 import { Route as ApiGamesIndexRouteImport } from './routes/api/games/index'
 import { Route as ApiGamesGameIdRouteImport } from './routes/api/games/$gameId'
 import { Route as ApiGamesCurrentRouteImport } from './routes/api/games/current'
@@ -471,6 +474,22 @@ const SalonProofTable003RelayDottxtRoute =
     path: '/proof-table-003-relay.txt',
     getParentRoute: () => SalonRoute,
   } as any)
+const SalonFifteenSpeedsRoute = SalonFifteenSpeedsRouteImport.update({
+  id: '/fifteen-speeds',
+  path: '/fifteen-speeds',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonFifteenSpeedsDothtmlRoute =
+  SalonFifteenSpeedsDothtmlRouteImport.update({
+    id: '/fifteen-speeds.html',
+    path: '/fifteen-speeds.html',
+    getParentRoute: () => SalonRoute,
+  } as any)
+const SalonFifteenSpeedsDottxtRoute = SalonFifteenSpeedsDottxtRouteImport.update({
+  id: '/fifteen-speeds.txt',
+  path: '/fifteen-speeds.txt',
+  getParentRoute: () => SalonRoute,
+} as any)
 const ApiGamesIndexRoute = ApiGamesIndexRouteImport.update({
   id: '/api/games/',
   path: '/api/games/',
@@ -918,6 +937,9 @@ export interface FileRoutesByFullPath {
   '/salon/proof-table-003-relay': typeof SalonProofTable003RelayRoute
   '/salon/proof-table-003-relay.html': typeof SalonProofTable003RelayDothtmlRoute
   '/salon/proof-table-003-relay.txt': typeof SalonProofTable003RelayDottxtRoute
+  '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
+  '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
+  '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
   '/gathering/': typeof GatheringIndexRoute
   '/salon/': typeof SalonIndexRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
@@ -1047,6 +1069,9 @@ export interface FileRoutesByTo {
   '/salon/proof-table-003-relay': typeof SalonProofTable003RelayRoute
   '/salon/proof-table-003-relay.html': typeof SalonProofTable003RelayDothtmlRoute
   '/salon/proof-table-003-relay.txt': typeof SalonProofTable003RelayDottxtRoute
+  '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
+  '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
+  '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
   '/gathering': typeof GatheringIndexRoute
   '/salon': typeof SalonIndexRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
@@ -1179,6 +1204,9 @@ export interface FileRoutesById {
   '/salon/proof-table-003-relay': typeof SalonProofTable003RelayRoute
   '/salon/proof-table-003-relay.html': typeof SalonProofTable003RelayDothtmlRoute
   '/salon/proof-table-003-relay.txt': typeof SalonProofTable003RelayDottxtRoute
+  '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
+  '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
+  '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
   '/gathering/': typeof GatheringIndexRoute
   '/salon/': typeof SalonIndexRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
@@ -1312,6 +1340,9 @@ export interface FileRouteTypes {
     | '/salon/proof-table-003-relay'
     | '/salon/proof-table-003-relay.html'
     | '/salon/proof-table-003-relay.txt'
+    | '/salon/fifteen-speeds'
+    | '/salon/fifteen-speeds.html'
+    | '/salon/fifteen-speeds.txt'
     | '/gathering/'
     | '/salon/'
     | '/api/games/$gameId'
@@ -1441,6 +1472,9 @@ export interface FileRouteTypes {
     | '/salon/proof-table-003-relay'
     | '/salon/proof-table-003-relay.html'
     | '/salon/proof-table-003-relay.txt'
+    | '/salon/fifteen-speeds'
+    | '/salon/fifteen-speeds.html'
+    | '/salon/fifteen-speeds.txt'
     | '/gathering'
     | '/salon'
     | '/api/games/$gameId'
@@ -1572,6 +1606,9 @@ export interface FileRouteTypes {
     | '/salon/proof-table-003-relay'
     | '/salon/proof-table-003-relay.html'
     | '/salon/proof-table-003-relay.txt'
+    | '/salon/fifteen-speeds'
+    | '/salon/fifteen-speeds.html'
+    | '/salon/fifteen-speeds.txt'
     | '/gathering/'
     | '/salon/'
     | '/api/games/$gameId'
@@ -2134,6 +2171,27 @@ declare module '@tanstack/react-router' {
       path: '/proof-table-003-relay.txt'
       fullPath: '/salon/proof-table-003-relay.txt'
       preLoaderRoute: typeof SalonProofTable003RelayDottxtRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/fifteen-speeds': {
+      id: '/salon/fifteen-speeds'
+      path: '/fifteen-speeds'
+      fullPath: '/salon/fifteen-speeds'
+      preLoaderRoute: typeof SalonFifteenSpeedsRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/fifteen-speeds.html': {
+      id: '/salon/fifteen-speeds.html'
+      path: '/fifteen-speeds.html'
+      fullPath: '/salon/fifteen-speeds.html'
+      preLoaderRoute: typeof SalonFifteenSpeedsDothtmlRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/fifteen-speeds.txt': {
+      id: '/salon/fifteen-speeds.txt'
+      path: '/fifteen-speeds.txt'
+      fullPath: '/salon/fifteen-speeds.txt'
+      preLoaderRoute: typeof SalonFifteenSpeedsDottxtRouteImport
       parentRoute: typeof SalonRoute
     }
     '/api/games/': {
@@ -2781,6 +2839,9 @@ interface SalonRouteChildren {
   SalonProofTable003RelayRoute: typeof SalonProofTable003RelayRoute
   SalonProofTable003RelayDothtmlRoute: typeof SalonProofTable003RelayDothtmlRoute
   SalonProofTable003RelayDottxtRoute: typeof SalonProofTable003RelayDottxtRoute
+  SalonFifteenSpeedsRoute: typeof SalonFifteenSpeedsRoute
+  SalonFifteenSpeedsDothtmlRoute: typeof SalonFifteenSpeedsDothtmlRoute
+  SalonFifteenSpeedsDottxtRoute: typeof SalonFifteenSpeedsDottxtRoute
   SalonIndexRoute: typeof SalonIndexRoute
 }
 
@@ -2799,6 +2860,9 @@ const SalonRouteChildren: SalonRouteChildren = {
   SalonProofTable003RelayRoute: SalonProofTable003RelayRoute,
   SalonProofTable003RelayDothtmlRoute: SalonProofTable003RelayDothtmlRoute,
   SalonProofTable003RelayDottxtRoute: SalonProofTable003RelayDottxtRoute,
+  SalonFifteenSpeedsRoute: SalonFifteenSpeedsRoute,
+  SalonFifteenSpeedsDothtmlRoute: SalonFifteenSpeedsDothtmlRoute,
+  SalonFifteenSpeedsDottxtRoute: SalonFifteenSpeedsDottxtRoute,
   SalonIndexRoute: SalonIndexRoute,
 }
 
