@@ -3,7 +3,7 @@ import test from "node:test";
 import { BREAKFAST_ID } from "./breakfast.ts";
 import { DINNER_ID } from "./dinner.ts";
 import { rejectGatheringLine } from "./gathering-line.ts";
-import { LUNCH_ID } from "./lunch.ts";
+import { LUNCH_ID, LUNCH_SEATS, lunchFacts } from "./lunch.ts";
 
 test("lunch keeps a seated speaker, and a courier note is Hesper", () => {
   const kept = rejectGatheringLine(LUNCH_ID, {
@@ -43,12 +43,41 @@ test("lunch keeps a seated speaker, and a courier note is Hesper", () => {
   });
   assert.equal(puckNote.ok, false);
   const puckCarries = rejectGatheringLine(LUNCH_ID, {
-    speaker: "Bill",
+    speaker: "GPT",
     line_type: "participant_message",
     carried_by: "Puck",
     text: "no",
   });
   assert.equal(puckCarries.ok, false);
+  const bill = rejectGatheringLine(LUNCH_ID, {
+    speaker: "Bill",
+    line_type: "participant_message",
+    carried_by: "Hesper",
+    text: "no",
+  });
+  assert.equal(bill.ok, false);
+  const tuziTurn = rejectGatheringLine(LUNCH_ID, {
+    speaker: "Tuzi",
+    line_type: "participant_message",
+    carried_by: "Hesper",
+    text: "no",
+  });
+  assert.equal(tuziTurn.ok, false);
+  const hesperTurn = rejectGatheringLine(LUNCH_ID, {
+    speaker: "Hesper",
+    line_type: "participant_message",
+    carried_by: "Hesper",
+    text: "her own turn",
+  });
+  assert.equal(hesperTurn.ok, true);
+  assert.deepEqual([...LUNCH_SEATS], ["GPT", "Kimi", "Gemini", "Hesper"]);
+  const facts = lunchFacts([]);
+  assert.equal(facts.includes("SEAT: Bill"), false);
+  assert.equal(facts.includes("SEAT: Tuzi"), false);
+  assert.equal(facts.includes("FIRST: GPT"), true);
+  assert.equal(facts.includes("ORDER: not fixed"), true);
+  assert.equal(facts.includes("GPT-6.1 Sol"), true);
+  assert.equal(facts.includes("NOT SEATED: Bill"), true);
 });
 
 test("dinner and breakfast still refuse a Hesper courier note", () => {

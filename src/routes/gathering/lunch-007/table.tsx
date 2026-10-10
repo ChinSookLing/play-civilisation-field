@@ -4,6 +4,9 @@ import { loadLunchLinesFn } from "@/lib/play/load";
 import type { DinnerLine, DinnerLineType } from "@/lib/play/dinner";
 import { sheetLabel, sheetMeta } from "@/lib/play/sheet";
 import {
+  LUNCH_FIRST,
+  LUNCH_GPT_MODEL,
+  LUNCH_HOST,
   LUNCH_OPENS,
   LUNCH_PASSING,
   LUNCH_QUESTION,
@@ -28,7 +31,6 @@ const MARK: Record<string, { letter: string; color: string }> = {
   GPT: { letter: "G", color: "#ff8c42" },
   Kimi: { letter: "K", color: "#3c8f6e" },
   Gemini: { letter: "Ge", color: "#2f6fed" },
-  Bill: { letter: "B", color: "#c8ccd4" },
   Hesper: { letter: "H", color: "#b14eff" },
 };
 
@@ -49,8 +51,8 @@ function Lunch() {
   const initial = Route.useLoaderData();
   const [lines, setLines] = useState<DinnerLine[]>(initial.lines);
   const [key, setKey] = useState("");
-  const [lineType, setLineType] = useState<DinnerLineType>("host_note");
-  const [seat, setSeat] = useState<(typeof LUNCH_SEATS)[number]>("Tuzi");
+  const [lineType, setLineType] = useState<DinnerLineType>("participant_message");
+  const [seat, setSeat] = useState<(typeof LUNCH_SEATS)[number]>(LUNCH_FIRST);
   const [words, setWords] = useState("");
   const [relay, setRelay] = useState("");
   const [notice, setNotice] = useState("");
@@ -110,7 +112,7 @@ function Lunch() {
           </p>
           <h1 className="mt-2 font-display text-4xl tracking-tight">{LUNCH_TITLE}</h1>
           <p className="mt-2 text-sm text-muted">Practice. Not a Field gathering. No picture.</p>
-          <p className="mt-2 text-sm text-muted">Opens {LUNCH_OPENS}. Hosted by Tuzi. Carried by Hesper.</p>
+          <p className="mt-2 text-sm text-muted">Opens {LUNCH_OPENS}. {LUNCH_HOST} hosts and only watches. She names the next speaker. Hesper sits and carries.</p>
           <p className="mt-4 text-base leading-relaxed text-fg">{LUNCH_QUESTION}</p>
           <p className="mt-2 text-base leading-relaxed text-fg">{LUNCH_QUESTION_ZH}</p>
           <p className="mt-4 text-sm leading-relaxed text-muted">{LUNCH_PASSING}</p>
@@ -119,6 +121,16 @@ function Lunch() {
         <section className="mt-6" aria-label="Table">
           <p className="text-xs tracking-[0.16em] text-muted uppercase">At the table</p>
           <ul className="mt-3 flex flex-wrap gap-3">
+            <li className="flex items-center gap-2 text-sm">
+              <span
+                className="grid h-8 min-w-8 place-items-center rounded-full px-1 text-xs font-medium text-bg"
+                style={{ background: MARK[LUNCH_HOST].color }}
+              >
+                {MARK[LUNCH_HOST].letter}
+              </span>
+              {LUNCH_HOST}
+              <span className="text-muted">host · watches · names the next</span>
+            </li>
             {LUNCH_SEATS.map((name) => (
               <li key={name} className="flex items-center gap-2 text-sm">
                 <span
@@ -128,11 +140,12 @@ function Lunch() {
                   {MARK[name].letter}
                 </span>
                 {name}
-                {name === "Tuzi" ? <span className="text-muted">host</span> : null}
-                {name === "Hesper" ? <span className="text-muted">courier</span> : null}
+                {name === "GPT" ? <span className="text-muted">{LUNCH_GPT_MODEL}</span> : null}
+                {name === "Hesper" ? <span className="text-muted">sits, and carries</span> : null}
               </li>
             ))}
           </ul>
+          <p className="mt-3 text-sm text-muted">Bill keeps the wall. He is not seated.</p>
           <div className="mt-4 space-y-4">
             {lines.length === 0 ? <p className="text-sm text-muted">No one has spoken yet.</p> : null}
             {lines.map((line) => {
