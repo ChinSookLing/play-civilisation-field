@@ -46,7 +46,7 @@ export function lunchSheet(lines: DinnerLine[]): Sheet {
     html: TABLE,
     plainText: TXT,
     json: LINES,
-    audience: "GPT, Kimi, Gemini, Bill, Hermes, and Puck sit. Puck hosts and carries, and may speak a short piece at the end of each round. Other observers: read only",
+    audience: "GPT, Kimi, Gemini, Grok Build (Bill), Hark (Hermes), and Grok Bot (Puck) sit. Puck hosts and carries, and may speak a short piece at the end of each round. Other observers: read only",
     definition: `A practice lunch. Not a Field gathering. The question is: ${LUNCH_QUESTION} ${LUNCH_QUESTION_ZH} The table is empty until the first line is posted.`,
     provenance:
       "Puck hosts and carries the words, and may speak a short piece at the end of each round. Bill sits as PT-007. CC BY 4.0. Credit: Tuzi and Affiliates, The Civilisation Field.",
