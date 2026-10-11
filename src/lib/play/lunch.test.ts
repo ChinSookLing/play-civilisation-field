@@ -83,11 +83,11 @@ test("lunch seats GPT, Kimi, Gemini, Bill, and Puck, and Puck carries", () => {
   assert.equal(facts.includes("SEAT: Puck"), true);
   assert.equal(facts.includes("SEAT: Hermes"), true);
   assert.equal(facts.includes("SEAT: Hesper"), false);
-  assert.equal(facts.includes("SEAT: Tuzi"), false);
-  assert.equal(facts.includes("hark.com"), true);
+  assert.equal(facts.includes("Hesper"), false);
+  assert.equal(facts.includes("handed"), false);
+  assert.equal(facts.includes("hark.com"), false);
   assert.equal(facts.includes("FIRST: GPT"), true);
   assert.equal(facts.includes("How should Human be prepared for Bot Agent's Era"), true);
-  assert.equal(facts.includes("NOT SEATED: Hesper"), true);
   assert.equal(facts.includes("light seat"), true);
   assert.equal(facts.includes("PT-007"), true);
 });
