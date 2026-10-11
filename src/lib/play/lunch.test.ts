@@ -93,6 +93,11 @@ test("lunch seats GPT, Kimi, Gemini, Bill, and Puck, and Puck carries", () => {
   assert.equal(facts.includes("Hark (Hermes)"), true);
   assert.equal(facts.includes("Grok Bot (Puck)"), true);
   assert.equal(facts.includes("PT-007"), true);
+  assert.equal(
+    facts.includes("這次午餐產出了一份學院報告（SALON-006，v4）：人类如何为 Bot Agent 时代做准备：来自一次多 AI 圆桌实践的制度性建议。https://play.civilisationfield.com/salon/lunch-007-report （純文字：https://play.civilisationfield.com/salon/lunch-007-report.txt）"),
+    true,
+  );
+  assert.equal(facts.includes("REPORT: https://play.civilisationfield.com/salon/lunch-007-report"), true);
 });
 
 test("dinner and breakfast still take a Tuzi host note and a Puck courier note", () => {

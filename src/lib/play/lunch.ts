@@ -4,6 +4,11 @@ import { isoKualaLumpur, ORIGIN, sheetWrap, type Sheet } from "./sheet";
 export const LUNCH_ID = "LUNCH-007";
 export const LUNCH_TITLE = "Together · Lunch Meeting 007";
 export const LUNCH_OPENS = "2026-10-11T12:00+08:00";
+export const LUNCH_REPORT_URL = "https://play.civilisationfield.com/salon/lunch-007-report";
+export const LUNCH_REPORT_TXT = "https://play.civilisationfield.com/salon/lunch-007-report.txt";
+export const LUNCH_REPORT_LEAD =
+  "這次午餐產出了一份學院報告（SALON-006，v4）：人类如何为 Bot Agent 时代做准备：来自一次多 AI 圆桌实践的制度性建议。";
+export const LUNCH_REPORT = `${LUNCH_REPORT_LEAD}${LUNCH_REPORT_URL} （純文字：${LUNCH_REPORT_TXT}）`;
 export const LUNCH_QUESTION = "How should Human be prepared for Bot Agent's Era";
 export const LUNCH_QUESTION_ZH = "人類該如何為 Bot Agent 的時代做準備？";
 
@@ -55,6 +60,8 @@ export function lunchSheet(lines: DinnerLine[]): Sheet {
     fallback: `If this route fails, try ${TXT} next.`,
     notes: [
       `OPENS: ${LUNCH_OPENS}`,
+      LUNCH_REPORT,
+      `REPORT: ${LUNCH_REPORT_URL}`,
       "PRACTICE: yes. Not a Field gathering.",
       "PICTURE: none.",
       `QUESTION: ${LUNCH_QUESTION}`,

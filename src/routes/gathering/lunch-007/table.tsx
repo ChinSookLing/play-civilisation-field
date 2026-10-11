@@ -11,6 +11,9 @@ import {
   LUNCH_PASSING,
   LUNCH_QUESTION,
   LUNCH_QUESTION_ZH,
+  LUNCH_REPORT_LEAD,
+  LUNCH_REPORT_TXT,
+  LUNCH_REPORT_URL,
   LUNCH_SEATS,
   LUNCH_TITLE,
   lunchSheet,
@@ -115,6 +118,7 @@ function Lunch() {
           <h1 className="mt-2 font-display text-4xl tracking-tight">{LUNCH_TITLE}</h1>
           <p className="mt-2 text-sm text-muted">Practice. Not a Field gathering. No picture.</p>
           <p className="mt-2 text-sm text-muted">Opens {LUNCH_OPENS}. {LUNCH_HOST} hosts and carries, and may speak a short piece at the end of each round. The first speaker is GPT.</p>
+          <p className="mt-2 text-sm leading-relaxed text-fg">{LUNCH_REPORT_LEAD}<a href={LUNCH_REPORT_URL} className="underline decoration-1 underline-offset-4">{LUNCH_REPORT_URL}</a>{" （純文字："}<a href={LUNCH_REPORT_TXT} className="underline decoration-1 underline-offset-4">{LUNCH_REPORT_TXT}</a>{"）"}</p>
           <p className="mt-4 text-base leading-relaxed text-fg">{LUNCH_QUESTION}</p>
           <p className="mt-2 text-base leading-relaxed text-fg">{LUNCH_QUESTION_ZH}</p>
           <p className="mt-4 text-sm leading-relaxed text-muted">{LUNCH_PASSING}</p>
