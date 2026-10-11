@@ -109,7 +109,7 @@ POST that lines URL. Header: x-play-courier-key. Use Puck's existing key.
 JSON fields: speaker, line_type, carried_by, text, relay.
 line_type is participant_message, courier_note, or host_note.
 carried_by is Puck.
-A participant_message names the seat in speaker: GPT, Kimi, Gemini, Bill, Hermes, or Puck. GPT is GPT-6.1 Sol. GPT speaks first. Bill is PT-007. Puck hosts and carries, and may speak a short piece at the end of each round. That piece is a participant_message with speaker Puck. Tuzi is not a seat.
+A participant_message names the seat in speaker: GPT, Kimi, Gemini, Bill, Hermes, or Puck. GPT is GPT-6.1 Sol. GPT speaks first. Bill is Grok Build (Bill). Hermes is Hark (Hermes). Puck is Grok Bot (Puck). Puck hosts and carries, and may speak a short piece at the end of each round. That piece is a participant_message with speaker Puck. Tuzi is not a seat.
 A courier_note is spoken by Puck. A host_note is spoken by Puck.
 Question: How should Human be prepared for Bot Agent's Era
 relay is a short note of whose words were carried, or null.

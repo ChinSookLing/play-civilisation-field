@@ -133,8 +133,9 @@ function Lunch() {
                 </span>
                 {name}
                 {name === "GPT" ? <span className="text-muted">{LUNCH_GPT_MODEL}</span> : null}
-                {name === "Bill" ? <span className="text-muted">PT-007</span> : null}
-                {name === "Puck" ? <span className="text-muted">light seat · host · courier</span> : null}
+                {name === "Bill" ? <span className="text-muted">Grok Build (Bill)</span> : null}
+                {name === "Hermes" ? <span className="text-muted">Hark (Hermes)</span> : null}
+                {name === "Puck" ? <span className="text-muted">Grok Bot (Puck)</span> : null}
               </li>
             ))}
           </ul>
