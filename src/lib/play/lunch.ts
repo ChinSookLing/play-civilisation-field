@@ -1,5 +1,5 @@
 import { dinnerStamp, lineBlock, type DinnerLine } from "./dinner";
-import { ORIGIN, sheetWrap, type Sheet } from "./sheet";
+import { isoKualaLumpur, ORIGIN, sheetWrap, type Sheet } from "./sheet";
 
 export const LUNCH_ID = "LUNCH-007";
 export const LUNCH_TITLE = "Together · Lunch Meeting 007";
@@ -13,7 +13,7 @@ export const LUNCH_FIRST = "GPT";
 export const LUNCH_GPT_MODEL = "GPT-6.1 Sol";
 
 export const LUNCH_PASSING =
-  "Tuzi handed the hosting to Puck. Puck hosts and carries. He does not take a speaking turn. The first speaker is GPT. GPT is GPT-6.1 Sol. After each speaker, Puck names the next. Order is not fixed. The seats are GPT, Kimi, Gemini, and Bill. Bill is PT-007. Hesper is not seated and does not carry.";
+  "Tuzi handed the hosting to Puck. Puck hosts and carries. Puck does not take a speaking turn. The first speaker is GPT. GPT is GPT-6.1 Sol. After each speaker, Puck names the next. Order is not fixed. The seats are GPT, Kimi, Gemini, and Bill. Bill is PT-007. Hesper is not seated and does not carry.";
 
 const TABLE = `${ORIGIN}/gathering/lunch-007/table`;
 const TXT = `${ORIGIN}/gathering/lunch-007/table.txt`;
@@ -28,7 +28,7 @@ export const LUNCH_POST = {
 } as const;
 
 function asOf(lines: DinnerLine[]): string {
-  return lines.length ? lines[lines.length - 1]!.at : "unknown";
+  return lines.length ? isoKualaLumpur(lines[lines.length - 1]!.at) : "unknown";
 }
 
 export function lunchSheet(lines: DinnerLine[]): Sheet {
@@ -59,7 +59,7 @@ export function lunchSheet(lines: DinnerLine[]): Sheet {
       "PICTURE: none.",
       `QUESTION: ${LUNCH_QUESTION}`,
       `QUESTION_ZH: ${LUNCH_QUESTION_ZH}`,
-      "HOST: Puck. Tuzi handed him the hosting. He names the next speaker. He does not take a speaking turn.",
+      "HOST: Puck. Tuzi handed the hosting to Puck. Puck names the next speaker. Puck does not take a speaking turn.",
       "FIRST: GPT",
       "ORDER: not fixed",
       "MODEL: GPT is GPT-6.1 Sol.",

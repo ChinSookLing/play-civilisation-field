@@ -1,15 +1,7 @@
 import { getSql } from "@/lib/db";
-import { BREAKFAST_ID, BREAKFAST_SEATS } from "./breakfast";
 import { authorizeCourier } from "./courier-key";
-import { DINNER_ID, PRACTICE_SEATS, type DinnerLine, type DinnerLineType } from "./dinner";
-
-const TYPES = new Set<DinnerLineType>(["participant_message", "courier_note", "host_note"]);
-const CARRIERS = new Set(["Puck", "Tuzi (temporary courier)"]);
-
-const TABLES: Record<string, { seats: readonly string[]; prefix: string }> = {
-  [DINNER_ID]: { seats: PRACTICE_SEATS, prefix: "dinner-001" },
-  [BREAKFAST_ID]: { seats: BREAKFAST_SEATS, prefix: "breakfast-002" },
-};
+import { DINNER_ID, type DinnerLine, type DinnerLineType } from "./dinner";
+import { GATHERING_TABLES, rejectGatheringLine } from "./gathering-line";
 
 function iso(value: unknown): string {
   if (value instanceof Date) return value.toISOString();
@@ -31,6 +23,8 @@ function rowToLine(row: Record<string, unknown>): DinnerLine {
   };
 }
 
+export { rejectGatheringLine } from "./gathering-line";
+
 export async function listGatheringLines(gatheringId: string): Promise<DinnerLine[]> {
   const sql = await getSql();
   const rows = await sql<Record<string, unknown>>`
@@ -51,30 +45,12 @@ export async function addGatheringLine(
   request: Request,
   input: { speaker?: string; line_type?: string; carried_by?: string; text?: string; relay?: string | null },
 ): Promise<{ ok: true; line: DinnerLine } | { ok: false; status: number; error: string }> {
-  const table = TABLES[gatheringId];
+  const table = GATHERING_TABLES[gatheringId];
   if (!table) return { ok: false, status: 404, error: "no such table" };
-  const auth = authorizeCourier(request);
+  const auth = authorizeCourier(request, table.couriers);
   if (!auth.ok) return auth;
-  const lineType = input.line_type;
-  const speaker = input.speaker?.trim() ?? "";
-  const carriedBy = input.carried_by?.trim() ?? "";
-  const text = input.text?.replace(/\r\n/g, "\n").trim() ?? "";
-  const relay = input.relay?.trim() || null;
-  if (!lineType || !TYPES.has(lineType as DinnerLineType)) {
-    return { ok: false, status: 422, error: "line type must be participant_message, courier_note, or host_note" };
-  }
-  if (!CARRIERS.has(carriedBy)) return { ok: false, status: 422, error: "carried_by is not a courier" };
-  if (!text) return { ok: false, status: 422, error: "empty words" };
-  if (text.length > 4000) return { ok: false, status: 422, error: "too long" };
-  if (lineType === "participant_message" && !table.seats.includes(speaker)) {
-    return { ok: false, status: 422, error: "speaker is not seated" };
-  }
-  if (lineType === "courier_note" && speaker !== "Puck" && speaker !== "Tuzi") {
-    return { ok: false, status: 422, error: "a courier note is spoken by Puck or Tuzi" };
-  }
-  if (lineType === "host_note" && speaker !== "Tuzi") {
-    return { ok: false, status: 422, error: "a host note is spoken by Tuzi" };
-  }
+  const checked = rejectGatheringLine(gatheringId, input);
+  if (!checked.ok) return checked;
   const sql = await getSql();
   const next = await sql<{ n: number }>`
     select coalesce(max(n), 0) + 1 as n from dinner_lines where dinner_id = ${gatheringId}
@@ -83,7 +59,7 @@ export async function addGatheringLine(
   const id = `${table.prefix}-${n}`;
   const rows = await sql<Record<string, unknown>>`
     insert into dinner_lines (id, dinner_id, n, speaker, line_type, carried_by, text, relay)
-    values (${id}, ${gatheringId}, ${n}, ${speaker}, ${lineType}, ${carriedBy}, ${text}, ${relay})
+    values (${id}, ${gatheringId}, ${n}, ${checked.speaker}, ${checked.lineType}, ${checked.carriedBy}, ${checked.text}, ${checked.relay})
     returning id, n, at, speaker, line_type, carried_by, text, relay, void_reason, filed_as
   `;
   return { ok: true, line: rowToLine(rows[0]) };

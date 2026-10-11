@@ -18,6 +18,13 @@ function GatheringList() {
         {
           items: [
             {
+              href: "/gathering/lunch-007/table",
+              title: "Together · Lunch Meeting 007",
+              status: "Prepared. Opens 2026-10-11 12:00 +08. No lines yet.",
+              note: "Practice. Not a Field gathering. Puck hosts and carries. Seats: GPT, Kimi, Gemini, Bill.",
+              light: "/gathering/lunch-007/table.txt",
+            },
+            {
               href: "/gathering/proof-table-006/table",
               title: "Together · Proof Table 006 · 孤圈 · Lonely Circle (one ticked speed picture)",
               status: "Prepared. The opening line is not posted.",

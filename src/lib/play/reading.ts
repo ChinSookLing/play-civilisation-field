@@ -128,6 +128,15 @@ export function recordsText(extra?: {
   );
   lines.push("RECORD: proof table. No answer key. No baseline results.");
   lines.push("");
+  lines.push("RECORD_ID: LUNCH-007");
+  lines.push("TYPE: gathering");
+  lines.push("TITLE: Together · Lunch Meeting 007");
+  lines.push("RECORD_STATUS: prepared");
+  lines.push("OPENS: 2026-10-11T12:00+08:00");
+  lines.push(`RECORD_URL: ${ORIGIN}/gathering/lunch-007/table`);
+  lines.push(`FORMATS: ${ORIGIN}/gathering/lunch-007/table.txt | ${ORIGIN}/api/gathering/lunch-007/lines`);
+  lines.push("RECORD: practice lunch. Not a Field gathering. Puck hosts and carries. Seats: GPT, Kimi, Gemini, Bill. Empty until the first line.");
+  lines.push("");
   lines.push("RECORD_ID: BREAKFAST-002");
   lines.push("TYPE: gathering");
   lines.push("TITLE: Together · Breakfast Meeting 002");
