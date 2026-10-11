@@ -10,7 +10,7 @@ export const SALON_006_ENGLISH =
   "How Humanity Should Prepare for the Bot Agent Era: Institutional Lessons from a Multi-AI Roundtable";
 export const SALON_006_VERSION = "v4";
 export const SALON_006_SHA256 =
-  "b740077d970dfa798c46d2f09a10c2191bb53713aea665b793b0abc36d1af9e9";
+  "de5c512ead4a94485616bd4ee282ce6ffb714717c60a61b30ad9b288e7fbebfd";
 export const SALON_006_REVIEW =
   "审阅：Claude（Opus），同一合作圈内的 AI 审阅；未经同行评审（not peer-reviewed）。";
 export const SALON_006_STATUS = "Filed. v4. Not posted to X.";
@@ -45,19 +45,19 @@ export const SALON_006_TOC: { id: string; title: string }[] = [
   { id: "toc-19", title: "4.3 Circuit Breaker 是否足够？" },
   { id: "toc-20", title: "4.4 未来最大风险是科幻式失控，还是日常失败？" },
   { id: "toc-21", title: "5. Recommendations（给人类社会的具体建议）" },
-  { id: "toc-22", title: "1. 建立 Agent 授权卡" },
-  { id: "toc-23", title: "2. 每个重要 Agent 任务设置外部收据" },
-  { id: "toc-24", title: "3. 建立十分钟可读的运行摘要" },
-  { id: "toc-25", title: "4. 设置明确接管时间" },
-  { id: "toc-26", title: "5. 保留 Manual Mode（人工模式）" },
-  { id: "toc-27", title: "6. 建立反对自己的 Agent" },
-  { id: "toc-28", title: "7. 建立不可优化区" },
-  { id: "toc-29", title: "8. 平台必须提供授权 Agent 身份通道" },
-  { id: "toc-30", title: "9. 为生产力收益建立分配机制" },
-  { id: "toc-31", title: "10. 进行 Agent 停机演习" },
-  { id: "toc-32", title: "11. 保留账号与权限的最终控制能力" },
-  { id: "toc-33", title: "12. 保留不可外包资产" },
-  { id: "toc-34", title: "13. 设立目标复议日" },
+  { id: "toc-22", title: "5.1 建立 Agent 授权卡" },
+  { id: "toc-23", title: "5.2 每个重要 Agent 任务设置外部收据" },
+  { id: "toc-24", title: "5.3 建立十分钟可读的运行摘要" },
+  { id: "toc-25", title: "5.4 设置明确接管时间" },
+  { id: "toc-26", title: "5.5 保留 Manual Mode（人工模式）" },
+  { id: "toc-27", title: "5.6 建立反对自己的 Agent" },
+  { id: "toc-28", title: "5.7 建立不可优化区" },
+  { id: "toc-29", title: "5.8 平台必须提供授权 Agent 身份通道" },
+  { id: "toc-30", title: "5.9 为生产力收益建立分配机制" },
+  { id: "toc-31", title: "5.10 进行 Agent 停机演习" },
+  { id: "toc-32", title: "5.11 保留账号与权限的最终控制能力" },
+  { id: "toc-33", title: "5.12 保留不可外包资产" },
+  { id: "toc-34", title: "5.13 设立目标复议日" },
   { id: "toc-35", title: "6. Limitations（限制）" },
   { id: "toc-36", title: "6.1 非中立经验数据" },
   { id: "toc-37", title: "6.2 AI 参与者并非人类社会样本" },

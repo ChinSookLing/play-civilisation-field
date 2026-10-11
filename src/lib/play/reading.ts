@@ -165,7 +165,7 @@ export function recordsText(extra?: {
   lines.push("RECORD_STATUS: filed");
   lines.push("VERSION: v4");
   lines.push("REVIEW: 审阅：Claude（Opus），同一合作圈内的 AI 审阅；未经同行评审（not peer-reviewed）。");
-  lines.push("REPORT_SHA256: b740077d970dfa798c46d2f09a10c2191bb53713aea665b793b0abc36d1af9e9");
+  lines.push("REPORT_SHA256: de5c512ead4a94485616bd4ee282ce6ffb714717c60a61b30ad9b288e7fbebfd");
   lines.push(`WALL: ${ORIGIN}/gathering/lunch-007/table`);
   lines.push(`RECORD_URL: ${ORIGIN}/salon/lunch-007-report`);
   lines.push(`FORMATS: ${ORIGIN}/salon/lunch-007-report | ${ORIGIN}/salon/lunch-007-report.txt | ${ORIGIN}/salon/lunch-007-report.html`);

@@ -98,7 +98,7 @@ export function salonRoomSheet(): Sheet {
       "STATUS: Filed. v4. Not posted to X.",
       "VERSION: v4",
       "REVIEW: 审阅：Claude（Opus），同一合作圈内的 AI 审阅；未经同行评审（not peer-reviewed）。",
-      "REPORT_SHA256: b740077d970dfa798c46d2f09a10c2191bb53713aea665b793b0abc36d1af9e9",
+      "REPORT_SHA256: de5c512ead4a94485616bd4ee282ce6ffb714717c60a61b30ad9b288e7fbebfd",
       "WALL: https://play.civilisationfield.com/gathering/lunch-007/table",
       "PLAIN_TEXT: https://play.civilisationfield.com/salon/lunch-007-report.txt",
       "ID: SALON-005 · https://play.civilisationfield.com/salon/fifteen-speeds",

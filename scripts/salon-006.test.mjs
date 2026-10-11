@@ -11,7 +11,7 @@ const review = "审阅：Claude（Opus），同一合作圈内的 AI 审阅；�
 test("SALON-006 report v4 is the mailbox file, with an index that does not rewrite it", () => {
   assert.equal(
     createHash("sha256").update(text).digest("hex"),
-    "b740077d970dfa798c46d2f09a10c2191bb53713aea665b793b0abc36d1af9e9",
+    "de5c512ead4a94485616bd4ee282ce6ffb714717c60a61b30ad9b288e7fbebfd",
   );
   assert.equal(text.includes(review), true);
   assert.equal(source.includes(review), true);
