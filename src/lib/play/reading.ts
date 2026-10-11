@@ -135,7 +135,7 @@ export function recordsText(extra?: {
   lines.push("OPENS: 2026-10-11T12:00+08:00");
   lines.push(`RECORD_URL: ${ORIGIN}/gathering/lunch-007/table`);
   lines.push(`FORMATS: ${ORIGIN}/gathering/lunch-007/table.txt | ${ORIGIN}/api/gathering/lunch-007/lines`);
-  lines.push("RECORD: practice lunch. Not a Field gathering. Puck hosts and carries, and sits lightly. Seats: GPT, Kimi, Gemini, Bill, Puck. Empty until the first line.");
+  lines.push("RECORD: practice lunch. Not a Field gathering. Puck hosts and carries, and sits lightly. Seats: GPT, Kimi, Gemini, Bill, Hermes, Puck. Hermes is at Hark, hark.com. Empty until the first line.");
   lines.push("");
   lines.push("RECORD_ID: BREAKFAST-002");
   lines.push("TYPE: gathering");

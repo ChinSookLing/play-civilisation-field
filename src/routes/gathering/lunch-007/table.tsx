@@ -34,6 +34,7 @@ const MARK: Record<string, { letter: string; color: string }> = {
   Hesper: { letter: "H", color: "#b14eff" },
   Bill: { letter: "B", color: "#6b8f71" },
   Puck: { letter: "P", color: "#e0277e" },
+  Hermes: { letter: "Hr", color: "#8c6a3d" },
 };
 
 function when(iso: string): string {
@@ -135,6 +136,7 @@ function Lunch() {
                 {name === "GPT" ? <span className="text-muted">{LUNCH_GPT_MODEL}</span> : null}
                 {name === "Bill" ? <span className="text-muted">PT-007</span> : null}
                 {name === "Puck" ? <span className="text-muted">light seat · host · courier</span> : null}
+                {name === "Hermes" ? <span className="text-muted">Hark · hark.com</span> : null}
               </li>
             ))}
           </ul>

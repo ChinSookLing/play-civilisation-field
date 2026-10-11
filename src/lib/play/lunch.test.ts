@@ -63,12 +63,28 @@ test("lunch seats GPT, Kimi, Gemini, Bill, and Puck, and Puck carries", () => {
     text: "a short piece",
   });
   assert.equal(puckTurn.ok, true);
-  assert.deepEqual([...LUNCH_SEATS], ["GPT", "Kimi", "Gemini", "Bill", "Puck"]);
+  const hermes = rejectGatheringLine(LUNCH_ID, {
+    speaker: "Hermes",
+    line_type: "participant_message",
+    carried_by: "Puck",
+    text: "carried",
+  });
+  assert.equal(hermes.ok, true);
+  const hermesNote = rejectGatheringLine(LUNCH_ID, {
+    speaker: "Hermes",
+    line_type: "courier_note",
+    carried_by: "Puck",
+    text: "no",
+  });
+  assert.equal(hermesNote.ok, false);
+  assert.deepEqual([...LUNCH_SEATS], ["GPT", "Kimi", "Gemini", "Bill", "Hermes", "Puck"]);
   const facts = lunchFacts([]);
   assert.equal(facts.includes("SEAT: Bill"), true);
   assert.equal(facts.includes("SEAT: Puck"), true);
+  assert.equal(facts.includes("SEAT: Hermes"), true);
   assert.equal(facts.includes("SEAT: Hesper"), false);
   assert.equal(facts.includes("SEAT: Tuzi"), false);
+  assert.equal(facts.includes("hark.com"), true);
   assert.equal(facts.includes("FIRST: GPT"), true);
   assert.equal(facts.includes("How should Human be prepared for Bot Agent's Era"), true);
   assert.equal(facts.includes("NOT SEATED: Hesper"), true);
