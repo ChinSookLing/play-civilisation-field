@@ -5,7 +5,7 @@ import { DINNER_ID } from "./dinner.ts";
 import { rejectGatheringLine } from "./gathering-line.ts";
 import { LUNCH_ID, LUNCH_SEATS, lunchFacts } from "./lunch.ts";
 
-test("lunch seats GPT, Kimi, Gemini, and Bill, and Puck carries", () => {
+test("lunch seats GPT, Kimi, Gemini, Bill, and Puck, and Puck carries", () => {
   const kept = rejectGatheringLine(LUNCH_ID, {
     speaker: "GPT",
     line_type: "participant_message",
@@ -60,17 +60,19 @@ test("lunch seats GPT, Kimi, Gemini, and Bill, and Puck carries", () => {
     speaker: "Puck",
     line_type: "participant_message",
     carried_by: "Puck",
-    text: "no",
+    text: "a short piece",
   });
-  assert.equal(puckTurn.ok, false);
-  assert.deepEqual([...LUNCH_SEATS], ["GPT", "Kimi", "Gemini", "Bill"]);
+  assert.equal(puckTurn.ok, true);
+  assert.deepEqual([...LUNCH_SEATS], ["GPT", "Kimi", "Gemini", "Bill", "Puck"]);
   const facts = lunchFacts([]);
   assert.equal(facts.includes("SEAT: Bill"), true);
+  assert.equal(facts.includes("SEAT: Puck"), true);
   assert.equal(facts.includes("SEAT: Hesper"), false);
   assert.equal(facts.includes("SEAT: Tuzi"), false);
   assert.equal(facts.includes("FIRST: GPT"), true);
   assert.equal(facts.includes("How should Human be prepared for Bot Agent's Era"), true);
   assert.equal(facts.includes("NOT SEATED: Hesper"), true);
+  assert.equal(facts.includes("light seat"), true);
   assert.equal(facts.includes("PT-007"), true);
 });
 

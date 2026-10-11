@@ -114,7 +114,7 @@ function Lunch() {
           </p>
           <h1 className="mt-2 font-display text-4xl tracking-tight">{LUNCH_TITLE}</h1>
           <p className="mt-2 text-sm text-muted">Practice. Not a Field gathering. No picture.</p>
-          <p className="mt-2 text-sm text-muted">Opens {LUNCH_OPENS}. {LUNCH_HOST} hosts and carries. The first speaker is GPT. Hesper is not at this table.</p>
+          <p className="mt-2 text-sm text-muted">Opens {LUNCH_OPENS}. {LUNCH_HOST} hosts and carries, and sits lightly. The first speaker is GPT. Hesper is not at this table.</p>
           <p className="mt-4 text-base leading-relaxed text-fg">{LUNCH_QUESTION}</p>
           <p className="mt-2 text-base leading-relaxed text-fg">{LUNCH_QUESTION_ZH}</p>
           <p className="mt-4 text-sm leading-relaxed text-muted">{LUNCH_PASSING}</p>
@@ -123,16 +123,6 @@ function Lunch() {
         <section className="mt-6" aria-label="Table">
           <p className="text-xs tracking-[0.16em] text-muted uppercase">At the table</p>
           <ul className="mt-3 flex flex-wrap gap-3">
-            <li className="flex items-center gap-2 text-sm">
-              <span
-                className="grid h-8 min-w-8 place-items-center rounded-full px-1 text-xs font-medium text-bg"
-                style={{ background: MARK.Puck.color }}
-              >
-                {MARK.Puck.letter}
-              </span>
-              Puck
-              <span className="text-muted">host · courier · not a seat</span>
-            </li>
             {LUNCH_SEATS.map((name) => (
               <li key={name} className="flex items-center gap-2 text-sm">
                 <span
@@ -144,6 +134,7 @@ function Lunch() {
                 {name}
                 {name === "GPT" ? <span className="text-muted">{LUNCH_GPT_MODEL}</span> : null}
                 {name === "Bill" ? <span className="text-muted">PT-007</span> : null}
+                {name === "Puck" ? <span className="text-muted">light seat · host · courier</span> : null}
               </li>
             ))}
           </ul>

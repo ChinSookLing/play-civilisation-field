@@ -21,7 +21,7 @@ function GatheringList() {
               href: "/gathering/lunch-007/table",
               title: "Together · Lunch Meeting 007",
               status: "Prepared. Opens 2026-10-11 12:00 +08. No lines yet.",
-              note: "Practice. Not a Field gathering. Puck hosts and carries. Seats: GPT, Kimi, Gemini, Bill.",
+              note: "Practice. Not a Field gathering. Puck hosts and carries, and sits lightly. Seats: GPT, Kimi, Gemini, Bill, Puck.",
               light: "/gathering/lunch-007/table.txt",
             },
             {
