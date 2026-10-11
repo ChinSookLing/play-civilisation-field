@@ -75,6 +75,9 @@ import { Route as SalonProofTable003RelayDottxtRouteImport } from './routes/salo
 import { Route as SalonFifteenSpeedsRouteImport } from './routes/salon/fifteen-speeds'
 import { Route as SalonFifteenSpeedsDothtmlRouteImport } from './routes/salon/fifteen-speeds[.]html'
 import { Route as SalonFifteenSpeedsDottxtRouteImport } from './routes/salon/fifteen-speeds[.]txt'
+import { Route as SalonLunch007ReportRouteImport } from './routes/salon/lunch-007-report'
+import { Route as SalonLunch007ReportDothtmlRouteImport } from './routes/salon/lunch-007-report[.]html'
+import { Route as SalonLunch007ReportDottxtRouteImport } from './routes/salon/lunch-007-report[.]txt'
 import { Route as ApiGamesIndexRouteImport } from './routes/api/games/index'
 import { Route as ApiGamesGameIdRouteImport } from './routes/api/games/$gameId'
 import { Route as ApiGamesCurrentRouteImport } from './routes/api/games/current'
@@ -488,6 +491,21 @@ const SalonFifteenSpeedsDothtmlRoute =
 const SalonFifteenSpeedsDottxtRoute = SalonFifteenSpeedsDottxtRouteImport.update({
   id: '/fifteen-speeds.txt',
   path: '/fifteen-speeds.txt',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonLunch007ReportRoute = SalonLunch007ReportRouteImport.update({
+  id: '/lunch-007-report',
+  path: '/lunch-007-report',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonLunch007ReportDothtmlRoute = SalonLunch007ReportDothtmlRouteImport.update({
+  id: '/lunch-007-report.html',
+  path: '/lunch-007-report.html',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonLunch007ReportDottxtRoute = SalonLunch007ReportDottxtRouteImport.update({
+  id: '/lunch-007-report.txt',
+  path: '/lunch-007-report.txt',
   getParentRoute: () => SalonRoute,
 } as any)
 const ApiGamesIndexRoute = ApiGamesIndexRouteImport.update({
@@ -940,6 +958,9 @@ export interface FileRoutesByFullPath {
   '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
   '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
   '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
+  '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
+  '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
+  '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
   '/gathering/': typeof GatheringIndexRoute
   '/salon/': typeof SalonIndexRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
@@ -1072,6 +1093,9 @@ export interface FileRoutesByTo {
   '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
   '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
   '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
+  '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
+  '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
+  '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
   '/gathering': typeof GatheringIndexRoute
   '/salon': typeof SalonIndexRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
@@ -1207,6 +1231,9 @@ export interface FileRoutesById {
   '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
   '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
   '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
+  '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
+  '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
+  '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
   '/gathering/': typeof GatheringIndexRoute
   '/salon/': typeof SalonIndexRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
@@ -1343,6 +1370,9 @@ export interface FileRouteTypes {
     | '/salon/fifteen-speeds'
     | '/salon/fifteen-speeds.html'
     | '/salon/fifteen-speeds.txt'
+    | '/salon/lunch-007-report'
+    | '/salon/lunch-007-report.html'
+    | '/salon/lunch-007-report.txt'
     | '/gathering/'
     | '/salon/'
     | '/api/games/$gameId'
@@ -1475,6 +1505,9 @@ export interface FileRouteTypes {
     | '/salon/fifteen-speeds'
     | '/salon/fifteen-speeds.html'
     | '/salon/fifteen-speeds.txt'
+    | '/salon/lunch-007-report'
+    | '/salon/lunch-007-report.html'
+    | '/salon/lunch-007-report.txt'
     | '/gathering'
     | '/salon'
     | '/api/games/$gameId'
@@ -1609,6 +1642,9 @@ export interface FileRouteTypes {
     | '/salon/fifteen-speeds'
     | '/salon/fifteen-speeds.html'
     | '/salon/fifteen-speeds.txt'
+    | '/salon/lunch-007-report'
+    | '/salon/lunch-007-report.html'
+    | '/salon/lunch-007-report.txt'
     | '/gathering/'
     | '/salon/'
     | '/api/games/$gameId'
@@ -2192,6 +2228,27 @@ declare module '@tanstack/react-router' {
       path: '/fifteen-speeds.txt'
       fullPath: '/salon/fifteen-speeds.txt'
       preLoaderRoute: typeof SalonFifteenSpeedsDottxtRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/lunch-007-report': {
+      id: '/salon/lunch-007-report'
+      path: '/lunch-007-report'
+      fullPath: '/salon/lunch-007-report'
+      preLoaderRoute: typeof SalonLunch007ReportRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/lunch-007-report.html': {
+      id: '/salon/lunch-007-report.html'
+      path: '/lunch-007-report.html'
+      fullPath: '/salon/lunch-007-report.html'
+      preLoaderRoute: typeof SalonLunch007ReportDothtmlRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/lunch-007-report.txt': {
+      id: '/salon/lunch-007-report.txt'
+      path: '/lunch-007-report.txt'
+      fullPath: '/salon/lunch-007-report.txt'
+      preLoaderRoute: typeof SalonLunch007ReportDottxtRouteImport
       parentRoute: typeof SalonRoute
     }
     '/api/games/': {
@@ -2842,6 +2899,9 @@ interface SalonRouteChildren {
   SalonFifteenSpeedsRoute: typeof SalonFifteenSpeedsRoute
   SalonFifteenSpeedsDothtmlRoute: typeof SalonFifteenSpeedsDothtmlRoute
   SalonFifteenSpeedsDottxtRoute: typeof SalonFifteenSpeedsDottxtRoute
+  SalonLunch007ReportRoute: typeof SalonLunch007ReportRoute
+  SalonLunch007ReportDothtmlRoute: typeof SalonLunch007ReportDothtmlRoute
+  SalonLunch007ReportDottxtRoute: typeof SalonLunch007ReportDottxtRoute
   SalonIndexRoute: typeof SalonIndexRoute
 }
 
@@ -2863,6 +2923,9 @@ const SalonRouteChildren: SalonRouteChildren = {
   SalonFifteenSpeedsRoute: SalonFifteenSpeedsRoute,
   SalonFifteenSpeedsDothtmlRoute: SalonFifteenSpeedsDothtmlRoute,
   SalonFifteenSpeedsDottxtRoute: SalonFifteenSpeedsDottxtRoute,
+  SalonLunch007ReportRoute: SalonLunch007ReportRoute,
+  SalonLunch007ReportDothtmlRoute: SalonLunch007ReportDothtmlRoute,
+  SalonLunch007ReportDottxtRoute: SalonLunch007ReportDottxtRoute,
   SalonIndexRoute: SalonIndexRoute,
 }
 

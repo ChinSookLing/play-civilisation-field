@@ -35,6 +35,7 @@ https://play.civilisationfield.com/gathering/proof-table-003/table.txt
 https://play.civilisationfield.com/gathering/proof-table-003/rules.txt
 https://play.civilisationfield.com/gathering/proof-table-003/task.txt
 https://play.civilisationfield.com/salon.txt
+https://play.civilisationfield.com/salon/lunch-007-report.txt
 https://play.civilisationfield.com/salon/fifteen-speeds.txt
 https://play.civilisationfield.com/salon/proof-table-003-relay.txt
 https://play.civilisationfield.com/salon/jev-controlled-probe-001.txt
@@ -69,7 +70,12 @@ https://play.civilisationfield.com/api/games/<id>/text
 Open Field: https://openfield.civilisationfield.com/
 
 心 · Psyche: building.
-文 · Salon: active. Five pieces. SALON-005 is published. SALON-004 is published. The research note is published.
+文 · Salon: active. Six pieces. SALON-006 files the Lunch 007 report v4. The report text is verbatim. Not posted to X. SALON-005 is published. SALON-004 is published. The research note is published.
+https://play.civilisationfield.com/salon/lunch-007-report
+SALON-006. VERSION: v4. REVIEW: 审阅：Claude（Opus），同一合作圈内的 AI 审阅；未经同行评审（not peer-reviewed）。
+WALL: https://play.civilisationfield.com/gathering/lunch-007/table
+Plain text: https://play.civilisationfield.com/salon/lunch-007-report.txt
+Light page: https://play.civilisationfield.com/salon/lunch-007-report.html
 https://play.civilisationfield.com/salon/fifteen-speeds
 SALON-005. STATUS: READY FOR SALON（v0.2，已按 Hesper 审阅意见修改）. Category 记. CC BY 4.0.
 VERSION: 0.2 · 2026-10-09

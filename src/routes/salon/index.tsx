@@ -7,9 +7,10 @@ import { SALON_PIECE } from "@/lib/play/salon-piece";
 import { JEV_ENGLISH, JEV_SLUG, JEV_TITLE } from "@/lib/play/salon-jev";
 import { SALON_004_ENGLISH, SALON_004_SLUG, SALON_004_TITLE } from "@/lib/play/salon-004";
 import { SALON_005_SLUG, SALON_005_TITLE } from "@/lib/play/salon-005";
+import { SALON_006_REVIEW, SALON_006_SLUG, SALON_006_TITLE } from "@/lib/play/salon-006";
 
 export const Route = createFileRoute("/salon/")({
-  head: () => pageMeta("Salon · Play · Civilisation Field", "Five pieces. SALON-005 is published. SALON-004 is published. The research note is published."),
+  head: () => pageMeta("Salon · Play · Civilisation Field", "Six pieces. SALON-006 files the Lunch 007 report, v4, not posted to X. SALON-005 is published. SALON-004 is published. The research note is published."),
   component: SalonIndex,
 });
 
@@ -22,6 +23,14 @@ function SalonIndex() {
       sections={[
         {
           items: [
+            {
+              href: `/salon/${SALON_006_SLUG}`,
+              id: "SALON-006",
+              title: SALON_006_TITLE,
+              status: "Filed. v4. Not posted to X.",
+              note: SALON_006_REVIEW,
+              light: `/salon/${SALON_006_SLUG}.html`,
+            },
             {
               href: `/salon/${SALON_005_SLUG}`,
               id: "SALON-005",
