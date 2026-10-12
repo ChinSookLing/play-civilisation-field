@@ -27,8 +27,8 @@ function GatheringList() {
             {
               href: "/gathering/proof-table-006/table",
               title: "Together · Proof Table 006 · 孤圈 · Lonely Circle (one ticked speed picture)",
-              status: "Prepared. The opening line is not posted.",
-              note: "One ticked speed picture on one shared t. Hosted by Tuzi. Words passed by Hesper. Rules v0.5.1.",
+              status: "Active. The opening line is posted.",
+              note: "One ticked speed picture on one shared t. The full wall is table.txt. Hosted by Tuzi. Words passed by Hesper. Rules v0.5.1.",
               light: "/gathering/proof-table-006/table.txt",
             },
             {

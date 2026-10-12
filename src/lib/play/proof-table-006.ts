@@ -5,8 +5,29 @@ import {
   type ProofLine,
   type ProofTableSpec,
 } from "./proof-table";
-import { isoKualaLumpur, ORIGIN, sheetWrap, textRevision, type Sheet } from "./sheet";
+import {
+  isoKualaLumpur,
+  ORIGIN,
+  sheetLabel,
+  sheetMeta,
+  sheetWrap,
+  textRevision,
+  type Sheet,
+} from "./sheet";
 import { RULES_V051_URL } from "./proof-rules";
+import {
+  chooseWhenOpen,
+  ledgerBody,
+  ledgerVersionNote,
+  openTableSheetBits,
+  wallCatalog,
+  wallLatest,
+  wallPartText,
+  wallParts,
+  wallPartsPlain,
+  wallRoundNote,
+  type WallPart,
+} from "./proof-wall";
 
 export const PROOF_006_ID = "PROOF-TABLE-006";
 export const PROOF_006_TITLE =
@@ -14,6 +35,11 @@ export const PROOF_006_TITLE =
 export const PROOF_006_HEADER =
   "孤圈 · Lonely Circle · One ticked speed picture on one shared t · Not every speed tuple · Hosted by Tuzi · Picture rules by Qwen · Checked by Astra · Built by Bill · Words passed by Hesper · Rules v0.5.1";
 export const PROOF_006_RELAY = "passed by Hesper, with Tuzi's approval when needed";
+
+export const PROOF_006_DEFINITION_OPEN =
+  "One circle. The speeds that are ticked move together on one shared t. This table records that one picture. It does not prove every speed tuple. That work stays on Proof Table 005. The opening line is posted and the table is active. Rules v0.5.1. No answer key is on this table.";
+export const PROOF_006_DEFINITION_PREPARED =
+  "One circle. The speeds that are ticked move together on one shared t. This table records that one picture. It does not prove every speed tuple. That work stays on Proof Table 005. Prepared until the opening line is posted. Rules v0.5.1. No answer key is on this table.";
 
 export const PROOF_006_SEATS = ["Tuzi", "Hesper", "Qwen", "Astra", "Bill"] as const;
 
@@ -37,6 +63,7 @@ export const PROOF_006_SPEC: ProofTableSpec = {
 
 const TABLE = `${ORIGIN}/gathering/proof-table-006/table`;
 const TABLE_TXT = `${ORIGIN}/gathering/proof-table-006/table.txt`;
+const PARTS_TXT = `${ORIGIN}/gathering/proof-table-006/parts.txt`;
 const LINES_JSON = `${ORIGIN}/api/gathering/proof-table-006/lines`;
 
 export function proof006AsOf(lines: ProofLine[], ledger: ProofLedger[]): string {
@@ -49,13 +76,20 @@ export function proof006AsOf(lines: ProofLine[], ledger: ProofLedger[]): string 
   return newest ? isoKualaLumpur(newest.toISOString()) : "unknown";
 }
 
+export function proof006Parts(lines: ProofLine[]): WallPart[] {
+  const blocks = lines.map((line) => ({ line, text: proofLineBlock(line, lines) }));
+  return wallParts("proof-table-006", blocks);
+}
+
 export function proof006Sheet(lines: ProofLine[], ledger: ProofLedger[]): Sheet {
   const current = ledger.at(-1);
   const opened = lines.length > 0;
+  const parts = proof006Parts(lines);
+  const bits = openTableSheetBits(opened);
   return {
     id: PROOF_006_ID,
     page: PROOF_006_TITLE,
-    status: opened ? "active" : "prepared",
+    status: bits.status,
     asOf: proof006AsOf(lines, ledger),
     asOfMeans: opened
       ? "time of the newest posted line or ledger entry, in +08:00."
@@ -64,14 +98,14 @@ export function proof006Sheet(lines: ProofLine[], ledger: ProofLedger[]): Sheet 
     html: TABLE,
     plainText: TABLE_TXT,
     json: LINES_JSON,
-    completeness: opened ? undefined : "partial — do not act",
+    completeness: bits.completeness,
+    completenessInStatus: bits.completenessInStatus,
     audience: "the seats of Proof Table 006. Observers: read only",
-    definition:
-      "One circle. The speeds that are ticked move together on one shared t. This table records that one picture. It does not prove every speed tuple. That work stays on Proof Table 005. Prepared until the opening line is posted. Rules v0.5.1. No answer key is on this table.",
+    definition: chooseWhenOpen(opened, PROOF_006_DEFINITION_OPEN, PROOF_006_DEFINITION_PREPARED),
     provenance:
       "Tuzi hosts. Qwen locks the picture rules. Astra checks the picture is the same math, and does not import prime gates. Bill builds. Hesper passes the words, with Tuzi's approval when needed. CC BY 4.0. Credit: Tuzi and Affiliates, The Civilisation Field.",
     rules: `Rules v0.5.1. ${RULES_V051_URL}`,
-    fallback: `If this route fails, try ${TABLE_TXT} next, then ${RULES_V051_URL}.txt.`,
+    fallback: `If this route fails, try ${PARTS_TXT} next, then ${TABLE_TXT}, then ${RULES_V051_URL}.txt.`,
     notes: [
       `HEADER: ${PROOF_006_HEADER}`,
       "FORMAT: one ticked speed picture. Not an audit, and not a proof of every speed tuple.",
@@ -88,11 +122,23 @@ export function proof006Sheet(lines: ProofLine[], ledger: ProofLedger[]): Sheet 
       "The circle is the picture. It is not an answer key.",
       "NOT THIS TABLE: every speed tuple. That remains Proof Table 005.",
       ...PROOF_006_SEATS.map((name) => `SEAT: ${name}`),
-      current ? `LEDGER_VERSION: ${current.version}` : "LEDGER_VERSION: none yet",
-      opened ? "The opening line is posted." : "No lines yet. The opening line is not posted.",
+      ledgerVersionNote(current?.version),
+      opened
+        ? `OPENED: ${isoKualaLumpur(lines[0]!.at)}`
+        : "No lines yet. The opening line is not posted.",
       "No answer key is on this page.",
       "A line is kept as given. A correction is a new line. The old line stays, with a mark. Nothing is deleted.",
-    ],
+      opened
+        ? "STATUS does not repeat COMPLETENESS. COMPLETENESS means this copy is whole. It does not mean the picture is finished."
+        : "",
+      "The full wall is table.txt. This HTML page does not repeat it. Read one part if table.txt is too large.",
+      `PARTS: ${PARTS_TXT}`,
+      wallRoundNote(lines),
+      wallLatest(lines),
+      ...parts.map(
+        (part) => `PART_${part.id}: ${part.from}-${part.to} rounds ${part.rounds} ${part.url}`,
+      ),
+    ].filter((line) => line !== ""),
   };
 }
 
@@ -105,7 +151,7 @@ export function proof006Record(lines: ProofLine[], ledger: ProofLedger[]): strin
         .reverse()
         .map((version, index) => proofLedgerBlock(version, index === 0))
         .join("\n")
-    : "LEDGER: none yet";
+    : undefined;
   return [
     `HEADER: ${PROOF_006_HEADER}`,
     "LICENSE: CC BY 4.0. Credit: Tuzi and Affiliates, The Civilisation Field.",
@@ -116,11 +162,53 @@ export function proof006Record(lines: ProofLine[], ledger: ProofLedger[]): strin
     "END WALL",
     "",
     "BEGIN LEDGER",
-    books.trimEnd(),
+    ledgerBody(books).trimEnd(),
     "END LEDGER",
   ].join("\n");
 }
 
 export function proof006Plain(lines: ProofLine[], ledger: ProofLedger[]): string {
   return sheetWrap(proof006Sheet(lines, ledger), proof006Record(lines, ledger));
+}
+
+export function proof006PartText(lines: ProofLine[], part: WallPart): string {
+  return wallPartText({
+    tableId: PROOF_006_ID,
+    title: "Together · Proof Table 006",
+    part,
+    total: proof006Parts(lines).length,
+    asOf: proof006AsOf(lines, []),
+    opened: lines.length > 0,
+    audience: "the seats of Proof Table 006. Observers: read only",
+    provenance: "Same record as PROOF-TABLE-006. A correction is a new line. Nothing is deleted.",
+    tableUrl: TABLE,
+    tableTxt: TABLE_TXT,
+    partsTxt: PARTS_TXT,
+  });
+}
+
+export function proof006PartsPlain(lines: ProofLine[], ledger: ProofLedger[]): string {
+  return wallPartsPlain({
+    base: proof006Sheet(lines, ledger),
+    id: "PROOF-TABLE-006-PARTS",
+    page: `${PROOF_006_TITLE} · parts`,
+    partsTxt: PARTS_TXT,
+    tableUrl: TABLE,
+    definition:
+      "Index of Proof Table 006. The full wall stays in table.txt. Read one part if that file is too large. Parts are by size, not by round, because most lines have no round number.",
+    lines,
+    parts: proof006Parts(lines),
+  });
+}
+
+export function proof006PageData(lines: ProofLine[], ledger: ProofLedger[]) {
+  const sheet = proof006Sheet(lines, ledger);
+  return {
+    label: sheetLabel(sheet),
+    meta: sheetMeta(sheet),
+    latest: wallLatest(lines),
+    rounds: wallRoundNote(lines),
+    parts: wallCatalog(proof006Parts(lines)),
+    asOf: sheet.asOf,
+  };
 }

@@ -75,15 +75,19 @@ export function recordsText(extra?: {
   lines.push("RECORD_ID: PROOF-TABLE-006");
   lines.push("TYPE: gathering");
   lines.push("TITLE: Together · Proof Table 006 · 孤圈 · Lonely Circle (one ticked speed picture)");
-  lines.push("RECORD_STATUS: prepared");
+  lines.push(extra?.proof006?.messages ? "RECORD_STATUS: active" : "RECORD_STATUS: prepared");
   lines.push(`MESSAGES: ${extra?.proof006?.messages ?? 0}`);
-  lines.push(`LEDGER: ${extra?.proof006?.ledger ?? "none yet"}`);
+  lines.push(`LEDGER: ${extra?.proof006?.ledger ?? "none on this table"}`);
   lines.push("RULES: v0.5.1");
   lines.push(`RECORD_URL: ${ORIGIN}/gathering/proof-table-006/table`);
   lines.push(
-    `FORMATS: ${ORIGIN}/gathering/proof-table-006/table.txt | ${ORIGIN}/gathering/proof-table/rules/v0.5.1.txt`,
+    `FORMATS: ${ORIGIN}/gathering/proof-table-006/table.txt | ${ORIGIN}/gathering/proof-table-006/parts.txt | ${ORIGIN}/gathering/proof-table/rules/v0.5.1.txt`,
   );
-  lines.push("RECORD: one ticked speed picture on one shared t. Not every speed tuple. No lines until the opening line is posted.");
+  lines.push(
+    extra?.proof006?.messages
+      ? "RECORD: one ticked speed picture on one shared t. Not every speed tuple. The opening line is posted. The full wall is table.txt."
+      : "RECORD: one ticked speed picture on one shared t. Not every speed tuple. No lines until the opening line is posted.",
+  );
   lines.push("");
   lines.push("RECORD_ID: PROOF-TABLE-005");
   lines.push("TYPE: gathering");

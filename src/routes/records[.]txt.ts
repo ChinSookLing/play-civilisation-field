@@ -56,7 +56,7 @@ export const Route = createFileRoute("/records.txt")({
             proof006: {
               messages: proof006Lines.length,
               updated: [...proof006Lines.map((line) => line.at), ...proof006Ledger.map((version) => version.at)].sort().at(-1) ?? "",
-              ledger: proof006Ledger.at(-1)?.version ?? "none yet",
+              ledger: proof006Ledger.at(-1)?.version ?? "none on this table",
             },
           }),
           "text/plain; charset=utf-8",
