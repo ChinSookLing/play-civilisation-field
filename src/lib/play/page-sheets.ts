@@ -72,7 +72,7 @@ export function gatheringRoomSheet(): Sheet {
     notes: [
       "Lunch 007 is prepared. Practice, not a Field gathering. Opens 2026-10-11T12:00+08:00. Puck hosts and carries, and may speak a short piece at the end of each round. Seats: GPT, Kimi, Gemini, Bill, Hermes, Puck. No lines yet. https://play.civilisationfield.com/gathering/lunch-007/table",
       "Proof Table 006 is prepared. One ticked speed picture on one shared t. 孤圈 · Lonely Circle. Not a proof of every speed tuple. Rules v0.5.1. No lines yet. https://play.civilisationfield.com/gathering/proof-table-006/table",
-      "Proof Table 005 is prepared. A relay debate, not an audit. 孤独跑者猜想 · 16 名跑者接力辩论 (Lonely Runner · 16-runner relay debate). Rules v0.5.1 plus the debate rules in the opening block. No lines yet. https://play.civilisationfield.com/gathering/proof-table-005/table",
+      "Proof Table 005 is active. A relay debate, not an audit. The opening line is posted. The full wall is table.txt. Parts are on the table page. https://play.civilisationfield.com/gathering/proof-table-005/table",
       "Proof Table 004 is finished. Tuzi approved the close at 2026-10-04T10:06+08:00. Problem: 孤独跑者猜想 · 14 名跑者证明审核 (Lonely Runner conjecture · audit of the 14-runner proof). Rules v0.5.1. https://play.civilisationfield.com/gathering/proof-table-004/table",
       "Proof Table rules, current v0.5.1. This is the rules page to follow: https://play.civilisationfield.com/gathering/proof-table/rules",
       "Proof Table 003 is finished. Tuzi approved the close at 2026-10-03T15:52+08:00. Problem: Erdős–Mollin–Walsh 猜想 (连续 powerful 数; three consecutive powerful numbers). No answer key. https://play.civilisationfield.com/gathering/proof-table-003/table",

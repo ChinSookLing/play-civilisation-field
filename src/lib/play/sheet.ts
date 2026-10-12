@@ -20,6 +20,8 @@ export type Sheet = {
   notes?: string[];
   asOfMeans?: string;
   statusWords?: string;
+  /** When false, STATUS does not repeat COMPLETENESS. Default keeps the old line. */
+  completenessInStatus?: boolean;
 };
 
 export function isoKualaLumpur(iso: string): string {
@@ -54,7 +56,8 @@ export function completenessWord(sheet: Sheet): "COMPLETE" | "PARTIAL" {
 }
 
 export function statusLine(sheet: Sheet): string {
-  return `STATUS: ${sheet.status} · ${completenessWord(sheet)} · AS_OF: ${sheet.asOf}`;
+  const mark = sheet.completenessInStatus === false ? "" : ` · ${completenessWord(sheet)}`;
+  return `STATUS: ${sheet.status}${mark} · AS_OF: ${sheet.asOf}`;
 }
 
 export function sheetLabel(sheet: Sheet): string {
@@ -71,7 +74,7 @@ export function sheetMeta(sheet: Sheet): string {
     `ID: ${sheet.id}`,
     `DEFINITION: ${sheet.definition}`,
     `URL: ${sheet.html}`,
-    `STATUS: ${sheet.status} · ${completenessWord(sheet)} · AS_OF: ${sheet.asOf}`,
+    statusLine(sheet),
     sheet.statusWords
       ? `STATUS_WORDS: ${sheet.statusWords}`
       : "STATUS_WORDS: building, prepared, active, paused, finished.",

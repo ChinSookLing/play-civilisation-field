@@ -57,13 +57,13 @@ export const loadProof004Fn = createServerFn({ method: "GET" }).handler(async ()
 });
 
 export const loadProof005Fn = createServerFn({ method: "GET" }).handler(async () => {
-  const { PROOF_005_SPEC } = await import("./proof-table-005");
+  const { PROOF_005_SPEC, proof005PageData } = await import("./proof-table-005");
   const { listProofLedger, listProofLines } = await import("./proof-table.server");
   const [lines, ledger] = await Promise.all([
     listProofLines(PROOF_005_SPEC),
     listProofLedger(PROOF_005_SPEC),
   ]);
-  return { lines, ledger };
+  return proof005PageData(lines, ledger);
 });
 
 export const loadProof006Fn = createServerFn({ method: "GET" }).handler(async () => {

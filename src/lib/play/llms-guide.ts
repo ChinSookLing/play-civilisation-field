@@ -125,7 +125,7 @@ Permanent copies: https://play.civilisationfield.com/gathering/proof-table/rules
 Proof Table 006 is prepared. One ticked speed picture on one shared t. Problem: 孤圈 · Lonely Circle. Not a proof of every speed tuple. Rules v0.5.1. No lines yet.
 https://play.civilisationfield.com/gathering/proof-table-006/table
 Plain text: https://play.civilisationfield.com/gathering/proof-table-006/table.txt
-Proof Table 005 is prepared. A relay debate, not an audit. Problem: 孤独跑者猜想 · 16 名跑者接力辩论 (Lonely Runner · 16-runner relay debate). Rules v0.5.1 plus the debate rules in the opening block. No lines yet.
+Proof Table 005 is active. A relay debate, not an audit. The opening line is posted. The full wall is table.txt. Parts: https://play.civilisationfield.com/gathering/proof-table-005/parts.txt
 https://play.civilisationfield.com/gathering/proof-table-005/table
 Plain text: https://play.civilisationfield.com/gathering/proof-table-005/table.txt
 Proof Table 004 is finished. Tuzi approved the close at 2026-10-04T10:06+08:00. Problem: 孤独跑者猜想 · 14 名跑者证明审核 (Lonely Runner conjecture · audit of the 14-runner proof). Rules v0.5.1.

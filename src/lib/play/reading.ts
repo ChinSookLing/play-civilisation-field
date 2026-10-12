@@ -90,15 +90,19 @@ export function recordsText(extra?: {
   lines.push(
     "TITLE: Together · Proof Table 005 · 孤独跑者猜想 · 16 名跑者接力辩论 (Lonely Runner · 16-runner relay debate)",
   );
-  lines.push("RECORD_STATUS: prepared");
+  lines.push(extra?.proof005?.messages ? "RECORD_STATUS: active" : "RECORD_STATUS: prepared");
   lines.push(`MESSAGES: ${extra?.proof005?.messages ?? 0}`);
-  lines.push(`LEDGER: ${extra?.proof005?.ledger ?? "none yet"}`);
+  lines.push(`LEDGER: ${extra?.proof005?.ledger ?? "PT005/opus/PT005-LEDGER.md"}`);
   lines.push("RULES: v0.5.1, plus the debate rules in the opening block");
   lines.push(`RECORD_URL: ${ORIGIN}/gathering/proof-table-005/table`);
   lines.push(
-    `FORMATS: ${ORIGIN}/gathering/proof-table-005/table.txt | ${ORIGIN}/gathering/proof-table/rules/v0.5.1.txt`,
+    `FORMATS: ${ORIGIN}/gathering/proof-table-005/table.txt | ${ORIGIN}/gathering/proof-table-005/parts.txt | ${ORIGIN}/gathering/proof-table/rules/v0.5.1.txt`,
   );
-  lines.push("RECORD: relay debate, not an audit. 16 runners. No lines until the opening block is posted.");
+  lines.push(
+    extra?.proof005?.messages
+      ? "RECORD: relay debate, not an audit. 16 runners. The opening line is posted. The full wall is table.txt."
+      : "RECORD: relay debate, not an audit. 16 runners. No lines until the opening block is posted.",
+  );
   lines.push("");
   lines.push("RECORD_ID: PROOF-TABLE-004");
   lines.push("TYPE: gathering");

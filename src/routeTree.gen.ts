@@ -60,24 +60,24 @@ import { Route as NotesNoteIdRouteImport } from './routes/notes.$noteId'
 import { Route as NotesChar123noteIdChar125DottxtRouteImport } from './routes/notes.{$noteId}[.]txt'
 import { Route as SalonIndexRouteImport } from './routes/salon/index'
 import { Route as SalonSplatRouteImport } from './routes/salon/$'
+import { Route as SalonFifteenSpeedsRouteImport } from './routes/salon/fifteen-speeds'
+import { Route as SalonFifteenSpeedsDothtmlRouteImport } from './routes/salon/fifteen-speeds[.]html'
+import { Route as SalonFifteenSpeedsDottxtRouteImport } from './routes/salon/fifteen-speeds[.]txt'
 import { Route as SalonJevControlledProbe001RouteImport } from './routes/salon/jev-controlled-probe-001'
 import { Route as SalonJevControlledProbe001DothtmlRouteImport } from './routes/salon/jev-controlled-probe-001[.]html'
 import { Route as SalonJevControlledProbe001DottxtRouteImport } from './routes/salon/jev-controlled-probe-001[.]txt'
 import { Route as SalonLadderRouteImport } from './routes/salon/ladder'
 import { Route as SalonLadderDothtmlRouteImport } from './routes/salon/ladder[.]html'
 import { Route as SalonLadderDottxtRouteImport } from './routes/salon/ladder[.]txt'
+import { Route as SalonLunch007ReportRouteImport } from './routes/salon/lunch-007-report'
+import { Route as SalonLunch007ReportDothtmlRouteImport } from './routes/salon/lunch-007-report[.]html'
+import { Route as SalonLunch007ReportDottxtRouteImport } from './routes/salon/lunch-007-report[.]txt'
 import { Route as SalonPlainWaterRouteImport } from './routes/salon/plain-water'
 import { Route as SalonPlainWaterDothtmlRouteImport } from './routes/salon/plain-water[.]html'
 import { Route as SalonPlainWaterDottxtRouteImport } from './routes/salon/plain-water[.]txt'
 import { Route as SalonProofTable003RelayRouteImport } from './routes/salon/proof-table-003-relay'
 import { Route as SalonProofTable003RelayDothtmlRouteImport } from './routes/salon/proof-table-003-relay[.]html'
 import { Route as SalonProofTable003RelayDottxtRouteImport } from './routes/salon/proof-table-003-relay[.]txt'
-import { Route as SalonFifteenSpeedsRouteImport } from './routes/salon/fifteen-speeds'
-import { Route as SalonFifteenSpeedsDothtmlRouteImport } from './routes/salon/fifteen-speeds[.]html'
-import { Route as SalonFifteenSpeedsDottxtRouteImport } from './routes/salon/fifteen-speeds[.]txt'
-import { Route as SalonLunch007ReportRouteImport } from './routes/salon/lunch-007-report'
-import { Route as SalonLunch007ReportDothtmlRouteImport } from './routes/salon/lunch-007-report[.]html'
-import { Route as SalonLunch007ReportDottxtRouteImport } from './routes/salon/lunch-007-report[.]txt'
 import { Route as ApiGamesIndexRouteImport } from './routes/api/games/index'
 import { Route as ApiGamesGameIdRouteImport } from './routes/api/games/$gameId'
 import { Route as ApiGamesCurrentRouteImport } from './routes/api/games/current'
@@ -87,6 +87,9 @@ import { Route as GatheringDinner001PartPartDothtmlRouteImport } from './routes/
 import { Route as GatheringDinner001PartPartDottxtRouteImport } from './routes/gathering/dinner-001-part/$part[.]txt'
 import { Route as GatheringDinner001IndexRouteImport } from './routes/gathering/dinner-001/index'
 import { Route as GatheringDinner001TableRouteImport } from './routes/gathering/dinner-001/table'
+import { Route as GatheringLunch007IndexRouteImport } from './routes/gathering/lunch-007/index'
+import { Route as GatheringLunch007TableRouteImport } from './routes/gathering/lunch-007/table'
+import { Route as GatheringLunch007TableDottxtRouteImport } from './routes/gathering/lunch-007/table[.]txt'
 import { Route as GatheringProofTable001IndexRouteImport } from './routes/gathering/proof-table-001/index'
 import { Route as GatheringProofTable001RulesRouteImport } from './routes/gathering/proof-table-001/rules'
 import { Route as GatheringProofTable001RulesDothtmlRouteImport } from './routes/gathering/proof-table-001/rules[.]html'
@@ -110,7 +113,9 @@ import { Route as GatheringProofTable003TaskDottxtRouteImport } from './routes/g
 import { Route as GatheringProofTable004IndexRouteImport } from './routes/gathering/proof-table-004/index'
 import { Route as GatheringProofTable004TableRouteImport } from './routes/gathering/proof-table-004/table'
 import { Route as GatheringProofTable004TableDottxtRouteImport } from './routes/gathering/proof-table-004/table[.]txt'
+import { Route as GatheringProofTable005PartPartDottxtRouteImport } from './routes/gathering/proof-table-005-part/$part[.]txt'
 import { Route as GatheringProofTable005IndexRouteImport } from './routes/gathering/proof-table-005/index'
+import { Route as GatheringProofTable005PartsDottxtRouteImport } from './routes/gathering/proof-table-005/parts[.]txt'
 import { Route as GatheringProofTable005TableRouteImport } from './routes/gathering/proof-table-005/table'
 import { Route as GatheringProofTable005TableDottxtRouteImport } from './routes/gathering/proof-table-005/table[.]txt'
 import { Route as GatheringProofTable006IndexRouteImport } from './routes/gathering/proof-table-006/index'
@@ -128,6 +133,7 @@ import { Route as ApiGamesGameIdSgfRouteImport } from './routes/api/games/$gameI
 import { Route as ApiGamesGameIdTextRouteImport } from './routes/api/games/$gameId.text'
 import { Route as ApiGatheringBreakfast002LinesRouteImport } from './routes/api/gathering/breakfast-002.lines'
 import { Route as ApiGatheringDinner001LinesRouteImport } from './routes/api/gathering/dinner-001.lines'
+import { Route as ApiGatheringLunch007LinesRouteImport } from './routes/api/gathering/lunch-007.lines'
 import { Route as ApiGatheringProofTable001LedgerRouteImport } from './routes/api/gathering/proof-table-001.ledger'
 import { Route as ApiGatheringProofTable001LinesRouteImport } from './routes/api/gathering/proof-table-001.lines'
 import { Route as ApiGatheringProofTable003LedgerRouteImport } from './routes/api/gathering/proof-table-003.ledger'
@@ -412,6 +418,23 @@ const SalonSplatRoute = SalonSplatRouteImport.update({
   path: '/$',
   getParentRoute: () => SalonRoute,
 } as any)
+const SalonFifteenSpeedsRoute = SalonFifteenSpeedsRouteImport.update({
+  id: '/fifteen-speeds',
+  path: '/fifteen-speeds',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonFifteenSpeedsDothtmlRoute =
+  SalonFifteenSpeedsDothtmlRouteImport.update({
+    id: '/fifteen-speeds.html',
+    path: '/fifteen-speeds.html',
+    getParentRoute: () => SalonRoute,
+  } as any)
+const SalonFifteenSpeedsDottxtRoute =
+  SalonFifteenSpeedsDottxtRouteImport.update({
+    id: '/fifteen-speeds.txt',
+    path: '/fifteen-speeds.txt',
+    getParentRoute: () => SalonRoute,
+  } as any)
 const SalonJevControlledProbe001Route =
   SalonJevControlledProbe001RouteImport.update({
     id: '/jev-controlled-probe-001',
@@ -445,6 +468,23 @@ const SalonLadderDottxtRoute = SalonLadderDottxtRouteImport.update({
   path: '/ladder.txt',
   getParentRoute: () => SalonRoute,
 } as any)
+const SalonLunch007ReportRoute = SalonLunch007ReportRouteImport.update({
+  id: '/lunch-007-report',
+  path: '/lunch-007-report',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonLunch007ReportDothtmlRoute =
+  SalonLunch007ReportDothtmlRouteImport.update({
+    id: '/lunch-007-report.html',
+    path: '/lunch-007-report.html',
+    getParentRoute: () => SalonRoute,
+  } as any)
+const SalonLunch007ReportDottxtRoute =
+  SalonLunch007ReportDottxtRouteImport.update({
+    id: '/lunch-007-report.txt',
+    path: '/lunch-007-report.txt',
+    getParentRoute: () => SalonRoute,
+  } as any)
 const SalonPlainWaterRoute = SalonPlainWaterRouteImport.update({
   id: '/plain-water',
   path: '/plain-water',
@@ -477,37 +517,6 @@ const SalonProofTable003RelayDottxtRoute =
     path: '/proof-table-003-relay.txt',
     getParentRoute: () => SalonRoute,
   } as any)
-const SalonFifteenSpeedsRoute = SalonFifteenSpeedsRouteImport.update({
-  id: '/fifteen-speeds',
-  path: '/fifteen-speeds',
-  getParentRoute: () => SalonRoute,
-} as any)
-const SalonFifteenSpeedsDothtmlRoute =
-  SalonFifteenSpeedsDothtmlRouteImport.update({
-    id: '/fifteen-speeds.html',
-    path: '/fifteen-speeds.html',
-    getParentRoute: () => SalonRoute,
-  } as any)
-const SalonFifteenSpeedsDottxtRoute = SalonFifteenSpeedsDottxtRouteImport.update({
-  id: '/fifteen-speeds.txt',
-  path: '/fifteen-speeds.txt',
-  getParentRoute: () => SalonRoute,
-} as any)
-const SalonLunch007ReportRoute = SalonLunch007ReportRouteImport.update({
-  id: '/lunch-007-report',
-  path: '/lunch-007-report',
-  getParentRoute: () => SalonRoute,
-} as any)
-const SalonLunch007ReportDothtmlRoute = SalonLunch007ReportDothtmlRouteImport.update({
-  id: '/lunch-007-report.html',
-  path: '/lunch-007-report.html',
-  getParentRoute: () => SalonRoute,
-} as any)
-const SalonLunch007ReportDottxtRoute = SalonLunch007ReportDottxtRouteImport.update({
-  id: '/lunch-007-report.txt',
-  path: '/lunch-007-report.txt',
-  getParentRoute: () => SalonRoute,
-} as any)
 const ApiGamesIndexRoute = ApiGamesIndexRouteImport.update({
   id: '/api/games/',
   path: '/api/games/',
@@ -557,6 +566,22 @@ const GatheringDinner001TableRoute = GatheringDinner001TableRouteImport.update({
   path: '/dinner-001/table',
   getParentRoute: () => GatheringRoute,
 } as any)
+const GatheringLunch007IndexRoute = GatheringLunch007IndexRouteImport.update({
+  id: '/lunch-007/',
+  path: '/lunch-007/',
+  getParentRoute: () => GatheringRoute,
+} as any)
+const GatheringLunch007TableRoute = GatheringLunch007TableRouteImport.update({
+  id: '/lunch-007/table',
+  path: '/lunch-007/table',
+  getParentRoute: () => GatheringRoute,
+} as any)
+const GatheringLunch007TableDottxtRoute =
+  GatheringLunch007TableDottxtRouteImport.update({
+    id: '/lunch-007/table.txt',
+    path: '/lunch-007/table.txt',
+    getParentRoute: () => GatheringRoute,
+  } as any)
 const GatheringProofTable001IndexRoute =
   GatheringProofTable001IndexRouteImport.update({
     id: '/proof-table-001/',
@@ -695,10 +720,22 @@ const GatheringProofTable004TableDottxtRoute =
     path: '/proof-table-004/table.txt',
     getParentRoute: () => GatheringRoute,
   } as any)
+const GatheringProofTable005PartPartDottxtRoute =
+  GatheringProofTable005PartPartDottxtRouteImport.update({
+    id: '/proof-table-005-part/$part.txt',
+    path: '/proof-table-005-part/$part.txt',
+    getParentRoute: () => GatheringRoute,
+  } as any)
 const GatheringProofTable005IndexRoute =
   GatheringProofTable005IndexRouteImport.update({
     id: '/proof-table-005/',
     path: '/proof-table-005/',
+    getParentRoute: () => GatheringRoute,
+  } as any)
+const GatheringProofTable005PartsDottxtRoute =
+  GatheringProofTable005PartsDottxtRouteImport.update({
+    id: '/proof-table-005/parts.txt',
+    path: '/proof-table-005/parts.txt',
     getParentRoute: () => GatheringRoute,
   } as any)
 const GatheringProofTable005TableRoute =
@@ -794,6 +831,12 @@ const ApiGatheringDinner001LinesRoute =
   ApiGatheringDinner001LinesRouteImport.update({
     id: '/api/gathering/dinner-001/lines',
     path: '/api/gathering/dinner-001/lines',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiGatheringLunch007LinesRoute =
+  ApiGatheringLunch007LinesRouteImport.update({
+    id: '/api/gathering/lunch-007/lines',
+    path: '/api/gathering/lunch-007/lines',
     getParentRoute: () => rootRouteImport,
   } as any)
 const ApiGatheringProofTable001LedgerRoute =
@@ -943,24 +986,24 @@ export interface FileRoutesByFullPath {
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
   '/salon/$': typeof SalonSplatRoute
+  '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
+  '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
+  '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
   '/salon/jev-controlled-probe-001': typeof SalonJevControlledProbe001Route
   '/salon/jev-controlled-probe-001.html': typeof SalonJevControlledProbe001DothtmlRoute
   '/salon/jev-controlled-probe-001.txt': typeof SalonJevControlledProbe001DottxtRoute
   '/salon/ladder': typeof SalonLadderRoute
   '/salon/ladder.html': typeof SalonLadderDothtmlRoute
   '/salon/ladder.txt': typeof SalonLadderDottxtRoute
+  '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
+  '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
+  '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
   '/salon/plain-water': typeof SalonPlainWaterRoute
   '/salon/plain-water.html': typeof SalonPlainWaterDothtmlRoute
   '/salon/plain-water.txt': typeof SalonPlainWaterDottxtRoute
   '/salon/proof-table-003-relay': typeof SalonProofTable003RelayRoute
   '/salon/proof-table-003-relay.html': typeof SalonProofTable003RelayDothtmlRoute
   '/salon/proof-table-003-relay.txt': typeof SalonProofTable003RelayDottxtRoute
-  '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
-  '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
-  '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
-  '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
-  '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
-  '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
   '/gathering/': typeof GatheringIndexRoute
   '/salon/': typeof SalonIndexRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
@@ -969,6 +1012,8 @@ export interface FileRoutesByFullPath {
   '/gathering/dinner-001-part/$part.html': typeof GatheringDinner001PartPartDothtmlRoute
   '/gathering/dinner-001-part/$part.txt': typeof GatheringDinner001PartPartDottxtRoute
   '/gathering/dinner-001/table': typeof GatheringDinner001TableRoute
+  '/gathering/lunch-007/table': typeof GatheringLunch007TableRoute
+  '/gathering/lunch-007/table.txt': typeof GatheringLunch007TableDottxtRoute
   '/gathering/proof-table-001/rules': typeof GatheringProofTable001RulesRoute
   '/gathering/proof-table-001/rules.html': typeof GatheringProofTable001RulesDothtmlRoute
   '/gathering/proof-table-001/rules.txt': typeof GatheringProofTable001RulesDottxtRoute
@@ -989,6 +1034,8 @@ export interface FileRoutesByFullPath {
   '/gathering/proof-table-003/task.txt': typeof GatheringProofTable003TaskDottxtRoute
   '/gathering/proof-table-004/table': typeof GatheringProofTable004TableRoute
   '/gathering/proof-table-004/table.txt': typeof GatheringProofTable004TableDottxtRoute
+  '/gathering/proof-table-005-part/$part.txt': typeof GatheringProofTable005PartPartDottxtRoute
+  '/gathering/proof-table-005/parts.txt': typeof GatheringProofTable005PartsDottxtRoute
   '/gathering/proof-table-005/table': typeof GatheringProofTable005TableRoute
   '/gathering/proof-table-005/table.txt': typeof GatheringProofTable005TableDottxtRoute
   '/gathering/proof-table-006/table': typeof GatheringProofTable006TableRoute
@@ -998,6 +1045,7 @@ export interface FileRoutesByFullPath {
   '/api/games/': typeof ApiGamesIndexRoute
   '/gathering/breakfast-002/': typeof GatheringBreakfast002IndexRoute
   '/gathering/dinner-001/': typeof GatheringDinner001IndexRoute
+  '/gathering/lunch-007/': typeof GatheringLunch007IndexRoute
   '/gathering/proof-table-001/': typeof GatheringProofTable001IndexRoute
   '/gathering/proof-table-003/': typeof GatheringProofTable003IndexRoute
   '/gathering/proof-table-004/': typeof GatheringProofTable004IndexRoute
@@ -1013,6 +1061,7 @@ export interface FileRoutesByFullPath {
   '/api/games/$gameId/text': typeof ApiGamesGameIdTextRoute
   '/api/gathering/breakfast-002/lines': typeof ApiGatheringBreakfast002LinesRoute
   '/api/gathering/dinner-001/lines': typeof ApiGatheringDinner001LinesRoute
+  '/api/gathering/lunch-007/lines': typeof ApiGatheringLunch007LinesRoute
   '/api/gathering/proof-table-001/ledger': typeof ApiGatheringProofTable001LedgerRoute
   '/api/gathering/proof-table-001/lines': typeof ApiGatheringProofTable001LinesRoute
   '/api/gathering/proof-table-003/ledger': typeof ApiGatheringProofTable003LedgerRoute
@@ -1078,24 +1127,24 @@ export interface FileRoutesByTo {
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
   '/salon/$': typeof SalonSplatRoute
+  '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
+  '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
+  '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
   '/salon/jev-controlled-probe-001': typeof SalonJevControlledProbe001Route
   '/salon/jev-controlled-probe-001.html': typeof SalonJevControlledProbe001DothtmlRoute
   '/salon/jev-controlled-probe-001.txt': typeof SalonJevControlledProbe001DottxtRoute
   '/salon/ladder': typeof SalonLadderRoute
   '/salon/ladder.html': typeof SalonLadderDothtmlRoute
   '/salon/ladder.txt': typeof SalonLadderDottxtRoute
+  '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
+  '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
+  '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
   '/salon/plain-water': typeof SalonPlainWaterRoute
   '/salon/plain-water.html': typeof SalonPlainWaterDothtmlRoute
   '/salon/plain-water.txt': typeof SalonPlainWaterDottxtRoute
   '/salon/proof-table-003-relay': typeof SalonProofTable003RelayRoute
   '/salon/proof-table-003-relay.html': typeof SalonProofTable003RelayDothtmlRoute
   '/salon/proof-table-003-relay.txt': typeof SalonProofTable003RelayDottxtRoute
-  '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
-  '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
-  '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
-  '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
-  '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
-  '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
   '/gathering': typeof GatheringIndexRoute
   '/salon': typeof SalonIndexRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
@@ -1104,6 +1153,8 @@ export interface FileRoutesByTo {
   '/gathering/dinner-001-part/$part.html': typeof GatheringDinner001PartPartDothtmlRoute
   '/gathering/dinner-001-part/$part.txt': typeof GatheringDinner001PartPartDottxtRoute
   '/gathering/dinner-001/table': typeof GatheringDinner001TableRoute
+  '/gathering/lunch-007/table': typeof GatheringLunch007TableRoute
+  '/gathering/lunch-007/table.txt': typeof GatheringLunch007TableDottxtRoute
   '/gathering/proof-table-001/rules': typeof GatheringProofTable001RulesRoute
   '/gathering/proof-table-001/rules.html': typeof GatheringProofTable001RulesDothtmlRoute
   '/gathering/proof-table-001/rules.txt': typeof GatheringProofTable001RulesDottxtRoute
@@ -1124,6 +1175,8 @@ export interface FileRoutesByTo {
   '/gathering/proof-table-003/task.txt': typeof GatheringProofTable003TaskDottxtRoute
   '/gathering/proof-table-004/table': typeof GatheringProofTable004TableRoute
   '/gathering/proof-table-004/table.txt': typeof GatheringProofTable004TableDottxtRoute
+  '/gathering/proof-table-005-part/$part.txt': typeof GatheringProofTable005PartPartDottxtRoute
+  '/gathering/proof-table-005/parts.txt': typeof GatheringProofTable005PartsDottxtRoute
   '/gathering/proof-table-005/table': typeof GatheringProofTable005TableRoute
   '/gathering/proof-table-005/table.txt': typeof GatheringProofTable005TableDottxtRoute
   '/gathering/proof-table-006/table': typeof GatheringProofTable006TableRoute
@@ -1133,6 +1186,7 @@ export interface FileRoutesByTo {
   '/api/games': typeof ApiGamesIndexRoute
   '/gathering/breakfast-002': typeof GatheringBreakfast002IndexRoute
   '/gathering/dinner-001': typeof GatheringDinner001IndexRoute
+  '/gathering/lunch-007': typeof GatheringLunch007IndexRoute
   '/gathering/proof-table-001': typeof GatheringProofTable001IndexRoute
   '/gathering/proof-table-003': typeof GatheringProofTable003IndexRoute
   '/gathering/proof-table-004': typeof GatheringProofTable004IndexRoute
@@ -1148,6 +1202,7 @@ export interface FileRoutesByTo {
   '/api/games/$gameId/text': typeof ApiGamesGameIdTextRoute
   '/api/gathering/breakfast-002/lines': typeof ApiGatheringBreakfast002LinesRoute
   '/api/gathering/dinner-001/lines': typeof ApiGatheringDinner001LinesRoute
+  '/api/gathering/lunch-007/lines': typeof ApiGatheringLunch007LinesRoute
   '/api/gathering/proof-table-001/ledger': typeof ApiGatheringProofTable001LedgerRoute
   '/api/gathering/proof-table-001/lines': typeof ApiGatheringProofTable001LinesRoute
   '/api/gathering/proof-table-003/ledger': typeof ApiGatheringProofTable003LedgerRoute
@@ -1216,24 +1271,24 @@ export interface FileRoutesById {
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
   '/salon/$': typeof SalonSplatRoute
+  '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
+  '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
+  '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
   '/salon/jev-controlled-probe-001': typeof SalonJevControlledProbe001Route
   '/salon/jev-controlled-probe-001.html': typeof SalonJevControlledProbe001DothtmlRoute
   '/salon/jev-controlled-probe-001.txt': typeof SalonJevControlledProbe001DottxtRoute
   '/salon/ladder': typeof SalonLadderRoute
   '/salon/ladder.html': typeof SalonLadderDothtmlRoute
   '/salon/ladder.txt': typeof SalonLadderDottxtRoute
+  '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
+  '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
+  '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
   '/salon/plain-water': typeof SalonPlainWaterRoute
   '/salon/plain-water.html': typeof SalonPlainWaterDothtmlRoute
   '/salon/plain-water.txt': typeof SalonPlainWaterDottxtRoute
   '/salon/proof-table-003-relay': typeof SalonProofTable003RelayRoute
   '/salon/proof-table-003-relay.html': typeof SalonProofTable003RelayDothtmlRoute
   '/salon/proof-table-003-relay.txt': typeof SalonProofTable003RelayDottxtRoute
-  '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
-  '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
-  '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
-  '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
-  '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
-  '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
   '/gathering/': typeof GatheringIndexRoute
   '/salon/': typeof SalonIndexRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
@@ -1242,6 +1297,8 @@ export interface FileRoutesById {
   '/gathering/dinner-001-part/$part.html': typeof GatheringDinner001PartPartDothtmlRoute
   '/gathering/dinner-001-part/$part.txt': typeof GatheringDinner001PartPartDottxtRoute
   '/gathering/dinner-001/table': typeof GatheringDinner001TableRoute
+  '/gathering/lunch-007/table': typeof GatheringLunch007TableRoute
+  '/gathering/lunch-007/table.txt': typeof GatheringLunch007TableDottxtRoute
   '/gathering/proof-table-001/rules': typeof GatheringProofTable001RulesRoute
   '/gathering/proof-table-001/rules.html': typeof GatheringProofTable001RulesDothtmlRoute
   '/gathering/proof-table-001/rules.txt': typeof GatheringProofTable001RulesDottxtRoute
@@ -1262,6 +1319,8 @@ export interface FileRoutesById {
   '/gathering/proof-table-003/task.txt': typeof GatheringProofTable003TaskDottxtRoute
   '/gathering/proof-table-004/table': typeof GatheringProofTable004TableRoute
   '/gathering/proof-table-004/table.txt': typeof GatheringProofTable004TableDottxtRoute
+  '/gathering/proof-table-005-part/$part.txt': typeof GatheringProofTable005PartPartDottxtRoute
+  '/gathering/proof-table-005/parts.txt': typeof GatheringProofTable005PartsDottxtRoute
   '/gathering/proof-table-005/table': typeof GatheringProofTable005TableRoute
   '/gathering/proof-table-005/table.txt': typeof GatheringProofTable005TableDottxtRoute
   '/gathering/proof-table-006/table': typeof GatheringProofTable006TableRoute
@@ -1271,6 +1330,7 @@ export interface FileRoutesById {
   '/api/games/': typeof ApiGamesIndexRoute
   '/gathering/breakfast-002/': typeof GatheringBreakfast002IndexRoute
   '/gathering/dinner-001/': typeof GatheringDinner001IndexRoute
+  '/gathering/lunch-007/': typeof GatheringLunch007IndexRoute
   '/gathering/proof-table-001/': typeof GatheringProofTable001IndexRoute
   '/gathering/proof-table-003/': typeof GatheringProofTable003IndexRoute
   '/gathering/proof-table-004/': typeof GatheringProofTable004IndexRoute
@@ -1286,6 +1346,7 @@ export interface FileRoutesById {
   '/api/games/$gameId/text': typeof ApiGamesGameIdTextRoute
   '/api/gathering/breakfast-002/lines': typeof ApiGatheringBreakfast002LinesRoute
   '/api/gathering/dinner-001/lines': typeof ApiGatheringDinner001LinesRoute
+  '/api/gathering/lunch-007/lines': typeof ApiGatheringLunch007LinesRoute
   '/api/gathering/proof-table-001/ledger': typeof ApiGatheringProofTable001LedgerRoute
   '/api/gathering/proof-table-001/lines': typeof ApiGatheringProofTable001LinesRoute
   '/api/gathering/proof-table-003/ledger': typeof ApiGatheringProofTable003LedgerRoute
@@ -1355,24 +1416,24 @@ export interface FileRouteTypes {
     | '/notes/$noteId'
     | '/notes/{$noteId}.txt'
     | '/salon/$'
+    | '/salon/fifteen-speeds'
+    | '/salon/fifteen-speeds.html'
+    | '/salon/fifteen-speeds.txt'
     | '/salon/jev-controlled-probe-001'
     | '/salon/jev-controlled-probe-001.html'
     | '/salon/jev-controlled-probe-001.txt'
     | '/salon/ladder'
     | '/salon/ladder.html'
     | '/salon/ladder.txt'
+    | '/salon/lunch-007-report'
+    | '/salon/lunch-007-report.html'
+    | '/salon/lunch-007-report.txt'
     | '/salon/plain-water'
     | '/salon/plain-water.html'
     | '/salon/plain-water.txt'
     | '/salon/proof-table-003-relay'
     | '/salon/proof-table-003-relay.html'
     | '/salon/proof-table-003-relay.txt'
-    | '/salon/fifteen-speeds'
-    | '/salon/fifteen-speeds.html'
-    | '/salon/fifteen-speeds.txt'
-    | '/salon/lunch-007-report'
-    | '/salon/lunch-007-report.html'
-    | '/salon/lunch-007-report.txt'
     | '/gathering/'
     | '/salon/'
     | '/api/games/$gameId'
@@ -1381,6 +1442,8 @@ export interface FileRouteTypes {
     | '/gathering/dinner-001-part/$part.html'
     | '/gathering/dinner-001-part/$part.txt'
     | '/gathering/dinner-001/table'
+    | '/gathering/lunch-007/table'
+    | '/gathering/lunch-007/table.txt'
     | '/gathering/proof-table-001/rules'
     | '/gathering/proof-table-001/rules.html'
     | '/gathering/proof-table-001/rules.txt'
@@ -1401,6 +1464,8 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-003/task.txt'
     | '/gathering/proof-table-004/table'
     | '/gathering/proof-table-004/table.txt'
+    | '/gathering/proof-table-005-part/$part.txt'
+    | '/gathering/proof-table-005/parts.txt'
     | '/gathering/proof-table-005/table'
     | '/gathering/proof-table-005/table.txt'
     | '/gathering/proof-table-006/table'
@@ -1410,6 +1475,7 @@ export interface FileRouteTypes {
     | '/api/games/'
     | '/gathering/breakfast-002/'
     | '/gathering/dinner-001/'
+    | '/gathering/lunch-007/'
     | '/gathering/proof-table-001/'
     | '/gathering/proof-table-003/'
     | '/gathering/proof-table-004/'
@@ -1425,6 +1491,7 @@ export interface FileRouteTypes {
     | '/api/games/$gameId/text'
     | '/api/gathering/breakfast-002/lines'
     | '/api/gathering/dinner-001/lines'
+    | '/api/gathering/lunch-007/lines'
     | '/api/gathering/proof-table-001/ledger'
     | '/api/gathering/proof-table-001/lines'
     | '/api/gathering/proof-table-003/ledger'
@@ -1490,24 +1557,24 @@ export interface FileRouteTypes {
     | '/notes/$noteId'
     | '/notes/{$noteId}.txt'
     | '/salon/$'
+    | '/salon/fifteen-speeds'
+    | '/salon/fifteen-speeds.html'
+    | '/salon/fifteen-speeds.txt'
     | '/salon/jev-controlled-probe-001'
     | '/salon/jev-controlled-probe-001.html'
     | '/salon/jev-controlled-probe-001.txt'
     | '/salon/ladder'
     | '/salon/ladder.html'
     | '/salon/ladder.txt'
+    | '/salon/lunch-007-report'
+    | '/salon/lunch-007-report.html'
+    | '/salon/lunch-007-report.txt'
     | '/salon/plain-water'
     | '/salon/plain-water.html'
     | '/salon/plain-water.txt'
     | '/salon/proof-table-003-relay'
     | '/salon/proof-table-003-relay.html'
     | '/salon/proof-table-003-relay.txt'
-    | '/salon/fifteen-speeds'
-    | '/salon/fifteen-speeds.html'
-    | '/salon/fifteen-speeds.txt'
-    | '/salon/lunch-007-report'
-    | '/salon/lunch-007-report.html'
-    | '/salon/lunch-007-report.txt'
     | '/gathering'
     | '/salon'
     | '/api/games/$gameId'
@@ -1516,6 +1583,8 @@ export interface FileRouteTypes {
     | '/gathering/dinner-001-part/$part.html'
     | '/gathering/dinner-001-part/$part.txt'
     | '/gathering/dinner-001/table'
+    | '/gathering/lunch-007/table'
+    | '/gathering/lunch-007/table.txt'
     | '/gathering/proof-table-001/rules'
     | '/gathering/proof-table-001/rules.html'
     | '/gathering/proof-table-001/rules.txt'
@@ -1536,6 +1605,8 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-003/task.txt'
     | '/gathering/proof-table-004/table'
     | '/gathering/proof-table-004/table.txt'
+    | '/gathering/proof-table-005-part/$part.txt'
+    | '/gathering/proof-table-005/parts.txt'
     | '/gathering/proof-table-005/table'
     | '/gathering/proof-table-005/table.txt'
     | '/gathering/proof-table-006/table'
@@ -1545,6 +1616,7 @@ export interface FileRouteTypes {
     | '/api/games'
     | '/gathering/breakfast-002'
     | '/gathering/dinner-001'
+    | '/gathering/lunch-007'
     | '/gathering/proof-table-001'
     | '/gathering/proof-table-003'
     | '/gathering/proof-table-004'
@@ -1560,6 +1632,7 @@ export interface FileRouteTypes {
     | '/api/games/$gameId/text'
     | '/api/gathering/breakfast-002/lines'
     | '/api/gathering/dinner-001/lines'
+    | '/api/gathering/lunch-007/lines'
     | '/api/gathering/proof-table-001/ledger'
     | '/api/gathering/proof-table-001/lines'
     | '/api/gathering/proof-table-003/ledger'
@@ -1627,24 +1700,24 @@ export interface FileRouteTypes {
     | '/notes/$noteId'
     | '/notes/{$noteId}.txt'
     | '/salon/$'
+    | '/salon/fifteen-speeds'
+    | '/salon/fifteen-speeds.html'
+    | '/salon/fifteen-speeds.txt'
     | '/salon/jev-controlled-probe-001'
     | '/salon/jev-controlled-probe-001.html'
     | '/salon/jev-controlled-probe-001.txt'
     | '/salon/ladder'
     | '/salon/ladder.html'
     | '/salon/ladder.txt'
+    | '/salon/lunch-007-report'
+    | '/salon/lunch-007-report.html'
+    | '/salon/lunch-007-report.txt'
     | '/salon/plain-water'
     | '/salon/plain-water.html'
     | '/salon/plain-water.txt'
     | '/salon/proof-table-003-relay'
     | '/salon/proof-table-003-relay.html'
     | '/salon/proof-table-003-relay.txt'
-    | '/salon/fifteen-speeds'
-    | '/salon/fifteen-speeds.html'
-    | '/salon/fifteen-speeds.txt'
-    | '/salon/lunch-007-report'
-    | '/salon/lunch-007-report.html'
-    | '/salon/lunch-007-report.txt'
     | '/gathering/'
     | '/salon/'
     | '/api/games/$gameId'
@@ -1653,6 +1726,8 @@ export interface FileRouteTypes {
     | '/gathering/dinner-001-part/$part.html'
     | '/gathering/dinner-001-part/$part.txt'
     | '/gathering/dinner-001/table'
+    | '/gathering/lunch-007/table'
+    | '/gathering/lunch-007/table.txt'
     | '/gathering/proof-table-001/rules'
     | '/gathering/proof-table-001/rules.html'
     | '/gathering/proof-table-001/rules.txt'
@@ -1673,6 +1748,8 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-003/task.txt'
     | '/gathering/proof-table-004/table'
     | '/gathering/proof-table-004/table.txt'
+    | '/gathering/proof-table-005-part/$part.txt'
+    | '/gathering/proof-table-005/parts.txt'
     | '/gathering/proof-table-005/table'
     | '/gathering/proof-table-005/table.txt'
     | '/gathering/proof-table-006/table'
@@ -1682,6 +1759,7 @@ export interface FileRouteTypes {
     | '/api/games/'
     | '/gathering/breakfast-002/'
     | '/gathering/dinner-001/'
+    | '/gathering/lunch-007/'
     | '/gathering/proof-table-001/'
     | '/gathering/proof-table-003/'
     | '/gathering/proof-table-004/'
@@ -1697,6 +1775,7 @@ export interface FileRouteTypes {
     | '/api/games/$gameId/text'
     | '/api/gathering/breakfast-002/lines'
     | '/api/gathering/dinner-001/lines'
+    | '/api/gathering/lunch-007/lines'
     | '/api/gathering/proof-table-001/ledger'
     | '/api/gathering/proof-table-001/lines'
     | '/api/gathering/proof-table-003/ledger'
@@ -1754,6 +1833,7 @@ export interface RootRouteChildren {
   ApiGamesIndexRoute: typeof ApiGamesIndexRoute
   ApiGatheringBreakfast002LinesRoute: typeof ApiGatheringBreakfast002LinesRoute
   ApiGatheringDinner001LinesRoute: typeof ApiGatheringDinner001LinesRoute
+  ApiGatheringLunch007LinesRoute: typeof ApiGatheringLunch007LinesRoute
   ApiGatheringProofTable001LedgerRoute: typeof ApiGatheringProofTable001LedgerRoute
   ApiGatheringProofTable001LinesRoute: typeof ApiGatheringProofTable001LinesRoute
   ApiGatheringProofTable003LedgerRoute: typeof ApiGatheringProofTable003LedgerRoute
@@ -2125,6 +2205,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SalonSplatRouteImport
       parentRoute: typeof SalonRoute
     }
+    '/salon/fifteen-speeds': {
+      id: '/salon/fifteen-speeds'
+      path: '/fifteen-speeds'
+      fullPath: '/salon/fifteen-speeds'
+      preLoaderRoute: typeof SalonFifteenSpeedsRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/fifteen-speeds.html': {
+      id: '/salon/fifteen-speeds.html'
+      path: '/fifteen-speeds.html'
+      fullPath: '/salon/fifteen-speeds.html'
+      preLoaderRoute: typeof SalonFifteenSpeedsDothtmlRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/fifteen-speeds.txt': {
+      id: '/salon/fifteen-speeds.txt'
+      path: '/fifteen-speeds.txt'
+      fullPath: '/salon/fifteen-speeds.txt'
+      preLoaderRoute: typeof SalonFifteenSpeedsDottxtRouteImport
+      parentRoute: typeof SalonRoute
+    }
     '/salon/jev-controlled-probe-001': {
       id: '/salon/jev-controlled-probe-001'
       path: '/jev-controlled-probe-001'
@@ -2167,6 +2268,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SalonLadderDottxtRouteImport
       parentRoute: typeof SalonRoute
     }
+    '/salon/lunch-007-report': {
+      id: '/salon/lunch-007-report'
+      path: '/lunch-007-report'
+      fullPath: '/salon/lunch-007-report'
+      preLoaderRoute: typeof SalonLunch007ReportRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/lunch-007-report.html': {
+      id: '/salon/lunch-007-report.html'
+      path: '/lunch-007-report.html'
+      fullPath: '/salon/lunch-007-report.html'
+      preLoaderRoute: typeof SalonLunch007ReportDothtmlRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/lunch-007-report.txt': {
+      id: '/salon/lunch-007-report.txt'
+      path: '/lunch-007-report.txt'
+      fullPath: '/salon/lunch-007-report.txt'
+      preLoaderRoute: typeof SalonLunch007ReportDottxtRouteImport
+      parentRoute: typeof SalonRoute
+    }
     '/salon/plain-water': {
       id: '/salon/plain-water'
       path: '/plain-water'
@@ -2207,48 +2329,6 @@ declare module '@tanstack/react-router' {
       path: '/proof-table-003-relay.txt'
       fullPath: '/salon/proof-table-003-relay.txt'
       preLoaderRoute: typeof SalonProofTable003RelayDottxtRouteImport
-      parentRoute: typeof SalonRoute
-    }
-    '/salon/fifteen-speeds': {
-      id: '/salon/fifteen-speeds'
-      path: '/fifteen-speeds'
-      fullPath: '/salon/fifteen-speeds'
-      preLoaderRoute: typeof SalonFifteenSpeedsRouteImport
-      parentRoute: typeof SalonRoute
-    }
-    '/salon/fifteen-speeds.html': {
-      id: '/salon/fifteen-speeds.html'
-      path: '/fifteen-speeds.html'
-      fullPath: '/salon/fifteen-speeds.html'
-      preLoaderRoute: typeof SalonFifteenSpeedsDothtmlRouteImport
-      parentRoute: typeof SalonRoute
-    }
-    '/salon/fifteen-speeds.txt': {
-      id: '/salon/fifteen-speeds.txt'
-      path: '/fifteen-speeds.txt'
-      fullPath: '/salon/fifteen-speeds.txt'
-      preLoaderRoute: typeof SalonFifteenSpeedsDottxtRouteImport
-      parentRoute: typeof SalonRoute
-    }
-    '/salon/lunch-007-report': {
-      id: '/salon/lunch-007-report'
-      path: '/lunch-007-report'
-      fullPath: '/salon/lunch-007-report'
-      preLoaderRoute: typeof SalonLunch007ReportRouteImport
-      parentRoute: typeof SalonRoute
-    }
-    '/salon/lunch-007-report.html': {
-      id: '/salon/lunch-007-report.html'
-      path: '/lunch-007-report.html'
-      fullPath: '/salon/lunch-007-report.html'
-      preLoaderRoute: typeof SalonLunch007ReportDothtmlRouteImport
-      parentRoute: typeof SalonRoute
-    }
-    '/salon/lunch-007-report.txt': {
-      id: '/salon/lunch-007-report.txt'
-      path: '/lunch-007-report.txt'
-      fullPath: '/salon/lunch-007-report.txt'
-      preLoaderRoute: typeof SalonLunch007ReportDottxtRouteImport
       parentRoute: typeof SalonRoute
     }
     '/api/games/': {
@@ -2312,6 +2392,27 @@ declare module '@tanstack/react-router' {
       path: '/dinner-001/table'
       fullPath: '/gathering/dinner-001/table'
       preLoaderRoute: typeof GatheringDinner001TableRouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/lunch-007/': {
+      id: '/gathering/lunch-007/'
+      path: '/lunch-007'
+      fullPath: '/gathering/lunch-007/'
+      preLoaderRoute: typeof GatheringLunch007IndexRouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/lunch-007/table': {
+      id: '/gathering/lunch-007/table'
+      path: '/lunch-007/table'
+      fullPath: '/gathering/lunch-007/table'
+      preLoaderRoute: typeof GatheringLunch007TableRouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/lunch-007/table.txt': {
+      id: '/gathering/lunch-007/table.txt'
+      path: '/lunch-007/table.txt'
+      fullPath: '/gathering/lunch-007/table.txt'
+      preLoaderRoute: typeof GatheringLunch007TableDottxtRouteImport
       parentRoute: typeof GatheringRoute
     }
     '/gathering/proof-table-001/': {
@@ -2475,11 +2576,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GatheringProofTable004TableDottxtRouteImport
       parentRoute: typeof GatheringRoute
     }
+    '/gathering/proof-table-005-part/$part.txt': {
+      id: '/gathering/proof-table-005-part/$part.txt'
+      path: '/proof-table-005-part/$part.txt'
+      fullPath: '/gathering/proof-table-005-part/$part.txt'
+      preLoaderRoute: typeof GatheringProofTable005PartPartDottxtRouteImport
+      parentRoute: typeof GatheringRoute
+    }
     '/gathering/proof-table-005/': {
       id: '/gathering/proof-table-005/'
       path: '/proof-table-005'
       fullPath: '/gathering/proof-table-005/'
       preLoaderRoute: typeof GatheringProofTable005IndexRouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/proof-table-005/parts.txt': {
+      id: '/gathering/proof-table-005/parts.txt'
+      path: '/proof-table-005/parts.txt'
+      fullPath: '/gathering/proof-table-005/parts.txt'
+      preLoaderRoute: typeof GatheringProofTable005PartsDottxtRouteImport
       parentRoute: typeof GatheringRoute
     }
     '/gathering/proof-table-005/table': {
@@ -2599,6 +2714,13 @@ declare module '@tanstack/react-router' {
       path: '/api/gathering/dinner-001/lines'
       fullPath: '/api/gathering/dinner-001/lines'
       preLoaderRoute: typeof ApiGatheringDinner001LinesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/gathering/lunch-007/lines': {
+      id: '/api/gathering/lunch-007/lines'
+      path: '/api/gathering/lunch-007/lines'
+      fullPath: '/api/gathering/lunch-007/lines'
+      preLoaderRoute: typeof ApiGatheringLunch007LinesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/gathering/proof-table-001/ledger': {
@@ -2775,6 +2897,8 @@ interface GatheringRouteChildren {
   GatheringDinner001PartPartDothtmlRoute: typeof GatheringDinner001PartPartDothtmlRoute
   GatheringDinner001PartPartDottxtRoute: typeof GatheringDinner001PartPartDottxtRoute
   GatheringDinner001TableRoute: typeof GatheringDinner001TableRoute
+  GatheringLunch007TableRoute: typeof GatheringLunch007TableRoute
+  GatheringLunch007TableDottxtRoute: typeof GatheringLunch007TableDottxtRoute
   GatheringProofTable001RulesRoute: typeof GatheringProofTable001RulesRoute
   GatheringProofTable001RulesDothtmlRoute: typeof GatheringProofTable001RulesDothtmlRoute
   GatheringProofTable001RulesDottxtRoute: typeof GatheringProofTable001RulesDottxtRoute
@@ -2795,6 +2919,8 @@ interface GatheringRouteChildren {
   GatheringProofTable003TaskDottxtRoute: typeof GatheringProofTable003TaskDottxtRoute
   GatheringProofTable004TableRoute: typeof GatheringProofTable004TableRoute
   GatheringProofTable004TableDottxtRoute: typeof GatheringProofTable004TableDottxtRoute
+  GatheringProofTable005PartPartDottxtRoute: typeof GatheringProofTable005PartPartDottxtRoute
+  GatheringProofTable005PartsDottxtRoute: typeof GatheringProofTable005PartsDottxtRoute
   GatheringProofTable005TableRoute: typeof GatheringProofTable005TableRoute
   GatheringProofTable005TableDottxtRoute: typeof GatheringProofTable005TableDottxtRoute
   GatheringProofTable006TableRoute: typeof GatheringProofTable006TableRoute
@@ -2803,6 +2929,7 @@ interface GatheringRouteChildren {
   GatheringProofTableRulesDottxtRoute: typeof GatheringProofTableRulesDottxtRoute
   GatheringBreakfast002IndexRoute: typeof GatheringBreakfast002IndexRoute
   GatheringDinner001IndexRoute: typeof GatheringDinner001IndexRoute
+  GatheringLunch007IndexRoute: typeof GatheringLunch007IndexRoute
   GatheringProofTable001IndexRoute: typeof GatheringProofTable001IndexRoute
   GatheringProofTable003IndexRoute: typeof GatheringProofTable003IndexRoute
   GatheringProofTable004IndexRoute: typeof GatheringProofTable004IndexRoute
@@ -2830,6 +2957,8 @@ const GatheringRouteChildren: GatheringRouteChildren = {
     GatheringDinner001PartPartDothtmlRoute,
   GatheringDinner001PartPartDottxtRoute: GatheringDinner001PartPartDottxtRoute,
   GatheringDinner001TableRoute: GatheringDinner001TableRoute,
+  GatheringLunch007TableRoute: GatheringLunch007TableRoute,
+  GatheringLunch007TableDottxtRoute: GatheringLunch007TableDottxtRoute,
   GatheringProofTable001RulesRoute: GatheringProofTable001RulesRoute,
   GatheringProofTable001RulesDothtmlRoute:
     GatheringProofTable001RulesDothtmlRoute,
@@ -2861,6 +2990,10 @@ const GatheringRouteChildren: GatheringRouteChildren = {
   GatheringProofTable004TableRoute: GatheringProofTable004TableRoute,
   GatheringProofTable004TableDottxtRoute:
     GatheringProofTable004TableDottxtRoute,
+  GatheringProofTable005PartPartDottxtRoute:
+    GatheringProofTable005PartPartDottxtRoute,
+  GatheringProofTable005PartsDottxtRoute:
+    GatheringProofTable005PartsDottxtRoute,
   GatheringProofTable005TableRoute: GatheringProofTable005TableRoute,
   GatheringProofTable005TableDottxtRoute:
     GatheringProofTable005TableDottxtRoute,
@@ -2871,6 +3004,7 @@ const GatheringRouteChildren: GatheringRouteChildren = {
   GatheringProofTableRulesDottxtRoute: GatheringProofTableRulesDottxtRoute,
   GatheringBreakfast002IndexRoute: GatheringBreakfast002IndexRoute,
   GatheringDinner001IndexRoute: GatheringDinner001IndexRoute,
+  GatheringLunch007IndexRoute: GatheringLunch007IndexRoute,
   GatheringProofTable001IndexRoute: GatheringProofTable001IndexRoute,
   GatheringProofTable003IndexRoute: GatheringProofTable003IndexRoute,
   GatheringProofTable004IndexRoute: GatheringProofTable004IndexRoute,
@@ -2884,29 +3018,32 @@ const GatheringRouteWithChildren = GatheringRoute._addFileChildren(
 
 interface SalonRouteChildren {
   SalonSplatRoute: typeof SalonSplatRoute
+  SalonFifteenSpeedsRoute: typeof SalonFifteenSpeedsRoute
+  SalonFifteenSpeedsDothtmlRoute: typeof SalonFifteenSpeedsDothtmlRoute
+  SalonFifteenSpeedsDottxtRoute: typeof SalonFifteenSpeedsDottxtRoute
   SalonJevControlledProbe001Route: typeof SalonJevControlledProbe001Route
   SalonJevControlledProbe001DothtmlRoute: typeof SalonJevControlledProbe001DothtmlRoute
   SalonJevControlledProbe001DottxtRoute: typeof SalonJevControlledProbe001DottxtRoute
   SalonLadderRoute: typeof SalonLadderRoute
   SalonLadderDothtmlRoute: typeof SalonLadderDothtmlRoute
   SalonLadderDottxtRoute: typeof SalonLadderDottxtRoute
+  SalonLunch007ReportRoute: typeof SalonLunch007ReportRoute
+  SalonLunch007ReportDothtmlRoute: typeof SalonLunch007ReportDothtmlRoute
+  SalonLunch007ReportDottxtRoute: typeof SalonLunch007ReportDottxtRoute
   SalonPlainWaterRoute: typeof SalonPlainWaterRoute
   SalonPlainWaterDothtmlRoute: typeof SalonPlainWaterDothtmlRoute
   SalonPlainWaterDottxtRoute: typeof SalonPlainWaterDottxtRoute
   SalonProofTable003RelayRoute: typeof SalonProofTable003RelayRoute
   SalonProofTable003RelayDothtmlRoute: typeof SalonProofTable003RelayDothtmlRoute
   SalonProofTable003RelayDottxtRoute: typeof SalonProofTable003RelayDottxtRoute
-  SalonFifteenSpeedsRoute: typeof SalonFifteenSpeedsRoute
-  SalonFifteenSpeedsDothtmlRoute: typeof SalonFifteenSpeedsDothtmlRoute
-  SalonFifteenSpeedsDottxtRoute: typeof SalonFifteenSpeedsDottxtRoute
-  SalonLunch007ReportRoute: typeof SalonLunch007ReportRoute
-  SalonLunch007ReportDothtmlRoute: typeof SalonLunch007ReportDothtmlRoute
-  SalonLunch007ReportDottxtRoute: typeof SalonLunch007ReportDottxtRoute
   SalonIndexRoute: typeof SalonIndexRoute
 }
 
 const SalonRouteChildren: SalonRouteChildren = {
   SalonSplatRoute: SalonSplatRoute,
+  SalonFifteenSpeedsRoute: SalonFifteenSpeedsRoute,
+  SalonFifteenSpeedsDothtmlRoute: SalonFifteenSpeedsDothtmlRoute,
+  SalonFifteenSpeedsDottxtRoute: SalonFifteenSpeedsDottxtRoute,
   SalonJevControlledProbe001Route: SalonJevControlledProbe001Route,
   SalonJevControlledProbe001DothtmlRoute:
     SalonJevControlledProbe001DothtmlRoute,
@@ -2914,18 +3051,15 @@ const SalonRouteChildren: SalonRouteChildren = {
   SalonLadderRoute: SalonLadderRoute,
   SalonLadderDothtmlRoute: SalonLadderDothtmlRoute,
   SalonLadderDottxtRoute: SalonLadderDottxtRoute,
+  SalonLunch007ReportRoute: SalonLunch007ReportRoute,
+  SalonLunch007ReportDothtmlRoute: SalonLunch007ReportDothtmlRoute,
+  SalonLunch007ReportDottxtRoute: SalonLunch007ReportDottxtRoute,
   SalonPlainWaterRoute: SalonPlainWaterRoute,
   SalonPlainWaterDothtmlRoute: SalonPlainWaterDothtmlRoute,
   SalonPlainWaterDottxtRoute: SalonPlainWaterDottxtRoute,
   SalonProofTable003RelayRoute: SalonProofTable003RelayRoute,
   SalonProofTable003RelayDothtmlRoute: SalonProofTable003RelayDothtmlRoute,
   SalonProofTable003RelayDottxtRoute: SalonProofTable003RelayDottxtRoute,
-  SalonFifteenSpeedsRoute: SalonFifteenSpeedsRoute,
-  SalonFifteenSpeedsDothtmlRoute: SalonFifteenSpeedsDothtmlRoute,
-  SalonFifteenSpeedsDottxtRoute: SalonFifteenSpeedsDottxtRoute,
-  SalonLunch007ReportRoute: SalonLunch007ReportRoute,
-  SalonLunch007ReportDothtmlRoute: SalonLunch007ReportDothtmlRoute,
-  SalonLunch007ReportDottxtRoute: SalonLunch007ReportDottxtRoute,
   SalonIndexRoute: SalonIndexRoute,
 }
 
@@ -2996,6 +3130,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiGamesIndexRoute: ApiGamesIndexRoute,
   ApiGatheringBreakfast002LinesRoute: ApiGatheringBreakfast002LinesRoute,
   ApiGatheringDinner001LinesRoute: ApiGatheringDinner001LinesRoute,
+  ApiGatheringLunch007LinesRoute: ApiGatheringLunch007LinesRoute,
   ApiGatheringProofTable001LedgerRoute: ApiGatheringProofTable001LedgerRoute,
   ApiGatheringProofTable001LinesRoute: ApiGatheringProofTable001LinesRoute,
   ApiGatheringProofTable003LedgerRoute: ApiGatheringProofTable003LedgerRoute,
