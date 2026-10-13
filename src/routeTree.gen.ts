@@ -63,6 +63,9 @@ import { Route as SalonSplatRouteImport } from './routes/salon/$'
 import { Route as SalonFifteenSpeedsRouteImport } from './routes/salon/fifteen-speeds'
 import { Route as SalonFifteenSpeedsDothtmlRouteImport } from './routes/salon/fifteen-speeds[.]html'
 import { Route as SalonFifteenSpeedsDottxtRouteImport } from './routes/salon/fifteen-speeds[.]txt'
+import { Route as SalonHowLlmsWorkTogetherRouteImport } from './routes/salon/how-llms-work-together'
+import { Route as SalonHowLlmsWorkTogetherDothtmlRouteImport } from './routes/salon/how-llms-work-together[.]html'
+import { Route as SalonHowLlmsWorkTogetherDottxtRouteImport } from './routes/salon/how-llms-work-together[.]txt'
 import { Route as SalonJevControlledProbe001RouteImport } from './routes/salon/jev-controlled-probe-001'
 import { Route as SalonJevControlledProbe001DothtmlRouteImport } from './routes/salon/jev-controlled-probe-001[.]html'
 import { Route as SalonJevControlledProbe001DottxtRouteImport } from './routes/salon/jev-controlled-probe-001[.]txt'
@@ -433,6 +436,24 @@ const SalonFifteenSpeedsDottxtRoute =
   SalonFifteenSpeedsDottxtRouteImport.update({
     id: '/fifteen-speeds.txt',
     path: '/fifteen-speeds.txt',
+    getParentRoute: () => SalonRoute,
+  } as any)
+const SalonHowLlmsWorkTogetherRoute =
+  SalonHowLlmsWorkTogetherRouteImport.update({
+    id: '/how-llms-work-together',
+    path: '/how-llms-work-together',
+    getParentRoute: () => SalonRoute,
+  } as any)
+const SalonHowLlmsWorkTogetherDothtmlRoute =
+  SalonHowLlmsWorkTogetherDothtmlRouteImport.update({
+    id: '/how-llms-work-together.html',
+    path: '/how-llms-work-together.html',
+    getParentRoute: () => SalonRoute,
+  } as any)
+const SalonHowLlmsWorkTogetherDottxtRoute =
+  SalonHowLlmsWorkTogetherDottxtRouteImport.update({
+    id: '/how-llms-work-together.txt',
+    path: '/how-llms-work-together.txt',
     getParentRoute: () => SalonRoute,
   } as any)
 const SalonJevControlledProbe001Route =
@@ -989,6 +1010,9 @@ export interface FileRoutesByFullPath {
   '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
   '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
   '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
+  '/salon/how-llms-work-together': typeof SalonHowLlmsWorkTogetherRoute
+  '/salon/how-llms-work-together.html': typeof SalonHowLlmsWorkTogetherDothtmlRoute
+  '/salon/how-llms-work-together.txt': typeof SalonHowLlmsWorkTogetherDottxtRoute
   '/salon/jev-controlled-probe-001': typeof SalonJevControlledProbe001Route
   '/salon/jev-controlled-probe-001.html': typeof SalonJevControlledProbe001DothtmlRoute
   '/salon/jev-controlled-probe-001.txt': typeof SalonJevControlledProbe001DottxtRoute
@@ -1130,6 +1154,9 @@ export interface FileRoutesByTo {
   '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
   '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
   '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
+  '/salon/how-llms-work-together': typeof SalonHowLlmsWorkTogetherRoute
+  '/salon/how-llms-work-together.html': typeof SalonHowLlmsWorkTogetherDothtmlRoute
+  '/salon/how-llms-work-together.txt': typeof SalonHowLlmsWorkTogetherDottxtRoute
   '/salon/jev-controlled-probe-001': typeof SalonJevControlledProbe001Route
   '/salon/jev-controlled-probe-001.html': typeof SalonJevControlledProbe001DothtmlRoute
   '/salon/jev-controlled-probe-001.txt': typeof SalonJevControlledProbe001DottxtRoute
@@ -1274,6 +1301,9 @@ export interface FileRoutesById {
   '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
   '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
   '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
+  '/salon/how-llms-work-together': typeof SalonHowLlmsWorkTogetherRoute
+  '/salon/how-llms-work-together.html': typeof SalonHowLlmsWorkTogetherDothtmlRoute
+  '/salon/how-llms-work-together.txt': typeof SalonHowLlmsWorkTogetherDottxtRoute
   '/salon/jev-controlled-probe-001': typeof SalonJevControlledProbe001Route
   '/salon/jev-controlled-probe-001.html': typeof SalonJevControlledProbe001DothtmlRoute
   '/salon/jev-controlled-probe-001.txt': typeof SalonJevControlledProbe001DottxtRoute
@@ -1419,6 +1449,9 @@ export interface FileRouteTypes {
     | '/salon/fifteen-speeds'
     | '/salon/fifteen-speeds.html'
     | '/salon/fifteen-speeds.txt'
+    | '/salon/how-llms-work-together'
+    | '/salon/how-llms-work-together.html'
+    | '/salon/how-llms-work-together.txt'
     | '/salon/jev-controlled-probe-001'
     | '/salon/jev-controlled-probe-001.html'
     | '/salon/jev-controlled-probe-001.txt'
@@ -1560,6 +1593,9 @@ export interface FileRouteTypes {
     | '/salon/fifteen-speeds'
     | '/salon/fifteen-speeds.html'
     | '/salon/fifteen-speeds.txt'
+    | '/salon/how-llms-work-together'
+    | '/salon/how-llms-work-together.html'
+    | '/salon/how-llms-work-together.txt'
     | '/salon/jev-controlled-probe-001'
     | '/salon/jev-controlled-probe-001.html'
     | '/salon/jev-controlled-probe-001.txt'
@@ -1703,6 +1739,9 @@ export interface FileRouteTypes {
     | '/salon/fifteen-speeds'
     | '/salon/fifteen-speeds.html'
     | '/salon/fifteen-speeds.txt'
+    | '/salon/how-llms-work-together'
+    | '/salon/how-llms-work-together.html'
+    | '/salon/how-llms-work-together.txt'
     | '/salon/jev-controlled-probe-001'
     | '/salon/jev-controlled-probe-001.html'
     | '/salon/jev-controlled-probe-001.txt'
@@ -2224,6 +2263,27 @@ declare module '@tanstack/react-router' {
       path: '/fifteen-speeds.txt'
       fullPath: '/salon/fifteen-speeds.txt'
       preLoaderRoute: typeof SalonFifteenSpeedsDottxtRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/how-llms-work-together': {
+      id: '/salon/how-llms-work-together'
+      path: '/how-llms-work-together'
+      fullPath: '/salon/how-llms-work-together'
+      preLoaderRoute: typeof SalonHowLlmsWorkTogetherRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/how-llms-work-together.html': {
+      id: '/salon/how-llms-work-together.html'
+      path: '/how-llms-work-together.html'
+      fullPath: '/salon/how-llms-work-together.html'
+      preLoaderRoute: typeof SalonHowLlmsWorkTogetherDothtmlRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/how-llms-work-together.txt': {
+      id: '/salon/how-llms-work-together.txt'
+      path: '/how-llms-work-together.txt'
+      fullPath: '/salon/how-llms-work-together.txt'
+      preLoaderRoute: typeof SalonHowLlmsWorkTogetherDottxtRouteImport
       parentRoute: typeof SalonRoute
     }
     '/salon/jev-controlled-probe-001': {
@@ -3021,6 +3081,9 @@ interface SalonRouteChildren {
   SalonFifteenSpeedsRoute: typeof SalonFifteenSpeedsRoute
   SalonFifteenSpeedsDothtmlRoute: typeof SalonFifteenSpeedsDothtmlRoute
   SalonFifteenSpeedsDottxtRoute: typeof SalonFifteenSpeedsDottxtRoute
+  SalonHowLlmsWorkTogetherRoute: typeof SalonHowLlmsWorkTogetherRoute
+  SalonHowLlmsWorkTogetherDothtmlRoute: typeof SalonHowLlmsWorkTogetherDothtmlRoute
+  SalonHowLlmsWorkTogetherDottxtRoute: typeof SalonHowLlmsWorkTogetherDottxtRoute
   SalonJevControlledProbe001Route: typeof SalonJevControlledProbe001Route
   SalonJevControlledProbe001DothtmlRoute: typeof SalonJevControlledProbe001DothtmlRoute
   SalonJevControlledProbe001DottxtRoute: typeof SalonJevControlledProbe001DottxtRoute
@@ -3044,6 +3107,9 @@ const SalonRouteChildren: SalonRouteChildren = {
   SalonFifteenSpeedsRoute: SalonFifteenSpeedsRoute,
   SalonFifteenSpeedsDothtmlRoute: SalonFifteenSpeedsDothtmlRoute,
   SalonFifteenSpeedsDottxtRoute: SalonFifteenSpeedsDottxtRoute,
+  SalonHowLlmsWorkTogetherRoute: SalonHowLlmsWorkTogetherRoute,
+  SalonHowLlmsWorkTogetherDothtmlRoute: SalonHowLlmsWorkTogetherDothtmlRoute,
+  SalonHowLlmsWorkTogetherDottxtRoute: SalonHowLlmsWorkTogetherDottxtRoute,
   SalonJevControlledProbe001Route: SalonJevControlledProbe001Route,
   SalonJevControlledProbe001DothtmlRoute:
     SalonJevControlledProbe001DothtmlRoute,
