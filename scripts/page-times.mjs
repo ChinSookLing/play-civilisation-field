@@ -14,6 +14,12 @@ const files = {
   GAMES: ["src/routes/games.tsx", "src/lib/play/page-sheets.ts", "src/lib/play/catalog.ts", ...shared],
   PSYCHE: ["src/routes/psyche.tsx", "src/lib/play/page-sheets.ts", ...shared],
   GATHERING: ["src/routes/gathering/index.tsx", "src/lib/play/page-sheets.ts", ...shared],
+  "PROOF-TABLE-008": [
+    "src/lib/play/proof-table-008.ts",
+    "src/lib/play/proof-table-008-aim.txt",
+    "src/routes/gathering/proof-table-008/table.tsx",
+    ...shared,
+  ],
   "PROOF-TABLE-007": [
     "src/lib/play/proof-table-007.ts",
     "src/lib/play/proof-table-007-aim.txt",

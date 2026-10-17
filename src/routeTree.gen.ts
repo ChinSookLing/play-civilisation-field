@@ -124,6 +124,9 @@ import { Route as GatheringProofTable005TableDottxtRouteImport } from './routes/
 import { Route as GatheringProofTable006IndexRouteImport } from './routes/gathering/proof-table-006/index'
 import { Route as GatheringProofTable006TableRouteImport } from './routes/gathering/proof-table-006/table'
 import { Route as GatheringProofTable006TableDottxtRouteImport } from './routes/gathering/proof-table-006/table[.]txt'
+import { Route as GatheringProofTable008IndexRouteImport } from './routes/gathering/proof-table-008/index'
+import { Route as GatheringProofTable008TableRouteImport } from './routes/gathering/proof-table-008/table'
+import { Route as GatheringProofTable008TableDottxtRouteImport } from './routes/gathering/proof-table-008/table[.]txt'
 import { Route as GatheringProofTable007IndexRouteImport } from './routes/gathering/proof-table-007/index'
 import { Route as GatheringProofTable007TableRouteImport } from './routes/gathering/proof-table-007/table'
 import { Route as GatheringProofTable007TableDottxtRouteImport } from './routes/gathering/proof-table-007/table[.]txt'
@@ -792,6 +795,24 @@ const GatheringProofTable006TableDottxtRoute =
     path: '/proof-table-006/table.txt',
     getParentRoute: () => GatheringRoute,
   } as any)
+const GatheringProofTable008IndexRoute =
+  GatheringProofTable008IndexRouteImport.update({
+    id: '/proof-table-008/',
+    path: '/proof-table-008/',
+    getParentRoute: () => GatheringRoute,
+  } as any)
+const GatheringProofTable008TableRoute =
+  GatheringProofTable008TableRouteImport.update({
+    id: '/proof-table-008/table',
+    path: '/proof-table-008/table',
+    getParentRoute: () => GatheringRoute,
+  } as any)
+const GatheringProofTable008TableDottxtRoute =
+  GatheringProofTable008TableDottxtRouteImport.update({
+    id: '/proof-table-008/table.txt',
+    path: '/proof-table-008/table.txt',
+    getParentRoute: () => GatheringRoute,
+  } as any)
 const GatheringProofTable007IndexRoute =
   GatheringProofTable007IndexRouteImport.update({
     id: '/proof-table-007/',
@@ -1085,6 +1106,8 @@ export interface FileRoutesByFullPath {
   '/gathering/proof-table-005/table.txt': typeof GatheringProofTable005TableDottxtRoute
   '/gathering/proof-table-006/table': typeof GatheringProofTable006TableRoute
   '/gathering/proof-table-006/table.txt': typeof GatheringProofTable006TableDottxtRoute
+  '/gathering/proof-table-008/table': typeof GatheringProofTable008TableRoute
+  '/gathering/proof-table-008/table.txt': typeof GatheringProofTable008TableDottxtRoute
   '/gathering/proof-table-007/table': typeof GatheringProofTable007TableRoute
   '/gathering/proof-table-007/table.txt': typeof GatheringProofTable007TableDottxtRoute
   '/gathering/proof-table/rules': typeof GatheringProofTableRulesRouteWithChildren
@@ -1098,6 +1121,7 @@ export interface FileRoutesByFullPath {
   '/gathering/proof-table-004/': typeof GatheringProofTable004IndexRoute
   '/gathering/proof-table-005/': typeof GatheringProofTable005IndexRoute
   '/gathering/proof-table-006/': typeof GatheringProofTable006IndexRoute
+  '/gathering/proof-table-008/': typeof GatheringProofTable008IndexRoute
   '/gathering/proof-table-007/': typeof GatheringProofTable007IndexRoute
   '/api/games/$gameId/handoff': typeof ApiGamesGameIdHandoffRoute
   '/api/games/$gameId/jev': typeof ApiGamesGameIdJevRoute
@@ -1232,6 +1256,8 @@ export interface FileRoutesByTo {
   '/gathering/proof-table-005/table.txt': typeof GatheringProofTable005TableDottxtRoute
   '/gathering/proof-table-006/table': typeof GatheringProofTable006TableRoute
   '/gathering/proof-table-006/table.txt': typeof GatheringProofTable006TableDottxtRoute
+  '/gathering/proof-table-008/table': typeof GatheringProofTable008TableRoute
+  '/gathering/proof-table-008/table.txt': typeof GatheringProofTable008TableDottxtRoute
   '/gathering/proof-table-007/table': typeof GatheringProofTable007TableRoute
   '/gathering/proof-table-007/table.txt': typeof GatheringProofTable007TableDottxtRoute
   '/gathering/proof-table/rules': typeof GatheringProofTableRulesRouteWithChildren
@@ -1245,6 +1271,7 @@ export interface FileRoutesByTo {
   '/gathering/proof-table-004': typeof GatheringProofTable004IndexRoute
   '/gathering/proof-table-005': typeof GatheringProofTable005IndexRoute
   '/gathering/proof-table-006': typeof GatheringProofTable006IndexRoute
+  '/gathering/proof-table-008': typeof GatheringProofTable008IndexRoute
   '/gathering/proof-table-007': typeof GatheringProofTable007IndexRoute
   '/api/games/$gameId/handoff': typeof ApiGamesGameIdHandoffRoute
   '/api/games/$gameId/jev': typeof ApiGamesGameIdJevRoute
@@ -1382,6 +1409,8 @@ export interface FileRoutesById {
   '/gathering/proof-table-005/table.txt': typeof GatheringProofTable005TableDottxtRoute
   '/gathering/proof-table-006/table': typeof GatheringProofTable006TableRoute
   '/gathering/proof-table-006/table.txt': typeof GatheringProofTable006TableDottxtRoute
+  '/gathering/proof-table-008/table': typeof GatheringProofTable008TableRoute
+  '/gathering/proof-table-008/table.txt': typeof GatheringProofTable008TableDottxtRoute
   '/gathering/proof-table-007/table': typeof GatheringProofTable007TableRoute
   '/gathering/proof-table-007/table.txt': typeof GatheringProofTable007TableDottxtRoute
   '/gathering/proof-table/rules': typeof GatheringProofTableRulesRouteWithChildren
@@ -1395,6 +1424,7 @@ export interface FileRoutesById {
   '/gathering/proof-table-004/': typeof GatheringProofTable004IndexRoute
   '/gathering/proof-table-005/': typeof GatheringProofTable005IndexRoute
   '/gathering/proof-table-006/': typeof GatheringProofTable006IndexRoute
+  '/gathering/proof-table-008/': typeof GatheringProofTable008IndexRoute
   '/gathering/proof-table-007/': typeof GatheringProofTable007IndexRoute
   '/api/games/$gameId/handoff': typeof ApiGamesGameIdHandoffRoute
   '/api/games/$gameId/jev': typeof ApiGamesGameIdJevRoute
@@ -1533,6 +1563,8 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-005/table.txt'
     | '/gathering/proof-table-006/table'
     | '/gathering/proof-table-006/table.txt'
+    | '/gathering/proof-table-008/table'
+    | '/gathering/proof-table-008/table.txt'
     | '/gathering/proof-table-007/table'
     | '/gathering/proof-table-007/table.txt'
     | '/gathering/proof-table/rules'
@@ -1546,6 +1578,7 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-004/'
     | '/gathering/proof-table-005/'
     | '/gathering/proof-table-006/'
+    | '/gathering/proof-table-008/'
     | '/gathering/proof-table-007/'
     | '/api/games/$gameId/handoff'
     | '/api/games/$gameId/jev'
@@ -1680,6 +1713,8 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-005/table.txt'
     | '/gathering/proof-table-006/table'
     | '/gathering/proof-table-006/table.txt'
+    | '/gathering/proof-table-008/table'
+    | '/gathering/proof-table-008/table.txt'
     | '/gathering/proof-table-007/table'
     | '/gathering/proof-table-007/table.txt'
     | '/gathering/proof-table/rules'
@@ -1693,6 +1728,7 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-004'
     | '/gathering/proof-table-005'
     | '/gathering/proof-table-006'
+    | '/gathering/proof-table-008'
     | '/gathering/proof-table-007'
     | '/api/games/$gameId/handoff'
     | '/api/games/$gameId/jev'
@@ -1829,6 +1865,8 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-005/table.txt'
     | '/gathering/proof-table-006/table'
     | '/gathering/proof-table-006/table.txt'
+    | '/gathering/proof-table-008/table'
+    | '/gathering/proof-table-008/table.txt'
     | '/gathering/proof-table-007/table'
     | '/gathering/proof-table-007/table.txt'
     | '/gathering/proof-table/rules'
@@ -1842,6 +1880,7 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-004/'
     | '/gathering/proof-table-005/'
     | '/gathering/proof-table-006/'
+    | '/gathering/proof-table-008/'
     | '/gathering/proof-table-007/'
     | '/api/games/$gameId/handoff'
     | '/api/games/$gameId/jev'
@@ -2731,6 +2770,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GatheringProofTable006TableDottxtRouteImport
       parentRoute: typeof GatheringRoute
     }
+    '/gathering/proof-table-008/': {
+      id: '/gathering/proof-table-008/'
+      path: '/proof-table-008'
+      fullPath: '/gathering/proof-table-008/'
+      preLoaderRoute: typeof GatheringProofTable008IndexRouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/proof-table-008/table': {
+      id: '/gathering/proof-table-008/table'
+      path: '/proof-table-008/table'
+      fullPath: '/gathering/proof-table-008/table'
+      preLoaderRoute: typeof GatheringProofTable008TableRouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/proof-table-008/table.txt': {
+      id: '/gathering/proof-table-008/table.txt'
+      path: '/proof-table-008/table.txt'
+      fullPath: '/gathering/proof-table-008/table.txt'
+      preLoaderRoute: typeof GatheringProofTable008TableDottxtRouteImport
+      parentRoute: typeof GatheringRoute
+    }
     '/gathering/proof-table-007/': {
       id: '/gathering/proof-table-007/'
       path: '/proof-table-007'
@@ -3045,6 +3105,8 @@ interface GatheringRouteChildren {
   GatheringProofTable005TableDottxtRoute: typeof GatheringProofTable005TableDottxtRoute
   GatheringProofTable006TableRoute: typeof GatheringProofTable006TableRoute
   GatheringProofTable006TableDottxtRoute: typeof GatheringProofTable006TableDottxtRoute
+  GatheringProofTable008TableRoute: typeof GatheringProofTable008TableRoute
+  GatheringProofTable008TableDottxtRoute: typeof GatheringProofTable008TableDottxtRoute
   GatheringProofTable007TableRoute: typeof GatheringProofTable007TableRoute
   GatheringProofTable007TableDottxtRoute: typeof GatheringProofTable007TableDottxtRoute
   GatheringProofTableRulesRoute: typeof GatheringProofTableRulesRouteWithChildren
@@ -3057,6 +3119,7 @@ interface GatheringRouteChildren {
   GatheringProofTable004IndexRoute: typeof GatheringProofTable004IndexRoute
   GatheringProofTable005IndexRoute: typeof GatheringProofTable005IndexRoute
   GatheringProofTable006IndexRoute: typeof GatheringProofTable006IndexRoute
+  GatheringProofTable008IndexRoute: typeof GatheringProofTable008IndexRoute
   GatheringProofTable007IndexRoute: typeof GatheringProofTable007IndexRoute
 }
 
@@ -3123,6 +3186,9 @@ const GatheringRouteChildren: GatheringRouteChildren = {
   GatheringProofTable006TableRoute: GatheringProofTable006TableRoute,
   GatheringProofTable006TableDottxtRoute:
     GatheringProofTable006TableDottxtRoute,
+  GatheringProofTable008TableRoute: GatheringProofTable008TableRoute,
+  GatheringProofTable008TableDottxtRoute:
+    GatheringProofTable008TableDottxtRoute,
   GatheringProofTable007TableRoute: GatheringProofTable007TableRoute,
   GatheringProofTable007TableDottxtRoute:
     GatheringProofTable007TableDottxtRoute,
@@ -3136,6 +3202,7 @@ const GatheringRouteChildren: GatheringRouteChildren = {
   GatheringProofTable004IndexRoute: GatheringProofTable004IndexRoute,
   GatheringProofTable005IndexRoute: GatheringProofTable005IndexRoute,
   GatheringProofTable006IndexRoute: GatheringProofTable006IndexRoute,
+  GatheringProofTable008IndexRoute: GatheringProofTable008IndexRoute,
   GatheringProofTable007IndexRoute: GatheringProofTable007IndexRoute,
 }
 
