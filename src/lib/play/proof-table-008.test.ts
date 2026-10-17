@@ -18,6 +18,13 @@ test("PT-008 aim is the public text, and the page stays open", () => {
   assert.equal(aim.includes("研究主席（Chair）： GPT-6"), true);
   assert.equal(aim.includes("研究协作： Claude（Opus）及受邀 AI 研究伙伴"), true);
   assert.equal(aim.includes("\\boxed{t=F(v_1,v_2,\\ldots,v_n)}"), true);
+  assert.equal(aim.includes("\\left\\|(v_i-v_1)t\\right\\|\\geq\\frac1n"), true);
+  assert.equal(aim.includes("\\left|(v_i-v_1)t\\right|"), false);
+  assert.equal(aim.includes("时间 t ≥ 0，为连续实数；除非证明具有相应周期性，否则不预设 t ∈ [0,1)。"), true);
+  assert.equal(aim.includes("定义：||x|| = min_{k∈Z}|x-k|，表示实数 x 到最近整数的距离，并非普通绝对值。"), true);
+  assert.equal(source.includes('VELOCITIES: v_1, v_2, ..., v_n'), true);
+  assert.equal(source.includes("TIME_FORMULA_GOAL: t = F(v_1, v_2, ..., v_n)"), true);
+  assert.equal(source.includes("DISTANCE_CONDITION: ||(v_i-v_1)*t|| >= 1/n for every i=2,...,n"), true);
   assert.equal(aim.includes("统一构造公式（Unified Constructive Time Formula）：尚未完成。"), true);
   assert.equal(aim.includes("From velocities to time."), true);
   assert.equal(aim.endsWith("研究持续开放。所有结论以可核验的数学证明为准。\n"), true);
