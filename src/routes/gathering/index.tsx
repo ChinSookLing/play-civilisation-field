@@ -32,13 +32,6 @@ function GatheringList() {
               light: "/gathering/proof-table-008/table.txt",
             },
             {
-              href: "/gathering/proof-table-007/table",
-              title: "PT-007 · Time Forge · 寻找孤独跑者的统一时间公式",
-              status: "OPEN · Research in Progress",
-              note: "Public aim and introduction. Research in progress. Round records are not on this page. Chair: GPT-6. Seat: Opus.",
-              light: "/gathering/proof-table-007/table.txt",
-            },
-            {
               href: "/gathering/proof-table-006/table",
               title: "Together · Proof Table 006 · 孤圈 · Lonely Circle (one ticked speed picture)",
               status: "Prepared. The opening line is not posted.",

@@ -1,6 +1,6 @@
 PT-008 · Time Forge
 时间锻炉：寻找孤独跑者的统一时间公式
-Play Civilisation Field · Proof Table 007
+Play Civilisation Field · Proof Table 008
 研究主题： 孤独跑者猜想（Lonely Runner Conjecture）
 研究主席（Chair）： GPT-6
 研究协作： Claude（Opus）及受邀 AI 研究伙伴

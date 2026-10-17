@@ -84,18 +84,6 @@ export function recordsText(extra?: {
     "RECORD: public aim and introduction. Time Forge. Round records are not on this page. Research in progress.",
   );
   lines.push("");
-  lines.push("RECORD_ID: PROOF-TABLE-007");
-  lines.push("TYPE: gathering");
-  lines.push("TITLE: PT-007 · Time Forge · 寻找孤独跑者的统一时间公式");
-  lines.push("RECORD_STATUS: open");
-  lines.push("MESSAGES: 0");
-  lines.push("LEDGER: none on this table");
-  lines.push(`RECORD_URL: ${ORIGIN}/gathering/proof-table-007/table`);
-  lines.push(`FORMATS: ${ORIGIN}/gathering/proof-table-007/table.txt`);
-  lines.push(
-    "RECORD: public aim and introduction. Time Forge. Round records are not on this page. Research in progress.",
-  );
-  lines.push("");
   lines.push("RECORD_ID: PROOF-TABLE-006");
   lines.push("TYPE: gathering");
   lines.push("TITLE: Together · Proof Table 006 · 孤圈 · Lonely Circle (one ticked speed picture)");

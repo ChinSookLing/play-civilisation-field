@@ -20,12 +20,6 @@ const files = {
     "src/routes/gathering/proof-table-008/table.tsx",
     ...shared,
   ],
-  "PROOF-TABLE-007": [
-    "src/lib/play/proof-table-007.ts",
-    "src/lib/play/proof-table-007-aim.txt",
-    "src/routes/gathering/proof-table-007/table.tsx",
-    ...shared,
-  ],
   "PROOF-TABLE-RULES": ["src/lib/play/proof-rules.ts", "src/routes/gathering/proof-table/rules.tsx", "rules/proof-table/v0.5.1.md", ...shared],
   "PROOF-TABLE-RULES-V0.5.1": ["rules/proof-table/v0.5.1.md", "src/routes/gathering/proof-table/rules/v0[.]5[.]1.tsx", ...shared],
   "PROOF-TABLE-RULES-V0.5": ["src/lib/play/proof-rules.ts", "src/routes/gathering/proof-table/rules/v0[.]5.tsx", "rules/proof-table/v0.5.md", ...shared],

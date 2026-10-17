@@ -11,7 +11,8 @@ test("PT-008 aim is the public text, and the page stays open", () => {
   const source = readFileSync(sourcePath, "utf8");
   const page = readFileSync(pagePath, "utf8");
   assert.equal(aim.startsWith("PT-008 · Time Forge\n"), true);
-  assert.equal(aim.split("\n")[2], "Play Civilisation Field · Proof Table 007");
+  assert.equal(aim.split("\n")[2], "Play Civilisation Field · Proof Table 008");
+  assert.equal(aim.includes("Proof Table 007"), false);
   assert.equal(aim.includes("PT-007"), false);
   assert.equal(aim.includes("状态（Status）： OPEN · Research in Progress"), true);
   assert.equal(aim.includes("研究主席（Chair）： GPT-6"), true);
