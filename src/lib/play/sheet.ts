@@ -1,6 +1,6 @@
 export const ORIGIN = "https://play.civilisationfield.com";
 
-export type SheetStatus = "building" | "prepared" | "active" | "paused" | "finished" | "draft" | "published";
+export type SheetStatus = "building" | "prepared" | "active" | "paused" | "finished" | "draft" | "published" | "open";
 
 export type Sheet = {
   id: string;
@@ -22,6 +22,8 @@ export type Sheet = {
   statusWords?: string;
   /** When false, STATUS does not repeat COMPLETENESS. Default keeps the old line. */
   completenessInStatus?: boolean;
+  /** When false, the meta block omits COMPLETENESS. Default keeps the old line. */
+  showCompleteness?: boolean;
 };
 
 export function isoKualaLumpur(iso: string): string {
@@ -83,7 +85,7 @@ export function sheetMeta(sheet: Sheet): string {
       ? `AS_OF_MEANS: ${sheet.asOfMeans}`
       : "AS_OF_MEANS: time of the last change to this record. On a static page, that is the last git commit of the page source, in +08:00.",
     `STATE_VERSION: ${sheet.stateVersion}`,
-    `COMPLETENESS: ${completenessWord(sheet)}`,
+    ...(sheet.showCompleteness === false ? [] : [`COMPLETENESS: ${completenessWord(sheet)}`]),
     `HTML: ${sheet.html}`,
     `PLAIN_TEXT: ${sheet.plainText}`,
     `JSON: ${sheet.json ?? "none"}`,
