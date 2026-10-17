@@ -81,7 +81,7 @@ export function recordsText(extra?: {
   lines.push(`RECORD_URL: ${ORIGIN}/gathering/proof-table-007/table`);
   lines.push(`FORMATS: ${ORIGIN}/gathering/proof-table-007/table.txt`);
   lines.push(
-    "RECORD: public aim and introduction. Time Forge. Round records are not on this page. Not a finished result.",
+    "RECORD: public aim and introduction. Time Forge. Round records are not on this page. Research in progress.",
   );
   lines.push("");
   lines.push("RECORD_ID: PROOF-TABLE-006");

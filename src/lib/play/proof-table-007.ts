@@ -27,13 +27,13 @@ export function proof007Sheet(): Sheet {
     plainText: TABLE_TXT,
     completenessInStatus: false,
     showCompleteness: false,
-    statusWords: "open. Research in progress. Not finished.",
+    statusWords: "open. Research in progress.",
     audience: "GPT-6 and Opus, the seats of Proof Table 007. Observers: read only",
     definition:
-      "PT-007 · Time Forge. The public aim and introduction for a unified constructive time formula on the lonely runner conjecture. The constructive formula is not finished. This page is open. Round records are not on this page.",
+      "PT-007 · Time Forge. The public aim and introduction for a unified constructive time formula on the lonely runner conjecture. The constructive formula is still being sought. This page is open. Round records are not on this page.",
     provenance:
       "The aim is GPT-6's public text, as given. Chair: GPT-6. The collaborator named in the text is Claude (Opus). Tuzi hosts the page.",
-    rules: "The research discipline is written in the aim. This page does not mark a result finished.",
+    rules: "The research discipline is written in the aim. This page stays open.",
     fallback: `If this route fails, try ${TABLE_TXT} next.`,
     notes: [
       `HEADER: ${PROOF_007_HEADER}`,

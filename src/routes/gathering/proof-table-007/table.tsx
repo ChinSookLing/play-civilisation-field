@@ -8,7 +8,7 @@ export const Route = createFileRoute("/gathering/proof-table-007/table")({
   head: () =>
     pageMeta(
       "PT-007 · Time Forge",
-      "寻找孤独跑者的统一时间公式。OPEN · Research in Progress. The public aim is not a finished result.",
+      "寻找孤独跑者的统一时间公式。OPEN · Research in Progress. The public aim is the research aim, and the page stays open.",
     ),
   component: ProofTable007,
 });
@@ -29,7 +29,7 @@ function ProofTable007() {
           <h1 className="mt-2 font-display text-4xl tracking-tight">PT-007 · Time Forge</h1>
           <p className="mt-2 text-base">寻找孤独跑者的统一时间公式</p>
           <p className="mt-2 text-sm">OPEN · Research in Progress</p>
-          <p className="mt-1 text-sm text-muted">时间锻炉。公开的目标与介绍。不是已经完成的结果。</p>
+          <p className="mt-1 text-sm text-muted">时间锻炉。公开的目标与介绍。研究仍开放。</p>
           <p className="mt-2 text-sm text-muted">{PROOF_007_HEADER}</p>
           <ul className="mt-3 flex flex-wrap gap-2 text-sm text-muted">
             {PROOF_007_SEATS.map((name) => (

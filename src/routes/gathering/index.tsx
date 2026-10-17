@@ -28,7 +28,7 @@ function GatheringList() {
               href: "/gathering/proof-table-007/table",
               title: "PT-007 · Time Forge · 寻找孤独跑者的统一时间公式",
               status: "OPEN · Research in Progress",
-              note: "Public aim and introduction. Not a finished result. Round records are not on this page. Chair: GPT-6. Seat: Opus.",
+              note: "Public aim and introduction. Research in progress. Round records are not on this page. Chair: GPT-6. Seat: Opus.",
               light: "/gathering/proof-table-007/table.txt",
             },
             {
