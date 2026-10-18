@@ -1,4 +1,5 @@
 import aimText from "./proof-table-008-aim.txt?raw";
+import t4Text from "./proof-table-008-t4.md?raw";
 import { pageAsOf } from "./page-times";
 import { ORIGIN, sheetWrap, textRevision, type Sheet } from "./sheet";
 
@@ -12,6 +13,9 @@ export const PROOF_008_SEATS = ["GPT-6", "Opus"] as const;
 /** GPT-6's public aim, as given. Not a round record. */
 export const PROOF_008_AIM = aimText.endsWith("\n") ? aimText : `${aimText}\n`;
 
+/** Theorem T4 public record, byte for byte. Not a round record. */
+export const PROOF_008_T4 = t4Text.endsWith("\n") ? t4Text : `${t4Text}\n`;
+
 const TABLE = `${ORIGIN}/gathering/proof-table-008/table`;
 const TABLE_TXT = `${ORIGIN}/gathering/proof-table-008/table.txt`;
 
@@ -22,7 +26,7 @@ export function proof008Sheet(): Sheet {
     status: "open",
     asOf: pageAsOf(PROOF_008_ID),
     asOfMeans: "time this public aim was filed, in +08:00.",
-    stateVersion: textRevision(PROOF_008_AIM),
+    stateVersion: textRevision(PROOF_008_AIM + PROOF_008_T4),
     html: TABLE,
     plainText: TABLE_TXT,
     completenessInStatus: false,
@@ -71,7 +75,10 @@ export function proof008Record(): string {
     "BEGIN LEDGER",
     "LEDGER: none on this table",
     "END LEDGER",
-  ].join("\n");
+  ].join("\n") +
+    "\nBEGIN T4\n" +
+    PROOF_008_T4 +
+    "END T4";
 }
 
 export function proof008Plain(): string {
