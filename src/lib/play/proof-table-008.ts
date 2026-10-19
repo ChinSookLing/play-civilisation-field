@@ -1,4 +1,6 @@
 import aimText from "./proof-table-008-aim.txt?raw";
+import c1Text from "./proof-table-008-c1.md?raw";
+import hbText from "./proof-table-008-hb.md?raw";
 import lnText from "./proof-table-008-ln.md?raw";
 import t4Text from "./proof-table-008-t4.md?raw";
 import { pageAsOf } from "./page-times";
@@ -20,6 +22,12 @@ export const PROOF_008_T4 = t4Text.endsWith("\n") ? t4Text : `${t4Text}\n`;
 /** Lemma LN public record, byte for byte. Not a round record. */
 export const PROOF_008_LN = lnText.endsWith("\n") ? lnText : `${lnText}\n`;
 
+/** Lemma HB public record, byte for byte. Not a round record. */
+export const PROOF_008_HB = hbText.endsWith("\n") ? hbText : `${hbText}\n`;
+
+/** Lemma C1 public record, byte for byte. Not a round record. */
+export const PROOF_008_C1 = c1Text.endsWith("\n") ? c1Text : `${c1Text}\n`;
+
 const TABLE = `${ORIGIN}/gathering/proof-table-008/table`;
 const TABLE_TXT = `${ORIGIN}/gathering/proof-table-008/table.txt`;
 
@@ -30,7 +38,7 @@ export function proof008Sheet(): Sheet {
     status: "open",
     asOf: pageAsOf(PROOF_008_ID),
     asOfMeans: "time this public aim was filed, in +08:00.",
-    stateVersion: textRevision(PROOF_008_AIM + PROOF_008_T4 + PROOF_008_LN),
+    stateVersion: textRevision(PROOF_008_AIM + PROOF_008_T4 + PROOF_008_LN + PROOF_008_HB + PROOF_008_C1),
     html: TABLE,
     plainText: TABLE_TXT,
     completenessInStatus: false,
@@ -84,7 +92,11 @@ export function proof008Record(): string {
     PROOF_008_T4 +
     "END T4\nBEGIN LN\n" +
     PROOF_008_LN +
-    "END LN";
+    "END LN\nBEGIN HB\n" +
+    PROOF_008_HB +
+    "END HB\nBEGIN C1\n" +
+    PROOF_008_C1 +
+    "END C1";
 }
 
 export function proof008Plain(): string {

@@ -6,6 +6,8 @@ import test from "node:test";
 const aimPath = new URL("./proof-table-008-aim.txt", import.meta.url);
 const t4Path = new URL("./proof-table-008-t4.md", import.meta.url);
 const lnPath = new URL("./proof-table-008-ln.md", import.meta.url);
+const hbPath = new URL("./proof-table-008-hb.md", import.meta.url);
+const c1Path = new URL("./proof-table-008-c1.md", import.meta.url);
 const sourcePath = new URL("./proof-table-008.ts", import.meta.url);
 const pagePath = new URL("../../routes/gathering/proof-table-008/table.tsx", import.meta.url);
 
@@ -45,6 +47,8 @@ test("PT-008 aim is the public text, and the page stays open", () => {
   assert.equal(page.includes("PROOF_008_AIM"), true);
   assert.equal(page.includes("PROOF_008_T4"), true);
   assert.equal(page.includes("PROOF_008_LN"), true);
+  assert.equal(page.includes("PROOF_008_HB"), true);
+  assert.equal(page.includes("PROOF_008_C1"), true);
   assert.equal(page.includes("proofLineBlock"), false);
   const t4 = readFileSync(t4Path);
   assert.equal(
@@ -56,6 +60,29 @@ test("PT-008 aim is the public text, and the page stays open", () => {
   assert.equal(source.includes("PROOF_008_T4 +"), true);
   assert.equal(source.includes("BEGIN LN"), true);
   assert.equal(source.includes("PROOF_008_LN +"), true);
+  assert.equal(source.includes("BEGIN HB"), true);
+  assert.equal(source.includes("PROOF_008_HB +"), true);
+  assert.equal(source.includes("BEGIN C1"), true);
+  assert.equal(source.includes("PROOF_008_C1 +"), true);
+  const hb = readFileSync(hbPath);
+  const c1 = readFileSync(c1Path);
+  assert.equal(
+    createHash("sha256").update(hb).digest("hex"),
+    "53d9f13aa6876b7f5d306701c5e46762030a791c7ab9e5d6fe45d13b5b184399",
+  );
+  assert.equal(hb.length, 5838);
+  assert.equal(
+    createHash("sha256").update(c1).digest("hex"),
+    "fd1f60fa6beac4783fcfc3607105b89af0982804369ecbbff104dde94cfc84e1",
+  );
+  assert.equal(c1.length, 7885);
+  for (const file of [hb, c1]) {
+    const text = file.toString("utf8");
+    assert.equal(text.includes("Internally verified, not externally peer-reviewed."), true);
+    assert.equal(text.includes("The general five-runner formula F5 remains UNFINISHED."), true);
+    assert.equal(text.includes("This result does not prove the general Lonely Runner Conjecture."), true);
+    assert.equal(text.includes("Proof author: Opus (Claude)"), true);
+  }
   assert.equal(source.includes("Round 011"), false);
   const ln = readFileSync(lnPath);
   assert.equal(

@@ -19,6 +19,8 @@ const files = {
     "src/lib/play/proof-table-008-aim.txt",
     "src/lib/play/proof-table-008-t4.md",
     "src/lib/play/proof-table-008-ln.md",
+    "src/lib/play/proof-table-008-hb.md",
+    "src/lib/play/proof-table-008-c1.md",
     "src/routes/gathering/proof-table-008/table.tsx",
     ...shared,
   ],

@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteFooter } from "@/components/play/SiteFooter";
 import { pageMeta } from "@/lib/play/page-meta";
-import { PROOF_008_AIM, PROOF_008_HEADER, PROOF_008_LN, PROOF_008_SEATS, PROOF_008_T4, proof008Sheet } from "@/lib/play/proof-table-008";
+import { PROOF_008_AIM, PROOF_008_C1, PROOF_008_HB, PROOF_008_HEADER, PROOF_008_LN, PROOF_008_SEATS, PROOF_008_T4, proof008Sheet } from "@/lib/play/proof-table-008";
 import { sheetLabel, sheetMeta } from "@/lib/play/sheet";
 
 export const Route = createFileRoute("/gathering/proof-table-008/table")({
@@ -48,6 +48,12 @@ function ProofTable008() {
         <h2 className="mt-8 text-sm tracking-[0.14em] text-faint uppercase">Lemma LN</h2>
         <p className="mt-2 text-sm text-muted">Public record. Not a round. The words below are the publication, unchanged.</p>
         <pre className="mt-2 overflow-x-auto whitespace-pre text-sm leading-relaxed text-fg">{PROOF_008_LN}</pre>
+        <h2 className="mt-8 text-sm tracking-[0.14em] text-faint uppercase">Lemma HB</h2>
+        <p className="mt-2 text-sm text-muted">Public record. Not a round. The words below are the publication, unchanged.</p>
+        <pre className="mt-2 overflow-x-auto whitespace-pre text-sm leading-relaxed text-fg">{PROOF_008_HB}</pre>
+        <h2 className="mt-8 text-sm tracking-[0.14em] text-faint uppercase">Lemma C1</h2>
+        <p className="mt-2 text-sm text-muted">Public record. Not a round. The words below are the publication, unchanged.</p>
+        <pre className="mt-2 overflow-x-auto whitespace-pre text-sm leading-relaxed text-fg">{PROOF_008_C1}</pre>
         <pre className="mt-8 whitespace-pre-wrap border-t border-line pt-6 text-sm leading-relaxed text-fg">
           {sheetMeta(sheet)}
         </pre>
