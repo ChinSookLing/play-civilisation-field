@@ -60,6 +60,9 @@ import { Route as NotesNoteIdRouteImport } from './routes/notes.$noteId'
 import { Route as NotesChar123noteIdChar125DottxtRouteImport } from './routes/notes.{$noteId}[.]txt'
 import { Route as SalonIndexRouteImport } from './routes/salon/index'
 import { Route as SalonSplatRouteImport } from './routes/salon/$'
+import { Route as SalonFifthRunnerRouteImport } from './routes/salon/fifth-runner'
+import { Route as SalonFifthRunnerDothtmlRouteImport } from './routes/salon/fifth-runner[.]html'
+import { Route as SalonFifthRunnerDottxtRouteImport } from './routes/salon/fifth-runner[.]txt'
 import { Route as SalonFifteenSpeedsRouteImport } from './routes/salon/fifteen-speeds'
 import { Route as SalonFifteenSpeedsDothtmlRouteImport } from './routes/salon/fifteen-speeds[.]html'
 import { Route as SalonFifteenSpeedsDottxtRouteImport } from './routes/salon/fifteen-speeds[.]txt'
@@ -424,6 +427,23 @@ const SalonSplatRoute = SalonSplatRouteImport.update({
   path: '/$',
   getParentRoute: () => SalonRoute,
 } as any)
+const SalonFifthRunnerRoute = SalonFifthRunnerRouteImport.update({
+  id: '/fifth-runner',
+  path: '/fifth-runner',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonFifthRunnerDothtmlRoute =
+  SalonFifthRunnerDothtmlRouteImport.update({
+    id: '/fifth-runner.html',
+    path: '/fifth-runner.html',
+    getParentRoute: () => SalonRoute,
+  } as any)
+const SalonFifthRunnerDottxtRoute =
+  SalonFifthRunnerDottxtRouteImport.update({
+    id: '/fifth-runner.txt',
+    path: '/fifth-runner.txt',
+    getParentRoute: () => SalonRoute,
+  } as any)
 const SalonFifteenSpeedsRoute = SalonFifteenSpeedsRouteImport.update({
   id: '/fifteen-speeds',
   path: '/fifteen-speeds',
@@ -1028,6 +1048,9 @@ export interface FileRoutesByFullPath {
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
   '/salon/$': typeof SalonSplatRoute
+  '/salon/fifth-runner': typeof SalonFifthRunnerRoute
+  '/salon/fifth-runner.html': typeof SalonFifthRunnerDothtmlRoute
+  '/salon/fifth-runner.txt': typeof SalonFifthRunnerDottxtRoute
   '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
   '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
   '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
@@ -1175,6 +1198,9 @@ export interface FileRoutesByTo {
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
   '/salon/$': typeof SalonSplatRoute
+  '/salon/fifth-runner': typeof SalonFifthRunnerRoute
+  '/salon/fifth-runner.html': typeof SalonFifthRunnerDothtmlRoute
+  '/salon/fifth-runner.txt': typeof SalonFifthRunnerDottxtRoute
   '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
   '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
   '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
@@ -1325,6 +1351,9 @@ export interface FileRoutesById {
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
   '/salon/$': typeof SalonSplatRoute
+  '/salon/fifth-runner': typeof SalonFifthRunnerRoute
+  '/salon/fifth-runner.html': typeof SalonFifthRunnerDothtmlRoute
+  '/salon/fifth-runner.txt': typeof SalonFifthRunnerDottxtRoute
   '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
   '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
   '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
@@ -1476,6 +1505,9 @@ export interface FileRouteTypes {
     | '/notes/$noteId'
     | '/notes/{$noteId}.txt'
     | '/salon/$'
+    | '/salon/fifth-runner'
+    | '/salon/fifth-runner.html'
+    | '/salon/fifth-runner.txt'
     | '/salon/fifteen-speeds'
     | '/salon/fifteen-speeds.html'
     | '/salon/fifteen-speeds.txt'
@@ -1623,6 +1655,9 @@ export interface FileRouteTypes {
     | '/notes/$noteId'
     | '/notes/{$noteId}.txt'
     | '/salon/$'
+    | '/salon/fifth-runner'
+    | '/salon/fifth-runner.html'
+    | '/salon/fifth-runner.txt'
     | '/salon/fifteen-speeds'
     | '/salon/fifteen-speeds.html'
     | '/salon/fifteen-speeds.txt'
@@ -1772,6 +1807,9 @@ export interface FileRouteTypes {
     | '/notes/$noteId'
     | '/notes/{$noteId}.txt'
     | '/salon/$'
+    | '/salon/fifth-runner'
+    | '/salon/fifth-runner.html'
+    | '/salon/fifth-runner.txt'
     | '/salon/fifteen-speeds'
     | '/salon/fifteen-speeds.html'
     | '/salon/fifteen-speeds.txt'
@@ -2281,6 +2319,27 @@ declare module '@tanstack/react-router' {
       path: '/$'
       fullPath: '/salon/$'
       preLoaderRoute: typeof SalonSplatRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/fifth-runner': {
+      id: '/salon/fifth-runner'
+      path: '/fifth-runner'
+      fullPath: '/salon/fifth-runner'
+      preLoaderRoute: typeof SalonFifthRunnerRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/fifth-runner.html': {
+      id: '/salon/fifth-runner.html'
+      path: '/fifth-runner.html'
+      fullPath: '/salon/fifth-runner.html'
+      preLoaderRoute: typeof SalonFifthRunnerDothtmlRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/fifth-runner.txt': {
+      id: '/salon/fifth-runner.txt'
+      path: '/fifth-runner.txt'
+      fullPath: '/salon/fifth-runner.txt'
+      preLoaderRoute: typeof SalonFifthRunnerDottxtRouteImport
       parentRoute: typeof SalonRoute
     }
     '/salon/fifteen-speeds': {
@@ -3145,6 +3204,9 @@ const GatheringRouteWithChildren = GatheringRoute._addFileChildren(
 
 interface SalonRouteChildren {
   SalonSplatRoute: typeof SalonSplatRoute
+  SalonFifthRunnerRoute: typeof SalonFifthRunnerRoute
+  SalonFifthRunnerDothtmlRoute: typeof SalonFifthRunnerDothtmlRoute
+  SalonFifthRunnerDottxtRoute: typeof SalonFifthRunnerDottxtRoute
   SalonFifteenSpeedsRoute: typeof SalonFifteenSpeedsRoute
   SalonFifteenSpeedsDothtmlRoute: typeof SalonFifteenSpeedsDothtmlRoute
   SalonFifteenSpeedsDottxtRoute: typeof SalonFifteenSpeedsDottxtRoute
@@ -3171,6 +3233,9 @@ interface SalonRouteChildren {
 
 const SalonRouteChildren: SalonRouteChildren = {
   SalonSplatRoute: SalonSplatRoute,
+  SalonFifthRunnerRoute: SalonFifthRunnerRoute,
+  SalonFifthRunnerDothtmlRoute: SalonFifthRunnerDothtmlRoute,
+  SalonFifthRunnerDottxtRoute: SalonFifthRunnerDottxtRoute,
   SalonFifteenSpeedsRoute: SalonFifteenSpeedsRoute,
   SalonFifteenSpeedsDothtmlRoute: SalonFifteenSpeedsDothtmlRoute,
   SalonFifteenSpeedsDottxtRoute: SalonFifteenSpeedsDottxtRoute,
