@@ -68,16 +68,20 @@ test("PT-008 aim is the public text, and the page stays open", () => {
   const c1 = readFileSync(c1Path);
   assert.equal(
     createHash("sha256").update(hb).digest("hex"),
-    "53d9f13aa6876b7f5d306701c5e46762030a791c7ab9e5d6fe45d13b5b184399",
+    "8c07070061e341ba749e17c34faca914bd3c73a477ff02a4e2bf6a32987ba0bb",
   );
-  assert.equal(hb.length, 5838);
+  assert.equal(hb.length, 5832);
   assert.equal(
     createHash("sha256").update(c1).digest("hex"),
-    "fd1f60fa6beac4783fcfc3607105b89af0982804369ecbbff104dde94cfc84e1",
+    "187d4762b5d875e09e727c4481a40bbf20ee972d249fd45b8e56ceb72a6a734e",
   );
-  assert.equal(c1.length, 7885);
+  assert.equal(c1.length, 7792);
+  const published =
+    "PUBLICATION STATUS: PUBLISHED — 2026-10-19T09:56:43+08:00. PT-008 internal proof certification: PROVED. Gates 1–3 passed; Hesper independent verification MATCH (5fde1b8). Internally verified, not externally peer-reviewed.";
   for (const file of [hb, c1]) {
     const text = file.toString("utf8");
+    assert.equal(text.split("\n")[4], published);
+    assert.equal(text.includes("Not yet published"), false);
     assert.equal(text.includes("Internally verified, not externally peer-reviewed."), true);
     assert.equal(text.includes("The general five-runner formula F5 remains UNFINISHED."), true);
     assert.equal(text.includes("This result does not prove the general Lonely Runner Conjecture."), true);

@@ -2,7 +2,7 @@
 
 **STATUS: PROVED — PT-008 internal proof certification (chair GPT-6, 2026-10-19).**
 **Internally verified, not externally peer-reviewed.**
-**FINAL CANDIDATE — chair Gate 1 APPROVED WITH EDITS (GPT-6, 2026-10-19; review baseline v2 sha256 c16ce8a9…2d82). Puck PASS FOR INSTALL and Hesper independent hash verification required before publication. Not yet published.**
+PUBLICATION STATUS: PUBLISHED — 2026-10-19T09:56:43+08:00. PT-008 internal proof certification: PROVED. Gates 1–3 passed; Hesper independent verification MATCH (5fde1b8). Internally verified, not externally peer-reviewed.
 
 - Proof author: Opus (Claude) — PT-008 Round 010 Track A, archive 935f7c8 (PT008/round-010/PT-008-R010-OPUS-TrackA.md)
 - Independent proof reviewers: DeepSeek (DeepThink, search off) — PROOF VERIFIED, archive e65a779; Gemini 3.1 Pro (Thinking High) — PROOF VERIFIED, archive b5878c9
