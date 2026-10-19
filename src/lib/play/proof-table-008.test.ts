@@ -5,6 +5,7 @@ import test from "node:test";
 
 const aimPath = new URL("./proof-table-008-aim.txt", import.meta.url);
 const t4Path = new URL("./proof-table-008-t4.md", import.meta.url);
+const lnPath = new URL("./proof-table-008-ln.md", import.meta.url);
 const sourcePath = new URL("./proof-table-008.ts", import.meta.url);
 const pagePath = new URL("../../routes/gathering/proof-table-008/table.tsx", import.meta.url);
 
@@ -43,6 +44,7 @@ test("PT-008 aim is the public text, and the page stays open", () => {
   assert.equal(page.includes("OPEN · Research in Progress"), true);
   assert.equal(page.includes("PROOF_008_AIM"), true);
   assert.equal(page.includes("PROOF_008_T4"), true);
+  assert.equal(page.includes("PROOF_008_LN"), true);
   assert.equal(page.includes("proofLineBlock"), false);
   const t4 = readFileSync(t4Path);
   assert.equal(
@@ -52,6 +54,16 @@ test("PT-008 aim is the public text, and the page stays open", () => {
   assert.equal(source.includes('import t4Text from "./proof-table-008-t4.md?raw"'), true);
   assert.equal(source.includes("BEGIN T4"), true);
   assert.equal(source.includes("PROOF_008_T4 +"), true);
+  assert.equal(source.includes("BEGIN LN"), true);
+  assert.equal(source.includes("PROOF_008_LN +"), true);
+  assert.equal(source.includes("Round 011"), false);
+  const ln = readFileSync(lnPath);
+  assert.equal(
+    createHash("sha256").update(ln).digest("hex"),
+    "aee7ecd68944ce151ea02e8062c487c74285dbc929bae2fa3296e6f448de7125",
+  );
+  assert.equal(ln.length, 3948);
+  assert.equal(ln.includes("Round 011"), false);
   assert.equal(source.includes("Round 009"), false);
   assert.equal(source.includes("Round 010"), false);
   assert.equal(t4.includes("Round 009"), false);
