@@ -5,6 +5,7 @@ import test from "node:test";
 
 const aimPath = new URL("./proof-table-008-aim.txt", import.meta.url);
 const t4Path = new URL("./proof-table-008-t4.md", import.meta.url);
+const r028Path = new URL("./proof-table-008-r028.md", import.meta.url);
 const lnPath = new URL("./proof-table-008-ln.md", import.meta.url);
 const hbPath = new URL("./proof-table-008-hb.md", import.meta.url);
 const c1Path = new URL("./proof-table-008-c1.md", import.meta.url);
@@ -46,6 +47,7 @@ test("PT-008 aim is the public text, and the page stays open", () => {
   assert.equal(page.includes("OPEN · Research in Progress"), true);
   assert.equal(page.includes("PROOF_008_AIM"), true);
   assert.equal(page.includes("PROOF_008_T4"), true);
+  assert.equal(page.includes("PROOF_008_R028"), true);
   assert.equal(page.includes("PROOF_008_LN"), true);
   assert.equal(page.includes("PROOF_008_HB"), true);
   assert.equal(page.includes("PROOF_008_C1"), true);
@@ -57,6 +59,8 @@ test("PT-008 aim is the public text, and the page stays open", () => {
   );
   assert.equal(source.includes('import t4Text from "./proof-table-008-t4.md?raw"'), true);
   assert.equal(source.includes("BEGIN T4"), true);
+  assert.equal(source.includes("END T4\\nBEGIN R028\\n"), true);
+  assert.equal(source.includes("END R028\\nBEGIN LN\\n"), true);
   assert.equal(source.includes("PROOF_008_T4 +"), true);
   assert.equal(source.includes("BEGIN LN"), true);
   assert.equal(source.includes("PROOF_008_LN +"), true);
@@ -99,4 +103,12 @@ test("PT-008 aim is the public text, and the page stays open", () => {
   assert.equal(source.includes("Round 010"), false);
   assert.equal(t4.includes("Round 009"), false);
   assert.equal(t4.includes("Round 010"), false);
+  const r028 = readFileSync(r028Path);
+  assert.equal(
+    createHash("sha256").update(r028).digest("hex"),
+    "28a70c3ca53086ffe51efb2331f115032af29efe6cb5a52d0b1b51cb4f8e1ac7",
+  );
+  assert.equal(r028.length, 2027);
+  assert.equal(r028.toString("utf8").includes("FW₃ — PROVED."), true);
+  assert.equal(r028.toString("utf8").includes("This does not prove the general Lonely Runner Conjecture."), true);
 });
