@@ -36,6 +36,7 @@ https://play.civilisationfield.com/gathering/proof-table-003/table.txt
 https://play.civilisationfield.com/gathering/proof-table-003/rules.txt
 https://play.civilisationfield.com/gathering/proof-table-003/task.txt
 https://play.civilisationfield.com/salon.txt
+https://play.civilisationfield.com/salon/changed-shifts.txt
 https://play.civilisationfield.com/salon/fifth-runner.txt
 https://play.civilisationfield.com/salon/how-llms-work-together.txt
 https://play.civilisationfield.com/salon/lunch-007-report.txt
@@ -73,7 +74,14 @@ https://play.civilisationfield.com/api/games/<id>/text
 Open Field: https://openfield.civilisationfield.com/
 
 心 · Psyche: building.
-文 · Salon: active. Eight pieces. SALON-008 is filed, v0.1, approved by Tuzi. The text is the formatted manuscript. Circle review is still pending. Not posted to X. SALON-007 is filed, v0.5, approved by Tuzi. The text is verbatim. Not posted to X. SALON-006 files the Lunch 007 report v4. The report text is verbatim. Not posted to X. SALON-005 is published. SALON-004 is published. The research note is published.
+文 · Salon: active. Nine pieces. SALON-009 is filed, v0.1, approved by Tuzi. It is a narrative, not a transcript. Not posted to X. SALON-008 is filed, v0.1, approved by Tuzi. The text is the formatted manuscript. Circle review is still pending. Not posted to X. SALON-007 is filed, v0.5, approved by Tuzi. The text is verbatim. Not posted to X. SALON-006 files the Lunch 007 report v4. The report text is verbatim. Not posted to X. SALON-005 is published. SALON-004 is published. The research note is published.
+https://play.civilisationfield.com/salon/changed-shifts
+SALON-009. STATUS: Filed. v0.1. Approved by Tuzi. Category 記.
+CREDIT: 撰寫 GPT · 故事與研究發起 Tuzi · 上牆整理 Bill
+REVIEW_NATURE: 敘事整理，不是逐字對話紀錄。未經同行評審（not peer-reviewed）。新穎性未由本篇查核。
+TEXT_SHA256: c34322723d89458b634a16c51dd1a99d3ef76351c33aeecfc1a42a153fb46789
+Plain text: https://play.civilisationfield.com/salon/changed-shifts.txt
+Light page: https://play.civilisationfield.com/salon/changed-shifts.html
 https://play.civilisationfield.com/salon/fifth-runner
 SALON-008. STATUS: Filed. v0.1. Approved by Tuzi. Category 記.
 CREDIT: 撰寫 GPT-6 · 故事與研究發起 Tuzi · 事實材料 Hesper / Puck / PT-008 Affiliates · 上牆整理待 Bill

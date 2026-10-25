@@ -60,6 +60,9 @@ import { Route as NotesNoteIdRouteImport } from './routes/notes.$noteId'
 import { Route as NotesChar123noteIdChar125DottxtRouteImport } from './routes/notes.{$noteId}[.]txt'
 import { Route as SalonIndexRouteImport } from './routes/salon/index'
 import { Route as SalonSplatRouteImport } from './routes/salon/$'
+import { Route as SalonChangedShiftsRouteImport } from './routes/salon/changed-shifts'
+import { Route as SalonChangedShiftsDothtmlRouteImport } from './routes/salon/changed-shifts[.]html'
+import { Route as SalonChangedShiftsDottxtRouteImport } from './routes/salon/changed-shifts[.]txt'
 import { Route as SalonFifteenSpeedsRouteImport } from './routes/salon/fifteen-speeds'
 import { Route as SalonFifteenSpeedsDothtmlRouteImport } from './routes/salon/fifteen-speeds[.]html'
 import { Route as SalonFifteenSpeedsDottxtRouteImport } from './routes/salon/fifteen-speeds[.]txt'
@@ -425,6 +428,21 @@ const SalonIndexRoute = SalonIndexRouteImport.update({
 const SalonSplatRoute = SalonSplatRouteImport.update({
   id: '/$',
   path: '/$',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonChangedShiftsRoute = SalonChangedShiftsRouteImport.update({
+  id: '/changed-shifts',
+  path: '/changed-shifts',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonChangedShiftsDothtmlRoute = SalonChangedShiftsDothtmlRouteImport.update({
+  id: '/changed-shifts.html',
+  path: '/changed-shifts.html',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonChangedShiftsDottxtRoute = SalonChangedShiftsDottxtRouteImport.update({
+  id: '/changed-shifts.txt',
+  path: '/changed-shifts.txt',
   getParentRoute: () => SalonRoute,
 } as any)
 const SalonFifteenSpeedsRoute = SalonFifteenSpeedsRouteImport.update({
@@ -1046,6 +1064,9 @@ export interface FileRoutesByFullPath {
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
   '/salon/$': typeof SalonSplatRoute
+  '/salon/changed-shifts': typeof SalonChangedShiftsRoute
+  '/salon/changed-shifts.html': typeof SalonChangedShiftsDothtmlRoute
+  '/salon/changed-shifts.txt': typeof SalonChangedShiftsDottxtRoute
   '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
   '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
   '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
@@ -1196,6 +1217,9 @@ export interface FileRoutesByTo {
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
   '/salon/$': typeof SalonSplatRoute
+  '/salon/changed-shifts': typeof SalonChangedShiftsRoute
+  '/salon/changed-shifts.html': typeof SalonChangedShiftsDothtmlRoute
+  '/salon/changed-shifts.txt': typeof SalonChangedShiftsDottxtRoute
   '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
   '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
   '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
@@ -1349,6 +1373,9 @@ export interface FileRoutesById {
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
   '/salon/$': typeof SalonSplatRoute
+  '/salon/changed-shifts': typeof SalonChangedShiftsRoute
+  '/salon/changed-shifts.html': typeof SalonChangedShiftsDothtmlRoute
+  '/salon/changed-shifts.txt': typeof SalonChangedShiftsDottxtRoute
   '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
   '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
   '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
@@ -1503,6 +1530,9 @@ export interface FileRouteTypes {
     | '/notes/$noteId'
     | '/notes/{$noteId}.txt'
     | '/salon/$'
+    | '/salon/changed-shifts'
+    | '/salon/changed-shifts.html'
+    | '/salon/changed-shifts.txt'
     | '/salon/fifteen-speeds'
     | '/salon/fifteen-speeds.html'
     | '/salon/fifteen-speeds.txt'
@@ -1653,6 +1683,9 @@ export interface FileRouteTypes {
     | '/notes/$noteId'
     | '/notes/{$noteId}.txt'
     | '/salon/$'
+    | '/salon/changed-shifts'
+    | '/salon/changed-shifts.html'
+    | '/salon/changed-shifts.txt'
     | '/salon/fifteen-speeds'
     | '/salon/fifteen-speeds.html'
     | '/salon/fifteen-speeds.txt'
@@ -1805,6 +1838,9 @@ export interface FileRouteTypes {
     | '/notes/$noteId'
     | '/notes/{$noteId}.txt'
     | '/salon/$'
+    | '/salon/changed-shifts'
+    | '/salon/changed-shifts.html'
+    | '/salon/changed-shifts.txt'
     | '/salon/fifteen-speeds'
     | '/salon/fifteen-speeds.html'
     | '/salon/fifteen-speeds.txt'
@@ -2317,6 +2353,27 @@ declare module '@tanstack/react-router' {
       path: '/$'
       fullPath: '/salon/$'
       preLoaderRoute: typeof SalonSplatRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/changed-shifts': {
+      id: '/salon/changed-shifts'
+      path: '/changed-shifts'
+      fullPath: '/salon/changed-shifts'
+      preLoaderRoute: typeof SalonChangedShiftsRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/changed-shifts.html': {
+      id: '/salon/changed-shifts.html'
+      path: '/changed-shifts.html'
+      fullPath: '/salon/changed-shifts.html'
+      preLoaderRoute: typeof SalonChangedShiftsDothtmlRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/changed-shifts.txt': {
+      id: '/salon/changed-shifts.txt'
+      path: '/changed-shifts.txt'
+      fullPath: '/salon/changed-shifts.txt'
+      preLoaderRoute: typeof SalonChangedShiftsDottxtRouteImport
       parentRoute: typeof SalonRoute
     }
     '/salon/fifteen-speeds': {
@@ -3202,6 +3259,9 @@ const GatheringRouteWithChildren = GatheringRoute._addFileChildren(
 
 interface SalonRouteChildren {
   SalonSplatRoute: typeof SalonSplatRoute
+  SalonChangedShiftsRoute: typeof SalonChangedShiftsRoute
+  SalonChangedShiftsDothtmlRoute: typeof SalonChangedShiftsDothtmlRoute
+  SalonChangedShiftsDottxtRoute: typeof SalonChangedShiftsDottxtRoute
   SalonFifteenSpeedsRoute: typeof SalonFifteenSpeedsRoute
   SalonFifteenSpeedsDothtmlRoute: typeof SalonFifteenSpeedsDothtmlRoute
   SalonFifteenSpeedsDottxtRoute: typeof SalonFifteenSpeedsDottxtRoute
@@ -3231,6 +3291,9 @@ interface SalonRouteChildren {
 
 const SalonRouteChildren: SalonRouteChildren = {
   SalonSplatRoute: SalonSplatRoute,
+  SalonChangedShiftsRoute: SalonChangedShiftsRoute,
+  SalonChangedShiftsDothtmlRoute: SalonChangedShiftsDothtmlRoute,
+  SalonChangedShiftsDottxtRoute: SalonChangedShiftsDottxtRoute,
   SalonFifteenSpeedsRoute: SalonFifteenSpeedsRoute,
   SalonFifteenSpeedsDothtmlRoute: SalonFifteenSpeedsDothtmlRoute,
   SalonFifteenSpeedsDottxtRoute: SalonFifteenSpeedsDottxtRoute,
