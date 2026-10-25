@@ -5,19 +5,25 @@ import test from "node:test";
 import katex from "katex";
 import { parseManuscript, uncoveredLines } from "./proof-table-008-new-branch-read.ts";
 
-const manuscriptPath = new URL("../../../docs/gathering/PT008-T1-T5-v0.2.md", import.meta.url);
+const manuscriptPath = new URL("../../../docs/gathering/PT008-T1-T5-v0.3.md", import.meta.url);
+const previousPath = new URL("../../../docs/gathering/PT008-T1-T5-v0.2.md", import.meta.url);
 const ledgerPath = new URL("./proof-table-008.ts", import.meta.url);
-const EXPECTED = "000e9c68ef14b82574b82890a3b4e53e606afd937c13f95f9b68220fb004802d";
+const EXPECTED = "3520cacd6244ec055d72997c6bbeeb6209eaf5a22febfe5b9a97cabccf217fd7";
 
-test("the new-branch manuscript is the filed v0.2 file", () => {
+test("the new-branch manuscript is the filed v0.3 file", () => {
   const bytes = readFileSync(manuscriptPath);
   assert.equal(createHash("sha256").update(bytes).digest("hex"), EXPECTED);
-  assert.equal(bytes.length, 36410);
+  assert.equal(bytes.length, 38559);
   const text = bytes.toString("utf8");
   assert.equal(text.startsWith("# PT-008 · Time Forge · 新研究分支：一至五跑者的安全時間構造\n"), true);
-  assert.equal(text.endsWith("**END · PT-008 NEW BRANCH · T1–T5 · v0.2**\n"), true);
-  assert.equal(text.includes("不授權上牆或改台帳"), true);
-  assert.equal(text.includes("T4-Q3"), true);
+  assert.equal(text.endsWith("**END · PT-008 NEW BRANCH · T1–T5 · v0.3**\n"), true);
+  assert.equal(text.includes("### V5. Opus 大壓力測試完成補報（v0.3 新增）"), true);
+  assert.equal(text.includes("不是另一次 v0.3 數學認證"), true);
+  const previous = readFileSync(previousPath);
+  assert.equal(
+    createHash("sha256").update(previous).digest("hex"),
+    "000e9c68ef14b82574b82890a3b4e53e606afd937c13f95f9b68220fb004802d",
+  );
 });
 
 test("filing the new branch does not edit the proof-table ledger module", () => {

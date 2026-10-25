@@ -212,7 +212,8 @@ export function NewBranchReading() {
           </a>
         </p>
         <h1 className="mt-6 font-display text-4xl tracking-tight">一至五跑者的安全時間構造</h1>
-        <p className="mt-3 text-sm text-muted">整合送審稿 v0.2 · 2026-10-25（Asia/Singapore）</p>
+        <p className="mt-3 text-sm text-muted">整合送審稿 v0.3 · 2026-10-25（Asia/Singapore）</p>
+        <p className="mt-1 text-sm text-muted">v0.3 補記 Opus 大壓力測試已完成。公式沒有改。這不是另一次數學認證。</p>
         <p className="mt-1 text-sm text-muted">主鏈 T4-Q3。不是舊公開八分支 T4-PUB-8。證明桌台帳沒有改。</p>
         <p className="mt-4 text-sm leading-relaxed">
           本稿證明 N≤5 的精確安全時間構造：N≤4 為固定次數直接式；N=5 在一個有證明的固定候選範圍內選取。整數存在性主鏈含

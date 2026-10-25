@@ -34,7 +34,7 @@ function GatheringList() {
             {
               href: "/gathering/proof-table-008/new-branch",
               title: "PT-008 · Time Forge · 新分支 T1–T5",
-              status: "Filed. v0.2. Q3 chain. The proof-table ledger is unchanged.",
+              status: "Filed. v0.3. Q3 chain. The proof-table ledger is unchanged.",
               note: "N≤5. N≤4 is direct. N=5 chooses inside a fixed candidate bound. Not peer-reviewed. Not the one formula for every N.",
               light: "/gathering/proof-table-008/new-branch/verification.txt",
             },
