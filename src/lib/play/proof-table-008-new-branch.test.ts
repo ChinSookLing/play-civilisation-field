@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import test from "node:test";
+import katex from "katex";
+import { parseManuscript, uncoveredLines } from "./proof-table-008-new-branch-read.ts";
 
 const manuscriptPath = new URL("../../../docs/gathering/PT008-T1-T5-v0.2.md", import.meta.url);
 const ledgerPath = new URL("./proof-table-008.ts", import.meta.url);
@@ -23,4 +25,22 @@ test("filing the new branch does not edit the proof-table ledger module", () => 
   assert.equal(ledger.includes("T4-Q3"), false);
   assert.equal(ledger.includes("new-branch"), false);
   assert.equal(ledger.includes('status: "open"'), true);
+});
+
+test("the reading blocks keep every line, and the formulas render", () => {
+  const text = readFileSync(manuscriptPath, "utf8");
+  const blocks = parseManuscript(text);
+  assert.deepEqual(uncoveredLines(text, blocks), []);
+  const headings = blocks.flatMap((block) => (block.kind === "heading" && block.id ? [block.id] : []));
+  assert.deepEqual(headings, ["def", "one-to-four", "five", "proof", "review", "appendix"]);
+  const math = blocks.filter((block) => block.kind === "math");
+  assert.equal(math.length, 23);
+  for (const block of math) {
+    if (block.kind !== "math") continue;
+    const html = katex.renderToString(block.tex, { displayMode: true, throwOnError: true, trust: false });
+    assert.equal(html.includes("katex"), true);
+  }
+  const code = blocks.filter((block) => block.kind === "code");
+  assert.equal(code.length, 6);
+  assert.equal(blocks.some((block) => block.kind === "table"), true);
 });
