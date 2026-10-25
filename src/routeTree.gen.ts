@@ -69,6 +69,9 @@ import { Route as SalonFifteenSpeedsDottxtRouteImport } from './routes/salon/fif
 import { Route as SalonFifthRunnerRouteImport } from './routes/salon/fifth-runner'
 import { Route as SalonFifthRunnerDothtmlRouteImport } from './routes/salon/fifth-runner[.]html'
 import { Route as SalonFifthRunnerDottxtRouteImport } from './routes/salon/fifth-runner[.]txt'
+import { Route as SalonFinalGateRouteImport } from './routes/salon/final-gate'
+import { Route as SalonFinalGateDothtmlRouteImport } from './routes/salon/final-gate[.]html'
+import { Route as SalonFinalGateDottxtRouteImport } from './routes/salon/final-gate[.]txt'
 import { Route as SalonHowLlmsWorkTogetherRouteImport } from './routes/salon/how-llms-work-together'
 import { Route as SalonHowLlmsWorkTogetherDothtmlRouteImport } from './routes/salon/how-llms-work-together[.]html'
 import { Route as SalonHowLlmsWorkTogetherDottxtRouteImport } from './routes/salon/how-llms-work-together[.]txt'
@@ -477,6 +480,21 @@ const SalonFifthRunnerDothtmlRoute = SalonFifthRunnerDothtmlRouteImport.update({
 const SalonFifthRunnerDottxtRoute = SalonFifthRunnerDottxtRouteImport.update({
   id: '/fifth-runner.txt',
   path: '/fifth-runner.txt',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonFinalGateRoute = SalonFinalGateRouteImport.update({
+  id: '/final-gate',
+  path: '/final-gate',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonFinalGateDothtmlRoute = SalonFinalGateDothtmlRouteImport.update({
+  id: '/final-gate.html',
+  path: '/final-gate.html',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonFinalGateDottxtRoute = SalonFinalGateDottxtRouteImport.update({
+  id: '/final-gate.txt',
+  path: '/final-gate.txt',
   getParentRoute: () => SalonRoute,
 } as any)
 const SalonHowLlmsWorkTogetherRoute =
@@ -1075,6 +1093,9 @@ export interface FileRoutesByFullPath {
   '/salon/fifth-runner': typeof SalonFifthRunnerRoute
   '/salon/fifth-runner.html': typeof SalonFifthRunnerDothtmlRoute
   '/salon/fifth-runner.txt': typeof SalonFifthRunnerDottxtRoute
+  '/salon/final-gate': typeof SalonFinalGateRoute
+  '/salon/final-gate.html': typeof SalonFinalGateDothtmlRoute
+  '/salon/final-gate.txt': typeof SalonFinalGateDottxtRoute
   '/salon/how-llms-work-together': typeof SalonHowLlmsWorkTogetherRoute
   '/salon/how-llms-work-together.html': typeof SalonHowLlmsWorkTogetherDothtmlRoute
   '/salon/how-llms-work-together.txt': typeof SalonHowLlmsWorkTogetherDottxtRoute
@@ -1228,6 +1249,9 @@ export interface FileRoutesByTo {
   '/salon/fifth-runner': typeof SalonFifthRunnerRoute
   '/salon/fifth-runner.html': typeof SalonFifthRunnerDothtmlRoute
   '/salon/fifth-runner.txt': typeof SalonFifthRunnerDottxtRoute
+  '/salon/final-gate': typeof SalonFinalGateRoute
+  '/salon/final-gate.html': typeof SalonFinalGateDothtmlRoute
+  '/salon/final-gate.txt': typeof SalonFinalGateDottxtRoute
   '/salon/how-llms-work-together': typeof SalonHowLlmsWorkTogetherRoute
   '/salon/how-llms-work-together.html': typeof SalonHowLlmsWorkTogetherDothtmlRoute
   '/salon/how-llms-work-together.txt': typeof SalonHowLlmsWorkTogetherDottxtRoute
@@ -1384,6 +1408,9 @@ export interface FileRoutesById {
   '/salon/fifth-runner': typeof SalonFifthRunnerRoute
   '/salon/fifth-runner.html': typeof SalonFifthRunnerDothtmlRoute
   '/salon/fifth-runner.txt': typeof SalonFifthRunnerDottxtRoute
+  '/salon/final-gate': typeof SalonFinalGateRoute
+  '/salon/final-gate.html': typeof SalonFinalGateDothtmlRoute
+  '/salon/final-gate.txt': typeof SalonFinalGateDottxtRoute
   '/salon/how-llms-work-together': typeof SalonHowLlmsWorkTogetherRoute
   '/salon/how-llms-work-together.html': typeof SalonHowLlmsWorkTogetherDothtmlRoute
   '/salon/how-llms-work-together.txt': typeof SalonHowLlmsWorkTogetherDottxtRoute
@@ -1541,6 +1568,9 @@ export interface FileRouteTypes {
     | '/salon/fifth-runner'
     | '/salon/fifth-runner.html'
     | '/salon/fifth-runner.txt'
+    | '/salon/final-gate'
+    | '/salon/final-gate.html'
+    | '/salon/final-gate.txt'
     | '/salon/how-llms-work-together'
     | '/salon/how-llms-work-together.html'
     | '/salon/how-llms-work-together.txt'
@@ -1694,6 +1724,9 @@ export interface FileRouteTypes {
     | '/salon/fifth-runner'
     | '/salon/fifth-runner.html'
     | '/salon/fifth-runner.txt'
+    | '/salon/final-gate'
+    | '/salon/final-gate.html'
+    | '/salon/final-gate.txt'
     | '/salon/how-llms-work-together'
     | '/salon/how-llms-work-together.html'
     | '/salon/how-llms-work-together.txt'
@@ -1849,6 +1882,9 @@ export interface FileRouteTypes {
     | '/salon/fifth-runner'
     | '/salon/fifth-runner.html'
     | '/salon/fifth-runner.txt'
+    | '/salon/final-gate'
+    | '/salon/final-gate.html'
+    | '/salon/final-gate.txt'
     | '/salon/how-llms-work-together'
     | '/salon/how-llms-work-together.html'
     | '/salon/how-llms-work-together.txt'
@@ -2418,6 +2454,27 @@ declare module '@tanstack/react-router' {
       path: '/fifth-runner.txt'
       fullPath: '/salon/fifth-runner.txt'
       preLoaderRoute: typeof SalonFifthRunnerDottxtRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/final-gate': {
+      id: '/salon/final-gate'
+      path: '/final-gate'
+      fullPath: '/salon/final-gate'
+      preLoaderRoute: typeof SalonFinalGateRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/final-gate.html': {
+      id: '/salon/final-gate.html'
+      path: '/final-gate.html'
+      fullPath: '/salon/final-gate.html'
+      preLoaderRoute: typeof SalonFinalGateDothtmlRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/final-gate.txt': {
+      id: '/salon/final-gate.txt'
+      path: '/final-gate.txt'
+      fullPath: '/salon/final-gate.txt'
+      preLoaderRoute: typeof SalonFinalGateDottxtRouteImport
       parentRoute: typeof SalonRoute
     }
     '/salon/how-llms-work-together': {
@@ -3270,6 +3327,9 @@ interface SalonRouteChildren {
   SalonFifthRunnerRoute: typeof SalonFifthRunnerRoute
   SalonFifthRunnerDothtmlRoute: typeof SalonFifthRunnerDothtmlRoute
   SalonFifthRunnerDottxtRoute: typeof SalonFifthRunnerDottxtRoute
+  SalonFinalGateRoute: typeof SalonFinalGateRoute
+  SalonFinalGateDothtmlRoute: typeof SalonFinalGateDothtmlRoute
+  SalonFinalGateDottxtRoute: typeof SalonFinalGateDottxtRoute
   SalonHowLlmsWorkTogetherRoute: typeof SalonHowLlmsWorkTogetherRoute
   SalonHowLlmsWorkTogetherDothtmlRoute: typeof SalonHowLlmsWorkTogetherDothtmlRoute
   SalonHowLlmsWorkTogetherDottxtRoute: typeof SalonHowLlmsWorkTogetherDottxtRoute
@@ -3302,6 +3362,9 @@ const SalonRouteChildren: SalonRouteChildren = {
   SalonFifthRunnerRoute: SalonFifthRunnerRoute,
   SalonFifthRunnerDothtmlRoute: SalonFifthRunnerDothtmlRoute,
   SalonFifthRunnerDottxtRoute: SalonFifthRunnerDottxtRoute,
+  SalonFinalGateRoute: SalonFinalGateRoute,
+  SalonFinalGateDothtmlRoute: SalonFinalGateDothtmlRoute,
+  SalonFinalGateDottxtRoute: SalonFinalGateDottxtRoute,
   SalonHowLlmsWorkTogetherRoute: SalonHowLlmsWorkTogetherRoute,
   SalonHowLlmsWorkTogetherDothtmlRoute: SalonHowLlmsWorkTogetherDothtmlRoute,
   SalonHowLlmsWorkTogetherDottxtRoute: SalonHowLlmsWorkTogetherDottxtRoute,

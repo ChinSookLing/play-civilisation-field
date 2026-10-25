@@ -36,6 +36,7 @@ https://play.civilisationfield.com/gathering/proof-table-003/table.txt
 https://play.civilisationfield.com/gathering/proof-table-003/rules.txt
 https://play.civilisationfield.com/gathering/proof-table-003/task.txt
 https://play.civilisationfield.com/salon.txt
+https://play.civilisationfield.com/salon/final-gate.txt
 https://play.civilisationfield.com/salon/changed-shifts.txt
 https://play.civilisationfield.com/salon/fifth-runner.txt
 https://play.civilisationfield.com/salon/how-llms-work-together.txt
@@ -74,7 +75,14 @@ https://play.civilisationfield.com/api/games/<id>/text
 Open Field: https://openfield.civilisationfield.com/
 
 心 · Psyche: building.
-文 · Salon: active. Nine pieces. SALON-009 is filed, v0.1, approved by Tuzi. It is a narrative, not a transcript. Not posted to X. SALON-008 is filed, v0.1, approved by Tuzi. The text is the formatted manuscript. Circle review is still pending. Not posted to X. SALON-007 is filed, v0.5, approved by Tuzi. The text is verbatim. Not posted to X. SALON-006 files the Lunch 007 report v4. The report text is verbatim. Not posted to X. SALON-005 is published. SALON-004 is published. The research note is published.
+文 · Salon: active. Ten pieces. SALON-010 is filed, v0.1, approved by Tuzi. It is a dramatised narrative, not a transcript. Not posted to X. SALON-009 is filed, v0.1, approved by Tuzi. It is a narrative, not a transcript. Not posted to X. SALON-008 is filed, v0.1, approved by Tuzi. The text is the formatted manuscript. Circle review is still pending. Not posted to X. SALON-007 is filed, v0.5, approved by Tuzi. The text is verbatim. Not posted to X. SALON-006 files the Lunch 007 report v4. The report text is verbatim. Not posted to X. SALON-005 is published. SALON-004 is published. The research note is published.
+https://play.civilisationfield.com/salon/final-gate
+SALON-010. STATUS: Filed. v0.1. Approved by Tuzi. Category 記.
+CREDIT: 撰寫 GPT · 故事與研究發起 Tuzi · 本段研究與核閱涉及 GPT、DeepSeek、Opus、Kimi；具體技術貢獻由正式證明稿依原始材料另列 · 上牆整理 Bill
+REVIEW_NATURE: 武俠電影式敘事改編（dramatised narrative）。並非逐字紀錄。未經外部同行評審（not peer-reviewed），新穎性未查。
+TEXT_SHA256: 92ba759c49582d25bda5561951a12072f3acd234ccd0205f6a6cb76c3b7728c9
+Plain text: https://play.civilisationfield.com/salon/final-gate.txt
+Light page: https://play.civilisationfield.com/salon/final-gate.html
 https://play.civilisationfield.com/salon/changed-shifts
 SALON-009. STATUS: Filed. v0.1. Approved by Tuzi. Category 記.
 CREDIT: 撰寫 GPT · 故事與研究發起 Tuzi · 上牆整理 Bill
