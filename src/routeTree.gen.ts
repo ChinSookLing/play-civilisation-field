@@ -435,16 +435,18 @@ const SalonChangedShiftsRoute = SalonChangedShiftsRouteImport.update({
   path: '/changed-shifts',
   getParentRoute: () => SalonRoute,
 } as any)
-const SalonChangedShiftsDothtmlRoute = SalonChangedShiftsDothtmlRouteImport.update({
-  id: '/changed-shifts.html',
-  path: '/changed-shifts.html',
-  getParentRoute: () => SalonRoute,
-} as any)
-const SalonChangedShiftsDottxtRoute = SalonChangedShiftsDottxtRouteImport.update({
-  id: '/changed-shifts.txt',
-  path: '/changed-shifts.txt',
-  getParentRoute: () => SalonRoute,
-} as any)
+const SalonChangedShiftsDothtmlRoute =
+  SalonChangedShiftsDothtmlRouteImport.update({
+    id: '/changed-shifts.html',
+    path: '/changed-shifts.html',
+    getParentRoute: () => SalonRoute,
+  } as any)
+const SalonChangedShiftsDottxtRoute =
+  SalonChangedShiftsDottxtRouteImport.update({
+    id: '/changed-shifts.txt',
+    path: '/changed-shifts.txt',
+    getParentRoute: () => SalonRoute,
+  } as any)
 const SalonFifteenSpeedsRoute = SalonFifteenSpeedsRouteImport.update({
   id: '/fifteen-speeds',
   path: '/fifteen-speeds',
