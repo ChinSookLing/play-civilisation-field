@@ -39,6 +39,12 @@ function ProofTable008() {
           <p className="mt-4 text-sm text-muted">
             This page is the public aim. Round records are separate. No round is posted here.
           </p>
+          <p className="mt-4 text-sm">
+            <Link to="/gathering/proof-table-008/new-branch" className="text-fg underline decoration-1 underline-offset-4">
+              新分支 T1–T5
+            </Link>
+            <span className="text-muted"> · 另外歸檔。主鏈是 T4-Q3。這張證明桌的原文沒有改。</span>
+          </p>
         </header>
         <h2 className="mt-8 text-sm tracking-[0.14em] text-faint uppercase">Aim & Introduction</h2>
         <pre className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-fg">{PROOF_008_AIM.trimEnd()}</pre>

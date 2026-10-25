@@ -84,6 +84,16 @@ export function recordsText(extra?: {
     "RECORD: public aim and introduction. Time Forge. Round records are not on this page. Research in progress.",
   );
   lines.push("");
+  lines.push("RECORD_ID: PT008-NEW-BRANCH");
+  lines.push("TYPE: gathering");
+  lines.push("TITLE: PT-008 · Time Forge · 新研究分支：一至五跑者的安全時間構造");
+  lines.push("RECORD_STATUS: Filed. v0.2. Not a change to the proof-table ledger.");
+  lines.push("CHAIN: T4-Q3. Not T4-PUB-8.");
+  lines.push("MANUSCRIPT_SHA256: 000e9c68ef14b82574b82890a3b4e53e606afd937c13f95f9b68220fb004802d");
+  lines.push(`RECORD_URL: ${ORIGIN}/gathering/proof-table-008/new-branch`);
+  lines.push(`FORMATS: ${ORIGIN}/gathering/proof-table-008/new-branch.txt | ${ORIGIN}/gathering/proof-table-008/new-branch/verification.txt | ${ORIGIN}/gathering/proof-table-008/new-branch/verification.md`);
+  lines.push("RECORD: filed at Tuzi's request on 2026-10-25. N≤5. Not externally peer-reviewed. The proof table stays open.");
+  lines.push("");
   lines.push("RECORD_ID: PROOF-TABLE-006");
   lines.push("TYPE: gathering");
   lines.push("TITLE: Together · Proof Table 006 · 孤圈 · Lonely Circle (one ticked speed picture)");

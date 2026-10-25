@@ -25,6 +25,13 @@ const files = {
     "src/routes/gathering/proof-table-008/table.tsx",
     ...shared,
   ],
+  "PT008-NEW-BRANCH": [
+    "src/lib/play/proof-table-008-new-branch.ts",
+    "docs/gathering/PT008-T1-T5-v0.2.md",
+    "src/routes/gathering/proof-table-008/new-branch.tsx",
+    "src/routes/gathering/proof-table-008/new-branch/verification.tsx",
+    ...shared,
+  ],
   "PROOF-TABLE-RULES": ["src/lib/play/proof-rules.ts", "src/routes/gathering/proof-table/rules.tsx", "rules/proof-table/v0.5.1.md", ...shared],
   "PROOF-TABLE-RULES-V0.5.1": ["rules/proof-table/v0.5.1.md", "src/routes/gathering/proof-table/rules/v0[.]5[.]1.tsx", ...shared],
   "PROOF-TABLE-RULES-V0.5": ["src/lib/play/proof-rules.ts", "src/routes/gathering/proof-table/rules/v0[.]5.tsx", "rules/proof-table/v0.5.md", ...shared],
