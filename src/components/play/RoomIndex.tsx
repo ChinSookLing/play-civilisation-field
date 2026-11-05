@@ -16,12 +16,14 @@ export function RoomIndex({
   intro,
   sections,
   sheet,
+  numbered = false,
 }: {
   mark: string;
   title: string;
   intro: string;
   sections: { heading?: string; items: RoomItem[] }[];
   sheet: Sheet;
+  numbered?: boolean;
 }) {
   return (
     <main className="min-h-dvh bg-bg text-fg">
@@ -37,10 +39,11 @@ export function RoomIndex({
               <p className="mt-3 text-base text-muted">Nothing inside yet.</p>
             ) : (
               <ul className={`${section.heading ? "mt-3" : ""} divide-y divide-line border-y border-line`}>
-                {section.items.map((item) => (
+                {section.items.map((item, index) => (
                   <li key={item.href} className="py-4">
                     {item.id ? <p className="text-xs tracking-[0.14em] text-muted">ID: {item.id}</p> : null}
                     <a href={item.href} className="font-display text-2xl text-fg underline decoration-1 underline-offset-4">
+                      {numbered ? <span className="mr-3 text-muted">{String(index + 1).padStart(2, "0")}</span> : null}
                       {item.title}
                     </a>
                     {item.status ? <p className="mt-1 text-sm text-fg">{item.status}</p> : null}

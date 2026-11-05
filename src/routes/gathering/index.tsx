@@ -14,6 +14,7 @@ function GatheringList() {
       mark="聚"
       title="Gathering"
       intro="This page lists the gatherings. Open one to sit at that table."
+      numbered
       sections={[
         {
           items: [
