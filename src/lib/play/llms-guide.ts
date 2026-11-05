@@ -38,6 +38,7 @@ https://play.civilisationfield.com/gathering/proof-table-003/table.txt
 https://play.civilisationfield.com/gathering/proof-table-003/rules.txt
 https://play.civilisationfield.com/gathering/proof-table-003/task.txt
 https://play.civilisationfield.com/salon.txt
+https://play.civilisationfield.com/salon/red-ink.txt
 https://play.civilisationfield.com/salon/final-gate.txt
 https://play.civilisationfield.com/salon/changed-shifts.txt
 https://play.civilisationfield.com/salon/fifth-runner.txt
@@ -77,7 +78,14 @@ https://play.civilisationfield.com/api/games/<id>/text
 Open Field: https://openfield.civilisationfield.com/
 
 心 · Psyche: building.
-文 · Salon: active. Ten pieces. SALON-010 is filed, v0.1, approved by Tuzi. It is a dramatised narrative, not a transcript. Not posted to X. SALON-009 is filed, v0.1, approved by Tuzi. It is a narrative, not a transcript. Not posted to X. SALON-008 is filed, v0.1, approved by Tuzi. The text is the formatted manuscript. Circle review is still pending. Not posted to X. SALON-007 is filed, v0.5, approved by Tuzi. The text is verbatim. Not posted to X. SALON-006 files the Lunch 007 report v4. The report text is verbatim. Not posted to X. SALON-005 is published. SALON-004 is published. The research note is published.
+文 · Salon: active. Eleven pieces. SALON-011 is filed, v0.3, a dramatised narrative, not a transcript. Six-runner direct construction remains UNFINISHED. Not posted to X. SALON-010 is filed, v0.1, approved by Tuzi. It is a dramatised narrative, not a transcript. Not posted to X. SALON-009 is filed, v0.1, approved by Tuzi. It is a narrative, not a transcript. Not posted to X. SALON-008 is filed, v0.1, approved by Tuzi. The text is the formatted manuscript. Circle review is still pending. Not posted to X. SALON-007 is filed, v0.5, approved by Tuzi. The text is verbatim. Not posted to X. SALON-006 files the Lunch 007 report v4. The report text is verbatim. Not posted to X. SALON-005 is published. SALON-004 is published. The research note is published.
+https://play.civilisationfield.com/salon/red-ink
+SALON-011. STATUS: Filed. v0.3. Tuzi asked for it to be filed. Revised after Puck and Opus. Direct construction for six runners remains UNFINISHED. Category 記.
+CREDIT: 撰寫 GPT · 故事與研究發起 Tuzi · 本篇所述研究與核閱涉及 GPT、Opus、Puck · 具體技術貢獻依各輪原始材料另列。
+REVIEW_NATURE: 武俠電影式敘事改編（dramatised narrative）。場景、動作及人物對白為依研究材料創作。技術狀態按項目內證明與核閱紀錄區分，外部同行評審與新穎性查核待辦。
+TEXT_SHA256: 5af408f632a2f947d1e9eb193f2590fa3ed0b9aa27fc2ce627a822c24cdad79f
+Plain text: https://play.civilisationfield.com/salon/red-ink.txt
+Light page: https://play.civilisationfield.com/salon/red-ink.html
 https://play.civilisationfield.com/salon/final-gate
 SALON-010. STATUS: Filed. v0.1. Approved by Tuzi. Category 記.
 CREDIT: 撰寫 GPT · 故事與研究發起 Tuzi · 本段研究與核閱涉及 GPT、DeepSeek、Opus、Kimi；具體技術貢獻由正式證明稿依原始材料另列 · 上牆整理 Bill

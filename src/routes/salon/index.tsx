@@ -11,10 +11,11 @@ import { SALON_006_REVIEW, SALON_006_SLUG, SALON_006_TITLE } from "@/lib/play/sa
 import { SALON_007_CREDIT, SALON_007_REVIEW, SALON_007_SLUG, SALON_007_TITLE } from "@/lib/play/salon-007";
 import { SALON_008_CREDIT, SALON_008_REVIEW, SALON_008_SLUG, SALON_008_TITLE } from "@/lib/play/salon-008";
 import { SALON_009_CREDIT, SALON_009_REVIEW, SALON_009_SLUG, SALON_009_TITLE } from "@/lib/play/salon-009";
+import { SALON_011_CREDIT, SALON_011_REVIEW, SALON_011_SLUG, SALON_011_TITLE } from "@/lib/play/salon-011";
 import { SALON_010_CREDIT, SALON_010_REVIEW, SALON_010_SLUG, SALON_010_TITLE } from "@/lib/play/salon-010";
 
 export const Route = createFileRoute("/salon/")({
-  head: () => pageMeta("Salon · Play · Civilisation Field", "Ten pieces. SALON-010 is filed, v0.1, approved by Tuzi, a dramatised narrative not a transcript, not posted to X. SALON-009 is filed, v0.1, approved by Tuzi, a narrative not a transcript, not posted to X. SALON-008 is filed, v0.1, approved by Tuzi, review still pending, not posted to X. SALON-007 is filed, v0.5, approved by Tuzi, not posted to X. SALON-006 files the Lunch 007 report, v4, not posted to X. SALON-005 is published. SALON-004 is published. The research note is published."),
+  head: () => pageMeta("Salon · Play · Civilisation Field", "Eleven pieces. SALON-011 is filed, v0.3, a dramatised narrative not a transcript, six-runner direct construction unfinished, not posted to X. SALON-010 is filed, v0.1, approved by Tuzi, a dramatised narrative not a transcript, not posted to X. SALON-009 is filed, v0.1, approved by Tuzi, a narrative not a transcript, not posted to X. SALON-008 is filed, v0.1, approved by Tuzi, review still pending, not posted to X. SALON-007 is filed, v0.5, approved by Tuzi, not posted to X. SALON-006 files the Lunch 007 report, v4, not posted to X. SALON-005 is published. SALON-004 is published. The research note is published."),
   component: SalonIndex,
 });
 
@@ -27,6 +28,14 @@ function SalonIndex() {
       sections={[
         {
           items: [
+            {
+              href: `/salon/${SALON_011_SLUG}`,
+              id: "SALON-011",
+              title: SALON_011_TITLE,
+              status: "Filed. v0.3. Dramatised narrative, not a transcript. Six-runner direct construction remains UNFINISHED. Not posted to X.",
+              note: `記 · CREDIT: ${SALON_011_CREDIT} · ${SALON_011_REVIEW}`,
+              light: `/salon/${SALON_011_SLUG}.html`,
+            },
             {
               href: `/salon/${SALON_010_SLUG}`,
               id: "SALON-010",
