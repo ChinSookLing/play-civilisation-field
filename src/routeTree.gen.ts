@@ -75,6 +75,9 @@ import { Route as SalonFinalGateDottxtRouteImport } from './routes/salon/final-g
 import { Route as SalonRedInkRouteImport } from './routes/salon/red-ink'
 import { Route as SalonRedInkDothtmlRouteImport } from './routes/salon/red-ink[.]html'
 import { Route as SalonRedInkDottxtRouteImport } from './routes/salon/red-ink[.]txt'
+import { Route as SalonSummitFlagRouteImport } from './routes/salon/summit-flag'
+import { Route as SalonSummitFlagDothtmlRouteImport } from './routes/salon/summit-flag[.]html'
+import { Route as SalonSummitFlagDottxtRouteImport } from './routes/salon/summit-flag[.]txt'
 import { Route as SalonHowLlmsWorkTogetherRouteImport } from './routes/salon/how-llms-work-together'
 import { Route as SalonHowLlmsWorkTogetherDothtmlRouteImport } from './routes/salon/how-llms-work-together[.]html'
 import { Route as SalonHowLlmsWorkTogetherDottxtRouteImport } from './routes/salon/how-llms-work-together[.]txt'
@@ -518,6 +521,21 @@ const SalonRedInkDothtmlRoute = SalonRedInkDothtmlRouteImport.update({
 const SalonRedInkDottxtRoute = SalonRedInkDottxtRouteImport.update({
   id: '/red-ink.txt',
   path: '/red-ink.txt',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonSummitFlagRoute = SalonSummitFlagRouteImport.update({
+  id: '/summit-flag',
+  path: '/summit-flag',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonSummitFlagDothtmlRoute = SalonSummitFlagDothtmlRouteImport.update({
+  id: '/summit-flag.html',
+  path: '/summit-flag.html',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonSummitFlagDottxtRoute = SalonSummitFlagDottxtRouteImport.update({
+  id: '/summit-flag.txt',
+  path: '/summit-flag.txt',
   getParentRoute: () => SalonRoute,
 } as any)
 const SalonHowLlmsWorkTogetherRoute =
@@ -1152,6 +1170,9 @@ export interface FileRoutesByFullPath {
   '/salon/red-ink': typeof SalonRedInkRoute
   '/salon/red-ink.html': typeof SalonRedInkDothtmlRoute
   '/salon/red-ink.txt': typeof SalonRedInkDottxtRoute
+  '/salon/summit-flag': typeof SalonSummitFlagRoute
+  '/salon/summit-flag.html': typeof SalonSummitFlagDothtmlRoute
+  '/salon/summit-flag.txt': typeof SalonSummitFlagDottxtRoute
   '/salon/how-llms-work-together': typeof SalonHowLlmsWorkTogetherRoute
   '/salon/how-llms-work-together.html': typeof SalonHowLlmsWorkTogetherDothtmlRoute
   '/salon/how-llms-work-together.txt': typeof SalonHowLlmsWorkTogetherDottxtRoute
@@ -1316,6 +1337,9 @@ export interface FileRoutesByTo {
   '/salon/red-ink': typeof SalonRedInkRoute
   '/salon/red-ink.html': typeof SalonRedInkDothtmlRoute
   '/salon/red-ink.txt': typeof SalonRedInkDottxtRoute
+  '/salon/summit-flag': typeof SalonSummitFlagRoute
+  '/salon/summit-flag.html': typeof SalonSummitFlagDothtmlRoute
+  '/salon/summit-flag.txt': typeof SalonSummitFlagDottxtRoute
   '/salon/how-llms-work-together': typeof SalonHowLlmsWorkTogetherRoute
   '/salon/how-llms-work-together.html': typeof SalonHowLlmsWorkTogetherDothtmlRoute
   '/salon/how-llms-work-together.txt': typeof SalonHowLlmsWorkTogetherDottxtRoute
@@ -1483,6 +1507,9 @@ export interface FileRoutesById {
   '/salon/red-ink': typeof SalonRedInkRoute
   '/salon/red-ink.html': typeof SalonRedInkDothtmlRoute
   '/salon/red-ink.txt': typeof SalonRedInkDottxtRoute
+  '/salon/summit-flag': typeof SalonSummitFlagRoute
+  '/salon/summit-flag.html': typeof SalonSummitFlagDothtmlRoute
+  '/salon/summit-flag.txt': typeof SalonSummitFlagDottxtRoute
   '/salon/how-llms-work-together': typeof SalonHowLlmsWorkTogetherRoute
   '/salon/how-llms-work-together.html': typeof SalonHowLlmsWorkTogetherDothtmlRoute
   '/salon/how-llms-work-together.txt': typeof SalonHowLlmsWorkTogetherDottxtRoute
@@ -1651,6 +1678,9 @@ export interface FileRouteTypes {
     | '/salon/red-ink'
     | '/salon/red-ink.html'
     | '/salon/red-ink.txt'
+    | '/salon/summit-flag'
+    | '/salon/summit-flag.html'
+    | '/salon/summit-flag.txt'
     | '/salon/how-llms-work-together'
     | '/salon/how-llms-work-together.html'
     | '/salon/how-llms-work-together.txt'
@@ -1815,6 +1845,9 @@ export interface FileRouteTypes {
     | '/salon/red-ink'
     | '/salon/red-ink.html'
     | '/salon/red-ink.txt'
+    | '/salon/summit-flag'
+    | '/salon/summit-flag.html'
+    | '/salon/summit-flag.txt'
     | '/salon/how-llms-work-together'
     | '/salon/how-llms-work-together.html'
     | '/salon/how-llms-work-together.txt'
@@ -1981,6 +2014,9 @@ export interface FileRouteTypes {
     | '/salon/red-ink'
     | '/salon/red-ink.html'
     | '/salon/red-ink.txt'
+    | '/salon/summit-flag'
+    | '/salon/summit-flag.html'
+    | '/salon/summit-flag.txt'
     | '/salon/how-llms-work-together'
     | '/salon/how-llms-work-together.html'
     | '/salon/how-llms-work-together.txt'
@@ -2597,6 +2633,27 @@ declare module '@tanstack/react-router' {
       path: '/red-ink.txt'
       fullPath: '/salon/red-ink.txt'
       preLoaderRoute: typeof SalonRedInkDottxtRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/summit-flag': {
+      id: '/salon/summit-flag'
+      path: '/summit-flag'
+      fullPath: '/salon/summit-flag'
+      preLoaderRoute: typeof SalonSummitFlagRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/summit-flag.html': {
+      id: '/salon/summit-flag.html'
+      path: '/summit-flag.html'
+      fullPath: '/salon/summit-flag.html'
+      preLoaderRoute: typeof SalonSummitFlagDothtmlRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/summit-flag.txt': {
+      id: '/salon/summit-flag.txt'
+      path: '/summit-flag.txt'
+      fullPath: '/salon/summit-flag.txt'
+      preLoaderRoute: typeof SalonSummitFlagDottxtRouteImport
       parentRoute: typeof SalonRoute
     }
     '/salon/how-llms-work-together': {
@@ -3517,6 +3574,9 @@ interface SalonRouteChildren {
   SalonRedInkRoute: typeof SalonRedInkRoute
   SalonRedInkDothtmlRoute: typeof SalonRedInkDothtmlRoute
   SalonRedInkDottxtRoute: typeof SalonRedInkDottxtRoute
+  SalonSummitFlagRoute: typeof SalonSummitFlagRoute
+  SalonSummitFlagDothtmlRoute: typeof SalonSummitFlagDothtmlRoute
+  SalonSummitFlagDottxtRoute: typeof SalonSummitFlagDottxtRoute
   SalonHowLlmsWorkTogetherRoute: typeof SalonHowLlmsWorkTogetherRoute
   SalonHowLlmsWorkTogetherDothtmlRoute: typeof SalonHowLlmsWorkTogetherDothtmlRoute
   SalonHowLlmsWorkTogetherDottxtRoute: typeof SalonHowLlmsWorkTogetherDottxtRoute
@@ -3555,6 +3615,9 @@ const SalonRouteChildren: SalonRouteChildren = {
   SalonRedInkRoute: SalonRedInkRoute,
   SalonRedInkDothtmlRoute: SalonRedInkDothtmlRoute,
   SalonRedInkDottxtRoute: SalonRedInkDottxtRoute,
+  SalonSummitFlagRoute: SalonSummitFlagRoute,
+  SalonSummitFlagDothtmlRoute: SalonSummitFlagDothtmlRoute,
+  SalonSummitFlagDottxtRoute: SalonSummitFlagDottxtRoute,
   SalonHowLlmsWorkTogetherRoute: SalonHowLlmsWorkTogetherRoute,
   SalonHowLlmsWorkTogetherDothtmlRoute: SalonHowLlmsWorkTogetherDothtmlRoute,
   SalonHowLlmsWorkTogetherDottxtRoute: SalonHowLlmsWorkTogetherDottxtRoute,
