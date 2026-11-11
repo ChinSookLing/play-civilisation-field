@@ -31,6 +31,8 @@ https://play.civilisationfield.com/gathering/proof-table/rules/v0.5.1.txt
 https://play.civilisationfield.com/gathering/proof-table-008/table.txt
 https://play.civilisationfield.com/gathering/proof-table-008/new-branch.txt
 https://play.civilisationfield.com/gathering/proof-table-008/new-branch/verification.txt
+https://play.civilisationfield.com/gathering/proof-table-008/t6.txt
+https://play.civilisationfield.com/gathering/proof-table-008/t6/verification.txt
 https://play.civilisationfield.com/gathering/proof-table-006/table.txt
 https://play.civilisationfield.com/gathering/proof-table-005/table.txt
 https://play.civilisationfield.com/gathering/proof-table-004/table.txt
@@ -188,6 +190,10 @@ PT-008 new branch T1–T5 is filed separately. v0.3. Chain T4-Q3. The large-test
 https://play.civilisationfield.com/gathering/proof-table-008/new-branch
 Verification: https://play.civilisationfield.com/gathering/proof-table-008/new-branch/verification.txt
 Markdown: https://play.civilisationfield.com/gathering/proof-table-008/new-branch/verification.md
+PT-008 six-runner construction T6 is filed separately. 整合修訂稿 v0.2. In-circle ruling 2026-11-11, as written in the manuscript. Not externally peer-reviewed. One formula for every N remains open. The replay package was not included. The proof table stays OPEN.
+https://play.civilisationfield.com/gathering/proof-table-008/t6
+Verification: https://play.civilisationfield.com/gathering/proof-table-008/t6/verification.txt
+Markdown: https://play.civilisationfield.com/gathering/proof-table-008/t6/verification.md
 Proof Table 006 is prepared. One ticked speed picture on one shared t. Problem: 孤圈 · Lonely Circle. Not a proof of every speed tuple. Rules v0.5.1. No lines yet.
 https://play.civilisationfield.com/gathering/proof-table-006/table
 Plain text: https://play.civilisationfield.com/gathering/proof-table-006/table.txt

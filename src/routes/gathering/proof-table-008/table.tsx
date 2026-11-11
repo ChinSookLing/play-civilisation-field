@@ -45,6 +45,12 @@ function ProofTable008() {
             </Link>
             <span className="text-muted"> · 另外歸檔。主鏈是 T4-Q3。這張證明桌的原文沒有改。</span>
           </p>
+          <p className="mt-2 text-sm">
+            <Link to="/gathering/proof-table-008/t6" className="text-fg underline decoration-1 underline-offset-4">
+              六跑者 T6
+            </Link>
+            <span className="text-muted"> · 整合修訂稿 v0.2。項目內裁定。任意人數通式仍開放。這張證明桌的原文沒有改。</span>
+          </p>
         </header>
         <h2 className="mt-8 text-sm tracking-[0.14em] text-faint uppercase">Aim & Introduction</h2>
         <pre className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-fg">{PROOF_008_AIM.trimEnd()}</pre>

@@ -145,6 +145,8 @@ import { Route as GatheringProofTable006TableDottxtRouteImport } from './routes/
 import { Route as GatheringProofTable008IndexRouteImport } from './routes/gathering/proof-table-008/index'
 import { Route as GatheringProofTable008NewBranchRouteImport } from './routes/gathering/proof-table-008/new-branch'
 import { Route as GatheringProofTable008NewBranchDottxtRouteImport } from './routes/gathering/proof-table-008/new-branch[.]txt'
+import { Route as GatheringProofTable008T6RouteImport } from './routes/gathering/proof-table-008/t6'
+import { Route as GatheringProofTable008T6DottxtRouteImport } from './routes/gathering/proof-table-008/t6[.]txt'
 import { Route as GatheringProofTable008TableRouteImport } from './routes/gathering/proof-table-008/table'
 import { Route as GatheringProofTable008TableDottxtRouteImport } from './routes/gathering/proof-table-008/table[.]txt'
 import { Route as GatheringProofTableRulesRouteImport } from './routes/gathering/proof-table/rules'
@@ -173,6 +175,9 @@ import { Route as ApiGatheringProofTable006LinesRouteImport } from './routes/api
 import { Route as GatheringProofTable008NewBranchVerificationRouteImport } from './routes/gathering/proof-table-008/new-branch/verification'
 import { Route as GatheringProofTable008NewBranchVerificationDotmdRouteImport } from './routes/gathering/proof-table-008/new-branch/verification[.]md'
 import { Route as GatheringProofTable008NewBranchVerificationDottxtRouteImport } from './routes/gathering/proof-table-008/new-branch/verification[.]txt'
+import { Route as GatheringProofTable008T6VerificationRouteImport } from './routes/gathering/proof-table-008/t6/verification'
+import { Route as GatheringProofTable008T6VerificationDotmdRouteImport } from './routes/gathering/proof-table-008/t6/verification[.]md'
+import { Route as GatheringProofTable008T6VerificationDottxtRouteImport } from './routes/gathering/proof-table-008/t6/verification[.]txt'
 import { Route as GatheringProofTableRulesV0Dot3RouteImport } from './routes/gathering/proof-table/rules/v0[.]3'
 import { Route as GatheringProofTableRulesV0Dot3DottxtRouteImport } from './routes/gathering/proof-table/rules/v0[.]3[.]txt'
 import { Route as GatheringProofTableRulesV0Dot5RouteImport } from './routes/gathering/proof-table/rules/v0[.]5'
@@ -925,6 +930,18 @@ const GatheringProofTable008NewBranchDottxtRoute =
     path: '/proof-table-008/new-branch.txt',
     getParentRoute: () => GatheringRoute,
   } as any)
+const GatheringProofTable008T6Route =
+  GatheringProofTable008T6RouteImport.update({
+    id: '/proof-table-008/t6',
+    path: '/proof-table-008/t6',
+    getParentRoute: () => GatheringRoute,
+  } as any)
+const GatheringProofTable008T6DottxtRoute =
+  GatheringProofTable008T6DottxtRouteImport.update({
+    id: '/proof-table-008/t6.txt',
+    path: '/proof-table-008/t6.txt',
+    getParentRoute: () => GatheringRoute,
+  } as any)
 const GatheringProofTable008TableRoute =
   GatheringProofTable008TableRouteImport.update({
     id: '/proof-table-008/table',
@@ -1085,6 +1102,24 @@ const GatheringProofTable008NewBranchVerificationDottxtRoute =
     id: '/verification.txt',
     path: '/verification.txt',
     getParentRoute: () => GatheringProofTable008NewBranchRoute,
+  } as any)
+const GatheringProofTable008T6VerificationRoute =
+  GatheringProofTable008T6VerificationRouteImport.update({
+    id: '/verification',
+    path: '/verification',
+    getParentRoute: () => GatheringProofTable008T6Route,
+  } as any)
+const GatheringProofTable008T6VerificationDotmdRoute =
+  GatheringProofTable008T6VerificationDotmdRouteImport.update({
+    id: '/verification.md',
+    path: '/verification.md',
+    getParentRoute: () => GatheringProofTable008T6Route,
+  } as any)
+const GatheringProofTable008T6VerificationDottxtRoute =
+  GatheringProofTable008T6VerificationDottxtRouteImport.update({
+    id: '/verification.txt',
+    path: '/verification.txt',
+    getParentRoute: () => GatheringProofTable008T6Route,
   } as any)
 const GatheringProofTableRulesV0Dot3Route =
   GatheringProofTableRulesV0Dot3RouteImport.update({
@@ -1250,6 +1285,8 @@ export interface FileRoutesByFullPath {
   '/gathering/proof-table-006/table.txt': typeof GatheringProofTable006TableDottxtRoute
   '/gathering/proof-table-008/new-branch': typeof GatheringProofTable008NewBranchRouteWithChildren
   '/gathering/proof-table-008/new-branch.txt': typeof GatheringProofTable008NewBranchDottxtRoute
+  '/gathering/proof-table-008/t6': typeof GatheringProofTable008T6RouteWithChildren
+  '/gathering/proof-table-008/t6.txt': typeof GatheringProofTable008T6DottxtRoute
   '/gathering/proof-table-008/table': typeof GatheringProofTable008TableRoute
   '/gathering/proof-table-008/table.txt': typeof GatheringProofTable008TableDottxtRoute
   '/gathering/proof-table/rules': typeof GatheringProofTableRulesRouteWithChildren
@@ -1288,6 +1325,9 @@ export interface FileRoutesByFullPath {
   '/gathering/proof-table-008/new-branch/verification': typeof GatheringProofTable008NewBranchVerificationRoute
   '/gathering/proof-table-008/new-branch/verification.md': typeof GatheringProofTable008NewBranchVerificationDotmdRoute
   '/gathering/proof-table-008/new-branch/verification.txt': typeof GatheringProofTable008NewBranchVerificationDottxtRoute
+  '/gathering/proof-table-008/t6/verification': typeof GatheringProofTable008T6VerificationRoute
+  '/gathering/proof-table-008/t6/verification.md': typeof GatheringProofTable008T6VerificationDotmdRoute
+  '/gathering/proof-table-008/t6/verification.txt': typeof GatheringProofTable008T6VerificationDottxtRoute
   '/gathering/proof-table/rules/v0.3': typeof GatheringProofTableRulesV0Dot3Route
   '/gathering/proof-table/rules/v0.3.txt': typeof GatheringProofTableRulesV0Dot3DottxtRoute
   '/gathering/proof-table/rules/v0.5': typeof GatheringProofTableRulesV0Dot5Route
@@ -1420,6 +1460,8 @@ export interface FileRoutesByTo {
   '/gathering/proof-table-006/table.txt': typeof GatheringProofTable006TableDottxtRoute
   '/gathering/proof-table-008/new-branch': typeof GatheringProofTable008NewBranchRouteWithChildren
   '/gathering/proof-table-008/new-branch.txt': typeof GatheringProofTable008NewBranchDottxtRoute
+  '/gathering/proof-table-008/t6': typeof GatheringProofTable008T6RouteWithChildren
+  '/gathering/proof-table-008/t6.txt': typeof GatheringProofTable008T6DottxtRoute
   '/gathering/proof-table-008/table': typeof GatheringProofTable008TableRoute
   '/gathering/proof-table-008/table.txt': typeof GatheringProofTable008TableDottxtRoute
   '/gathering/proof-table/rules': typeof GatheringProofTableRulesRouteWithChildren
@@ -1458,6 +1500,9 @@ export interface FileRoutesByTo {
   '/gathering/proof-table-008/new-branch/verification': typeof GatheringProofTable008NewBranchVerificationRoute
   '/gathering/proof-table-008/new-branch/verification.md': typeof GatheringProofTable008NewBranchVerificationDotmdRoute
   '/gathering/proof-table-008/new-branch/verification.txt': typeof GatheringProofTable008NewBranchVerificationDottxtRoute
+  '/gathering/proof-table-008/t6/verification': typeof GatheringProofTable008T6VerificationRoute
+  '/gathering/proof-table-008/t6/verification.md': typeof GatheringProofTable008T6VerificationDotmdRoute
+  '/gathering/proof-table-008/t6/verification.txt': typeof GatheringProofTable008T6VerificationDottxtRoute
   '/gathering/proof-table/rules/v0.3': typeof GatheringProofTableRulesV0Dot3Route
   '/gathering/proof-table/rules/v0.3.txt': typeof GatheringProofTableRulesV0Dot3DottxtRoute
   '/gathering/proof-table/rules/v0.5': typeof GatheringProofTableRulesV0Dot5Route
@@ -1593,6 +1638,8 @@ export interface FileRoutesById {
   '/gathering/proof-table-006/table.txt': typeof GatheringProofTable006TableDottxtRoute
   '/gathering/proof-table-008/new-branch': typeof GatheringProofTable008NewBranchRouteWithChildren
   '/gathering/proof-table-008/new-branch.txt': typeof GatheringProofTable008NewBranchDottxtRoute
+  '/gathering/proof-table-008/t6': typeof GatheringProofTable008T6RouteWithChildren
+  '/gathering/proof-table-008/t6.txt': typeof GatheringProofTable008T6DottxtRoute
   '/gathering/proof-table-008/table': typeof GatheringProofTable008TableRoute
   '/gathering/proof-table-008/table.txt': typeof GatheringProofTable008TableDottxtRoute
   '/gathering/proof-table/rules': typeof GatheringProofTableRulesRouteWithChildren
@@ -1631,6 +1678,9 @@ export interface FileRoutesById {
   '/gathering/proof-table-008/new-branch/verification': typeof GatheringProofTable008NewBranchVerificationRoute
   '/gathering/proof-table-008/new-branch/verification.md': typeof GatheringProofTable008NewBranchVerificationDotmdRoute
   '/gathering/proof-table-008/new-branch/verification.txt': typeof GatheringProofTable008NewBranchVerificationDottxtRoute
+  '/gathering/proof-table-008/t6/verification': typeof GatheringProofTable008T6VerificationRoute
+  '/gathering/proof-table-008/t6/verification.md': typeof GatheringProofTable008T6VerificationDotmdRoute
+  '/gathering/proof-table-008/t6/verification.txt': typeof GatheringProofTable008T6VerificationDottxtRoute
   '/gathering/proof-table/rules/v0.3': typeof GatheringProofTableRulesV0Dot3Route
   '/gathering/proof-table/rules/v0.3.txt': typeof GatheringProofTableRulesV0Dot3DottxtRoute
   '/gathering/proof-table/rules/v0.5': typeof GatheringProofTableRulesV0Dot5Route
@@ -1767,6 +1817,8 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-006/table.txt'
     | '/gathering/proof-table-008/new-branch'
     | '/gathering/proof-table-008/new-branch.txt'
+    | '/gathering/proof-table-008/t6'
+    | '/gathering/proof-table-008/t6.txt'
     | '/gathering/proof-table-008/table'
     | '/gathering/proof-table-008/table.txt'
     | '/gathering/proof-table/rules'
@@ -1805,6 +1857,9 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-008/new-branch/verification'
     | '/gathering/proof-table-008/new-branch/verification.md'
     | '/gathering/proof-table-008/new-branch/verification.txt'
+    | '/gathering/proof-table-008/t6/verification'
+    | '/gathering/proof-table-008/t6/verification.md'
+    | '/gathering/proof-table-008/t6/verification.txt'
     | '/gathering/proof-table/rules/v0.3'
     | '/gathering/proof-table/rules/v0.3.txt'
     | '/gathering/proof-table/rules/v0.5'
@@ -1937,6 +1992,8 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-006/table.txt'
     | '/gathering/proof-table-008/new-branch'
     | '/gathering/proof-table-008/new-branch.txt'
+    | '/gathering/proof-table-008/t6'
+    | '/gathering/proof-table-008/t6.txt'
     | '/gathering/proof-table-008/table'
     | '/gathering/proof-table-008/table.txt'
     | '/gathering/proof-table/rules'
@@ -1975,6 +2032,9 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-008/new-branch/verification'
     | '/gathering/proof-table-008/new-branch/verification.md'
     | '/gathering/proof-table-008/new-branch/verification.txt'
+    | '/gathering/proof-table-008/t6/verification'
+    | '/gathering/proof-table-008/t6/verification.md'
+    | '/gathering/proof-table-008/t6/verification.txt'
     | '/gathering/proof-table/rules/v0.3'
     | '/gathering/proof-table/rules/v0.3.txt'
     | '/gathering/proof-table/rules/v0.5'
@@ -2109,6 +2169,8 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-006/table.txt'
     | '/gathering/proof-table-008/new-branch'
     | '/gathering/proof-table-008/new-branch.txt'
+    | '/gathering/proof-table-008/t6'
+    | '/gathering/proof-table-008/t6.txt'
     | '/gathering/proof-table-008/table'
     | '/gathering/proof-table-008/table.txt'
     | '/gathering/proof-table/rules'
@@ -2147,6 +2209,9 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-008/new-branch/verification'
     | '/gathering/proof-table-008/new-branch/verification.md'
     | '/gathering/proof-table-008/new-branch/verification.txt'
+    | '/gathering/proof-table-008/t6/verification'
+    | '/gathering/proof-table-008/t6/verification.md'
+    | '/gathering/proof-table-008/t6/verification.txt'
     | '/gathering/proof-table/rules/v0.3'
     | '/gathering/proof-table/rules/v0.3.txt'
     | '/gathering/proof-table/rules/v0.5'
@@ -3161,6 +3226,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GatheringProofTable008NewBranchDottxtRouteImport
       parentRoute: typeof GatheringRoute
     }
+    '/gathering/proof-table-008/t6': {
+      id: '/gathering/proof-table-008/t6'
+      path: '/proof-table-008/t6'
+      fullPath: '/gathering/proof-table-008/t6'
+      preLoaderRoute: typeof GatheringProofTable008T6RouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/proof-table-008/t6.txt': {
+      id: '/gathering/proof-table-008/t6.txt'
+      path: '/proof-table-008/t6.txt'
+      fullPath: '/gathering/proof-table-008/t6.txt'
+      preLoaderRoute: typeof GatheringProofTable008T6DottxtRouteImport
+      parentRoute: typeof GatheringRoute
+    }
     '/gathering/proof-table-008/table': {
       id: '/gathering/proof-table-008/table'
       path: '/proof-table-008/table'
@@ -3357,6 +3436,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GatheringProofTable008NewBranchVerificationDottxtRouteImport
       parentRoute: typeof GatheringProofTable008NewBranchRoute
     }
+    '/gathering/proof-table-008/t6/verification': {
+      id: '/gathering/proof-table-008/t6/verification'
+      path: '/verification'
+      fullPath: '/gathering/proof-table-008/t6/verification'
+      preLoaderRoute: typeof GatheringProofTable008T6VerificationRouteImport
+      parentRoute: typeof GatheringProofTable008T6Route
+    }
+    '/gathering/proof-table-008/t6/verification.md': {
+      id: '/gathering/proof-table-008/t6/verification.md'
+      path: '/verification.md'
+      fullPath: '/gathering/proof-table-008/t6/verification.md'
+      preLoaderRoute: typeof GatheringProofTable008T6VerificationDotmdRouteImport
+      parentRoute: typeof GatheringProofTable008T6Route
+    }
+    '/gathering/proof-table-008/t6/verification.txt': {
+      id: '/gathering/proof-table-008/t6/verification.txt'
+      path: '/verification.txt'
+      fullPath: '/gathering/proof-table-008/t6/verification.txt'
+      preLoaderRoute: typeof GatheringProofTable008T6VerificationDottxtRouteImport
+      parentRoute: typeof GatheringProofTable008T6Route
+    }
     '/gathering/proof-table/rules/v0.3': {
       id: '/gathering/proof-table/rules/v0.3'
       path: '/v0.3'
@@ -3433,6 +3533,27 @@ const GatheringProofTable008NewBranchRouteChildren: GatheringProofTable008NewBra
 const GatheringProofTable008NewBranchRouteWithChildren =
   GatheringProofTable008NewBranchRoute._addFileChildren(
     GatheringProofTable008NewBranchRouteChildren,
+  )
+
+interface GatheringProofTable008T6RouteChildren {
+  GatheringProofTable008T6VerificationRoute: typeof GatheringProofTable008T6VerificationRoute
+  GatheringProofTable008T6VerificationDotmdRoute: typeof GatheringProofTable008T6VerificationDotmdRoute
+  GatheringProofTable008T6VerificationDottxtRoute: typeof GatheringProofTable008T6VerificationDottxtRoute
+}
+
+const GatheringProofTable008T6RouteChildren: GatheringProofTable008T6RouteChildren =
+  {
+    GatheringProofTable008T6VerificationRoute:
+      GatheringProofTable008T6VerificationRoute,
+    GatheringProofTable008T6VerificationDotmdRoute:
+      GatheringProofTable008T6VerificationDotmdRoute,
+    GatheringProofTable008T6VerificationDottxtRoute:
+      GatheringProofTable008T6VerificationDottxtRoute,
+  }
+
+const GatheringProofTable008T6RouteWithChildren =
+  GatheringProofTable008T6Route._addFileChildren(
+    GatheringProofTable008T6RouteChildren,
   )
 
 interface GatheringProofTableRulesRouteChildren {
@@ -3512,6 +3633,8 @@ interface GatheringRouteChildren {
   GatheringProofTable006TableDottxtRoute: typeof GatheringProofTable006TableDottxtRoute
   GatheringProofTable008NewBranchRoute: typeof GatheringProofTable008NewBranchRouteWithChildren
   GatheringProofTable008NewBranchDottxtRoute: typeof GatheringProofTable008NewBranchDottxtRoute
+  GatheringProofTable008T6Route: typeof GatheringProofTable008T6RouteWithChildren
+  GatheringProofTable008T6DottxtRoute: typeof GatheringProofTable008T6DottxtRoute
   GatheringProofTable008TableRoute: typeof GatheringProofTable008TableRoute
   GatheringProofTable008TableDottxtRoute: typeof GatheringProofTable008TableDottxtRoute
   GatheringProofTableRulesRoute: typeof GatheringProofTableRulesRouteWithChildren
@@ -3594,6 +3717,10 @@ const GatheringRouteChildren: GatheringRouteChildren = {
     GatheringProofTable008NewBranchRouteWithChildren,
   GatheringProofTable008NewBranchDottxtRoute:
     GatheringProofTable008NewBranchDottxtRoute,
+  GatheringProofTable008T6Route:
+    GatheringProofTable008T6RouteWithChildren,
+  GatheringProofTable008T6DottxtRoute:
+    GatheringProofTable008T6DottxtRoute,
   GatheringProofTable008TableRoute: GatheringProofTable008TableRoute,
   GatheringProofTable008TableDottxtRoute:
     GatheringProofTable008TableDottxtRoute,

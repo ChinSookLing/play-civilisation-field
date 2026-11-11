@@ -94,6 +94,16 @@ export function recordsText(extra?: {
   lines.push(`FORMATS: ${ORIGIN}/gathering/proof-table-008/new-branch.txt | ${ORIGIN}/gathering/proof-table-008/new-branch/verification.txt | ${ORIGIN}/gathering/proof-table-008/new-branch/verification.md`);
   lines.push("RECORD: filed at Tuzi's request. v0.3 adds the completed large-test report. It is not a new mathematical certification. Not externally peer-reviewed. The proof table stays open.");
   lines.push("");
+  lines.push("RECORD_ID: PT008-T6");
+  lines.push("TYPE: gathering");
+  lines.push("TITLE: PT-008 · Time Forge · 六跑者的安全時間構造");
+  lines.push("RECORD_STATUS: Filed. v0.2. Not a change to the proof-table ledger.");
+  lines.push("RULING: in-circle, 2026-11-11, as written in the manuscript. Not externally peer-reviewed.");
+  lines.push("MANUSCRIPT_SHA256: 08d8898e8ee4add10816003ca5f218d087d08a3584cbd852f027caa690b594fd");
+  lines.push(`RECORD_URL: ${ORIGIN}/gathering/proof-table-008/t6`);
+  lines.push(`FORMATS: ${ORIGIN}/gathering/proof-table-008/t6.txt | ${ORIGIN}/gathering/proof-table-008/t6/verification.txt | ${ORIGIN}/gathering/proof-table-008/t6/verification.md`);
+  lines.push("RECORD: filed at Tuzi's request on 2026-11-12. Theorem T6. The replay package named in the manuscript was not included. One formula for every N remains open. The proof table stays open.");
+  lines.push("");
   lines.push("RECORD_ID: PROOF-TABLE-006");
   lines.push("TYPE: gathering");
   lines.push("TITLE: Together · Proof Table 006 · 孤圈 · Lonely Circle (one ticked speed picture)");

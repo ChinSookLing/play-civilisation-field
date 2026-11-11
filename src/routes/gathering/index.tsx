@@ -88,6 +88,13 @@ function GatheringList() {
               note: "N≤5. N≤4 is direct. N=5 chooses inside a fixed candidate bound. Not peer-reviewed. Not the one formula for every N. 2026-10-25.",
               light: "/gathering/proof-table-008/new-branch/verification.txt",
             },
+            {
+              href: "/gathering/proof-table-008/t6",
+              title: "PT-008 · Time Forge · 六跑者的安全時間構造",
+              status: "Filed. v0.2. In-circle ruling 2026-11-11. Not externally peer-reviewed. The proof table stays OPEN.",
+              note: "Theorem T6. One formula for every N remains open. Manuscript only; the replay package was not in this filing. 2026-11-12.",
+              light: "/gathering/proof-table-008/t6/verification.txt",
+            },
           ],
         },
       ]}
