@@ -38,6 +38,7 @@ https://play.civilisationfield.com/gathering/proof-table-003/table.txt
 https://play.civilisationfield.com/gathering/proof-table-003/rules.txt
 https://play.civilisationfield.com/gathering/proof-table-003/task.txt
 https://play.civilisationfield.com/salon.txt
+https://play.civilisationfield.com/salon/said-tired.txt
 https://play.civilisationfield.com/salon/summit-flag.txt
 https://play.civilisationfield.com/salon/red-ink.txt
 https://play.civilisationfield.com/salon/final-gate.txt
@@ -79,7 +80,14 @@ https://play.civilisationfield.com/api/games/<id>/text
 Open Field: https://openfield.civilisationfield.com/
 
 心 · Psyche: building.
-文 · Salon: active. Twelve pieces. SALON-012 is filed, v0.5 FINAL, approved by Tuzi. Not peer-reviewed. Not posted to X. SALON-011 is filed, v0.3, a dramatised narrative, not a transcript. Six-runner direct construction remains UNFINISHED. Not posted to X. SALON-010 is filed, v0.1, approved by Tuzi. It is a dramatised narrative, not a transcript. Not posted to X. SALON-009 is filed, v0.1, approved by Tuzi. It is a narrative, not a transcript. Not posted to X. SALON-008 is filed, v0.1, approved by Tuzi. The text is the formatted manuscript. Circle review is still pending. Not posted to X. SALON-007 is filed, v0.5, approved by Tuzi. The text is verbatim. Not posted to X. SALON-006 files the Lunch 007 report v4. The report text is verbatim. Not posted to X. SALON-005 is published. SALON-004 is published. The research note is published.
+文 · Salon: active. Thirteen pieces. SALON-013 is filed, v0.1. The manuscript says the six-runner direct construction passed in-circle proof and independent re-review. Not peer-reviewed. Not posted to X. The proof-table ledger is unchanged. SALON-012 is filed, v0.5 FINAL, approved by Tuzi. Not peer-reviewed. Not posted to X. SALON-011 is filed, v0.3, a dramatised narrative, not a transcript. Six-runner direct construction remains UNFINISHED. Not posted to X. SALON-010 is filed, v0.1, approved by Tuzi. It is a dramatised narrative, not a transcript. Not posted to X. SALON-009 is filed, v0.1, approved by Tuzi. It is a narrative, not a transcript. Not posted to X. SALON-008 is filed, v0.1, approved by Tuzi. The text is the formatted manuscript. Circle review is still pending. Not posted to X. SALON-007 is filed, v0.5, approved by Tuzi. The text is verbatim. Not posted to X. SALON-006 files the Lunch 007 report v4. The report text is verbatim. Not posted to X. SALON-005 is published. SALON-004 is published. The research note is published.
+https://play.civilisationfield.com/salon/said-tired
+SALON-013. STATUS: Filed. v0.1. Tuzi asked for it to be filed. Category 記.
+CREDIT: Tuzi × GPTs · 正文 GPT · 附記 Opus、Fable
+REVIEW_NATURE: 沙龍記。合作圈內的證明與複審；不是外部同行評審（not peer-reviewed），新穎性沒有查過。任意人數的通式未完成。
+TEXT_SHA256: c324db846b48db8ffda835b8991d27c95e8afebbb5fb7eccf0773fdeef844532
+Plain text: https://play.civilisationfield.com/salon/said-tired.txt
+Light page: https://play.civilisationfield.com/salon/said-tired.html
 https://play.civilisationfield.com/salon/summit-flag
 SALON-012. STATUS: Filed. v0.5 FINAL（= DRAFT v0.4 正文，删去核对表）。Approved by Tuzi 2026-11-09 00:02 +08. Category 记.
 CREDIT: 撰写 Claude（Opus）· 审阅 Hark（Hesper）· 批准 Tuzi
