@@ -84,8 +84,8 @@ function GatheringList() {
             {
               href: "/gathering/proof-table-008/new-branch",
               title: "PT-008 · Time Forge · 新分支 T1–T5",
-              status: "Filed. v0.3. Q3 chain. The proof-table ledger is unchanged.",
-              note: "N≤5. N≤4 is direct. N=5 chooses inside a fixed candidate bound. Not peer-reviewed. Not the one formula for every N. 2026-10-25.",
+              status: "Filed. v0.3. Appendix U added 2026-11-12. Q3 chain. The proof-table ledger is unchanged.",
+              note: "N≤5. Appendix U is the integer five-runner direct entrance. U3 by Fable. Opus reviewed and implemented it independently. The GPT chair re-ran the cases and ruled it in-circle PROVED. Not externally peer-reviewed. Not the one formula for every N. 2026-11-12.",
               light: "/gathering/proof-table-008/new-branch/verification.txt",
             },
             {

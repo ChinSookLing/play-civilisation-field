@@ -20,6 +20,7 @@ const TOC = [
   ["proof", "證明"],
   ["review", "核閱"],
   ["appendix", "附錄"],
+  ["appendix-u", "附錄 U"],
 ] as const;
 
 function mathHtml(tex: string, display: boolean): string {
@@ -36,6 +37,24 @@ function Inline({ text }: { text: string }) {
   let index = 0;
   let key = 0;
   while (index < text.length) {
+    if (text.startsWith("[", index)) {
+      const close = text.indexOf("](", index + 1);
+      const endParen = close >= 0 ? text.indexOf(")", close + 2) : -1;
+      if (close > index + 1 && endParen > close + 2) {
+        const label = text.slice(index + 1, close);
+        const href = text.slice(close + 2, endParen);
+        if (href.startsWith("https://") && !href.includes(" ") && !label.includes("[")) {
+          nodes.push(
+            <a key={key} href={href} className="text-fg underline decoration-1 underline-offset-4">
+              {label}
+            </a>,
+          );
+          key += 1;
+          index = endParen + 1;
+          continue;
+        }
+      }
+    }
     if (text.startsWith("\\(", index)) {
       const end = text.indexOf("\\)", index + 2);
       if (end >= 0) {
@@ -79,7 +98,8 @@ function Inline({ text }: { text: string }) {
       end < text.length &&
       !text.startsWith("\\(", end) &&
       text[end] !== "`" &&
-      !text.startsWith("**", end)
+      !text.startsWith("**", end) &&
+      text[end] !== "["
     ) {
       end += 1;
     }
@@ -180,12 +200,13 @@ function BlockView({ block }: { block: ReadBlock }) {
       </div>
     );
   }
+  const quote = block.lines.every((line) => line.startsWith("> "));
   return (
     <p className="mt-3 text-sm leading-relaxed">
       {block.lines.map((line, lineIndex) => (
         <span key={`${lineIndex}-${line}`}>
           {lineIndex > 0 ? <br /> : null}
-          <Inline text={line.trimEnd()} />
+          <Inline text={(quote ? line.replace(/^>\s?/, "") : line).trimEnd()} />
         </span>
       ))}
     </p>
@@ -214,6 +235,9 @@ export function NewBranchReading() {
         <h1 className="mt-6 font-display text-4xl tracking-tight">一至五跑者的安全時間構造</h1>
         <p className="mt-3 text-sm text-muted">整合送審稿 v0.3 · 2026-10-25（Asia/Singapore）</p>
         <p className="mt-1 text-sm text-muted">v0.3 補記 Opus 大壓力測試已完成。公式沒有改。這不是另一次數學認證。</p>
+        <p className="mt-1 text-sm text-muted">
+          2026-11-12 加附錄 U。U3 由 Fable 提出，Opus 獨立審讀並實作，GPT 主席重跑後裁定項目內 PROVED。未經外部同行評審。證明桌台帳沒有改。
+        </p>
         <p className="mt-1 text-sm text-muted">主鏈 T4-Q3。不是舊公開八分支 T4-PUB-8。證明桌台帳沒有改。</p>
         <p className="mt-4 text-sm leading-relaxed">
           本稿證明 N≤5 的精確安全時間構造：N≤4 為固定次數直接式；N=5 在一個有證明的固定候選範圍內選取。整數存在性主鏈含

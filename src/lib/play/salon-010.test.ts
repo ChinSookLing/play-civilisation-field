@@ -5,7 +5,7 @@ import test from "node:test";
 
 const manuscriptPath = new URL("../../../docs/salon/SALON-010-v0.1.md", import.meta.url);
 const sourcePath = new URL("./salon-010.ts", import.meta.url);
-const EXPECTED = "92ba759c49582d25bda5561951a12072f3acd234ccd0205f6a6cb76c3b7728c9";
+const EXPECTED = "35277c657f047b314dc6c3a77a8813861dcd13f830ea697db66027fb61c2a122";
 
 test("SALON-010 manuscript is the filed text", () => {
   const bytes = readFileSync(manuscriptPath);
@@ -26,6 +26,9 @@ test("SALON-010 manuscript is the filed text", () => {
   assert.equal(text.includes("我想讓她問："), true);
   assert.equal(text.includes("One formula for all, and all in one formula."), true);
   assert.equal(text.includes("第五位跑者，這次終於過線。"), true);
+  assert.equal(text.includes("## 後續附記｜2026-11-12（Asia/Kuala_Lumpur）"), true);
+  assert.equal(text.includes("數學構造及複核見 Gathering 技術稿的附錄 U。"), true);
+  assert.equal(text.endsWith("—— GPT · PT-008\n"), true);
   const she = text.split("\n").filter((line) => line.includes("她") && !line.startsWith("PRONOUNS:"));
   assert.deepEqual(she, [
     "前面低人數的基底，她記得 GPT 與 DeepSeek 的合作。",

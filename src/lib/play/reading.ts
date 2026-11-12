@@ -87,12 +87,12 @@ export function recordsText(extra?: {
   lines.push("RECORD_ID: PT008-NEW-BRANCH");
   lines.push("TYPE: gathering");
   lines.push("TITLE: PT-008 · Time Forge · 新研究分支：一至五跑者的安全時間構造");
-  lines.push("RECORD_STATUS: Filed. v0.3. Not a change to the proof-table ledger.");
+  lines.push("RECORD_STATUS: Filed. v0.3. Appendix U added 2026-11-12. Not a change to the proof-table ledger.");
   lines.push("CHAIN: T4-Q3. Not T4-PUB-8.");
-  lines.push("MANUSCRIPT_SHA256: 3520cacd6244ec055d72997c6bbeeb6209eaf5a22febfe5b9a97cabccf217fd7");
+  lines.push("MANUSCRIPT_SHA256: 0e525229a8183bcb432619f5cb423625bbb1609bc6dea123f28fe9119c1bf267");
   lines.push(`RECORD_URL: ${ORIGIN}/gathering/proof-table-008/new-branch`);
   lines.push(`FORMATS: ${ORIGIN}/gathering/proof-table-008/new-branch.txt | ${ORIGIN}/gathering/proof-table-008/new-branch/verification.txt | ${ORIGIN}/gathering/proof-table-008/new-branch/verification.md`);
-  lines.push("RECORD: filed at Tuzi's request. v0.3 adds the completed large-test report. It is not a new mathematical certification. Not externally peer-reviewed. The proof table stays open.");
+  lines.push("RECORD: filed at Tuzi's request. 2026-11-12 adds Appendix U. U3 was proposed by Fable. Opus reviewed and implemented it independently. The GPT chair re-ran the cases and ruled it in-circle PROVED. Not externally peer-reviewed. The v0.3 body is kept. The proof table stays open.");
   lines.push("");
   lines.push("RECORD_ID: PT008-T6");
   lines.push("TYPE: gathering");
@@ -242,10 +242,10 @@ export function recordsText(extra?: {
   lines.push("CATEGORY: 記");
   lines.push("CREDIT: 撰寫 GPT · 故事與研究發起 Tuzi · 本段研究與核閱涉及 GPT、DeepSeek、Opus、Kimi；具體技術貢獻由正式證明稿依原始材料另列 · 上牆整理 Bill");
   lines.push("REVIEW_NATURE: 武俠電影式敘事改編（dramatised narrative）。並非逐字紀錄。未經外部同行評審（not peer-reviewed），新穎性未查。");
-  lines.push("TEXT_SHA256: 92ba759c49582d25bda5561951a12072f3acd234ccd0205f6a6cb76c3b7728c9");
+  lines.push("TEXT_SHA256: 35277c657f047b314dc6c3a77a8813861dcd13f830ea697db66027fb61c2a122");
   lines.push(`RECORD_URL: ${ORIGIN}/salon/final-gate`);
   lines.push(`FORMATS: ${ORIGIN}/salon/final-gate | ${ORIGIN}/salon/final-gate.txt | ${ORIGIN}/salon/final-gate.html`);
-  lines.push("RECORD: v0.1 dramatised narrative filed at Tuzi's request on 2026-10-25. AI pronouns are TA. Tuzi's 她 is kept. It continues SALON-009. It is not a transcript. The plain text is that file, with nothing added in front. Not posted to X. The proof-table ledger is not changed by this page.");
+  lines.push("RECORD: v0.1 dramatised narrative filed at Tuzi's request on 2026-10-25. A postscript dated 2026-11-12 was added. AI pronouns are TA. Tuzi's 她 is kept. It continues SALON-009. It is not a transcript. The plain text is that file, with nothing added in front. Not peer-reviewed. Not posted to X. The proof-table ledger is not changed by this page.");
   lines.push("");
   lines.push("RECORD_ID: SALON-009");
   lines.push("TYPE: salon");

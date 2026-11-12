@@ -14,6 +14,7 @@ const HEADING_IDS: Array<[string, string]> = [
   ["2. 通道一", "proof"],
   ["7. 版本", "review"],
   ["附錄 Q", "appendix"],
+  ["附錄 U", "appendix-u"],
 ];
 
 export function headingId(text: string): string | undefined {

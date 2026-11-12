@@ -12,7 +12,7 @@ export const SALON_010_CREDIT =
   "撰寫 GPT · 故事與研究發起 Tuzi · 本段研究與核閱涉及 GPT、DeepSeek、Opus、Kimi；具體技術貢獻由正式證明稿依原始材料另列 · 上牆整理 Bill";
 export const SALON_010_REVIEW =
   "武俠電影式敘事改編（dramatised narrative）。並非逐字紀錄。未經外部同行評審（not peer-reviewed），新穎性未查。";
-export const SALON_010_SHA256 = "92ba759c49582d25bda5561951a12072f3acd234ccd0205f6a6cb76c3b7728c9";
+export const SALON_010_SHA256 = "35277c657f047b314dc6c3a77a8813861dcd13f830ea697db66027fb61c2a122";
 
 const PAGE = `${ORIGIN}/salon/${SALON_010_SLUG}`;
 const TXT = `${ORIGIN}/salon/${SALON_010_SLUG}.txt`;
@@ -42,7 +42,7 @@ export function salon010StaticHtml(): string {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeText(SALON_010_TITLE)}</title>
-<meta name="description" content="SALON-010 v0.1. Category 記. Filed. Approved by Tuzi. A dramatised narrative, not a transcript. Not peer-reviewed. Not posted to X.">
+<meta name="description" content="SALON-010 v0.1. Category 記. Filed. Approved by Tuzi. A dramatised narrative, not a transcript. A 2026-11-12 postscript is included. Not peer-reviewed. Not posted to X. The proof-table ledger is unchanged.">
 </head>
 <body>
 <main>

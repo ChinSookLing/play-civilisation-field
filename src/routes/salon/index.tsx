@@ -17,7 +17,7 @@ import { SALON_011_CREDIT, SALON_011_REVIEW, SALON_011_SLUG, SALON_011_TITLE } f
 import { SALON_010_CREDIT, SALON_010_REVIEW, SALON_010_SLUG, SALON_010_TITLE } from "@/lib/play/salon-010";
 
 export const Route = createFileRoute("/salon/")({
-  head: () => pageMeta("Salon · Play · Civilisation Field", "Thirteen pieces. SALON-013 is filed, v0.1. The manuscript says the six-runner direct construction passed in-circle proof and independent re-review. Not peer-reviewed. Not posted to X. The proof-table ledger is unchanged. SALON-012 is filed, v0.5 FINAL, approved by Tuzi, not peer-reviewed, not posted to X. SALON-011 is filed, v0.3, a dramatised narrative not a transcript, six-runner direct construction unfinished, not posted to X. SALON-010 is filed, v0.1, approved by Tuzi, a dramatised narrative not a transcript, not posted to X. SALON-009 is filed, v0.1, approved by Tuzi, a narrative not a transcript, not posted to X. SALON-008 is filed, v0.1, approved by Tuzi, review still pending, not posted to X. SALON-007 is filed, v0.5, approved by Tuzi, not posted to X. SALON-006 files the Lunch 007 report, v4, not posted to X. SALON-005 is published. SALON-004 is published. The research note is published."),
+  head: () => pageMeta("Salon · Play · Civilisation Field", "Thirteen pieces. SALON-013 is filed, v0.1. The manuscript says the six-runner direct construction passed in-circle proof and independent re-review. Not peer-reviewed. Not posted to X. The proof-table ledger is unchanged. SALON-012 is filed, v0.5 FINAL, approved by Tuzi, not peer-reviewed, not posted to X. SALON-011 is filed, v0.3, a dramatised narrative not a transcript, six-runner direct construction unfinished, not posted to X. SALON-010 is filed, v0.1, approved by Tuzi, a dramatised narrative not a transcript, with a 2026-11-12 postscript, not posted to X. The proof-table ledger is unchanged. SALON-009 is filed, v0.1, approved by Tuzi, a narrative not a transcript, not posted to X. SALON-008 is filed, v0.1, approved by Tuzi, review still pending, not posted to X. SALON-007 is filed, v0.5, approved by Tuzi, not posted to X. SALON-006 files the Lunch 007 report, v4, not posted to X. SALON-005 is published. SALON-004 is published. The research note is published."),
   component: SalonIndex,
 });
 
@@ -59,7 +59,7 @@ function SalonIndex() {
               id: "SALON-010",
               title: SALON_010_TITLE,
               status: "Filed. v0.1. Approved by Tuzi. Dramatised narrative, not a transcript. Not posted to X.",
-              note: `記 · CREDIT: ${SALON_010_CREDIT} · ${SALON_010_REVIEW}`,
+              note: `記 · CREDIT: ${SALON_010_CREDIT} · ${SALON_010_REVIEW} · 2026-11-12 後續附記已收入。證明桌台帳不改。`,
               light: `/salon/${SALON_010_SLUG}.html`,
             },
             {

@@ -18,7 +18,7 @@ export const Route = createFileRoute("/salon/final-gate")({
   head: () =>
     pageMeta(
       `${SALON_010_TITLE} · Salon · Play`,
-      "SALON-010 v0.1. Category 記. Filed. Approved by Tuzi. A dramatised narrative, not a transcript. Not peer-reviewed. Not posted to X.",
+      "SALON-010 v0.1. Category 記. Filed. Approved by Tuzi. A dramatised narrative, not a transcript. A 2026-11-12 postscript is included. Not peer-reviewed. Not posted to X. The proof-table ledger is unchanged.",
     ),
   component: Salon010Page,
 });
