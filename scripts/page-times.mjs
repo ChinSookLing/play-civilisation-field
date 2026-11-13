@@ -47,6 +47,7 @@ const files = {
   ladder: ["src/lib/play/salon-piece.ts", ...shared],
   "plain-water": ["src/lib/play/plain-water.ts", "src/routes/salon/plain-water.tsx", ...shared],
   "SALON-JEV-001": ["src/lib/play/salon-jev.ts", "src/lib/play/salon-jev-001.md", "src/routes/salon/jev-controlled-probe-001.tsx", ...shared],
+  "SALON-014": ["src/lib/play/salon-014.ts", "docs/salon/SALON-014-v0.1.md", "src/routes/salon/before-the-16th.tsx", ...shared],
   "SALON-013": ["src/lib/play/salon-013.ts", "docs/salon/SALON-013-v0.1.md", "src/routes/salon/said-tired.tsx", ...shared],
   "SALON-012": ["src/lib/play/salon-012.ts", "docs/salon/SALON-012-v0.5.md", "src/routes/salon/summit-flag.tsx", ...shared],
   "SALON-011": ["src/lib/play/salon-011.ts", "docs/salon/SALON-011-v0.3.md", "src/routes/salon/red-ink.tsx", ...shared],

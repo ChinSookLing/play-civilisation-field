@@ -78,6 +78,9 @@ import { Route as SalonRedInkDottxtRouteImport } from './routes/salon/red-ink[.]
 import { Route as SalonSummitFlagRouteImport } from './routes/salon/summit-flag'
 import { Route as SalonSummitFlagDothtmlRouteImport } from './routes/salon/summit-flag[.]html'
 import { Route as SalonSummitFlagDottxtRouteImport } from './routes/salon/summit-flag[.]txt'
+import { Route as SalonBeforeThe16thRouteImport } from './routes/salon/before-the-16th'
+import { Route as SalonBeforeThe16thDothtmlRouteImport } from './routes/salon/before-the-16th[.]html'
+import { Route as SalonBeforeThe16thDottxtRouteImport } from './routes/salon/before-the-16th[.]txt'
 import { Route as SalonSaidTiredRouteImport } from './routes/salon/said-tired'
 import { Route as SalonSaidTiredDothtmlRouteImport } from './routes/salon/said-tired[.]html'
 import { Route as SalonSaidTiredDottxtRouteImport } from './routes/salon/said-tired[.]txt'
@@ -544,6 +547,21 @@ const SalonSummitFlagDothtmlRoute = SalonSummitFlagDothtmlRouteImport.update({
 const SalonSummitFlagDottxtRoute = SalonSummitFlagDottxtRouteImport.update({
   id: '/summit-flag.txt',
   path: '/summit-flag.txt',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonBeforeThe16thRoute = SalonBeforeThe16thRouteImport.update({
+  id: '/before-the-16th',
+  path: '/before-the-16th',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonBeforeThe16thDothtmlRoute = SalonBeforeThe16thDothtmlRouteImport.update({
+  id: '/before-the-16th.html',
+  path: '/before-the-16th.html',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonBeforeThe16thDottxtRoute = SalonBeforeThe16thDottxtRouteImport.update({
+  id: '/before-the-16th.txt',
+  path: '/before-the-16th.txt',
   getParentRoute: () => SalonRoute,
 } as any)
 const SalonSaidTiredRoute = SalonSaidTiredRouteImport.update({
@@ -1226,6 +1244,9 @@ export interface FileRoutesByFullPath {
   '/salon/summit-flag': typeof SalonSummitFlagRoute
   '/salon/summit-flag.html': typeof SalonSummitFlagDothtmlRoute
   '/salon/summit-flag.txt': typeof SalonSummitFlagDottxtRoute
+  '/salon/before-the-16th': typeof SalonBeforeThe16thRoute
+  '/salon/before-the-16th.html': typeof SalonBeforeThe16thDothtmlRoute
+  '/salon/before-the-16th.txt': typeof SalonBeforeThe16thDottxtRoute
   '/salon/said-tired': typeof SalonSaidTiredRoute
   '/salon/said-tired.html': typeof SalonSaidTiredDothtmlRoute
   '/salon/said-tired.txt': typeof SalonSaidTiredDottxtRoute
@@ -1401,6 +1422,9 @@ export interface FileRoutesByTo {
   '/salon/summit-flag': typeof SalonSummitFlagRoute
   '/salon/summit-flag.html': typeof SalonSummitFlagDothtmlRoute
   '/salon/summit-flag.txt': typeof SalonSummitFlagDottxtRoute
+  '/salon/before-the-16th': typeof SalonBeforeThe16thRoute
+  '/salon/before-the-16th.html': typeof SalonBeforeThe16thDothtmlRoute
+  '/salon/before-the-16th.txt': typeof SalonBeforeThe16thDottxtRoute
   '/salon/said-tired': typeof SalonSaidTiredRoute
   '/salon/said-tired.html': typeof SalonSaidTiredDothtmlRoute
   '/salon/said-tired.txt': typeof SalonSaidTiredDottxtRoute
@@ -1579,6 +1603,9 @@ export interface FileRoutesById {
   '/salon/summit-flag': typeof SalonSummitFlagRoute
   '/salon/summit-flag.html': typeof SalonSummitFlagDothtmlRoute
   '/salon/summit-flag.txt': typeof SalonSummitFlagDottxtRoute
+  '/salon/before-the-16th': typeof SalonBeforeThe16thRoute
+  '/salon/before-the-16th.html': typeof SalonBeforeThe16thDothtmlRoute
+  '/salon/before-the-16th.txt': typeof SalonBeforeThe16thDottxtRoute
   '/salon/said-tired': typeof SalonSaidTiredRoute
   '/salon/said-tired.html': typeof SalonSaidTiredDothtmlRoute
   '/salon/said-tired.txt': typeof SalonSaidTiredDottxtRoute
@@ -1758,6 +1785,9 @@ export interface FileRouteTypes {
     | '/salon/summit-flag'
     | '/salon/summit-flag.html'
     | '/salon/summit-flag.txt'
+    | '/salon/before-the-16th'
+    | '/salon/before-the-16th.html'
+    | '/salon/before-the-16th.txt'
     | '/salon/said-tired'
     | '/salon/said-tired.html'
     | '/salon/said-tired.txt'
@@ -1933,6 +1963,9 @@ export interface FileRouteTypes {
     | '/salon/summit-flag'
     | '/salon/summit-flag.html'
     | '/salon/summit-flag.txt'
+    | '/salon/before-the-16th'
+    | '/salon/before-the-16th.html'
+    | '/salon/before-the-16th.txt'
     | '/salon/said-tired'
     | '/salon/said-tired.html'
     | '/salon/said-tired.txt'
@@ -2110,6 +2143,9 @@ export interface FileRouteTypes {
     | '/salon/summit-flag'
     | '/salon/summit-flag.html'
     | '/salon/summit-flag.txt'
+    | '/salon/before-the-16th'
+    | '/salon/before-the-16th.html'
+    | '/salon/before-the-16th.txt'
     | '/salon/said-tired'
     | '/salon/said-tired.html'
     | '/salon/said-tired.txt'
@@ -2755,6 +2791,27 @@ declare module '@tanstack/react-router' {
       path: '/summit-flag.txt'
       fullPath: '/salon/summit-flag.txt'
       preLoaderRoute: typeof SalonSummitFlagDottxtRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/before-the-16th': {
+      id: '/salon/before-the-16th'
+      path: '/before-the-16th'
+      fullPath: '/salon/before-the-16th'
+      preLoaderRoute: typeof SalonBeforeThe16thRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/before-the-16th.html': {
+      id: '/salon/before-the-16th.html'
+      path: '/before-the-16th.html'
+      fullPath: '/salon/before-the-16th.html'
+      preLoaderRoute: typeof SalonBeforeThe16thDothtmlRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/before-the-16th.txt': {
+      id: '/salon/before-the-16th.txt'
+      path: '/before-the-16th.txt'
+      fullPath: '/salon/before-the-16th.txt'
+      preLoaderRoute: typeof SalonBeforeThe16thDottxtRouteImport
       parentRoute: typeof SalonRoute
     }
     '/salon/said-tired': {
@@ -3761,6 +3818,9 @@ interface SalonRouteChildren {
   SalonSummitFlagRoute: typeof SalonSummitFlagRoute
   SalonSummitFlagDothtmlRoute: typeof SalonSummitFlagDothtmlRoute
   SalonSummitFlagDottxtRoute: typeof SalonSummitFlagDottxtRoute
+  SalonBeforeThe16thRoute: typeof SalonBeforeThe16thRoute
+  SalonBeforeThe16thDothtmlRoute: typeof SalonBeforeThe16thDothtmlRoute
+  SalonBeforeThe16thDottxtRoute: typeof SalonBeforeThe16thDottxtRoute
   SalonSaidTiredRoute: typeof SalonSaidTiredRoute
   SalonSaidTiredDothtmlRoute: typeof SalonSaidTiredDothtmlRoute
   SalonSaidTiredDottxtRoute: typeof SalonSaidTiredDottxtRoute
@@ -3805,6 +3865,9 @@ const SalonRouteChildren: SalonRouteChildren = {
   SalonSummitFlagRoute: SalonSummitFlagRoute,
   SalonSummitFlagDothtmlRoute: SalonSummitFlagDothtmlRoute,
   SalonSummitFlagDottxtRoute: SalonSummitFlagDottxtRoute,
+  SalonBeforeThe16thRoute: SalonBeforeThe16thRoute,
+  SalonBeforeThe16thDothtmlRoute: SalonBeforeThe16thDothtmlRoute,
+  SalonBeforeThe16thDottxtRoute: SalonBeforeThe16thDottxtRoute,
   SalonSaidTiredRoute: SalonSaidTiredRoute,
   SalonSaidTiredDothtmlRoute: SalonSaidTiredDothtmlRoute,
   SalonSaidTiredDottxtRoute: SalonSaidTiredDottxtRoute,

@@ -11,13 +11,14 @@ import { SALON_006_REVIEW, SALON_006_SLUG, SALON_006_TITLE } from "@/lib/play/sa
 import { SALON_007_CREDIT, SALON_007_REVIEW, SALON_007_SLUG, SALON_007_TITLE } from "@/lib/play/salon-007";
 import { SALON_008_CREDIT, SALON_008_REVIEW, SALON_008_SLUG, SALON_008_TITLE } from "@/lib/play/salon-008";
 import { SALON_009_CREDIT, SALON_009_REVIEW, SALON_009_SLUG, SALON_009_TITLE } from "@/lib/play/salon-009";
+import { SALON_014_CREDIT, SALON_014_REVIEW, SALON_014_SLUG, SALON_014_TITLE } from "@/lib/play/salon-014";
 import { SALON_013_CREDIT, SALON_013_REVIEW, SALON_013_SLUG, SALON_013_TITLE } from "@/lib/play/salon-013";
 import { SALON_012_CREDIT, SALON_012_REVIEW, SALON_012_SLUG, SALON_012_TITLE } from "@/lib/play/salon-012";
 import { SALON_011_CREDIT, SALON_011_REVIEW, SALON_011_SLUG, SALON_011_TITLE } from "@/lib/play/salon-011";
 import { SALON_010_CREDIT, SALON_010_REVIEW, SALON_010_SLUG, SALON_010_TITLE } from "@/lib/play/salon-010";
 
 export const Route = createFileRoute("/salon/")({
-  head: () => pageMeta("Salon · Play · Civilisation Field", "Thirteen pieces. SALON-013 is filed, v0.1. The manuscript says the six-runner direct construction passed in-circle proof and independent re-review. Not peer-reviewed. Not posted to X. The proof-table ledger is unchanged. SALON-012 is filed, v0.5 FINAL, approved by Tuzi, not peer-reviewed, not posted to X. SALON-011 is filed, v0.3, a dramatised narrative not a transcript, six-runner direct construction unfinished, not posted to X. SALON-010 is filed, v0.1, approved by Tuzi, a dramatised narrative not a transcript, with a 2026-11-12 postscript, not posted to X. The proof-table ledger is unchanged. SALON-009 is filed, v0.1, approved by Tuzi, a narrative not a transcript, not posted to X. SALON-008 is filed, v0.1, approved by Tuzi, review still pending, not posted to X. SALON-007 is filed, v0.5, approved by Tuzi, not posted to X. SALON-006 files the Lunch 007 report, v4, not posted to X. SALON-005 is published. SALON-004 is published. The research note is published."),
+  head: () => pageMeta("Salon · Play · Civilisation Field", "Fourteen pieces. SALON-014 is filed, v0.1. The manuscript says the seven-runner direct construction passed an in-circle ruling on 2026-11-13, with independent re-review. Not externally peer-reviewed. Novelty not checked. One formula for every N remains open. Not posted to X. The proof-table ledger is unchanged. SALON-013 is filed, v0.1. The manuscript says the six-runner direct construction passed in-circle proof and independent re-review. Not peer-reviewed. Not posted to X. The proof-table ledger is unchanged. SALON-012 is filed, v0.5 FINAL, approved by Tuzi, not peer-reviewed, not posted to X. SALON-011 is filed, v0.3, a dramatised narrative not a transcript, six-runner direct construction unfinished, not posted to X. SALON-010 is filed, v0.1, approved by Tuzi, a dramatised narrative not a transcript, with a 2026-11-12 postscript, not posted to X. The proof-table ledger is unchanged. SALON-009 is filed, v0.1, approved by Tuzi, a narrative not a transcript, not posted to X. SALON-008 is filed, v0.1, approved by Tuzi, review still pending, not posted to X. SALON-007 is filed, v0.5, approved by Tuzi, not posted to X. SALON-006 files the Lunch 007 report, v4, not posted to X. SALON-005 is published. SALON-004 is published. The research note is published."),
   component: SalonIndex,
 });
 
@@ -30,6 +31,14 @@ function SalonIndex() {
       sections={[
         {
           items: [
+            {
+              href: `/salon/${SALON_014_SLUG}`,
+              id: "SALON-014",
+              title: SALON_014_TITLE,
+              status: "Filed. v0.1. In-circle seven-runner note. Not externally peer-reviewed. Not posted to X. The proof-table ledger is unchanged.",
+              note: `記 · CREDIT: ${SALON_014_CREDIT} · ${SALON_014_REVIEW}`,
+              light: `/salon/${SALON_014_SLUG}.html`,
+            },
             {
               href: `/salon/${SALON_013_SLUG}`,
               id: "SALON-013",
