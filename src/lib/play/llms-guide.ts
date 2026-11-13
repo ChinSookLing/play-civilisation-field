@@ -33,6 +33,8 @@ https://play.civilisationfield.com/gathering/proof-table-008/new-branch.txt
 https://play.civilisationfield.com/gathering/proof-table-008/new-branch/verification.txt
 https://play.civilisationfield.com/gathering/proof-table-008/t6.txt
 https://play.civilisationfield.com/gathering/proof-table-008/t6/verification.txt
+https://play.civilisationfield.com/gathering/proof-table-008/t7.txt
+https://play.civilisationfield.com/gathering/proof-table-008/t7/verification.txt
 https://play.civilisationfield.com/gathering/proof-table-006/table.txt
 https://play.civilisationfield.com/gathering/proof-table-005/table.txt
 https://play.civilisationfield.com/gathering/proof-table-004/table.txt
@@ -203,6 +205,11 @@ PT-008 six-runner construction T6 is filed separately. 整合修訂稿 v0.2. In-
 https://play.civilisationfield.com/gathering/proof-table-008/t6
 Verification: https://play.civilisationfield.com/gathering/proof-table-008/t6/verification.txt
 Markdown: https://play.civilisationfield.com/gathering/proof-table-008/t6/verification.md
+PT-008 seven-runner construction T7 is filed separately. 外審準備稿 v0.3. In-circle ruling 2026-11-13, as written in the manuscript. Not externally peer-reviewed. Novelty not checked. One formula for every N remains open. The review package is included. Author manuscripts named in that package are still pending. The proof table stays OPEN.
+https://play.civilisationfield.com/gathering/proof-table-008/t7
+Verification: https://play.civilisationfield.com/gathering/proof-table-008/t7/verification.txt
+Markdown: https://play.civilisationfield.com/gathering/proof-table-008/t7/verification.md
+Package: https://play.civilisationfield.com/gathering/proof-table-008/t7/PT008-T7-Gathering-Review-v0.3.zip
 Proof Table 006 is prepared. One ticked speed picture on one shared t. Problem: 孤圈 · Lonely Circle. Not a proof of every speed tuple. Rules v0.5.1. No lines yet.
 https://play.civilisationfield.com/gathering/proof-table-006/table
 Plain text: https://play.civilisationfield.com/gathering/proof-table-006/table.txt

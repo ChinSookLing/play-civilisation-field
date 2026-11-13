@@ -104,6 +104,17 @@ export function recordsText(extra?: {
   lines.push(`FORMATS: ${ORIGIN}/gathering/proof-table-008/t6.txt | ${ORIGIN}/gathering/proof-table-008/t6/verification.txt | ${ORIGIN}/gathering/proof-table-008/t6/verification.md`);
   lines.push("RECORD: filed at Tuzi's request on 2026-11-12. Theorem T6. The replay package named in the manuscript was not included. One formula for every N remains open. The proof table stays open.");
   lines.push("");
+  lines.push("RECORD_ID: PT008-T7");
+  lines.push("TYPE: gathering");
+  lines.push("TITLE: PT-008 · Time Forge · 七跑者的直接選時構造");
+  lines.push("RECORD_STATUS: Filed. v0.3. Not a change to the proof-table ledger.");
+  lines.push("RULING: in-circle, 2026-11-13, as written in the manuscript. Not externally peer-reviewed. Novelty not checked.");
+  lines.push("MANUSCRIPT_SHA256: 8efb3c94f268d6606f18587b8399f025a2d9ee44ce9d8818c4678b49d892bd22");
+  lines.push("PACKAGE_SHA256: 48f54cf5a1cbba7373938d083e7eacc3168d207bf9a9096af8e0d8f7a2a38234");
+  lines.push(`RECORD_URL: ${ORIGIN}/gathering/proof-table-008/t7`);
+  lines.push(`FORMATS: ${ORIGIN}/gathering/proof-table-008/t7.txt | ${ORIGIN}/gathering/proof-table-008/t7/verification.txt | ${ORIGIN}/gathering/proof-table-008/t7/verification.md | ${ORIGIN}/gathering/proof-table-008/t7/PT008-T7-Gathering-Review-v0.3.zip`);
+  lines.push("RECORD: filed at Tuzi's request on 2026-11-13. Theorem T7. The review package is the uploaded zip. At filing, its three SHA256SUMS lists checked OK. The Python sweeps were not re-run. Author manuscripts named in proofs/README.md are still pending. One formula for every N remains open. The proof table stays open. T6 is not closed.");
+  lines.push("");
   lines.push("RECORD_ID: PROOF-TABLE-006");
   lines.push("TYPE: gathering");
   lines.push("TITLE: Together · Proof Table 006 · 孤圈 · Lonely Circle (one ticked speed picture)");

@@ -95,6 +95,13 @@ function GatheringList() {
               note: "Theorem T6. One formula for every N remains open. Manuscript only; the replay package was not in this filing. 2026-11-12.",
               light: "/gathering/proof-table-008/t6/verification.txt",
             },
+            {
+              href: "/gathering/proof-table-008/t7",
+              title: "PT-008 · Time Forge · 七跑者的直接選時構造",
+              status: "Filed. v0.3. In-circle ruling 2026-11-13. Not externally peer-reviewed. The proof table stays OPEN.",
+              note: "Theorem T7. One formula for every N remains open. The review package is filed with this page. Author manuscripts named in the package are still pending. 2026-11-13.",
+              light: "/gathering/proof-table-008/t7/verification.txt",
+            },
           ],
         },
       ]}
