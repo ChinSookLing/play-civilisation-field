@@ -39,6 +39,8 @@ import { Route as StartDottxtRouteImport } from './routes/start[.]txt'
 import { Route as ApiImportHistoryRouteImport } from './routes/api/import-history'
 import { Route as DataGameDotjsonRouteImport } from './routes/data/game[.]json'
 import { Route as DataGameDotsgfRouteImport } from './routes/data/game[.]sgf'
+import { Route as DraftTypeCRouteImport } from './routes/draft/type-c'
+import { Route as DraftTypeCDottxtRouteImport } from './routes/draft/type-c[.]txt'
 import { Route as GamesSplatRouteImport } from './routes/games/$'
 import { Route as GamesIndexDotjsonRouteImport } from './routes/games/index[.]json'
 import { Route as GatheringIndexRouteImport } from './routes/gathering/index'
@@ -162,6 +164,7 @@ import { Route as GatheringProofTableRulesDottxtRouteImport } from './routes/gat
 import { Route as Psyche001CommentRouteImport } from './routes/psyche/001/comment'
 import { Route as Psyche001PlayRouteImport } from './routes/psyche/001/play'
 import { Route as Psyche001PlayDottxtRouteImport } from './routes/psyche/001/play[.]txt'
+import { Route as Psyche001StartRouteImport } from './routes/psyche/001/start'
 import { Route as Psyche001StartDottxtRouteImport } from './routes/psyche/001/start[.]txt'
 import { Route as ApiGamesGameIdHandoffRouteImport } from './routes/api/games/$gameId.handoff'
 import { Route as ApiGamesGameIdJevRouteImport } from './routes/api/games/$gameId.jev'
@@ -348,6 +351,16 @@ const DataGameDotjsonRoute = DataGameDotjsonRouteImport.update({
 const DataGameDotsgfRoute = DataGameDotsgfRouteImport.update({
   id: '/data/game.sgf',
   path: '/data/game.sgf',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DraftTypeCRoute = DraftTypeCRouteImport.update({
+  id: '/draft/type-c',
+  path: '/draft/type-c',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DraftTypeCDottxtRoute = DraftTypeCDottxtRouteImport.update({
+  id: '/draft/type-c.txt',
+  path: '/draft/type-c.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GamesSplatRoute = GamesSplatRouteImport.update({
@@ -1040,6 +1053,11 @@ const Psyche001PlayDottxtRoute = Psyche001PlayDottxtRouteImport.update({
   path: '/play.txt',
   getParentRoute: () => Psyche001Route,
 } as any)
+const Psyche001StartRoute = Psyche001StartRouteImport.update({
+  id: '/start',
+  path: '/start',
+  getParentRoute: () => Psyche001Route,
+} as any)
 const Psyche001StartDottxtRoute = Psyche001StartDottxtRouteImport.update({
   id: '/start.txt',
   path: '/start.txt',
@@ -1286,6 +1304,8 @@ export interface FileRoutesByFullPath {
   '/api/import-history': typeof ApiImportHistoryRoute
   '/data/game.json': typeof DataGameDotjsonRoute
   '/data/game.sgf': typeof DataGameDotsgfRoute
+  '/draft/type-c': typeof DraftTypeCRoute
+  '/draft/type-c.txt': typeof DraftTypeCDottxtRoute
   '/games/$': typeof GamesSplatRoute
   '/games/index.json': typeof GamesIndexDotjsonRoute
   '/gathering/$': typeof GatheringSplatRoute
@@ -1399,6 +1419,7 @@ export interface FileRoutesByFullPath {
   '/psyche/001/comment': typeof Psyche001CommentRoute
   '/psyche/001/play': typeof Psyche001PlayRoute
   '/psyche/001/play.txt': typeof Psyche001PlayDottxtRoute
+  '/psyche/001/start': typeof Psyche001StartRoute
   '/psyche/001/start.txt': typeof Psyche001StartDottxtRoute
   '/api/games/': typeof ApiGamesIndexRoute
   '/gathering/breakfast-002/': typeof GatheringBreakfast002IndexRoute
@@ -1475,6 +1496,8 @@ export interface FileRoutesByTo {
   '/api/import-history': typeof ApiImportHistoryRoute
   '/data/game.json': typeof DataGameDotjsonRoute
   '/data/game.sgf': typeof DataGameDotsgfRoute
+  '/draft/type-c': typeof DraftTypeCRoute
+  '/draft/type-c.txt': typeof DraftTypeCDottxtRoute
   '/games/$': typeof GamesSplatRoute
   '/games/index.json': typeof GamesIndexDotjsonRoute
   '/gathering/$': typeof GatheringSplatRoute
@@ -1588,6 +1611,7 @@ export interface FileRoutesByTo {
   '/psyche/001/comment': typeof Psyche001CommentRoute
   '/psyche/001/play': typeof Psyche001PlayRoute
   '/psyche/001/play.txt': typeof Psyche001PlayDottxtRoute
+  '/psyche/001/start': typeof Psyche001StartRoute
   '/psyche/001/start.txt': typeof Psyche001StartDottxtRoute
   '/api/games': typeof ApiGamesIndexRoute
   '/gathering/breakfast-002': typeof GatheringBreakfast002IndexRoute
@@ -1668,6 +1692,8 @@ export interface FileRoutesById {
   '/api/import-history': typeof ApiImportHistoryRoute
   '/data/game.json': typeof DataGameDotjsonRoute
   '/data/game.sgf': typeof DataGameDotsgfRoute
+  '/draft/type-c': typeof DraftTypeCRoute
+  '/draft/type-c.txt': typeof DraftTypeCDottxtRoute
   '/games/$': typeof GamesSplatRoute
   '/games/index.json': typeof GamesIndexDotjsonRoute
   '/gathering/$': typeof GatheringSplatRoute
@@ -1781,6 +1807,7 @@ export interface FileRoutesById {
   '/psyche/001/comment': typeof Psyche001CommentRoute
   '/psyche/001/play': typeof Psyche001PlayRoute
   '/psyche/001/play.txt': typeof Psyche001PlayDottxtRoute
+  '/psyche/001/start': typeof Psyche001StartRoute
   '/psyche/001/start.txt': typeof Psyche001StartDottxtRoute
   '/api/games/': typeof ApiGamesIndexRoute
   '/gathering/breakfast-002/': typeof GatheringBreakfast002IndexRoute
@@ -1862,6 +1889,8 @@ export interface FileRouteTypes {
     | '/api/import-history'
     | '/data/game.json'
     | '/data/game.sgf'
+    | '/draft/type-c'
+    | '/draft/type-c.txt'
     | '/games/$'
     | '/games/index.json'
     | '/gathering/$'
@@ -1975,6 +2004,7 @@ export interface FileRouteTypes {
     | '/psyche/001/comment'
     | '/psyche/001/play'
     | '/psyche/001/play.txt'
+    | '/psyche/001/start'
     | '/psyche/001/start.txt'
     | '/api/games/'
     | '/gathering/breakfast-002/'
@@ -2051,6 +2081,8 @@ export interface FileRouteTypes {
     | '/api/import-history'
     | '/data/game.json'
     | '/data/game.sgf'
+    | '/draft/type-c'
+    | '/draft/type-c.txt'
     | '/games/$'
     | '/games/index.json'
     | '/gathering/$'
@@ -2164,6 +2196,7 @@ export interface FileRouteTypes {
     | '/psyche/001/comment'
     | '/psyche/001/play'
     | '/psyche/001/play.txt'
+    | '/psyche/001/start'
     | '/psyche/001/start.txt'
     | '/api/games'
     | '/gathering/breakfast-002'
@@ -2243,6 +2276,8 @@ export interface FileRouteTypes {
     | '/api/import-history'
     | '/data/game.json'
     | '/data/game.sgf'
+    | '/draft/type-c'
+    | '/draft/type-c.txt'
     | '/games/$'
     | '/games/index.json'
     | '/gathering/$'
@@ -2356,6 +2391,7 @@ export interface FileRouteTypes {
     | '/psyche/001/comment'
     | '/psyche/001/play'
     | '/psyche/001/play.txt'
+    | '/psyche/001/start'
     | '/psyche/001/start.txt'
     | '/api/games/'
     | '/gathering/breakfast-002/'
@@ -2436,6 +2472,8 @@ export interface RootRouteChildren {
   ApiImportHistoryRoute: typeof ApiImportHistoryRoute
   DataGameDotjsonRoute: typeof DataGameDotjsonRoute
   DataGameDotsgfRoute: typeof DataGameDotsgfRoute
+  DraftTypeCRoute: typeof DraftTypeCRoute
+  DraftTypeCDottxtRoute: typeof DraftTypeCDottxtRoute
   GoGameIdRoute: typeof GoGameIdRoute
   NotesNoteIdRoute: typeof NotesNoteIdRoute
   NotesChar123noteIdChar125DottxtRoute: typeof NotesChar123noteIdChar125DottxtRoute
@@ -2667,6 +2705,20 @@ declare module '@tanstack/react-router' {
       path: '/data/game.sgf'
       fullPath: '/data/game.sgf'
       preLoaderRoute: typeof DataGameDotsgfRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/draft/type-c': {
+      id: '/draft/type-c'
+      path: '/draft/type-c'
+      fullPath: '/draft/type-c'
+      preLoaderRoute: typeof DraftTypeCRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/draft/type-c.txt': {
+      id: '/draft/type-c.txt'
+      path: '/draft/type-c.txt'
+      fullPath: '/draft/type-c.txt'
+      preLoaderRoute: typeof DraftTypeCDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/games/$': {
@@ -3530,6 +3582,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Psyche001PlayDottxtRouteImport
       parentRoute: typeof Psyche001Route
     }
+    '/psyche/001/start': {
+      id: '/psyche/001/start'
+      path: '/start'
+      fullPath: '/psyche/001/start'
+      preLoaderRoute: typeof Psyche001StartRouteImport
+      parentRoute: typeof Psyche001Route
+    }
     '/psyche/001/start.txt': {
       id: '/psyche/001/start.txt'
       path: '/start.txt'
@@ -4058,6 +4117,7 @@ interface Psyche001RouteChildren {
   Psyche001CommentRoute: typeof Psyche001CommentRoute
   Psyche001PlayRoute: typeof Psyche001PlayRoute
   Psyche001PlayDottxtRoute: typeof Psyche001PlayDottxtRoute
+  Psyche001StartRoute: typeof Psyche001StartRoute
   Psyche001StartDottxtRoute: typeof Psyche001StartDottxtRoute
 }
 
@@ -4065,6 +4125,7 @@ const Psyche001RouteChildren: Psyche001RouteChildren = {
   Psyche001CommentRoute: Psyche001CommentRoute,
   Psyche001PlayRoute: Psyche001PlayRoute,
   Psyche001PlayDottxtRoute: Psyche001PlayDottxtRoute,
+  Psyche001StartRoute: Psyche001StartRoute,
   Psyche001StartDottxtRoute: Psyche001StartDottxtRoute,
 }
 
@@ -4241,6 +4302,8 @@ const rootRouteChildren: RootRouteChildren = {
   ApiImportHistoryRoute: ApiImportHistoryRoute,
   DataGameDotjsonRoute: DataGameDotjsonRoute,
   DataGameDotsgfRoute: DataGameDotsgfRoute,
+  DraftTypeCRoute: DraftTypeCRoute,
+  DraftTypeCDottxtRoute: DraftTypeCDottxtRoute,
   GoGameIdRoute: GoGameIdRoute,
   NotesNoteIdRoute: NotesNoteIdRoute,
   NotesChar123noteIdChar125DottxtRoute: NotesChar123noteIdChar125DottxtRoute,

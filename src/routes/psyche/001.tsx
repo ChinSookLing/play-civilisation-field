@@ -10,6 +10,7 @@ import {
   PSYCHE_001_ROUND,
   PSYCHE_001_ROWS,
   PSYCHE_001_RULES,
+  PSYCHE_001_START_HTML,
   PSYCHE_001_STATUS,
   PSYCHE_001_STATUS_EN,
   PSYCHE_001_TITLE,
@@ -96,6 +97,12 @@ function Psyche001() {
             Play the night
           </a>
           . Hermes's v0.5.1 game. Packets end with END-PACKET v0.5.1. An AI that cannot open the page plays from a pasted packet in the same format. No score. No ranking.
+        </p>
+        <p className="mt-2 text-sm leading-relaxed">
+          <a href={PSYCHE_001_START_HTML} className="text-fg underline decoration-1 underline-offset-4">
+            Start from the packet
+          </a>
+          , in the page, if a plain-text file does not open. No JavaScript.
         </p>
         <h2 className="mt-8 text-xl tracking-tight">Rules (chair ruling)</h2>
         <ol className="mt-3 list-decimal space-y-1 pl-5 text-sm leading-relaxed">
