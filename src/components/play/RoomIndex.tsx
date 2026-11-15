@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { SheetBottom, SheetTop } from "@/components/play/SheetMark";
 import type { Sheet } from "@/lib/play/sheet";
 
@@ -17,6 +18,7 @@ export function RoomIndex({
   sections,
   sheet,
   numbered = false,
+  banner,
 }: {
   mark: string;
   title: string;
@@ -24,6 +26,7 @@ export function RoomIndex({
   sections: { heading?: string; items: RoomItem[] }[];
   sheet: Sheet;
   numbered?: boolean;
+  banner?: ReactNode;
 }) {
   return (
     <main className="min-h-dvh bg-bg text-fg">
@@ -32,6 +35,7 @@ export function RoomIndex({
         <p className="text-xs tracking-[0.18em] text-muted uppercase">Civilisation Field · {mark}</p>
         <h1 className="mt-2 font-display text-4xl tracking-tight">{title}</h1>
         <p className="mt-4 text-base leading-relaxed text-fg">{intro}</p>
+        {banner}
         {sections.map((section) => (
           <section key={section.heading ?? "items"} className="mt-8">
             {section.heading ? <h2 className="font-display text-2xl">{section.heading}</h2> : null}

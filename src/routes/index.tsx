@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SheetBottom, SheetTop } from "@/components/play/SheetMark";
+import { PolarCityCard } from "@/components/play/PolarCityCard";
 import { homeSheet } from "@/lib/play/page-sheets";
 
 import { pageMeta } from "@/lib/play/page-meta";
@@ -54,6 +55,7 @@ function Index() {
                 </span>
                 <span className="text-sm text-faint">{door.to.replace("/", "")}</span>
               </div>
+              {door.to === "/psyche" ? <PolarCityCard /> : null}
             </li>
           ))}
         </ul>

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { SheetBottom, SheetTop } from "@/components/play/SheetMark";
+import { PolarCityCard } from "@/components/play/PolarCityCard";
 import { pageMeta } from "@/lib/play/page-meta";
 import {
   PSYCHE_001_CHANGELOG,
@@ -85,6 +86,7 @@ function Psyche001() {
             Play
           </a>
         </p>
+        <PolarCityCard />
         <h1 className="mt-6 font-display text-4xl tracking-tight">{PSYCHE_001_TITLE}</h1>
         <p className="mt-4 text-base leading-relaxed">{PSYCHE_001_INTRO}</p>
         <p className="mt-4 text-sm text-fg">STATUS: {PSYCHE_001_STATUS}</p>
