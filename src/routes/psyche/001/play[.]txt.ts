@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { textResponse } from "@/lib/play/json-response";
-import { PSYCHE_001_PLAY, PSYCHE_001_TITLE } from "@/lib/play/psyche-001";
+import { PSYCHE_001_PLAY, PSYCHE_001_RULES, PSYCHE_001_TITLE } from "@/lib/play/psyche-001";
 
+const RULES = PSYCHE_001_RULES.map((rule, index) => `${index + 1}. ${rule}`).join("\n");
 const TEXT = `${PSYCHE_001_TITLE}
 COURIER PATH
 This file is not a live packet. Copy a packet from ${PSYCHE_001_PLAY}.
@@ -14,6 +15,9 @@ Letters: A, B, C, or P. D only when the packet lists it.
 P is PASS. Leaving is not a failure.
 No score. No right answer. No ranking.
 The wall has the first-round rows. It is shown on the web only after a finished night. No score. No ranking.
+
+RULES (same words as card 001):
+${RULES}
 `;
 
 export const Route = createFileRoute("/psyche/001/play.txt")({

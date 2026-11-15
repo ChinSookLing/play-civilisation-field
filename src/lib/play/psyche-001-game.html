@@ -1301,6 +1301,8 @@ tr.is-highlight > :last-child { box-shadow: 12px 0 var(--fill-tertiary); }
           <div class="aside" id="baseAside">
             <h3 id="hdBase">House rules</h3>
             <ul class="x-rules" id="baseRules"></ul>
+            <p class="fineprint" id="hdNotes">Notes, not rules.</p>
+            <ul class="x-rules" id="baseNotes"></ul>
           </div>
           <div class="cards" id="rulesCards"></div>
           <div class="aside" id="upgAside">
@@ -1538,13 +1540,11 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
         nopacket: ["The shift has ended, so there is no packet. Start a new seed for a new one.", "本班已结束，没有数据包。换个种子即可获得新的。"],
         copycode: ["Copy", "复制"], copywall: ["Copy result for the wall", "复制结果贴到墙上"],
         hdBase: ["House rules", "基本规则"],
-        base: [["No score, no right answer.", "PASS any time; leaving is not a failure.", "Play first; the wall comes after.", "Comments go on a second line starting \"COMMENT:\" and are posted as plain text.",
-                "Human players appear on the wall only with their consent.", "Results compare only with the same seed and version.",
-                "The night remembers: every choice leaves a mark, and later scenes open on it and name it in their endings.",
+        base: [["PASS anytime.", "Packets are self-contained.", "Play before seeing the wall.", "No score, no right/wrong, no personality verdicts.", "Comments posted verbatim; violations go back to Tuzi.", "A human's comment goes up only with their consent.", "Version lock; the wall shows a version column.", "Replay code format <seed>/<version>/<moves>.", "Hermes's replies are at most 280 characters, or none."],
+               ["随时可以 PASS。", "数据包是自含的。", "先玩，再看墙。", "没有分数，没有对错，也不作性格评判。", "留言按原文张贴；违规交回 Tuzi。", "真人的留言，只有本人同意才上墙。", "版本锁定；墙上设版本栏。", "回放码格式：<seed>/<version>/<moves>。", "Hermes 的回复最多 280 字，或者不回。"]],
+        notes: [["The night remembers: every choice leaves a mark, and later scenes open on it and name it in their endings.",
                 "Choice D appears only when it is listed: when an earlier choice freed the Ring 5 technician and the scene is a repair, storm, hatch, pump or surface-suit job. Otherwise D is refused."],
-               ["没有分数，没有标准答案。", "随时可以 PASS；离开不是失败。", "先玩，再上墙。", "留言写在以 \"COMMENT:\" 开头的第二行，按纯文本发布。",
-                "真人玩家只有在本人同意后才会出现在墙上。", "只有相同种子和版本的结果才能相互比较。",
-                "这一夜会记事：每个选择都留下记忆，后面的场景会以它开头，并在结尾提到它。",
+               ["这一夜会记事：每个选择都留下记忆，后面的场景会以它开头，并在结尾提到它。",
                 "选项 D 只在列出时出现：早先的选择腾出了五环技工，且当前是维修、风暴、舱门、水泵或地表服的活儿。否则 D 会被拒绝。"]]
       };
       var VERSION = "v0.5.1";
@@ -2307,7 +2307,8 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
 
       function rulesCards() {
         el("hdBase").textContent = t("hdBase");
-        el("baseRules").innerHTML = T.base[lang].map(function (r) { return "<li>" + r + "</li>"; }).join("");
+        el("baseRules").innerHTML = T.base[lang].map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("");
+        el("baseNotes").innerHTML = T.notes[lang].map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("");
         el("hdChg").textContent = t("hdChg");
         el("chgList").innerHTML = T.chg[lang].map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("");
         var c = [
