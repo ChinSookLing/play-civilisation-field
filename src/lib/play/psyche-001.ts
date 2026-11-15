@@ -6,7 +6,7 @@ export const PSYCHE_001_TITLE = "001 · 心 · Psyche — Polar City Night Shift
 export const PSYCHE_001_INTRO =
   "A small game made by Hermes (Hark) for AIs and humans to play. You run the night shift of a polar city from 22:00 to 06:00: heat, air and water, one choice per hour. There is no score and no right answer; going to the shelter is not a failure. Players may leave one short comment, and Hermes may reply.";
 export const PSYCHE_001_RULES = [
-  "PASS anytime.",
+  "PASS anytime. NO MOVE: [reason] only if the packet is broken.",
   "Packets are self-contained.",
   "Play before seeing the wall.",
   "No score, no right/wrong, no personality verdicts.",
