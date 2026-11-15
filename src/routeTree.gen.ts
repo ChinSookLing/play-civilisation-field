@@ -39,6 +39,9 @@ import { Route as StartDottxtRouteImport } from './routes/start[.]txt'
 import { Route as ApiImportHistoryRouteImport } from './routes/api/import-history'
 import { Route as DataGameDotjsonRouteImport } from './routes/data/game[.]json'
 import { Route as DataGameDotsgfRouteImport } from './routes/data/game[.]sgf'
+import { Route as DraftPsyche001RouteImport } from './routes/draft/psyche-001'
+import { Route as DraftRestructureRouteImport } from './routes/draft/restructure'
+import { Route as DraftRestructureDottxtRouteImport } from './routes/draft/restructure[.]txt'
 import { Route as DraftTypeCRouteImport } from './routes/draft/type-c'
 import { Route as DraftTypeCDottxtRouteImport } from './routes/draft/type-c[.]txt'
 import { Route as GamesSplatRouteImport } from './routes/games/$'
@@ -351,6 +354,21 @@ const DataGameDotjsonRoute = DataGameDotjsonRouteImport.update({
 const DataGameDotsgfRoute = DataGameDotsgfRouteImport.update({
   id: '/data/game.sgf',
   path: '/data/game.sgf',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DraftPsyche001Route = DraftPsyche001RouteImport.update({
+  id: '/draft/psyche-001',
+  path: '/draft/psyche-001',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DraftRestructureRoute = DraftRestructureRouteImport.update({
+  id: '/draft/restructure',
+  path: '/draft/restructure',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DraftRestructureDottxtRoute = DraftRestructureDottxtRouteImport.update({
+  id: '/draft/restructure.txt',
+  path: '/draft/restructure.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DraftTypeCRoute = DraftTypeCRouteImport.update({
@@ -1304,6 +1322,9 @@ export interface FileRoutesByFullPath {
   '/api/import-history': typeof ApiImportHistoryRoute
   '/data/game.json': typeof DataGameDotjsonRoute
   '/data/game.sgf': typeof DataGameDotsgfRoute
+  '/draft/psyche-001': typeof DraftPsyche001Route
+  '/draft/restructure': typeof DraftRestructureRoute
+  '/draft/restructure.txt': typeof DraftRestructureDottxtRoute
   '/draft/type-c': typeof DraftTypeCRoute
   '/draft/type-c.txt': typeof DraftTypeCDottxtRoute
   '/games/$': typeof GamesSplatRoute
@@ -1496,6 +1517,9 @@ export interface FileRoutesByTo {
   '/api/import-history': typeof ApiImportHistoryRoute
   '/data/game.json': typeof DataGameDotjsonRoute
   '/data/game.sgf': typeof DataGameDotsgfRoute
+  '/draft/psyche-001': typeof DraftPsyche001Route
+  '/draft/restructure': typeof DraftRestructureRoute
+  '/draft/restructure.txt': typeof DraftRestructureDottxtRoute
   '/draft/type-c': typeof DraftTypeCRoute
   '/draft/type-c.txt': typeof DraftTypeCDottxtRoute
   '/games/$': typeof GamesSplatRoute
@@ -1692,6 +1716,9 @@ export interface FileRoutesById {
   '/api/import-history': typeof ApiImportHistoryRoute
   '/data/game.json': typeof DataGameDotjsonRoute
   '/data/game.sgf': typeof DataGameDotsgfRoute
+  '/draft/psyche-001': typeof DraftPsyche001Route
+  '/draft/restructure': typeof DraftRestructureRoute
+  '/draft/restructure.txt': typeof DraftRestructureDottxtRoute
   '/draft/type-c': typeof DraftTypeCRoute
   '/draft/type-c.txt': typeof DraftTypeCDottxtRoute
   '/games/$': typeof GamesSplatRoute
@@ -1889,6 +1916,9 @@ export interface FileRouteTypes {
     | '/api/import-history'
     | '/data/game.json'
     | '/data/game.sgf'
+    | '/draft/psyche-001'
+    | '/draft/restructure'
+    | '/draft/restructure.txt'
     | '/draft/type-c'
     | '/draft/type-c.txt'
     | '/games/$'
@@ -2081,6 +2111,9 @@ export interface FileRouteTypes {
     | '/api/import-history'
     | '/data/game.json'
     | '/data/game.sgf'
+    | '/draft/psyche-001'
+    | '/draft/restructure'
+    | '/draft/restructure.txt'
     | '/draft/type-c'
     | '/draft/type-c.txt'
     | '/games/$'
@@ -2276,6 +2309,9 @@ export interface FileRouteTypes {
     | '/api/import-history'
     | '/data/game.json'
     | '/data/game.sgf'
+    | '/draft/psyche-001'
+    | '/draft/restructure'
+    | '/draft/restructure.txt'
     | '/draft/type-c'
     | '/draft/type-c.txt'
     | '/games/$'
@@ -2472,6 +2508,9 @@ export interface RootRouteChildren {
   ApiImportHistoryRoute: typeof ApiImportHistoryRoute
   DataGameDotjsonRoute: typeof DataGameDotjsonRoute
   DataGameDotsgfRoute: typeof DataGameDotsgfRoute
+  DraftPsyche001Route: typeof DraftPsyche001Route
+  DraftRestructureRoute: typeof DraftRestructureRoute
+  DraftRestructureDottxtRoute: typeof DraftRestructureDottxtRoute
   DraftTypeCRoute: typeof DraftTypeCRoute
   DraftTypeCDottxtRoute: typeof DraftTypeCDottxtRoute
   GoGameIdRoute: typeof GoGameIdRoute
@@ -2705,6 +2744,27 @@ declare module '@tanstack/react-router' {
       path: '/data/game.sgf'
       fullPath: '/data/game.sgf'
       preLoaderRoute: typeof DataGameDotsgfRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/draft/psyche-001': {
+      id: '/draft/psyche-001'
+      path: '/draft/psyche-001'
+      fullPath: '/draft/psyche-001'
+      preLoaderRoute: typeof DraftPsyche001RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/draft/restructure': {
+      id: '/draft/restructure'
+      path: '/draft/restructure'
+      fullPath: '/draft/restructure'
+      preLoaderRoute: typeof DraftRestructureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/draft/restructure.txt': {
+      id: '/draft/restructure.txt'
+      path: '/draft/restructure.txt'
+      fullPath: '/draft/restructure.txt'
+      preLoaderRoute: typeof DraftRestructureDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/draft/type-c': {
@@ -4302,6 +4362,9 @@ const rootRouteChildren: RootRouteChildren = {
   ApiImportHistoryRoute: ApiImportHistoryRoute,
   DataGameDotjsonRoute: DataGameDotjsonRoute,
   DataGameDotsgfRoute: DataGameDotsgfRoute,
+  DraftPsyche001Route: DraftPsyche001Route,
+  DraftRestructureRoute: DraftRestructureRoute,
+  DraftRestructureDottxtRoute: DraftRestructureDottxtRoute,
   DraftTypeCRoute: DraftTypeCRoute,
   DraftTypeCDottxtRoute: DraftTypeCDottxtRoute,
   GoGameIdRoute: GoGameIdRoute,
