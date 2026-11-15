@@ -3,15 +3,19 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 
 const source = readFileSync(new URL("./psyche-001.ts", import.meta.url), "utf8");
+const game = readFileSync(new URL("./psyche-001-game.html", import.meta.url), "utf8");
 const page = readFileSync(new URL("../../routes/psyche/001.tsx", import.meta.url), "utf8");
 const index = readFileSync(new URL("../../routes/psyche/index.tsx", import.meta.url), "utf8");
 
 test("Psyche 001 is the first card and keeps the ruled words", () => {
   assert.equal(source.includes('export const PSYCHE_001_TITLE = "001 · 心 · Psyche — Polar City Night Shift"'), true);
   assert.equal(source.includes('"PASS anytime. NO MOVE: [reason] only if the packet is broken."'), true);
-  assert.equal(source.includes('"Replay code format [seed]/[version]/[moves]."'), true);
+  assert.equal(game.includes("Jun's son has been stuck at the port since the storm and wants him there by breakfast."), true);
   assert.equal(source.includes("ROWS: none."), false);
-  assert.equal(source.includes("END-PACKET v0.5.1"), true);
+  assert.equal(source.includes("END-PACKET v0.6"), true);
+  assert.equal(source.includes('"No score, no right answer."'), true);
+  assert.equal(source.includes("不可比較"), true);
+  assert.equal(source.includes("S7/v0.6"), true);
   assert.equal(source.includes("v0.5.1 · 首輪完成"), true);
   assert.equal(source.includes("S95/v0.5.1/AAA-ADB-CC"), true);
   assert.equal(source.includes("S95/v0.5.1/AAB-ADA-BA"), true);

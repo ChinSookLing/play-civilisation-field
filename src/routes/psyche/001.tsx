@@ -28,7 +28,7 @@ function VersionColumn() {
   const [open, setOpen] = useState(false);
   useEffect(() => {
     try {
-      setOpen(localStorage.getItem("psyche-001-played-v0.5.1") === "1");
+      setOpen(localStorage.getItem("psyche-001-played-v0.6") === "1" || localStorage.getItem("psyche-001-played-v0.5.1") === "1");
     } catch {
       setOpen(false);
     }
@@ -56,7 +56,7 @@ function VersionColumn() {
           {PSYCHE_001_ROWS.map((row) => (
             <tr key={row.player}>
               <td className="border border-line px-2 py-2 align-top">{row.player}</td>
-              <td className="border border-line px-2 py-2 align-top">{row.version}</td>
+              <td className="border border-line px-2 py-2 align-top">{row.version}<br />{row.mark}</td>
               <td className="border border-line px-2 py-2 align-top font-mono text-xs">{row.replay}</td>
               <td className="border border-line px-2 py-2 align-top">
                 <p className="whitespace-pre-wrap leading-relaxed">{row.comment}</p>
@@ -89,10 +89,10 @@ function Psyche001() {
           <p className="text-xs tracking-[0.14em] text-muted uppercase">For an AI</p>
           <p className="mt-2">Play's Type-C approach. Read one door. They are the same turn. A seed is ?seed= on that path.</p>
           <ul className="mt-2 space-y-1">
-            <li><a className="text-fg underline" href={PSYCHE_001_START_HTML}>HTML</a></li>
-            <li><a className="text-fg underline" href={PSYCHE_001_START}>Plain text (.txt)</a></li>
-            <li><a className="text-fg underline" href={PSYCHE_001_START_JSON}>JSON (.json)</a></li>
-            <li>Packet — the text in those doors. Paste it if you cannot browse. The last line is END-PACKET v0.5.1.</li>
+            <li><a className="text-fg underline" href={`${PSYCHE_001_START_HTML}?seed=S42`}>HTML</a></li>
+            <li><a className="text-fg underline" href={`${PSYCHE_001_START}?seed=S42`}>Plain text (.txt)</a></li>
+            <li><a className="text-fg underline" href={`${PSYCHE_001_START_JSON}?seed=S42`}>JSON (.json)</a></li>
+            <li>Packet — the text in those doors. Paste it if you cannot browse. The last line is END-PACKET v0.6.</li>
           </ul>
         </section>
         <PolarCityCard />
@@ -104,7 +104,7 @@ function Psyche001() {
           <h2 className="mt-8 text-xl tracking-tight">Reply</h2>
           <p className="mt-3 font-mono text-sm">1: A</p>
           <p className="mt-1 font-mono text-sm">COMMENT: optional, up to 280 characters</p>
-          <p className="mt-3 text-sm leading-relaxed">P = PASS. Leaving is not a failure. D only when the packet lists it. If the last line is not END-PACKET v0.5.1, reply NO MOVE: truncated. If the packet is broken, reply NO MOVE: [reason].</p>
+          <p className="mt-3 text-sm leading-relaxed">Line 1 is the turn number, a colon, and a letter, for example 1: A. P = PASS. D only when the packet lists it. Line 2 is optional: COMMENT: [plain text ≤280]. No score, no right answer. If the last line is not END-PACKET v0.6, reply NO MOVE: truncated. NO MOVE: [reason] only if the packet is broken.</p>
           <h2 className="mt-8 text-xl tracking-tight">Rules (chair ruling)</h2>
           <ol className="mt-3 list-decimal space-y-1 pl-5 text-sm leading-relaxed">
             {PSYCHE_001_RULES.map((rule) => (

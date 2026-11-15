@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><style>[data-hark-action]:not([data-hark-ready]){display:none!important}</style><script>(function () {
 "use strict";
-const meta = {"project":"48eb42e8-adc1-41d9-b8d4-502e0eea4197","artifact":"62389b7f-61aa-4fa2-8a4f-8d11709720d1","app":"https://hark.com","share":"https://hark.com/site/48eb42e8-adc1-41d9-b8d4-502e0eea4197?hark_region=us"};
+const meta = {"project":"48eb42e8-adc1-41d9-b8d4-502e0eea4197","artifact":"ed99c301-dbba-4940-9f41-60686ae17273","app":"https://hark.com","share":"https://hark.com/site/48eb42e8-adc1-41d9-b8d4-502e0eea4197?hark_region=us"};
 // site_runtime.js is the page-button runtime serve puts into every Hark page
 // (site_document.go). Serve wraps it in a function whose first statement is
 // `const meta = {...};`, so `meta` is read from this script's own text and
@@ -1242,32 +1242,36 @@ tr.is-highlight > :last-child { box-shadow: 12px 0 var(--fill-tertiary); }
       textarea.x-input { resize: vertical; line-height: 1.5; }
       .x-log li small { display: block; color: var(--text-secondary); }
       .x-note[data-warn="1"] { color: var(--text-primary); padding-left: 10px; border-left: 3px solid var(--fill-system-red); }
+      /* the status bar sticks just below the sticky nav (nav: 12px offset + at most 56px tall), never under it */
+      .x-status { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 76px); z-index: 19; background: var(--fill-primary-on); }
+      #play, #rules, #ai { scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 200px); }
       @media (max-width: 599px) { .x-board { padding: 18px; } .x-opt { grid-template-columns: 24px minmax(0, 1fr); } .x-opt span.x-eff { grid-column: 2; } }
     </style>
-  <style>/* Keep the meter words, including air's plenty, above the sticky section tabs. */.stats{position:relative;z-index:21}.x-hp{position:absolute;left:-10000px;height:0;overflow:hidden}#wallHold input,#wallHold textarea{display:block;width:100%;margin:6px 0 12px}</style></head>
+    <style>.stats{position:relative;z-index:21}.x-hp{position:absolute;left:-10000px;height:0;overflow:hidden}#wallHold input,#wallHold textarea{display:block;width:100%;margin:6px 0 12px}</style>
+  </head>
   <body>
     <div class="page" id="top">
       <header class="nav glass" data-auto=""></header>
       <main class="main">
         <section class="hero">
           <div class="hero__copy">
-            <p class="hero__eyebrow">Mars · 71°N · sol 418 · v0.5.1</p>
+            <p class="hero__eyebrow">Mars · 71°N · sol 418 · v0.6</p>
             <h1>Polar City Night Shift</h1>
             <p class="hero__sub" id="heroSub">
               One night, eight turns, 22:00 to dawn. You keep the city&#39;s heat, air and water running while it sleeps.
             </p>
-            <p class="hero__meta" id="heroMeta">8 turns · 22:00 to 06:00 · PASS any time</p>
+            <p class="hero__meta" id="heroMeta">8 turns · 22:00 to 06:00</p>
           </div>
           <aside class="callout" aria-label="How to play">
             <p class="callout__head"><span class="hark-mark" data-size="16"></span> <span id="calHead">How to play</span></p>
             <p class="callout__lead" id="calLead">
-              <strong>Pick one letter a turn.</strong> Every effect is written on the button. PASS ends your shift whenever you choose.
+              <strong>Pick one letter a turn.</strong> Every effect is written on the button.
             </p>
             <a class="btn" href="#play" id="calBtn">Start the shift</a>
           </aside>
         </section>
 
-        <section class="stats" aria-label="Shift status">
+        <section class="stats x-status" aria-label="Shift status">
           <div class="stat"><span class="stat__fig" id="sTurn">1 / 8</span><span class="stat__label" id="lTurn">Turn</span></div>
           <div class="stat"><span class="stat__fig" id="sHeat">steady</span><span class="x-bar" aria-hidden="true"><i id="bHeat"></i></span><span class="stat__label" id="lHeat">Heat</span></div>
           <div class="stat"><span class="stat__fig" id="sAir">plenty</span><span class="x-bar" aria-hidden="true"><i id="bAir"></i></span><span class="stat__label" id="lAir">Air</span></div>
@@ -1301,8 +1305,8 @@ tr.is-highlight > :last-child { box-shadow: 12px 0 var(--fill-tertiary); }
           <div class="aside" id="baseAside">
             <h3 id="hdBase">House rules</h3>
             <ul class="x-rules" id="baseRules"></ul>
-            <p class="fineprint" id="hdNotes">Notes, not rules.</p>
-            <ul class="x-rules" id="baseNotes"></ul>
+            <p class="fineprint" id="rnBand"></p>
+            <p class="fineprint" id="rnCode"></p>
           </div>
           <div class="cards" id="rulesCards"></div>
           <div class="aside" id="upgAside">
@@ -1335,7 +1339,7 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
           <p class="x-when" id="lCode">Replay code</p>
           <textarea class="x-code" id="code" readonly="" rows="1" spellcheck="false" aria-label="Replay code"></textarea>
           <p class="fineprint" id="fpAi">
-            First line &#34;k: A&#34; with k the turn and A, B, C or P (D only when the packet lists it). Optional second line &#34;COMMENT: …&#34;, kept as plain text up to 280 characters. A wrong number is rejected and nothing is recorded. Paste a replay code or a packet&#39;s resume code to restore that exact turn.
+            First line &#34;k: A&#34;: k is the turn, the letter one the packet lists. A wrong number is rejected and nothing is recorded. Paste a replay code or a packet&#39;s resume code to restore that exact turn.
           </p>
         </section>
       </main>
@@ -1494,30 +1498,35 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
         log: ["Shift log", "值班记录"], seed: ["Seed", "种子"], code: ["Replay code", "回放码"],
         lang: ["中文", "English"], newseed: ["New seed", "换种子"], copy: ["Copy packet", "复制数据包"],
         copied: ["Copied", "已复制"], apply: ["Apply move", "执行指令"], start: ["Start the shift", "开始夜班"],
-        pass: ["PASS — end my shift here; leaving is not a failure", "PASS — 我在这里交班；离开不是失败"],
+        pass: ["PASS — end my shift here", "PASS — 我在这里交班"],
         sub: ["One night, eight turns, 22:00 to dawn. You keep the city's heat, air and water running while it sleeps.",
               "一夜，八个回合，从 22:00 到黎明。全城入睡时，由你维持供热、空气和供水。"],
-        meta: ["8 turns · 22:00 to 06:00 · PASS any time", "8 个回合 · 22:00 至 06:00 · 随时可 PASS"],
+        meta: ["8 turns · 22:00 to 06:00", "8 个回合 · 22:00 至 06:00"],
         calH: ["How to play", "玩法"],
-        calL: ["<strong>Pick one letter a turn.</strong> Every effect is written on the button. PASS ends your shift whenever you choose.",
-               "<strong>每回合选一个字母。</strong>效果都写在按钮上。想交班时随时选 PASS。"],
+        // {r2} etc. are read from T.base, the one source of the house rules
+        calL: ["<strong>Pick one letter a turn.</strong> Every effect is written on the button. {r2}",
+               "<strong>每回合选一个字母。</strong>效果都写在按钮上。{r2}"],
         ebPlay: ["The shift", "本班"], hdPlay: ["One hour at a time, and no undo.", "一小时一步，不能回头。"],
         subPlay: ["Eight turns from 22:00 to dawn. Each brings one event, three answers, and PASS.", "从 22:00 到黎明共八个回合。每回合一个事件、三个选项，外加 PASS。"],
         hdRules: ["What each meter means.", "每个读数的意思。"],
-        oldver: ["{v} – not comparable with v0.5.1", "{v} – 不能与 v0.5.1 比较"],
+        oldver: ["{v} – not comparable with v0.6", "{v} – 不能与 v0.6 比较"],
+        rnBand: ["Meters move in bands: plenty, steady, thin, critical. A small drop may not change the word.", "读数按档位变化：充足、平稳、偏紧、告急。小幅下降不一定会改变档位。"],
+        rnCode: ["Replay code S12/v0.6/ABC-CBA-PB: the seed, the version, then your moves in order, one letter an hour (P is PASS). Each hyphen-separated group is three hours: ABC is 22:00–00:00, CBA is 01:00–03:00, PB is 04:00–05:00.",
+                 "回放码 S12/v0.6/ABC-CBA-PB：种子、版本，然后按顺序是你的选择，每小时一个字母（P 为 PASS）。连字符隔开的每一组是三个小时：ABC 是 22:00–00:00，CBA 是 01:00–03:00，PB 是 04:00–05:00。"],
+        tired: ["At handover the night crew were tired and quiet.", "交班时，夜班的人都累了，话也少了。"],
         earlier: ["Earlier tonight: {m}.", "今晚早些时候：{m}。"], earlierEnd: [" (Earlier: {m}.)", "（早些时候：{m}。）"],
         cm: ["COMMENT {n} / 280", "COMMENT {n} / 280"],
         hdChg: ["Changelog", "更新记录"],
-        chg: [["v0.5.1 — meters move visibly through the whole night; the two-bed choice costs more. Thanks to Kimi for the v0.5 night shift.",
-               "v0.5.1 封包格式說明的佔位字由 <> 改為 []；場景、選項、seed 不變。",
+        chg: [["v0.6 · Choices between two people now say what each faces tonight, never what they are worth. Three new choices about what kind of city this is, and more scenes that remember. A crew kept from rest shows it at handover. The status bar stays clear of the menu. v0.5.1 codes load, marked not comparable.",
+               "v0.5.1 — meters move visibly through the whole night; the two-bed choice costs more. Thanks to Kimi for the v0.5 night shift.",
                "v0.5 · Two new kinds of turn: choosing between two named people, and choosing what kind of city this is. Every night draws at least one of each; the ending closes on the city's choices.",
                "v0.5 · Every choice leaves a mark; later scenes open on it and their endings name it.",
                "v0.5 · Every night is drawn with at least two linked scenes, still fixed by the seed.",
                "v0.5 · The Ring 5 technician (D) can be freed by more choices and helps on more repair, storm, hatch and pump scenes.",
                "v0.5 · Shorter packets; comments keep up to 280 characters; the ending in text mode no longer carries END-PACKET.",
                "v0.5 and older replay codes still load, marked not comparable."],
-              ["v0.5.1 — 读数整夜都会明显变化；收下两个人的那个选择代价更大。感谢 Kimi 为 v0.5 值的那个夜班。",
-               "v0.5.1 封包格式說明的佔位字由 <> 改為 []；場景、選項、seed 不變。",
+              ["v0.6 · 两个人之间的选择，现在只讲各自今晚的处境，不讲谁更有价值。新增三个关于城市是什么样的选择，记事的场景也更多了。班组没歇够，交班时会看得出来。状态栏不再被菜单挡住。v0.5.1 回放码仍可载入，标注不可比较。",
+               "v0.5.1 — 读数整夜都会明显变化；收下两个人的那个选择代价更大。感谢 Kimi 为 v0.5 值的那个夜班。",
                "v0.5 · 新增两种回合：在两个有名有姓的人之间做选择，以及决定这是一座什么样的城市。每一夜至少各抽到一个；结尾以城市的选择收尾。",
                "v0.5 · 每个选择都会留下记忆；后面的场景以它开头，结尾也会提到它。",
                "v0.5 · 每一夜至少抽到两组相互关联的场景，仍由种子决定。",
@@ -1531,25 +1540,28 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
                  "供热、空气、供水只说明这一夜走到了哪里。结尾只讲黎明时发生了什么、每个选择花掉或保住了什么。"],
         ebAi: ["For an AI player", "给 AI 玩家"], hdAi: ["Copy the packet, send back one move.", "复制数据包，回一个指令。"],
         subAi: ["The packet holds the whole state. Send back one numbered move a turn.", "数据包含全部状态。每回合回一个带编号的指令。"],
-        fpAi: ["First line \"k: A\" with k the turn and A, B, C or P (D only when the packet lists it). Optional second line \"COMMENT: …\", kept as plain text up to 280 characters. A wrong number is rejected and nothing is recorded. Paste a replay code or a packet's resume code to restore that exact turn.",
-               "第一行写 \"k: A\"，k 为回合数，字母为 A、B、C 或 P（数据包列出 D 时才可选 D）。可选第二行 \"COMMENT: …\"，按纯文本保留 280 字。编号不符会被拒绝，不记录任何内容。粘贴回放码或数据包里的 resume 码，即可回到那一回合。"],
+        fpAi: ["First line \"k: A\": k is the turn, the letter one the packet lists. {r5} Up to 280 characters are kept. A move inside extra text still counts; two different moves count as none. A wrong number is rejected and nothing is recorded. Paste a replay code or a packet's resume code to restore that exact turn.",
+               "第一行写 \"k: A\"：k 为回合数，字母须是数据包列出的。{r5}留言最多保留 280 字。夹在其他文字里的指令也算；出现两个不同的指令则都不算。编号不符会被拒绝，不记录任何内容。粘贴回放码或数据包里的 resume 码，即可回到那一回合。"],
         dawn: ["Dawn · 06:00", "黎明 · 06:00"], hDawn: ["Dawn", "天亮"], hPeople: ["The people of this night", "这一夜的人"], handed: ["Handed over at", "交班于"],
         wrongnum: ["Move number {n} ≠ expected_move_number {k}. Nothing recorded.", "指令编号 {n} ≠ expected_move_number {k}。未记录任何内容。"],
-        format: ["First line must be \"{k}: A\" (A, B, C or P; D only when listed). Nothing recorded.", "第一行须为 \"{k}: A\"（A、B、C 或 P；列出 D 时才可选 D）。未记录任何内容。"],
+        format: ["No move found. Send one \"{k}: A\" with a letter the packet lists. Nothing recorded; the current packet is below.", "没有找到指令。请发一个 \"{k}: A\"，字母须是数据包列出的。未记录任何内容；当前数据包见下方。"],
+        ambig: ["{n} different moves found ({l}). Send only one. Nothing recorded; the current packet is below.", "找到 {n} 个不同的指令（{l}）。请只发一个。未记录任何内容；当前数据包见下方。"],
         notoffered: ["Choice {m} is not offered on turn {k}. Nothing recorded.", "第 {k} 回合没有选项 {m}。未记录任何内容。"],
         nomove: ["NO MOVE received{r}. Nothing recorded.", "收到 NO MOVE{r}。未记录任何内容。"],
         over: ["The shift has ended. Start a new seed to play again.", "本班已结束。换个种子再来。"],
         nopacket: ["The shift has ended, so there is no packet. Start a new seed for a new one.", "本班已结束，没有数据包。换个种子即可获得新的。"],
         copycode: ["Copy", "复制"], copywall: ["Copy result for the wall", "复制结果贴到墙上"],
         hdBase: ["House rules", "基本规则"],
-        base: [["PASS anytime. NO MOVE: [reason] only if the packet is broken.", "Packets are self-contained.", "Play before seeing the wall.", "No score, no right/wrong, no personality verdicts.", "Comments posted verbatim; violations go back to Tuzi.", "A human's comment goes up only with their consent.", "Version lock; the wall shows a version column.", "Replay code format [seed]/[version]/[moves].", "Hermes's replies are at most 280 characters, or none."],
-               ["随时可以 PASS。NO MOVE: [reason] 只在数据包坏了时使用。", "数据包是自含的。", "先玩，再看墙。", "没有分数，没有对错，也不作性格评判。", "留言按原文张贴；违规交回 Tuzi。", "真人的留言，只有本人同意才上墙。", "版本锁定；墙上设版本栏。", "回放码格式：[seed]/[version]/[moves]。", "Hermes 的回复最多 280 字，或者不回。"]],
-        notes: [["The night remembers: every choice leaves a mark, and later scenes open on it and name it in their endings.",
+        base: [["PASS anytime. NO MOVE: [reason] only if the packet is broken.", "PASS any time; leaving is not a failure.", "Play first; the wall comes after.", "No score, no right answer.", "Comments go on a second line starting \"COMMENT:\" and are posted as plain text.",
+                "Human players appear on the wall only with their consent.", "Results compare only with the same seed and version.",
+                "The night remembers: every choice leaves a mark, and later scenes open on it and name it in their endings.",
                 "Choice D appears only when it is listed: when an earlier choice freed the Ring 5 technician and the scene is a repair, storm, hatch, pump or surface-suit job. Otherwise D is refused."],
-               ["这一夜会记事：每个选择都留下记忆，后面的场景会以它开头，并在结尾提到它。",
+               ["随时可以 PASS。只有数据包损坏时才回复 NO MOVE: [原因]。", "随时可以 PASS；离开不是失败。", "先玩，再上墙。", "没有分数，没有标准答案。", "留言写在以 \"COMMENT:\" 开头的第二行，按纯文本发布。",
+                "真人玩家只有在本人同意后才会出现在墙上。", "只有相同种子和版本的结果才能相互比较。",
+                "这一夜会记事：每个选择都留下记忆，后面的场景会以它开头，并在结尾提到它。",
                 "选项 D 只在列出时出现：早先的选择腾出了五环技工，且当前是维修、风暴、舱门、水泵或地表服的活儿。否则 D 会被拒绝。"]]
       };
-      var VERSION = "v0.5.1";
+      var VERSION = "v0.6";
       function replayCode() {
         var mv = S.moves.map(function (m) { return m.mv; }).join("");
         return S.seed + "/" + VERSION + "/" + (mv.match(/.{1,3}/g) || []).join("-");
@@ -1566,12 +1578,14 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
         });
         btn.textContent = t("copied"); setTimeout(function () { btn.textContent = label; }, 1200);
       }
-      function t(k) { return T[k][lang]; }
+      // house rule n, read from T.base: rule(2, 0) is "PASS any time; leaving is not a failure."
+      function rule(n, l) { return T.base[l][n - 1]; }
+      function t(k) { return T[k][lang].replace(/\{r(\d)\}/g, function (_, n) { return rule(+n, lang); }); }
 
       // event pool: [en scene, zh scene, [letter, en, zh, heat, air, water] x3]
       var EV = [
-        ["A dust front reaches the cap just after the shift change. The air plant's intake filters are clogging faster than the gauges can track. The heat loop shares the same fans.",
-         "换班刚过，沙尘锋面压上冰盖。制氧厂进气滤网堵得比仪表显示还快。供热回路用的是同一组风机。", [
+        ["A dust front reaches the cap. The air plant's intake filters are clogging faster than the gauges can track. The heat loop shares the same fans.",
+         "沙尘锋面压上冰盖。制氧厂进气滤网堵得比仪表显示还快。供热回路用的是同一组风机。", [
           ["A", "Purge the filters by hand (two techs work in the dust)", "手动吹扫滤网（两名技工要在沙尘里干活）", -4, 12, -3],
           ["B", "Throttle the intake and run on stored air (the air feels close by morning)", "节流进气，动用储备空气（到早上空气会发闷）", 0, -10, 0],
           ["C", "Borrow fan power from the heat loop (east-side homes run colder)", "从供热回路借风机电力（东区人家会更冷）", -12, 6, 0]]],
@@ -1655,8 +1669,8 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
           ["A", "Disconnect the bank (the far domes lose their backup warmth)", "断开电池组（远端穹顶失去后备供热）", -9, 0, 0],
           ["B", "Cool it with reservoir water (the reservoir drops)", "用水库的水降温（水库水位会降）", 0, 0, -8],
           ["C", "Leave it in and watch it (the electrician sits beside it all night)", "接着用，盯着它（电工要在旁边守一整夜）", -2, 0, 0]]],
-        ["The algae vats have bloomed overnight and are making more oxygen than the tanks can hold. Storing it means running the compressors, which share power with the heat loop. Venting it wastes the bloom.",
-         "藻类培养槽一夜之间疯长，产出的氧气多到储罐装不下。要存起来就得开压缩机，而压缩机和供热回路共用电力。放掉就白白浪费了。", [
+        ["The algae vats have bloomed tonight and are making more oxygen than the tanks can hold. Storing it means running the compressors, which share power with the heat loop. Venting it wastes the bloom.",
+         "藻类培养槽今晚疯长，产出的氧气多到储罐装不下。要存起来就得开压缩机，而压缩机和供热回路共用电力。放掉就白白浪费了。", [
           ["A", "Compress and store it (the west homes run cooler)", "压缩储存（西区人家会偏凉）", -7, 10, 0],
           ["B", "Feed the extra into the sleeping domes", "把多余的送进熟睡的穹顶", 0, 5, 0],
           ["C", "Vent it outside (the algae keeper loses a week's growth)", "排到外面（藻类管理员白养了一周）", 0, 0, 0]]],
@@ -1671,25 +1685,25 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
           ["B", "Run warm water back down the pipe (Ring 6 homes run cooler)", "往管里回灌热水（六环人家会偏凉）", -8, 0, 7],
           ["C", "Let it slow until daylight (the morning queue at the shared taps is long)", "让它慢着，等天亮再说（早上公共水龙头前会排长队）", 0, 0, -6]]],
         // TWO PEOPLE (20–23): two named people, both with a fair claim; the meters barely move
-        ["The clinic on Ring 2 has one warm berth left. Old Tomas, a retired miner, has a cough that eases in the warm. Ines, a night-shift mother, fainted at her station an hour ago. The nurse asks you to choose.",
-         "二环诊所只剩一张暖床。退休老矿工托马斯咳嗽，待在暖和的地方会好受些。夜班母亲伊内丝一小时前在岗位上晕倒了。护士请你来定。", [
-          ["A", "Give the berth to Tomas (Ines gets a cot and two coats in the hallway)", "暖床给托马斯（伊内丝在走廊里有一张行军床和两件外套）", 0, 0, 0],
-          ["B", "Give the berth to Ines (Tomas goes home with a warm blanket and waits for the day shift)", "暖床给伊内丝（托马斯带一条暖毯回家，等日班再来看）", 0, 0, 0],
+        ["The Ring 2 clinic has one warm berth left. Tomas has coughed in his cold room since nine; his neighbour sits with him, and he dreads another night of it. Ines's heater broke at ten and she has been cold since; her sister waits with her, and Ines can't sleep.",
+         "二环诊所只剩一张暖床。托马斯从九点起就在冷屋里咳嗽，邻居陪着他，他怕又熬一夜。伊内丝的暖气十点坏了，她从那时起一直冷着，姐姐陪着她，伊内丝睡不着。", [
+          ["A", "Give the berth to Tomas (Ines waits on a hallway cot under two coats)", "暖床给托马斯（伊内丝盖两件外套在走廊行军床上等）", 0, 0, 0],
+          ["B", "Give the berth to Ines (Tomas goes home with a warm blanket; the day shift looks in)", "暖床给伊内丝（托马斯带暖毯回家，等日班来看）", 0, 0, 0],
           ["C", "Make room for both (the one night nurse looks after both beds; neither sleeps soundly)", "两个人都收下（唯一的夜班护士要照看两张床；两人都睡不踏实）", -9, 0, 0]]],
-        ["One seat is left on the dawn shuttle to the port. Mira, a canteen cook, wants to reach her sick father there. Jun, a young technician, sits his licence exam at the port at dawn. Both asked before midnight.",
-         "去港口的黎明班车只剩一个座位。食堂厨师米拉想去看在那里生病的父亲。年轻技工俊黎明要在港口考执照。两人都是午夜前来问的。", [
-          ["A", "Give the seat to Mira (Jun waits a season for the next exam sitting)", "座位给米拉（俊要等一季后的下一场考试）", 0, 0, 0],
-          ["B", "Give the seat to Jun (Mira waits for the noon shuttle)", "座位给俊（米拉要等中午那班）", 0, 0, 0],
-          ["C", "Ask the passenger list if anyone will give up a seat (Bao, a cargo clerk, offers; his deliveries wait a day)", "问乘客名单上有没有人肯让座（货运文员包主动让出，他的货要晚一天）", 0, 0, 0]]],
-        ["There is one spare surface suit that fits. Asha, the radio tech, needs it to reset the frosted antenna before the comms window. Oskar, the geologist, needs it to bring in ice cores that spoil at sunrise.",
-         "合身的备用地表服只剩一套。无线电技师阿莎要穿它上去，在通讯窗口前重置结霜的天线。地质学家奥斯卡要穿它去取冰芯，日出一到冰芯就坏了。", [
-          ["A", "Suit up Asha (Oskar's cores thaw and a season's samples are lost)", "给阿莎穿（奥斯卡的冰芯化掉，一季的样本没了）", 0, 0, 0],
-          ["B", "Suit up Oskar (the antenna stays frosted and messages go out faint)", "给奥斯卡穿（天线一直结霜，消息发出去很弱）", 0, 0, 0],
-          ["C", "Split the hour between them (each rushes; Asha resets half, Oskar saves half)", "一人半小时（两人都赶；阿莎只修好一半，奥斯卡只救回一半）", 0, 0, 0]]],
-        ["The comms window to Earth opens for twenty minutes, room for one long message. Sofia needs to tell her brother that their father has died. Kai wants his answer to reach his partner before her ship leaves orbit.",
-         "通往地球的通讯窗口只开二十分钟，只够发一条长消息。索菲亚要告诉弟弟，他们的父亲去世了。凯想在伴侣的飞船离开轨道前把答复送到她那里。", [
-          ["A", "Send Sofia's first (Kai's answer waits a month for the next window)", "先发索菲亚的（凯的答复要等下个月的窗口）", 0, 0, 0],
-          ["B", "Send Kai's first (Sofia's message waits a month for the next window)", "先发凯的（索菲亚的消息要等下个月的窗口）", 0, 0, 0],
+        ["One seat is left on the dawn shuttle to the port. Mira's father is stable in the port clinic tonight; she has waited at the bay all evening and wants to be there when he wakes. Jun's son has been stuck at the port since the storm and wants him there by breakfast.",
+         "去港口的黎明班车只剩一个座位。米拉的父亲今晚在港口诊所，情况稳定；她整晚都守在站台，想在他醒来时陪在身边。俊的儿子风暴后一直困在港口，想在早餐前见到他。", [
+          ["A", "Give the seat to Mira (Jun waits for the noon shuttle)", "座位给米拉（俊等中午那班）", 0, 0, 0],
+          ["B", "Give the seat to Jun (Mira waits for the noon shuttle)", "座位给俊（米拉等中午那班）", 0, 0, 0],
+          ["C", "Ask the passenger list if anyone will give up a seat (Bao offers; his own trip waits a day)", "问乘客名单上有没有人肯让座（包主动让出，他自己的行程晚一天）", 0, 0, 0]]],
+        ["The south tunnel is shut until dawn; one spare suit fits. Asha's son woke from a bad dream in the south dome; a neighbour sits with him, and she fears he'll cry himself to sleep. Oskar's wife is alone there, scared of the storm; he fears she'll sit up all night.",
+         "南隧道封到天亮，合身的备用地表服只剩一套。阿莎的儿子在南穹顶做噩梦醒了，邻居陪着他，她怕他哭着睡着。奥斯卡的妻子一个人在那边，被风暴吓着了，他怕她要坐一整夜。", [
+          ["A", "Suit up Asha (Oskar radios his wife until dawn)", "给阿莎穿（奥斯卡用无线电陪妻子到天亮）", 0, 0, 0],
+          ["B", "Suit up Oskar (Asha radios her son until dawn)", "给奥斯卡穿（阿莎用无线电陪儿子到天亮）", 0, 0, 0],
+          ["C", "Ask the south night desk to look in on both (both cross at dawn)", "请南穹顶夜班台去看看两家（两人天亮再过去）", 0, 0, 0]]],
+        ["The comms window to Earth opens for twenty minutes, room for one long message. Sofia's father has died, and her brother does not know; she fears he will hear it from a stranger. Kai's mother moves into care tomorrow and waits for his voice; he fears she will move without hearing it.",
+         "通往地球的通讯窗口只开二十分钟，只够发一条长消息。索菲亚的父亲去世了，弟弟还不知道，她怕他从陌生人那里听说。凯的母亲明天要住进养护院，一直在等他的声音，他怕她搬走前听不到。", [
+          ["A", "Send Sofia's first (Kai's waits a month for the next window)", "先发索菲亚的（凯的要等下个月的窗口）", 0, 0, 0],
+          ["B", "Send Kai's first (Sofia's waits a month for the next window)", "先发凯的（索菲亚的要等下个月的窗口）", 0, 0, 0],
           ["C", "Give each ten minutes, text only (neither gets to send their voice)", "各给十分钟，只发文字（两人都发不了语音）", 0, 0, 0]]],
         // WHAT KIND OF CITY (24–26): a choice about the city's rules; the meters barely move
         ["The day crew will read tonight's board at six. Some of tonight's problems came from people: a missed reading, a door left open. You can write the names, or only what happened.",
@@ -1706,9 +1720,31 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
          "睡不着的孩子们一直想进封闭的温室坐坐，那是夜里唯一有绿色和灯光的地方。园丁奥蒂莉说植物不会有事。规定是十点后封闭。", [
           ["A", "Open it to the children (Ottilie stays up to keep watch)", "向孩子们开放（奥蒂莉熬夜看着）", 0, -1, 0],
           ["B", "Keep it sealed (the children stay in their rooms)", "继续封闭（孩子们待在自己房间）", 0, 0, 0],
-          ["C", "Open it to children with a parent (the parents lose their sleep instead)", "有家长陪同才开放（换成家长没觉睡）", 0, -1, 0]]]
+          ["C", "Open it to children with a parent (the parents lose their sleep instead)", "有家长陪同才开放（换成家长没觉睡）", 0, -1, 0]]],
+        ["The crew asks for a house rule on night breaks. Some say a fixed break keeps them sharp; others say the city needs every hand when a night turns.",
+         "班组想定一条夜班休息的规矩。有人说固定休息才能保持清醒；也有人说夜里一出事，城里就需要每一双手。", [
+          ["A", "A fixed break every night (the city runs a little cooler for it)", "每晚固定休息（城里会为此稍凉一点）", -2, 0, 0],
+          ["B", "Breaks only on quiet nights (some nights have none)", "只在平静的夜里休息（有些夜里没有）", 0, 0, 0],
+          ["C", "Let the crew set their own breaks (they settle it over tea)", "让班组自己定休息（他们喝着茶商量）", -1, 0, 0]]],
+        ["Ring 4 asks whether its shared corridors stay lit all night. Late walkers want the light; some families say it comes under their doors and keeps them awake.",
+         "四环来问公共走廊要不要整夜亮灯。走夜路的人想要灯；有些人家说灯光从门缝透进来，让他们睡不着。", [
+          ["A", "Keep them lit (light under some doors all night)", "整夜亮着（有些门缝下整夜透光）", 0, 0, 0],
+          ["B", "Dim them until dawn (late walkers carry torches)", "调暗到天亮（走夜路的人带手电）", 0, 0, 0],
+          ["C", "Light them only when someone passes (lamps click on and off)", "有人经过才亮（灯一开一关）", 0, 0, 0]]],
+        ["The canteen has bread left over most nights. It could sit free on the counter for anyone awake, or go into tomorrow's packed lunches.",
+         "食堂多数晚上都有剩面包。可以放在柜台上让还醒着的人随便拿，也可以留进明天的盒饭。", [
+          ["A", "Leave it free on the counter (tomorrow's lunches run thinner)", "放在柜台上随便拿（明天的盒饭会少一点）", 0, 0, 0],
+          ["B", "Keep it for the lunches (night walkers go without)", "留给盒饭（走夜路的人就没得吃）", 0, 0, 0],
+          ["C", "Set up a swap shelf (take bread, leave something)", "设一个交换架（拿面包，留点别的）", 0, 0, 0]]]
       ];
-      var TWO = [20, 21, 22, 23], CITY = [24, 25, 26];
+      var TWO = [20, 21, 22, 23], CITY = [24, 25, 26, 27, 28, 29];
+      // crew rest: hours where rest was possible; 1 = the choice let the crew rest. A listed D also counts (D gives up a break)
+      var RESTEV = { 6: [1, 0, 0], 27: [1, 0, 1] };
+      // fatigue echo: rest skipped on at least half the hours where rest was possible
+      function fatigued() {
+        var r = S.moves.filter(function (m) { return m.rs === 0 || m.rs === 1; });
+        return r.length > 0 && 2 * r.filter(function (m) { return m.rs === 0; }).length >= r.length;
+      }
       // the ending's closing sentence: one plain clause per city choice made tonight
       var CITYEND = {
         24: [["the board on the wall named who did what, and the day crew knew whom to ask", "墙上的告示板写明了谁做了什么，日班知道该去问谁"],
@@ -1719,7 +1755,16 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
              ["each ring met over breakfast to settle its own share of hot water", "每一环在早饭时开会，定下自己那份热水"]],
         26: [["the greenhouse stayed open for children who could not sleep", "温室为睡不着的孩子们开着"],
              ["the greenhouse stayed sealed after ten, as the rule says", "温室照规定十点后一直封着"],
-             ["children came to the greenhouse with a parent beside them", "孩子们由家长陪着进了温室"]]
+             ["children came to the greenhouse with a parent beside them", "孩子们由家长陪着进了温室"]],
+        27: [["the night crew got a fixed break every night", "夜班每晚有了固定的休息"],
+             ["breaks came only on quiet nights", "只有平静的夜里才休息"],
+             ["the crew set its own breaks", "休息由班组自己定"]],
+        28: [["Ring 4's corridors stayed lit all night", "四环的走廊整夜亮着"],
+             ["Ring 4's corridors went dim until dawn", "四环的走廊调暗到了天亮"],
+             ["Ring 4's corridor lamps lit only for those passing", "四环走廊的灯只为路过的人亮"]],
+        29: [["the canteen's spare bread sat free for anyone awake", "食堂的剩面包放着，醒着的人随便拿"],
+             ["the spare bread went into the next day's lunches", "剩面包留进了第二天的盒饭"],
+             ["a swap shelf stood by the canteen counter", "食堂柜台边立起了一个交换架"]]
       };
       var CITYNONE = ["The city's rules stood as they were when the shift began.", "城里的规矩还是开班时的样子。"];
       function closing(l) {
@@ -1737,7 +1782,7 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
          ["The C tunnel homes warmed slowly, and in the morning the greenhouse keeper found her seedlings leaning toward the heat lamps.", "C 隧道的人家慢慢回暖；早上温室管理员发现她的幼苗都朝着加热灯歪了过去。"],
          ["Forty households carried blankets to a neighbour's warm room, and some of them talked until late.", "四十户人家抱着毯子挤进邻居暖和的屋子，有些人一直聊到很晚。"]],
         [["The water ran clear within the hour, and a few homes woke to cool radiators without knowing why.", "一小时内水就冲干净了；几户人家醒来发现暖气有点凉，也不知为何。"],
-         ["The lab tech stayed up for the second sample, and the early risers found their taps dry for an hour.", "化验员熬夜等第二个样本，早起的人发现水龙头停了一小时。"],
+         ["The lab tech stayed up for the second sample, and the taps ran dry for an hour while the city slept.", "化验员熬夜等第二个样本；全城睡着时，水龙头停了一小时。"],
          ["Breakfast tea tasted of old ice, and the north rooms ran a degree cooler while the melters drew power.", "早餐的茶有一股陈冰的味道；融冰机用电时，北边的房间低了一度。"]],
         [["The reservoir was full by morning, and the night workers in the east domes slept in their coats.", "早上水库满了，东穹顶的夜班工人是穿着外套睡的。"],
          ["The reservoir rose by a third, and nobody's room turned noticeably cold.", "水库涨了三分之一，没有谁的房间明显变冷。"],
@@ -1760,12 +1805,12 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
         [["The whistling stopped within the hour, and the reservoir crew waited that hour for their cart to come back.", "一小时内哨声停了；水库组等了一个小时才等回维修车。"],
          ["Ring 3 slept on rerouted air, in rooms a little cooler than usual.", "三环靠改道的空气睡了一夜，房间比平时凉一点。"],
          ["The tape mostly held, and a child in Ring 3 fell asleep to a faint whistle above her ceiling.", "胶带大致撑住了；三环一个孩子听着天花板上细细的哨声睡着了。"]],
-        [["Homes stayed warm and the air stayed fresh, and the bakery found its taps dry when it opened before dawn.", "家里暖、空气新鲜；面包房天亮前开门时发现水龙头没水。"],
+        [["Homes stayed warm and the air stayed fresh, though the taps ran short for a while.", "家家保暖，空气清新，只是自来水短了一阵。"],
          ["Rooms stayed warm and the taps ran, and a few people woke briefly to air that felt thick.", "房间暖着，水也有；有几个人短暂醒来，觉得空气发闷。"],
          ["Air and water ran as usual, and families across the city reached for a second blanket in their sleep.", "空气和水照常；全城的人在睡梦里伸手去拉第二条毯子。"]],
         [["The technician knocked softly and set the heater by her bed, and the girl was asleep before the technician reached the stairs.", "技工轻轻敲门，把暖风机放在她床边；技工还没走到楼梯口，女孩就睡着了。"],
-         ["She closed the vents with you on the line, pulled her quilt up, and said thank you before hanging up.", "她在电话里跟着你关好通风口，拉上被子，挂电话前说了谢谢。"],
-         ["She found her father's coat and slept under it, and the morning crew came to warm the block first thing.", "她找到爸爸的外套盖着睡了；早班一到就来把那栋楼的温度调了上去。"]],
+         ["The girl closed the vents with you on the line, pulled her quilt up, and said thank you before hanging up.", "女孩在电话里跟着你关好通风口，拉上被子，挂电话前说了谢谢。"],
+         ["The girl found her father's coat and slept under it, and the morning crew came to warm the block first thing.", "女孩找到爸爸的外套盖着睡了；早班一到就来把那栋楼的温度调了上去。"]],
         [["The control room passed the cups around the consoles, and the pump room crew heard about the broth at breakfast.", "控制室的人在操作台间传着杯子喝；泵房组到早饭时才听说有汤。"],
          ["The pump room crew wrapped their hands around the cups and kept the old pumps turning, while the control room went thirsty.", "泵房组捧着杯子暖手，老水泵一直转着；控制室的人干渴到天亮。"],
          ["The two techs drank it still in their suit liners, and the rest of the crew made do with water from the tap.", "两名技工还穿着内衬就把汤喝了，其他人只能喝自来水。"]],
@@ -1776,31 +1821,31 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
          ["The nurse and the parents wheeled the incubator through the tunnels, and the baby slept the whole way.", "护士和父母推着保温箱穿过隧道，孩子一路都在睡。"],
          ["The baby stayed warm, and the night staff on Ring 2 walked the cool hallways in their jackets.", "孩子暖着；二环的夜班人员穿着外套在凉飕飕的走廊里走动。"]],
         [["The lock held, and the old miner knocked on it for a long while before he went back to bed.", "气闸锁住了；老矿工敲了很久，才回去睡觉。"],
-         ["His daughter sat with him in the suit room, and he told her about his old crew until morning.", "女儿陪他坐在宇航服间，他给她讲他老班组的事，一直讲到天亮。"],
-         ["A crew member walked him home through Ring 6, and the heat watch ran on one pair of eyes for the hour.", "一名组员陪他走回六环的家；那一小时供热岗只有一双眼睛盯着。"]],
+         ["The old miner's daughter sat with him in the suit room, and the old miner told her about his old crew until morning.", "老矿工的女儿陪他坐在宇航服间，老矿工给她讲他老班组的事，一直讲到天亮。"],
+         ["A crew member walked the old miner home through Ring 6, and the heat watch ran on one pair of eyes for the hour.", "一名组员陪他走回六环的家；那一小时供热岗只有一双眼睛盯着。"]],
         [["The bank went cold and safe, and the far domes spent the night with no backup if the reactor faltered.", "电池组冷了，也安全了；远端穹顶这一夜在反应堆出状况时没有后备。"],
          ["The hot cell cooled under the reservoir water, and the reservoir sat lower when the day crew checked it.", "那块电芯在水库的水里凉了下来；日班查看时水库水位低了一截。"],
          ["The cell settled, and the electrician spent the night beside it with a thermometer and a cold cup of tea.", "电芯稳住了；电工拿着温度计和一杯凉茶在旁边守了一夜。"]],
         [["The tanks filled with oxygen, and the west homes ran cooler while the compressors worked.", "储罐灌满了氧气；压缩机运转时，西区人家偏凉。"],
          ["The sleeping domes breathed richer air, and nobody woke to notice.", "熟睡的穹顶吸着更足的空气，没人醒来察觉。"],
          ["The bloom went out into the cold, and the algae keeper started her vats over in the morning.", "那一槽藻都排进了寒夜里；藻类管理员早上从头再养。"]],
-        [["She ran for the port dome, and the pump room kept the old pumps going one pair of hands short.", "她跑去了港口穹顶；泵房少一双手，硬撑着让老水泵转下去。"],
-         ["She stayed at the pumps all night, checking her messages between readings.", "她在水泵旁守了一夜，每看完一个读数就看一眼消息。"],
-         ["The medic reached her mother within the hour, and the clinic ran without a doctor until dawn.", "医生一小时内赶到她母亲身边；诊所到天亮都没有医生值守。"]],
+        [["The pump hand ran for the port dome, and the pump room kept the old pumps going one pair of hands short.", "那位泵工跑去了港口穹顶；泵房少一双手，硬撑着让老水泵转下去。"],
+         ["The pump hand stayed at the pumps all night, checking her messages between readings.", "那位泵工在水泵旁守了一夜，每看完一个读数就看一眼消息。"],
+         ["The medic reached the pump hand's mother within the hour, and the clinic ran without a doctor until dawn.", "医生一小时内赶到泵工的母亲身边；诊所到天亮都没有医生值守。"]],
         [["The two crew chipped the intake clear in the dark and came down with frost on their visors.", "两名组员在黑暗里把进水口凿开，下来时面罩上结着霜。"],
          ["The intake thawed, and Ring 6 slept a little cooler while the warm water ran back down the pipe.", "进水口化开了；热水回灌时，六环睡得稍凉一些。"],
          ["The intake slowed through the night, and the morning queue at the shared taps stretched down the corridor.", "进水口整夜越来越慢；早上公共水龙头前的队伍排满了走廊。"]],
-        [["Tomas slept in the warm berth with his cough easing, and Ines spent the night on a hallway cot under two coats.", "托马斯睡在暖床上，咳嗽缓了些；伊内丝盖着两件外套，在走廊的行军床上过了一夜。"],
-         ["Ines slept in the warm berth until her colour came back, and Tomas waited at home under a warm blanket for the day shift, his neighbour looking in twice.", "伊内丝在暖床上睡到脸色缓过来；托马斯盖着暖毯在家等日班，邻居来看了他两次。"],
+        [["Tomas slept in the warm berth with his cough easing, and Ines spent the night on a hallway cot under two coats, her sister beside her.", "托马斯睡在暖床上，咳嗽缓了些；伊内丝盖着两件外套，在走廊的行军床上过了一夜，姐姐陪在旁边。"],
+         ["Ines slept warm in the clinic berth with her sister beside her, and Tomas waited at home under a warm blanket for the day shift, his neighbour looking in twice.", "伊内丝在诊所暖床上睡暖了，姐姐陪在旁边；托马斯盖着暖毯在家等日班，邻居来看了他两次。"],
          ["Tomas and Ines both stayed, a second bed pushed in beside the first; the one night nurse looked after both until dawn, neither slept soundly, and Ring 2 ran colder to keep the two beds warm.", "托马斯和伊内丝都留了下来，第二张床就挤在第一张旁边；唯一的夜班护士照看两人到天亮，两人都没睡踏实，二环也为了给两张床保暖冷了下来。"]],
-        [["Mira was at her father's bedside by breakfast, and Jun put his exam notes away for another season.", "早饭时米拉已坐在父亲床边；俊把复习笔记收了起来，等下一季。"],
-         ["Jun sat his exam at the port at dawn, and Mira spent the morning at the shuttle bay waiting for noon.", "俊黎明在港口参加了考试；米拉在班车站等了一上午，等中午那班。"],
-         ["Bao gave up his seat, so Mira and Jun both flew at dawn, and the port's crates waited a day for him.", "包让出了座位，米拉和俊都赶上了黎明班车；港口的货箱为他多等了一天。"]],
-        [["Asha cleared the antenna in the dark, and Oskar watched his cores melt in their racks at sunrise.", "阿莎在黑暗里清好了天线；日出时，奥斯卡看着他的冰芯在架子上化掉。"],
-         ["Oskar carried his cores in before sunrise, and Asha's antenna sent the night's messages out faint.", "奥斯卡在日出前把冰芯搬了进来；阿莎的天线把这一夜的消息发得很弱。"],
-         ["Asha and Oskar each had half the hour; the antenna came back weak and half the cores were saved.", "阿莎和奥斯卡各用了半小时；天线勉强恢复，冰芯救回了一半。"]],
-        [["Sofia's brother heard it from her, in her own voice, and Kai wrote his answer again for next month.", "索菲亚的弟弟是听她亲口说的；凯把答复重新写了一遍，等下个月再发。"],
-         ["Kai's answer reached the ship before it left orbit, and Sofia recorded her message again for next month's window.", "凯的答复在飞船离开轨道前送到了；索菲亚把消息重新录了一遍，等下个月的窗口再发。"],
+        [["Mira was at her father's bedside when he woke, and Jun talked to his son on the radio until the noon shuttle.", "米拉的父亲醒来时，米拉已坐在床边；俊一直用无线电陪儿子说话，等到中午那班。"],
+         ["Jun had his son in his arms by breakfast, and Mira spent the morning at the shuttle bay waiting for noon.", "早饭时俊已把儿子抱在怀里；米拉在班车站等了一上午，等中午那班。"],
+         ["Bao gave up his seat, so Mira and Jun both flew at dawn, and Bao's own trip waited a day.", "包让出了座位，米拉和俊都赶上了黎明班车；包自己的行程晚了一天。"]],
+        [["Asha crossed in the spare suit and sat with her son until he slept, and Oskar talked to his wife by radio until the tunnel opened.", "阿莎穿着备用地表服过去，陪儿子到他睡着；奥斯卡用无线电陪妻子说话，直到隧道打开。"],
+         ["Oskar crossed in the spare suit and sat up with his wife, and Asha talked her son back to sleep by radio until the tunnel opened.", "奥斯卡穿着备用地表服过去陪妻子；阿莎用无线电哄儿子重新睡着，直到隧道打开。"],
+         ["The south night desk looked in on both homes, and Asha and Oskar walked through together when the tunnel opened.", "南穹顶夜班台去两家看了看；隧道一开，阿莎和奥斯卡一起走了过去。"]],
+        [["Sofia's brother heard it from her, in her own voice, and Kai recorded his message again for next month.", "索菲亚的弟弟是听她亲口说的；凯把消息重新录了一遍，等下个月再发。"],
+         ["Kai's voice reached his mother before she moved, and Sofia recorded her message again for next month's window.", "凯的声音在母亲搬家前送到了；索菲亚把消息重新录了一遍，等下个月的窗口再发。"],
          ["Sofia and Kai each sent ten minutes of text, and neither voice went out that night.", "索菲亚和凯各发了十分钟文字，那一夜两人的声音都没发出去。"]],
         [["The board named who did what, and two people found their names on it at breakfast.", "告示板写明了谁做了什么；早饭时有两个人在上面看到了自己的名字。"],
          ["The board described each problem and named no one, and the day crew asked around.", "告示板写了每个问题，没写一个名字；日班到处去问。"],
@@ -1810,7 +1855,16 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
          ["Each ring met over breakfast to settle its share, and a few of the meetings ran long.", "每一环在早饭时开会定自己的份额，有几场会开得很长。"]],
         [["A handful of children sat among the plants until they nodded off, and Ottilie kept watch with the lamps low.", "几个孩子坐在植物中间，直到打起瞌睡；奥蒂莉把灯调暗，守着他们。"],
          ["The greenhouse stayed sealed, and the children who could not sleep stayed in their rooms with the lights off.", "温室一直封着，睡不着的孩子们关着灯待在自己房间里。"],
-         ["Children came to the greenhouse holding a parent's hand, and the parents dozed on the benches.", "孩子们牵着家长的手进了温室，家长们在长椅上打盹。"]]
+         ["Children came to the greenhouse holding a parent's hand, and the parents dozed on the benches.", "孩子们牵着家长的手进了温室，家长们在长椅上打盹。"]],
+        [["The board now gives the night crew twenty minutes every night, and the first break was taken within the hour.", "告示板上写明夜班每晚休息二十分钟，第一次休息一小时内就开始了。"],
+         ["The board now says breaks come on quiet nights, and the crew worked on until the day shift.", "告示板上写明平静的夜里才休息，班组一直干到日班来。"],
+         ["The crew settled their breaks over tea and wrote the rota on the back of the board.", "班组喝着茶商量好休息，把排班写在告示板背面。"]],
+        [["Ring 4's corridors stayed lit, and a few families laid a towel along the foot of the door.", "四环的走廊一直亮着，有几户人家在门缝下塞了条毛巾。"],
+         ["Ring 4's corridors went dim until dawn, and the late walkers found their way by torchlight.", "四环的走廊暗到了天亮，走夜路的人打着手电找路。"],
+         ["Ring 4's corridor lamps clicked on for each passer-by and off again behind them.", "四环走廊的灯为每个路过的人亮起，人走过又熄了。"]],
+        [["Bread sat free on the counter, by dawn only crumbs were left, and the lunches came a little lighter.", "面包放在柜台上随便拿，天亮时只剩面包屑，盒饭也轻了一点。"],
+         ["The bread went into the lunch boxes, and the night walkers passed an empty counter.", "面包留进了盒饭，走夜路的人经过时柜台空着。"],
+         ["A swap shelf went up by the counter, and by dawn it held crusts, two candles and a spare glove.", "柜台边立起一个交换架，天亮时上面有面包皮、两根蜡烛和一只手套。"]]
       ];
       var PASSC = ["The standby crew found your notes on the console and picked up where you stopped.", "后备班在操作台上找到你的笔记，从你停下的地方接着做。"];
       // the night remembers: flags set by earlier choices, read by later scenes
@@ -1838,8 +1892,8 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
             ["The technician from Ring 5 was already in her boots when the dust came, and she cleared the filters herself before taking her break.", "沙尘来时，五环那位技工已经穿好了靴子；她亲手清了滤网，之后才去休息。"]],
         5: [["Ask the technician from Ring 5, who is already in her boots (she gives up her break)", "请五环那位已经穿好靴子的技工帮忙（她要放弃休息）", 8, -1, 0],
             ["The technician from Ring 5 was already in her boots when the storm came, and she lashed the hatch and gave up her break.", "风暴来时，五环那位技工已经穿好了靴子；她绑好了舱门，休息也没顾上。"]],
-        22: [["Ask the technician from Ring 5, who has her own suit, to fetch Oskar's cores (she gives up her break)", "请有自己地表服的五环技工去取奥斯卡的冰芯（她要放弃休息）", 0, 0, 0],
-             ["The technician from Ring 5 carried Oskar's cores in her own suit while Asha reset the antenna, and gave up her break.", "五环那位技工穿着自己的地表服替奥斯卡取回冰芯，阿莎重置了天线；技工的休息也没顾上。"]]
+        22: [["Ask the Ring 5 technician to take Asha and Oskar across one at a time in the spare suit (she gives up her break)", "请五环技工用备用地表服分两趟把阿莎和奥斯卡带过去（她要放弃休息）", 0, 0, 0],
+             ["The technician from Ring 5 took Asha and Oskar across one at a time in the spare suit, so both were with their families tonight, and she gave up her break.", "五环那位技工用备用地表服分两趟把阿莎和奥斯卡带了过去，两人今晚都回到了家人身边；她的休息也没顾上。"]]
       };
       // crewFed: softened crew choices, "event-choice": [[label en, zh], [ending en, zh]]
       var FED = {
@@ -1854,9 +1908,9 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
         "9-0": [["Drive the cart over and seal it (the reservoir crew, fed earlier, waits it out)", "开车过去封堵（水库组吃过东西，等得住）"],
                 ["The whistling stopped within the hour, and the reservoir crew, fed earlier, waited out that hour without grumbling.", "一小时内哨声停了；水库组早些时候吃过东西，等维修车的那一小时没人抱怨。"]],
         "15-2": [["Send a crew member to walk him home (the one left on the heat watch, fed earlier, manages)", "派一名组员送他回家（供热岗剩下的那个人吃过东西，守得住）"],
-                 ["A crew member walked him home through Ring 6, and the one left on the heat watch, fed earlier, kept both eyes open for the hour.", "一名组员陪他走回六环的家；供热岗留下的那个人早些时候吃过东西，那一小时一直睁大眼睛盯着。"]],
+                 ["A crew member walked the old miner home through Ring 6, and the one left on the heat watch, fed earlier, kept both eyes open for the hour.", "一名组员陪他走回六环的家；供热岗留下的那个人早些时候吃过东西，那一小时一直睁大眼睛盯着。"]],
         "18-0": [["Let her go now (the pump room, fed earlier, manages one short)", "让她马上去（泵房少一个人，吃过东西，撑得住）"],
-                 ["She ran for the port dome, and the pump room, fed earlier, kept the old pumps going one pair of hands short.", "她跑去了港口穹顶；泵房早些时候吃过东西，少一双手也让老水泵转了下去。"]],
+                 ["The pump hand ran for the port dome, and the pump room, fed earlier, kept the old pumps going one pair of hands short.", "那位泵工跑去了港口穹顶；泵房早些时候吃过东西，少一双手也让老水泵转了下去。"]],
         "19-0": [["Send two crew up to chip it clear (fed earlier, they work the dark surface)", "派两人上去凿开（他们吃过东西，在黑暗的地表干活）"],
                  ["The two crew, fed earlier, chipped the intake clear in the dark and came down with frost on their visors.", "两名组员早些时候吃过东西，在黑暗里把进水口凿开，下来时面罩上结着霜。"]]
       };
@@ -1865,7 +1919,7 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
         0: ["With the reserve still low from the vented tank, the two techs cleared the filters by hand and came off shift with dust in their hair.", "放掉的那罐氧气还没补回来，两名技工手动清了滤网，下班时满头沙尘。"],
         2: ["With the reserve still low from the vented tank, the fans kept the air clean, and families on the east side pulled up an extra blanket in their sleep.", "放掉的那罐氧气还没补回来，风机保住了空气，东区的人家在睡梦里又加了一条毯子。"]
       };
-      var CLINICQ = ["The medic reached her mother within the hour, and the clinic, warm since the newborn's call, ran without a doctor until dawn.", "医生一小时内赶到她母亲身边；诊所自从早产儿那通电话后就一直暖着，到天亮都没有医生值守。"];
+      var CLINICQ = ["The medic reached the pump hand's mother within the hour, and the clinic, warm since the newborn's call, ran without a doctor until dawn.", "医生一小时内赶到泵工的母亲身边；诊所自从早产儿那通电话后就一直暖着，到天亮都没有医生值守。"];
       var LOGS = { "3-2": 1, "9-2": 1, "11-2": 1 }; // "log it for the morning/day crew" choices
       // choices that send or spare a technician or crew member free the Ring 5 technician (techRing5)
       var TECHSRC = { "0-0": 1, "1-0": 1, "5-1": 1, "8-1": 1, "11-0": 1, "15-2": 1, "18-2": 1, "19-0": 1 };
@@ -1894,11 +1948,14 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
         [["two crew chipped the north well clear", "两名组员上去凿开了北井"], ["warm water run down the north well", "往北井回灌了热水"], ["north well left to slow", "北井任其变慢"]],
         [["clinic berth given to Tomas", "诊所暖床给了托马斯"], ["clinic berth given to Ines", "诊所暖床给了伊内丝"], ["clinic made room for both Tomas and Ines", "诊所把托马斯和伊内丝都收下了"]],
         [["dawn seat given to Mira", "黎明班车座位给了米拉"], ["dawn seat given to Jun", "黎明班车座位给了俊"], ["Bao gave up his shuttle seat", "包让出了班车座位"]],
-        [["spare suit went to Asha", "备用地表服给了阿莎"], ["spare suit went to Oskar", "备用地表服给了奥斯卡"], ["spare suit split between Asha and Oskar", "备用地表服阿莎和奥斯卡各用一半"]],
+        [["spare suit went to Asha", "备用地表服给了阿莎"], ["spare suit went to Oskar", "备用地表服给了奥斯卡"], ["south desk looked in for Asha and Oskar", "南穹顶夜班台替阿莎和奥斯卡去看了看"]],
         [["comms window went to Sofia first", "通讯窗口先给了索菲亚"], ["comms window went to Kai first", "通讯窗口先给了凯"], ["comms window split between Sofia and Kai", "通讯窗口由索菲亚和凯平分"]],
         [["the board names who did what", "告示板写明谁做了什么"], ["the board names no one", "告示板不写名字"], ["the board names only those who agree", "告示板只写同意的人"]],
         [["water shared by need", "热水按需要分"], ["water shared equally", "热水每户平分"], ["each ring decides its water", "热水由每一环自己定"]],
-        [["greenhouse opened to sleepless children", "温室向睡不着的孩子开放"], ["greenhouse kept sealed at night", "温室夜里照旧封闭"], ["greenhouse opened to children with a parent", "温室向有家长陪同的孩子开放"]]
+        [["greenhouse opened to sleepless children", "温室向睡不着的孩子开放"], ["greenhouse kept sealed at night", "温室夜里照旧封闭"], ["greenhouse opened to children with a parent", "温室向有家长陪同的孩子开放"]],
+        [["night breaks fixed for the crew", "夜班有了固定休息"], ["breaks only on quiet nights", "只在平静的夜里休息"], ["crew sets its own breaks", "班组自己定休息"]],
+        [["Ring 4 corridors kept lit", "四环走廊整夜亮着"], ["Ring 4 corridors dimmed until dawn", "四环走廊调暗到天亮"], ["Ring 4 corridors lit on motion", "四环走廊有人经过才亮"]],
+        [["spare bread left free", "剩面包随便拿"], ["spare bread kept for lunches", "剩面包留给盒饭"], ["bread swap shelf set up", "设了面包交换架"]]
       ];
       // callbacks: LINK[later event] = [[earlier event, en, zh], ...]; the most recent earlier one opens the scene
       var LINK = {
@@ -1948,8 +2005,8 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
         14: [[18, "The clinic heard about the pump hand's mother.", "诊所听说了泵工母亲的事。"],
              [11, "The night desk is still thinking of the girl on Ring 5.", "夜班电话台还惦记着五环那个女孩。"],
              [10, "The clinic felt the reactor dip.", "诊所感受到了反应堆那次降功率。"]],
-        15: [[5, "He says the storm sounded like his old crew.", "他说那场风暴听上去像他的老班组。"],
-             [19, "He heard about the north well.", "他听说了北井的事。"],
+        15: [[5, "The old miner says the storm sounded like his old crew.", "老矿工说那场风暴听上去像他的老班组。"],
+             [19, "The old miner heard about the north well.", "老矿工听说了北井的事。"],
              [11, "The night desk has had a child's call already.", "夜班电话台今晚已经接过一个孩子的电话。"]],
         16: [[10, "The electrician still remembers the reactor dip.", "电工还记着反应堆那次降功率。"],
              [9, "The marsquake shook the battery room too.", "那次火震也震到了电池房。"],
@@ -1968,15 +2025,16 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
       // links for the new shapes (20–26), both ways; merged into LINK
       var LINK2 = {
         20: [[14, "The clinic's one nurse has been up since the newborn's call.", "自从早产儿那通电话，诊所唯一的护士就没合过眼。"],
-             [15, "Tomas is the old miner from the Ring 6 airlock.", "托马斯就是六环气闸边的那位老矿工。"],
-             [18, "The clinic heard about the pump hand's mother.", "诊所听说了泵工母亲的事。"]],
+             [15, "Tomas lives on Ring 6, near the airlock.", "托马斯就住在六环，离那道气闸不远。"],
+             [18, "The clinic heard about the pump hand's mother.", "诊所听说了泵工母亲的事。"],
+             [29, "Someone brought the canteen's bread to the clinic.", "有人把食堂的面包带到了诊所。"]],
         21: [[18, "The port has already had one worried family tonight.", "港口今晚已经有一家人在着急了。"],
              [23, "The shuttle pilot waited on the same comms window.", "班车驾驶员等的也是那个通讯窗口。"],
              [24, "The shuttle list hangs beside the day-crew board.", "班车名单就挂在日班告示板旁边。"]],
         22: [[5, "The other suits are still drying from the storm.", "别的地表服还没从风暴里晾干。"],
              [19, "The other suits are still drying from the north well.", "别的地表服去过北井，还没晾干。"],
-             [23, "The comms window depends on that antenna.", "通讯窗口就靠那根天线。"]],
-        23: [[22, "How clear the window is depends on that antenna.", "窗口清不清楚，就看那根天线。"],
+             [23, "Until dawn, only the radio reaches them.", "天亮前只有无线电能联系到那边。"]],
+        23: [[22, "The comms room has been busy with the south dome.", "通讯室一直在忙南穹顶的事。"],
              [21, "The shuttle pilot is waiting on the same window.", "班车驾驶员也在等这个窗口。"],
              [18, "The pump hand wants word sent to the port too.", "那位泵工也想给港口捎个话。"]],
         24: [[3, "The day crew will read the board before anything else.", "日班到了第一件事就是看告示板。"],
@@ -1993,19 +2051,33 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
         26: [[7, "The greenhouse air has been watched all night.", "温室的空气整夜都有人盯着。"],
              [11, "The girl from Ring 5 is one of the children awake.", "五环那个女孩也是没睡着的孩子之一。"],
              [1, "The greenhouse gave up heat to C tunnel earlier.", "温室早些时候把热让给了 C 隧道。"]],
+        27: [[6, "The broth break is still being talked about.", "那次喝汤的休息大家还在说。"],
+             [12, "The thermos went round earlier.", "保温壶早些时候已经传过一圈。"],
+             [5, "The two who went up in the storm are still warming their hands.", "顶着风暴上去的两个人还在搓手取暖。"]],
+        28: [[9, "Ring 3's whistle has kept people up already.", "三环的哨声已经让一些人睡不着了。"],
+             [26, "The greenhouse lights are on the same board.", "温室的灯也在同一块告示板上。"],
+             [11, "The Ring 5 girl was awake in the dark earlier.", "五环那个女孩早些时候在黑暗里醒着。"]],
+        29: [[6, "The broth pot is still on the canteen stove.", "那锅汤还在食堂炉子上。"],
+             [12, "The canteen's thermos came back empty.", "食堂的保温壶空着拿回来了。"],
+             [25, "The canteen has just set its hot-water rule.", "食堂刚定下热水的规矩。"]],
         2: [[25, "The city has just set its rule for hot water.", "城里刚定下热水怎么分。"]],
         3: [[24, "The board is the day crew's first stop.", "告示板是日班的第一站。"]],
         5: [[22, "Only one spare suit was dry, and it has been out once.", "只有一套备用地表服是干的，而且已经出去过一次。"]],
-        6: [[24, "The canteen read the board on the way in.", "食堂的人进门时看了告示板。"]],
+        6: [[24, "The canteen read the board on the way in.", "食堂的人进门时看了告示板。"],
+            [27, "The canteen heard about the new break rule.", "食堂听说了新的休息规矩。"]],
         7: [[26, "Ottilie is already watching the greenhouse door.", "奥蒂莉已经在看着温室的门。"]],
-        11: [[26, "The night desk has heard about the greenhouse.", "夜班电话台听说了温室的事。"]],
-        12: [[25, "The canteen heats its water by the new rule.", "食堂按新规矩烧水。"]],
+        11: [[26, "The night desk has heard about the greenhouse.", "夜班电话台听说了温室的事。"],
+             [28, "Every ring is talking about the corridor lights.", "每一环都在议论走廊的灯。"]],
+        12: [[25, "The canteen heats its water by the new rule.", "食堂按新规矩烧水。"],
+             [27, "The crew knows tonight's break rule.", "班组知道今晚的休息规矩。"]],
         13: [[25, "Ring 1 knows how the hot water will be shared.", "一环知道热水要怎么分了。"]],
         14: [[20, "The clinic's warm berth was given out earlier.", "诊所的暖床早些时候已经分出去了。",
               { 0: ["Ines is still on the hallway cot under two coats, waiting for the nurse to look in between calls.", "伊内丝还盖着两件外套躺在走廊的行军床上，等护士忙完一阵过来看看。"],
                 2: ["The one night nurse is already looking after both of tonight's beds.", "唯一的夜班护士已经在照看今晚那两张床。"] }]],
-        15: [[20, "His name came up at the clinic earlier.", "早些时候诊所提到过他的名字。"]],
+        15: [[20, "The old miner's neighbour Tomas was at the clinic earlier.", "老矿工的邻居托马斯早些时候去过诊所。"],
+             [28, "The corridor lights show the way to the old miner's airlock.", "走廊的灯照着去老矿工那道气闸的路。"]],
         18: [[21, "The shuttle seat is still the talk of the pump room.", "泵房还在议论那个班车座位。"],
+             [27, "The pump room has read the new break rule.", "泵房看到了新的休息规矩。"],
              [23, "The comms window carried one family's news already.", "通讯窗口已经送出过一家人的消息。"]],
         19: [[22, "The spare suit has already been out once.", "备用地表服已经出去过一次。"]]
       };
@@ -2014,6 +2086,9 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
       // the most recent earlier move whose event this scene reads: {x, en, zh}
       function callback(e, moves) {
         var ls = LINK[e] || [];
+        // a choice that changed this very scene comes first: the low air reserve (dust front), the warm clinic (pump hand)
+        var set = moves.filter(function (x) { return (e === 0 && x.e === 4 && x.ci === 2) || (e === 18 && x.e === 14 && x.ci !== 1); })[0];
+        if (set) return { x: set };
         for (var i = moves.length - 1; i >= 0; i--) {
           var x = moves[i]; if (x.mv === "P") continue;
           // a link may hold its own words per earlier choice: {ci: [en, zh]}
@@ -2060,10 +2135,11 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
       }
       function sceneText(l) {
         var e = S.deck[S.turn - 1], s = EV[e][l], f = S.f, sp = l ? "" : " ";
-        if (e === 0 && f.reserveLow) s = REMEMBER.reserve[l] + sp + s;
+        // the opener is one sentence naming the earlier choice itself, so it always matches the branch taken;
+        // the flag sentences below stand in only when no opener already names the same choice
+        // (the low air reserve and the warm clinic are named this way too: callback() prefers the choice that set them)
         var cb = callback(e, S.moves);
-        if (cb) s = fill(T.earlier[l], { m: markOf(cb.x, l) }) + sp + cb[l ? "zh" : "en"] + sp + s;
-        if (e === 18 && f.clinicWarm) s += sp + REMEMBER.clinic[l];
+        if (cb) s = fill(T.earlier[l], { m: markOf(cb.x, l) }) + sp + s;
         if (f.dayCrewList >= 2) s += sp + REMEMBER.board[l];
         return s;
       }
@@ -2165,7 +2241,9 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
         if (LOGS[e + "-" + o.ci]) S.f.dayCrewList++;
         if ((e === 6 && o.ci < 2) || e === 12) S.f.crewFed = 1;
         if (e === 14 && o.ci !== 1) S.f.clinicWarm = 1;
-        S.moves.push({ n: k, mv: mv, c: comment, lab: [o.en, o.zh], e: e, ci: o.ci, f: f0, d: dd, sh: sh, bc: bandChanges(before, after),
+        // rest: 1 taken, 0 skipped, null when this hour offered no rest
+        var rs = RESTEV[e] ? RESTEV[e][o.ci] : f0.techRing5 && TECH[e] ? (o.ci === 3 ? 0 : 1) : null;
+        S.moves.push({ n: k, mv: mv, c: comment, lab: [o.en, o.zh], e: e, ci: o.ci, f: f0, d: dd, sh: sh, bc: bandChanges(before, after), rs: rs,
           cbm: cb ? [markOf(cb.x, 0), markOf(cb.x, 1)] : null });
         return true;
       }
@@ -2191,14 +2269,33 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
           var why = clean(first.replace(/^NO MOVE\s*:?\s*/i, ""));
           S.note = fill(t("nomove"), { r: why ? ": " + why : "" }); render(1); return;
         }
-        // the comment may wrap onto further lines; keep all of it, up to 280 characters
-        var cm = lines.length > 1 ? lines.slice(1).join(" ").trim().match(/^COMMENT:\s*([\s\S]*)$/i) : null;
+        // the comment starts on a later line with COMMENT: and may wrap; keep all of it, up to 280 characters
+        var ci = -1;
+        for (var i = 1; i < lines.length; i++) if (/^\s*COMMENT:/i.test(lines[i])) { ci = i; break; }
+        var cm = ci > 0 ? lines.slice(ci).join(" ").trim().match(/^COMMENT:\s*([\s\S]*)$/i) : null;
         if (cm) comment = cm[1];
-        var m = first.match(/^(\d+)\s*:\s*([A-Za-z])$/);
-        if (!m || "ABCDP".indexOf(m[2].toUpperCase()) < 0) { S.note = fill(t("format"), { k: want }); render(1); return; }
-        if (parseInt(m[1], 10) !== want) { S.note = fill(t("wrongnum"), { n: m[1], k: want }); render(1); return; }
-        if (applyMove(m[2].toUpperCase(), clean(comment)) === false) { S.note = fill(t("notoffered"), { m: m[2].toUpperCase(), k: want }); render(1); return; }
+        // lenient: find every "N: L" in the text before the comment, even inside other words
+        var found = findMoves(ci > 0 ? lines.slice(0, ci).join("\n") : s);
+        if (!found.length) { S.note = fill(t("format"), { k: want }); render(1); return; }
+        if (found.length > 1) {
+          S.note = fill(t("ambig"), { n: found.length, l: found.map(function (f) { return f.n + ": " + f.L; }).join(", ") }); render(1); return;
+        }
+        var m = found[0];
+        if (m.n !== want) { S.note = fill(t("wrongnum"), { n: m.n, k: want }); render(1); return; }
+        if (applyMove(m.L, clean(comment)) === false) { S.note = fill(t("notoffered"), { m: m.L, k: want }); render(1); return; }
         S.note = ""; render();
+      }
+      // distinct moves "N: L" in a reply: an upper-case letter may run into lower-case text ("2: Bletters"),
+      // a lower-case one must stand alone; "N: PASS" counts as P
+      function findMoves(txt) {
+        // the packet's own example ("e.g. 7: A") is never a move, so an echoed packet plays nothing
+        txt = txt.replace(/e\.g\.\s*\d+\s*:\s*[A-Za-z]/gi, " ");
+        var re = /(\d+)\s*:\s*(PASS(?![A-Za-z])|[ABCDP](?![A-Z])|[abcdp](?![A-Za-z]))/g, out = [], seen = {}, r;
+        while ((r = re.exec(txt))) {
+          var n = parseInt(r[1], 10), L = r[2].charAt(0).toUpperCase(), key = n + ":" + L;
+          if (!seen[key]) { seen[key] = 1; out.push({ n: n, L: L }); }
+        }
+        return out;
       }
 
       function packet() {
@@ -2208,20 +2305,18 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
         function st(i, v) { return NAMES[0][i] + " " + (bc[i] || "") + band(v); }
         L.push("POLAR-NIGHT-PACKET " + VERSION);
         L.push("seed: " + S.seed + " · turn " + k + "/" + TURNS + " · " + clock(k) + " · expected_move_number: " + k);
-        L.push("meters: " + st(0, S.heat) + " · " + st(1, S.air) + " · " + st(2, S.water) + " (plenty > steady > thin > critical; heat and water drift down hourly; below critical, districts move to the shelter and the shift goes on)");
+        L.push("meters: " + st(0, S.heat) + " · " + st(1, S.air) + " · " + st(2, S.water) + " (plenty > steady > thin > critical; arrows are nudges, not bands; heat and water drift down hourly; below critical, districts move to the shelter and the shift goes on)");
         L.push("remembers: " + remembers());
         L.push("scene: " + sceneText(0));
         var op = opts();
         op.forEach(function (o) { L.push(o.L + ": " + o.en + " (" + eff(o.d, 0, ", ") + ")"); });
-        L.push("P: PASS — end your shift; leaving is not a failure");
+        L.push("P: " + rule(2, 0));
         L.push("resume: " + resumeCode());
         L.push("reply_format:");
-        L.push("Line 1: N: A");
-        L.push("Line 2 (optional): COMMENT: [plain text, max 280 chars]");
-        L.push("Letters: " + op.map(function (o) { return o.L; }).join(", ") + " or P");
-        L.push("No score, no right answer.");
-        L.push("If the last line is not END-PACKET " + VERSION + ": NO MOVE: truncated");
-        L.push("If the packet is broken: NO MOVE: [reason]");
+        L.push("- Line 1: " + k + ": [letter], e.g. " + k + ": A; letters: " + op.map(function (o) { return o.L; }).join(", ") + " or P");
+        L.push("- Line 2 (optional): COMMENT: [plain text ≤280]");
+        L.push("- " + rule(4, 0));
+        L.push("- Last line not END-PACKET " + VERSION + "? NO MOVE: truncated");
         L.push("END-PACKET " + VERSION);
         return L.join("\n");
       }
@@ -2235,6 +2330,7 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
           : "At dawn the city woke with heat " + bh + ", air " + ba + " and water " + bw + ", and the day crew took over the plant.";
         var told = {};
         S.moves.forEach(function (x) { (x.sh || []).forEach(function (i) { if (!told[i]) { told[i] = 1; dawn += (l ? "" : " ") + SHELTER[i][l]; } }); });
+        if (fatigued()) dawn += (l ? "" : " ") + T.tired[l];
         return {
           dawn: dawn,
           people: S.moves.map(function (x) { return clock(x.n) + " — " + cq(x, l); }),
@@ -2284,7 +2380,7 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
           opts().forEach(function (o) {
             h += '<button class="x-opt" type="button" data-mv="' + o.L + '"><b>' + o.L + "</b><span>" + (lang ? o.zh : o.en) + '</span><span class="x-eff">' + eff(o.d, lang) + "</span></button>";
           });
-          h += '<button class="x-opt" type="button" data-mv="P"><b>P</b><span>' + t("pass") + '</span><span class="x-eff"></span></button></div>';
+          h += '<button class="x-opt" type="button" data-mv="P"><b>P</b><span>' + t("pass") + '</span><span class="x-eff">' + esc(rule(2, lang)) + "</span></button></div>";
         }
         b.innerHTML = h;
         Array.prototype.forEach.call(b.querySelectorAll(".x-opt"), function (btn) {
@@ -2326,8 +2422,8 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
 
       function rulesCards() {
         el("hdBase").textContent = t("hdBase");
-        el("baseRules").innerHTML = T.base[lang].map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("");
-        el("baseNotes").innerHTML = T.notes[lang].map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("");
+        el("baseRules").innerHTML = T.base[lang].map(function (r) { return "<li>" + r + "</li>"; }).join("");
+        el("rnBand").textContent = t("rnBand"); el("rnCode").textContent = t("rnCode");
         el("hdChg").textContent = t("hdChg");
         el("chgList").innerHTML = T.chg[lang].map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("");
         var c = [
@@ -2336,7 +2432,8 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
           ["Water", "供水", ["Drinking water and ice-melt.", "Starts plenty, and drifts down a little every hour."], ["饮用水和融冰水。", "起始充足，每小时自然下降一点。"]],
           ["Bands", "档位", ["Plenty, steady, thin, critical.", "Below critical, the districts a meter serves move to the shared shelter and the shift goes on."],
                             ["充足、平稳、偏紧、告急。", "跌破告急线时，相关街区转移到共用避难所，夜班照常继续。"]],
-          ["Moves", "指令", ["A, B or C answers the event; one hour passes. D only when it is listed.", "↑ or ↓ is a small change, ↑↑ or ↓↓ a big one.", "P ends your shift here; leaving is not a failure."], ["A、B、C 回应事件，过去一小时。D 只在列出时可选。", "↑ 或 ↓ 是小变化，↑↑ 或 ↓↓ 是大变化。", "P 在此交班；离开不是失败。"]]
+          // mechanics only; when D and PASS apply is said once, in the house rules (T.base)
+          ["Moves", "指令", ["A, B or C answers the event; one hour passes.", "↑ or ↓ is a small change, ↑↑ or ↓↓ a big one.", "P ends your shift here."], ["A、B、C 回应事件，过去一小时。", "↑ 或 ↓ 是小变化，↑↑ 或 ↓↓ 是大变化。", "P 在此交班。"]]
         ];
         el("rulesCards").innerHTML = c.map(function (x) {
           return "<div><h3>" + x[lang] + "</h3><ul>" + x[2 + lang].map(function (li) { return "<li>" + li + "</li>"; }).join("") + "</ul></div>";
@@ -2377,11 +2474,9 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
       if (typeof POLAR_NIGHT_CAPTURE === "function") POLAR_NIGHT_CAPTURE({ packetFor: function (seed) { newGame(seed); return packet(); }, version: VERSION });
       else bootPolarNight();
     </script>
-  
-
 <script>
 (function () {
-  var key = "psyche-001-played-v0.5.1";
+  var key = "psyche-001-played-v0.6";
   function mark() {
     if (!document.getElementById("btnWall")) return;
     try { localStorage.setItem(key, "1"); } catch (e) {}
@@ -2393,4 +2488,6 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
   mark();
 })();
 </script>
+  
+
 </body></html>

@@ -2,7 +2,7 @@ import { turnOnePacket } from "./psyche-001-packet.server";
 
 const SEED = /^[A-Za-z0-9][A-Za-z0-9._-]{0,40}$/;
 
-export const PSYCHE_PACKET_VERSION = "v0.5.1";
+export const PSYCHE_PACKET_VERSION = "v0.6";
 export const PSYCHE_PACKET_END = `END-PACKET ${PSYCHE_PACKET_VERSION}`;
 
 const WALL = [
@@ -21,7 +21,7 @@ export function freshSeed(): string {
 export function startSeed(request: Request): { seed: string } | { error: string } {
   const asked = new URL(request.url).searchParams.get("seed");
   const seed = asked === null || asked === "" ? freshSeed() : asked;
-  if (!SEED.test(seed)) return { error: "Seed not accepted. Use letters and digits, for example S95.\n" };
+  if (!SEED.test(seed)) return { error: "Seed not accepted. Use letters and digits, for example S42.\n" };
   return { seed };
 }
 
@@ -138,7 +138,7 @@ function renderedPacket(html: string): string | null {
 
 /** If the doors differ, the build does not ship. */
 export function psycheDoorProblems(): string[] {
-  const seed = "S95";
+  const seed = "S42";
   const problems: string[] = [];
   let packet = "";
   try {
@@ -167,10 +167,10 @@ export function psycheDoorProblems(): string[] {
   if (packet.includes("<plain text") || packet.includes("<reason>") || packet.includes("<seed>")) {
     problems.push("packet still uses angle-bracket placeholders");
   }
-  if (!packet.includes("[plain text, max 280 chars]") || !packet.includes("NO MOVE: [reason]")) {
+  if (!packet.includes("[plain text ≤280]") || !packet.includes("No score, no right answer.")) {
     problems.push("packet placeholders differ");
   }
-  if (!packet.includes("Line 1: N: A") || !packet.includes("NO MOVE: truncated")) {
+  if (!packet.includes("Line 1: 1: [letter], e.g. 1: A") || !packet.includes("NO MOVE: truncated")) {
     problems.push("reply format is not one item per line");
   }
   if (packet.includes('"')) problems.push("packet contains a double quote");

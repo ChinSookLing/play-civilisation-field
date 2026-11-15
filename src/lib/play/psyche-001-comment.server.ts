@@ -2,8 +2,8 @@ import { createHash, randomBytes } from "node:crypto";
 import { getSql } from "@/lib/db";
 
 export const PSYCHE_COMMENT_TO = ["csllanna@gmail.com", "puck.tuzi@mail.grokbot.com"] as const;
-const VERSION = "v0.5.1";
-const REPLAY = /^[A-Za-z0-9][A-Za-z0-9._-]{0,40}\/v0\.5\.1\/(?:none|[ABCDP-]{1,40})$/i;
+const VERSIONS = new Set(["v0.5.1", "v0.6"]);
+const REPLAY = /^[A-Za-z0-9][A-Za-z0-9._-]{0,40}\/v0\.(?:5\.1|6)\/(?:none|[ABCDP-]{1,40})$/i;
 
 export type CommentInput = {
   player?: string;
@@ -90,8 +90,8 @@ export async function holdPsycheComment(request: Request, input: CommentInput): 
   if (Array.from(comment).length > 280) {
     return { ok: false, status: 400, text: "The comment is longer than 280 characters. Nothing was held.\n" };
   }
-  if (version !== VERSION || !REPLAY.test(replay)) {
-    return { ok: false, status: 400, text: "The replay code has to be this night, v0.5.1. Nothing was held.\n" };
+  if (!VERSIONS.has(version) || !REPLAY.test(replay)) {
+    return { ok: false, status: 400, text: "The replay code has to be this night, v0.5.1 or v0.6. Nothing was held.\n" };
   }
   const consent = clean(input.consent ?? "").toLowerCase() === "yes";
   const hash = createHash("sha256").update(`psyche-001|${ipOf(request)}`).digest("hex").slice(0, 32);
