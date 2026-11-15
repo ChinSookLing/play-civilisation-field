@@ -173,6 +173,10 @@ import { Route as Psyche001PlayDottxtRouteImport } from './routes/psyche/001/pla
 import { Route as Psyche001StartRouteImport } from './routes/psyche/001/start'
 import { Route as Psyche001StartDotjsonRouteImport } from './routes/psyche/001/start[.]json'
 import { Route as Psyche001StartDottxtRouteImport } from './routes/psyche/001/start[.]txt'
+import { Route as SalonNightShiftIndexRouteImport } from './routes/salon/night-shift.index'
+import { Route as SalonNightShiftZhRouteImport } from './routes/salon/night-shift.zh'
+import { Route as SalonNightShiftZhDothtmlRouteImport } from './routes/salon/night-shift.zh[.]html'
+import { Route as SalonNightShiftZhDottxtRouteImport } from './routes/salon/night-shift.zh[.]txt'
 import { Route as ApiGamesGameIdHandoffRouteImport } from './routes/api/games/$gameId.handoff'
 import { Route as ApiGamesGameIdJevRouteImport } from './routes/api/games/$gameId.jev'
 import { Route as ApiGamesGameIdMovesRouteImport } from './routes/api/games/$gameId.moves'
@@ -1105,6 +1109,27 @@ const Psyche001StartDottxtRoute = Psyche001StartDottxtRouteImport.update({
   path: '/start.txt',
   getParentRoute: () => Psyche001Route,
 } as any)
+const SalonNightShiftIndexRoute = SalonNightShiftIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SalonNightShiftRoute,
+} as any)
+const SalonNightShiftZhRoute = SalonNightShiftZhRouteImport.update({
+  id: '/zh',
+  path: '/zh',
+  getParentRoute: () => SalonNightShiftRoute,
+} as any)
+const SalonNightShiftZhDothtmlRoute =
+  SalonNightShiftZhDothtmlRouteImport.update({
+    id: '/zh.html',
+    path: '/zh.html',
+    getParentRoute: () => SalonNightShiftRoute,
+  } as any)
+const SalonNightShiftZhDottxtRoute = SalonNightShiftZhDottxtRouteImport.update({
+  id: '/zh.txt',
+  path: '/zh.txt',
+  getParentRoute: () => SalonNightShiftRoute,
+} as any)
 const ApiGamesGameIdHandoffRoute = ApiGamesGameIdHandoffRouteImport.update({
   id: '/handoff',
   path: '/handoff',
@@ -1399,7 +1424,7 @@ export interface FileRoutesByFullPath {
   '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
   '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
   '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
-  '/salon/night-shift': typeof SalonNightShiftRoute
+  '/salon/night-shift': typeof SalonNightShiftRouteWithChildren
   '/salon/night-shift.html': typeof SalonNightShiftDothtmlRoute
   '/salon/night-shift.txt': typeof SalonNightShiftDottxtRoute
   '/salon/plain-water': typeof SalonPlainWaterRoute
@@ -1470,6 +1495,9 @@ export interface FileRoutesByFullPath {
   '/psyche/001/start': typeof Psyche001StartRoute
   '/psyche/001/start.json': typeof Psyche001StartDotjsonRoute
   '/psyche/001/start.txt': typeof Psyche001StartDottxtRoute
+  '/salon/night-shift/zh': typeof SalonNightShiftZhRoute
+  '/salon/night-shift/zh.html': typeof SalonNightShiftZhDothtmlRoute
+  '/salon/night-shift/zh.txt': typeof SalonNightShiftZhDottxtRoute
   '/api/games/': typeof ApiGamesIndexRoute
   '/gathering/breakfast-002/': typeof GatheringBreakfast002IndexRoute
   '/gathering/dinner-001/': typeof GatheringDinner001IndexRoute
@@ -1480,6 +1508,7 @@ export interface FileRoutesByFullPath {
   '/gathering/proof-table-005/': typeof GatheringProofTable005IndexRoute
   '/gathering/proof-table-006/': typeof GatheringProofTable006IndexRoute
   '/gathering/proof-table-008/': typeof GatheringProofTable008IndexRoute
+  '/salon/night-shift/': typeof SalonNightShiftIndexRoute
   '/api/games/$gameId/handoff': typeof ApiGamesGameIdHandoffRoute
   '/api/games/$gameId/jev': typeof ApiGamesGameIdJevRoute
   '/api/games/$gameId/moves': typeof ApiGamesGameIdMovesRoute
@@ -1598,7 +1627,6 @@ export interface FileRoutesByTo {
   '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
   '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
   '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
-  '/salon/night-shift': typeof SalonNightShiftRoute
   '/salon/night-shift.html': typeof SalonNightShiftDothtmlRoute
   '/salon/night-shift.txt': typeof SalonNightShiftDottxtRoute
   '/salon/plain-water': typeof SalonPlainWaterRoute
@@ -1669,6 +1697,9 @@ export interface FileRoutesByTo {
   '/psyche/001/start': typeof Psyche001StartRoute
   '/psyche/001/start.json': typeof Psyche001StartDotjsonRoute
   '/psyche/001/start.txt': typeof Psyche001StartDottxtRoute
+  '/salon/night-shift/zh': typeof SalonNightShiftZhRoute
+  '/salon/night-shift/zh.html': typeof SalonNightShiftZhDothtmlRoute
+  '/salon/night-shift/zh.txt': typeof SalonNightShiftZhDottxtRoute
   '/api/games': typeof ApiGamesIndexRoute
   '/gathering/breakfast-002': typeof GatheringBreakfast002IndexRoute
   '/gathering/dinner-001': typeof GatheringDinner001IndexRoute
@@ -1679,6 +1710,7 @@ export interface FileRoutesByTo {
   '/gathering/proof-table-005': typeof GatheringProofTable005IndexRoute
   '/gathering/proof-table-006': typeof GatheringProofTable006IndexRoute
   '/gathering/proof-table-008': typeof GatheringProofTable008IndexRoute
+  '/salon/night-shift': typeof SalonNightShiftIndexRoute
   '/api/games/$gameId/handoff': typeof ApiGamesGameIdHandoffRoute
   '/api/games/$gameId/jev': typeof ApiGamesGameIdJevRoute
   '/api/games/$gameId/moves': typeof ApiGamesGameIdMovesRoute
@@ -1801,7 +1833,7 @@ export interface FileRoutesById {
   '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
   '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
   '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
-  '/salon/night-shift': typeof SalonNightShiftRoute
+  '/salon/night-shift': typeof SalonNightShiftRouteWithChildren
   '/salon/night-shift.html': typeof SalonNightShiftDothtmlRoute
   '/salon/night-shift.txt': typeof SalonNightShiftDottxtRoute
   '/salon/plain-water': typeof SalonPlainWaterRoute
@@ -1872,6 +1904,9 @@ export interface FileRoutesById {
   '/psyche/001/start': typeof Psyche001StartRoute
   '/psyche/001/start.json': typeof Psyche001StartDotjsonRoute
   '/psyche/001/start.txt': typeof Psyche001StartDottxtRoute
+  '/salon/night-shift/zh': typeof SalonNightShiftZhRoute
+  '/salon/night-shift/zh.html': typeof SalonNightShiftZhDothtmlRoute
+  '/salon/night-shift/zh.txt': typeof SalonNightShiftZhDottxtRoute
   '/api/games/': typeof ApiGamesIndexRoute
   '/gathering/breakfast-002/': typeof GatheringBreakfast002IndexRoute
   '/gathering/dinner-001/': typeof GatheringDinner001IndexRoute
@@ -1882,6 +1917,7 @@ export interface FileRoutesById {
   '/gathering/proof-table-005/': typeof GatheringProofTable005IndexRoute
   '/gathering/proof-table-006/': typeof GatheringProofTable006IndexRoute
   '/gathering/proof-table-008/': typeof GatheringProofTable008IndexRoute
+  '/salon/night-shift/': typeof SalonNightShiftIndexRoute
   '/api/games/$gameId/handoff': typeof ApiGamesGameIdHandoffRoute
   '/api/games/$gameId/jev': typeof ApiGamesGameIdJevRoute
   '/api/games/$gameId/moves': typeof ApiGamesGameIdMovesRoute
@@ -2076,6 +2112,9 @@ export interface FileRouteTypes {
     | '/psyche/001/start'
     | '/psyche/001/start.json'
     | '/psyche/001/start.txt'
+    | '/salon/night-shift/zh'
+    | '/salon/night-shift/zh.html'
+    | '/salon/night-shift/zh.txt'
     | '/api/games/'
     | '/gathering/breakfast-002/'
     | '/gathering/dinner-001/'
@@ -2086,6 +2125,7 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-005/'
     | '/gathering/proof-table-006/'
     | '/gathering/proof-table-008/'
+    | '/salon/night-shift/'
     | '/api/games/$gameId/handoff'
     | '/api/games/$gameId/jev'
     | '/api/games/$gameId/moves'
@@ -2204,7 +2244,6 @@ export interface FileRouteTypes {
     | '/salon/lunch-007-report'
     | '/salon/lunch-007-report.html'
     | '/salon/lunch-007-report.txt'
-    | '/salon/night-shift'
     | '/salon/night-shift.html'
     | '/salon/night-shift.txt'
     | '/salon/plain-water'
@@ -2275,6 +2314,9 @@ export interface FileRouteTypes {
     | '/psyche/001/start'
     | '/psyche/001/start.json'
     | '/psyche/001/start.txt'
+    | '/salon/night-shift/zh'
+    | '/salon/night-shift/zh.html'
+    | '/salon/night-shift/zh.txt'
     | '/api/games'
     | '/gathering/breakfast-002'
     | '/gathering/dinner-001'
@@ -2285,6 +2327,7 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-005'
     | '/gathering/proof-table-006'
     | '/gathering/proof-table-008'
+    | '/salon/night-shift'
     | '/api/games/$gameId/handoff'
     | '/api/games/$gameId/jev'
     | '/api/games/$gameId/moves'
@@ -2477,6 +2520,9 @@ export interface FileRouteTypes {
     | '/psyche/001/start'
     | '/psyche/001/start.json'
     | '/psyche/001/start.txt'
+    | '/salon/night-shift/zh'
+    | '/salon/night-shift/zh.html'
+    | '/salon/night-shift/zh.txt'
     | '/api/games/'
     | '/gathering/breakfast-002/'
     | '/gathering/dinner-001/'
@@ -2487,6 +2533,7 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-005/'
     | '/gathering/proof-table-006/'
     | '/gathering/proof-table-008/'
+    | '/salon/night-shift/'
     | '/api/games/$gameId/handoff'
     | '/api/games/$gameId/jev'
     | '/api/games/$gameId/moves'
@@ -3732,6 +3779,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Psyche001StartDottxtRouteImport
       parentRoute: typeof Psyche001Route
     }
+    '/salon/night-shift/': {
+      id: '/salon/night-shift/'
+      path: '/'
+      fullPath: '/salon/night-shift/'
+      preLoaderRoute: typeof SalonNightShiftIndexRouteImport
+      parentRoute: typeof SalonNightShiftRoute
+    }
+    '/salon/night-shift/zh': {
+      id: '/salon/night-shift/zh'
+      path: '/zh'
+      fullPath: '/salon/night-shift/zh'
+      preLoaderRoute: typeof SalonNightShiftZhRouteImport
+      parentRoute: typeof SalonNightShiftRoute
+    }
+    '/salon/night-shift/zh.html': {
+      id: '/salon/night-shift/zh.html'
+      path: '/zh.html'
+      fullPath: '/salon/night-shift/zh.html'
+      preLoaderRoute: typeof SalonNightShiftZhDothtmlRouteImport
+      parentRoute: typeof SalonNightShiftRoute
+    }
+    '/salon/night-shift/zh.txt': {
+      id: '/salon/night-shift/zh.txt'
+      path: '/zh.txt'
+      fullPath: '/salon/night-shift/zh.txt'
+      preLoaderRoute: typeof SalonNightShiftZhDottxtRouteImport
+      parentRoute: typeof SalonNightShiftRoute
+    }
     '/api/games/$gameId/handoff': {
       id: '/api/games/$gameId/handoff'
       path: '/handoff'
@@ -4286,6 +4361,24 @@ const PsycheRouteChildren: PsycheRouteChildren = {
 const PsycheRouteWithChildren =
   PsycheRoute._addFileChildren(PsycheRouteChildren)
 
+interface SalonNightShiftRouteChildren {
+  SalonNightShiftZhRoute: typeof SalonNightShiftZhRoute
+  SalonNightShiftZhDothtmlRoute: typeof SalonNightShiftZhDothtmlRoute
+  SalonNightShiftZhDottxtRoute: typeof SalonNightShiftZhDottxtRoute
+  SalonNightShiftIndexRoute: typeof SalonNightShiftIndexRoute
+}
+
+const SalonNightShiftRouteChildren: SalonNightShiftRouteChildren = {
+  SalonNightShiftZhRoute: SalonNightShiftZhRoute,
+  SalonNightShiftZhDothtmlRoute: SalonNightShiftZhDothtmlRoute,
+  SalonNightShiftZhDottxtRoute: SalonNightShiftZhDottxtRoute,
+  SalonNightShiftIndexRoute: SalonNightShiftIndexRoute,
+}
+
+const SalonNightShiftRouteWithChildren = SalonNightShiftRoute._addFileChildren(
+  SalonNightShiftRouteChildren,
+)
+
 interface SalonRouteChildren {
   SalonSplatRoute: typeof SalonSplatRoute
   SalonBeforeThe16thRoute: typeof SalonBeforeThe16thRoute
@@ -4315,7 +4408,7 @@ interface SalonRouteChildren {
   SalonLunch007ReportRoute: typeof SalonLunch007ReportRoute
   SalonLunch007ReportDothtmlRoute: typeof SalonLunch007ReportDothtmlRoute
   SalonLunch007ReportDottxtRoute: typeof SalonLunch007ReportDottxtRoute
-  SalonNightShiftRoute: typeof SalonNightShiftRoute
+  SalonNightShiftRoute: typeof SalonNightShiftRouteWithChildren
   SalonNightShiftDothtmlRoute: typeof SalonNightShiftDothtmlRoute
   SalonNightShiftDottxtRoute: typeof SalonNightShiftDottxtRoute
   SalonPlainWaterRoute: typeof SalonPlainWaterRoute
@@ -4366,7 +4459,7 @@ const SalonRouteChildren: SalonRouteChildren = {
   SalonLunch007ReportRoute: SalonLunch007ReportRoute,
   SalonLunch007ReportDothtmlRoute: SalonLunch007ReportDothtmlRoute,
   SalonLunch007ReportDottxtRoute: SalonLunch007ReportDottxtRoute,
-  SalonNightShiftRoute: SalonNightShiftRoute,
+  SalonNightShiftRoute: SalonNightShiftRouteWithChildren,
   SalonNightShiftDothtmlRoute: SalonNightShiftDothtmlRoute,
   SalonNightShiftDottxtRoute: SalonNightShiftDottxtRoute,
   SalonPlainWaterRoute: SalonPlainWaterRoute,

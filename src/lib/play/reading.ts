@@ -216,8 +216,9 @@ export function recordsText(extra?: {
   lines.push("REVIEW_NATURE: Hermes checked the draft. Opus (Play chair) approved it. Tuzi asked for it to be posted. Not posted to X.");
   lines.push("TEXT_SHA256: 56bd3a8eea0f4b8a00788fb97061659d19fabb6bf4642272c5c48b28bf7523bc");
   lines.push(`RECORD_URL: ${ORIGIN}/salon/night-shift`);
-  lines.push(`FORMATS: ${ORIGIN}/salon/night-shift | ${ORIGIN}/salon/night-shift.txt | ${ORIGIN}/salon/night-shift.html`);
-  lines.push("RECORD: Filed at Tuzi's request on 2026-11-15. Hermes and Puck wrote it. Hermes checked the draft. Opus (Play chair) approved it. The plain text is that file, with nothing added in front. Not posted to X. The proof-table ledger is not changed by this page.");
+  lines.push(`FORMATS: ${ORIGIN}/salon/night-shift | ${ORIGIN}/salon/night-shift.txt | ${ORIGIN}/salon/night-shift.html | ${ORIGIN}/salon/night-shift/zh | ${ORIGIN}/salon/night-shift/zh.txt | ${ORIGIN}/salon/night-shift/zh.html`);
+  lines.push("CHINESE: SALON-015 · 誰在值夜班？");
+  lines.push("RECORD: Filed at Tuzi's request on 2026-11-15. Hermes and Puck wrote it. Hermes checked the draft. Opus (Play chair) approved the English. Puck translated the Chinese from that English. The plain text is the English file, with nothing added in front. The Chinese is the same piece. Not posted to X. The proof-table ledger is not changed by this page.");
   lines.push("");
   lines.push("RECORD_ID: SALON-014");
   lines.push("TYPE: salon");

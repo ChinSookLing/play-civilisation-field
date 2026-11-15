@@ -37,7 +37,7 @@ function SalonIndex() {
               id: "SALON-015",
               title: SALON_015_TITLE,
               status: "Filed. Opus (Play chair) approved. Tuzi asked for it to be posted. Not posted to X.",
-              note: `記 · CREDIT: ${SALON_015_CREDIT} · ${SALON_015_REVIEW}`,
+              note: `記 · CREDIT: ${SALON_015_CREDIT} · 中文版 SALON-015 · 誰在值夜班？ · ${SALON_015_REVIEW}`,
               light: `/salon/${SALON_015_SLUG}.html`,
             },
             {

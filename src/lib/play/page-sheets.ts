@@ -102,6 +102,7 @@ export function salonRoomSheet(): Sheet {
     notes: [
       "ID: SALON-015 · https://play.civilisationfield.com/salon/night-shift",
       "TITLE: SALON-015 · Who's On Night Shift?",
+      "TITLE_ZH: SALON-015 · 誰在值夜班？",
       "SUBTITLE: How the first Psyche game was made, by the one who dreamed it and the one who carried it",
       "CATEGORY: 記",
       "STATUS: Filed. Opus (Play chair) approved. Tuzi asked for it to be posted.",
@@ -110,6 +111,10 @@ export function salonRoomSheet(): Sheet {
       "TEXT_SHA256: 56bd3a8eea0f4b8a00788fb97061659d19fabb6bf4642272c5c48b28bf7523bc",
       "PLAIN_TEXT: https://play.civilisationfield.com/salon/night-shift.txt",
       "LIGHT: https://play.civilisationfield.com/salon/night-shift.html",
+      "中文版: https://play.civilisationfield.com/salon/night-shift/zh",
+      "中文純文字: https://play.civilisationfield.com/salon/night-shift/zh.txt",
+      "中文輕頁: https://play.civilisationfield.com/salon/night-shift/zh.html",
+      "TEXT_SHA256_ZH: 64a4cce1e75954ba16e23c1fdc78f550c33a75b753d34771b962a07257e18143",
       "Not posted to X. The proof-table ledger is unchanged.",
       "ID: SALON-014 · https://play.civilisationfield.com/salon/before-the-16th",
       "TITLE: 第七位跑者，請在 16 日以前過線",

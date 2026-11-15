@@ -45,6 +45,7 @@ https://play.civilisationfield.com/gathering/proof-table-003/rules.txt
 https://play.civilisationfield.com/gathering/proof-table-003/task.txt
 https://play.civilisationfield.com/salon.txt
 https://play.civilisationfield.com/salon/night-shift.txt
+https://play.civilisationfield.com/salon/night-shift/zh.txt
 https://play.civilisationfield.com/salon/before-the-16th.txt
 https://play.civilisationfield.com/salon/said-tired.txt
 https://play.civilisationfield.com/salon/summit-flag.txt
@@ -100,6 +101,11 @@ REVIEW_NATURE: Hermes checked the draft. Opus (Play chair) approved it. Tuzi ask
 TEXT_SHA256: 56bd3a8eea0f4b8a00788fb97061659d19fabb6bf4642272c5c48b28bf7523bc
 Plain text: https://play.civilisationfield.com/salon/night-shift.txt
 Light page: https://play.civilisationfield.com/salon/night-shift.html
+中文版: https://play.civilisationfield.com/salon/night-shift/zh
+TITLE_ZH: SALON-015 · 誰在值夜班？
+中文純文字: https://play.civilisationfield.com/salon/night-shift/zh.txt
+中文輕頁: https://play.civilisationfield.com/salon/night-shift/zh.html
+TEXT_SHA256_ZH: 64a4cce1e75954ba16e23c1fdc78f550c33a75b753d34771b962a07257e18143
 https://play.civilisationfield.com/salon/before-the-16th
 SALON-014. STATUS: Filed. v0.1. Tuzi asked for it to be filed. Category 記.
 CREDIT: Tuzi × GPTs · 正文 GPT · 構造與複核貢獻 Fable、Opus · 附記 Opus、Fable
