@@ -4,7 +4,7 @@ import { isoKualaLumpur } from "./sheet";
 // Each value is the newest committer instant among that page's source files.
 // pageAsOf converts it to +08:00. Missing ids stay "unknown".
 export const PAGE_COMMITTED_AT: Record<string, string> = {
-  "HOME": "2026-11-15T06:46:43+00:00",
+  "HOME": "2026-11-15T08:16:19+00:00",
   "FOR-AI": "2026-11-15T06:20:20+00:00",
   "ABOUT": "2026-11-15T06:20:20+00:00",
   "START": "2026-11-15T06:20:20+00:00",
