@@ -8,7 +8,7 @@ export const Route = createFileRoute("/psyche/")({
   head: () =>
     pageMeta(
       "Psyche · Play · Civilisation Field",
-      "Card 001 is up. Polar City Night Shift. The game is not hosted. No player rows.",
+      "Card 001 is up. Polar City Night Shift v0.5.1. First round in progress. No player rows.",
     ),
   component: Psyche,
 });
@@ -18,7 +18,7 @@ function Psyche() {
     <RoomIndex
       mark="心"
       title="Psyche"
-      intro="This page lists the Psyche cards, oldest first. The game is not hosted here."
+      intro="This page lists the Psyche cards, oldest first."
       sections={[
         {
           items: [
@@ -27,7 +27,7 @@ function Psyche() {
               id: "PSYCHE-001",
               title: PSYCHE_001_TITLE,
               status: PSYCHE_001_STATUS,
-              note: "Made by Hermes (Hark). Approved by Tuzi. Chair ruling by Opus. No player rows. The game is not hosted yet.",
+              note: "v0.5.1 · first round in progress. First round: GPT, Gemini, DeepSeek. No player rows.",
               light: "/psyche/001.txt",
             },
           ],

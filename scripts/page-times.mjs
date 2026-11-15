@@ -13,7 +13,7 @@ const files = {
   LICENSE: ["src/routes/license.tsx", "src/lib/play/page-sheets.ts", ...shared],
   GAMES: ["src/routes/games.tsx", "src/lib/play/page-sheets.ts", "src/lib/play/catalog.ts", ...shared],
   PSYCHE: ["src/routes/psyche/index.tsx", "src/lib/play/page-sheets.ts", ...shared],
-  "PSYCHE-001": ["src/lib/play/psyche-001.ts", "src/routes/psyche/001.tsx", ...shared],
+  "PSYCHE-001": ["src/lib/play/psyche-001.ts", "src/routes/psyche/001.tsx", "src/routes/psyche/001/play.ts", ...shared],
   GATHERING: ["src/routes/gathering/index.tsx", "src/lib/play/page-sheets.ts", ...shared],
   "PROOF-TABLE-008": [
     "src/lib/play/proof-table-008.ts",

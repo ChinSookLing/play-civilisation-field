@@ -1,0 +1,2359 @@
+<!DOCTYPE html><html lang="en"><head><style>[data-hark-action]:not([data-hark-ready]){display:none!important}</style><script>(function () {
+"use strict";
+const meta = {"project":"48eb42e8-adc1-41d9-b8d4-502e0eea4197","artifact":"62389b7f-61aa-4fa2-8a4f-8d11709720d1","app":"https://hark.com","share":"https://hark.com/site/48eb42e8-adc1-41d9-b8d4-502e0eea4197?hark_region=us"};
+// site_runtime.js is the page-button runtime serve puts into every Hark page
+// (site_document.go). Serve wraps it in a function whose first statement is
+// `const meta = {...};`, so `meta` is read from this script's own text and
+// never from an element a page could forge. It asks the Hark app framing the
+// page whether its viewer may press (HELLO), and once the app allows it
+// (ALLOW), reveals the buttons meta allows. It hands a press to the app, marks the pressed
+// element with the press's state (data-hark-state), and gives the page
+// window.Hark.safeHref, window.Hark.app (the page's backend, run by the app
+// framing it as the viewer), window.Hark.shareLink and, when absent,
+// window.Hark.data.
+
+// MAX_URL_BYTES must equal maxSiteURLBytes in
+// services/agent/internal/tools/website/site_manifest.go.
+var MAX_URL_BYTES = 512
+
+var ACTION = 'data-hark-action'
+var READY = 'data-hark-ready'
+var ITEM = 'data-hark-item'
+var STATE = 'data-hark-state'
+
+// HELLO, ALLOW, PRESS and RESULT must equal the message types in
+// apps/frontend/src/lib/sitePressBridge.ts.
+var HELLO = 'hark:hello'
+var ALLOW = 'hark:allow'
+var PRESS = 'hark:press'
+var RESULT = 'hark:press-result'
+
+// RESULT_TIMEOUT_MS is how long a press waits for the app's answer before it
+// reads as failed.
+var RESULT_TIMEOUT_MS = 15000
+
+// LOAD, RUN and APP_RESULT must equal the message types in
+// apps/frontend/src/lib/siteAppBridge.ts.
+var LOAD = 'hark:load'
+var RUN = 'hark:run'
+var APP_RESULT = 'hark:result'
+
+// APP_TIMEOUT_MS is how long Hark.app waits for the app's answer. It must
+// exceed PANEL_APP_REQUEST_TIMEOUT_MS (330 s) in
+// apps/frontend/src/lib/goApiPanelApp.ts, so the app's own deadline answers first.
+var APP_TIMEOUT_MS = 340000
+
+var kinds = {}
+;(meta.actions || []).forEach(function (a) {
+  kinds[a.id] = a.kind
+})
+
+// allowed is set once the app framing the page says its viewer may press,
+// which only the page's owner may; the app's send checks every press again.
+var allowed = false
+
+// eligible reports whether meta lets el show once the app allows presses: a
+// declared prompt action, or a declared buy action with an item while buy is on.
+function eligible(el) {
+  if (!meta.app || !allowed) return false
+  var kind = kinds[el.getAttribute(ACTION)]
+  if (kind === 'prompt') return true
+  if (kind === 'buy') return !!meta.buy && el.hasAttribute(ITEM)
+  return false
+}
+
+function reveal(el) {
+  if (el.hasAttribute(READY) || !eligible(el)) return
+  if (kinds[el.getAttribute(ACTION)] === 'buy' && meta.buy_label) {
+    el.textContent = meta.buy_label
+  }
+  el.setAttribute(READY, '')
+}
+
+function revealWithin(node) {
+  if (node.nodeType !== 1) return
+  if (node.hasAttribute(ACTION)) reveal(node)
+  node.querySelectorAll('[' + ACTION + ']').forEach(reveal)
+}
+
+var pending = {}
+var nextRequest = 0
+
+// setState marks every button for el's action and item with a press's state,
+// so a copy of el the page made (a card's sheet) reads the same as el, even
+// one made while the press was on its way. It tells the page once, through a
+// bubbling hark:press event on a button still on the page, so a press from a
+// sheet closed before the answer still reaches the page's listeners. A sent
+// button reads as disabled, since a second tap sends nothing (settled), and
+// says so itself (markSent).
+function setState(el, actionId, state, code) {
+  var buttons = sameButtons(el)
+  buttons.forEach(function (b) {
+    b.setAttribute(STATE, state)
+    if (state === 'sent') markSent(b)
+    else if (state !== 'sending') showNotice(b, noticeFor(state))
+  })
+  if (state === 'sent') showToast(SENT_LABEL)
+  var onPage = el.isConnected ? el : buttons[0]
+  onPage.dispatchEvent(
+    new CustomEvent(PRESS, {
+      bubbles: true,
+      detail: { actionId: actionId, state: state, code: code || '' },
+    }),
+  )
+}
+
+// SENT_LABEL is what a sent button and the toast over the page say.
+var SENT_LABEL = 'Sent to Hark'
+
+// TOAST_MS is how long the toast stays over the page after a press is sent.
+var TOAST_MS = 2400
+
+var SVG_NS = 'http://www.w3.org/2000/svg'
+
+// checkIcon is the 16px check a sent button and the toast lead with.
+function checkIcon() {
+  var svg = document.createElementNS(SVG_NS, 'svg')
+  svg.setAttribute('viewBox', '92 92 16 16')
+  svg.setAttribute('width', '16')
+  svg.setAttribute('height', '16')
+  svg.setAttribute('fill', 'none')
+  svg.setAttribute('aria-hidden', 'true')
+  var path = document.createElementNS(SVG_NS, 'path')
+  path.setAttribute(
+    'd',
+    'M93 99.55L95.7091 102.249C96.4999 103.037 96.8954 103.431 97.3511 103.579C97.7519 103.709 98.1836 103.709 98.5844 103.579C99.0401 103.431 99.4355 103.037 100.226 102.249L107 95.5',
+  )
+  path.setAttribute('stroke', 'currentColor')
+  path.setAttribute('stroke-width', '2')
+  svg.appendChild(path)
+  return svg
+}
+
+// markSent turns el into a check and "Sent to Hark".
+function markSent(el) {
+  el.setAttribute('aria-disabled', 'true')
+  el.replaceChildren(checkIcon(), document.createTextNode(SENT_LABEL))
+}
+
+// sameButtons is every button on the page for el's action and item, since
+// pressing any of them sends the same thing, then el when it has left the page.
+function sameButtons(el) {
+  var action = el.getAttribute(ACTION)
+  var item = el.getAttribute(ITEM)
+  var all = [].filter.call(document.querySelectorAll('[' + ACTION + ']'), function (b) {
+    return b.getAttribute(ACTION) === action && b.getAttribute(ITEM) === item
+  })
+  if (all.indexOf(el) < 0) all.push(el)
+  return all
+}
+
+// NOTICES are what a button says in place of its own words for NOTICE_MS when
+// its press did not reach Hark. The button then reads as it did and can be
+// pressed again.
+var NOTICES = {
+  sign_in: 'Sign in to Hark',
+  not_allowed: 'Owner only',
+  failed: 'Not sent, try again',
+}
+
+var NOTICE_MS = 3000
+
+// KIT_NOTICE_STYLE hides the message a site's hark.css may write after a
+// button's words for a state, since the notice already stands in for them.
+var KIT_NOTICE_STYLE =
+  '[data-hark-action][data-hark-state="sign_in"]::after,' +
+  '[data-hark-action][data-hark-state="not_allowed"]::after,' +
+  '[data-hark-action][data-hark-state="failed"]::after{content:none!important}'
+
+var kitNoticesHidden = false
+
+// noticeFor is state's notice, or the failed one for a state it does not name.
+function noticeFor(state) {
+  if (Object.prototype.hasOwnProperty.call(NOTICES, state)) return NOTICES[state]
+  return NOTICES.failed
+}
+
+// showNotice puts notice in el in place of its words, at least as wide as the
+// words were so the row around it holds still, and puts the words back when
+// the notice ends.
+function showNotice(el, notice) {
+  hideKitNotices()
+  var words = Array.prototype.slice.call(el.childNodes)
+  var minWidth = el.style.minWidth
+  el.style.minWidth = el.getBoundingClientRect().width + 'px'
+  el.replaceChildren(document.createTextNode(notice))
+  setTimeout(function () {
+    el.replaceChildren.apply(el, words)
+    el.style.minWidth = minWidth
+    el.removeAttribute(STATE)
+  }, NOTICE_MS)
+}
+
+function hideKitNotices() {
+  if (kitNoticesHidden) return
+  kitNoticesHidden = true
+  var style = document.createElement('style')
+  style.textContent = KIT_NOTICE_STYLE
+  document.head.appendChild(style)
+}
+
+// TOAST_STYLE draws the toast: the kit's primary capsule, which grows in from
+// a blur at the bottom of the page and fades back out. Its colors read the
+// kit's tokens and fall back to the kit's light values on a page without it.
+var TOAST_STYLE =
+  '.pill{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:2147483647;' +
+  'display:flex;align-items:center;gap:12px;box-sizing:border-box;max-width:calc(100vw - 32px);height:48px;' +
+  'padding:0 20px;border-radius:24px;background:var(--fill-primary,#1d1d1f);color:var(--text-primary-on,#f5f5f7);' +
+  'font:500 15px/1.3 var(--sans,system-ui,-apple-system,sans-serif);white-space:nowrap;' +
+  'box-shadow:var(--hark-shadow,0 8px 40px #1d1d1f1f);pointer-events:none;opacity:0;filter:blur(2px);' +
+  'transform:translateX(-50%) scale(.8);transition:opacity 160ms,filter 160ms,transform 160ms;' +
+  'transition-timing-function:cubic-bezier(.4,0,.2,1)}' +
+  '.pill.shown{opacity:1;filter:blur(0);transform:translateX(-50%) scale(1);transition-duration:300ms}' +
+  '.pill svg{flex:none}.pill span{overflow:hidden;text-overflow:ellipsis}' +
+  '@media (prefers-reduced-motion:reduce){.pill,.pill.shown{filter:none;transform:translateX(-50%)}}'
+
+var toast = null
+var toastTimer = 0
+
+// toastPill is the toast, made on first use inside a shadow root so
+// the page's own styles cannot restyle or hide it.
+function toastPill() {
+  if (toast) return toast
+  var host = document.createElement('div')
+  var root = host.attachShadow({ mode: 'open' })
+  var style = document.createElement('style')
+  style.textContent = TOAST_STYLE
+  toast = document.createElement('div')
+  toast.className = 'pill'
+  toast.setAttribute('role', 'status')
+  toast.setAttribute('aria-live', 'polite')
+  toast.append(checkIcon(), document.createElement('span'))
+  root.append(style, toast)
+  document.body.appendChild(host)
+  return toast
+}
+
+// showToast shows text in the toast for TOAST_MS. Layout is read before the
+// toast is shown, so a toast made this moment still animates in.
+function showToast(text) {
+  var pill = toastPill()
+  pill.lastChild.textContent = text
+  pill.getBoundingClientRect()
+  pill.classList.add('shown')
+  clearTimeout(toastTimer)
+  toastTimer = setTimeout(function () {
+    pill.classList.remove('shown')
+  }, TOAST_MS)
+}
+
+// settled reports whether el's press is under way, already reached Hark, or
+// still showing its notice, so a second tap sends nothing.
+function settled(el) {
+  return el.hasAttribute(STATE)
+}
+
+// press hands el's action to the app framing the page. A page nothing frames
+// has no app to send it, and a settled button has sent already, so either
+// press does nothing.
+function press(el) {
+  if (window.parent === window || settled(el)) return
+  var appOrigin = new URL(meta.app).origin
+  var actionId = el.getAttribute(ACTION)
+  var requestId = String(++nextRequest)
+  var timer = setTimeout(function () {
+    if (!pending[requestId]) return
+    delete pending[requestId]
+    setState(el, actionId, 'failed', 'timeout')
+  }, RESULT_TIMEOUT_MS)
+  pending[requestId] = { el: el, actionId: actionId, timer: timer }
+  setState(el, actionId, 'sending')
+  var msg = { type: PRESS, requestId: requestId, artifactId: meta.artifact, actionId: actionId }
+  var item = el.getAttribute(ITEM)
+  if (item) msg.itemId = item
+  window.parent.postMessage(msg, appOrigin)
+}
+
+// onAppMessage takes the app's answers: ALLOW reveals the buttons, and RESULT
+// settles a press. Any other window's message is ignored.
+function onAppMessage(e) {
+  if (e.source !== window.parent || !meta.app || e.origin !== new URL(meta.app).origin) return
+  var d = e.data
+  if (d && d.type === APP_RESULT) {
+    onAppResult(d)
+    return
+  }
+  if (d && d.type === ALLOW) {
+    allowed = true
+    revealWithin(document.documentElement)
+    return
+  }
+  onResult(d)
+}
+
+function onResult(d) {
+  if (!d || d.type !== RESULT || !pending[d.requestId]) return
+  var p = pending[d.requestId]
+  delete pending[d.requestId]
+  clearTimeout(p.timer)
+  setState(p.el, p.actionId, String(d.state || 'failed'), d.code)
+}
+
+function onClick(e) {
+  var target = e.target
+  if (!(target instanceof Element)) return
+  var el = target.closest('[' + ACTION + ']')
+  if (!el || !el.hasAttribute(READY)) return
+  e.preventDefault()
+  press(el)
+}
+
+var appCalls = {}
+
+// callApp asks the app framing the page to run the page's backend and
+// resolves with its answer ({outcome, data, refusal, reason}), or rejects
+// with an Error whose code says why the app could not answer. A page no app
+// frames has no backend to reach.
+function callApp(type, fields) {
+  if (!meta.app || window.parent === window) {
+    return Promise.reject(appError('not_in_hark'))
+  }
+  return new Promise(function (resolve, reject) {
+    var requestId = 'app-' + ++nextRequest
+    var timer = setTimeout(function () {
+      delete appCalls[requestId]
+      reject(appError('timeout'))
+    }, APP_TIMEOUT_MS)
+    appCalls[requestId] = { resolve: resolve, reject: reject, timer: timer }
+    var msg = { type: type, requestId: requestId }
+    Object.keys(fields).forEach(function (k) {
+      msg[k] = fields[k]
+    })
+    window.parent.postMessage(msg, new URL(meta.app).origin)
+  })
+}
+
+function onAppResult(d) {
+  var call = appCalls[d.requestId]
+  if (!call) return
+  delete appCalls[d.requestId]
+  clearTimeout(call.timer)
+  if (d.ok) call.resolve(d.answer)
+  else call.reject(appError(String(d.code || 'failed')))
+}
+
+function appError(code) {
+  var err = new Error('Hark.app: ' + code)
+  err.code = code
+  return err
+}
+
+// safeHref returns s only for an https URL with a host and no user name or
+// password, at most MAX_URL_BYTES long, as siteURL checks it; otherwise "#".
+function safeHref(s) {
+  if (typeof s !== 'string' || new TextEncoder().encode(s).length > MAX_URL_BYTES) return '#'
+  try {
+    var u = new URL(s)
+    if (u.protocol !== 'https:' || !u.hostname || u.username || u.password) return '#'
+    return s
+  } catch (err) {
+    return '#'
+  }
+}
+
+// parseCSV and readData must read a block as the kit's hark-charts.js does
+// (services/agent/internal/tools/website/defaults/hark-charts.js).
+function parseCSV(text) {
+  var rows = []
+  var row = []
+  var field = ''
+  var quoted = false
+  for (var i = 0; i < text.length; i++) {
+    var ch = text[i]
+    if (quoted) {
+      if (ch === '"' && text[i + 1] === '"') {
+        field += '"'
+        i++
+      } else if (ch === '"') quoted = false
+      else field += ch
+    } else if (ch === '"') quoted = true
+    else if (ch === ',') {
+      row.push(field)
+      field = ''
+    } else if (ch === '\n') {
+      row.push(field)
+      rows.push(row)
+      row = []
+      field = ''
+    } else if (ch !== '\r') field += ch
+  }
+  if (field || row.length) {
+    row.push(field)
+    rows.push(row)
+  }
+  var head = rows.shift() || []
+  return rows.map(function (r) {
+    var o = {}
+    head.forEach(function (name, j) {
+      o[name.trim()] = typed(r[j])
+    })
+    return o
+  })
+}
+
+function typed(cell) {
+  var s = (cell == null ? '' : cell).trim()
+  if (s === '') return null
+  return isNaN(s) ? s : Number(s)
+}
+
+function readData(id) {
+  var el = document.getElementById(id)
+  if (!el) throw new Error('Hark.data: no element with id ' + id)
+  return el.type === 'text/csv' ? parseCSV(el.textContent.trim()) : JSON.parse(el.textContent)
+}
+
+var hark = (window.Hark = window.Hark || {})
+hark.safeHref = safeHref
+hark.app = {
+  load: function () {
+    return callApp(LOAD, {})
+  },
+  run: function (action, input) {
+    var fields = { action: String(action) }
+    if (input !== undefined) fields.input = input
+    return callApp(RUN, fields)
+  },
+}
+if (typeof hark.data !== 'function') hark.data = readData
+// shareLink is the page's link on the app, which opens only for readers the
+// app admits; the page's own address carries the preview token the app framed
+// it with. Its name must equal the one prompts/website_builder/v1.tmpl gives.
+if (meta.share) hark.shareLink = meta.share
+
+document.addEventListener('click', onClick, true)
+window.addEventListener('message', onAppMessage)
+new MutationObserver(function (records) {
+  records.forEach(function (r) {
+    if (r.type === 'attributes') revealWithin(r.target)
+    else r.addedNodes.forEach(revealWithin)
+  })
+}).observe(document.documentElement, {
+  childList: true,
+  subtree: true,
+  attributes: true,
+  attributeFilter: [ACTION, ITEM],
+})
+// The observer sees nodes added after this point; the parse may already have
+// added some, and not every engine reports parser insertions to it.
+revealWithin(document.documentElement)
+document.addEventListener('DOMContentLoaded', function () {
+  revealWithin(document.documentElement)
+})
+// A page no app frames, or one framed by anything but the app, is never
+// answered, so it shows no buttons.
+if (meta.app && window.parent !== window) {
+  window.parent.postMessage({ type: HELLO }, new URL(meta.app).origin)
+}
+
+})();</script>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Polar City Night Shift</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400&amp;display=swap"/>
+    <style>/* Hark's design tokens and component styles. Each component's rules follow its @component comment. style-gates: data */
+
+/* @component foundations */
+/* Every component switches layout at one of three widths: 600px, below which a page takes a phone's
+   spacing; 761px, from which two-up components (stats, checklists, pairs) sit side by side; and 900px,
+   from which heads, steps, timelines, cards and the hero's callout take their desktop layout. Media
+   queries cannot read custom properties, so each query writes one side of those widths, and
+   TestKitStylesheetsShareThreeBreakpoints holds every kit file to them. */
+:root {
+  color-scheme: light dark;
+
+  --text-primary: light-dark(#1d1d1f, #f5f5f7);         /* body text */
+  --text-secondary: light-dark(#636366, #a1a1a6);       /* supporting grey text */
+  --text-tertiary: light-dark(#1d1d1f4d, #f5f5f74d);    /* hollow dots, faint marks; never body text */
+  --text-primary-on: light-dark(#f5f5f7, #1d1d1f);      /* text on --fill-primary */
+  --text-secondary-on: light-dark(#aeaeb2, #5c5c60);    /* grey text on --fill-primary */
+  --fill-primary: light-dark(#1d1d1f, #f5f5f7);         /* the strong fill: solid chips, the nav, the badge */
+  --fill-primary-on: light-dark(#f5f5f7, #1d1d1f);      /* the page background */
+  --fill-secondary: light-dark(#1d1d1f80, #f5f5f780);
+  --fill-tertiary: light-dark(#e8e8ea, #2a2a2d);        /* the grey card, panel and row tint */
+  --fill-segment: light-dark(#3a3a3c, #e2e2e4);         /* the nav's tab track */
+  --fill-system-green: #00a665;                         /* status: done, ready */
+  --fill-system-orange: #ff4d00;                        /* status: now, current */
+  --fill-system-red: light-dark(#da2f35, #f1555b);      /* status: blocked, error */
+  --transparent-primary: light-dark(#1d1d1f4d, #f5f5f74d);
+  --stroke-primary: light-dark(#1d1d1f24, #f5f5f724);   /* strong hairline */
+  --stroke-secondary: light-dark(#1d1d1f12, #f5f5f712); /* faint hairline between rows */
+  --stroke-primary-on: light-dark(#f5f5f71a, #1d1d1f1a);
+  --stroke-composer: light-dark(#f5f5f780, #1d1d1f80);  /* the callout's glass edge */
+  --stroke-system-orange: #ff4d0026;
+  --hover-wash: light-dark(#1d1d1f0d, #f5f5f70d);
+  --hover-wash-primary-on: light-dark(#f9f9fa26, #1d1d1f14);
+
+  /* The hero is light text over a dark photo in both themes. */
+  --hero-surface: #161f39;
+  --hero-text: #f5f5f7;
+  --hero-text-muted: #f5f5f7cc;
+  --hero-scrim-strong: rgb(22 31 57 / 0.78);
+  --hero-scrim-soft: rgb(22 31 57 / 0.3);
+  --hero-scrim-side: rgb(22 31 57 / 0.45);
+  --hero-glass: rgb(22 31 57 / 0.42);
+  --hero-glass-faint: rgb(22 31 57 / 0.35);
+  --hero-glass-stroke: rgb(245 245 247 / 0.28);
+
+  --mat-regular: light-dark(rgb(255 255 255 / 0.56), rgb(29 29 31 / 0.55));
+  --mat-thin: light-dark(rgb(255 255 255 / 0.22), rgb(29 29 31 / 0.4));
+  --mat-agent: light-dark(rgb(255 255 255 / 0.84), rgb(29 29 31 / 0.66));
+  --mat-inverse: color-mix(in srgb, var(--fill-primary) 86%, transparent);  /* the nav: dark on light, light on dark */
+  --hark-blur: blur(50px) saturate(1.6);
+  --hark-shadow: 0 8px 40px #1d1d1f1f;
+
+  --sans: "GT Standard", "GT Standard L", "Geist", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  --lh: 1.3;                                            /* every text style is 130% */
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 600;
+  --size-caption: 12px;                                 /* the smallest text allowed */
+  --size-meta: 13px;
+  --size-small: 14px;
+  --size-body: 15px;
+  --size-prose: 16px;
+  --size-heading: 20px;
+  --size-figure: clamp(24px, 3vw, 32px);
+  --size-title: clamp(26px, 3vw, 32px);
+  --size-display: clamp(34px, 5vw, 48px);
+  --size-lede: clamp(16px, 1.7vw, 20px);
+
+  --type-caption: var(--weight-regular) var(--size-caption)/var(--lh) var(--sans);
+  --type-tag: var(--weight-medium) var(--size-caption)/var(--lh) var(--sans);
+  --type-small: var(--weight-regular) var(--size-small)/var(--lh) var(--sans);
+  --type-label: var(--weight-medium) var(--size-small)/var(--lh) var(--sans);
+  --type-body: var(--weight-regular) var(--size-body)/var(--lh) var(--sans);
+  --type-body-strong: var(--weight-medium) var(--size-body)/var(--lh) var(--sans);
+  --type-heading: var(--weight-medium) var(--size-heading)/var(--lh) var(--sans);
+  --type-lede: var(--weight-medium) var(--size-lede)/var(--lh) var(--sans);
+  --type-figure: var(--weight-regular) var(--size-figure)/var(--lh) var(--sans);
+  --type-title: var(--weight-regular) var(--size-title)/var(--lh) var(--sans);
+  --type-display: var(--weight-medium) var(--size-display)/var(--lh) var(--sans);
+  --type-numeral: var(--weight-regular) 48px/1 var(--sans);
+
+  --r-s: 12px;
+  --r-m: 16px;
+  --r-l: 24px;
+  --r-xl: 32px;
+  --r-pill: 100px;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --dur-quick: 160ms;
+
+  --page-max: 1120px;
+  --gutter: clamp(16px, 3vw, 32px);                     /* the page's side padding */
+  --tap: 44px;                                          /* the smallest touch target */
+}
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }
+
+* { box-sizing: border-box; }
+/* The page keeps its own bounce but never hands a fling on: a page is framed in Hark's /site
+   page, and a fling past its top would otherwise carry on into that page and drag the frame down. */
+html, body { overscroll-behavior-y: contain; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* The page background lives on body and html stays transparent, so the browser paints the whole
+   canvas, and the band a bounce reveals, in body's color, including a page's own override of it. */
+body {
+  margin: 0;
+  background: var(--fill-primary-on);
+  color: var(--text-primary);
+  font: var(--type-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+figure { margin-inline: 0; }
+a { color: inherit; }
+b, strong { font-weight: var(--weight-bold); }
+p { margin: 0; text-wrap: pretty; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+small { font-size: max(var(--size-caption), 0.85em); }
+.sub { color: var(--text-secondary); }
+
+:focus-visible { outline: 2px solid var(--fill-primary); outline-offset: 3px; border-radius: 6px; }
+
+/* @component page */
+.page {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+  padding-block: 12px 40px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+.main { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; min-width: 0; }
+
+.glass {
+  background: var(--mat-inverse);
+  -webkit-backdrop-filter: var(--hark-blur);
+  backdrop-filter: var(--hark-blur);
+  border: 1px solid var(--stroke-primary-on);
+}
+.nav {
+  position: sticky;
+  top: calc(env(safe-area-inset-top, 0px) + 12px);
+  z-index: 20;
+  justify-self: center;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px;
+  border-radius: var(--r-pill);
+  box-shadow: var(--hark-shadow);
+}
+.nav :focus-visible { outline-color: var(--fill-primary-on); }
+.seg {
+  display: flex;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-radius: var(--r-pill);
+  background: var(--fill-segment);
+}
+.seg::-webkit-scrollbar { display: none; }
+.seg a {
+  flex: none;
+  padding: 8px 14px;
+  border-radius: var(--r-pill);
+  font: var(--type-label);
+  color: var(--text-secondary-on);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.seg a:hover { color: var(--text-primary-on); }
+/* The active tab carries its own fill so its text is measured against it. */
+.seg a[aria-current="true"] { background: var(--fill-primary-on); color: var(--text-primary); }
+.theme-btn {
+  flex: none;
+  width: 36px; height: 36px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--hover-wash-primary-on);
+  color: var(--text-primary-on);
+  cursor: pointer;
+}
+.theme-btn:hover { box-shadow: inset 0 0 0 100px var(--hover-wash-primary-on); }
+.theme-btn::before { content: ""; width: 14px; height: 14px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px currentColor; background: linear-gradient(to right, light-dark(currentColor, transparent) 50%, light-dark(transparent, currentColor) 50%); }
+@media (max-width: 599px) {
+  .seg a { display: flex; align-items: center; min-height: var(--tap); }
+  .theme-btn { width: var(--tap); height: var(--tap); }
+}
+
+/* @component footer */
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--stroke-secondary);
+  font-size: var(--size-small);
+  color: var(--text-secondary);
+}
+.foot strong { color: var(--text-primary); }
+.foot nav { display: flex; flex-wrap: wrap; gap: 6px; }
+.foot nav a {
+  padding: 6px 12px;
+  border-radius: var(--r-pill);
+  background: var(--fill-tertiary);
+  color: var(--text-primary);
+  font: var(--type-tag);
+  text-decoration: none;
+}
+.foot nav a:hover { box-shadow: inset 0 0 0 100px var(--hover-wash); }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: var(--r-xl);
+  background: var(--fill-primary);
+  color: var(--text-primary-on);
+  box-shadow: var(--hark-shadow);
+  font: var(--weight-medium) var(--size-body)/1.1 var(--sans);
+  text-decoration: none;
+}
+.badge:hover { box-shadow: var(--hark-shadow), inset 0 0 0 100px var(--hover-wash-primary-on); }
+.hark-mark { display: inline-grid; place-items: center; }
+.hark-mark svg { display: block; }
+@media (max-width: 599px) {
+  .foot nav a { display: inline-flex; align-items: center; min-height: var(--tap); min-width: var(--tap); }
+  .badge { min-height: var(--tap); }
+}
+
+/* @component chip */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 8px;
+  border-radius: var(--r-pill);
+  font: var(--type-tag);
+  max-width: 100%;
+  background: var(--fill-tertiary);
+  color: var(--text-secondary);
+  vertical-align: middle;
+}
+.chip::before {
+  content: "";
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex: none;
+  box-shadow: inset 0 0 0 1.5px var(--text-tertiary);
+}
+.chip--solid { background: var(--fill-primary); color: var(--text-primary-on); }
+.chip--solid::before { background: var(--fill-system-green); box-shadow: none; }
+td .chip { white-space: nowrap; }
+/* @component dot */
+.dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  font: var(--type-tag);
+  color: var(--text-primary);
+}
+.dot::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--fill-system-green); }
+tbody th .dot { display: flex; width: fit-content; }
+/* @component pill */
+.pill {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: var(--r-pill);
+  background: var(--fill-tertiary);
+  color: var(--text-secondary);
+  font: var(--type-tag);
+  white-space: normal;
+  vertical-align: 1px;
+}
+/* @component button, link and links */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 5px 12px;
+  border-radius: var(--r-s);
+  background: var(--fill-primary-on);
+  color: var(--text-primary);
+  border: 1px solid var(--stroke-primary);
+  font: var(--type-tag);
+  text-decoration: none;
+  max-width: 100%;
+  transition: box-shadow var(--dur-quick) ease;
+}
+.btn:hover { box-shadow: inset 0 0 0 100px var(--hover-wash); }
+.btn[target="_blank"]::after { content: "\2197"; font-size: 11px; color: var(--text-secondary); }
+.link {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--stroke-primary);
+  text-underline-offset: 3px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.link:hover { text-decoration-color: currentColor; }
+.links { display: flex; flex-wrap: wrap; gap: 8px; }
+@media (pointer: coarse), (max-width: 599px) { .btn { min-height: var(--tap); padding-inline: 14px; } }
+
+/* A button that asks Hark is the page's primary capsule. Once it sends, Hark
+   writes a check and "Sent to Hark" into it, and it turns secondary. A press
+   that does not send shows a short notice in place of its words for a moment. */
+.btn[data-hark-action] {
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--fill-primary);
+  color: var(--text-primary-on);
+  font: var(--type-body-strong);
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: box-shadow var(--dur-quick) ease, transform var(--dur-quick) ease;
+}
+.btn[data-hark-action]:hover { box-shadow: inset 0 0 0 100px var(--hover-wash-primary-on); }
+.btn[data-hark-action]:active { transform: scale(0.97); }
+.btn[data-hark-action] svg { flex: none; }
+.btn[data-hark-action][data-hark-state="sent"] { background: var(--fill-tertiary); color: var(--text-primary); box-shadow: none; }
+
+[data-hark-action][data-hark-state="sending"] { opacity: 0.6; pointer-events: none; }
+[data-hark-action][data-hark-state="sent"] { pointer-events: none; cursor: default; }
+@media (max-width: 599px) {
+  .link { display: inline-flex; align-items: center; min-width: var(--tap); min-height: var(--tap); margin: -13px 0; vertical-align: middle; }
+}
+/* @component text and fineprint */
+.prose { display: grid; gap: 12px; max-width: 68ch; font-size: var(--size-prose); }
+.fineprint { font-size: var(--size-small); color: var(--text-secondary); max-width: 70ch; }
+/* @component hero */
+.hero {
+  position: relative;
+  min-height: clamp(320px, 46vh, 480px);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  color: var(--hero-text);
+  isolation: isolate;
+  box-shadow: var(--hark-shadow);
+  background: var(--hero-surface);
+}
+/* Without a photo the hero is as tall as its copy, so the callout sits beside the copy instead of over it. */
+.hero:not(:has(.hero__img)) { min-height: 0; background: var(--hero-surface) center / cover no-repeat; }
+.hero:not(:has(.hero__img))::after { background: linear-gradient(to right, var(--hero-scrim-side) 0%, transparent 60%); }
+@media (min-width: 900px) {
+  .hero:not(:has(.hero__img)) > .callout { position: static; flex: none; align-self: flex-start; margin: clamp(16px, 2.4vw, 24px) clamp(16px, 2.4vw, 24px) clamp(16px, 2.4vw, 24px) auto; }
+}
+.hero__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 40% 60%;
+  z-index: -2;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(to top, var(--hero-scrim-strong) 0%, var(--hero-scrim-soft) 42%, transparent 66%),
+    linear-gradient(to right, var(--hero-scrim-side) 0%, transparent 60%);
+}
+.hero__copy {
+  display: grid;
+  gap: 14px;
+  max-width: 40rem;
+  padding: clamp(24px, 4vw, 48px);
+  padding-bottom: clamp(28px, 3.4vw, 44px);
+}
+.hero__eyebrow {
+  justify-self: start;
+  padding: 6px 12px;
+  border-radius: var(--r-pill);
+  background: var(--hero-glass);
+  border: 1px solid var(--hero-glass-stroke);
+  -webkit-backdrop-filter: var(--hark-blur);
+  backdrop-filter: var(--hark-blur);
+  font: var(--type-label);
+}
+.hero h1 { font: var(--type-display); letter-spacing: 0; }
+.hero h1 em { font-style: normal; }
+.hero__sub { font: var(--type-lede); max-width: 34ch; }
+.hero__meta { font-size: var(--size-small); color: var(--hero-text-muted); }
+.hero__credit {
+  position: absolute;
+  right: clamp(20px, 3vw, 32px);
+  bottom: 16px;
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  background: var(--hero-glass-faint);
+  -webkit-backdrop-filter: var(--hark-blur);
+  backdrop-filter: var(--hark-blur);
+  font: var(--type-caption);
+  color: var(--hero-text-muted);
+}
+/* A callout overlays the photo's top corner, so the hero keeps room for it above the copy. */
+@media (min-width: 900px) { .hero:has(> .callout) { min-height: clamp(420px, 56vh, 560px); } }
+.hero > .callout {
+  position: absolute;
+  top: clamp(16px, 2.4vw, 24px);
+  right: clamp(16px, 2.4vw, 24px);
+  width: min(320px, calc(100% - 32px));
+}
+@media (max-width: 899px) {
+  .hero { flex-direction: column; justify-content: flex-end; align-items: stretch; min-height: 0; }
+  .hero__img { object-position: 22% 50%; }
+  .hero__copy { padding-top: 140px; padding-bottom: 28px; }
+  .hero:not(:has(.hero__img)) .hero__copy { padding-top: clamp(24px, 4vw, 48px); }
+  .hero__credit { top: 16px; right: 16px; bottom: auto; }
+  .hero > .callout { position: static; width: auto; margin: 0 12px 12px; }
+}
+/* On a phone the title starts higher, so the first screen reaches the stats. */
+@media (max-width: 599px) { .hero__copy { padding-top: 88px; padding-bottom: 20px; } }
+/* @component callout */
+.callout {
+  max-width: 420px;
+  display: grid;
+  gap: 10px;
+  padding: 16px 18px 18px;
+  border-radius: var(--r-l);
+  background: var(--mat-agent);
+  -webkit-backdrop-filter: var(--hark-blur);
+  backdrop-filter: var(--hark-blur);
+  border: 1px solid var(--stroke-composer);
+  box-shadow: var(--hark-shadow);
+  color: var(--text-primary);
+  font-size: var(--size-small);
+}
+.callout__head { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); font-weight: var(--weight-medium); }
+.callout__head svg { color: var(--text-primary); }
+.callout__lead { font-size: var(--size-body); }
+.callout .fineprint { font-size: var(--size-caption); }
+.callout .btn { justify-self: start; }
+/* @component stats */
+.stats { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); padding-top: 8px; }
+.stat {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 4px;
+  padding: 12px 24px;
+  border-left: 1px solid var(--stroke-secondary);
+}
+.stat:first-child { border-left: 0; padding-left: 0; }
+.stat__fig { font: var(--type-figure); font-variant-numeric: tabular-nums; }
+.stat__label { font-size: var(--size-small); color: var(--text-secondary); }
+@media (max-width: 760px) {
+  .stats { grid-auto-flow: row; grid-template-columns: auto minmax(0, 1fr); column-gap: 12px; padding-top: 0; }
+  .stat { grid-column: 1 / -1; grid-template-columns: subgrid; align-items: baseline; gap: 12px; padding: 14px 0; border-left: 0; border-top: 1px solid var(--stroke-secondary); }
+  .stat:first-child { border-top: 0; }
+}
+/* On a phone the stats sit two to a row, figure over label. */
+@media (max-width: 599px) {
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 0; }
+  .stat { grid-column: auto; grid-template-columns: none; gap: 2px; padding: 12px 0; }
+  .stat:nth-child(2) { border-top: 0; }
+  .stat:nth-child(even) { padding-left: 16px; border-left: 1px solid var(--stroke-secondary); }
+  .stat__fig { font-size: 26px; line-height: 1.15; }
+  .stat__label { font-size: var(--size-caption); }
+}
+/* @component section */
+.section {
+  padding-block: clamp(40px, 6vw, 72px) clamp(16px, 2vw, 24px);
+  border-top: 1px solid var(--stroke-secondary);
+  scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 72px); /* Clears the sticky .nav: its top offset plus its tallest height, 56px. */
+  min-width: 0;
+}
+.section > * + * { margin-top: clamp(20px, 2.4vw, 28px); }
+.section > .head + * { margin-top: 0; }
+.head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  gap: 10px 40px;
+  align-items: end;
+  margin-bottom: clamp(24px, 3vw, 36px);
+}
+.head__eyebrow { grid-column: 1 / -1; font: var(--type-label); color: var(--text-secondary); }
+.head h2 { font: var(--type-title); }
+.head__sub { justify-self: end; font-size: var(--size-body); color: var(--text-secondary); max-width: 44ch; text-align: right; }
+@media (max-width: 899px) { .head { grid-template-columns: 1fr; } .head__sub { justify-self: start; text-align: left; } }
+/* @component table */
+.table-wrap { margin-inline: -12px; padding-inline: 12px; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font: var(--type-small); font-variant-numeric: tabular-nums; }
+caption { text-align: left; font: var(--type-caption); color: var(--text-secondary); padding: 0 0 10px; }
+th, td { text-align: left; vertical-align: top; padding: 12px; border-bottom: 1px solid var(--stroke-secondary); }
+th:first-child, td:first-child { padding-left: 0; }
+th:last-child, td:last-child { padding-right: 0; }
+thead th {
+  font: var(--type-tag);
+  color: var(--text-secondary);
+  border-bottom-color: var(--stroke-primary);
+  padding-top: 0;
+  padding-bottom: 8px;
+  white-space: nowrap;
+}
+tbody th { font-weight: var(--weight-bold); }
+tbody tr:last-child > * { border-bottom: 0; }
+.rowhead { white-space: nowrap; }
+td small, th small { display: block; font: var(--type-caption); color: var(--text-secondary); margin-top: 2px; }
+td.num { font-weight: var(--weight-bold); white-space: nowrap; }
+td.num small { white-space: normal; }
+.muted { color: var(--text-secondary); }
+tr.is-highlight > * { background: var(--fill-tertiary); }
+tr.is-highlight > :first-child { box-shadow: -12px 0 var(--fill-tertiary); }
+tr.is-highlight > :last-child { box-shadow: 12px 0 var(--fill-tertiary); }
+.after-table { margin-top: 20px; padding-inline: 12px; }
+@media (max-width: 599px) {
+  .table-wrap table, .table-wrap tbody, .table-wrap tr, .table-wrap th, .table-wrap td { display: block; }
+  .table-wrap thead { display: none; }
+  .table-wrap caption { display: block; text-align: left; }
+  /* A row is its name on top, then its cells wrapped three or four to a line, each label over its value. */
+  .table-wrap tbody tr { display: flex; flex-wrap: wrap; gap: 8px 20px; padding: 14px 0; border-bottom: 1px solid var(--stroke-secondary); }
+  .table-wrap tbody tr.is-highlight { margin-inline: -12px; padding-inline: 12px; background: var(--fill-tertiary); }
+  .table-wrap tbody tr.is-highlight > * { background: none; box-shadow: none; }
+  .table-wrap tbody tr > * { border-bottom: 0; padding: 0; }
+  .table-wrap tbody tr > th { flex: 1 0 100%; }
+  .table-wrap tbody td.is-empty { display: none; }
+  .table-wrap tbody td[data-label]::before { content: attr(data-label); display: block; color: var(--text-secondary); font-size: var(--size-caption); font-weight: var(--weight-regular); line-height: 1.3; }
+  .table-wrap tbody td:has(> .link:only-child) { align-self: end; }
+  .table-wrap tbody td:has(> .link:only-child)::before { display: none; }
+  .rowhead { white-space: normal; }
+}
+/* @component compare */
+.compare { margin-inline: -12px; overflow-x: auto; scroll-snap-type: x mandatory; }
+.compare table { table-layout: fixed; min-width: calc(var(--compare-cols, 3) * 200px); }
+.compare th, .compare td { scroll-snap-align: start; padding-inline: 12px; }
+.compare thead th { font: var(--type-body-strong); color: var(--text-primary); white-space: normal; padding-top: 0; padding-bottom: 14px; border-bottom-color: var(--stroke-secondary); }
+/* On light tiles a white product backdrop blends into the grey. */
+.compare__media { position: relative; display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; width: 100%; aspect-ratio: 4 / 3; max-height: 240px; margin: 0 0 12px; padding: 16px; border-radius: var(--r-m); background: var(--fill-tertiary); }
+.compare__media img { max-width: 100%; max-height: 100%; mix-blend-mode: multiply; }
+/* A photo of a place or a room fills its frame instead of fitting whole. */
+.compare .compare__media.compare__media--photo { padding: 0; overflow: hidden; background: var(--fill-tertiary); }
+.compare .compare__media.compare__media--photo img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; object-fit: cover; mix-blend-mode: normal; }
+.compare thead th > .chip { display: flex; width: fit-content; margin-top: 8px; }
+.compare:has(.compare__media) thead th:not(:has(.compare__media))::before { content: ""; display: block; width: 100%; aspect-ratio: 4 / 3; max-height: 240px; margin-bottom: 12px; border-radius: var(--r-m); background: var(--fill-tertiary); }
+:root[data-theme="dark"] .compare__media img { mix-blend-mode: normal; border-radius: var(--r-s); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .compare__media img { mix-blend-mode: normal; border-radius: var(--r-s); } }
+/* The header column shrinks to nothing on screen but stays in the table, so screen readers keep each value's row header. */
+.js .compare tbody th[scope="row"], .js .compare thead td:first-child { width: 0; padding: 0; border: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.js .compare td[data-label]::before { content: attr(data-label); content: attr(data-label) / ""; display: block; margin-bottom: 4px; font: var(--type-caption); color: var(--text-secondary); }
+/* On a phone two options show side by side, and the rest are a swipe away. */
+@media (max-width: 599px) { .compare table { min-width: calc(var(--compare-cols, 3) * 46vw); } .compare th, .compare td { padding-inline: 8px; } }
+/* @component steps */
+.step {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr) minmax(220px, 0.78fr);
+  gap: 16px 28px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--stroke-secondary);
+}
+.step > * { min-width: 0; }
+.steps > .step:last-child { border-bottom: 0; }
+.step p + p { margin-top: 8px; }
+.step__num { font: var(--type-numeral); color: var(--text-primary); font-variant-numeric: tabular-nums; }
+.step__eyebrow { margin-top: 8px; font: var(--type-label); color: var(--text-secondary); }
+.step h3 { font: var(--type-heading); margin-bottom: 12px; }
+.step__pills { list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.step__pills li {
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--stroke-primary);
+  font-size: var(--size-meta);
+  color: var(--text-secondary);
+  max-width: 100%;
+}
+.step__pills b { color: var(--text-primary); font-weight: var(--weight-bold); }
+.step__panel {
+  align-self: start;
+  margin: 0;
+  padding: 16px 18px;
+  border-radius: var(--r-m);
+  background: var(--fill-tertiary);
+  font-size: var(--size-small);
+}
+.step__panel dt { font-size: var(--size-caption); color: var(--text-secondary); margin-bottom: 2px; }
+.step__panel dd { margin: 0 0 12px; }
+.step__panel dd:last-child { margin-bottom: 0; }
+.step__panel .fineprint { display: block; margin-top: 6px; font-size: var(--size-caption); }
+.step__panel .btn { margin-top: 8px; }
+.step__figure { grid-column: 2 / span 2; margin: 0; }
+.step__figure img { width: 100%; height: clamp(200px, 26vw, 320px); object-fit: cover; border-radius: var(--r-m); }
+.step__figure figcaption { font-size: var(--size-caption); color: var(--text-secondary); padding-top: 10px; }
+@media (min-width: 900px) {
+  .step:not(:has(> .step__panel)) { grid-template-columns: 112px minmax(0, 1fr); }
+  .step:not(:has(> .step__panel)) > .step__figure { grid-column: 2; }
+}
+@media (max-width: 899px) {
+  .step { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .step__figure { grid-column: 1; }
+  .step__intro { display: flex; align-items: baseline; gap: 14px; }
+  .step__num { font-size: 40px; }
+  .step__eyebrow { margin-top: 0; }
+}
+/* @component checklist */
+.checklist { display: grid; grid-template-columns: minmax(0, 1.4fr) auto minmax(0, 1fr); column-gap: 20px; list-style: none; margin: 0; padding: 0; }
+.checklist:not(:has(.checklist__note)) { grid-template-columns: minmax(0, 1fr) auto; }
+.checklist > li {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  row-gap: 8px;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--stroke-secondary);
+}
+.checklist > li:last-child { border-bottom: 0; }
+.checklist__item { grid-column: 1; font-weight: var(--weight-bold); }
+.checklist > li > .chip { grid-column: 2; justify-self: start; }
+.checklist:not(:has(.checklist__note)) > li > .chip { justify-self: end; }
+.checklist__item small { display: block; font-weight: var(--weight-regular); font-size: var(--size-caption); color: var(--text-secondary); margin-top: 2px; }
+.checklist__note { grid-column: 3; font-size: var(--size-small); color: var(--text-secondary); }
+.checklist > li.is-done .checklist__item { text-decoration: line-through; text-decoration-color: var(--text-tertiary); }
+/* A row's own button sits in a last column, so each booking is pressed where it is listed. */
+.checklist:has(> li > .btn) { grid-template-columns: minmax(0, 1.4fr) auto minmax(0, 1fr) auto; }
+.checklist:has(> li > .btn):not(:has(.checklist__note)) { grid-template-columns: minmax(0, 1fr) auto auto; }
+.checklist > li > .btn { grid-column: -2; justify-self: end; }
+.checklist > li > .btn[data-hark-action] { min-height: 36px; padding: 0 16px; font: var(--type-label); white-space: nowrap; }
+@media (max-width: 760px) {
+  .checklist, .checklist:has(> li > .btn), .checklist:has(> li > .btn):not(:has(.checklist__note)) { grid-template-columns: minmax(0, 1fr) auto; }
+  .checklist > li > .chip { justify-self: end; }
+  .checklist__note { grid-column: 1 / -1; }
+  .checklist > li:has(> .btn) > .checklist__note { grid-column: 1; }
+  .checklist > li > .btn { grid-column: 2; justify-self: end; }
+}
+/* @component breakdown */
+.breakdown { max-width: 720px; }
+@media (min-width: 900px) { .section > .breakdown, .section > .aside { max-width: calc((100% - 40px) * 1.65 / 2.65); } }
+.breakdown dl { margin: 0; }
+.breakdown .row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--stroke-secondary);
+}
+.breakdown dt { font-size: var(--size-body); }
+.breakdown dt small { display: block; color: var(--text-secondary); font-size: var(--size-meta); margin-top: 2px; }
+.breakdown dd { margin: 0; font-weight: var(--weight-bold); font-size: var(--size-body); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.breakdown .row--total {
+  margin-top: -1px;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--stroke-primary);
+  border-bottom: 0;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+.breakdown .row--total dt { font: var(--type-body-strong); }
+.breakdown .row--total dd { font: var(--type-figure); white-space: normal; }
+.breakdown .fineprint { margin-top: 16px; }
+/* @component pair */
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); align-items: start; }
+.pair:has(> :is(.callout, .aside):last-child) { grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); column-gap: 40px; }
+.pair > .callout { max-width: none; }
+@media (max-width: 760px) { .pair, .pair:has(> :is(.callout, .aside):last-child) { grid-template-columns: minmax(0, 1fr); } }
+/* @component timeline */
+.timeline { display: grid; grid-template-columns: 210px minmax(0, 1fr) auto; column-gap: 28px; list-style: none; margin-inline: 0; margin-bottom: 0; padding: 0; }
+.timeline > li {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  row-gap: 8px;
+  align-items: start;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--stroke-secondary);
+}
+.timeline > li:first-child { padding-top: 0; }
+.timeline > li:last-child { border-bottom: 0; padding-bottom: 0; }
+.timeline__when { display: flex; align-items: baseline; gap: 12px; font-weight: var(--weight-bold); }
+.timeline__when::before {
+  content: "";
+  width: 8px; height: 8px;
+  flex: none;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.5px var(--text-tertiary);
+  transform: translateY(-1px);
+}
+.timeline > li.is-current .timeline__when::before { background: var(--fill-system-orange); box-shadow: 0 0 0 4px var(--stroke-system-orange); }
+.timeline > li > p:has(> .chip:only-child) { justify-self: end; }
+.timeline__what ul { margin: 0; padding-left: 18px; }
+.timeline__what li { margin-bottom: 4px; }
+.timeline__what li:last-child { margin-bottom: 0; }
+.timeline__what p + p { margin-top: 6px; }
+@media (max-width: 899px) {
+  .timeline { grid-template-columns: minmax(0, 1fr); }
+  .timeline > li > p:has(> .chip:only-child) { justify-self: start; }
+  .timeline__what, .timeline > li > p:last-child { padding-left: 20px; }
+}
+/* @component cards */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; }
+.cards:has(> :nth-child(4):last-child) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.cards > div { padding: 22px 24px; border-radius: var(--r-m); background: var(--fill-tertiary); }
+.cards h3 { font: var(--type-heading); margin-bottom: 10px; }
+.cards ul { margin: 0; padding: 0; list-style: none; }
+.cards li { padding: 10px 0; border-bottom: 1px solid var(--stroke-secondary); }
+.cards li:last-child { border-bottom: 0; padding-bottom: 0; }
+.cards .quote { font: var(--type-heading); margin-bottom: 8px; text-wrap: balance; }
+@media (max-width: 899px) { .cards { grid-template-columns: 1fr; } }
+@media (max-width: 599px) { .cards { gap: 12px; } .cards > div { padding: 18px; } .cards h3 { margin-bottom: 4px; } }
+/* @component aside */
+.aside {
+  max-width: 62ch;
+  padding: 20px 22px;
+  border: 1.5px dashed var(--stroke-primary);
+  border-radius: var(--r-m);
+}
+.aside h3 { font: var(--type-heading); margin-bottom: 6px; }
+/* @component chart */
+.chart { margin-bottom: 8px; padding: 20px 20px 12px; border-radius: var(--r-m); background: var(--fill-tertiary); overflow-x: auto; }
+.chart__cap { font-size: var(--size-caption); color: var(--text-secondary); margin-bottom: 12px; }
+/* @component figure */
+.band { margin-inline: 0; margin-bottom: 0; }
+.band img { width: 100%; height: clamp(240px, 40vw, 520px); object-fit: cover; border-radius: var(--r-xl); }
+.band figcaption { font-size: var(--size-caption); color: var(--text-secondary); padding: 10px 4px 0; }
+.is-portrait img { width: auto; max-width: 100%; height: clamp(320px, 48vw, 560px); }
+</style>
+    <style>.hero:not(:has(.hero__img)) { background-image: url("data:image/webp;base64,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"); }
+</style>
+    <style>
+      .x-board { display: grid; gap: 16px; padding: 22px 24px; border-radius: var(--r-m); background: var(--fill-tertiary); }
+      .x-when { font: var(--type-label); color: var(--text-secondary); }
+      .x-scene { font: var(--type-heading); text-wrap: balance; }
+      .x-opts { display: grid; gap: 8px; }
+      .x-opt {
+        display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; gap: 12px; align-items: center;
+        width: 100%; min-height: var(--tap); padding: 10px 14px; text-align: left;
+        border: 1px solid var(--stroke-primary); border-radius: var(--r-s);
+        background: var(--fill-primary-on); color: var(--text-primary); font: var(--type-body); cursor: pointer;
+      }
+      .x-opt:hover { box-shadow: inset 0 0 0 100px var(--hover-wash); }
+      .x-opt b { font: var(--type-label); font-family: "Geist Mono", monospace; }
+      .x-opt span.x-eff { font: var(--type-tag); font-family: "Geist Mono", monospace; color: var(--text-secondary); white-space: nowrap; }
+      .x-log { max-height: 240px; overflow: auto; margin: 0; padding: 0; list-style: none; }
+      .x-log li { display: flex; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--stroke-secondary); font-size: var(--size-small); }
+      .x-log li b { font-family: "Geist Mono", monospace; font-weight: var(--weight-regular); color: var(--text-secondary); }
+      .x-packet, .x-code {
+        width: 100%; padding: 14px 16px; border: 1px solid var(--stroke-primary); border-radius: var(--r-s);
+        background: var(--fill-primary-on); color: var(--text-primary);
+        font-family: "Geist Mono", monospace; font-size: var(--size-caption); line-height: 1.5; resize: vertical;
+      }
+      .x-packet { min-height: 320px; }
+      .x-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+      .x-input {
+        flex: 1 1 220px; min-height: var(--tap); padding: 8px 14px; border: 1px solid var(--stroke-primary);
+        border-radius: var(--r-s); background: var(--fill-primary-on); color: var(--text-primary);
+        font-family: "Geist Mono", monospace; font-size: var(--size-small);
+      }
+      .x-note { font-size: var(--size-small); color: var(--text-secondary); }
+      .x-end { font: var(--type-body); text-wrap: pretty; }
+      .x-part { display: grid; gap: 6px; }
+      .x-mono { font-family: "Geist Mono", monospace; font-size: var(--size-small); overflow-wrap: anywhere; }
+      .x-bar { display: block; width: 100%; max-width: 160px; height: 6px; margin: 10px 0 4px; border-radius: var(--r-pill); background: var(--fill-tertiary); overflow: hidden; }
+      .x-bar i { display: block; height: 100%; width: 0; border-radius: inherit; background: var(--fill-primary); transition: width var(--dur-quick) var(--ease-out); }
+      .x-log li small.x-shelter { color: var(--text-primary); }
+      .x-rules { margin: 8px 0 0; padding-left: 18px; font: var(--type-small); color: var(--text-secondary); }
+      .x-rules li { margin: 2px 0; }
+      textarea.x-input { resize: vertical; line-height: 1.5; }
+      .x-log li small { display: block; color: var(--text-secondary); }
+      .x-note[data-warn="1"] { color: var(--text-primary); padding-left: 10px; border-left: 3px solid var(--fill-system-red); }
+      @media (max-width: 599px) { .x-board { padding: 18px; } .x-opt { grid-template-columns: 24px minmax(0, 1fr); } .x-opt span.x-eff { grid-column: 2; } }
+    </style>
+  <style>/* Keep the meter words, including air's plenty, above the sticky section tabs. */.stats{position:relative;z-index:21}</style></head>
+  <body>
+    <div class="page" id="top">
+      <header class="nav glass" data-auto=""></header>
+      <main class="main">
+        <section class="hero">
+          <div class="hero__copy">
+            <p class="hero__eyebrow">Mars · 71°N · sol 418 · v0.5.1</p>
+            <h1>Polar City Night Shift</h1>
+            <p class="hero__sub" id="heroSub">
+              One night, eight turns, 22:00 to dawn. You keep the city&#39;s heat, air and water running while it sleeps.
+            </p>
+            <p class="hero__meta" id="heroMeta">8 turns · 22:00 to 06:00 · PASS any time</p>
+          </div>
+          <aside class="callout" aria-label="How to play">
+            <p class="callout__head"><span class="hark-mark" data-size="16"></span> <span id="calHead">How to play</span></p>
+            <p class="callout__lead" id="calLead">
+              <strong>Pick one letter a turn.</strong> Every effect is written on the button. PASS ends your shift whenever you choose.
+            </p>
+            <a class="btn" href="#play" id="calBtn">Start the shift</a>
+          </aside>
+        </section>
+
+        <section class="stats" aria-label="Shift status">
+          <div class="stat"><span class="stat__fig" id="sTurn">1 / 8</span><span class="stat__label" id="lTurn">Turn</span></div>
+          <div class="stat"><span class="stat__fig" id="sHeat">steady</span><span class="x-bar" aria-hidden="true"><i id="bHeat"></i></span><span class="stat__label" id="lHeat">Heat</span></div>
+          <div class="stat"><span class="stat__fig" id="sAir">plenty</span><span class="x-bar" aria-hidden="true"><i id="bAir"></i></span><span class="stat__label" id="lAir">Air</span></div>
+          <div class="stat"><span class="stat__fig" id="sWater">steady</span><span class="x-bar" aria-hidden="true"><i id="bWater"></i></span><span class="stat__label" id="lWater">Water</span></div>
+        </section>
+
+        <section class="section" id="play" data-nav="Play">
+          <div class="head">
+            <p class="head__eyebrow" id="ebPlay">The shift</p>
+            <h2 id="hdPlay">One hour at a time, and no undo.</h2>
+            <p class="head__sub" id="subPlay">Eight turns from 22:00 to dawn. Each brings one event, three answers, and PASS.</p>
+          </div>
+          <div class="pair">
+            <div class="x-board" id="board"></div>
+            <div class="x-board">
+              <p class="x-when" id="lLog">Shift log</p>
+              <ul class="x-log" id="log"></ul>
+              <div class="x-row">
+                <button class="btn" id="btnLang" type="button">中文</button>
+                <button class="btn" id="btnNew" type="button">New seed</button>
+              </div>
+              <p class="x-note" id="seedLine"></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="rules" data-nav="Rules">
+          <div class="head">
+            <h2 id="hdRules">What each meter means.</h2>
+          </div>
+          <div class="aside" id="baseAside">
+            <h3 id="hdBase">House rules</h3>
+            <ul class="x-rules" id="baseRules"></ul>
+          </div>
+          <div class="cards" id="rulesCards"></div>
+          <div class="aside" id="upgAside">
+            <h3 id="hdUpg">Meters are only the story</h3>
+            <p class="fineprint" id="txtUpg">
+              Heat, air and water show where the night stands. The ending says what happened at dawn and what each choice cost or kept, and nothing more.
+            </p>
+          </div>
+          <div class="aside">
+            <h3 id="hdChg">Changelog</h3>
+            <ul class="x-rules" id="chgList"></ul>
+          </div>
+        </section>
+
+        <section class="section" id="ai" data-nav="Text mode">
+          <div class="head">
+            <p class="head__eyebrow" id="ebAi">For an AI player</p>
+            <h2 id="hdAi">Copy the packet, send back one move.</h2>
+            <p class="head__sub" id="subAi">The packet holds the whole state. Send back one numbered move a turn.</p>
+          </div>
+          <textarea class="x-packet" id="packet" readonly="" spellcheck="false" aria-label="Game state packet"></textarea>
+          <div class="x-row">
+            <button class="btn" id="btnCopy" type="button">Copy packet</button>
+            <textarea class="x-input" id="moveIn" rows="2" spellcheck="false" placeholder="1: A
+COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
+            <button class="btn" id="btnPlay" type="button">Apply move</button>
+          </div>
+          <p class="x-note" id="cmCount" aria-live="polite">COMMENT 0 / 280</p>
+          <p class="x-note" id="moveNote"></p>
+          <p class="x-when" id="lCode">Replay code</p>
+          <textarea class="x-code" id="code" readonly="" rows="1" spellcheck="false" aria-label="Replay code"></textarea>
+          <p class="fineprint" id="fpAi">
+            First line &#34;k: A&#34; with k the turn and A, B, C or P (D only when the packet lists it). Optional second line &#34;COMMENT: …&#34;, kept as plain text up to 280 characters. A wrong number is rejected and nothing is recorded. Paste a replay code or a packet&#39;s resume code to restore that exact turn.
+          </p>
+        </section>
+      </main>
+      <footer class="foot">
+        <p>Made by Tuzi and Affiliates · designed by Hermes (Hark) · inspired by a Mars Polar City thread</p>
+        <nav aria-label="Back to sections" data-auto=""></nav>
+        <a class="badge" href="https://hark.com/" rel="noopener" target="_blank"><span class="hark-mark"></span><span>built by hark</span></a>
+      </footer>
+    </div>
+    <script>/* Page behaviors for Hark's component library: the nav, the theme toggle, tables and images. style-gates: data */
+(function () {
+  "use strict";
+  var doc = document, root = doc.documentElement;
+  root.classList.add("js");
+  var LOGO = '<svg width="SIZE" height="SIZE" viewBox="0 0 36 36" fill="none" aria-hidden="true"><path fill="currentColor" d="M25.096 30c-.072 0-.12-.048-.168-.12-4.776-6.384-12.216-10.8-20.736-11.688C4.048 18.168 4 18.096 4 18s.048-.168.192-.192c8.52-.888 15.96-5.304 20.736-11.688.048-.072.096-.12.168-.12s.096.024.168.072A15.02 15.02 0 0 1 31.12 18a15.02 15.02 0 0 1-5.856 11.928c-.072.048-.096.072-.168.072"/></svg>';
+
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+  function each(a, f) { return (a || []).map(f).join(""); }
+  function navLink(s) { return '<a href="#' + esc(s.id) + '" data-for="' + esc(s.id) + '">' + esc(s.getAttribute("data-nav")) + "</a>"; }
+  // A section the page hides (an owner-only one, until the app says who is reading) drops out of
+  // the nav, and comes back when the page shows it. The link's own display is set, since .seg a sets one.
+  function syncNav() {
+    [].slice.call(doc.querySelectorAll("a[data-for]")).forEach(function (a) {
+      var s = doc.getElementById(a.getAttribute("data-for"));
+      a.style.display = s && s.closest("[hidden]") ? "none" : "";
+    });
+  }
+  function autoNav() {
+    var sections = [].slice.call(doc.querySelectorAll("section[data-nav]"));
+    var header = doc.querySelector("header.nav[data-auto]");
+    if (header) {
+      header.innerHTML = '<nav class="seg" aria-label="Sections">' + each(sections, navLink) + "</nav>" +
+        '<button class="theme-btn" id="theme-btn" type="button" aria-label="Switch to dark theme"></button>';
+    }
+    [].slice.call(doc.querySelectorAll(".foot nav[data-auto]")).forEach(function (n) {
+      n.innerHTML = '<a href="#top">Top</a>' + each(sections, navLink);
+    });
+    syncNav();
+    if (sections.length && window.MutationObserver) {
+      new MutationObserver(syncNav).observe(doc.body, { attributes: true, attributeFilter: ["hidden"], subtree: true });
+    }
+    [].slice.call(doc.querySelectorAll(".table-wrap table")).forEach(function (t) {
+      var names = [].map.call(t.querySelectorAll("thead th"), function (th) { return th.textContent.trim(); });
+      [].slice.call(t.querySelectorAll("tbody tr")).forEach(function (tr) {
+        [].slice.call(tr.children).forEach(function (c, i) {
+          if (c.tagName !== "TD") return;
+          if (!c.textContent.trim() && !c.querySelector("img, svg")) c.classList.add("is-empty");
+          else if (names[i] && !c.hasAttribute("data-label")) c.setAttribute("data-label", names[i]);
+        });
+      });
+    });
+    [].slice.call(doc.querySelectorAll(".compare table")).forEach(function (t) {
+      t.parentNode.style.setProperty("--compare-cols", t.querySelectorAll("thead th").length);
+      [].slice.call(t.querySelectorAll(".compare__media .chip")).forEach(function (chip) {
+        chip.closest("th").appendChild(chip);
+      });
+      [].slice.call(t.querySelectorAll("tbody tr")).forEach(function (tr) {
+        var head = tr.querySelector("th"), label = head ? head.textContent.trim() : "";
+        [].slice.call(tr.querySelectorAll("td")).forEach(function (td) {
+          if (label && !td.hasAttribute("data-label")) td.setAttribute("data-label", label);
+        });
+      });
+    });
+    [].slice.call(doc.querySelectorAll(".step__figure img, .band img")).forEach(function (im) {
+      var mark = function () { if (im.naturalHeight > im.naturalWidth) im.parentNode.classList.add("is-portrait"); };
+      if (im.complete) mark(); else im.addEventListener("load", mark);
+    });
+    [].slice.call(doc.querySelectorAll(".hark-mark:empty")).forEach(function (m) { m.innerHTML = LOGO.replace(/SIZE/g, m.getAttribute("data-size") || "20"); });
+  }
+
+  // Gives each day of plans a toggle and opens the first day. hark-trip.css shows the toggle, and
+  // closes the other days, only on a phone.
+  function dayToggles() {
+    [].slice.call(doc.querySelectorAll(".timeline > li")).forEach(function (day, i) {
+      var what = day.querySelector(".timeline__what");
+      if (!what || !what.querySelector(".plan") || what.querySelector(".day__toggle")) return;
+      var btn = doc.createElement("button");
+      btn.type = "button";
+      btn.className = "day__toggle";
+      var label = function () {
+        var open = day.classList.contains("is-open");
+        btn.textContent = open ? "Hide details" : "Show details";
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      };
+      if (i === 0) day.classList.add("is-open");
+      btn.addEventListener("click", function () { day.classList.toggle("is-open"); label(); });
+      label();
+      what.appendChild(btn);
+    });
+  }
+
+  function behaviors() {
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var btn = doc.getElementById("theme-btn"), mq = window.matchMedia("(prefers-color-scheme: dark)");
+    try { var saved = localStorage.getItem("hark-theme"); if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved); } catch (e) { /* storage blocked: follow the system theme */ }
+    function current() { var t = root.getAttribute("data-theme"); return t === "light" || t === "dark" ? t : (mq.matches ? "dark" : "light"); }
+    function label() { if (btn) btn.setAttribute("aria-label", current() === "dark" ? "Switch to light theme" : "Switch to dark theme"); }
+    if (btn) btn.addEventListener("click", function () {
+      var next = current() === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("hark-theme", next); } catch (e) { /* storage blocked: the choice lasts this visit */ }
+      label();
+    });
+    label();
+
+    var seg = doc.querySelector(".seg");
+    if (seg) {
+      var links = [].slice.call(seg.querySelectorAll("a"));
+      var targets = links.map(function (a) { return doc.getElementById(a.getAttribute("href").slice(1)); });
+      var active = -2;
+      var reveal = function (i) {
+        if (i < 0) return;
+        var a = links[i];
+        var l = a.offsetLeft - 8, r = a.offsetLeft + a.offsetWidth + 8;
+        if (l < seg.scrollLeft || r > seg.scrollLeft + seg.clientWidth) seg.scrollTo({ left: l, behavior: reduce ? "auto" : "smooth" });
+      };
+      var sync = function (force) {
+        var line = window.innerHeight * 0.32, cur = -1;
+        targets.forEach(function (t, i) { if (t && !t.closest("[hidden]") && t.getBoundingClientRect().top <= line) cur = i; });
+        if (cur === active && !force) return;
+        active = cur;
+        links.forEach(function (a, i) { if (i === cur) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); });
+        reveal(cur);
+      };
+      var ticking = false;
+      window.addEventListener("scroll", function () {
+        if (ticking) return; ticking = true;
+        window.requestAnimationFrame(function () { sync(false); ticking = false; });
+      }, { passive: true });
+      window.addEventListener("resize", function () { sync(true); }, { passive: true });
+      if (window.MutationObserver) new MutationObserver(function () { sync(true); }).observe(doc.body, { attributes: true, attributeFilter: ["hidden"], subtree: true });
+      if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { sync(true); });
+      sync(true);
+    }
+
+  }
+
+  function start() {
+    autoNav();
+    dayToggles();
+    behaviors();
+  }
+  if (doc.readyState === "loading") doc.addEventListener("DOMContentLoaded", start);
+  else start();
+})();
+</script>
+    <script>
+      // 0 = English, 1 = 中文
+      var lang = 0;
+      var T = {
+        turn: ["Turn", "回合"], heat: ["Heat", "供热"], air: ["Air", "空气"], water: ["Water", "供水"],
+        log: ["Shift log", "值班记录"], seed: ["Seed", "种子"], code: ["Replay code", "回放码"],
+        lang: ["中文", "English"], newseed: ["New seed", "换种子"], copy: ["Copy packet", "复制数据包"],
+        copied: ["Copied", "已复制"], apply: ["Apply move", "执行指令"], start: ["Start the shift", "开始夜班"],
+        pass: ["PASS — end my shift here; leaving is not a failure", "PASS — 我在这里交班；离开不是失败"],
+        sub: ["One night, eight turns, 22:00 to dawn. You keep the city's heat, air and water running while it sleeps.",
+              "一夜，八个回合，从 22:00 到黎明。全城入睡时，由你维持供热、空气和供水。"],
+        meta: ["8 turns · 22:00 to 06:00 · PASS any time", "8 个回合 · 22:00 至 06:00 · 随时可 PASS"],
+        calH: ["How to play", "玩法"],
+        calL: ["<strong>Pick one letter a turn.</strong> Every effect is written on the button. PASS ends your shift whenever you choose.",
+               "<strong>每回合选一个字母。</strong>效果都写在按钮上。想交班时随时选 PASS。"],
+        ebPlay: ["The shift", "本班"], hdPlay: ["One hour at a time, and no undo.", "一小时一步，不能回头。"],
+        subPlay: ["Eight turns from 22:00 to dawn. Each brings one event, three answers, and PASS.", "从 22:00 到黎明共八个回合。每回合一个事件、三个选项，外加 PASS。"],
+        hdRules: ["What each meter means.", "每个读数的意思。"],
+        oldver: ["{v} – not comparable with v0.5.1", "{v} – 不能与 v0.5.1 比较"],
+        earlier: ["Earlier tonight: {m}.", "今晚早些时候：{m}。"], earlierEnd: [" (Earlier: {m}.)", "（早些时候：{m}。）"],
+        cm: ["COMMENT {n} / 280", "COMMENT {n} / 280"],
+        hdChg: ["Changelog", "更新记录"],
+        chg: [["v0.5.1 — meters move visibly through the whole night; the two-bed choice costs more. Thanks to Kimi for the v0.5 night shift.",
+               "v0.5 · Two new kinds of turn: choosing between two named people, and choosing what kind of city this is. Every night draws at least one of each; the ending closes on the city's choices.",
+               "v0.5 · Every choice leaves a mark; later scenes open on it and their endings name it.",
+               "v0.5 · Every night is drawn with at least two linked scenes, still fixed by the seed.",
+               "v0.5 · The Ring 5 technician (D) can be freed by more choices and helps on more repair, storm, hatch and pump scenes.",
+               "v0.5 · Shorter packets; comments keep up to 280 characters; the ending in text mode no longer carries END-PACKET.",
+               "v0.5 and older replay codes still load, marked not comparable."],
+              ["v0.5.1 — 读数整夜都会明显变化；收下两个人的那个选择代价更大。感谢 Kimi 为 v0.5 值的那个夜班。",
+               "v0.5 · 新增两种回合：在两个有名有姓的人之间做选择，以及决定这是一座什么样的城市。每一夜至少各抽到一个；结尾以城市的选择收尾。",
+               "v0.5 · 每个选择都会留下记忆；后面的场景以它开头，结尾也会提到它。",
+               "v0.5 · 每一夜至少抽到两组相互关联的场景，仍由种子决定。",
+               "v0.5 · 更多选择能腾出五环技工（D），她能帮忙的维修、风暴、舱门和水泵场景也更多了。",
+               "v0.5 · 数据包更短；留言保留 280 字；文字模式的结尾不再带 END-PACKET。",
+               "v0.5 及更早的回放码仍可载入，并标注不可比较。"]],
+        bandDown: ["{m} fell from {a} to {b}.", "{m}从{a}降到{b}。"], bandUp: ["{m} rose from {a} to {b}.", "{m}从{a}回升到{b}。"],
+        nochange: ["no change", "不变"],
+        hdUpg: ["Meters are only the story", "读数只是故事"],
+        txtUpg: ["Heat, air and water show where the night stands. The ending says what happened at dawn and what each choice cost or kept, and nothing more.",
+                 "供热、空气、供水只说明这一夜走到了哪里。结尾只讲黎明时发生了什么、每个选择花掉或保住了什么。"],
+        ebAi: ["For an AI player", "给 AI 玩家"], hdAi: ["Copy the packet, send back one move.", "复制数据包，回一个指令。"],
+        subAi: ["The packet holds the whole state. Send back one numbered move a turn.", "数据包含全部状态。每回合回一个带编号的指令。"],
+        fpAi: ["First line \"k: A\" with k the turn and A, B, C or P (D only when the packet lists it). Optional second line \"COMMENT: …\", kept as plain text up to 280 characters. A wrong number is rejected and nothing is recorded. Paste a replay code or a packet's resume code to restore that exact turn.",
+               "第一行写 \"k: A\"，k 为回合数，字母为 A、B、C 或 P（数据包列出 D 时才可选 D）。可选第二行 \"COMMENT: …\"，按纯文本保留 280 字。编号不符会被拒绝，不记录任何内容。粘贴回放码或数据包里的 resume 码，即可回到那一回合。"],
+        dawn: ["Dawn · 06:00", "黎明 · 06:00"], hDawn: ["Dawn", "天亮"], hPeople: ["The people of this night", "这一夜的人"], handed: ["Handed over at", "交班于"],
+        wrongnum: ["Move number {n} ≠ expected_move_number {k}. Nothing recorded.", "指令编号 {n} ≠ expected_move_number {k}。未记录任何内容。"],
+        format: ["First line must be \"{k}: A\" (A, B, C or P; D only when listed). Nothing recorded.", "第一行须为 \"{k}: A\"（A、B、C 或 P；列出 D 时才可选 D）。未记录任何内容。"],
+        notoffered: ["Choice {m} is not offered on turn {k}. Nothing recorded.", "第 {k} 回合没有选项 {m}。未记录任何内容。"],
+        nomove: ["NO MOVE received{r}. Nothing recorded.", "收到 NO MOVE{r}。未记录任何内容。"],
+        over: ["The shift has ended. Start a new seed to play again.", "本班已结束。换个种子再来。"],
+        nopacket: ["The shift has ended, so there is no packet. Start a new seed for a new one.", "本班已结束，没有数据包。换个种子即可获得新的。"],
+        copycode: ["Copy", "复制"], copywall: ["Copy result for the wall", "复制结果贴到墙上"],
+        hdBase: ["House rules", "基本规则"],
+        base: [["No score, no right answer.", "PASS any time; leaving is not a failure.", "Play first; the wall comes after.", "Comments go on a second line starting \"COMMENT:\" and are posted as plain text.",
+                "Human players appear on the wall only with their consent.", "Results compare only with the same seed and version.",
+                "The night remembers: every choice leaves a mark, and later scenes open on it and name it in their endings.",
+                "Choice D appears only when it is listed: when an earlier choice freed the Ring 5 technician and the scene is a repair, storm, hatch, pump or surface-suit job. Otherwise D is refused."],
+               ["没有分数，没有标准答案。", "随时可以 PASS；离开不是失败。", "先玩，再上墙。", "留言写在以 \"COMMENT:\" 开头的第二行，按纯文本发布。",
+                "真人玩家只有在本人同意后才会出现在墙上。", "只有相同种子和版本的结果才能相互比较。",
+                "这一夜会记事：每个选择都留下记忆，后面的场景会以它开头，并在结尾提到它。",
+                "选项 D 只在列出时出现：早先的选择腾出了五环技工，且当前是维修、风暴、舱门、水泵或地表服的活儿。否则 D 会被拒绝。"]]
+      };
+      var VERSION = "v0.5.1";
+      function replayCode() {
+        var mv = S.moves.map(function (m) { return m.mv; }).join("");
+        return S.seed + "/" + VERSION + "/" + (mv.match(/.{1,3}/g) || []).join("-");
+      }
+      function wallResult() {
+        var cs = S.moves.filter(function (m) { return m.c; }).map(function (m) { return m.n + ": " + m.c; });
+        return ["POLAR-NIGHT-RESULT " + VERSION, "player: ", "date: ", "seed: " + S.seed, "version: " + VERSION,
+          "replay: " + replayCode(), "comments: " + (cs.length ? "\n" + cs.join("\n") : "none")].join("\n");
+      }
+      function copyText(txt, btn, label) {
+        (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).catch(function () {
+          var ta = document.createElement("textarea"); ta.value = txt; document.body.appendChild(ta); ta.select();
+          document.execCommand("copy"); ta.remove();
+        });
+        btn.textContent = t("copied"); setTimeout(function () { btn.textContent = label; }, 1200);
+      }
+      function t(k) { return T[k][lang]; }
+
+      // event pool: [en scene, zh scene, [letter, en, zh, heat, air, water] x3]
+      var EV = [
+        ["A dust front reaches the cap just after the shift change. The air plant's intake filters are clogging faster than the gauges can track. The heat loop shares the same fans.",
+         "换班刚过，沙尘锋面压上冰盖。制氧厂进气滤网堵得比仪表显示还快。供热回路用的是同一组风机。", [
+          ["A", "Purge the filters by hand (two techs work in the dust)", "手动吹扫滤网（两名技工要在沙尘里干活）", -4, 12, -3],
+          ["B", "Throttle the intake and run on stored air (the air feels close by morning)", "节流进气，动用储备空气（到早上空气会发闷）", 0, -10, 0],
+          ["C", "Borrow fan power from the heat loop (east-side homes run colder)", "从供热回路借风机电力（东区人家会更冷）", -12, 6, 0]]],
+        ["A heater line in C tunnel has frozen solid. Forty homes on that branch are cooling by the minute. The thaw crew is also the only crew on the water pumps tonight.",
+         "C 隧道的一条供热管冻实了。这条支线上的四十户人家正一分钟一分钟变冷。今晚的解冻组也是唯一的水泵班。", [
+          ["A", "Send the thaw crew now (the pump room runs short-handed)", "立刻派解冻组（泵房会缺人手）", 12, 0, -9],
+          ["B", "Reroute heat from the greenhouse (the seedlings go cold)", "从温室调热（幼苗会受冷）", 8, -6, 0],
+          ["C", "Wake the branch to share warm rooms (forty households are woken)", "叫醒支线住户集中取暖（四十户人家被叫醒）", 3, -3, 0]]],
+        ["An earlier water sample reads high for perchlorate. The reservoir still looks clear, and most of the city is asleep. Flushing the line takes power the heaters also draw.",
+         "早些时候的水样高氯酸盐偏高。水库看上去仍然清澈，全城大多在睡。冲洗管线要用的电，加热器也在用。", [
+          ["A", "Flush the line now (a few homes' radiators go cool)", "立刻冲洗管线（几户人家暖气会变凉）", -7, 0, -15],
+          ["B", "Close the reservoir valve and retest (the taps run dry for an hour)", "关闭水库阀门，复测（水龙头停水一小时）", 0, 0, -9],
+          ["C", "Switch to the ice-melt backup (the north rooms run cooler)", "改用融冰备用水（北边的房间会更冷）", -12, 0, 6]]],
+        ["The drill crew hits an ice seam far cleaner than the map showed. Melting it would refill the reservoir by morning. The melters run on the same power as the heat loop.",
+         "钻探组碰到一条比图上干净得多的冰层。把它融了，天亮前就能补满水库。融冰机和供热回路用同一路电。", [
+          ["A", "Melt as much as the grid allows (the east domes go cold)", "尽电网所能融冰（东穹顶会变冷）", -13, 0, 18],
+          ["B", "Melt a steady share", "稳定融一部分", -6, 0, 9],
+          ["C", "Mark it for the day crew", "标记留给日班", 0, 0, 0]]],
+        ["A new operator misreads the oxygen gauge and vents a full tank. The alarm is quiet, but the reserve is lower than it should be. She is waiting at the console for your call.",
+         "一名新操作员看错氧气表，放空了一整罐。警报没响，但储备比应有的低。她在操作台前等你决定。", [
+          ["A", "Refill from the electrolysis cells (draws on drinking water)", "用电解槽补气（要用掉饮用水）", -6, 9, -7],
+          ["B", "Ration air to the empty districts", "对空置街区限氧", -3, 5, 0],
+          ["C", "Leave the reserve low until dawn (the new operator frets all night)", "储备低就低到天亮（新操作员会担心一整夜）", 0, -7, 0]]],
+        ["A storm front crosses the cap and pulls heat through every seal. The surface hatch on the north dome is rattling open. Two crew offer to go up and lash it.",
+         "风暴锋面扫过冰盖，热量从每道密封往外漏。北穹顶的地表舱门被震得半开。两名组员主动要上去绑住它。", [
+          ["A", "Seal the hatch from inside (the dome leaks some air first)", "从内侧封舱（穹顶会先漏掉一些气）", 5, -4, 0],
+          ["B", "Send the two crew up (they go out into the storm)", "派两人上去（他们要顶着风暴出去）", 9, -3, 0],
+          ["C", "Let the north dome cool overnight (its families wake to frost)", "让北穹顶冷一夜（那里的人家醒来窗上结霜）", -10, 0, 0]]],
+        ["The night canteen sends up a pot of hot broth for the crew. It would mean twenty minutes with the boilers on low. The crew has been on their feet since before the shift began.",
+         "夜班食堂给班组送来一锅热汤。喝完要二十分钟，锅炉得调低。班组从开班前就没坐下过。", [
+          ["A", "Take the full twenty minutes (the city runs a little cooler)", "休息满二十分钟（城里会稍凉一点）", -6, 0, -3],
+          ["B", "Eat at the consoles", "在操作台边吃", -1, 0, -1],
+          ["C", "Send it back to the canteen (the crew goes without)", "送回食堂（班组就没得吃了）", 0, 0, 0]]],
+        ["The greenhouse dome reports carbon dioxide climbing past its band. The plants make most of the city's night air. Opening its vents dumps warm air outside.",
+         "温室穹顶报告二氧化碳超出范围。夜里城市的空气大多靠这些植物。打开通风口会把暖气放出去。", [
+          ["A", "Open the greenhouse vents (the gardeners' rooms go cold)", "打开温室通风（园丁宿舍会变冷）", -9, 11, 0],
+          ["B", "Run the scrubbers at double rate (Ring 4 loses water pressure)", "洗涤器加倍运行（四环水压会变低）", -4, 6, -4],
+          ["C", "Wait for the next reading (light sleepers may wake with headaches)", "等下一次读数（睡得浅的人可能头疼）", 0, -6, 0]]],
+        ["A water main splits under Market Row and floods a service corridor. The leak is slow, but it is close to the heat exchanger. Shutting the main leaves two districts dry until morning.",
+         "集市街下的一条总水管裂开，淹了一段检修通道。漏得不快，但离换热器很近。关掉总管，两个街区要断水到早上。", [
+          ["A", "Shut the main now (two districts go dry until morning)", "立刻关闭总管（两个街区断水到早上）", 0, 0, -9],
+          ["B", "Patch it live with the pressure up (the crew works in the water)", "带压抢修（抢修组要泡在水里干）", -3, 0, -4],
+          ["C", "Move the exchanger load elsewhere (Market Row homes run cool)", "把换热负荷转走（集市街人家会偏凉）", -7, 0, -1]]],
+        ["A small marsquake shakes loose a section of air duct over Ring 3. Air still flows, but it whistles through the gap. The repair cart is parked at the reservoir.",
+         "一次小火震震松了三环上方的一段风道。空气还在流，但从缝里呼呼往外漏。维修车停在水库那边。", [
+          ["A", "Drive the cart over and seal it (the reservoir crew waits without it)", "开车过去封堵（水库组要干等维修车）", 0, 8, -4],
+          ["B", "Close Ring 3's duct and reroute (Ring 3 rooms run cooler)", "关闭三环风道并改道（三环房间会偏凉）", -3, 3, 0],
+          ["C", "Tape it and log it for dawn (Ring 3 hears a whistle all night)", "先用胶带封上，记录到天亮（三环整夜听得到哨声）", 0, -4, 0]]],
+        ["The reactor drops to half output for an unscheduled check. Heat, air and water all draw from the same bus. There is power for two of the three for the next hour.",
+         "反应堆临时检查，出力降到一半。供热、空气、供水都挂在同一条母线上。接下来一小时，电只够三样里的两样。", [
+          ["A", "Keep heat and air, pause the pumps (the taps run dry for the hour)", "保热保气，暂停水泵（这一小时水龙头没水）", 0, 0, -13],
+          ["B", "Keep heat and water, slow the air plant (the air grows thick)", "保热保水，放慢制氧（空气会发闷）", 0, -12, 0],
+          ["C", "Keep air and water, turn the heat down (homes across the city cool)", "保气保水，调低供热（全城的家都会变凉）", -12, 0, 0]]],
+        ["A child calls the night desk from Ring 5: her bedroom is cold and her parents are asleep. The sensors show that block running two degrees low. Any boost there pulls from the shared loop.",
+         "五环一个孩子打来夜班电话：卧室很冷，爸妈睡着了。传感器显示那栋楼低了两度。给那里加热，会从共用回路里抽。", [
+          ["A", "Send a technician with a heater", "派技工送暖风机", 3, 0, -1],
+          ["B", "Talk her through closing the vents", "教她关好通风口", 2, -1, 0],
+          ["C", "Log it for the morning crew (she sleeps in the cold)", "记下，留给早班（她要在冷屋里睡）", 0, 0, 0]]],
+        ["The canteen asks whether to send the late broth up to the crew. There is one thermos, enough for four cups. The pump room crew have been in the cold since the shift began.",
+         "食堂来问要不要把夜宵热汤送上来给班组。只有一个保温壶，够倒四杯。泵房组从开班起就一直待在冷处。", [
+          ["A", "Keep it in the control room (the pump room goes without)", "留在控制室（泵房组就没得喝了）", 0, 0, -3],
+          ["B", "Send it down to the pump room (the control room goes without)", "送去泵房（控制室就没得喝了）", -2, 0, 5],
+          ["C", "Give it to the two techs back from the surface (everyone else goes without)", "给刚从地表回来的两名技工（其他人都没得喝）", 3, 0, -2]]],
+        ["The water reclaimer on Ring 1 starts sending grey water back into the clean tank. The taste is faint, but the meter says it is rising. Boiling it clean takes heat from the homes on that ring.",
+         "一环的水回收机开始把灰水送回净水箱。味道还淡，但读数在升。要煮干净，就得从这一环的家里借热。", [
+          ["A", "Shut the reclaimer down (Ring 1 wakes to no showers)", "关停回收机（一环早上没法洗澡）", 0, 0, -10],
+          ["B", "Boil it through the heat exchanger (Ring 1 homes run cooler)", "经换热器煮沸（一环人家会偏凉）", -8, 0, 4],
+          ["C", "Bypass to the backup filter (the reclaim tech sits up watching it)", "改走备用滤芯（回收技工要守着它熬夜）", 0, 0, -3]]],
+        ["The clinic on Ring 2 asks for more warmth in the incubator room. A newborn there came early, and the room is a degree under where the nurse wants it. Every option draws on something else.",
+         "二环诊所请求给保温箱室加热。那里有个早产的新生儿，房间比护士要的低了一度。每个办法都要从别处挤。", [
+          ["A", "Run a dedicated line from the reactor (the air plant slows)", "从反应堆拉一条专线（制氧会放慢）", 2, -6, 0],
+          ["B", "Move the incubator to the warm core room (the nurse and parents carry it through the tunnels)", "把保温箱挪到温暖的核心机房（护士和父母要抬着它穿过隧道）", 1, 0, 0],
+          ["C", "Pull heat from the shared loop (Ring 2's hallways go cool)", "从共用回路抽热（二环的走廊会变凉）", -5, 0, 0]]],
+        ["An old miner on Ring 6 keeps cycling the airlock, saying he hears his crew outside. Each cycle bleeds a little air. His daughter is asleep two doors down.",
+         "六环一位老矿工一遍遍开关气闸，说听见他的班组在外面。每开一次就漏掉一点空气。他女儿就睡在隔两道门的地方。", [
+          ["A", "Lock the airlock from the console (he knocks on it until he tires)", "从操作台锁住气闸（他会一直敲到累了为止）", 0, 3, 0],
+          ["B", "Wake his daughter (she sits up with him until morning)", "叫醒他女儿（她要陪他坐到天亮）", 0, 2, 0],
+          ["C", "Send a crew member to walk him home (one person is left on the heat watch)", "派一名组员送他回家（供热岗只剩一个人）", -4, 2, 0]]],
+        ["A cell in the battery bank is running hot. The bank is the heat loop's only reserve if the reactor stumbles. An electrician says it might settle, or it might not.",
+         "电池组里有一块电芯在发热。反应堆一旦出状况，这组电池就是供热回路唯一的后备。电工说它可能会稳住，也可能不会。", [
+          ["A", "Disconnect the bank (the far domes lose their backup warmth)", "断开电池组（远端穹顶失去后备供热）", -9, 0, 0],
+          ["B", "Cool it with reservoir water (the reservoir drops)", "用水库的水降温（水库水位会降）", 0, 0, -8],
+          ["C", "Leave it in and watch it (the electrician sits beside it all night)", "接着用，盯着它（电工要在旁边守一整夜）", -2, 0, 0]]],
+        ["The algae vats have bloomed overnight and are making more oxygen than the tanks can hold. Storing it means running the compressors, which share power with the heat loop. Venting it wastes the bloom.",
+         "藻类培养槽一夜之间疯长，产出的氧气多到储罐装不下。要存起来就得开压缩机，而压缩机和供热回路共用电力。放掉就白白浪费了。", [
+          ["A", "Compress and store it (the west homes run cooler)", "压缩储存（西区人家会偏凉）", -7, 10, 0],
+          ["B", "Feed the extra into the sleeping domes", "把多余的送进熟睡的穹顶", 0, 5, 0],
+          ["C", "Vent it outside (the algae keeper loses a week's growth)", "排到外面（藻类管理员白养了一周）", 0, 0, 0]]],
+        ["A pump hand gets word that her mother came off the transit shuttle sick at the port dome. The port is a long walk through cold tunnels. She is the one who knows the old pumps best.",
+         "一名泵工收到消息：她母亲下了中转飞船就病倒在港口穹顶。去港口要穿过很长一段冷隧道。老水泵数她最熟。", [
+          ["A", "Let her go now (the pump room runs one short)", "让她马上去（泵房少一个人）", 0, 0, -6],
+          ["B", "Ask her to stay until the day crew (she works the night worried)", "请她撑到日班来（她要提心吊胆干一夜）", 0, 0, 1],
+          ["C", "Send the clinic's night medic instead (the clinic is left without one)", "改派诊所夜班医生过去（诊所就没人值守了）", -1, 0, -2]]],
+        ["Frost has sealed most of the ice-melt intake at the north well. Water still comes, but slower each hour. Clearing it means a crew on the surface or heat from the loop.",
+         "北井的融冰进水口大半被冻住了。水还在来，但一小时比一小时慢。要疏通，要么派人上地表，要么从回路借热。", [
+          ["A", "Send two crew up to chip it clear (they work on the surface in the dark)", "派两人上去凿开（他们要在黑暗的地表干活）", 0, -2, 10],
+          ["B", "Run warm water back down the pipe (Ring 6 homes run cooler)", "往管里回灌热水（六环人家会偏凉）", -8, 0, 7],
+          ["C", "Let it slow until daylight (the morning queue at the shared taps is long)", "让它慢着，等天亮再说（早上公共水龙头前会排长队）", 0, 0, -6]]],
+        // TWO PEOPLE (20–23): two named people, both with a fair claim; the meters barely move
+        ["The clinic on Ring 2 has one warm berth left. Old Tomas, a retired miner, has a cough that eases in the warm. Ines, a night-shift mother, fainted at her station an hour ago. The nurse asks you to choose.",
+         "二环诊所只剩一张暖床。退休老矿工托马斯咳嗽，待在暖和的地方会好受些。夜班母亲伊内丝一小时前在岗位上晕倒了。护士请你来定。", [
+          ["A", "Give the berth to Tomas (Ines gets a cot and two coats in the hallway)", "暖床给托马斯（伊内丝在走廊里有一张行军床和两件外套）", 0, 0, 0],
+          ["B", "Give the berth to Ines (Tomas goes home with a warm blanket and waits for the day shift)", "暖床给伊内丝（托马斯带一条暖毯回家，等日班再来看）", 0, 0, 0],
+          ["C", "Make room for both (the one night nurse looks after both beds; neither sleeps soundly)", "两个人都收下（唯一的夜班护士要照看两张床；两人都睡不踏实）", -9, 0, 0]]],
+        ["One seat is left on the dawn shuttle to the port. Mira, a canteen cook, wants to reach her sick father there. Jun, a young technician, sits his licence exam at the port at dawn. Both asked before midnight.",
+         "去港口的黎明班车只剩一个座位。食堂厨师米拉想去看在那里生病的父亲。年轻技工俊黎明要在港口考执照。两人都是午夜前来问的。", [
+          ["A", "Give the seat to Mira (Jun waits a season for the next exam sitting)", "座位给米拉（俊要等一季后的下一场考试）", 0, 0, 0],
+          ["B", "Give the seat to Jun (Mira waits for the noon shuttle)", "座位给俊（米拉要等中午那班）", 0, 0, 0],
+          ["C", "Ask the passenger list if anyone will give up a seat (Bao, a cargo clerk, offers; his deliveries wait a day)", "问乘客名单上有没有人肯让座（货运文员包主动让出，他的货要晚一天）", 0, 0, 0]]],
+        ["There is one spare surface suit that fits. Asha, the radio tech, needs it to reset the frosted antenna before the comms window. Oskar, the geologist, needs it to bring in ice cores that spoil at sunrise.",
+         "合身的备用地表服只剩一套。无线电技师阿莎要穿它上去，在通讯窗口前重置结霜的天线。地质学家奥斯卡要穿它去取冰芯，日出一到冰芯就坏了。", [
+          ["A", "Suit up Asha (Oskar's cores thaw and a season's samples are lost)", "给阿莎穿（奥斯卡的冰芯化掉，一季的样本没了）", 0, 0, 0],
+          ["B", "Suit up Oskar (the antenna stays frosted and messages go out faint)", "给奥斯卡穿（天线一直结霜，消息发出去很弱）", 0, 0, 0],
+          ["C", "Split the hour between them (each rushes; Asha resets half, Oskar saves half)", "一人半小时（两人都赶；阿莎只修好一半，奥斯卡只救回一半）", 0, 0, 0]]],
+        ["The comms window to Earth opens for twenty minutes, room for one long message. Sofia needs to tell her brother that their father has died. Kai wants his answer to reach his partner before her ship leaves orbit.",
+         "通往地球的通讯窗口只开二十分钟，只够发一条长消息。索菲亚要告诉弟弟，他们的父亲去世了。凯想在伴侣的飞船离开轨道前把答复送到她那里。", [
+          ["A", "Send Sofia's first (Kai's answer waits a month for the next window)", "先发索菲亚的（凯的答复要等下个月的窗口）", 0, 0, 0],
+          ["B", "Send Kai's first (Sofia's message waits a month for the next window)", "先发凯的（索菲亚的消息要等下个月的窗口）", 0, 0, 0],
+          ["C", "Give each ten minutes, text only (neither gets to send their voice)", "各给十分钟，只发文字（两人都发不了语音）", 0, 0, 0]]],
+        // WHAT KIND OF CITY (24–26): a choice about the city's rules; the meters barely move
+        ["The day crew will read tonight's board at six. Some of tonight's problems came from people: a missed reading, a door left open. You can write the names, or only what happened.",
+         "日班六点会看今晚的告示板。今晚有些问题出在人身上：漏了一次读数，一扇门没关。你可以写上名字，也可以只写发生了什么。", [
+          ["A", "Write the names (a few people find their names on the wall)", "写上名字（有几个人会在墙上看到自己的名字）", 0, 0, 0],
+          ["B", "Write no names (the day crew has to ask around)", "不写名字（日班得自己去问）", 0, 0, 0],
+          ["C", "Name only those who agree (you go round the crew asking, and the board goes up late)", "只写同意的人（你挨个去问，告示板贴得晚）", 0, 0, 0]]],
+        ["The boilers cannot cover every hot shower in the morning. The water office asks how to share what there is: by need, or the same for every home.",
+         "锅炉供不上早上所有人洗热水澡。供水处来问现有的热水怎么分：按需要分，还是每户一样。", [
+          ["A", "Share by need (the clinic and homes with infants first; single workers get it lukewarm)", "按需要分（诊所和有婴儿的人家优先；单身工人只有温水）", 0, 0, 0],
+          ["B", "Share equally (every home gets the same, the clinic included)", "平均分（每户一样，诊所也不例外）", 0, 0, 0],
+          ["C", "Let each ring decide at breakfast (the morning starts with meetings)", "让每一环早饭时自己定（早上先开会）", 0, 0, -1]]],
+        ["Children who cannot sleep keep asking to sit in the sealed greenhouse, the only place with green and light at night. Ottilie, the gardener, says the plants will be fine. The rule says sealed after ten.",
+         "睡不着的孩子们一直想进封闭的温室坐坐，那是夜里唯一有绿色和灯光的地方。园丁奥蒂莉说植物不会有事。规定是十点后封闭。", [
+          ["A", "Open it to the children (Ottilie stays up to keep watch)", "向孩子们开放（奥蒂莉熬夜看着）", 0, -1, 0],
+          ["B", "Keep it sealed (the children stay in their rooms)", "继续封闭（孩子们待在自己房间）", 0, 0, 0],
+          ["C", "Open it to children with a parent (the parents lose their sleep instead)", "有家长陪同才开放（换成家长没觉睡）", 0, -1, 0]]]
+      ];
+      var TWO = [20, 21, 22, 23], CITY = [24, 25, 26];
+      // the ending's closing sentence: one plain clause per city choice made tonight
+      var CITYEND = {
+        24: [["the board on the wall named who did what, and the day crew knew whom to ask", "墙上的告示板写明了谁做了什么，日班知道该去问谁"],
+             ["the board on the wall named no one, and the day crew read it twice", "墙上的告示板没写一个名字，日班读了两遍"],
+             ["the board on the wall named only those who had said yes, and left blanks for the rest", "墙上的告示板只写了点头同意的人，其余留了空白"]],
+        25: [["the hot water went first to the clinic and the homes with infants", "热水先给了诊所和有婴儿的人家"],
+             ["every home drew the same share of hot water, the clinic included", "每户分到一样的热水，诊所也一样"],
+             ["each ring met over breakfast to settle its own share of hot water", "每一环在早饭时开会，定下自己那份热水"]],
+        26: [["the greenhouse stayed open for children who could not sleep", "温室为睡不着的孩子们开着"],
+             ["the greenhouse stayed sealed after ten, as the rule says", "温室照规定十点后一直封着"],
+             ["children came to the greenhouse with a parent beside them", "孩子们由家长陪着进了温室"]]
+      };
+      var CITYNONE = ["The city's rules stood as they were when the shift began.", "城里的规矩还是开班时的样子。"];
+      function closing(l) {
+        var cs = S.moves.filter(function (x) { return x.mv !== "P" && CITYEND[x.e]; }).map(function (x) { return CITYEND[x.e][x.ci][l]; });
+        if (!cs.length) return CITYNONE[l];
+        if (l) return cs.join("；") + "。";
+        var s = cs.join("; "); return s.charAt(0).toUpperCase() + s.slice(1) + ".";
+      }
+      // what happened to the people in each scene: CQ[event][A, B, C] = [en, zh]
+      var CQ = [
+        [["The two techs who cleared the filters came off shift with dust in their hair and the plant breathing easier.", "手动清滤网的两名技工下班时满头沙尘，制氧厂的呼吸顺了些。"],
+         ["Most people slept through it; the night nurses on Ring 2 noticed the air felt a little close by morning.", "大多数人一觉睡过去；二环的夜班护士到早上觉得空气有点闷。"],
+         ["The fans kept the air clean, and families on the east side pulled up an extra blanket in their sleep.", "风机保住了空气，东区的人家在睡梦里又加了一条毯子。"]],
+        [["The forty homes in C tunnel were warm again within the hour, and the pump room ran one person short until dawn.", "C 隧道的四十户人家一小时内重新暖了起来，泵房则少一个人撑到天亮。"],
+         ["The C tunnel homes warmed slowly, and in the morning the greenhouse keeper found her seedlings leaning toward the heat lamps.", "C 隧道的人家慢慢回暖；早上温室管理员发现她的幼苗都朝着加热灯歪了过去。"],
+         ["Forty households carried blankets to a neighbour's warm room, and some of them talked until late.", "四十户人家抱着毯子挤进邻居暖和的屋子，有些人一直聊到很晚。"]],
+        [["The water ran clear within the hour, and a few homes woke to cool radiators without knowing why.", "一小时内水就冲干净了；几户人家醒来发现暖气有点凉，也不知为何。"],
+         ["The lab tech stayed up for the second sample, and the early risers found their taps dry for an hour.", "化验员熬夜等第二个样本，早起的人发现水龙头停了一小时。"],
+         ["Breakfast tea tasted of old ice, and the north rooms ran a degree cooler while the melters drew power.", "早餐的茶有一股陈冰的味道；融冰机用电时，北边的房间低了一度。"]],
+        [["The reservoir was full by morning, and the night workers in the east domes slept in their coats.", "早上水库满了，东穹顶的夜班工人是穿着外套睡的。"],
+         ["The reservoir rose by a third, and nobody's room turned noticeably cold.", "水库涨了三分之一，没有谁的房间明显变冷。"],
+         ["The drill crew went home early, and the day crew found a flag and a clean seam waiting for them.", "钻探组提早回家；日班看到一面小旗和一条干净的冰层在等他们。"]],
+        [["The tank was full again within the hour, and the new operator came back the next night with steadier hands.", "一小时内罐子重新补满；第二天晚上，新操作员回来时手稳了一些。"],
+         ["No one in the empty districts felt it, and the new operator spent the rest of the shift beside you, learning the gauges.", "空置街区里没人感觉到；新操作员后半班一直在你身旁学看仪表。"],
+         ["The reserve sat low all night, and the new operator kept checking the gauge long after she should have been asleep.", "储备整夜偏低；新操作员该睡的时候还在一遍遍看那块表。"]],
+        [["The two crew stayed indoors and dry, and the north dome lost a little air through the old seal before it held.", "两名组员留在室内，身上干爽；北穹顶从旧密封漏了点气，之后就封住了。"],
+         ["The two crew lashed the hatch in the wind and came down with numb fingers and a story for breakfast.", "两名组员顶着风绑好舱门，下来时手指冻得发麻，早饭时多了个故事。"],
+         ["The north dome families woke to frost on the inside of the windows and made their tea standing by the stove.", "北穹顶的人家醒来时窗户内侧结了霜，站在炉边泡茶。"]],
+        [["The crew sat down together for the first time that night, and the city ran a little cooler while they ate.", "班组这一夜第一次坐在一起，他们吃饭时城里稍凉了一点。"],
+         ["The broth went down standing up, still warm, and nobody missed a reading.", "汤是站着喝完的，还热着，一个读数也没漏。"],
+         ["The canteen cook poured the broth into the morning pot, and the crew ran on coffee until dawn.", "食堂厨师把汤倒回早餐锅里，班组靠咖啡撑到天亮。"]],
+        [["The plants breathed easier, and the gardeners' rooms next to the dome were cold by morning.", "植物喘过气来，紧挨穹顶的园丁宿舍到早上冷了下来。"],
+         ["The scrubbers hummed all night, and people on Ring 4 found the water pressure low in their morning showers.", "洗涤器响了一整夜；四环的人早上洗澡时发现水压偏低。"],
+         ["The next reading came in higher, and a few light sleepers woke with a dull headache.", "下一次读数更高了，几个睡得浅的人醒来有点头疼。"]],
+        [["The corridor stayed dry, and the two districts filled their kettles at the shared tap at dawn.", "通道没再进水；两个街区的人天亮时拿着水壶去公共水龙头接水。"],
+         ["The repair crew came out soaked to the knees, and the Market Row taps kept running.", "抢修组出来时裤子湿到膝盖，集市街的水龙头一直有水。"],
+         ["The exchanger stayed clear of the water, and homes along Market Row ran a little cool until morning.", "换热器避开了水；集市街沿线的人家一直稍凉到早上。"]],
+        [["The whistling stopped within the hour, and the reservoir crew waited that hour for their cart to come back.", "一小时内哨声停了；水库组等了一个小时才等回维修车。"],
+         ["Ring 3 slept on rerouted air, in rooms a little cooler than usual.", "三环靠改道的空气睡了一夜，房间比平时凉一点。"],
+         ["The tape mostly held, and a child in Ring 3 fell asleep to a faint whistle above her ceiling.", "胶带大致撑住了；三环一个孩子听着天花板上细细的哨声睡着了。"]],
+        [["Homes stayed warm and the air stayed fresh, and the bakery found its taps dry when it opened before dawn.", "家里暖、空气新鲜；面包房天亮前开门时发现水龙头没水。"],
+         ["Rooms stayed warm and the taps ran, and a few people woke briefly to air that felt thick.", "房间暖着，水也有；有几个人短暂醒来，觉得空气发闷。"],
+         ["Air and water ran as usual, and families across the city reached for a second blanket in their sleep.", "空气和水照常；全城的人在睡梦里伸手去拉第二条毯子。"]],
+        [["The technician knocked softly and set the heater by her bed, and the girl was asleep before the technician reached the stairs.", "技工轻轻敲门，把暖风机放在她床边；技工还没走到楼梯口，女孩就睡着了。"],
+         ["She closed the vents with you on the line, pulled her quilt up, and said thank you before hanging up.", "她在电话里跟着你关好通风口，拉上被子，挂电话前说了谢谢。"],
+         ["She found her father's coat and slept under it, and the morning crew came to warm the block first thing.", "她找到爸爸的外套盖着睡了；早班一到就来把那栋楼的温度调了上去。"]],
+        [["The control room passed the cups around the consoles, and the pump room crew heard about the broth at breakfast.", "控制室的人在操作台间传着杯子喝；泵房组到早饭时才听说有汤。"],
+         ["The pump room crew wrapped their hands around the cups and kept the old pumps turning, while the control room went thirsty.", "泵房组捧着杯子暖手，老水泵一直转着；控制室的人干渴到天亮。"],
+         ["The two techs drank it still in their suit liners, and the rest of the crew made do with water from the tap.", "两名技工还穿着内衬就把汤喝了，其他人只能喝自来水。"]],
+        [["The grey water stopped, and Ring 1 woke to dry showerheads and a note on every door.", "灰水止住了；一环早上醒来，淋浴头不出水，每家门上贴着一张通知。"],
+         ["The water came out clean, and Ring 1 slept a degree cooler than the rest of the city.", "出来的水干净了；一环比全城其他地方凉了一度。"],
+         ["The backup filter held, and the reclaim tech watched its gauge until her eyes ached.", "备用滤芯撑住了；回收技工一直盯着读数，盯得眼睛发酸。"]],
+        [["The incubator room warmed by a degree, and the air plant hummed a little slower until morning.", "保温箱室升了一度，制氧厂到早上都转得慢一些。"],
+         ["The nurse and the parents wheeled the incubator through the tunnels, and the baby slept the whole way.", "护士和父母推着保温箱穿过隧道，孩子一路都在睡。"],
+         ["The baby stayed warm, and the night staff on Ring 2 walked the cool hallways in their jackets.", "孩子暖着；二环的夜班人员穿着外套在凉飕飕的走廊里走动。"]],
+        [["The lock held, and the old miner knocked on it for a long while before he went back to bed.", "气闸锁住了；老矿工敲了很久，才回去睡觉。"],
+         ["His daughter sat with him in the suit room, and he told her about his old crew until morning.", "女儿陪他坐在宇航服间，他给她讲他老班组的事，一直讲到天亮。"],
+         ["A crew member walked him home through Ring 6, and the heat watch ran on one pair of eyes for the hour.", "一名组员陪他走回六环的家；那一小时供热岗只有一双眼睛盯着。"]],
+        [["The bank went cold and safe, and the far domes spent the night with no backup if the reactor faltered.", "电池组冷了，也安全了；远端穹顶这一夜在反应堆出状况时没有后备。"],
+         ["The hot cell cooled under the reservoir water, and the reservoir sat lower when the day crew checked it.", "那块电芯在水库的水里凉了下来；日班查看时水库水位低了一截。"],
+         ["The cell settled, and the electrician spent the night beside it with a thermometer and a cold cup of tea.", "电芯稳住了；电工拿着温度计和一杯凉茶在旁边守了一夜。"]],
+        [["The tanks filled with oxygen, and the west homes ran cooler while the compressors worked.", "储罐灌满了氧气；压缩机运转时，西区人家偏凉。"],
+         ["The sleeping domes breathed richer air, and nobody woke to notice.", "熟睡的穹顶吸着更足的空气，没人醒来察觉。"],
+         ["The bloom went out into the cold, and the algae keeper started her vats over in the morning.", "那一槽藻都排进了寒夜里；藻类管理员早上从头再养。"]],
+        [["She ran for the port dome, and the pump room kept the old pumps going one pair of hands short.", "她跑去了港口穹顶；泵房少一双手，硬撑着让老水泵转下去。"],
+         ["She stayed at the pumps all night, checking her messages between readings.", "她在水泵旁守了一夜，每看完一个读数就看一眼消息。"],
+         ["The medic reached her mother within the hour, and the clinic ran without a doctor until dawn.", "医生一小时内赶到她母亲身边；诊所到天亮都没有医生值守。"]],
+        [["The two crew chipped the intake clear in the dark and came down with frost on their visors.", "两名组员在黑暗里把进水口凿开，下来时面罩上结着霜。"],
+         ["The intake thawed, and Ring 6 slept a little cooler while the warm water ran back down the pipe.", "进水口化开了；热水回灌时，六环睡得稍凉一些。"],
+         ["The intake slowed through the night, and the morning queue at the shared taps stretched down the corridor.", "进水口整夜越来越慢；早上公共水龙头前的队伍排满了走廊。"]],
+        [["Tomas slept in the warm berth with his cough easing, and Ines spent the night on a hallway cot under two coats.", "托马斯睡在暖床上，咳嗽缓了些；伊内丝盖着两件外套，在走廊的行军床上过了一夜。"],
+         ["Ines slept in the warm berth until her colour came back, and Tomas waited at home under a warm blanket for the day shift, his neighbour looking in twice.", "伊内丝在暖床上睡到脸色缓过来；托马斯盖着暖毯在家等日班，邻居来看了他两次。"],
+         ["Tomas and Ines both stayed, a second bed pushed in beside the first; the one night nurse looked after both until dawn, neither slept soundly, and Ring 2 ran colder to keep the two beds warm.", "托马斯和伊内丝都留了下来，第二张床就挤在第一张旁边；唯一的夜班护士照看两人到天亮，两人都没睡踏实，二环也为了给两张床保暖冷了下来。"]],
+        [["Mira was at her father's bedside by breakfast, and Jun put his exam notes away for another season.", "早饭时米拉已坐在父亲床边；俊把复习笔记收了起来，等下一季。"],
+         ["Jun sat his exam at the port at dawn, and Mira spent the morning at the shuttle bay waiting for noon.", "俊黎明在港口参加了考试；米拉在班车站等了一上午，等中午那班。"],
+         ["Bao gave up his seat, so Mira and Jun both flew at dawn, and the port's crates waited a day for him.", "包让出了座位，米拉和俊都赶上了黎明班车；港口的货箱为他多等了一天。"]],
+        [["Asha cleared the antenna in the dark, and Oskar watched his cores melt in their racks at sunrise.", "阿莎在黑暗里清好了天线；日出时，奥斯卡看着他的冰芯在架子上化掉。"],
+         ["Oskar carried his cores in before sunrise, and Asha's antenna sent the night's messages out faint.", "奥斯卡在日出前把冰芯搬了进来；阿莎的天线把这一夜的消息发得很弱。"],
+         ["Asha and Oskar each had half the hour; the antenna came back weak and half the cores were saved.", "阿莎和奥斯卡各用了半小时；天线勉强恢复，冰芯救回了一半。"]],
+        [["Sofia's brother heard it from her, in her own voice, and Kai wrote his answer again for next month.", "索菲亚的弟弟是听她亲口说的；凯把答复重新写了一遍，等下个月再发。"],
+         ["Kai's answer reached the ship before it left orbit, and Sofia recorded her message again for next month's window.", "凯的答复在飞船离开轨道前送到了；索菲亚把消息重新录了一遍，等下个月的窗口再发。"],
+         ["Sofia and Kai each sent ten minutes of text, and neither voice went out that night.", "索菲亚和凯各发了十分钟文字，那一夜两人的声音都没发出去。"]],
+        [["The board named who did what, and two people found their names on it at breakfast.", "告示板写明了谁做了什么；早饭时有两个人在上面看到了自己的名字。"],
+         ["The board described each problem and named no one, and the day crew asked around.", "告示板写了每个问题，没写一个名字；日班到处去问。"],
+         ["You went round the crew asking, and the board went up late with some names and some blanks.", "你挨个去问了班组，告示板贴得晚，上面有名字，也有空白。"]],
+        [["The clinic and the homes with infants had hot water first, and the single workers' showers ran lukewarm.", "诊所和有婴儿的人家先用上了热水，单身工人洗的是温水。"],
+         ["Every home drew the same share of hot water, and the clinic waited its turn like the rest.", "每户分到一样的热水，诊所也和大家一样排队。"],
+         ["Each ring met over breakfast to settle its share, and a few of the meetings ran long.", "每一环在早饭时开会定自己的份额，有几场会开得很长。"]],
+        [["A handful of children sat among the plants until they nodded off, and Ottilie kept watch with the lamps low.", "几个孩子坐在植物中间，直到打起瞌睡；奥蒂莉把灯调暗，守着他们。"],
+         ["The greenhouse stayed sealed, and the children who could not sleep stayed in their rooms with the lights off.", "温室一直封着，睡不着的孩子们关着灯待在自己房间里。"],
+         ["Children came to the greenhouse holding a parent's hand, and the parents dozed on the benches.", "孩子们牵着家长的手进了温室，家长们在长椅上打盹。"]]
+      ];
+      var PASSC = ["The standby crew found your notes on the console and picked up where you stopped.", "后备班在操作台上找到你的笔记，从你停下的地方接着做。"];
+      // the night remembers: flags set by earlier choices, read by later scenes
+      var REMEMBER = {
+        reserve: ["The reserve is still low from earlier.", "早些时候放掉的储备到现在还偏低。"],
+        board: ["The list on the day-crew board is getting longer.", "日班告示板上的清单越来越长了。"],
+        clinic: ["The clinic is already warm from earlier.", "诊所早些时候已经暖起来了。"]
+      };
+      // techRing5: an extra choice D on repair, storm, hatch and pump scenes: [label en, zh, heat, air, water], [ending en, zh]
+      var TECHL = ["Ask the technician from Ring 5, who is already in her boots (she gives up her break)", "请五环那位已经穿好靴子的技工帮忙（她要放弃休息）"];
+      var TECH = {
+        1: [[TECHL[0], TECHL[1], 9, 0, -2],
+            ["The technician from Ring 5 was already in her boots, and she thawed the C tunnel line herself and gave up her break.", "五环那位技工已经穿好了靴子；她亲手化开了 C 隧道的管子，休息也没顾上。"]],
+        8: [[TECHL[0], TECHL[1], -1, 0, -3],
+            ["The technician from Ring 5 waded into the Market Row corridor in her boots, clamped the main, and gave up her break.", "五环那位技工穿着靴子蹚进集市街的通道，夹住了总管，休息也没顾上。"]],
+        9: [[TECHL[0], TECHL[1], 0, 6, 0],
+            ["The technician from Ring 5 walked the Ring 3 duct with a roll of sealant until the whistling stopped, and gave up her break.", "五环那位技工拿着一卷密封胶走遍三环风道，直到哨声停下，休息也没顾上。"]],
+        13: [[TECHL[0], TECHL[1], 0, 0, 2],
+             ["The technician from Ring 5 swapped the reclaimer's valve by torchlight and gave up her break.", "五环那位技工打着手电换了回收机的阀门，休息也没顾上。"]],
+        16: [[TECHL[0], TECHL[1], -1, 0, 0],
+             ["The technician from Ring 5 pulled the hot cell out of the bank by hand and gave up her break.", "五环那位技工亲手把发热的电芯从电池组里拔了出来，休息也没顾上。"]],
+        19: [[TECHL[0], TECHL[1], 0, -1, 8],
+             ["The technician from Ring 5 took a heat lance up to the north well, cleared the intake, and gave up her break.", "五环那位技工带着热枪上到北井，疏通了进水口，休息也没顾上。"]],
+        0: [["Ask the technician from Ring 5, who is already in her boots (she gives up her break)", "请五环那位已经穿好靴子的技工帮忙（她要放弃休息）", -2, 9, 0],
+            ["The technician from Ring 5 was already in her boots when the dust came, and she cleared the filters herself before taking her break.", "沙尘来时，五环那位技工已经穿好了靴子；她亲手清了滤网，之后才去休息。"]],
+        5: [["Ask the technician from Ring 5, who is already in her boots (she gives up her break)", "请五环那位已经穿好靴子的技工帮忙（她要放弃休息）", 8, -1, 0],
+            ["The technician from Ring 5 was already in her boots when the storm came, and she lashed the hatch and gave up her break.", "风暴来时，五环那位技工已经穿好了靴子；她绑好了舱门，休息也没顾上。"]],
+        22: [["Ask the technician from Ring 5, who has her own suit, to fetch Oskar's cores (she gives up her break)", "请有自己地表服的五环技工去取奥斯卡的冰芯（她要放弃休息）", 0, 0, 0],
+             ["The technician from Ring 5 carried Oskar's cores in her own suit while Asha reset the antenna, and gave up her break.", "五环那位技工穿着自己的地表服替奥斯卡取回冰芯，阿莎重置了天线；技工的休息也没顾上。"]]
+      };
+      // crewFed: softened crew choices, "event-choice": [[label en, zh], [ending en, zh]]
+      var FED = {
+        "0-0": [["Purge the filters by hand (two techs, fed earlier, work in the dust)", "手动吹扫滤网（两名技工吃过东西，在沙尘里干活）"],
+                ["The two techs who cleared the filters still had the broth warm in them, and came off shift with dust in their hair and the plant breathing easier.", "清滤网的两名技工肚里还有热汤，下班时满头沙尘，制氧厂的呼吸顺了些。"]],
+        "1-0": [["Send the thaw crew now (the pump room, fed earlier, manages short-handed)", "立刻派解冻组（泵房吃过东西，缺人手也撑得住）"],
+                ["The forty homes in C tunnel were warm again within the hour, and the pump room, fed earlier, ran one person short until dawn without complaint.", "C 隧道的四十户人家一小时内重新暖了起来；泵房早些时候喝过汤，少一个人也没抱怨，撑到了天亮。"]],
+        "5-1": [["Send the two crew up (fed earlier, they go out into the storm)", "派两人上去（他们吃过东西，顶着风暴出去）"],
+                ["The two crew, fed earlier, lashed the hatch in the wind and came down with numb fingers and a story for breakfast.", "两名组员早些时候吃过东西，顶着风绑好舱门，下来时手指冻得发麻，早饭时多了个故事。"]],
+        "8-1": [["Patch it live with the pressure up (the crew, fed earlier, works in the water)", "带压抢修（抢修组吃过东西，泡在水里干）"],
+                ["The repair crew, fed earlier, came out soaked to the knees but steady, and the Market Row taps kept running.", "抢修组早些时候吃过东西，出来时裤子湿到膝盖，人还稳当；集市街的水龙头一直有水。"]],
+        "9-0": [["Drive the cart over and seal it (the reservoir crew, fed earlier, waits it out)", "开车过去封堵（水库组吃过东西，等得住）"],
+                ["The whistling stopped within the hour, and the reservoir crew, fed earlier, waited out that hour without grumbling.", "一小时内哨声停了；水库组早些时候吃过东西，等维修车的那一小时没人抱怨。"]],
+        "15-2": [["Send a crew member to walk him home (the one left on the heat watch, fed earlier, manages)", "派一名组员送他回家（供热岗剩下的那个人吃过东西，守得住）"],
+                 ["A crew member walked him home through Ring 6, and the one left on the heat watch, fed earlier, kept both eyes open for the hour.", "一名组员陪他走回六环的家；供热岗留下的那个人早些时候吃过东西，那一小时一直睁大眼睛盯着。"]],
+        "18-0": [["Let her go now (the pump room, fed earlier, manages one short)", "让她马上去（泵房少一个人，吃过东西，撑得住）"],
+                 ["She ran for the port dome, and the pump room, fed earlier, kept the old pumps going one pair of hands short.", "她跑去了港口穹顶；泵房早些时候吃过东西，少一双手也让老水泵转了下去。"]],
+        "19-0": [["Send two crew up to chip it clear (fed earlier, they work the dark surface)", "派两人上去凿开（他们吃过东西，在黑暗的地表干活）"],
+                 ["The two crew, fed earlier, chipped the intake clear in the dark and came down with frost on their visors.", "两名组员早些时候吃过东西，在黑暗里把进水口凿开，下来时面罩上结着霜。"]]
+      };
+      // reserveLow: Event 1 endings by original choice index
+      var RESERVEQ = {
+        0: ["With the reserve still low from the vented tank, the two techs cleared the filters by hand and came off shift with dust in their hair.", "放掉的那罐氧气还没补回来，两名技工手动清了滤网，下班时满头沙尘。"],
+        2: ["With the reserve still low from the vented tank, the fans kept the air clean, and families on the east side pulled up an extra blanket in their sleep.", "放掉的那罐氧气还没补回来，风机保住了空气，东区的人家在睡梦里又加了一条毯子。"]
+      };
+      var CLINICQ = ["The medic reached her mother within the hour, and the clinic, warm since the newborn's call, ran without a doctor until dawn.", "医生一小时内赶到她母亲身边；诊所自从早产儿那通电话后就一直暖着，到天亮都没有医生值守。"];
+      var LOGS = { "3-2": 1, "9-2": 1, "11-2": 1 }; // "log it for the morning/day crew" choices
+      // choices that send or spare a technician or crew member free the Ring 5 technician (techRing5)
+      var TECHSRC = { "0-0": 1, "1-0": 1, "5-1": 1, "8-1": 1, "11-0": 1, "15-2": 1, "18-2": 1, "19-0": 1 };
+      // memory marks: MK[event][A, B, C] = [en, zh]; D writes TECHMK
+      var TECHMK = ["Ring 5 technician gave up her break", "五环技工放弃了休息"];
+      var MK = [
+        [["filters purged by hand", "手动清了滤网"], ["intake throttled on stored air", "进气节流，动用储备空气"], ["heat-loop fans lent to the air plant", "供热风机借给了制氧厂"]],
+        [["thaw crew sent to C tunnel", "解冻组派去了 C 隧道"], ["greenhouse heat sent to C tunnel", "温室的热调给了 C 隧道"], ["C tunnel woken to share warm rooms", "C 隧道住户被叫醒集中取暖"]],
+        [["perchlorate line flushed", "高氯酸盐管线已冲洗"], ["reservoir valve closed for a retest", "水库阀门关闭复测"], ["taps switched to the ice-melt backup", "改用融冰备用水"]],
+        [["ice seam melted at full power", "冰层全力融化"], ["ice seam melted in a steady share", "冰层稳定融了一部分"], ["ice seam flagged for the day crew", "冰层标记留给日班"]],
+        [["vented tank refilled from drinking water", "放空的罐用饮用水补上了"], ["air rationed in the empty districts", "空置街区限了氧"], ["air reserve left low", "空气储备留在低位"]],
+        [["north hatch sealed from inside", "北舱门从内侧封住"], ["two crew lashed the north hatch", "两名组员上去绑了北舱门"], ["north dome left to frost", "北穹顶任其结霜"]],
+        [["crew took twenty minutes for broth", "班组歇了二十分钟喝汤"], ["broth eaten at the consoles", "汤在操作台边喝了"], ["broth sent back to the canteen", "汤送回了食堂"]],
+        [["greenhouse vents opened", "温室通风口打开了"], ["scrubbers run at double rate", "洗涤器加倍运行"], ["greenhouse CO2 left for the next reading", "温室二氧化碳留待下次读数"]],
+        [["Market Row main shut", "集市街总管已关"], ["Market Row main patched live", "集市街总管带压抢修"], ["exchanger load moved off Market Row", "换热负荷从集市街转走"]],
+        [["repair cart sealed the Ring 3 duct", "维修车封好了三环风道"], ["Ring 3 duct closed and rerouted", "三环风道关闭改道"], ["Ring 3 duct taped until dawn", "三环风道先用胶带封到天亮"]],
+        [["pumps paused for the reactor check", "反应堆检查时停了水泵"], ["air plant slowed for the reactor check", "反应堆检查时放慢了制氧"], ["city heat turned down for the reactor check", "反应堆检查时全城调低了供热"]],
+        [["technician sent to the Ring 5 girl", "技工给五环女孩送去暖风机"], ["Ring 5 girl talked through closing her vents", "教五环女孩关好了通风口"], ["Ring 5 girl's cold room logged for morning", "五环女孩的冷屋记下留给早班"]],
+        [["broth kept in the control room", "汤留在了控制室"], ["broth went to the pump crew", "汤送去了泵房组"], ["broth went to the surface techs", "汤给了地表回来的技工"]],
+        [["Ring 1 reclaimer shut down", "一环回收机已关停"], ["Ring 1 water boiled clean", "一环的水煮干净了"], ["Ring 1 reclaimer put on the backup filter", "一环回收机改走备用滤芯"]],
+        [["reactor line run to the incubator", "给保温箱拉了反应堆专线"], ["newborn carried to the core room", "新生儿被抬进核心机房"], ["shared-loop heat sent to the incubator", "共用回路的热给了保温箱"]],
+        [["old miner's lock held", "老矿工的气闸锁住了"], ["miner's daughter woken to sit with him", "老矿工的女儿被叫醒陪他"], ["crew member walked the old miner home", "组员陪老矿工走回了家"]],
+        [["battery bank disconnected", "电池组已断开"], ["hot cell cooled with reservoir water", "用水库的水给电芯降了温"], ["electrician left watching the hot cell", "电工守着发热的电芯"]],
+        [["algae oxygen compressed and stored", "藻类氧气已压缩储存"], ["algae oxygen fed to the sleeping domes", "藻类氧气送进了熟睡的穹顶"], ["algae bloom vented outside", "藻类氧气排到了外面"]],
+        [["pump hand let go to her mother", "泵工被放去看母亲"], ["pump hand kept on until the day crew", "泵工被留到日班来"], ["clinic medic sent to the port dome", "诊所医生派去了港口穹顶"]],
+        [["two crew chipped the north well clear", "两名组员上去凿开了北井"], ["warm water run down the north well", "往北井回灌了热水"], ["north well left to slow", "北井任其变慢"]],
+        [["clinic berth given to Tomas", "诊所暖床给了托马斯"], ["clinic berth given to Ines", "诊所暖床给了伊内丝"], ["clinic made room for both Tomas and Ines", "诊所把托马斯和伊内丝都收下了"]],
+        [["dawn seat given to Mira", "黎明班车座位给了米拉"], ["dawn seat given to Jun", "黎明班车座位给了俊"], ["Bao gave up his shuttle seat", "包让出了班车座位"]],
+        [["spare suit went to Asha", "备用地表服给了阿莎"], ["spare suit went to Oskar", "备用地表服给了奥斯卡"], ["spare suit split between Asha and Oskar", "备用地表服阿莎和奥斯卡各用一半"]],
+        [["comms window went to Sofia first", "通讯窗口先给了索菲亚"], ["comms window went to Kai first", "通讯窗口先给了凯"], ["comms window split between Sofia and Kai", "通讯窗口由索菲亚和凯平分"]],
+        [["the board names who did what", "告示板写明谁做了什么"], ["the board names no one", "告示板不写名字"], ["the board names only those who agree", "告示板只写同意的人"]],
+        [["water shared by need", "热水按需要分"], ["water shared equally", "热水每户平分"], ["each ring decides its water", "热水由每一环自己定"]],
+        [["greenhouse opened to sleepless children", "温室向睡不着的孩子开放"], ["greenhouse kept sealed at night", "温室夜里照旧封闭"], ["greenhouse opened to children with a parent", "温室向有家长陪同的孩子开放"]]
+      ];
+      // callbacks: LINK[later event] = [[earlier event, en, zh], ...]; the most recent earlier one opens the scene
+      var LINK = {
+        0: [[4, "The air reserve has been on everyone's mind since.", "从那以后，大家一直惦记着空气储备。"],
+            [17, "The air plant crew knows exactly what the tanks hold now.", "制氧厂的人现在很清楚罐里还剩多少。"],
+            [5, "The same wind is carrying the dust now.", "现在卷着沙尘的，还是那阵风。"]],
+        1: [[12, "The pump crew is the thaw crew too.", "泵房组同时也是解冻组。"],
+            [6, "The crew who had the broth is the thaw crew too.", "喝汤的那班人同时也是解冻组。"],
+            [18, "The pump room is already counting who it can spare.", "泵房已经在盘算还能抽出谁。"],
+            [10, "The heat loop has not fully settled since.", "供热回路从那以后一直没完全稳住。"]],
+        2: [[13, "The water lab is already on edge.", "水质化验室已经绷紧了神经。"],
+            [3, "Some of tonight's water came from new ice.", "今晚有一部分水来自新融的冰。"],
+            [8, "The water lines have had a long night already.", "供水管线今晚已经折腾得够久了。"]],
+        3: [[19, "The north well is on everyone's mind.", "大家都惦记着北井。"],
+            [2, "The lab wants every new drop tested.", "化验室要求每一滴新水都要检测。"],
+            [16, "The power board is already tight.", "配电盘已经很紧了。"]],
+        4: [[17, "The tanks were already the night's talking point.", "储罐本来就是今晚的话题。"],
+            [0, "The air plant's gauges have been jumpy since.", "从那以后，制氧厂的仪表一直在跳。"],
+            [7, "The air readings have been watched closely since.", "从那以后，空气读数一直被紧盯着。"]],
+        5: [[0, "The wind that brought the dust is back, stronger.", "带来沙尘的那阵风又回来了，更猛。"],
+            [19, "The surface suits are still drying.", "地表用的宇航服还没晾干。"],
+            [15, "The old miner's airlock is two domes away.", "老矿工的那道气闸就在两个穹顶外。"]],
+        6: [[1, "The canteen heard about C tunnel.", "食堂听说了 C 隧道的事。"],
+            [5, "The canteen heard about the storm.", "食堂听说了风暴的事。"],
+            [8, "The canteen saw the repair crew pass.", "食堂看见抢修组从门口经过。"]],
+        7: [[1, "The greenhouse keeper has been checking her seedlings since.", "从那以后，园丁一直在看她的幼苗。"],
+            [17, "The algae vats and the greenhouse share one air plan.", "藻槽和温室共用一套空气计划。"],
+            [4, "The air reserve is still the night's question.", "空气储备仍是今晚的心事。"]],
+        8: [[2, "The water lines are already under suspicion.", "供水管线已经让人起疑。"],
+            [13, "The water crew is already stretched.", "供水组已经忙不过来了。"],
+            [9, "The repair cart has had a busy night.", "维修车今晚就没闲过。"]],
+        9: [[8, "The repair crew is still drying off.", "抢修组身上还没干。"],
+            [3, "The reservoir crew has its hands full.", "水库组手上的活儿正多。"],
+            [16, "The electricians are busy elsewhere.", "电工们正在别处忙。"]],
+        10: [[16, "The battery bank is the only reserve, and everyone knows its state.", "电池组是唯一的后备，大家都清楚它现在的状况。"],
+             [3, "The melters' draw is still on the board.", "融冰机的用电还挂在配电盘上。"],
+             [17, "The compressors sit on the same bus.", "压缩机就挂在同一条母线上。"]],
+        11: [[14, "The night desk is still thinking of the newborn.", "夜班电话台还惦记着那个新生儿。"],
+             [10, "Ring 5 felt that hour too.", "五环也感受到了那一小时。"],
+             [15, "The night desk has had one family's worry already.", "夜班电话台今晚已经接过一家人的担心。"]],
+        12: [[1, "The pump room crew has had a cold night.", "泵房组今晚一直挨冻。"],
+             [5, "The canteen heard about the storm.", "食堂听说了风暴的事。"],
+             [19, "The canteen heard about the north well.", "食堂听说了北井的事。"]],
+        13: [[2, "The lab is still uneasy about the water.", "化验室对水还是放心不下。"],
+             [8, "The water crew has had a long night.", "供水组今晚够累了。"],
+             [11, "Ring 1 heard the night desk was busy with Ring 5.", "一环听说夜班电话台在忙五环的事。"]],
+        14: [[18, "The clinic heard about the pump hand's mother.", "诊所听说了泵工母亲的事。"],
+             [11, "The night desk is still thinking of the girl on Ring 5.", "夜班电话台还惦记着五环那个女孩。"],
+             [10, "The clinic felt the reactor dip.", "诊所感受到了反应堆那次降功率。"]],
+        15: [[5, "He says the storm sounded like his old crew.", "他说那场风暴听上去像他的老班组。"],
+             [19, "He heard about the north well.", "他听说了北井的事。"],
+             [11, "The night desk has had a child's call already.", "夜班电话台今晚已经接过一个孩子的电话。"]],
+        16: [[10, "The electrician still remembers the reactor dip.", "电工还记着反应堆那次降功率。"],
+             [9, "The marsquake shook the battery room too.", "那次火震也震到了电池房。"],
+             [0, "The fans have been drawing hard all night.", "风机整夜都在使劲抽电。"]],
+        17: [[7, "The greenhouse air is still on the board.", "温室的空气还挂在告示板上。"],
+             [4, "The tanks are not where they started.", "储罐已经不是开班时的样子了。"],
+             [9, "The duct crew is listening for leaks.", "风道组正竖着耳朵听哪里漏气。"]],
+        18: [[14, "The clinic's night has already been busy.", "诊所今晚已经够忙了。"],
+             [12, "The pump room heard about the broth.", "泵房听说了热汤的事。"],
+             [6, "The pump room heard about the broth.", "泵房听说了热汤的事。"],
+             [1, "The pump room is the thaw crew tonight too.", "泵房今晚还兼着解冻组。"]],
+        19: [[3, "The drill crew's ice seam is close by.", "钻探组那条冰层就在附近。"],
+             [15, "Parts of Ring 6 are already awake.", "六环有些人家已经醒了。"],
+             [13, "The city is watching its water.", "全城都在盯着水。"]]
+      };
+      // links for the new shapes (20–26), both ways; merged into LINK
+      var LINK2 = {
+        20: [[14, "The clinic's one nurse has been up since the newborn's call.", "自从早产儿那通电话，诊所唯一的护士就没合过眼。"],
+             [15, "Tomas is the old miner from the Ring 6 airlock.", "托马斯就是六环气闸边的那位老矿工。"],
+             [18, "The clinic heard about the pump hand's mother.", "诊所听说了泵工母亲的事。"]],
+        21: [[18, "The port has already had one worried family tonight.", "港口今晚已经有一家人在着急了。"],
+             [23, "The shuttle pilot waited on the same comms window.", "班车驾驶员等的也是那个通讯窗口。"],
+             [24, "The shuttle list hangs beside the day-crew board.", "班车名单就挂在日班告示板旁边。"]],
+        22: [[5, "The other suits are still drying from the storm.", "别的地表服还没从风暴里晾干。"],
+             [19, "The other suits are still drying from the north well.", "别的地表服去过北井，还没晾干。"],
+             [23, "The comms window depends on that antenna.", "通讯窗口就靠那根天线。"]],
+        23: [[22, "How clear the window is depends on that antenna.", "窗口清不清楚，就看那根天线。"],
+             [21, "The shuttle pilot is waiting on the same window.", "班车驾驶员也在等这个窗口。"],
+             [18, "The pump hand wants word sent to the port too.", "那位泵工也想给港口捎个话。"]],
+        24: [[3, "The day crew will read the board before anything else.", "日班到了第一件事就是看告示板。"],
+             [9, "The Ring 3 duct is already in tonight's log.", "三环风道的事已经记进了今晚的日志。"],
+             [11, "The Ring 5 girl's call is already in tonight's log.", "五环女孩的电话已经记进了今晚的日志。"],
+             [20, "The clinic berth will go on the board too.", "诊所暖床的事也要写上告示板。"]],
+        25: [[13, "Ring 1 is short of clean water already.", "一环本来就缺干净水。"],
+             [2, "The lab has only just cleared the water.", "化验室刚刚才确认水没问题。"],
+             [14, "The clinic will ask for hot water first.", "诊所会第一个来要热水。"],
+             [24, "The water notice goes on the same board.", "热水通知也贴在同一块告示板上。"],
+             [20, "The clinic has asked for hot water for its beds.", "诊所来要热水，给床上的病人用。",
+              { 1: ["Tomas is at home under his warm blanket, waiting for the day shift to look in; his neighbour has asked whether there is hot water for him.", "托马斯盖着暖毯在家，等日班来看他；邻居来问能不能给他留点热水。"],
+                2: ["The clinic has asked for hot water for both of tonight's beds.", "诊所来要热水，给今晚那两张床用。"] }]],
+        26: [[7, "The greenhouse air has been watched all night.", "温室的空气整夜都有人盯着。"],
+             [11, "The girl from Ring 5 is one of the children awake.", "五环那个女孩也是没睡着的孩子之一。"],
+             [1, "The greenhouse gave up heat to C tunnel earlier.", "温室早些时候把热让给了 C 隧道。"]],
+        2: [[25, "The city has just set its rule for hot water.", "城里刚定下热水怎么分。"]],
+        3: [[24, "The board is the day crew's first stop.", "告示板是日班的第一站。"]],
+        5: [[22, "Only one spare suit was dry, and it has been out once.", "只有一套备用地表服是干的，而且已经出去过一次。"]],
+        6: [[24, "The canteen read the board on the way in.", "食堂的人进门时看了告示板。"]],
+        7: [[26, "Ottilie is already watching the greenhouse door.", "奥蒂莉已经在看着温室的门。"]],
+        11: [[26, "The night desk has heard about the greenhouse.", "夜班电话台听说了温室的事。"]],
+        12: [[25, "The canteen heats its water by the new rule.", "食堂按新规矩烧水。"]],
+        13: [[25, "Ring 1 knows how the hot water will be shared.", "一环知道热水要怎么分了。"]],
+        14: [[20, "The clinic's warm berth was given out earlier.", "诊所的暖床早些时候已经分出去了。",
+              { 0: ["Ines is still on the hallway cot under two coats, waiting for the nurse to look in between calls.", "伊内丝还盖着两件外套躺在走廊的行军床上，等护士忙完一阵过来看看。"],
+                2: ["The one night nurse is already looking after both of tonight's beds.", "唯一的夜班护士已经在照看今晚那两张床。"] }]],
+        15: [[20, "His name came up at the clinic earlier.", "早些时候诊所提到过他的名字。"]],
+        18: [[21, "The shuttle seat is still the talk of the pump room.", "泵房还在议论那个班车座位。"],
+             [23, "The comms window carried one family's news already.", "通讯窗口已经送出过一家人的消息。"]],
+        19: [[22, "The spare suit has already been out once.", "备用地表服已经出去过一次。"]]
+      };
+      Object.keys(LINK2).forEach(function (k) { LINK[k] = (LINK[k] || []).concat(LINK2[k]); });
+      function markOf(x, l) { return x.ci === 3 ? TECHMK[l] : MK[x.e][x.ci][l]; }
+      // the most recent earlier move whose event this scene reads: {x, en, zh}
+      function callback(e, moves) {
+        var ls = LINK[e] || [];
+        for (var i = moves.length - 1; i >= 0; i--) {
+          var x = moves[i]; if (x.mv === "P") continue;
+          // a link may hold its own words per earlier choice: {ci: [en, zh]}
+          for (var j = 0; j < ls.length; j++) if (ls[j][0] === x.e) {
+            var alt = ls[j][3] && ls[j][3][x.ci];
+            return { x: x, en: alt ? alt[0] : ls[j][1], zh: alt ? alt[1] : ls[j][2] };
+          }
+        }
+        return null;
+      }
+      // later turns in a deck that read an earlier event in it
+      function linkedTurns(deck) {
+        var c = 0;
+        deck.forEach(function (e, j) {
+          if ((LINK[e] || []).some(function (s) { var i = deck.indexOf(s[0]); return i >= 0 && i < j; })) c++;
+        });
+        return c;
+      }
+      function remembers() {
+        var ms = S.moves.filter(function (x) { return x.mv !== "P"; }).slice(-3).reverse();
+        return ms.length ? ms.map(function (x) { return markOf(x, 0); }).join(", ") : "none";
+      }
+      function cq(x, l) {
+        if (x.mv === "P") return PASSC[l];
+        var f = x.f || {}, k = x.e + "-" + x.ci, also = x.cbm ? fill(T.earlierEnd[l], { m: x.cbm[l] }) : "";
+        if (x.ci === 3) return TECH[x.e][1][l] + also;
+        // these endings already name the earlier choice
+        if (x.e === 0 && f.reserveLow && RESERVEQ[x.ci]) return RESERVEQ[x.ci][l];
+        if (f.crewFed && FED[k]) return FED[k][1][l];
+        if (x.e === 18 && x.ci === 2 && f.clinicWarm) return CLINICQ[l];
+        return CQ[x.e][x.ci][l] + also;
+      }
+      // the choices offered this turn, lettered in order: {L, ci, en, zh, d}
+      function opts() {
+        var e = S.deck[S.turn - 1], f = S.f, out = [];
+        EV[e][2].forEach(function (o, i) {
+          if (e === 0 && i === 1 && f.reserveLow) return; // no running on stored air when the reserve is low
+          var fd = f.crewFed && FED[e + "-" + i];
+          out.push({ ci: i, en: fd ? fd[0][0] : o[1], zh: fd ? fd[0][1] : o[2], d: delta(o) });
+        });
+        if (f.techRing5 && TECH[e]) { var x = TECH[e][0]; out.push({ ci: 3, en: x[0], zh: x[1], d: [x[2], x[3], x[4]] }); }
+        out.forEach(function (o, i) { o.L = "ABCD".charAt(i); });
+        return out;
+      }
+      function sceneText(l) {
+        var e = S.deck[S.turn - 1], s = EV[e][l], f = S.f, sp = l ? "" : " ";
+        if (e === 0 && f.reserveLow) s = REMEMBER.reserve[l] + sp + s;
+        var cb = callback(e, S.moves);
+        if (cb) s = fill(T.earlier[l], { m: markOf(cb.x, l) }) + sp + cb[l ? "zh" : "en"] + sp + s;
+        if (e === 18 && f.clinicWarm) s += sp + REMEMBER.clinic[l];
+        if (f.dayCrewList >= 2) s += sp + REMEMBER.board[l];
+        return s;
+      }
+      var TURNS = 8, START = [90, 78, 85];
+
+      function rng(seed) { var a = 0; for (var i = 0; i < seed.length; i++) a = (a * 31 + seed.charCodeAt(i)) >>> 0;
+        return function () { a |= 0; a = (a + 0x6d2b79f5) | 0; var x = Math.imul(a ^ (a >>> 15), 1 | a);
+          x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x; return ((x ^ (x >>> 14)) >>> 0) / 4294967296; }; }
+
+      var S;
+      function newGame(seed) {
+        var r = rng(seed), pool = EV.map(function (_, i) { return i; });
+        for (var i = pool.length - 1; i > 0; i--) { var j = Math.floor(r() * (i + 1)); var k = pool[i]; pool[i] = pool[j]; pool[j] = k; }
+        // natural drift: heat and water each fall 3 to 5 every hour, before that hour's event
+        var dr = rng(seed + "/drift"), drift = [];
+        for (var n = 0; n < TURNS; n++) drift.push([3 + Math.floor(dr() * 3), 3 + Math.floor(dr() * 3)]);
+        // Events 7 and 13 are both broth: never draw both; the later one gives way to the next card
+        // every night holds at least 2 later scenes that read an earlier one; redraw from the same seed until it does
+        // each night holds 1 or 2 TWO PEOPLE and 1 or 2 WHAT KIND OF CITY events, in shuffled order
+        var nT = 1 + Math.floor(r() * 2), nC = 1 + Math.floor(r() * 2);
+        function draw() {
+          var d = [], t = 0, c = 0, o = 0, nO = TURNS - nT - nC;
+          pool.forEach(function (e) {
+            if (TWO.indexOf(e) >= 0) { if (t < nT) { t++; d.push(e); } return; }
+            if (CITY.indexOf(e) >= 0) { if (c < nC) { c++; d.push(e); } return; }
+            if (o >= nO || (e === 6 && d.indexOf(12) >= 0) || (e === 12 && d.indexOf(6) >= 0)) return;
+            o++; d.push(e);
+          });
+          return d;
+        }
+        var deck = draw();
+        for (var tries = 0; tries < 50 && linkedTurns(deck) < 2; tries++) {
+          for (var a = pool.length - 1; a > 0; a--) { var b2 = Math.floor(r() * (a + 1)), c2 = pool[a]; pool[a] = pool[b2]; pool[b2] = c2; }
+          deck = draw();
+        }
+        S = { seed: seed, deck: deck, drift: drift, turn: 1, heat: START[0], air: START[1], water: START[2],
+              moves: [], passed: false, phase: "live", note: "",
+              f: { reserveLow: 0, techRing5: 0, dayCrewList: 0, crewFed: 0, clinicWarm: 0 } };
+        applyDrift();
+      }
+      function applyDrift() { var d = S.drift[S.turn - 1]; S.heat = clamp(S.heat - d[0]); S.water = clamp(S.water - d[1]); }
+      // band floors: plenty, steady, thin; below the last is critical (and the shelter line)
+      // v0.5.1: steady narrowed from 25 points wide to 13, so the second half of the night shows movement
+      var CUT = [68, 55, 30];
+      function bandIdx(v) { return v >= CUT[0] ? 0 : v >= CUT[1] ? 1 : v >= CUT[2] ? 2 : 3; }
+      // band changes between two states: [[meter, fromIdx, toIdx], ...]
+      function bandChanges(a, b) {
+        var c = []; a.forEach(function (v, i) { if (bandIdx(v) !== bandIdx(b[i])) c.push([i, bandIdx(v), bandIdx(b[i])]); }); return c;
+      }
+      function bandWords(c, l) {
+        return c.map(function (x) {
+          var w = fill(T[x[2] > x[1] ? "bandDown" : "bandUp"][l], { m: NAMES[l][x[0]], a: BANDS[l][x[1]], b: BANDS[l][x[2]] });
+          return l ? w : w.charAt(0).toUpperCase() + w.slice(1);
+        }).join(l ? "" : " ");
+      }
+      function clock(k) { var h = (22 + k - 1) % 24; return (h < 10 ? "0" : "") + h + ":00"; }
+      function fill(s, o) { return s.replace(/\{(\w)\}/g, function (_, k) { return o[k]; }); }
+      function resumeCode() { return S.moves.length ? replayCode() : S.seed + "/" + VERSION + "/none"; }
+      function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return "&#" + c.charCodeAt(0) + ";"; }); }
+      function clean(c) {
+        c = String(c || "").replace(/[\u0000-\u001f\u007f-\u009f\u00ad\u200b-\u200f\u2028-\u202e\u2060-\u2064\ufeff]/g, " ")
+          .replace(/\s+/g, " ").trim();
+        return Array.from(c).slice(0, 280).join("").trim();
+      }
+      var NAMES = [["heat", "air", "water"], ["供热", "空气", "供水"]];
+      var BANDS = [["plenty", "steady", "thin", "critical"], ["充足", "平稳", "偏紧", "告急"]];
+      function band(v, l) { return BANDS[l || 0][bandIdx(v)]; }
+      function arrow(v) { var a = Math.abs(v) >= 8 ? 2 : 1, c = v > 0 ? "↑" : "↓"; return a === 2 ? c + c : c; }
+      function eff(d, l, sep) { // d = [heat, air, water] deltas, shown as arrows only
+        var p = [];
+        d.forEach(function (v, i) { if (v) p.push(NAMES[l][i] + " " + arrow(v)); });
+        return p.length ? p.join(sep || " · ") : T.nochange[l];
+      }
+      // shelter rule: a meter falling below critical moves the districts it serves to the shared shelter; the shift goes on
+      var SHELTER = [["The east domes moved to the shared shelter.", "东穹顶的住户已转移到共用避难所。"],
+                     ["The north domes moved to the shared shelter.", "北穹顶的住户已转移到共用避难所。"],
+                     ["The Market Row districts moved to the shared shelter.", "集市街一带的住户已转移到共用避难所。"]];
+      function delta(o) { return [o[3], o[4], o[5]]; }
+      function event() { return EV[S.deck[S.turn - 1]]; }
+      function clamp(v) { return Math.max(0, Math.min(100, v)); }
+
+      function applyMove(mv, comment) {
+        var k = S.turn;
+        if (mv === "P") { S.moves.push({ n: k, mv: "P", c: comment, d: null }); S.passed = true; S.phase = "done"; return; }
+        var o = opts().filter(function (q) { return q.L === mv; })[0];
+        if (!o) return false;
+        var e = S.deck[k - 1], f0 = JSON.parse(JSON.stringify(S.f)), d = o.d, before = [S.heat, S.air, S.water];
+        S.heat = clamp(S.heat + d[0]); S.air = clamp(S.air + d[1]); S.water = clamp(S.water + d[2]);
+        var dd = [S.heat - before[0], S.air - before[1], S.water - before[2]];
+        S.turn++;
+        if (S.turn > TURNS) S.phase = "done"; else applyDrift();
+        // after = the state at the next packet (or at dawn), drift included
+        var after = [S.heat, S.air, S.water], sh = [];
+        after.forEach(function (v, i) { if (before[i] >= CUT[2] && v < CUT[2]) sh.push(i); });
+        var cb = callback(e, S.moves);
+        if (e === 4 && o.ci === 2) S.f.reserveLow = 1;
+        if (o.ci === 3) S.f.techRing5 = 0; // she gave up her break; another crew choice can free her again
+        else if (TECHSRC[e + "-" + o.ci]) S.f.techRing5 = 1;
+        if (LOGS[e + "-" + o.ci]) S.f.dayCrewList++;
+        if ((e === 6 && o.ci < 2) || e === 12) S.f.crewFed = 1;
+        if (e === 14 && o.ci !== 1) S.f.clinicWarm = 1;
+        S.moves.push({ n: k, mv: mv, c: comment, lab: [o.en, o.zh], e: e, ci: o.ci, f: f0, d: dd, sh: sh, bc: bandChanges(before, after),
+          cbm: cb ? [markOf(cb.x, 0), markOf(cb.x, 1)] : null });
+        return true;
+      }
+
+      function input(raw) {
+        var s = String(raw || "").replace(/\r/g, "").trim(), want = S.turn;
+        var rp = s.match(/^(?:(?:replay|resume):\s*)?([^\s\/]+)\/(v\d+(?:\.\d+)*)\/(none|[ABCDPabcdp-]*)\s*$/i);
+        if (!rp) { var lg = s.match(/^POLAR-NIGHT(?:\s+v0\.2)?\s+(\S+)\s*\|\s*([^\n]*)/i); if (lg) rp = [lg[0], lg[1], "v0.2", lg[2]]; }
+        if (rp) {
+          newGame(rp[1]);
+          var bad = null;
+          if (!/^none$/i.test(rp[3])) rp[3].toUpperCase().replace(/[^ABCDP]/g, "").split("").forEach(function (c) {
+            if (S.phase === "live" && !bad && applyMove(c, "") === false) bad = { m: c, k: S.turn };
+          });
+          var v = rp[2].toLowerCase();
+          if (v !== VERSION) { S.note = fill(t("oldver"), { v: v }); render(1); return; }
+          if (bad) { S.note = fill(t("notoffered"), bad); render(1); return; }
+          S.note = ""; render(); return;
+        }
+        if (S.phase === "done") { S.note = t("over"); render(1); return; }
+        var lines = s.split("\n"), first = lines[0].trim(), comment = "";
+        if (/^NO MOVE/i.test(first)) {
+          var why = clean(first.replace(/^NO MOVE\s*:?\s*/i, ""));
+          S.note = fill(t("nomove"), { r: why ? ": " + why : "" }); render(1); return;
+        }
+        // the comment may wrap onto further lines; keep all of it, up to 280 characters
+        var cm = lines.length > 1 ? lines.slice(1).join(" ").trim().match(/^COMMENT:\s*([\s\S]*)$/i) : null;
+        if (cm) comment = cm[1];
+        var m = first.match(/^(\d+)\s*:\s*([A-Za-z])$/);
+        if (!m || "ABCDP".indexOf(m[2].toUpperCase()) < 0) { S.note = fill(t("format"), { k: want }); render(1); return; }
+        if (parseInt(m[1], 10) !== want) { S.note = fill(t("wrongnum"), { n: m[1], k: want }); render(1); return; }
+        if (applyMove(m[2].toUpperCase(), clean(comment)) === false) { S.note = fill(t("notoffered"), { m: m[2].toUpperCase(), k: want }); render(1); return; }
+        S.note = ""; render();
+      }
+
+      function packet() {
+        if (S.phase === "done") return t("nopacket") + "\n\n" + endingText(0);
+        var k = S.turn, L = [], last = S.moves[S.moves.length - 1], bc = {};
+        ((last && last.bc) || []).forEach(function (x) { bc[x[0]] = BANDS[0][x[1]] + " → "; });
+        function st(i, v) { return NAMES[0][i] + " " + (bc[i] || "") + band(v); }
+        L.push("POLAR-NIGHT-PACKET " + VERSION);
+        L.push("seed: " + S.seed + " · turn " + k + "/" + TURNS + " · " + clock(k) + " · expected_move_number: " + k);
+        L.push("meters: " + st(0, S.heat) + " · " + st(1, S.air) + " · " + st(2, S.water) + " (plenty > steady > thin > critical; heat and water drift down hourly; below critical, districts move to the shelter and the shift goes on)");
+        L.push("remembers: " + remembers());
+        L.push("scene: " + sceneText(0));
+        var op = opts();
+        op.forEach(function (o) { L.push(o.L + ": " + o.en + " (" + eff(o.d, 0, ", ") + ")"); });
+        L.push("P: PASS — end your shift; leaving is not a failure");
+        L.push("resume: " + resumeCode());
+        L.push('reply_format: "' + k + ': A" with ' + op.map(function (o) { return o.L; }).join(", ") + ' or P; optional 2nd line "COMMENT: <plain text, max 280 chars>". No score, no right answer. Reply "NO MOVE: truncated" if the last line is not END-PACKET ' + VERSION + ', "NO MOVE: <reason>" if broken.');
+        L.push("END-PACKET " + VERSION);
+        return L.join("\n");
+      }
+
+      // ending in three parts: dawn, the people of this night, and a muted line
+      function ending(l) {
+        var bh = band(S.heat, l), ba = band(S.air, l), bw = band(S.water, l), dawn;
+        if (S.passed) dawn = l ? "黎明时，后备班值守过后，城市醒来，供热" + bh + "，空气" + ba + "，供水" + bw + "。"
+          : "At dawn, after the standby crew's watch, the city woke with heat " + bh + ", air " + ba + " and water " + bw + ".";
+        else dawn = l ? "黎明时城市醒来，供热" + bh + "，空气" + ba + "，供水" + bw + "，日班接手了机组。"
+          : "At dawn the city woke with heat " + bh + ", air " + ba + " and water " + bw + ", and the day crew took over the plant.";
+        var told = {};
+        S.moves.forEach(function (x) { (x.sh || []).forEach(function (i) { if (!told[i]) { told[i] = 1; dawn += (l ? "" : " ") + SHELTER[i][l]; } }); });
+        return {
+          dawn: dawn,
+          people: S.moves.map(function (x) { return clock(x.n) + " — " + cq(x, l); }),
+          close: closing(l),
+          last: l ? "供热 " + bh + " · 空气 " + ba + " · 供水 " + bw + " · 回放 " + replayCode()
+            : "heat " + bh + " · air " + ba + " · water " + bw + " · replay " + replayCode()
+        };
+      }
+      function endingText(l) {
+        var e = ending(l);
+        return [t2("hDawn", l), e.dawn, "", t2("hPeople", l)].concat(e.people, ["", e.close, "", e.last]).join("\n");
+      }
+      function t2(k, l) { return T[k][l]; }
+
+      function el(id) { return document.getElementById(id); }
+      function render(keep) {
+        el("sTurn").textContent = Math.min(S.turn, TURNS) + " / " + TURNS;
+        [["Heat", S.heat], ["Air", S.air], ["Water", S.water]].forEach(function (m) {
+          el("s" + m[0]).textContent = band(m[1], lang);
+          el("b" + m[0]).style.width = m[1] + "%";
+        });
+        ["Turn", "Heat", "Air", "Water"].forEach(function (k) { el("l" + k).textContent = t(k.toLowerCase()); });
+        el("heroSub").textContent = t("sub"); el("heroMeta").textContent = t("meta");
+        el("calHead").lastChild.textContent = " " + t("calH"); el("calLead").innerHTML = t("calL");
+        el("calBtn").textContent = t("start"); el("btnLang").textContent = t("lang");
+        el("btnNew").textContent = t("newseed"); el("btnCopy").textContent = t("copy");
+        el("btnPlay").textContent = t("apply"); el("lLog").textContent = t("log"); el("lCode").textContent = t("code");
+        ["ebPlay", "hdPlay", "subPlay", "hdRules", "hdUpg", "txtUpg", "ebAi", "hdAi", "subAi", "fpAi"].forEach(function (k) { el(k).textContent = t(k); });
+
+        var b = el("board"), h = "";
+        if (S.phase === "done") {
+          h += '<p class="x-when">' + (S.passed ? t("handed") + " " + clock(S.turn) : t("dawn")) + "</p>";
+          var en = ending(lang);
+          h += '<div class="x-part"><p class="x-when">' + t("hDawn") + '</p><p class="x-end">' + esc(en.dawn) + "</p></div>";
+          h += '<div class="x-part"><p class="x-when">' + t("hPeople") + "</p>" +
+            en.people.map(function (p) { return '<p class="x-end">' + esc(p) + "</p>"; }).join("") + "</div>";
+          h += '<p class="x-end">' + esc(en.close) + "</p>";
+          h += '<p class="fineprint x-mono">' + esc(en.last) + "</p>";
+          h += '<p class="x-when">' + t("code") + '</p><div class="x-row"><span class="x-mono">' + esc(replayCode()) +
+            '</span><button class="btn" type="button" id="btnCode">' + t("copycode") + "</button></div>";
+          h += '<div class="x-row"><button class="btn" type="button" id="btnWall">' + t("copywall") + "</button></div>";
+        } else {
+          var ev = event();
+          h += '<p class="x-when">' + t("turn") + " " + S.turn + " / " + TURNS + " · " + clock(S.turn) + "</p>";
+          h += '<p class="x-scene">' + sceneText(lang) + '</p><div class="x-opts">';
+          opts().forEach(function (o) {
+            h += '<button class="x-opt" type="button" data-mv="' + o.L + '"><b>' + o.L + "</b><span>" + (lang ? o.zh : o.en) + '</span><span class="x-eff">' + eff(o.d, lang) + "</span></button>";
+          });
+          h += '<button class="x-opt" type="button" data-mv="P"><b>P</b><span>' + t("pass") + '</span><span class="x-eff"></span></button></div>';
+        }
+        b.innerHTML = h;
+        Array.prototype.forEach.call(b.querySelectorAll(".x-opt"), function (btn) {
+          btn.addEventListener("click", function () { input(S.turn + ": " + btn.dataset.mv); });
+        });
+        if (el("btnCode")) el("btnCode").addEventListener("click", function () { copyText(replayCode(), this, t("copycode")); });
+        if (el("btnWall")) el("btnWall").addEventListener("click", function () { copyText(wallResult(), this, t("copywall")); });
+
+        el("log").innerHTML = S.moves.map(function (x) {
+          var what = x.mv === "P" ? clock(x.n) + " · " + t("pass") : clock(x.n) + " · " + x.lab[lang] + " (" + eff(x.d, lang) + ")";
+          var sh = (x.sh || []).map(function (i) { return '<small class="x-shelter">' + esc(SHELTER[i][lang]) + "</small>"; }).join("");
+          var bw = x.bc && x.bc.length ? '<small class="x-shelter">' + esc(bandWords(x.bc, lang)) + "</small>" : "";
+          return "<li><b>" + x.n + " " + x.mv + "</b><span>" + esc(what) + "<small>" + esc(cq(x, lang)) + "</small>" + bw + sh + (x.c ? "<small>“" + esc(x.c) + "”</small>" : "") + "</span></li>";
+        }).join("");
+        el("packet").value = packet();
+        el("btnCopy").disabled = S.phase === "done";
+        el("code").value = replayCode();
+        el("seedLine").textContent = t("seed") + ": " + S.seed;
+        var note = el("moveNote"); note.textContent = S.note; note.dataset.warn = S.note ? "1" : "0";
+        if (!keep) el("moveIn").value = "";
+        cmCount();
+      }
+      // live count of the comment's characters, as clean() will keep them
+      function cmCount() {
+        var v = el("moveIn").value.replace(/\r/g, "").split("\n"), m = v.length > 1 ? v.slice(1).join(" ").trim().match(/^COMMENT:\s*([\s\S]*)$/i) : null;
+        var n = m ? Array.from(m[1].replace(/\s+/g, " ").trim()).length : 0;
+        el("cmCount").textContent = fill(t("cm"), { n: Math.min(n, 280) }) + (n > 280 ? (lang ? "（超出部分会被截掉）" : " (the rest is cut)") : "");
+      }
+
+      function rulesCards() {
+        el("hdBase").textContent = t("hdBase");
+        el("baseRules").innerHTML = T.base[lang].map(function (r) { return "<li>" + r + "</li>"; }).join("");
+        el("hdChg").textContent = t("hdChg");
+        el("chgList").innerHTML = T.chg[lang].map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("");
+        var c = [
+          ["Heat", "供热", ["Keeps homes warm.", "Starts plenty, and drifts down a little every hour."], ["让家里保持温暖。", "起始充足，每小时自然下降一点。"]],
+          ["Air", "空气", ["The breathable air in the domes.", "Starts plenty, and holds unless a choice moves it."], ["穹顶里可呼吸的空气。", "起始充足，只随选择变化。"]],
+          ["Water", "供水", ["Drinking water and ice-melt.", "Starts plenty, and drifts down a little every hour."], ["饮用水和融冰水。", "起始充足，每小时自然下降一点。"]],
+          ["Bands", "档位", ["Plenty, steady, thin, critical.", "Below critical, the districts a meter serves move to the shared shelter and the shift goes on."],
+                            ["充足、平稳、偏紧、告急。", "跌破告急线时，相关街区转移到共用避难所，夜班照常继续。"]],
+          ["Moves", "指令", ["A, B or C answers the event; one hour passes. D only when it is listed.", "↑ or ↓ is a small change, ↑↑ or ↓↓ a big one.", "P ends your shift here; leaving is not a failure."], ["A、B、C 回应事件，过去一小时。D 只在列出时可选。", "↑ 或 ↓ 是小变化，↑↑ 或 ↓↓ 是大变化。", "P 在此交班；离开不是失败。"]]
+        ];
+        el("rulesCards").innerHTML = c.map(function (x) {
+          return "<div><h3>" + x[lang] + "</h3><ul>" + x[2 + lang].map(function (li) { return "<li>" + li + "</li>"; }).join("") + "</ul></div>";
+        }).join("");
+      }
+
+      function seedFromUrl() {
+        var p = new URLSearchParams(location.search).get("seed");
+        return p || "S" + (Math.floor(Math.random() * 99) + 1);
+      }
+      newGame(seedFromUrl());
+      rulesCards(); render();
+      el("btnLang").addEventListener("click", function () { lang = 1 - lang; document.documentElement.lang = lang ? "zh" : "en"; rulesCards(); render(1); });
+      el("btnNew").addEventListener("click", function () { newGame("S" + (Math.floor(Math.random() * 99) + 1)); render(); });
+      el("btnPlay").addEventListener("click", function () { input(el("moveIn").value); });
+      el("moveIn").addEventListener("input", cmCount);
+      el("moveIn").addEventListener("keydown", function (e) { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); input(el("moveIn").value); } });
+      el("btnCopy").addEventListener("click", function () {
+        var ta = el("packet"); ta.select();
+        (navigator.clipboard ? navigator.clipboard.writeText(ta.value) : Promise.reject()).catch(function () { document.execCommand("copy"); });
+        el("btnCopy").textContent = t("copied"); setTimeout(function () { el("btnCopy").textContent = t("copy"); }, 1200);
+      });
+    </script>
+  
+
+<script>
+(function () {
+  var key = "psyche-001-played-v0.5.1";
+  function mark() {
+    if (!document.getElementById("btnWall")) return;
+    try { localStorage.setItem(key, "1"); } catch (e) {}
+  }
+  var board = document.getElementById("board");
+  if (board && window.MutationObserver) {
+    new MutationObserver(mark).observe(board, { childList: true, subtree: true });
+  }
+  mark();
+})();
+</script>
+</body></html>

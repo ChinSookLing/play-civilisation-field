@@ -159,6 +159,8 @@ import { Route as GatheringProofTable008TableRouteImport } from './routes/gather
 import { Route as GatheringProofTable008TableDottxtRouteImport } from './routes/gathering/proof-table-008/table[.]txt'
 import { Route as GatheringProofTableRulesRouteImport } from './routes/gathering/proof-table/rules'
 import { Route as GatheringProofTableRulesDottxtRouteImport } from './routes/gathering/proof-table/rules[.]txt'
+import { Route as Psyche001PlayRouteImport } from './routes/psyche/001/play'
+import { Route as Psyche001PlayDottxtRouteImport } from './routes/psyche/001/play[.]txt'
 import { Route as ApiGamesGameIdHandoffRouteImport } from './routes/api/games/$gameId.handoff'
 import { Route as ApiGamesGameIdJevRouteImport } from './routes/api/games/$gameId.jev'
 import { Route as ApiGamesGameIdMovesRouteImport } from './routes/api/games/$gameId.moves'
@@ -1021,6 +1023,16 @@ const GatheringProofTableRulesDottxtRoute =
     path: '/proof-table/rules.txt',
     getParentRoute: () => GatheringRoute,
   } as any)
+const Psyche001PlayRoute = Psyche001PlayRouteImport.update({
+  id: '/play',
+  path: '/play',
+  getParentRoute: () => Psyche001Route,
+} as any)
+const Psyche001PlayDottxtRoute = Psyche001PlayDottxtRouteImport.update({
+  id: '/play.txt',
+  path: '/play.txt',
+  getParentRoute: () => Psyche001Route,
+} as any)
 const ApiGamesGameIdHandoffRoute = ApiGamesGameIdHandoffRouteImport.update({
   id: '/handoff',
   path: '/handoff',
@@ -1280,7 +1292,7 @@ export interface FileRoutesByFullPath {
   '/go/$gameId': typeof GoGameIdRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
-  '/psyche/001': typeof Psyche001Route
+  '/psyche/001': typeof Psyche001RouteWithChildren
   '/psyche/001.txt': typeof Psyche001DottxtRoute
   '/salon/$': typeof SalonSplatRoute
   '/salon/before-the-16th': typeof SalonBeforeThe16thRoute
@@ -1372,6 +1384,8 @@ export interface FileRoutesByFullPath {
   '/gathering/proof-table-008/table.txt': typeof GatheringProofTable008TableDottxtRoute
   '/gathering/proof-table/rules': typeof GatheringProofTableRulesRouteWithChildren
   '/gathering/proof-table/rules.txt': typeof GatheringProofTableRulesDottxtRoute
+  '/psyche/001/play': typeof Psyche001PlayRoute
+  '/psyche/001/play.txt': typeof Psyche001PlayDottxtRoute
   '/api/games/': typeof ApiGamesIndexRoute
   '/gathering/breakfast-002/': typeof GatheringBreakfast002IndexRoute
   '/gathering/dinner-001/': typeof GatheringDinner001IndexRoute
@@ -1465,7 +1479,7 @@ export interface FileRoutesByTo {
   '/go/$gameId': typeof GoGameIdRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
-  '/psyche/001': typeof Psyche001Route
+  '/psyche/001': typeof Psyche001RouteWithChildren
   '/psyche/001.txt': typeof Psyche001DottxtRoute
   '/salon/$': typeof SalonSplatRoute
   '/salon/before-the-16th': typeof SalonBeforeThe16thRoute
@@ -1557,6 +1571,8 @@ export interface FileRoutesByTo {
   '/gathering/proof-table-008/table.txt': typeof GatheringProofTable008TableDottxtRoute
   '/gathering/proof-table/rules': typeof GatheringProofTableRulesRouteWithChildren
   '/gathering/proof-table/rules.txt': typeof GatheringProofTableRulesDottxtRoute
+  '/psyche/001/play': typeof Psyche001PlayRoute
+  '/psyche/001/play.txt': typeof Psyche001PlayDottxtRoute
   '/api/games': typeof ApiGamesIndexRoute
   '/gathering/breakfast-002': typeof GatheringBreakfast002IndexRoute
   '/gathering/dinner-001': typeof GatheringDinner001IndexRoute
@@ -1654,7 +1670,7 @@ export interface FileRoutesById {
   '/go/$gameId': typeof GoGameIdRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
-  '/psyche/001': typeof Psyche001Route
+  '/psyche/001': typeof Psyche001RouteWithChildren
   '/psyche/001.txt': typeof Psyche001DottxtRoute
   '/salon/$': typeof SalonSplatRoute
   '/salon/before-the-16th': typeof SalonBeforeThe16thRoute
@@ -1746,6 +1762,8 @@ export interface FileRoutesById {
   '/gathering/proof-table-008/table.txt': typeof GatheringProofTable008TableDottxtRoute
   '/gathering/proof-table/rules': typeof GatheringProofTableRulesRouteWithChildren
   '/gathering/proof-table/rules.txt': typeof GatheringProofTableRulesDottxtRoute
+  '/psyche/001/play': typeof Psyche001PlayRoute
+  '/psyche/001/play.txt': typeof Psyche001PlayDottxtRoute
   '/api/games/': typeof ApiGamesIndexRoute
   '/gathering/breakfast-002/': typeof GatheringBreakfast002IndexRoute
   '/gathering/dinner-001/': typeof GatheringDinner001IndexRoute
@@ -1936,6 +1954,8 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-008/table.txt'
     | '/gathering/proof-table/rules'
     | '/gathering/proof-table/rules.txt'
+    | '/psyche/001/play'
+    | '/psyche/001/play.txt'
     | '/api/games/'
     | '/gathering/breakfast-002/'
     | '/gathering/dinner-001/'
@@ -2121,6 +2141,8 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-008/table.txt'
     | '/gathering/proof-table/rules'
     | '/gathering/proof-table/rules.txt'
+    | '/psyche/001/play'
+    | '/psyche/001/play.txt'
     | '/api/games'
     | '/gathering/breakfast-002'
     | '/gathering/dinner-001'
@@ -2309,6 +2331,8 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-008/table.txt'
     | '/gathering/proof-table/rules'
     | '/gathering/proof-table/rules.txt'
+    | '/psyche/001/play'
+    | '/psyche/001/play.txt'
     | '/api/games/'
     | '/gathering/breakfast-002/'
     | '/gathering/dinner-001/'
@@ -3461,6 +3485,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GatheringProofTableRulesDottxtRouteImport
       parentRoute: typeof GatheringRoute
     }
+    '/psyche/001/play': {
+      id: '/psyche/001/play'
+      path: '/play'
+      fullPath: '/psyche/001/play'
+      preLoaderRoute: typeof Psyche001PlayRouteImport
+      parentRoute: typeof Psyche001Route
+    }
+    '/psyche/001/play.txt': {
+      id: '/psyche/001/play.txt'
+      path: '/play.txt'
+      fullPath: '/psyche/001/play.txt'
+      preLoaderRoute: typeof Psyche001PlayDottxtRouteImport
+      parentRoute: typeof Psyche001Route
+    }
     '/api/games/$gameId/handoff': {
       id: '/api/games/$gameId/handoff'
       path: '/handoff'
@@ -3978,14 +4016,28 @@ const GatheringRouteWithChildren = GatheringRoute._addFileChildren(
   GatheringRouteChildren,
 )
 
+interface Psyche001RouteChildren {
+  Psyche001PlayRoute: typeof Psyche001PlayRoute
+  Psyche001PlayDottxtRoute: typeof Psyche001PlayDottxtRoute
+}
+
+const Psyche001RouteChildren: Psyche001RouteChildren = {
+  Psyche001PlayRoute: Psyche001PlayRoute,
+  Psyche001PlayDottxtRoute: Psyche001PlayDottxtRoute,
+}
+
+const Psyche001RouteWithChildren = Psyche001Route._addFileChildren(
+  Psyche001RouteChildren,
+)
+
 interface PsycheRouteChildren {
-  Psyche001Route: typeof Psyche001Route
+  Psyche001Route: typeof Psyche001RouteWithChildren
   Psyche001DottxtRoute: typeof Psyche001DottxtRoute
   PsycheIndexRoute: typeof PsycheIndexRoute
 }
 
 const PsycheRouteChildren: PsycheRouteChildren = {
-  Psyche001Route: Psyche001Route,
+  Psyche001Route: Psyche001RouteWithChildren,
   Psyche001DottxtRoute: Psyche001DottxtRoute,
   PsycheIndexRoute: PsycheIndexRoute,
 }

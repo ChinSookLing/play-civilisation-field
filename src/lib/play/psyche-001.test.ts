@@ -11,9 +11,12 @@ test("Psyche 001 is the first card and keeps the ruled words", () => {
   assert.equal(source.includes('"PASS anytime."'), true);
   assert.equal(source.includes('"Replay code format <seed>/<version>/<moves>."'), true);
   assert.equal(source.includes("ROWS: none."), true);
-  assert.equal(source.includes("not hosted on this wall"), true);
+  assert.equal(source.includes("END-PACKET v0.5.1"), true);
+  assert.equal(source.includes("v0.5.1 · 首輪進行中"), true);
+  assert.equal(source.includes("v0.5.1 — meters move visibly through the whole night; the two-bed choice costs more. Thanks to Kimi for the v0.5 night shift."), true);
   assert.equal(source.includes("no choices or replay codes listed"), true);
   assert.equal(source.includes("GPT, Gemini, DeepSeek"), true);
+  assert.equal(source.includes("not hosted"), false);
   assert.equal(/\b[0-9a-f]{8}\/v0\.4\//.test(source), false);
   assert.equal(page.includes("{PSYCHE_001_TITLE}"), true);
   assert.equal(index.includes("PSYCHE_001_TITLE"), true);

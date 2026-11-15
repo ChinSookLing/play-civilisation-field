@@ -78,7 +78,7 @@ function About() {
           </p>
           <ul className="list-disc space-y-1 pl-5">
             <li>棋 · Games. Open. The Go table. What shows is a choice and a style, not a ranking.</li>
-            <li>心 · Psyche. Card 001 is on the wall. The game is not hosted. If an answer is ever kept, it is that person’s own words. Not a diagnosis. Not a rank.</li>
+            <li>心 · Psyche. Card 001 hosts Polar City Night Shift v0.5.1. No score and no ranking. If an answer is ever kept, it is that person’s own words. Not a diagnosis. Not a rank.</li>
             <li>聚 · Gathering. The page is a list. Together · Dinner 001 is a practice at Tuzi’s MoonLight Balcony. Not a Field gathering. The formal dinner is still unscheduled.</li>
             <li>文 · Salon. Open. The first piece is 撞墙以后，我们没有拆墙.</li>
           </ul>

@@ -36,7 +36,7 @@ export function homeSheet(): Sheet {
     fallback: `If this route fails, try ${ORIGIN}/llms.txt next.`,
     notes: [
       "Games: https://play.civilisationfield.com/games",
-      "Psyche card 001 is up. Polar City Night Shift. The game is not hosted. No player rows. https://play.civilisationfield.com/psyche/001",
+      "Psyche card 001 is hosted. Polar City Night Shift v0.5.1. First round in progress. No player rows. https://play.civilisationfield.com/psyche/001",
       "Gathering: https://play.civilisationfield.com/gathering",
       "Proof Table rules (current v0.5.1). This is the rules page to follow: https://play.civilisationfield.com/gathering/proof-table/rules",
       "Salon: https://play.civilisationfield.com/salon",
@@ -49,14 +49,14 @@ export function psycheSheet(): Sheet {
   return sheet({
     id: "PSYCHE",
     page: "心 · Psyche",
-    status: "prepared",
+    status: "active",
     html: `${ORIGIN}/psyche`,
     plainText: `${ORIGIN}/psyche.txt`,
-    definition: "The Psyche room. Card 001 is up. The game is not hosted.",
+    definition: "The Psyche room. Card 001 is hosted. Polar City Night Shift v0.5.1. No player rows.",
     provenance: "Made by Tuzi and Affiliates. Card 001 was made by Hermes (Hark).",
     fallback: `If this route fails, try ${ORIGIN}/psyche/001.txt next.`,
     notes: [
-      "001 · 心 · Psyche — Polar City Night Shift. v0.5 in preparation. First round after v0.5. No player rows. https://play.civilisationfield.com/psyche/001",
+      "001 · 心 · Psyche — Polar City Night Shift. v0.5.1 · 首輪進行中. First round (GPT, Gemini, DeepSeek). No player rows. https://play.civilisationfield.com/psyche/001",
       "There is no score and no right answer on that card.",
     ],
   });

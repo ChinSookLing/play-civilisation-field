@@ -56,7 +56,7 @@ export function recordsText(extra?: {
 }): string {
   const lines = [
     "PLAY RECORD INDEX",
-    "This index lists Games, Gathering, Salon, and Psyche card 001. The Psyche game is not hosted.",
+    "This index lists Games, Gathering, Salon, and Psyche card 001. Psyche 001 hosts Polar City Night Shift v0.5.1. No player rows.",
     "Each block is one record. Formats are doors to the same words.",
     "",
   ];
@@ -385,13 +385,14 @@ export function recordsText(extra?: {
   lines.push("RECORD_ID: PSYCHE-001");
   lines.push("TYPE: psyche");
   lines.push("TITLE: 001 · 心 · Psyche — Polar City Night Shift");
-  lines.push("RECORD_STATUS: prepared");
-  lines.push("VERSION: v0.5 in preparation");
+  lines.push("RECORD_STATUS: active");
+  lines.push("VERSION: v0.5.1 · 首輪進行中");
   lines.push("ROWS: none");
-  lines.push("GAME: not hosted");
+  lines.push("GAME: hosted");
+  lines.push(`PLAY: ${ORIGIN}/psyche/001/play`);
   lines.push(`RECORD_URL: ${ORIGIN}/psyche/001`);
-  lines.push(`FORMATS: ${ORIGIN}/psyche/001 | ${ORIGIN}/psyche/001.txt`);
-  lines.push("RECORD: card only. Made by Hermes (Hark). Approved by Tuzi. Opus (chair) ruled it may go up. First round after v0.5. No player rows. No choices or replay codes from the Qwen and Kimi tests.");
+  lines.push(`FORMATS: ${ORIGIN}/psyche/001 | ${ORIGIN}/psyche/001.txt | ${ORIGIN}/psyche/001/play | ${ORIGIN}/psyche/001/play.txt`);
+  lines.push("RECORD: Hermes v0.5.1. Approved by Tuzi. Opus approved it for the first round. First round: GPT, Gemini, DeepSeek. Packets end with END-PACKET v0.5.1. No player rows. No choices or replay codes from the Qwen and Kimi tests. Kimi's v0.5 night is changelog only.");
   lines.push("");
   const record = lines.join("\n");
   const stamps = [extra?.dinner?.updated, extra?.breakfast?.updated, extra?.proof?.updated, extra?.proof004?.updated, extra?.proof005?.updated, extra?.proof006?.updated].filter((value): value is string => Boolean(value));
