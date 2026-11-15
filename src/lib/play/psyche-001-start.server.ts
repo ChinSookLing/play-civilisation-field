@@ -98,6 +98,8 @@ export function renderedHtmlText(inner: string): string {
 
 export function psycheStartHtml(seed: string): string {
   const packet = psychePacket(seed);
+  const lines = packet.endsWith("\n") ? packet.slice(0, -1).split("\n") : packet.split("\n");
+  const body = lines.map((line) => `<p>${escapeHtml(line)}</p>`).join("\n");
   const q = `?seed=${encodeURIComponent(seed)}`;
   return `<!DOCTYPE html>
 <html lang="en">
@@ -107,14 +109,29 @@ export function psycheStartHtml(seed: string): string {
 <title>Polar City Night Shift — start</title>
 </head>
 <body>
+<main>
+<article>
+${body}
+</article>
+</main>
 <p>Play's Type-C approach. One turn. No JavaScript.</p>
 <p>P = PASS. Leaving is not a failure. D only when the packet lists it.</p>
 <p>Reply with one move. The first line is the turn number, a colon, and one letter.</p>
 <p><a href="/psyche/001/start.txt${q}">Plain text (.txt)</a> · <a href="/psyche/001/start.json${q}">JSON (.json)</a> · <a href="/psyche/001/play${q}">Play</a></p>
-<pre>${escapeHtml(packet)}</pre>
 </body>
 </html>
 `;
+}
+
+function renderedPacket(html: string): string | null {
+  const open = html.indexOf("<article>");
+  const close = html.indexOf("</article>");
+  if (open < 0 || close < open) return null;
+  const article = html.slice(open + "<article>".length, close);
+  const lines: string[] = [];
+  for (const match of article.matchAll(/<p>([\s\S]*?)<\/p>/g)) lines.push(renderedHtmlText(match[1] ?? ""));
+  if (lines.length === 0) return null;
+  return `${lines.join("\n")}\n`;
 }
 
 /** If the doors differ, the build does not ship. */
@@ -130,12 +147,13 @@ export function psycheDoorProblems(): string[] {
   const text = psycheStartText(seed);
   const json = psycheStartJson(seed);
   const html = psycheStartHtml(seed);
-  const open = html.indexOf("<pre>");
-  const close = html.indexOf("</pre>");
-  if (open < 0 || close < open) problems.push("html has no packet");
-  const pre = open < 0 ? "" : renderedHtmlText(html.slice(open + 5, close));
+  const articleAt = html.indexOf("<article>");
+  const noteAt = html.indexOf("Play's Type-C approach");
+  if (articleAt < 0 || noteAt < articleAt) problems.push("packet is not before the notes");
+  const rendered = renderedPacket(html);
+  if (rendered === null) problems.push("html has no packet");
   if (text !== packet) problems.push("plain text is not the packet");
-  if (pre !== packet) problems.push("rendered html door is not the plain text");
+  if (rendered !== packet) problems.push("rendered html door is not the plain text");
   if (json.packet !== packet) problems.push("json packet is not the packet");
   const keys = Object.keys(json);
   if (keys.join(",") !== "packet,seed,version,end") problems.push(`json fields: ${keys.join(",")}`);
@@ -145,7 +163,9 @@ export function psycheDoorProblems(): string[] {
   const last = packet.trimEnd().split("\n").at(-1);
   if (last !== PSYCHE_PACKET_END || json.end !== last) problems.push("end line differs");
   if (packet.includes("ranking")) problems.push("packet contains a ranking");
-  const outside = open < 0 ? html : html.slice(0, open) + html.slice(close + 6);
+  const open = html.indexOf("<article>");
+  const close = html.indexOf("</article>");
+  const outside = open < 0 || close < open ? html : html.slice(0, open) + html.slice(close + "</article>".length);
   if (/\bscore\b|ranking/i.test(outside)) problems.push("score or ranking outside the packet");
   if (!outside.includes("P = PASS")) problems.push("the HTML door does not say P = PASS");
   for (const phrase of WALL) {
