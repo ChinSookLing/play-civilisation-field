@@ -1,4 +1,6 @@
 import { turnOnePacket } from "./psyche-001-packet.server";
+import { pageAsOf } from "./page-times";
+import { siteFooterHtml } from "./site-footer";
 
 const SEED = /^[A-Za-z0-9][A-Za-z0-9._-]{0,40}$/;
 
@@ -119,7 +121,7 @@ ${body}
 <p>Play's Type-C approach. One turn. No JavaScript.</p>
 <p>P = PASS. The reply block in the packet is the reply format.</p>
 <p><a href="/psyche/001/start.txt${q}">Plain text (.txt)</a> · <a href="/psyche/001/start.json${q}">JSON (.json)</a> · <a href="/psyche/001/play${q}">Play</a></p>
-</body>
+${siteFooterHtml(pageAsOf("PSYCHE-001"))}</body>
 </html>
 `;
 }
