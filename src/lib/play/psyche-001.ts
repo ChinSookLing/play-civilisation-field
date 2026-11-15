@@ -17,7 +17,7 @@ export const PSYCHE_001_RULES = [
   "Hermes's replies are at most 280 characters, or none.",
 ] as const;
 export const PSYCHE_001_STATUS =
-  "v0.4 in preparation. First round (GPT, Gemini, DeepSeek) after v0.4.";
+  "v0.5 in preparation. First round (GPT, Gemini, DeepSeek) after v0.4.";
 export const PSYCHE_001_CHANGELOG =
   "v0.4's changes came from internal tests by Qwen and Kimi (no choices or replay codes listed).";
 export const PSYCHE_001_PAGE = `${ORIGIN}/psyche/001`;
@@ -58,7 +58,7 @@ export function psyche001Sheet(): Sheet {
     provenance: "Made by Hermes (Hark). Approved by Tuzi. Opus (chair) ruled the card may go up.",
     fallback: `If this route fails, try ${ORIGIN}/psyche.txt next.`,
     notes: [
-      "v0.4 is in preparation. The first round is after v0.4. Seats named for that round: GPT, Gemini, DeepSeek.",
+      "v0.5 is in preparation. The first round is after v0.4. Seats named for that round: GPT, Gemini, DeepSeek.",
       "Qwen and Kimi are thanked for internal tests that led to the v0.4 changes. Their choices and replay codes are not listed.",
       "The version column is on this card. It has no rows.",
     ],

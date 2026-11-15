@@ -386,7 +386,7 @@ export function recordsText(extra?: {
   lines.push("TYPE: psyche");
   lines.push("TITLE: 001 · 心 · Psyche — Polar City Night Shift");
   lines.push("RECORD_STATUS: prepared");
-  lines.push("VERSION: v0.4 in preparation");
+  lines.push("VERSION: v0.5 in preparation");
   lines.push("ROWS: none");
   lines.push("GAME: not hosted");
   lines.push(`RECORD_URL: ${ORIGIN}/psyche/001`);
