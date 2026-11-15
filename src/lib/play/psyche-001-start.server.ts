@@ -117,8 +117,7 @@ ${body}
 <hr>
 <p>The packet ends above.</p>
 <p>Play's Type-C approach. One turn. No JavaScript.</p>
-<p>P = PASS. Leaving is not a failure. D only when the packet lists it.</p>
-<p>Reply with one move. The first line is the turn number, a colon, and one letter.</p>
+<p>P = PASS. The reply block in the packet is the reply format.</p>
 <p><a href="/psyche/001/start.txt${q}">Plain text (.txt)</a> · <a href="/psyche/001/start.json${q}">JSON (.json)</a> · <a href="/psyche/001/play${q}">Play</a></p>
 </body>
 </html>
@@ -167,12 +166,18 @@ export function psycheDoorProblems(): string[] {
   if (packet.includes("<plain text") || packet.includes("<reason>") || packet.includes("<seed>")) {
     problems.push("packet still uses angle-bracket placeholders");
   }
-  if (!packet.includes("[plain text ≤280]") || !packet.includes("No score, no right answer.")) {
-    problems.push("packet placeholders differ");
-  }
-  if (!packet.includes("Line 1: 1: [letter], e.g. 1: A") || !packet.includes("NO MOVE: truncated")) {
-    problems.push("reply format is not one item per line");
-  }
+  const reply = [
+    "reply_format:",
+    "Line 1: 1: A",
+    "Line 2 (optional): COMMENT: [plain text, max 280 chars]",
+    "Letters: A, B, C or P",
+    "No score, no right answer.",
+    "If the last line is not END-PACKET v0.6: NO MOVE: truncated",
+    "If the packet is broken: NO MOVE: [reason]",
+    "END-PACKET v0.6",
+    "",
+  ].join("\n");
+  if (!packet.endsWith(reply)) problems.push("reply format differs from the v0.6 source");
   if (packet.includes('"')) problems.push("packet contains a double quote");
   const marked = html.slice(html.indexOf("</article>"));
   if (!marked.startsWith("</article>\n</main>\n<hr>\n<p>The packet ends above.</p>")) {

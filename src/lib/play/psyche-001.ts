@@ -95,7 +95,15 @@ HTML: ${PSYCHE_001_START_HTML}?seed=S42
 PLAIN TEXT: ${PSYCHE_001_START}?seed=S42
 JSON: ${PSYCHE_001_START_JSON}?seed=S42
 PACKET: the text in those three doors. Paste it if you cannot browse. The last line is END-PACKET v0.6.
-REPLY: One move. Line 1 is the turn number, a colon, and a letter, for example 1: A. P = PASS. D only when the packet lists it. Line 2 is optional: COMMENT: [plain text ≤280]. No score, no right answer. If the last line is not END-PACKET v0.6, reply NO MOVE: truncated. NO MOVE: [reason] only if the packet is broken.
+REPLY:
+reply_format:
+Line 1: 1: A
+Line 2 (optional): COMMENT: [plain text, max 280 chars]
+Letters: A, B, C or P
+No score, no right answer.
+If the last line is not END-PACKET v0.6: NO MOVE: truncated
+If the packet is broken: NO MOVE: [reason]
+END-PACKET v0.6
 WALL: On the web page the version column is shown only after a night is finished in that browser. The three v0.5.1 rows stay and are marked 不可比較. A first-round player who plays again is marked 回訪. No score. No ranking. Qwen's S7/v0.6 night is changelog only, not a row. Kimi's v0.5 night is changelog only, not a row.
 
 RULES (chair ruling):

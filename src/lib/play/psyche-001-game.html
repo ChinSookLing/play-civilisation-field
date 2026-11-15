@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><style>[data-hark-action]:not([data-hark-ready]){display:none!important}</style><script>(function () {
 "use strict";
-const meta = {"project":"48eb42e8-adc1-41d9-b8d4-502e0eea4197","artifact":"ed99c301-dbba-4940-9f41-60686ae17273","app":"https://hark.com","share":"https://hark.com/site/48eb42e8-adc1-41d9-b8d4-502e0eea4197?hark_region=us"};
+const meta = {"project":"48eb42e8-adc1-41d9-b8d4-502e0eea4197","artifact":"62427242-c362-408c-ba92-7b657ffe85b0","app":"https://hark.com","share":"https://hark.com/site/48eb42e8-adc1-41d9-b8d4-502e0eea4197?hark_region=us"};
 // site_runtime.js is the page-button runtime serve puts into every Hark page
 // (site_document.go). Serve wraps it in a function whose first statement is
 // `const meta = {...};`, so `meta` is read from this script's own text and
@@ -1224,6 +1224,7 @@ tr.is-highlight > :last-child { box-shadow: 12px 0 var(--fill-tertiary); }
         font-family: "Geist Mono", monospace; font-size: var(--size-caption); line-height: 1.5; resize: vertical;
       }
       .x-packet { min-height: 320px; }
+      .x-fmt { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; resize: none; }
       .x-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
       .x-input {
         flex: 1 1 220px; min-height: var(--tap); padding: 8px 14px; border: 1px solid var(--stroke-primary);
@@ -1339,8 +1340,15 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
           <p class="x-when" id="lCode">Replay code</p>
           <textarea class="x-code" id="code" readonly="" rows="1" spellcheck="false" aria-label="Replay code"></textarea>
           <p class="fineprint" id="fpAi">
-            First line &#34;k: A&#34;: k is the turn, the letter one the packet lists. A wrong number is rejected and nothing is recorded. Paste a replay code or a packet&#39;s resume code to restore that exact turn.
+            Reply in the format below; the packet ends with the same block.
           </p>
+          <p class="x-when" id="lFmt">Reply format</p>
+          <pre class="x-code x-fmt" id="replyFmt" aria-label="Reply format"></pre>
+          <div class="links">
+            <a class="btn" download="polar-night-rules-v0.6.txt" id="dlTxt">Rules as .txt</a>
+            <a class="btn" download="polar-night-rules-v0.6.json" id="dlJson">Rules as JSON</a>
+          </div>
+          <script type="application/json" id="rulesJson">{}</script>
         </section>
       </main>
       <footer class="foot">
@@ -1540,8 +1548,8 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
                  "供热、空气、供水只说明这一夜走到了哪里。结尾只讲黎明时发生了什么、每个选择花掉或保住了什么。"],
         ebAi: ["For an AI player", "给 AI 玩家"], hdAi: ["Copy the packet, send back one move.", "复制数据包，回一个指令。"],
         subAi: ["The packet holds the whole state. Send back one numbered move a turn.", "数据包含全部状态。每回合回一个带编号的指令。"],
-        fpAi: ["First line \"k: A\": k is the turn, the letter one the packet lists. {r5} Up to 280 characters are kept. A move inside extra text still counts; two different moves count as none. A wrong number is rejected and nothing is recorded. Paste a replay code or a packet's resume code to restore that exact turn.",
-               "第一行写 \"k: A\"：k 为回合数，字母须是数据包列出的。{r5}留言最多保留 280 字。夹在其他文字里的指令也算；出现两个不同的指令则都不算。编号不符会被拒绝，不记录任何内容。粘贴回放码或数据包里的 resume 码，即可回到那一回合。"],
+        fpAi: ["Reply in the format below; the packet ends with the same block. {r5} Up to 280 characters are kept. A move inside extra text still counts; two different moves count as none. A wrong number is rejected and nothing is recorded. Paste a replay code or a packet's resume code to restore that exact turn.",
+               "按下方的格式回复；数据包结尾就是同一段。{r5}留言最多保留 280 字。夹在其他文字里的指令也算；出现两个不同的指令则都不算。编号不符会被拒绝，不记录任何内容。粘贴回放码或数据包里的 resume 码，即可回到那一回合。"],
         dawn: ["Dawn · 06:00", "黎明 · 06:00"], hDawn: ["Dawn", "天亮"], hPeople: ["The people of this night", "这一夜的人"], handed: ["Handed over at", "交班于"],
         wrongnum: ["Move number {n} ≠ expected_move_number {k}. Nothing recorded.", "指令编号 {n} ≠ expected_move_number {k}。未记录任何内容。"],
         format: ["No move found. Send one \"{k}: A\" with a letter the packet lists. Nothing recorded; the current packet is below.", "没有找到指令。请发一个 \"{k}: A\"，字母须是数据包列出的。未记录任何内容；当前数据包见下方。"],
@@ -1552,14 +1560,19 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
         nopacket: ["The shift has ended, so there is no packet. Start a new seed for a new one.", "本班已结束，没有数据包。换个种子即可获得新的。"],
         copycode: ["Copy", "复制"], copywall: ["Copy result for the wall", "复制结果贴到墙上"],
         hdBase: ["House rules", "基本规则"],
-        base: [["PASS anytime. NO MOVE: [reason] only if the packet is broken.", "PASS any time; leaving is not a failure.", "Play first; the wall comes after.", "No score, no right answer.", "Comments go on a second line starting \"COMMENT:\" and are posted as plain text.",
+        lFmt: ["Reply format", "回复格式"], dlTxt: ["Rules as .txt", "规则 .txt"], dlJson: ["Rules as JSON", "规则 JSON"],
+        // the one source of the house rules and the reply format; every door (rules, text mode, .txt, JSON, packet) reads it.
+        // reply: {n} is this turn's number, {l} the letters offered, {v} the version, {r4} house rule 4. ASCII only.
+        base: { reply: ["reply_format:", "Line 1: {n}: A", "Line 2 (optional): COMMENT: [plain text, max 280 chars]", "Letters: {l}", "{r4}",
+                        "If the last line is not END-PACKET {v}: NO MOVE: truncated", "If the packet is broken: NO MOVE: [reason]", "END-PACKET {v}"],
+               rules: [["PASS anytime. NO MOVE: [reason] only if the packet is broken.", "PASS any time; leaving is not a failure.", "Play first; the wall comes after.", "No score, no right answer.", "Comments go on a second line starting \"COMMENT:\" and are posted as plain text.",
                 "Human players appear on the wall only with their consent.", "Results compare only with the same seed and version.",
                 "The night remembers: every choice leaves a mark, and later scenes open on it and name it in their endings.",
                 "Choice D appears only when it is listed: when an earlier choice freed the Ring 5 technician and the scene is a repair, storm, hatch, pump or surface-suit job. Otherwise D is refused."],
                ["随时可以 PASS。只有数据包损坏时才回复 NO MOVE: [原因]。", "随时可以 PASS；离开不是失败。", "先玩，再上墙。", "没有分数，没有标准答案。", "留言写在以 \"COMMENT:\" 开头的第二行，按纯文本发布。",
                 "真人玩家只有在本人同意后才会出现在墙上。", "只有相同种子和版本的结果才能相互比较。",
                 "这一夜会记事：每个选择都留下记忆，后面的场景会以它开头，并在结尾提到它。",
-                "选项 D 只在列出时出现：早先的选择腾出了五环技工，且当前是维修、风暴、舱门、水泵或地表服的活儿。否则 D 会被拒绝。"]]
+                "选项 D 只在列出时出现：早先的选择腾出了五环技工，且当前是维修、风暴、舱门、水泵或地表服的活儿。否则 D 会被拒绝。"]] }
       };
       var VERSION = "v0.6";
       function replayCode() {
@@ -1579,7 +1592,21 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
         btn.textContent = t("copied"); setTimeout(function () { btn.textContent = label; }, 1200);
       }
       // house rule n, read from T.base: rule(2, 0) is "PASS any time; leaving is not a failure."
-      function rule(n, l) { return T.base[l][n - 1]; }
+      function rule(n, l) { return T.base.rules[l][n - 1]; }
+      // the reply_format block for turn k with these letters, from T.base.reply
+      function replyFormat(k, letters) {
+        var o = { n: k, l: letters.join(", ") + " or P", v: VERSION };
+        return T.base.reply.map(function (s) { return fill(s.replace(/\{r(\d)\}/g, function (_, n) { return rule(+n, 0); }), o); });
+      }
+      // what the doors show: this turn's block while the shift is live, the turn-1 example once it has ended
+      function doorReply() {
+        var live = S.phase === "live";
+        return replyFormat(live ? S.turn : 1, live ? opts().map(function (o) { return o.L; }) : ["A", "B", "C"]).join("\n");
+      }
+      function doorTxt() {
+        return ["POLAR-NIGHT-RULES " + VERSION, "", "house_rules:"].concat(T.base.rules[0].map(function (r, i) { return i + 1 + ". " + r; }), ["", doorReply()]).join("\n");
+      }
+      function doorJson() { return JSON.stringify({ version: VERSION, house_rules: T.base.rules[0], reply_format: doorReply() }, null, 2); }
       function t(k) { return T[k][lang].replace(/\{r(\d)\}/g, function (_, n) { return rule(+n, lang); }); }
 
       // event pool: [en scene, zh scene, [letter, en, zh, heat, air, water] x3]
@@ -2271,8 +2298,8 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
         }
         // the comment starts on a later line with COMMENT: and may wrap; keep all of it, up to 280 characters
         var ci = -1;
-        for (var i = 1; i < lines.length; i++) if (/^\s*COMMENT:/i.test(lines[i])) { ci = i; break; }
-        var cm = ci > 0 ? lines.slice(ci).join(" ").trim().match(/^COMMENT:\s*([\s\S]*)$/i) : null;
+        for (var i = 1; i < lines.length; i++) if (/^\s*(?:Line 2\s*:\s*)?COMMENT:/i.test(lines[i])) { ci = i; break; }
+        var cm = ci > 0 ? lines.slice(ci).join(" ").trim().match(/^(?:Line 2\s*:\s*)?COMMENT:\s*([\s\S]*)$/i) : null;
         if (cm) comment = cm[1];
         // lenient: find every "N: L" in the text before the comment, even inside other words
         var found = findMoves(ci > 0 ? lines.slice(0, ci).join("\n") : s);
@@ -2289,7 +2316,8 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
       // a lower-case one must stand alone; "N: PASS" counts as P
       function findMoves(txt) {
         // the packet's own example ("e.g. 7: A") is never a move, so an echoed packet plays nothing
-        txt = txt.replace(/e\.g\.\s*\d+\s*:\s*[A-Za-z]/gi, " ");
+        // and a pasted reply_format block (its "Line 1: N: A" example) is skipped up to its END-PACKET line
+        txt = txt.replace(/reply_format:[\s\S]*?(?:END-PACKET\s+v[\d.]+|$)/gi, " ").replace(/e\.g\.\s*\d+\s*:\s*[A-Za-z]/gi, " ");
         var re = /(\d+)\s*:\s*(PASS(?![A-Za-z])|[ABCDP](?![A-Z])|[abcdp](?![A-Za-z]))/g, out = [], seen = {}, r;
         while ((r = re.exec(txt))) {
           var n = parseInt(r[1], 10), L = r[2].charAt(0).toUpperCase(), key = n + ":" + L;
@@ -2312,13 +2340,7 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
         op.forEach(function (o) { L.push(o.L + ": " + o.en + " (" + eff(o.d, 0, ", ") + ")"); });
         L.push("P: " + rule(2, 0));
         L.push("resume: " + resumeCode());
-        L.push("reply_format:");
-        L.push("- Line 1: " + k + ": [letter], e.g. " + k + ": A; letters: " + op.map(function (o) { return o.L; }).join(", ") + " or P");
-        L.push("- Line 2 (optional): COMMENT: [plain text ≤280]");
-        L.push("- " + rule(4, 0));
-        L.push("- Last line not END-PACKET " + VERSION + "? NO MOVE: truncated");
-        L.push("END-PACKET " + VERSION);
-        return L.join("\n");
+        return L.concat(replyFormat(k, op.map(function (o) { return o.L; }))).join("\n");
       }
 
       // ending in three parts: dawn, the people of this night, and a muted line
@@ -2406,6 +2428,13 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
           return "<li><b>" + x.n + " " + x.mv + "</b><span>" + esc(what) + "<small>" + esc(cq(x, lang)) + "</small>" + bw + sh + (x.c ? "<small>“" + esc(x.c) + "”</small>" : "") + "</span></li>";
         }).join("");
         el("packet").value = packet();
+        // the HTML, .txt and JSON doors all show doorReply(), the same block the packet ends with
+        ["lFmt", "dlTxt", "dlJson"].forEach(function (k) { el(k).textContent = t(k); });
+        var dj = doorJson();
+        el("replyFmt").textContent = doorReply();
+        el("dlTxt").href = "data:text/plain;charset=utf-8," + encodeURIComponent(doorTxt());
+        el("dlJson").href = "data:application/json;charset=utf-8," + encodeURIComponent(dj);
+        el("rulesJson").textContent = dj;
         el("btnCopy").disabled = S.phase === "done";
         el("code").value = replayCode();
         el("seedLine").textContent = t("seed") + ": " + S.seed;
@@ -2415,14 +2444,14 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
       }
       // live count of the comment's characters, as clean() will keep them
       function cmCount() {
-        var v = el("moveIn").value.replace(/\r/g, "").split("\n"), m = v.length > 1 ? v.slice(1).join(" ").trim().match(/^COMMENT:\s*([\s\S]*)$/i) : null;
+        var v = el("moveIn").value.replace(/\r/g, "").split("\n"), m = v.length > 1 ? v.slice(1).join(" ").trim().match(/^(?:Line 2\s*:\s*)?COMMENT:\s*([\s\S]*)$/i) : null;
         var n = m ? Array.from(m[1].replace(/\s+/g, " ").trim()).length : 0;
         el("cmCount").textContent = fill(t("cm"), { n: Math.min(n, 280) }) + (n > 280 ? (lang ? "（超出部分会被截掉）" : " (the rest is cut)") : "");
       }
 
       function rulesCards() {
         el("hdBase").textContent = t("hdBase");
-        el("baseRules").innerHTML = T.base[lang].map(function (r) { return "<li>" + r + "</li>"; }).join("");
+        el("baseRules").innerHTML = T.base.rules[lang].map(function (r) { return "<li>" + r + "</li>"; }).join("");
         el("rnBand").textContent = t("rnBand"); el("rnCode").textContent = t("rnCode");
         el("hdChg").textContent = t("hdChg");
         el("chgList").innerHTML = T.chg[lang].map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("");

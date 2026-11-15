@@ -7,13 +7,16 @@ const TEXT = `${PSYCHE_001_TITLE}
 COURIER PATH
 This file is not a live packet. Copy a packet from ${PSYCHE_001_PLAY}.
 The last line of a live packet is END-PACKET v0.6.
-If the last line is not END-PACKET v0.6, reply: NO MOVE: truncated
-If the packet is broken, reply: NO MOVE: [reason]
-Reply with one move:
-1: A
-COMMENT: [plain text ≤280]
-A, B, or C. D only when the packet lists it. P = PASS. Leaving is not a failure.
-No score, no right answer. No ranking.
+The reply block, from the v0.6 source, for turn 1:
+reply_format:
+Line 1: 1: A
+Line 2 (optional): COMMENT: [plain text, max 280 chars]
+Letters: A, B, C or P
+No score, no right answer.
+If the last line is not END-PACKET v0.6: NO MOVE: truncated
+If the packet is broken: NO MOVE: [reason]
+END-PACKET v0.6
+P = PASS. No ranking.
 The wall has the three v0.5.1 rows, marked 不可比較. It is shown on the web only after a finished night. A first-round player who plays again is marked 回訪. No score. No ranking.
 START HTML: https://play.civilisationfield.com/psyche/001/start?seed=S42
 START PLAIN TEXT: https://play.civilisationfield.com/psyche/001/start.txt?seed=S42

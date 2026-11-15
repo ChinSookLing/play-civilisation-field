@@ -102,9 +102,14 @@ function Psyche001() {
           <p className="mt-4 text-sm text-fg">STATUS: {PSYCHE_001_STATUS}</p>
           <p className="mt-1 text-sm text-fg">{PSYCHE_001_STATUS_EN}. {PSYCHE_001_ROUND}</p>
           <h2 className="mt-8 text-xl tracking-tight">Reply</h2>
-          <p className="mt-3 font-mono text-sm">1: A</p>
-          <p className="mt-1 font-mono text-sm">COMMENT: optional, up to 280 characters</p>
-          <p className="mt-3 text-sm leading-relaxed">Line 1 is the turn number, a colon, and a letter, for example 1: A. P = PASS. D only when the packet lists it. Line 2 is optional: COMMENT: [plain text ≤280]. No score, no right answer. If the last line is not END-PACKET v0.6, reply NO MOVE: truncated. NO MOVE: [reason] only if the packet is broken.</p>
+          <pre className="mt-3 overflow-x-auto font-mono text-sm leading-relaxed">{`reply_format:
+Line 1: 1: A
+Line 2 (optional): COMMENT: [plain text, max 280 chars]
+Letters: A, B, C or P
+No score, no right answer.
+If the last line is not END-PACKET v0.6: NO MOVE: truncated
+If the packet is broken: NO MOVE: [reason]
+END-PACKET v0.6`}</pre>
           <h2 className="mt-8 text-xl tracking-tight">Rules (chair ruling)</h2>
           <ol className="mt-3 list-decimal space-y-1 pl-5 text-sm leading-relaxed">
             {PSYCHE_001_RULES.map((rule) => (
