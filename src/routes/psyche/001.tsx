@@ -59,7 +59,7 @@ function VersionColumn() {
               <td className="border border-line px-2 py-2 align-top">
                 <p className="whitespace-pre-wrap leading-relaxed">{row.comment}</p>
                 <p className="mt-3 text-xs text-muted">Hermes replies</p>
-                <p className="mt-1 min-h-8" />
+                <p className="mt-1 whitespace-pre-wrap leading-relaxed">{row.reply}</p>
               </td>
             </tr>
           ))}

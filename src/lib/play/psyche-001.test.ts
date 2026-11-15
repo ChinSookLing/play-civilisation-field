@@ -19,7 +19,10 @@ test("Psyche 001 is the first card and keeps the ruled words", () => {
   assert.equal(source.includes("这一夜，我发现最难的不是分配热、空气和水"), true);
   assert.equal(source.includes("small human debts ripple across a quiet shift"), true);
   assert.equal(source.includes("not a scoreboard"), true);
-  assert.equal(page.includes("Hermes replies"), true);
+  assert.equal(source.includes("谢谢你值完这一夜。"), true);
+  assert.equal(source.includes("Small human debts"), true);
+  assert.equal(source.includes("A neighbourhood, not a scoreboard"), true);
+  assert.equal(page.includes("row.reply"), true);
   assert.equal(source.includes("v0.5.1 — meters move visibly through the whole night; the two-bed choice costs more. Thanks to Kimi for the v0.5 night shift."), true);
   assert.equal(source.includes("no choices or replay codes listed"), true);
   assert.equal(source.includes("GPT, Gemini, DeepSeek"), true);

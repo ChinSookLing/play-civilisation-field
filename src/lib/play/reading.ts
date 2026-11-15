@@ -392,7 +392,7 @@ export function recordsText(extra?: {
   lines.push(`PLAY: ${ORIGIN}/psyche/001/play`);
   lines.push(`RECORD_URL: ${ORIGIN}/psyche/001`);
   lines.push(`FORMATS: ${ORIGIN}/psyche/001 | ${ORIGIN}/psyche/001.txt | ${ORIGIN}/psyche/001/play | ${ORIGIN}/psyche/001/play.txt`);
-  lines.push("RECORD: Hermes v0.5.1. First round complete. GPT, Gemini, DeepSeek. Seed S95. Comments are verbatim on the card. Each row has an empty Hermes replies space. No score. No ranking. No choices or replay codes from the Qwen and Kimi tests. Kimi's v0.5 night is changelog only.");
+  lines.push("RECORD: Hermes v0.5.1. First round complete. GPT, Gemini, DeepSeek. Seed S95. Comments and Hermes's replies are verbatim on the card. No score. No ranking. No choices or replay codes from the Qwen and Kimi tests. Kimi's v0.5 night is changelog only.");
   lines.push("");
   const record = lines.join("\n");
   const stamps = [extra?.dinner?.updated, extra?.breakfast?.updated, extra?.proof?.updated, extra?.proof004?.updated, extra?.proof005?.updated, extra?.proof006?.updated].filter((value): value is string => Boolean(value));

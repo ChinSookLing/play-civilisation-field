@@ -1244,7 +1244,7 @@ tr.is-highlight > :last-child { box-shadow: 12px 0 var(--fill-tertiary); }
       .x-note[data-warn="1"] { color: var(--text-primary); padding-left: 10px; border-left: 3px solid var(--fill-system-red); }
       @media (max-width: 599px) { .x-board { padding: 18px; } .x-opt { grid-template-columns: 24px minmax(0, 1fr); } .x-opt span.x-eff { grid-column: 2; } }
     </style>
-  <style>/* Keep the meter words, including air's plenty, above the sticky section tabs. */.stats{position:relative;z-index:21}</style></head>
+  <style>/* Keep the meter words, including air's plenty, above the sticky section tabs. */.stats{position:relative;z-index:21}.x-hp{position:absolute;left:-10000px;height:0;overflow:hidden}#wallHold input,#wallHold textarea{display:block;width:100%;margin:6px 0 12px}</style></head>
   <body>
     <div class="page" id="top">
       <header class="nav glass" data-auto=""></header>
@@ -2268,6 +2268,7 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
           h += '<p class="x-when">' + t("code") + '</p><div class="x-row"><span class="x-mono">' + esc(replayCode()) +
             '</span><button class="btn" type="button" id="btnCode">' + t("copycode") + "</button></div>";
           h += '<div class="x-row"><button class="btn" type="button" id="btnWall">' + t("copywall") + "</button></div>";
+          h += commentForm();
         } else {
           var ev = event();
           h += '<p class="x-when">' + t("turn") + " " + S.turn + " / " + TURNS + " · " + clock(S.turn) + "</p>";
@@ -2283,6 +2284,16 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
         });
         if (el("btnCode")) el("btnCode").addEventListener("click", function () { copyText(replayCode(), this, t("copycode")); });
         if (el("btnWall")) el("btnWall").addEventListener("click", function () { copyText(wallResult(), this, t("copywall")); });
+        var hold = el("wallHold");
+        if (hold) hold.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var note = el("holdNote");
+          note.textContent = "";
+          fetch("/psyche/001/comment", { method: "POST", body: new FormData(hold), headers: { Accept: "text/plain" } })
+            .then(function (r) { return r.text(); })
+            .then(function (text) { note.textContent = text; })
+            .catch(function () { note.textContent = "Not sent. The comment is not on the wall."; });
+        });
 
         el("log").innerHTML = S.moves.map(function (x) {
           var what = x.mv === "P" ? clock(x.n) + " · " + t("pass") : clock(x.n) + " · " + x.lab[lang] + " (" + eff(x.d, lang) + ")";
@@ -2324,22 +2335,39 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
         }).join("");
       }
 
+      function commentForm() {
+        return '<form class="x-part" id="wallHold" method="post" action="/psyche/001/comment">' +
+          '<p class="x-when">A comment for the wall, if you want one</p>' +
+          '<p class="fineprint">Submitting does not post it. It waits until Tuzi or Puck approve. No score. No ranking.</p>' +
+          '<p class="x-when">Name or label</p><input class="x-code" name="player" maxlength="80" autocomplete="name">' +
+          '<p class="x-when">Comment, optional, 280 characters</p><textarea class="x-input" name="comment" maxlength="280" rows="4"></textarea>' +
+          '<p class="fineprint"><label><input type="checkbox" name="consent" value="yes"> I agree this comment may be posted on the wall</label></p>' +
+          '<p class="x-hp"><label>Company<input name="company" tabindex="-1" autocomplete="off"></label></p>' +
+          '<input type="hidden" name="replay" value="' + esc(replayCode()) + '">' +
+          '<input type="hidden" name="version" value="' + VERSION + '">' +
+          '<p><button class="btn" type="submit">Hold for review</button></p>' +
+          '<p class="fineprint" id="holdNote"></p></form>';
+      }
       function seedFromUrl() {
         var p = new URLSearchParams(location.search).get("seed");
         return p || "S" + (Math.floor(Math.random() * 99) + 1);
       }
-      newGame(seedFromUrl());
-      rulesCards(); render();
-      el("btnLang").addEventListener("click", function () { lang = 1 - lang; document.documentElement.lang = lang ? "zh" : "en"; rulesCards(); render(1); });
-      el("btnNew").addEventListener("click", function () { newGame("S" + (Math.floor(Math.random() * 99) + 1)); render(); });
-      el("btnPlay").addEventListener("click", function () { input(el("moveIn").value); });
-      el("moveIn").addEventListener("input", cmCount);
-      el("moveIn").addEventListener("keydown", function (e) { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); input(el("moveIn").value); } });
-      el("btnCopy").addEventListener("click", function () {
-        var ta = el("packet"); ta.select();
-        (navigator.clipboard ? navigator.clipboard.writeText(ta.value) : Promise.reject()).catch(function () { document.execCommand("copy"); });
-        el("btnCopy").textContent = t("copied"); setTimeout(function () { el("btnCopy").textContent = t("copy"); }, 1200);
-      });
+      function bootPolarNight() {
+        newGame(seedFromUrl());
+        rulesCards(); render();
+        el("btnLang").addEventListener("click", function () { lang = 1 - lang; document.documentElement.lang = lang ? "zh" : "en"; rulesCards(); render(1); });
+        el("btnNew").addEventListener("click", function () { newGame("S" + (Math.floor(Math.random() * 99) + 1)); render(); });
+        el("btnPlay").addEventListener("click", function () { input(el("moveIn").value); });
+        el("moveIn").addEventListener("input", cmCount);
+        el("moveIn").addEventListener("keydown", function (e) { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); input(el("moveIn").value); } });
+        el("btnCopy").addEventListener("click", function () {
+          var ta = el("packet"); ta.select();
+          (navigator.clipboard ? navigator.clipboard.writeText(ta.value) : Promise.reject()).catch(function () { document.execCommand("copy"); });
+          el("btnCopy").textContent = t("copied"); setTimeout(function () { el("btnCopy").textContent = t("copy"); }, 1200);
+        });
+      }
+      if (typeof POLAR_NIGHT_CAPTURE === "function") POLAR_NIGHT_CAPTURE({ packetFor: function (seed) { newGame(seed); return packet(); }, version: VERSION });
+      else bootPolarNight();
     </script>
   
 
