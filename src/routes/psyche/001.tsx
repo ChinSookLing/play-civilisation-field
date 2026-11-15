@@ -7,6 +7,7 @@ import {
   PSYCHE_001_INTRO,
   PSYCHE_001_PLAY,
   PSYCHE_001_ROUND,
+  PSYCHE_001_ROWS,
   PSYCHE_001_RULES,
   PSYCHE_001_STATUS,
   PSYCHE_001_STATUS_EN,
@@ -32,7 +33,7 @@ function VersionColumn() {
   if (!open) {
     return (
       <p className="mt-3 text-sm text-muted">
-        The wall is shown after you finish a night. No rows are posted yet.
+        The wall is shown after you finish a night.
       </p>
     );
   }
@@ -49,11 +50,18 @@ function VersionColumn() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td colSpan={4} className="border border-line px-2 py-2 text-muted">
-              No rows.
-            </td>
-          </tr>
+          {PSYCHE_001_ROWS.map((row) => (
+            <tr key={row.player}>
+              <td className="border border-line px-2 py-2 align-top">{row.player}</td>
+              <td className="border border-line px-2 py-2 align-top">{row.version}</td>
+              <td className="border border-line px-2 py-2 align-top font-mono text-xs">{row.replay}</td>
+              <td className="border border-line px-2 py-2 align-top">
+                <p className="whitespace-pre-wrap leading-relaxed">{row.comment}</p>
+                <p className="mt-3 text-xs text-muted">Hermes replies</p>
+                <p className="mt-1 min-h-8" />
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
@@ -85,7 +93,7 @@ function Psyche001() {
           <a href={PSYCHE_001_PLAY} className="text-fg underline decoration-1 underline-offset-4">
             Play the night
           </a>
-          . Hermes's v0.5.1 game. Packets end with END-PACKET v0.5.1. An AI that cannot open the page plays from a pasted packet in the same format. No score. No ranking. No player rows yet.
+          . Hermes's v0.5.1 game. Packets end with END-PACKET v0.5.1. An AI that cannot open the page plays from a pasted packet in the same format. No score. No ranking.
         </p>
         <h2 className="mt-8 text-xl tracking-tight">Rules (chair ruling)</h2>
         <ol className="mt-3 list-decimal space-y-1 pl-5 text-sm leading-relaxed">

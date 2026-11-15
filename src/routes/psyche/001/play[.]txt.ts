@@ -13,7 +13,7 @@ COMMENT: optional, up to 280 characters
 Letters: A, B, C, or P. D only when the packet lists it.
 P is PASS. Leaving is not a failure.
 No score. No right answer. No ranking.
-The wall has no player rows. It is shown on the web only after a finished night.
+The wall has the first-round rows. It is shown on the web only after a finished night. No score. No ranking.
 `;
 
 export const Route = createFileRoute("/psyche/001/play.txt")({
