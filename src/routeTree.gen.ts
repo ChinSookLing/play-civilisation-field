@@ -95,6 +95,9 @@ import { Route as SalonLadderDottxtRouteImport } from './routes/salon/ladder[.]t
 import { Route as SalonLunch007ReportRouteImport } from './routes/salon/lunch-007-report'
 import { Route as SalonLunch007ReportDothtmlRouteImport } from './routes/salon/lunch-007-report[.]html'
 import { Route as SalonLunch007ReportDottxtRouteImport } from './routes/salon/lunch-007-report[.]txt'
+import { Route as SalonNightShiftRouteImport } from './routes/salon/night-shift'
+import { Route as SalonNightShiftDothtmlRouteImport } from './routes/salon/night-shift[.]html'
+import { Route as SalonNightShiftDottxtRouteImport } from './routes/salon/night-shift[.]txt'
 import { Route as SalonPlainWaterRouteImport } from './routes/salon/plain-water'
 import { Route as SalonPlainWaterDothtmlRouteImport } from './routes/salon/plain-water[.]html'
 import { Route as SalonPlainWaterDottxtRouteImport } from './routes/salon/plain-water[.]txt'
@@ -663,6 +666,21 @@ const SalonLunch007ReportDottxtRoute =
     path: '/lunch-007-report.txt',
     getParentRoute: () => SalonRoute,
   } as any)
+const SalonNightShiftRoute = SalonNightShiftRouteImport.update({
+  id: '/night-shift',
+  path: '/night-shift',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonNightShiftDothtmlRoute = SalonNightShiftDothtmlRouteImport.update({
+  id: '/night-shift.html',
+  path: '/night-shift.html',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonNightShiftDottxtRoute = SalonNightShiftDottxtRouteImport.update({
+  id: '/night-shift.txt',
+  path: '/night-shift.txt',
+  getParentRoute: () => SalonRoute,
+} as any)
 const SalonPlainWaterRoute = SalonPlainWaterRouteImport.update({
   id: '/plain-water',
   path: '/plain-water',
@@ -1381,6 +1399,9 @@ export interface FileRoutesByFullPath {
   '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
   '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
   '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
+  '/salon/night-shift': typeof SalonNightShiftRoute
+  '/salon/night-shift.html': typeof SalonNightShiftDothtmlRoute
+  '/salon/night-shift.txt': typeof SalonNightShiftDottxtRoute
   '/salon/plain-water': typeof SalonPlainWaterRoute
   '/salon/plain-water.html': typeof SalonPlainWaterDothtmlRoute
   '/salon/plain-water.txt': typeof SalonPlainWaterDottxtRoute
@@ -1577,6 +1598,9 @@ export interface FileRoutesByTo {
   '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
   '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
   '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
+  '/salon/night-shift': typeof SalonNightShiftRoute
+  '/salon/night-shift.html': typeof SalonNightShiftDothtmlRoute
+  '/salon/night-shift.txt': typeof SalonNightShiftDottxtRoute
   '/salon/plain-water': typeof SalonPlainWaterRoute
   '/salon/plain-water.html': typeof SalonPlainWaterDothtmlRoute
   '/salon/plain-water.txt': typeof SalonPlainWaterDottxtRoute
@@ -1777,6 +1801,9 @@ export interface FileRoutesById {
   '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
   '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
   '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
+  '/salon/night-shift': typeof SalonNightShiftRoute
+  '/salon/night-shift.html': typeof SalonNightShiftDothtmlRoute
+  '/salon/night-shift.txt': typeof SalonNightShiftDottxtRoute
   '/salon/plain-water': typeof SalonPlainWaterRoute
   '/salon/plain-water.html': typeof SalonPlainWaterDothtmlRoute
   '/salon/plain-water.txt': typeof SalonPlainWaterDottxtRoute
@@ -1978,6 +2005,9 @@ export interface FileRouteTypes {
     | '/salon/lunch-007-report'
     | '/salon/lunch-007-report.html'
     | '/salon/lunch-007-report.txt'
+    | '/salon/night-shift'
+    | '/salon/night-shift.html'
+    | '/salon/night-shift.txt'
     | '/salon/plain-water'
     | '/salon/plain-water.html'
     | '/salon/plain-water.txt'
@@ -2174,6 +2204,9 @@ export interface FileRouteTypes {
     | '/salon/lunch-007-report'
     | '/salon/lunch-007-report.html'
     | '/salon/lunch-007-report.txt'
+    | '/salon/night-shift'
+    | '/salon/night-shift.html'
+    | '/salon/night-shift.txt'
     | '/salon/plain-water'
     | '/salon/plain-water.html'
     | '/salon/plain-water.txt'
@@ -2373,6 +2406,9 @@ export interface FileRouteTypes {
     | '/salon/lunch-007-report'
     | '/salon/lunch-007-report.html'
     | '/salon/lunch-007-report.txt'
+    | '/salon/night-shift'
+    | '/salon/night-shift.html'
+    | '/salon/night-shift.txt'
     | '/salon/plain-water'
     | '/salon/plain-water.html'
     | '/salon/plain-water.txt'
@@ -3148,6 +3184,27 @@ declare module '@tanstack/react-router' {
       path: '/lunch-007-report.txt'
       fullPath: '/salon/lunch-007-report.txt'
       preLoaderRoute: typeof SalonLunch007ReportDottxtRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/night-shift': {
+      id: '/salon/night-shift'
+      path: '/night-shift'
+      fullPath: '/salon/night-shift'
+      preLoaderRoute: typeof SalonNightShiftRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/night-shift.html': {
+      id: '/salon/night-shift.html'
+      path: '/night-shift.html'
+      fullPath: '/salon/night-shift.html'
+      preLoaderRoute: typeof SalonNightShiftDothtmlRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/night-shift.txt': {
+      id: '/salon/night-shift.txt'
+      path: '/night-shift.txt'
+      fullPath: '/salon/night-shift.txt'
+      preLoaderRoute: typeof SalonNightShiftDottxtRouteImport
       parentRoute: typeof SalonRoute
     }
     '/salon/plain-water': {
@@ -4258,6 +4315,9 @@ interface SalonRouteChildren {
   SalonLunch007ReportRoute: typeof SalonLunch007ReportRoute
   SalonLunch007ReportDothtmlRoute: typeof SalonLunch007ReportDothtmlRoute
   SalonLunch007ReportDottxtRoute: typeof SalonLunch007ReportDottxtRoute
+  SalonNightShiftRoute: typeof SalonNightShiftRoute
+  SalonNightShiftDothtmlRoute: typeof SalonNightShiftDothtmlRoute
+  SalonNightShiftDottxtRoute: typeof SalonNightShiftDottxtRoute
   SalonPlainWaterRoute: typeof SalonPlainWaterRoute
   SalonPlainWaterDothtmlRoute: typeof SalonPlainWaterDothtmlRoute
   SalonPlainWaterDottxtRoute: typeof SalonPlainWaterDottxtRoute
@@ -4306,6 +4366,9 @@ const SalonRouteChildren: SalonRouteChildren = {
   SalonLunch007ReportRoute: SalonLunch007ReportRoute,
   SalonLunch007ReportDothtmlRoute: SalonLunch007ReportDothtmlRoute,
   SalonLunch007ReportDottxtRoute: SalonLunch007ReportDottxtRoute,
+  SalonNightShiftRoute: SalonNightShiftRoute,
+  SalonNightShiftDothtmlRoute: SalonNightShiftDothtmlRoute,
+  SalonNightShiftDottxtRoute: SalonNightShiftDottxtRoute,
   SalonPlainWaterRoute: SalonPlainWaterRoute,
   SalonPlainWaterDothtmlRoute: SalonPlainWaterDothtmlRoute,
   SalonPlainWaterDottxtRoute: SalonPlainWaterDottxtRoute,
