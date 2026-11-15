@@ -47,12 +47,53 @@ export function psycheStartJson(seed: string): { packet: string; seed: string; v
   };
 }
 
+const AMP = "&" + "amp;";
+const LT = "&" + "lt;";
+const GT = "&" + "gt;";
+const QUOT = "&" + "quot;";
+
 export function escapeHtml(value: string): string {
-  return value.replace(/&/g, "&").replace(/</g, "<").replace(/>/g, ">");
+  return value.replace(/&/g, AMP).replace(/</g, LT).replace(/>/g, GT);
 }
 
-function unescapeHtml(value: string): string {
-  return value.replace(/</g, "<").replace(/>/g, ">").replace(/&/g, "&");
+/** Browser text of a pre. A raw <tag> is not text, so an unescaped packet fails the door check. */
+export function renderedHtmlText(inner: string): string {
+  let out = "";
+  let i = 0;
+  while (i < inner.length) {
+    if (inner[i] === "<") {
+      const close = inner.indexOf(">", i);
+      if (close < 0) {
+        out += inner.slice(i);
+        break;
+      }
+      i = close + 1;
+      continue;
+    }
+    if (inner.startsWith(AMP, i)) {
+      out += "&";
+      i += AMP.length;
+      continue;
+    }
+    if (inner.startsWith(LT, i)) {
+      out += "<";
+      i += LT.length;
+      continue;
+    }
+    if (inner.startsWith(GT, i)) {
+      out += ">";
+      i += GT.length;
+      continue;
+    }
+    if (inner.startsWith(QUOT, i)) {
+      out += "\"";
+      i += QUOT.length;
+      continue;
+    }
+    out += inner[i];
+    i += 1;
+  }
+  return out;
 }
 
 export function psycheStartHtml(seed: string): string {
@@ -92,9 +133,9 @@ export function psycheDoorProblems(): string[] {
   const open = html.indexOf("<pre>");
   const close = html.indexOf("</pre>");
   if (open < 0 || close < open) problems.push("html has no packet");
-  const pre = open < 0 ? "" : unescapeHtml(html.slice(open + 5, close));
+  const pre = open < 0 ? "" : renderedHtmlText(html.slice(open + 5, close));
   if (text !== packet) problems.push("plain text is not the packet");
-  if (pre !== packet) problems.push("html pre is not the packet");
+  if (pre !== packet) problems.push("rendered html door is not the plain text");
   if (json.packet !== packet) problems.push("json packet is not the packet");
   const keys = Object.keys(json);
   if (keys.join(",") !== "packet,seed,version,end") problems.push(`json fields: ${keys.join(",")}`);
