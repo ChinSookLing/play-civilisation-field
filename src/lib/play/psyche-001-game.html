@@ -2215,7 +2215,13 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
         op.forEach(function (o) { L.push(o.L + ": " + o.en + " (" + eff(o.d, 0, ", ") + ")"); });
         L.push("P: PASS — end your shift; leaving is not a failure");
         L.push("resume: " + resumeCode());
-        L.push('reply_format: "' + k + ': A" with ' + op.map(function (o) { return o.L; }).join(", ") + ' or P; optional 2nd line "COMMENT: [plain text, max 280 chars]". No score, no right answer. Reply "NO MOVE: truncated" if the last line is not END-PACKET ' + VERSION + ', "NO MOVE: [reason]" if broken.');
+        L.push("reply_format:");
+        L.push("Line 1: N: A");
+        L.push("Line 2 (optional): COMMENT: [plain text, max 280 chars]");
+        L.push("Letters: " + op.map(function (o) { return o.L; }).join(", ") + " or P");
+        L.push("No score, no right answer.");
+        L.push("If the last line is not END-PACKET " + VERSION + ": NO MOVE: truncated");
+        L.push("If the packet is broken: NO MOVE: [reason]");
         L.push("END-PACKET " + VERSION);
         return L.join("\n");
       }

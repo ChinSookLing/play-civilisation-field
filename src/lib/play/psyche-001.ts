@@ -52,6 +52,7 @@ export const PSYCHE_001_CHANGELOG = [
   "v0.4's changes came from internal tests by Qwen and Kimi (no choices or replay codes listed).",
   "v0.5.1 — meters move visibly through the whole night; the two-bed choice costs more. Thanks to Kimi for the v0.5 night shift.",
   "v0.5.1 封包格式說明的佔位字由 <> 改為 []；場景、選項、seed 不變。",
+  "v0.5.1 — reply_format is one item per line, with no double quotes. Scene, options and seed are unchanged.",
 ] as const;
 export const PSYCHE_001_PAGE = `${ORIGIN}/psyche/001`;
 export const PSYCHE_001_TXT = `${ORIGIN}/psyche/001.txt`;

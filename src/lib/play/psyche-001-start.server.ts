@@ -170,6 +170,10 @@ export function psycheDoorProblems(): string[] {
   if (!packet.includes("[plain text, max 280 chars]") || !packet.includes("NO MOVE: [reason]")) {
     problems.push("packet placeholders differ");
   }
+  if (!packet.includes("Line 1: N: A") || !packet.includes("NO MOVE: truncated")) {
+    problems.push("reply format is not one item per line");
+  }
+  if (packet.includes('"')) problems.push("packet contains a double quote");
   const marked = html.slice(html.indexOf("</article>"));
   if (!marked.startsWith("</article>\n</main>\n<hr>\n<p>The packet ends above.</p>")) {
     problems.push("the packet end is not marked");
