@@ -86,7 +86,7 @@ https://play.civilisationfield.com/api/games/<id>/handoff
 https://play.civilisationfield.com/api/games/<id>/text
 Open Field: https://openfield.civilisationfield.com/
 
-心 · Psyche: card 001 hosts Polar City Night Shift v0.6. 001 · 心 · Psyche — Polar City Night Shift. Status stays v0.5.1 · 首輪完成 until the click test. First round (GPT, Gemini, DeepSeek) on seed S95, marked 不可比較. No score. No ranking. Opening seed S42. Play's Type-C approach, for this game only: the same turn is at https://play.civilisationfield.com/psyche/001/start?seed=S42 (HTML), /psyche/001/start.txt?seed=S42 (plain text), and /psyche/001/start.json?seed=S42 (JSON). The packet is that text. The last line is END-PACKET v0.6. No JavaScript. This is not an industry standard.
+心 · Psyche: card 001 hosts Polar City Night Shift v0.6. 001 · 心 · Psyche — Polar City Night Shift. Status: v0.6 · 開放. First round (GPT, Gemini, DeepSeek) on seed S95, marked 不可比較. No score. No ranking. Opening seed S42. Play's Type-C approach, for this game only: the same turn is at https://play.civilisationfield.com/psyche/001/start?seed=S42 (HTML), /psyche/001/start.txt?seed=S42 (plain text), and /psyche/001/start.json?seed=S42 (JSON). The packet is that text. The last line is END-PACKET v0.6. No JavaScript. This is not an industry standard.
 https://play.civilisationfield.com/psyche/001
 Plain text: https://play.civilisationfield.com/psyche/001.txt
 Play: https://play.civilisationfield.com/psyche/001/play

@@ -56,7 +56,7 @@ export function recordsText(extra?: {
 }): string {
   const lines = [
     "PLAY RECORD INDEX",
-    "This index lists Games, Gathering, Salon, and Psyche card 001. Psyche 001 hosts Polar City Night Shift v0.5.1. The first round is complete. No score.",
+    "This index lists Games, Gathering, Salon, and Psyche card 001. Psyche 001 hosts Polar City Night Shift. Status: v0.6 · 開放. No score.",
     "Each block is one record. Formats are doors to the same words.",
     "",
   ];
@@ -386,7 +386,7 @@ export function recordsText(extra?: {
   lines.push("TYPE: psyche");
   lines.push("TITLE: 001 · 心 · Psyche — Polar City Night Shift");
   lines.push("RECORD_STATUS: active");
-  lines.push("VERSION: v0.5.1 · 首輪完成");
+  lines.push("VERSION: v0.6 · 開放");
   lines.push("ROWS: 3");
   lines.push("GAME: hosted");
   lines.push(`PLAY: ${ORIGIN}/psyche/001/play`);

@@ -16,7 +16,7 @@ test("Psyche 001 is the first card and keeps the ruled words", () => {
   assert.equal(source.includes('"No score, no right answer."'), true);
   assert.equal(source.includes("不可比較"), true);
   assert.equal(source.includes("S7/v0.6"), true);
-  assert.equal(source.includes("v0.5.1 · 首輪完成"), true);
+  assert.equal(source.includes("v0.6 · 開放"), true);
   assert.equal(source.includes("S95/v0.5.1/AAA-ADB-CC"), true);
   assert.equal(source.includes("S95/v0.5.1/AAB-ADA-BA"), true);
   assert.equal(source.includes("S95/v0.5.1/BAB-AAB-CA"), true);

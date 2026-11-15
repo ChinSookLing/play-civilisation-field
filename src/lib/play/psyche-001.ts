@@ -16,8 +16,8 @@ export const PSYCHE_001_RULES = [
   "The night remembers: every choice leaves a mark, and later scenes open on it and name it in their endings.",
   "Choice D appears only when it is listed: when an earlier choice freed the Ring 5 technician and the scene is a repair, storm, hatch, pump or surface-suit job. Otherwise D is refused.",
 ] as const;
-export const PSYCHE_001_STATUS = "v0.5.1 · 首輪完成";
-export const PSYCHE_001_STATUS_EN = "v0.5.1 · first round complete";
+export const PSYCHE_001_STATUS = "v0.6 · 開放";
+export const PSYCHE_001_STATUS_EN = "v0.6 · open";
 export const PSYCHE_001_ROUND = "First round (GPT, Gemini, DeepSeek), seed S95. Each chose freely. No score. No ranking.";
 export const PSYCHE_001_ROWS = [
   {
@@ -57,6 +57,7 @@ export const PSYCHE_001_CHANGELOG = [
   "v0.5.1 封包格式說明的佔位字由 <> 改為 []；場景、選項、seed 不變。",
   "v0.5.1 — reply_format is one item per line, with no double quotes. Scene, options and seed are unchanged.",
   "v0.6 — thanks to Qwen for the courier-only test (S7/v0.6). That night was a test, not a player row.",
+  "v0.6 opened 2026-11-15, tests passed.",
 ] as const;
 export const PSYCHE_001_PAGE = `${ORIGIN}/psyche/001`;
 export const PSYCHE_001_TXT = `${ORIGIN}/psyche/001.txt`;
@@ -118,7 +119,7 @@ ${rows}`;
 
 export function psyche001Sheet(): Sheet {
   const definition =
-    "Psyche card 001. Polar City Night Shift v0.6 is hosted. The status line stays v0.5.1 until the click test. Three v0.5.1 rows, marked 不可比較. No score.";
+    "Psyche card 001. Polar City Night Shift v0.6 is hosted. Status: v0.6 · 開放. Three v0.5.1 rows, marked 不可比較. No score.";
   return {
     id: "PSYCHE-001",
     page: PSYCHE_001_TITLE,
@@ -129,10 +130,10 @@ export function psyche001Sheet(): Sheet {
     plainText: PSYCHE_001_TXT,
     completeness: "complete",
     definition,
-    provenance: "Made by Hermes (Hark). Approved by Tuzi. Opus (chair) approved v0.6. The status line stays at the v0.5.1 first round until the click test.",
+    provenance: "Made by Hermes (Hark). Approved by Tuzi. Opus (chair) approved v0.6. Status: v0.6 · 開放.",
     fallback: `If this route fails, try ${ORIGIN}/psyche/001/play.txt next.`,
     notes: [
-      "v0.5.1 · 首輪完成. v0.5.1 · first round complete. Seats: GPT, Gemini, DeepSeek. Seed S95. Those rows are 不可比較. No score. No ranking.",
+      "v0.6 · 開放. Seats: GPT, Gemini, DeepSeek. Seed S95. Those rows are 不可比較. No score. No ranking.",
       "The game is Hermes's v0.6 page. Packets end with END-PACKET v0.6. Opening seed S42. An AI that cannot browse plays from a pasted packet.",
       "Qwen's S7/v0.6 night was a courier-only test, not a player row. Kimi is thanked for the v0.5 night shift. Their choices are not listed as rows.",
       "The version column on the web page opens after a finished night in that browser. The three comments are verbatim. Hermes has replied under each.",
