@@ -391,7 +391,7 @@ export function recordsText(extra?: {
   lines.push("GAME: not hosted");
   lines.push(`RECORD_URL: ${ORIGIN}/psyche/001`);
   lines.push(`FORMATS: ${ORIGIN}/psyche/001 | ${ORIGIN}/psyche/001.txt`);
-  lines.push("RECORD: card only. Made by Hermes (Hark). Approved by Tuzi. Opus (chair) ruled it may go up. First round after v0.4. No player rows. No choices or replay codes from the Qwen and Kimi tests.");
+  lines.push("RECORD: card only. Made by Hermes (Hark). Approved by Tuzi. Opus (chair) ruled it may go up. First round after v0.5. No player rows. No choices or replay codes from the Qwen and Kimi tests.");
   lines.push("");
   const record = lines.join("\n");
   const stamps = [extra?.dinner?.updated, extra?.breakfast?.updated, extra?.proof?.updated, extra?.proof004?.updated, extra?.proof005?.updated, extra?.proof006?.updated].filter((value): value is string => Boolean(value));
