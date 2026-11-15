@@ -8,8 +8,9 @@ COURIER PATH
 This file is not a live packet. Copy a packet from ${PSYCHE_001_PLAY}.
 The last line of a live packet is END-PACKET v0.5.1.
 If the last line is not END-PACKET v0.5.1, reply: NO MOVE: truncated
+If the packet is broken, reply: NO MOVE: [reason]
 Reply with one move:
-<turn>: A
+[turn]: A
 COMMENT: optional, up to 280 characters
 A, B, or C. D only when the packet lists it. P = PASS. Leaving is not a failure.
 No score. No right answer. No ranking.

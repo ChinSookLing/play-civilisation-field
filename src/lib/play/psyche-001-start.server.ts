@@ -114,6 +114,8 @@ export function psycheStartHtml(seed: string): string {
 ${body}
 </article>
 </main>
+<hr>
+<p>The packet ends above.</p>
 <p>Play's Type-C approach. One turn. No JavaScript.</p>
 <p>P = PASS. Leaving is not a failure. D only when the packet lists it.</p>
 <p>Reply with one move. The first line is the turn number, a colon, and one letter.</p>
@@ -162,7 +164,16 @@ export function psycheDoorProblems(): string[] {
   if (json.end !== PSYCHE_PACKET_END) problems.push("json end differs");
   const last = packet.trimEnd().split("\n").at(-1);
   if (last !== PSYCHE_PACKET_END || json.end !== last) problems.push("end line differs");
-  if (packet.includes("ranking")) problems.push("packet contains a ranking");
+  if (packet.includes("<plain text") || packet.includes("<reason>") || packet.includes("<seed>")) {
+    problems.push("packet still uses angle-bracket placeholders");
+  }
+  if (!packet.includes("[plain text, max 280 chars]") || !packet.includes("NO MOVE: [reason]")) {
+    problems.push("packet placeholders differ");
+  }
+  const marked = html.slice(html.indexOf("</article>"));
+  if (!marked.startsWith("</article>\n</main>\n<hr>\n<p>The packet ends above.</p>")) {
+    problems.push("the packet end is not marked");
+  }
   const open = html.indexOf("<article>");
   const close = html.indexOf("</article>");
   const outside = open < 0 || close < open ? html : html.slice(0, open) + html.slice(close + "</article>".length);

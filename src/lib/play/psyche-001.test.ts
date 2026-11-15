@@ -9,7 +9,7 @@ const index = readFileSync(new URL("../../routes/psyche/index.tsx", import.meta.
 test("Psyche 001 is the first card and keeps the ruled words", () => {
   assert.equal(source.includes('export const PSYCHE_001_TITLE = "001 · 心 · Psyche — Polar City Night Shift"'), true);
   assert.equal(source.includes('"PASS anytime."'), true);
-  assert.equal(source.includes('"Replay code format <seed>/<version>/<moves>."'), true);
+  assert.equal(source.includes('"Replay code format [seed]/[version]/[moves]."'), true);
   assert.equal(source.includes("ROWS: none."), false);
   assert.equal(source.includes("END-PACKET v0.5.1"), true);
   assert.equal(source.includes("v0.5.1 · 首輪完成"), true);

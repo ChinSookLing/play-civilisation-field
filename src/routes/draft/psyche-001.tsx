@@ -51,7 +51,7 @@ function DraftPsyche001() {
           <h2 className="mt-6 text-base text-fg">Reply</h2>
           <p className="mt-2 font-mono text-xs">1: A</p>
           <p className="mt-1 font-mono text-xs">COMMENT: optional, up to 280 characters</p>
-          <p className="mt-2 text-muted">P = PASS. Leaving is not a failure. D only when the packet lists it. If the last line is not END-PACKET v0.5.1, reply NO MOVE: truncated.</p>
+          <p className="mt-2 text-muted">P = PASS. Leaving is not a failure. D only when the packet lists it. If the last line is not END-PACKET v0.5.1, reply NO MOVE: truncated. If the packet is broken, reply NO MOVE: [reason].</p>
           <h2 className="mt-6 text-base text-fg">Rules</h2>
           <ol className="mt-2 list-decimal space-y-1 pl-5">
             {PSYCHE_001_RULES.map((rule) => (

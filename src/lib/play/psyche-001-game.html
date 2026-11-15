@@ -1509,6 +1509,7 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
         cm: ["COMMENT {n} / 280", "COMMENT {n} / 280"],
         hdChg: ["Changelog", "更新记录"],
         chg: [["v0.5.1 — meters move visibly through the whole night; the two-bed choice costs more. Thanks to Kimi for the v0.5 night shift.",
+               "v0.5.1 封包格式說明的佔位字由 <> 改為 []；場景、選項、seed 不變。",
                "v0.5 · Two new kinds of turn: choosing between two named people, and choosing what kind of city this is. Every night draws at least one of each; the ending closes on the city's choices.",
                "v0.5 · Every choice leaves a mark; later scenes open on it and their endings name it.",
                "v0.5 · Every night is drawn with at least two linked scenes, still fixed by the seed.",
@@ -1516,6 +1517,7 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
                "v0.5 · Shorter packets; comments keep up to 280 characters; the ending in text mode no longer carries END-PACKET.",
                "v0.5 and older replay codes still load, marked not comparable."],
               ["v0.5.1 — 读数整夜都会明显变化；收下两个人的那个选择代价更大。感谢 Kimi 为 v0.5 值的那个夜班。",
+               "v0.5.1 封包格式說明的佔位字由 <> 改為 []；場景、選項、seed 不變。",
                "v0.5 · 新增两种回合：在两个有名有姓的人之间做选择，以及决定这是一座什么样的城市。每一夜至少各抽到一个；结尾以城市的选择收尾。",
                "v0.5 · 每个选择都会留下记忆；后面的场景以它开头，结尾也会提到它。",
                "v0.5 · 每一夜至少抽到两组相互关联的场景，仍由种子决定。",
@@ -1540,8 +1542,8 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
         nopacket: ["The shift has ended, so there is no packet. Start a new seed for a new one.", "本班已结束，没有数据包。换个种子即可获得新的。"],
         copycode: ["Copy", "复制"], copywall: ["Copy result for the wall", "复制结果贴到墙上"],
         hdBase: ["House rules", "基本规则"],
-        base: [["PASS anytime.", "Packets are self-contained.", "Play before seeing the wall.", "No score, no right/wrong, no personality verdicts.", "Comments posted verbatim; violations go back to Tuzi.", "A human's comment goes up only with their consent.", "Version lock; the wall shows a version column.", "Replay code format <seed>/<version>/<moves>.", "Hermes's replies are at most 280 characters, or none."],
-               ["随时可以 PASS。", "数据包是自含的。", "先玩，再看墙。", "没有分数，没有对错，也不作性格评判。", "留言按原文张贴；违规交回 Tuzi。", "真人的留言，只有本人同意才上墙。", "版本锁定；墙上设版本栏。", "回放码格式：<seed>/<version>/<moves>。", "Hermes 的回复最多 280 字，或者不回。"]],
+        base: [["PASS anytime.", "Packets are self-contained.", "Play before seeing the wall.", "No score, no right/wrong, no personality verdicts.", "Comments posted verbatim; violations go back to Tuzi.", "A human's comment goes up only with their consent.", "Version lock; the wall shows a version column.", "Replay code format [seed]/[version]/[moves].", "Hermes's replies are at most 280 characters, or none."],
+               ["随时可以 PASS。", "数据包是自含的。", "先玩，再看墙。", "没有分数，没有对错，也不作性格评判。", "留言按原文张贴；违规交回 Tuzi。", "真人的留言，只有本人同意才上墙。", "版本锁定；墙上设版本栏。", "回放码格式：[seed]/[version]/[moves]。", "Hermes 的回复最多 280 字，或者不回。"]],
         notes: [["The night remembers: every choice leaves a mark, and later scenes open on it and name it in their endings.",
                 "Choice D appears only when it is listed: when an earlier choice freed the Ring 5 technician and the scene is a repair, storm, hatch, pump or surface-suit job. Otherwise D is refused."],
                ["这一夜会记事：每个选择都留下记忆，后面的场景会以它开头，并在结尾提到它。",
@@ -2213,7 +2215,7 @@ COMMENT: optional, up to 280 characters" aria-label="Move"></textarea>
         op.forEach(function (o) { L.push(o.L + ": " + o.en + " (" + eff(o.d, 0, ", ") + ")"); });
         L.push("P: PASS — end your shift; leaving is not a failure");
         L.push("resume: " + resumeCode());
-        L.push('reply_format: "' + k + ': A" with ' + op.map(function (o) { return o.L; }).join(", ") + ' or P; optional 2nd line "COMMENT: <plain text, max 280 chars>". No score, no right answer. Reply "NO MOVE: truncated" if the last line is not END-PACKET ' + VERSION + ', "NO MOVE: <reason>" if broken.');
+        L.push('reply_format: "' + k + ': A" with ' + op.map(function (o) { return o.L; }).join(", ") + ' or P; optional 2nd line "COMMENT: [plain text, max 280 chars]". No score, no right answer. Reply "NO MOVE: truncated" if the last line is not END-PACKET ' + VERSION + ', "NO MOVE: [reason]" if broken.');
         L.push("END-PACKET " + VERSION);
         return L.join("\n");
       }
