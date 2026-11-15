@@ -50,7 +50,7 @@ function PuckBrief() {
             to a finished table.
           </p>
           <p>
-            心 · Psyche says building. 文 · Salon has one piece. 聚 · Gathering is a list. Dinner 001 is a practice at
+            心 · Psyche has card 001. The game is not hosted. No player rows. 文 · Salon has one piece. 聚 · Gathering is a list. Dinner 001 is a practice at
             https://play.civilisationfield.com/gathering/dinner-001/table. Not a Field gathering. Enter a line on
             that table. Public words are kept and licensed CC BY 4.0.
           </p>

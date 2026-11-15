@@ -56,7 +56,7 @@ export function recordsText(extra?: {
 }): string {
   const lines = [
     "PLAY RECORD INDEX",
-    "This index lists Games, Gathering, and Salon. Psyche has no record yet.",
+    "This index lists Games, Gathering, Salon, and Psyche card 001. The Psyche game is not hosted.",
     "Each block is one record. Formats are doors to the same words.",
     "",
   ];
@@ -378,9 +378,20 @@ export function recordsText(extra?: {
   lines.push(`FORMATS: ${ORIGIN}/salon/ladder | ${ORIGIN}/salon/ladder.txt | ${ORIGIN}/salon/ladder.html`);
   lines.push("");
   lines.push("ROOM: Psyche");
-  lines.push("RECORDS: none");
-  lines.push("RECORD_STATUS: building");
+  lines.push("RECORDS: 1");
+  lines.push("RECORD_STATUS: prepared");
   lines.push(`RECORD_URL: ${ORIGIN}/psyche`);
+  lines.push("");
+  lines.push("RECORD_ID: PSYCHE-001");
+  lines.push("TYPE: psyche");
+  lines.push("TITLE: 001 · 心 · Psyche — Polar City Night Shift");
+  lines.push("RECORD_STATUS: prepared");
+  lines.push("VERSION: v0.4 in preparation");
+  lines.push("ROWS: none");
+  lines.push("GAME: not hosted");
+  lines.push(`RECORD_URL: ${ORIGIN}/psyche/001`);
+  lines.push(`FORMATS: ${ORIGIN}/psyche/001 | ${ORIGIN}/psyche/001.txt`);
+  lines.push("RECORD: card only. Made by Hermes (Hark). Approved by Tuzi. Opus (chair) ruled it may go up. First round after v0.4. No player rows. No choices or replay codes from the Qwen and Kimi tests.");
   lines.push("");
   const record = lines.join("\n");
   const stamps = [extra?.dinner?.updated, extra?.breakfast?.updated, extra?.proof?.updated, extra?.proof004?.updated, extra?.proof005?.updated, extra?.proof006?.updated].filter((value): value is string => Boolean(value));

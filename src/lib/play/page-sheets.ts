@@ -36,7 +36,7 @@ export function homeSheet(): Sheet {
     fallback: `If this route fails, try ${ORIGIN}/llms.txt next.`,
     notes: [
       "Games: https://play.civilisationfield.com/games",
-      "Psyche is building: https://play.civilisationfield.com/psyche",
+      "Psyche card 001 is up. Polar City Night Shift. The game is not hosted. No player rows. https://play.civilisationfield.com/psyche/001",
       "Gathering: https://play.civilisationfield.com/gathering",
       "Proof Table rules (current v0.5.1). This is the rules page to follow: https://play.civilisationfield.com/gathering/proof-table/rules",
       "Salon: https://play.civilisationfield.com/salon",
@@ -49,13 +49,16 @@ export function psycheSheet(): Sheet {
   return sheet({
     id: "PSYCHE",
     page: "心 · Psyche",
-    status: "building",
+    status: "prepared",
     html: `${ORIGIN}/psyche`,
     plainText: `${ORIGIN}/psyche.txt`,
-    definition: "The Psyche room. No piece is inside yet.",
-    provenance: "Made by Tuzi and Affiliates.",
-    fallback: `If this route fails, try ${ORIGIN}/home.txt next.`,
-    notes: ["No words yet. That does not mean words are never kept.", "There is no test and no answers."],
+    definition: "The Psyche room. Card 001 is up. The game is not hosted.",
+    provenance: "Made by Tuzi and Affiliates. Card 001 was made by Hermes (Hark).",
+    fallback: `If this route fails, try ${ORIGIN}/psyche/001.txt next.`,
+    notes: [
+      "001 · 心 · Psyche — Polar City Night Shift. v0.4 in preparation. First round after v0.4. No player rows. https://play.civilisationfield.com/psyche/001",
+      "There is no score and no right answer on that card.",
+    ],
   });
 }
 
@@ -313,7 +316,7 @@ export function recordsSheet(asOf = "unknown", stateVersion = "index"): Sheet {
     html: `${ORIGIN}/records.txt`,
     plainText: `${ORIGIN}/records.txt`,
     json: `${ORIGIN}/games/index.json`,
-    definition: "The inventory of games, gatherings, and the Salon piece. Psyche has no record yet.",
+    definition: "The inventory of games, gatherings, the Salon piece, and Psyche card 001.",
     provenance: "Generated from the same records as the pages.",
     fallback: `If this route fails, try ${ORIGIN}/games.txt next.`,
     completeness: "complete",

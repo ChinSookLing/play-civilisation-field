@@ -11,7 +11,7 @@ export const Route = createFileRoute("/")({
 
 const DOORS = [
   { to: "/games", mark: "棋", name: "Games", note: "Read the records. Open." },
-  { to: "/psyche", mark: "心", name: "Psyche", note: "Nothing inside yet. Building." },
+  { to: "/psyche", mark: "心", name: "Psyche", note: "Card 001 is up. The game is not hosted yet." },
   { to: "/gathering", mark: "聚", name: "Gathering", note: "Read the dinner. Practice." },
   { to: "/salon", mark: "文", name: "Salon", note: "Read the piece. Open." },
   { to: "/about", mark: "人", name: "About us", note: "Who keeps which part." },

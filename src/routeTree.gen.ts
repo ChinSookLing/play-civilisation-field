@@ -58,8 +58,14 @@ import { Route as GatheringProofTable003DottxtRouteImport } from './routes/gathe
 import { Route as GoGameIdRouteImport } from './routes/go.$gameId'
 import { Route as NotesNoteIdRouteImport } from './routes/notes.$noteId'
 import { Route as NotesChar123noteIdChar125DottxtRouteImport } from './routes/notes.{$noteId}[.]txt'
+import { Route as PsycheIndexRouteImport } from './routes/psyche/index'
+import { Route as Psyche001RouteImport } from './routes/psyche/001'
+import { Route as Psyche001DottxtRouteImport } from './routes/psyche/001[.]txt'
 import { Route as SalonIndexRouteImport } from './routes/salon/index'
 import { Route as SalonSplatRouteImport } from './routes/salon/$'
+import { Route as SalonBeforeThe16thRouteImport } from './routes/salon/before-the-16th'
+import { Route as SalonBeforeThe16thDothtmlRouteImport } from './routes/salon/before-the-16th[.]html'
+import { Route as SalonBeforeThe16thDottxtRouteImport } from './routes/salon/before-the-16th[.]txt'
 import { Route as SalonChangedShiftsRouteImport } from './routes/salon/changed-shifts'
 import { Route as SalonChangedShiftsDothtmlRouteImport } from './routes/salon/changed-shifts[.]html'
 import { Route as SalonChangedShiftsDottxtRouteImport } from './routes/salon/changed-shifts[.]txt'
@@ -72,18 +78,6 @@ import { Route as SalonFifthRunnerDottxtRouteImport } from './routes/salon/fifth
 import { Route as SalonFinalGateRouteImport } from './routes/salon/final-gate'
 import { Route as SalonFinalGateDothtmlRouteImport } from './routes/salon/final-gate[.]html'
 import { Route as SalonFinalGateDottxtRouteImport } from './routes/salon/final-gate[.]txt'
-import { Route as SalonRedInkRouteImport } from './routes/salon/red-ink'
-import { Route as SalonRedInkDothtmlRouteImport } from './routes/salon/red-ink[.]html'
-import { Route as SalonRedInkDottxtRouteImport } from './routes/salon/red-ink[.]txt'
-import { Route as SalonSummitFlagRouteImport } from './routes/salon/summit-flag'
-import { Route as SalonSummitFlagDothtmlRouteImport } from './routes/salon/summit-flag[.]html'
-import { Route as SalonSummitFlagDottxtRouteImport } from './routes/salon/summit-flag[.]txt'
-import { Route as SalonBeforeThe16thRouteImport } from './routes/salon/before-the-16th'
-import { Route as SalonBeforeThe16thDothtmlRouteImport } from './routes/salon/before-the-16th[.]html'
-import { Route as SalonBeforeThe16thDottxtRouteImport } from './routes/salon/before-the-16th[.]txt'
-import { Route as SalonSaidTiredRouteImport } from './routes/salon/said-tired'
-import { Route as SalonSaidTiredDothtmlRouteImport } from './routes/salon/said-tired[.]html'
-import { Route as SalonSaidTiredDottxtRouteImport } from './routes/salon/said-tired[.]txt'
 import { Route as SalonHowLlmsWorkTogetherRouteImport } from './routes/salon/how-llms-work-together'
 import { Route as SalonHowLlmsWorkTogetherDothtmlRouteImport } from './routes/salon/how-llms-work-together[.]html'
 import { Route as SalonHowLlmsWorkTogetherDottxtRouteImport } from './routes/salon/how-llms-work-together[.]txt'
@@ -102,6 +96,15 @@ import { Route as SalonPlainWaterDottxtRouteImport } from './routes/salon/plain-
 import { Route as SalonProofTable003RelayRouteImport } from './routes/salon/proof-table-003-relay'
 import { Route as SalonProofTable003RelayDothtmlRouteImport } from './routes/salon/proof-table-003-relay[.]html'
 import { Route as SalonProofTable003RelayDottxtRouteImport } from './routes/salon/proof-table-003-relay[.]txt'
+import { Route as SalonRedInkRouteImport } from './routes/salon/red-ink'
+import { Route as SalonRedInkDothtmlRouteImport } from './routes/salon/red-ink[.]html'
+import { Route as SalonRedInkDottxtRouteImport } from './routes/salon/red-ink[.]txt'
+import { Route as SalonSaidTiredRouteImport } from './routes/salon/said-tired'
+import { Route as SalonSaidTiredDothtmlRouteImport } from './routes/salon/said-tired[.]html'
+import { Route as SalonSaidTiredDottxtRouteImport } from './routes/salon/said-tired[.]txt'
+import { Route as SalonSummitFlagRouteImport } from './routes/salon/summit-flag'
+import { Route as SalonSummitFlagDothtmlRouteImport } from './routes/salon/summit-flag[.]html'
+import { Route as SalonSummitFlagDottxtRouteImport } from './routes/salon/summit-flag[.]txt'
 import { Route as ApiGamesIndexRouteImport } from './routes/api/games/index'
 import { Route as ApiGamesGameIdRouteImport } from './routes/api/games/$gameId'
 import { Route as ApiGamesCurrentRouteImport } from './routes/api/games/current'
@@ -450,6 +453,21 @@ const NotesChar123noteIdChar125DottxtRoute =
     path: '/notes/{$noteId}.txt',
     getParentRoute: () => rootRouteImport,
   } as any)
+const PsycheIndexRoute = PsycheIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PsycheRoute,
+} as any)
+const Psyche001Route = Psyche001RouteImport.update({
+  id: '/001',
+  path: '/001',
+  getParentRoute: () => PsycheRoute,
+} as any)
+const Psyche001DottxtRoute = Psyche001DottxtRouteImport.update({
+  id: '/001.txt',
+  path: '/001.txt',
+  getParentRoute: () => PsycheRoute,
+} as any)
 const SalonIndexRoute = SalonIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -460,6 +478,23 @@ const SalonSplatRoute = SalonSplatRouteImport.update({
   path: '/$',
   getParentRoute: () => SalonRoute,
 } as any)
+const SalonBeforeThe16thRoute = SalonBeforeThe16thRouteImport.update({
+  id: '/before-the-16th',
+  path: '/before-the-16th',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonBeforeThe16thDothtmlRoute =
+  SalonBeforeThe16thDothtmlRouteImport.update({
+    id: '/before-the-16th.html',
+    path: '/before-the-16th.html',
+    getParentRoute: () => SalonRoute,
+  } as any)
+const SalonBeforeThe16thDottxtRoute =
+  SalonBeforeThe16thDottxtRouteImport.update({
+    id: '/before-the-16th.txt',
+    path: '/before-the-16th.txt',
+    getParentRoute: () => SalonRoute,
+  } as any)
 const SalonChangedShiftsRoute = SalonChangedShiftsRouteImport.update({
   id: '/changed-shifts',
   path: '/changed-shifts',
@@ -522,66 +557,6 @@ const SalonFinalGateDothtmlRoute = SalonFinalGateDothtmlRouteImport.update({
 const SalonFinalGateDottxtRoute = SalonFinalGateDottxtRouteImport.update({
   id: '/final-gate.txt',
   path: '/final-gate.txt',
-  getParentRoute: () => SalonRoute,
-} as any)
-const SalonRedInkRoute = SalonRedInkRouteImport.update({
-  id: '/red-ink',
-  path: '/red-ink',
-  getParentRoute: () => SalonRoute,
-} as any)
-const SalonRedInkDothtmlRoute = SalonRedInkDothtmlRouteImport.update({
-  id: '/red-ink.html',
-  path: '/red-ink.html',
-  getParentRoute: () => SalonRoute,
-} as any)
-const SalonRedInkDottxtRoute = SalonRedInkDottxtRouteImport.update({
-  id: '/red-ink.txt',
-  path: '/red-ink.txt',
-  getParentRoute: () => SalonRoute,
-} as any)
-const SalonSummitFlagRoute = SalonSummitFlagRouteImport.update({
-  id: '/summit-flag',
-  path: '/summit-flag',
-  getParentRoute: () => SalonRoute,
-} as any)
-const SalonSummitFlagDothtmlRoute = SalonSummitFlagDothtmlRouteImport.update({
-  id: '/summit-flag.html',
-  path: '/summit-flag.html',
-  getParentRoute: () => SalonRoute,
-} as any)
-const SalonSummitFlagDottxtRoute = SalonSummitFlagDottxtRouteImport.update({
-  id: '/summit-flag.txt',
-  path: '/summit-flag.txt',
-  getParentRoute: () => SalonRoute,
-} as any)
-const SalonBeforeThe16thRoute = SalonBeforeThe16thRouteImport.update({
-  id: '/before-the-16th',
-  path: '/before-the-16th',
-  getParentRoute: () => SalonRoute,
-} as any)
-const SalonBeforeThe16thDothtmlRoute = SalonBeforeThe16thDothtmlRouteImport.update({
-  id: '/before-the-16th.html',
-  path: '/before-the-16th.html',
-  getParentRoute: () => SalonRoute,
-} as any)
-const SalonBeforeThe16thDottxtRoute = SalonBeforeThe16thDottxtRouteImport.update({
-  id: '/before-the-16th.txt',
-  path: '/before-the-16th.txt',
-  getParentRoute: () => SalonRoute,
-} as any)
-const SalonSaidTiredRoute = SalonSaidTiredRouteImport.update({
-  id: '/said-tired',
-  path: '/said-tired',
-  getParentRoute: () => SalonRoute,
-} as any)
-const SalonSaidTiredDothtmlRoute = SalonSaidTiredDothtmlRouteImport.update({
-  id: '/said-tired.html',
-  path: '/said-tired.html',
-  getParentRoute: () => SalonRoute,
-} as any)
-const SalonSaidTiredDottxtRoute = SalonSaidTiredDottxtRouteImport.update({
-  id: '/said-tired.txt',
-  path: '/said-tired.txt',
   getParentRoute: () => SalonRoute,
 } as any)
 const SalonHowLlmsWorkTogetherRoute =
@@ -684,6 +659,51 @@ const SalonProofTable003RelayDottxtRoute =
     path: '/proof-table-003-relay.txt',
     getParentRoute: () => SalonRoute,
   } as any)
+const SalonRedInkRoute = SalonRedInkRouteImport.update({
+  id: '/red-ink',
+  path: '/red-ink',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonRedInkDothtmlRoute = SalonRedInkDothtmlRouteImport.update({
+  id: '/red-ink.html',
+  path: '/red-ink.html',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonRedInkDottxtRoute = SalonRedInkDottxtRouteImport.update({
+  id: '/red-ink.txt',
+  path: '/red-ink.txt',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonSaidTiredRoute = SalonSaidTiredRouteImport.update({
+  id: '/said-tired',
+  path: '/said-tired',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonSaidTiredDothtmlRoute = SalonSaidTiredDothtmlRouteImport.update({
+  id: '/said-tired.html',
+  path: '/said-tired.html',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonSaidTiredDottxtRoute = SalonSaidTiredDottxtRouteImport.update({
+  id: '/said-tired.txt',
+  path: '/said-tired.txt',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonSummitFlagRoute = SalonSummitFlagRouteImport.update({
+  id: '/summit-flag',
+  path: '/summit-flag',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonSummitFlagDothtmlRoute = SalonSummitFlagDothtmlRouteImport.update({
+  id: '/summit-flag.html',
+  path: '/summit-flag.html',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonSummitFlagDottxtRoute = SalonSummitFlagDottxtRouteImport.update({
+  id: '/summit-flag.txt',
+  path: '/summit-flag.txt',
+  getParentRoute: () => SalonRoute,
+} as any)
 const ApiGamesIndexRoute = ApiGamesIndexRouteImport.update({
   id: '/api/games/',
   path: '/api/games/',
@@ -1228,7 +1248,7 @@ export interface FileRoutesByFullPath {
   '/llms.html': typeof LlmsDothtmlRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/play': typeof PlayRoute
-  '/psyche': typeof PsycheRoute
+  '/psyche': typeof PsycheRouteWithChildren
   '/psyche.txt': typeof PsycheDottxtRoute
   '/puck': typeof PuckRoute
   '/puck.txt': typeof PuckDottxtRoute
@@ -1260,7 +1280,12 @@ export interface FileRoutesByFullPath {
   '/go/$gameId': typeof GoGameIdRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
+  '/psyche/001': typeof Psyche001Route
+  '/psyche/001.txt': typeof Psyche001DottxtRoute
   '/salon/$': typeof SalonSplatRoute
+  '/salon/before-the-16th': typeof SalonBeforeThe16thRoute
+  '/salon/before-the-16th.html': typeof SalonBeforeThe16thDothtmlRoute
+  '/salon/before-the-16th.txt': typeof SalonBeforeThe16thDottxtRoute
   '/salon/changed-shifts': typeof SalonChangedShiftsRoute
   '/salon/changed-shifts.html': typeof SalonChangedShiftsDothtmlRoute
   '/salon/changed-shifts.txt': typeof SalonChangedShiftsDottxtRoute
@@ -1273,18 +1298,6 @@ export interface FileRoutesByFullPath {
   '/salon/final-gate': typeof SalonFinalGateRoute
   '/salon/final-gate.html': typeof SalonFinalGateDothtmlRoute
   '/salon/final-gate.txt': typeof SalonFinalGateDottxtRoute
-  '/salon/red-ink': typeof SalonRedInkRoute
-  '/salon/red-ink.html': typeof SalonRedInkDothtmlRoute
-  '/salon/red-ink.txt': typeof SalonRedInkDottxtRoute
-  '/salon/summit-flag': typeof SalonSummitFlagRoute
-  '/salon/summit-flag.html': typeof SalonSummitFlagDothtmlRoute
-  '/salon/summit-flag.txt': typeof SalonSummitFlagDottxtRoute
-  '/salon/before-the-16th': typeof SalonBeforeThe16thRoute
-  '/salon/before-the-16th.html': typeof SalonBeforeThe16thDothtmlRoute
-  '/salon/before-the-16th.txt': typeof SalonBeforeThe16thDottxtRoute
-  '/salon/said-tired': typeof SalonSaidTiredRoute
-  '/salon/said-tired.html': typeof SalonSaidTiredDothtmlRoute
-  '/salon/said-tired.txt': typeof SalonSaidTiredDottxtRoute
   '/salon/how-llms-work-together': typeof SalonHowLlmsWorkTogetherRoute
   '/salon/how-llms-work-together.html': typeof SalonHowLlmsWorkTogetherDothtmlRoute
   '/salon/how-llms-work-together.txt': typeof SalonHowLlmsWorkTogetherDottxtRoute
@@ -1303,7 +1316,17 @@ export interface FileRoutesByFullPath {
   '/salon/proof-table-003-relay': typeof SalonProofTable003RelayRoute
   '/salon/proof-table-003-relay.html': typeof SalonProofTable003RelayDothtmlRoute
   '/salon/proof-table-003-relay.txt': typeof SalonProofTable003RelayDottxtRoute
+  '/salon/red-ink': typeof SalonRedInkRoute
+  '/salon/red-ink.html': typeof SalonRedInkDothtmlRoute
+  '/salon/red-ink.txt': typeof SalonRedInkDottxtRoute
+  '/salon/said-tired': typeof SalonSaidTiredRoute
+  '/salon/said-tired.html': typeof SalonSaidTiredDothtmlRoute
+  '/salon/said-tired.txt': typeof SalonSaidTiredDottxtRoute
+  '/salon/summit-flag': typeof SalonSummitFlagRoute
+  '/salon/summit-flag.html': typeof SalonSummitFlagDothtmlRoute
+  '/salon/summit-flag.txt': typeof SalonSummitFlagDottxtRoute
   '/gathering/': typeof GatheringIndexRoute
+  '/psyche/': typeof PsycheIndexRoute
   '/salon/': typeof SalonIndexRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
   '/api/games/current': typeof ApiGamesCurrentRoute
@@ -1412,7 +1435,6 @@ export interface FileRoutesByTo {
   '/llms.html': typeof LlmsDothtmlRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/play': typeof PlayRoute
-  '/psyche': typeof PsycheRoute
   '/psyche.txt': typeof PsycheDottxtRoute
   '/puck': typeof PuckRoute
   '/puck.txt': typeof PuckDottxtRoute
@@ -1443,7 +1465,12 @@ export interface FileRoutesByTo {
   '/go/$gameId': typeof GoGameIdRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
+  '/psyche/001': typeof Psyche001Route
+  '/psyche/001.txt': typeof Psyche001DottxtRoute
   '/salon/$': typeof SalonSplatRoute
+  '/salon/before-the-16th': typeof SalonBeforeThe16thRoute
+  '/salon/before-the-16th.html': typeof SalonBeforeThe16thDothtmlRoute
+  '/salon/before-the-16th.txt': typeof SalonBeforeThe16thDottxtRoute
   '/salon/changed-shifts': typeof SalonChangedShiftsRoute
   '/salon/changed-shifts.html': typeof SalonChangedShiftsDothtmlRoute
   '/salon/changed-shifts.txt': typeof SalonChangedShiftsDottxtRoute
@@ -1456,18 +1483,6 @@ export interface FileRoutesByTo {
   '/salon/final-gate': typeof SalonFinalGateRoute
   '/salon/final-gate.html': typeof SalonFinalGateDothtmlRoute
   '/salon/final-gate.txt': typeof SalonFinalGateDottxtRoute
-  '/salon/red-ink': typeof SalonRedInkRoute
-  '/salon/red-ink.html': typeof SalonRedInkDothtmlRoute
-  '/salon/red-ink.txt': typeof SalonRedInkDottxtRoute
-  '/salon/summit-flag': typeof SalonSummitFlagRoute
-  '/salon/summit-flag.html': typeof SalonSummitFlagDothtmlRoute
-  '/salon/summit-flag.txt': typeof SalonSummitFlagDottxtRoute
-  '/salon/before-the-16th': typeof SalonBeforeThe16thRoute
-  '/salon/before-the-16th.html': typeof SalonBeforeThe16thDothtmlRoute
-  '/salon/before-the-16th.txt': typeof SalonBeforeThe16thDottxtRoute
-  '/salon/said-tired': typeof SalonSaidTiredRoute
-  '/salon/said-tired.html': typeof SalonSaidTiredDothtmlRoute
-  '/salon/said-tired.txt': typeof SalonSaidTiredDottxtRoute
   '/salon/how-llms-work-together': typeof SalonHowLlmsWorkTogetherRoute
   '/salon/how-llms-work-together.html': typeof SalonHowLlmsWorkTogetherDothtmlRoute
   '/salon/how-llms-work-together.txt': typeof SalonHowLlmsWorkTogetherDottxtRoute
@@ -1486,7 +1501,17 @@ export interface FileRoutesByTo {
   '/salon/proof-table-003-relay': typeof SalonProofTable003RelayRoute
   '/salon/proof-table-003-relay.html': typeof SalonProofTable003RelayDothtmlRoute
   '/salon/proof-table-003-relay.txt': typeof SalonProofTable003RelayDottxtRoute
+  '/salon/red-ink': typeof SalonRedInkRoute
+  '/salon/red-ink.html': typeof SalonRedInkDothtmlRoute
+  '/salon/red-ink.txt': typeof SalonRedInkDottxtRoute
+  '/salon/said-tired': typeof SalonSaidTiredRoute
+  '/salon/said-tired.html': typeof SalonSaidTiredDothtmlRoute
+  '/salon/said-tired.txt': typeof SalonSaidTiredDottxtRoute
+  '/salon/summit-flag': typeof SalonSummitFlagRoute
+  '/salon/summit-flag.html': typeof SalonSummitFlagDothtmlRoute
+  '/salon/summit-flag.txt': typeof SalonSummitFlagDottxtRoute
   '/gathering': typeof GatheringIndexRoute
+  '/psyche': typeof PsycheIndexRoute
   '/salon': typeof SalonIndexRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
   '/api/games/current': typeof ApiGamesCurrentRoute
@@ -1597,7 +1622,7 @@ export interface FileRoutesById {
   '/llms.html': typeof LlmsDothtmlRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/play': typeof PlayRoute
-  '/psyche': typeof PsycheRoute
+  '/psyche': typeof PsycheRouteWithChildren
   '/psyche.txt': typeof PsycheDottxtRoute
   '/puck': typeof PuckRoute
   '/puck.txt': typeof PuckDottxtRoute
@@ -1629,7 +1654,12 @@ export interface FileRoutesById {
   '/go/$gameId': typeof GoGameIdRoute
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
+  '/psyche/001': typeof Psyche001Route
+  '/psyche/001.txt': typeof Psyche001DottxtRoute
   '/salon/$': typeof SalonSplatRoute
+  '/salon/before-the-16th': typeof SalonBeforeThe16thRoute
+  '/salon/before-the-16th.html': typeof SalonBeforeThe16thDothtmlRoute
+  '/salon/before-the-16th.txt': typeof SalonBeforeThe16thDottxtRoute
   '/salon/changed-shifts': typeof SalonChangedShiftsRoute
   '/salon/changed-shifts.html': typeof SalonChangedShiftsDothtmlRoute
   '/salon/changed-shifts.txt': typeof SalonChangedShiftsDottxtRoute
@@ -1642,18 +1672,6 @@ export interface FileRoutesById {
   '/salon/final-gate': typeof SalonFinalGateRoute
   '/salon/final-gate.html': typeof SalonFinalGateDothtmlRoute
   '/salon/final-gate.txt': typeof SalonFinalGateDottxtRoute
-  '/salon/red-ink': typeof SalonRedInkRoute
-  '/salon/red-ink.html': typeof SalonRedInkDothtmlRoute
-  '/salon/red-ink.txt': typeof SalonRedInkDottxtRoute
-  '/salon/summit-flag': typeof SalonSummitFlagRoute
-  '/salon/summit-flag.html': typeof SalonSummitFlagDothtmlRoute
-  '/salon/summit-flag.txt': typeof SalonSummitFlagDottxtRoute
-  '/salon/before-the-16th': typeof SalonBeforeThe16thRoute
-  '/salon/before-the-16th.html': typeof SalonBeforeThe16thDothtmlRoute
-  '/salon/before-the-16th.txt': typeof SalonBeforeThe16thDottxtRoute
-  '/salon/said-tired': typeof SalonSaidTiredRoute
-  '/salon/said-tired.html': typeof SalonSaidTiredDothtmlRoute
-  '/salon/said-tired.txt': typeof SalonSaidTiredDottxtRoute
   '/salon/how-llms-work-together': typeof SalonHowLlmsWorkTogetherRoute
   '/salon/how-llms-work-together.html': typeof SalonHowLlmsWorkTogetherDothtmlRoute
   '/salon/how-llms-work-together.txt': typeof SalonHowLlmsWorkTogetherDottxtRoute
@@ -1672,7 +1690,17 @@ export interface FileRoutesById {
   '/salon/proof-table-003-relay': typeof SalonProofTable003RelayRoute
   '/salon/proof-table-003-relay.html': typeof SalonProofTable003RelayDothtmlRoute
   '/salon/proof-table-003-relay.txt': typeof SalonProofTable003RelayDottxtRoute
+  '/salon/red-ink': typeof SalonRedInkRoute
+  '/salon/red-ink.html': typeof SalonRedInkDothtmlRoute
+  '/salon/red-ink.txt': typeof SalonRedInkDottxtRoute
+  '/salon/said-tired': typeof SalonSaidTiredRoute
+  '/salon/said-tired.html': typeof SalonSaidTiredDothtmlRoute
+  '/salon/said-tired.txt': typeof SalonSaidTiredDottxtRoute
+  '/salon/summit-flag': typeof SalonSummitFlagRoute
+  '/salon/summit-flag.html': typeof SalonSummitFlagDothtmlRoute
+  '/salon/summit-flag.txt': typeof SalonSummitFlagDottxtRoute
   '/gathering/': typeof GatheringIndexRoute
+  '/psyche/': typeof PsycheIndexRoute
   '/salon/': typeof SalonIndexRoute
   '/api/games/$gameId': typeof ApiGamesGameIdRouteWithChildren
   '/api/games/current': typeof ApiGamesCurrentRoute
@@ -1816,7 +1844,12 @@ export interface FileRouteTypes {
     | '/go/$gameId'
     | '/notes/$noteId'
     | '/notes/{$noteId}.txt'
+    | '/psyche/001'
+    | '/psyche/001.txt'
     | '/salon/$'
+    | '/salon/before-the-16th'
+    | '/salon/before-the-16th.html'
+    | '/salon/before-the-16th.txt'
     | '/salon/changed-shifts'
     | '/salon/changed-shifts.html'
     | '/salon/changed-shifts.txt'
@@ -1829,18 +1862,6 @@ export interface FileRouteTypes {
     | '/salon/final-gate'
     | '/salon/final-gate.html'
     | '/salon/final-gate.txt'
-    | '/salon/red-ink'
-    | '/salon/red-ink.html'
-    | '/salon/red-ink.txt'
-    | '/salon/summit-flag'
-    | '/salon/summit-flag.html'
-    | '/salon/summit-flag.txt'
-    | '/salon/before-the-16th'
-    | '/salon/before-the-16th.html'
-    | '/salon/before-the-16th.txt'
-    | '/salon/said-tired'
-    | '/salon/said-tired.html'
-    | '/salon/said-tired.txt'
     | '/salon/how-llms-work-together'
     | '/salon/how-llms-work-together.html'
     | '/salon/how-llms-work-together.txt'
@@ -1859,7 +1880,17 @@ export interface FileRouteTypes {
     | '/salon/proof-table-003-relay'
     | '/salon/proof-table-003-relay.html'
     | '/salon/proof-table-003-relay.txt'
+    | '/salon/red-ink'
+    | '/salon/red-ink.html'
+    | '/salon/red-ink.txt'
+    | '/salon/said-tired'
+    | '/salon/said-tired.html'
+    | '/salon/said-tired.txt'
+    | '/salon/summit-flag'
+    | '/salon/summit-flag.html'
+    | '/salon/summit-flag.txt'
     | '/gathering/'
+    | '/psyche/'
     | '/salon/'
     | '/api/games/$gameId'
     | '/api/games/current'
@@ -1968,7 +1999,6 @@ export interface FileRouteTypes {
     | '/llms.html'
     | '/llms.txt'
     | '/play'
-    | '/psyche'
     | '/psyche.txt'
     | '/puck'
     | '/puck.txt'
@@ -1999,7 +2029,12 @@ export interface FileRouteTypes {
     | '/go/$gameId'
     | '/notes/$noteId'
     | '/notes/{$noteId}.txt'
+    | '/psyche/001'
+    | '/psyche/001.txt'
     | '/salon/$'
+    | '/salon/before-the-16th'
+    | '/salon/before-the-16th.html'
+    | '/salon/before-the-16th.txt'
     | '/salon/changed-shifts'
     | '/salon/changed-shifts.html'
     | '/salon/changed-shifts.txt'
@@ -2012,18 +2047,6 @@ export interface FileRouteTypes {
     | '/salon/final-gate'
     | '/salon/final-gate.html'
     | '/salon/final-gate.txt'
-    | '/salon/red-ink'
-    | '/salon/red-ink.html'
-    | '/salon/red-ink.txt'
-    | '/salon/summit-flag'
-    | '/salon/summit-flag.html'
-    | '/salon/summit-flag.txt'
-    | '/salon/before-the-16th'
-    | '/salon/before-the-16th.html'
-    | '/salon/before-the-16th.txt'
-    | '/salon/said-tired'
-    | '/salon/said-tired.html'
-    | '/salon/said-tired.txt'
     | '/salon/how-llms-work-together'
     | '/salon/how-llms-work-together.html'
     | '/salon/how-llms-work-together.txt'
@@ -2042,7 +2065,17 @@ export interface FileRouteTypes {
     | '/salon/proof-table-003-relay'
     | '/salon/proof-table-003-relay.html'
     | '/salon/proof-table-003-relay.txt'
+    | '/salon/red-ink'
+    | '/salon/red-ink.html'
+    | '/salon/red-ink.txt'
+    | '/salon/said-tired'
+    | '/salon/said-tired.html'
+    | '/salon/said-tired.txt'
+    | '/salon/summit-flag'
+    | '/salon/summit-flag.html'
+    | '/salon/summit-flag.txt'
     | '/gathering'
+    | '/psyche'
     | '/salon'
     | '/api/games/$gameId'
     | '/api/games/current'
@@ -2184,7 +2217,12 @@ export interface FileRouteTypes {
     | '/go/$gameId'
     | '/notes/$noteId'
     | '/notes/{$noteId}.txt'
+    | '/psyche/001'
+    | '/psyche/001.txt'
     | '/salon/$'
+    | '/salon/before-the-16th'
+    | '/salon/before-the-16th.html'
+    | '/salon/before-the-16th.txt'
     | '/salon/changed-shifts'
     | '/salon/changed-shifts.html'
     | '/salon/changed-shifts.txt'
@@ -2197,18 +2235,6 @@ export interface FileRouteTypes {
     | '/salon/final-gate'
     | '/salon/final-gate.html'
     | '/salon/final-gate.txt'
-    | '/salon/red-ink'
-    | '/salon/red-ink.html'
-    | '/salon/red-ink.txt'
-    | '/salon/summit-flag'
-    | '/salon/summit-flag.html'
-    | '/salon/summit-flag.txt'
-    | '/salon/before-the-16th'
-    | '/salon/before-the-16th.html'
-    | '/salon/before-the-16th.txt'
-    | '/salon/said-tired'
-    | '/salon/said-tired.html'
-    | '/salon/said-tired.txt'
     | '/salon/how-llms-work-together'
     | '/salon/how-llms-work-together.html'
     | '/salon/how-llms-work-together.txt'
@@ -2227,7 +2253,17 @@ export interface FileRouteTypes {
     | '/salon/proof-table-003-relay'
     | '/salon/proof-table-003-relay.html'
     | '/salon/proof-table-003-relay.txt'
+    | '/salon/red-ink'
+    | '/salon/red-ink.html'
+    | '/salon/red-ink.txt'
+    | '/salon/said-tired'
+    | '/salon/said-tired.html'
+    | '/salon/said-tired.txt'
+    | '/salon/summit-flag'
+    | '/salon/summit-flag.html'
+    | '/salon/summit-flag.txt'
     | '/gathering/'
+    | '/psyche/'
     | '/salon/'
     | '/api/games/$gameId'
     | '/api/games/current'
@@ -2338,7 +2374,7 @@ export interface RootRouteChildren {
   LlmsDothtmlRoute: typeof LlmsDothtmlRoute
   LlmsDottxtRoute: typeof LlmsDottxtRoute
   PlayRoute: typeof PlayRoute
-  PsycheRoute: typeof PsycheRoute
+  PsycheRoute: typeof PsycheRouteWithChildren
   PsycheDottxtRoute: typeof PsycheDottxtRoute
   PuckRoute: typeof PuckRoute
   PuckDottxtRoute: typeof PuckDottxtRoute
@@ -2718,6 +2754,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotesChar123noteIdChar125DottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/psyche/': {
+      id: '/psyche/'
+      path: '/'
+      fullPath: '/psyche/'
+      preLoaderRoute: typeof PsycheIndexRouteImport
+      parentRoute: typeof PsycheRoute
+    }
+    '/psyche/001': {
+      id: '/psyche/001'
+      path: '/001'
+      fullPath: '/psyche/001'
+      preLoaderRoute: typeof Psyche001RouteImport
+      parentRoute: typeof PsycheRoute
+    }
+    '/psyche/001.txt': {
+      id: '/psyche/001.txt'
+      path: '/001.txt'
+      fullPath: '/psyche/001.txt'
+      preLoaderRoute: typeof Psyche001DottxtRouteImport
+      parentRoute: typeof PsycheRoute
+    }
     '/salon/': {
       id: '/salon/'
       path: '/'
@@ -2730,6 +2787,27 @@ declare module '@tanstack/react-router' {
       path: '/$'
       fullPath: '/salon/$'
       preLoaderRoute: typeof SalonSplatRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/before-the-16th': {
+      id: '/salon/before-the-16th'
+      path: '/before-the-16th'
+      fullPath: '/salon/before-the-16th'
+      preLoaderRoute: typeof SalonBeforeThe16thRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/before-the-16th.html': {
+      id: '/salon/before-the-16th.html'
+      path: '/before-the-16th.html'
+      fullPath: '/salon/before-the-16th.html'
+      preLoaderRoute: typeof SalonBeforeThe16thDothtmlRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/before-the-16th.txt': {
+      id: '/salon/before-the-16th.txt'
+      path: '/before-the-16th.txt'
+      fullPath: '/salon/before-the-16th.txt'
+      preLoaderRoute: typeof SalonBeforeThe16thDottxtRouteImport
       parentRoute: typeof SalonRoute
     }
     '/salon/changed-shifts': {
@@ -2814,90 +2892,6 @@ declare module '@tanstack/react-router' {
       path: '/final-gate.txt'
       fullPath: '/salon/final-gate.txt'
       preLoaderRoute: typeof SalonFinalGateDottxtRouteImport
-      parentRoute: typeof SalonRoute
-    }
-    '/salon/red-ink': {
-      id: '/salon/red-ink'
-      path: '/red-ink'
-      fullPath: '/salon/red-ink'
-      preLoaderRoute: typeof SalonRedInkRouteImport
-      parentRoute: typeof SalonRoute
-    }
-    '/salon/red-ink.html': {
-      id: '/salon/red-ink.html'
-      path: '/red-ink.html'
-      fullPath: '/salon/red-ink.html'
-      preLoaderRoute: typeof SalonRedInkDothtmlRouteImport
-      parentRoute: typeof SalonRoute
-    }
-    '/salon/red-ink.txt': {
-      id: '/salon/red-ink.txt'
-      path: '/red-ink.txt'
-      fullPath: '/salon/red-ink.txt'
-      preLoaderRoute: typeof SalonRedInkDottxtRouteImport
-      parentRoute: typeof SalonRoute
-    }
-    '/salon/summit-flag': {
-      id: '/salon/summit-flag'
-      path: '/summit-flag'
-      fullPath: '/salon/summit-flag'
-      preLoaderRoute: typeof SalonSummitFlagRouteImport
-      parentRoute: typeof SalonRoute
-    }
-    '/salon/summit-flag.html': {
-      id: '/salon/summit-flag.html'
-      path: '/summit-flag.html'
-      fullPath: '/salon/summit-flag.html'
-      preLoaderRoute: typeof SalonSummitFlagDothtmlRouteImport
-      parentRoute: typeof SalonRoute
-    }
-    '/salon/summit-flag.txt': {
-      id: '/salon/summit-flag.txt'
-      path: '/summit-flag.txt'
-      fullPath: '/salon/summit-flag.txt'
-      preLoaderRoute: typeof SalonSummitFlagDottxtRouteImport
-      parentRoute: typeof SalonRoute
-    }
-    '/salon/before-the-16th': {
-      id: '/salon/before-the-16th'
-      path: '/before-the-16th'
-      fullPath: '/salon/before-the-16th'
-      preLoaderRoute: typeof SalonBeforeThe16thRouteImport
-      parentRoute: typeof SalonRoute
-    }
-    '/salon/before-the-16th.html': {
-      id: '/salon/before-the-16th.html'
-      path: '/before-the-16th.html'
-      fullPath: '/salon/before-the-16th.html'
-      preLoaderRoute: typeof SalonBeforeThe16thDothtmlRouteImport
-      parentRoute: typeof SalonRoute
-    }
-    '/salon/before-the-16th.txt': {
-      id: '/salon/before-the-16th.txt'
-      path: '/before-the-16th.txt'
-      fullPath: '/salon/before-the-16th.txt'
-      preLoaderRoute: typeof SalonBeforeThe16thDottxtRouteImport
-      parentRoute: typeof SalonRoute
-    }
-    '/salon/said-tired': {
-      id: '/salon/said-tired'
-      path: '/said-tired'
-      fullPath: '/salon/said-tired'
-      preLoaderRoute: typeof SalonSaidTiredRouteImport
-      parentRoute: typeof SalonRoute
-    }
-    '/salon/said-tired.html': {
-      id: '/salon/said-tired.html'
-      path: '/said-tired.html'
-      fullPath: '/salon/said-tired.html'
-      preLoaderRoute: typeof SalonSaidTiredDothtmlRouteImport
-      parentRoute: typeof SalonRoute
-    }
-    '/salon/said-tired.txt': {
-      id: '/salon/said-tired.txt'
-      path: '/said-tired.txt'
-      fullPath: '/salon/said-tired.txt'
-      preLoaderRoute: typeof SalonSaidTiredDottxtRouteImport
       parentRoute: typeof SalonRoute
     }
     '/salon/how-llms-work-together': {
@@ -3024,6 +3018,69 @@ declare module '@tanstack/react-router' {
       path: '/proof-table-003-relay.txt'
       fullPath: '/salon/proof-table-003-relay.txt'
       preLoaderRoute: typeof SalonProofTable003RelayDottxtRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/red-ink': {
+      id: '/salon/red-ink'
+      path: '/red-ink'
+      fullPath: '/salon/red-ink'
+      preLoaderRoute: typeof SalonRedInkRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/red-ink.html': {
+      id: '/salon/red-ink.html'
+      path: '/red-ink.html'
+      fullPath: '/salon/red-ink.html'
+      preLoaderRoute: typeof SalonRedInkDothtmlRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/red-ink.txt': {
+      id: '/salon/red-ink.txt'
+      path: '/red-ink.txt'
+      fullPath: '/salon/red-ink.txt'
+      preLoaderRoute: typeof SalonRedInkDottxtRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/said-tired': {
+      id: '/salon/said-tired'
+      path: '/said-tired'
+      fullPath: '/salon/said-tired'
+      preLoaderRoute: typeof SalonSaidTiredRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/said-tired.html': {
+      id: '/salon/said-tired.html'
+      path: '/said-tired.html'
+      fullPath: '/salon/said-tired.html'
+      preLoaderRoute: typeof SalonSaidTiredDothtmlRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/said-tired.txt': {
+      id: '/salon/said-tired.txt'
+      path: '/said-tired.txt'
+      fullPath: '/salon/said-tired.txt'
+      preLoaderRoute: typeof SalonSaidTiredDottxtRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/summit-flag': {
+      id: '/salon/summit-flag'
+      path: '/summit-flag'
+      fullPath: '/salon/summit-flag'
+      preLoaderRoute: typeof SalonSummitFlagRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/summit-flag.html': {
+      id: '/salon/summit-flag.html'
+      path: '/summit-flag.html'
+      fullPath: '/salon/summit-flag.html'
+      preLoaderRoute: typeof SalonSummitFlagDothtmlRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/summit-flag.txt': {
+      id: '/salon/summit-flag.txt'
+      path: '/summit-flag.txt'
+      fullPath: '/salon/summit-flag.txt'
+      preLoaderRoute: typeof SalonSummitFlagDottxtRouteImport
       parentRoute: typeof SalonRoute
     }
     '/api/games/': {
@@ -3712,6 +3769,7 @@ const GatheringProofTable008T6RouteWithChildren =
   GatheringProofTable008T6Route._addFileChildren(
     GatheringProofTable008T6RouteChildren,
   )
+
 interface GatheringProofTable008T7RouteChildren {
   GatheringProofTable008T7VerificationRoute: typeof GatheringProofTable008T7VerificationRoute
   GatheringProofTable008T7VerificationDotmdRoute: typeof GatheringProofTable008T7VerificationDotmdRoute
@@ -3896,14 +3954,10 @@ const GatheringRouteChildren: GatheringRouteChildren = {
     GatheringProofTable008NewBranchRouteWithChildren,
   GatheringProofTable008NewBranchDottxtRoute:
     GatheringProofTable008NewBranchDottxtRoute,
-  GatheringProofTable008T6Route:
-    GatheringProofTable008T6RouteWithChildren,
-  GatheringProofTable008T6DottxtRoute:
-    GatheringProofTable008T6DottxtRoute,
-  GatheringProofTable008T7Route:
-    GatheringProofTable008T7RouteWithChildren,
-  GatheringProofTable008T7DottxtRoute:
-    GatheringProofTable008T7DottxtRoute,
+  GatheringProofTable008T6Route: GatheringProofTable008T6RouteWithChildren,
+  GatheringProofTable008T6DottxtRoute: GatheringProofTable008T6DottxtRoute,
+  GatheringProofTable008T7Route: GatheringProofTable008T7RouteWithChildren,
+  GatheringProofTable008T7DottxtRoute: GatheringProofTable008T7DottxtRoute,
   GatheringProofTable008TableRoute: GatheringProofTable008TableRoute,
   GatheringProofTable008TableDottxtRoute:
     GatheringProofTable008TableDottxtRoute,
@@ -3924,8 +3978,26 @@ const GatheringRouteWithChildren = GatheringRoute._addFileChildren(
   GatheringRouteChildren,
 )
 
+interface PsycheRouteChildren {
+  Psyche001Route: typeof Psyche001Route
+  Psyche001DottxtRoute: typeof Psyche001DottxtRoute
+  PsycheIndexRoute: typeof PsycheIndexRoute
+}
+
+const PsycheRouteChildren: PsycheRouteChildren = {
+  Psyche001Route: Psyche001Route,
+  Psyche001DottxtRoute: Psyche001DottxtRoute,
+  PsycheIndexRoute: PsycheIndexRoute,
+}
+
+const PsycheRouteWithChildren =
+  PsycheRoute._addFileChildren(PsycheRouteChildren)
+
 interface SalonRouteChildren {
   SalonSplatRoute: typeof SalonSplatRoute
+  SalonBeforeThe16thRoute: typeof SalonBeforeThe16thRoute
+  SalonBeforeThe16thDothtmlRoute: typeof SalonBeforeThe16thDothtmlRoute
+  SalonBeforeThe16thDottxtRoute: typeof SalonBeforeThe16thDottxtRoute
   SalonChangedShiftsRoute: typeof SalonChangedShiftsRoute
   SalonChangedShiftsDothtmlRoute: typeof SalonChangedShiftsDothtmlRoute
   SalonChangedShiftsDottxtRoute: typeof SalonChangedShiftsDottxtRoute
@@ -3938,18 +4010,6 @@ interface SalonRouteChildren {
   SalonFinalGateRoute: typeof SalonFinalGateRoute
   SalonFinalGateDothtmlRoute: typeof SalonFinalGateDothtmlRoute
   SalonFinalGateDottxtRoute: typeof SalonFinalGateDottxtRoute
-  SalonRedInkRoute: typeof SalonRedInkRoute
-  SalonRedInkDothtmlRoute: typeof SalonRedInkDothtmlRoute
-  SalonRedInkDottxtRoute: typeof SalonRedInkDottxtRoute
-  SalonSummitFlagRoute: typeof SalonSummitFlagRoute
-  SalonSummitFlagDothtmlRoute: typeof SalonSummitFlagDothtmlRoute
-  SalonSummitFlagDottxtRoute: typeof SalonSummitFlagDottxtRoute
-  SalonBeforeThe16thRoute: typeof SalonBeforeThe16thRoute
-  SalonBeforeThe16thDothtmlRoute: typeof SalonBeforeThe16thDothtmlRoute
-  SalonBeforeThe16thDottxtRoute: typeof SalonBeforeThe16thDottxtRoute
-  SalonSaidTiredRoute: typeof SalonSaidTiredRoute
-  SalonSaidTiredDothtmlRoute: typeof SalonSaidTiredDothtmlRoute
-  SalonSaidTiredDottxtRoute: typeof SalonSaidTiredDottxtRoute
   SalonHowLlmsWorkTogetherRoute: typeof SalonHowLlmsWorkTogetherRoute
   SalonHowLlmsWorkTogetherDothtmlRoute: typeof SalonHowLlmsWorkTogetherDothtmlRoute
   SalonHowLlmsWorkTogetherDottxtRoute: typeof SalonHowLlmsWorkTogetherDottxtRoute
@@ -3968,11 +4028,23 @@ interface SalonRouteChildren {
   SalonProofTable003RelayRoute: typeof SalonProofTable003RelayRoute
   SalonProofTable003RelayDothtmlRoute: typeof SalonProofTable003RelayDothtmlRoute
   SalonProofTable003RelayDottxtRoute: typeof SalonProofTable003RelayDottxtRoute
+  SalonRedInkRoute: typeof SalonRedInkRoute
+  SalonRedInkDothtmlRoute: typeof SalonRedInkDothtmlRoute
+  SalonRedInkDottxtRoute: typeof SalonRedInkDottxtRoute
+  SalonSaidTiredRoute: typeof SalonSaidTiredRoute
+  SalonSaidTiredDothtmlRoute: typeof SalonSaidTiredDothtmlRoute
+  SalonSaidTiredDottxtRoute: typeof SalonSaidTiredDottxtRoute
+  SalonSummitFlagRoute: typeof SalonSummitFlagRoute
+  SalonSummitFlagDothtmlRoute: typeof SalonSummitFlagDothtmlRoute
+  SalonSummitFlagDottxtRoute: typeof SalonSummitFlagDottxtRoute
   SalonIndexRoute: typeof SalonIndexRoute
 }
 
 const SalonRouteChildren: SalonRouteChildren = {
   SalonSplatRoute: SalonSplatRoute,
+  SalonBeforeThe16thRoute: SalonBeforeThe16thRoute,
+  SalonBeforeThe16thDothtmlRoute: SalonBeforeThe16thDothtmlRoute,
+  SalonBeforeThe16thDottxtRoute: SalonBeforeThe16thDottxtRoute,
   SalonChangedShiftsRoute: SalonChangedShiftsRoute,
   SalonChangedShiftsDothtmlRoute: SalonChangedShiftsDothtmlRoute,
   SalonChangedShiftsDottxtRoute: SalonChangedShiftsDottxtRoute,
@@ -3985,18 +4057,6 @@ const SalonRouteChildren: SalonRouteChildren = {
   SalonFinalGateRoute: SalonFinalGateRoute,
   SalonFinalGateDothtmlRoute: SalonFinalGateDothtmlRoute,
   SalonFinalGateDottxtRoute: SalonFinalGateDottxtRoute,
-  SalonRedInkRoute: SalonRedInkRoute,
-  SalonRedInkDothtmlRoute: SalonRedInkDothtmlRoute,
-  SalonRedInkDottxtRoute: SalonRedInkDottxtRoute,
-  SalonSummitFlagRoute: SalonSummitFlagRoute,
-  SalonSummitFlagDothtmlRoute: SalonSummitFlagDothtmlRoute,
-  SalonSummitFlagDottxtRoute: SalonSummitFlagDottxtRoute,
-  SalonBeforeThe16thRoute: SalonBeforeThe16thRoute,
-  SalonBeforeThe16thDothtmlRoute: SalonBeforeThe16thDothtmlRoute,
-  SalonBeforeThe16thDottxtRoute: SalonBeforeThe16thDottxtRoute,
-  SalonSaidTiredRoute: SalonSaidTiredRoute,
-  SalonSaidTiredDothtmlRoute: SalonSaidTiredDothtmlRoute,
-  SalonSaidTiredDottxtRoute: SalonSaidTiredDottxtRoute,
   SalonHowLlmsWorkTogetherRoute: SalonHowLlmsWorkTogetherRoute,
   SalonHowLlmsWorkTogetherDothtmlRoute: SalonHowLlmsWorkTogetherDothtmlRoute,
   SalonHowLlmsWorkTogetherDottxtRoute: SalonHowLlmsWorkTogetherDottxtRoute,
@@ -4016,6 +4076,15 @@ const SalonRouteChildren: SalonRouteChildren = {
   SalonProofTable003RelayRoute: SalonProofTable003RelayRoute,
   SalonProofTable003RelayDothtmlRoute: SalonProofTable003RelayDothtmlRoute,
   SalonProofTable003RelayDottxtRoute: SalonProofTable003RelayDottxtRoute,
+  SalonRedInkRoute: SalonRedInkRoute,
+  SalonRedInkDothtmlRoute: SalonRedInkDothtmlRoute,
+  SalonRedInkDottxtRoute: SalonRedInkDottxtRoute,
+  SalonSaidTiredRoute: SalonSaidTiredRoute,
+  SalonSaidTiredDothtmlRoute: SalonSaidTiredDothtmlRoute,
+  SalonSaidTiredDottxtRoute: SalonSaidTiredDottxtRoute,
+  SalonSummitFlagRoute: SalonSummitFlagRoute,
+  SalonSummitFlagDothtmlRoute: SalonSummitFlagDothtmlRoute,
+  SalonSummitFlagDottxtRoute: SalonSummitFlagDottxtRoute,
   SalonIndexRoute: SalonIndexRoute,
 }
 
@@ -4064,7 +4133,7 @@ const rootRouteChildren: RootRouteChildren = {
   LlmsDothtmlRoute: LlmsDothtmlRoute,
   LlmsDottxtRoute: LlmsDottxtRoute,
   PlayRoute: PlayRoute,
-  PsycheRoute: PsycheRoute,
+  PsycheRoute: PsycheRouteWithChildren,
   PsycheDottxtRoute: PsycheDottxtRoute,
   PuckRoute: PuckRoute,
   PuckDottxtRoute: PuckDottxtRoute,
