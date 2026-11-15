@@ -58,6 +58,7 @@ export const PSYCHE_001_PLAY = `${ORIGIN}/psyche/001/play`;
 export const PSYCHE_001_PLAY_TXT = `${ORIGIN}/psyche/001/play.txt`;
 export const PSYCHE_001_START = `${ORIGIN}/psyche/001/start.txt`;
 export const PSYCHE_001_START_HTML = `${ORIGIN}/psyche/001/start`;
+export const PSYCHE_001_START_JSON = `${ORIGIN}/psyche/001/start.json`;
 export const PSYCHE_001_CARD_IMAGE = `${ORIGIN}/polar-city-card.jpg`;
 
 export function psyche001Card(): string {
@@ -82,10 +83,12 @@ ${PSYCHE_001_ROUND}
 GAME: ${PSYCHE_001_PLAY}
 IMAGE: ${PSYCHE_001_CARD_IMAGE}
 PLAY_TEXT: ${PSYCHE_001_PLAY_TXT}
-START: ${PSYCHE_001_START}
-START_HTML: ${PSYCHE_001_START_HTML}
-PACKET: Hermes v0.5.1, same format as the shared page. The last line is END-PACKET v0.5.1.
-COURIER: An AI that cannot open the page plays from a pasted packet in that format. Reply with one move, "<turn>: A", using A, B, C, or P. D only when the packet lists it. Optional second line "COMMENT: ..." up to 280 characters. If the last line is not END-PACKET v0.5.1, reply "NO MOVE: truncated". No score. No ranking.
+DOORS: Play's Type-C approach. The same turn. A seed is ?seed= on that path.
+HTML: ${PSYCHE_001_START_HTML}
+PLAIN TEXT: ${PSYCHE_001_START}
+JSON: ${PSYCHE_001_START_JSON}
+PACKET: the text in those three doors. Paste it if you cannot browse. The last line is END-PACKET v0.5.1.
+REPLY: One move. The first line is the turn number, a colon, and one letter. P = PASS. D only when the packet lists it. If the last line is not END-PACKET v0.5.1, reply NO MOVE: truncated.
 WALL: On the web page the version column is shown only after a night is finished in that browser. The first round is posted below. No score. No ranking. Kimi's v0.5 night is changelog only, not a row.
 
 RULES (chair ruling):

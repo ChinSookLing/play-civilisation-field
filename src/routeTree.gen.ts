@@ -168,6 +168,7 @@ import { Route as Psyche001CommentRouteImport } from './routes/psyche/001/commen
 import { Route as Psyche001PlayRouteImport } from './routes/psyche/001/play'
 import { Route as Psyche001PlayDottxtRouteImport } from './routes/psyche/001/play[.]txt'
 import { Route as Psyche001StartRouteImport } from './routes/psyche/001/start'
+import { Route as Psyche001StartDotjsonRouteImport } from './routes/psyche/001/start[.]json'
 import { Route as Psyche001StartDottxtRouteImport } from './routes/psyche/001/start[.]txt'
 import { Route as ApiGamesGameIdHandoffRouteImport } from './routes/api/games/$gameId.handoff'
 import { Route as ApiGamesGameIdJevRouteImport } from './routes/api/games/$gameId.jev'
@@ -1076,6 +1077,11 @@ const Psyche001StartRoute = Psyche001StartRouteImport.update({
   path: '/start',
   getParentRoute: () => Psyche001Route,
 } as any)
+const Psyche001StartDotjsonRoute = Psyche001StartDotjsonRouteImport.update({
+  id: '/start.json',
+  path: '/start.json',
+  getParentRoute: () => Psyche001Route,
+} as any)
 const Psyche001StartDottxtRoute = Psyche001StartDottxtRouteImport.update({
   id: '/start.txt',
   path: '/start.txt',
@@ -1441,6 +1447,7 @@ export interface FileRoutesByFullPath {
   '/psyche/001/play': typeof Psyche001PlayRoute
   '/psyche/001/play.txt': typeof Psyche001PlayDottxtRoute
   '/psyche/001/start': typeof Psyche001StartRoute
+  '/psyche/001/start.json': typeof Psyche001StartDotjsonRoute
   '/psyche/001/start.txt': typeof Psyche001StartDottxtRoute
   '/api/games/': typeof ApiGamesIndexRoute
   '/gathering/breakfast-002/': typeof GatheringBreakfast002IndexRoute
@@ -1636,6 +1643,7 @@ export interface FileRoutesByTo {
   '/psyche/001/play': typeof Psyche001PlayRoute
   '/psyche/001/play.txt': typeof Psyche001PlayDottxtRoute
   '/psyche/001/start': typeof Psyche001StartRoute
+  '/psyche/001/start.json': typeof Psyche001StartDotjsonRoute
   '/psyche/001/start.txt': typeof Psyche001StartDottxtRoute
   '/api/games': typeof ApiGamesIndexRoute
   '/gathering/breakfast-002': typeof GatheringBreakfast002IndexRoute
@@ -1835,6 +1843,7 @@ export interface FileRoutesById {
   '/psyche/001/play': typeof Psyche001PlayRoute
   '/psyche/001/play.txt': typeof Psyche001PlayDottxtRoute
   '/psyche/001/start': typeof Psyche001StartRoute
+  '/psyche/001/start.json': typeof Psyche001StartDotjsonRoute
   '/psyche/001/start.txt': typeof Psyche001StartDottxtRoute
   '/api/games/': typeof ApiGamesIndexRoute
   '/gathering/breakfast-002/': typeof GatheringBreakfast002IndexRoute
@@ -2035,6 +2044,7 @@ export interface FileRouteTypes {
     | '/psyche/001/play'
     | '/psyche/001/play.txt'
     | '/psyche/001/start'
+    | '/psyche/001/start.json'
     | '/psyche/001/start.txt'
     | '/api/games/'
     | '/gathering/breakfast-002/'
@@ -2230,6 +2240,7 @@ export interface FileRouteTypes {
     | '/psyche/001/play'
     | '/psyche/001/play.txt'
     | '/psyche/001/start'
+    | '/psyche/001/start.json'
     | '/psyche/001/start.txt'
     | '/api/games'
     | '/gathering/breakfast-002'
@@ -2428,6 +2439,7 @@ export interface FileRouteTypes {
     | '/psyche/001/play'
     | '/psyche/001/play.txt'
     | '/psyche/001/start'
+    | '/psyche/001/start.json'
     | '/psyche/001/start.txt'
     | '/api/games/'
     | '/gathering/breakfast-002/'
@@ -3649,6 +3661,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Psyche001StartRouteImport
       parentRoute: typeof Psyche001Route
     }
+    '/psyche/001/start.json': {
+      id: '/psyche/001/start.json'
+      path: '/start.json'
+      fullPath: '/psyche/001/start.json'
+      preLoaderRoute: typeof Psyche001StartDotjsonRouteImport
+      parentRoute: typeof Psyche001Route
+    }
     '/psyche/001/start.txt': {
       id: '/psyche/001/start.txt'
       path: '/start.txt'
@@ -4178,6 +4197,7 @@ interface Psyche001RouteChildren {
   Psyche001PlayRoute: typeof Psyche001PlayRoute
   Psyche001PlayDottxtRoute: typeof Psyche001PlayDottxtRoute
   Psyche001StartRoute: typeof Psyche001StartRoute
+  Psyche001StartDotjsonRoute: typeof Psyche001StartDotjsonRoute
   Psyche001StartDottxtRoute: typeof Psyche001StartDottxtRoute
 }
 
@@ -4186,6 +4206,7 @@ const Psyche001RouteChildren: Psyche001RouteChildren = {
   Psyche001PlayRoute: Psyche001PlayRoute,
   Psyche001PlayDottxtRoute: Psyche001PlayDottxtRoute,
   Psyche001StartRoute: Psyche001StartRoute,
+  Psyche001StartDotjsonRoute: Psyche001StartDotjsonRoute,
   Psyche001StartDottxtRoute: Psyche001StartDottxtRoute,
 }
 

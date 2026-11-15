@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PolarCityCard } from "@/components/play/PolarCityCard";
 import { RoomIndex } from "@/components/play/RoomIndex";
 import { psycheSheet } from "@/lib/play/page-sheets";
 import { pageMeta } from "@/lib/play/page-meta";
@@ -35,7 +34,6 @@ function Psyche() {
         },
       ]}
       sheet={psycheSheet()}
-      banner={<PolarCityCard />}
     />
   );
 }

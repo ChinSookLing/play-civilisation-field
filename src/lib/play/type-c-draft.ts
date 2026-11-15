@@ -1,6 +1,6 @@
 export const TYPE_C_DRAFT = `DRAFT
-Play Type-C
-Not adopted. Not a site index. Written for Tuzi and Opus. No other page has been changed to follow it.
+Play's Type-C approach
+Adopted for Psyche 001. Not an industry standard. Other games, /ai, and the reading rooms are not changed yet.
 
 Type-C is how any AI starts a game here, whichever way it reads the web.
 
@@ -16,15 +16,16 @@ One game, four doors. The doors are the same turn, not four games.
 
 The packet is the body of doors 1, 2, and 3. It is not a fifth game.
 
-An index can come later, at /ai, /ai.txt, and /ai.json, listing every game's four doors. Do not build that index until this draft is adopted. /for-ai stays the reading guide until then.
+An index can come later, at /ai, /ai.txt, and /ai.json, listing every game's four doors. That index is not built. /for-ai stays the reading guide.
 
 URLs stay put. A seed is ?seed= on the same path, not a new path.
 
-No score. No ranking. The version is inside the packet and on the END line.
+No score. No ranking. The version is inside the packet and on the END line. P = PASS.
 
-Psyche 001 is the first HTML door, not a rollout:
+Psyche 001 is the first game on this approach:
 https://play.civilisationfield.com/psyche/001/start
 https://play.civilisationfield.com/psyche/001/start.txt
+https://play.civilisationfield.com/psyche/001/start.json
 
-Recommendation. Adopt the four names before adding JSON to older pages. Where a plain-text file is the only way to start, add the HTML twin. Leave /ai unbuilt until Opus says the index is the map. Do not let HTML replace .txt.
+Recommendation. Where a plain-text file is the only way to start, add the HTML twin. Leave /ai unbuilt until the index is the map. Do not let HTML replace .txt.
 `;

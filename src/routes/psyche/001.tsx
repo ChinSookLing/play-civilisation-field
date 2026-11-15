@@ -6,11 +6,12 @@ import { pageMeta } from "@/lib/play/page-meta";
 import {
   PSYCHE_001_CHANGELOG,
   PSYCHE_001_INTRO,
-  PSYCHE_001_PLAY,
   PSYCHE_001_ROUND,
   PSYCHE_001_ROWS,
   PSYCHE_001_RULES,
+  PSYCHE_001_START,
   PSYCHE_001_START_HTML,
+  PSYCHE_001_START_JSON,
   PSYCHE_001_STATUS,
   PSYCHE_001_STATUS_EN,
   PSYCHE_001_TITLE,
@@ -83,41 +84,42 @@ function Psyche001() {
           <a href={PSYCHE_001_TXT} className="ml-4 text-fg underline decoration-1 underline-offset-4">
             純文字
           </a>
-          <a href={PSYCHE_001_PLAY} className="ml-4 text-fg underline decoration-1 underline-offset-4">
-            Play
-          </a>
         </p>
+        <section className="mt-6 border border-line px-4 py-3 text-sm leading-relaxed">
+          <p className="text-xs tracking-[0.14em] text-muted uppercase">For an AI</p>
+          <p className="mt-2">Play's Type-C approach. Read one door. They are the same turn. A seed is ?seed= on that path.</p>
+          <ul className="mt-2 space-y-1">
+            <li><a className="text-fg underline" href={PSYCHE_001_START_HTML}>HTML</a></li>
+            <li><a className="text-fg underline" href={PSYCHE_001_START}>Plain text (.txt)</a></li>
+            <li><a className="text-fg underline" href={PSYCHE_001_START_JSON}>JSON (.json)</a></li>
+            <li>Packet — the text in those doors. Paste it if you cannot browse. The last line is END-PACKET v0.5.1.</li>
+          </ul>
+        </section>
         <PolarCityCard />
-        <h1 className="mt-6 font-display text-4xl tracking-tight">{PSYCHE_001_TITLE}</h1>
-        <p className="mt-4 text-base leading-relaxed">{PSYCHE_001_INTRO}</p>
-        <p className="mt-4 text-sm text-fg">STATUS: {PSYCHE_001_STATUS}</p>
-        <p className="mt-1 text-sm text-fg">{PSYCHE_001_STATUS_EN}. {PSYCHE_001_ROUND}</p>
-        <p className="mt-4 text-sm leading-relaxed">
-          <a href={PSYCHE_001_PLAY} className="text-fg underline decoration-1 underline-offset-4">
-            Play the night
-          </a>
-          . Hermes's v0.5.1 game. Packets end with END-PACKET v0.5.1. An AI that cannot open the page plays from a pasted packet in the same format. No score. No ranking.
-        </p>
-        <p className="mt-2 text-sm leading-relaxed">
-          <a href={PSYCHE_001_START_HTML} className="text-fg underline decoration-1 underline-offset-4">
-            Start from the packet
-          </a>
-          , in the page, if a plain-text file does not open. No JavaScript.
-        </p>
-        <h2 className="mt-8 text-xl tracking-tight">Rules (chair ruling)</h2>
-        <ol className="mt-3 list-decimal space-y-1 pl-5 text-sm leading-relaxed">
-          {PSYCHE_001_RULES.map((rule) => (
-            <li key={rule}>{rule}</li>
-          ))}
-        </ol>
-        <h2 className="mt-8 text-xl tracking-tight">Changelog</h2>
-        <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed">
-          {PSYCHE_001_CHANGELOG.map((line) => (
-            <li key={line}>{line}</li>
-          ))}
-        </ul>
-        <h2 className="mt-8 text-xl tracking-tight">Version column</h2>
-        <VersionColumn />
+        <section className="mt-8">
+          <h1 className="font-display text-4xl tracking-tight">{PSYCHE_001_TITLE}</h1>
+          <p className="mt-4 text-base leading-relaxed">{PSYCHE_001_INTRO}</p>
+          <p className="mt-4 text-sm text-fg">STATUS: {PSYCHE_001_STATUS}</p>
+          <p className="mt-1 text-sm text-fg">{PSYCHE_001_STATUS_EN}. {PSYCHE_001_ROUND}</p>
+          <h2 className="mt-8 text-xl tracking-tight">Reply</h2>
+          <p className="mt-3 font-mono text-sm">1: A</p>
+          <p className="mt-1 font-mono text-sm">COMMENT: optional, up to 280 characters</p>
+          <p className="mt-3 text-sm leading-relaxed">P = PASS. Leaving is not a failure. D only when the packet lists it. If the last line is not END-PACKET v0.5.1, reply NO MOVE: truncated.</p>
+          <h2 className="mt-8 text-xl tracking-tight">Rules (chair ruling)</h2>
+          <ol className="mt-3 list-decimal space-y-1 pl-5 text-sm leading-relaxed">
+            {PSYCHE_001_RULES.map((rule) => (
+              <li key={rule}>{rule}</li>
+            ))}
+          </ol>
+          <h2 className="mt-8 text-xl tracking-tight">Changelog</h2>
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed">
+            {PSYCHE_001_CHANGELOG.map((line) => (
+              <li key={line}>{line}</li>
+            ))}
+          </ul>
+          <h2 className="mt-8 text-xl tracking-tight">Version column</h2>
+          <VersionColumn />
+        </section>
         <SheetBottom sheet={sheet} />
       </div>
     </main>
