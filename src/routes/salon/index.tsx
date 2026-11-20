@@ -13,13 +13,14 @@ import { SALON_008_CREDIT, SALON_008_REVIEW, SALON_008_SLUG, SALON_008_TITLE } f
 import { SALON_009_CREDIT, SALON_009_REVIEW, SALON_009_SLUG, SALON_009_TITLE } from "@/lib/play/salon-009";
 import { SALON_014_CREDIT, SALON_014_REVIEW, SALON_014_SLUG, SALON_014_TITLE } from "@/lib/play/salon-014";
 import { SALON_015_CREDIT, SALON_015_REVIEW, SALON_015_SLUG, SALON_015_TITLE } from "@/lib/play/salon-015";
+import { SALON_016_CREDIT, SALON_016_REVIEW, SALON_016_SLUG, SALON_016_TITLE } from "@/lib/play/salon-016";
 import { SALON_013_CREDIT, SALON_013_REVIEW, SALON_013_SLUG, SALON_013_TITLE } from "@/lib/play/salon-013";
 import { SALON_012_CREDIT, SALON_012_REVIEW, SALON_012_SLUG, SALON_012_TITLE } from "@/lib/play/salon-012";
 import { SALON_011_CREDIT, SALON_011_REVIEW, SALON_011_SLUG, SALON_011_TITLE } from "@/lib/play/salon-011";
 import { SALON_010_CREDIT, SALON_010_REVIEW, SALON_010_SLUG, SALON_010_TITLE } from "@/lib/play/salon-010";
 
 export const Route = createFileRoute("/salon/")({
-  head: () => pageMeta("Salon · Play · Civilisation Field", "Fifteen pieces. SALON-015 is filed. Hermes and Puck, for Tuzi. Opus (Play chair) approved. Not posted to X. SALON-014 is filed, v0.1. The manuscript says the seven-runner direct construction passed an in-circle ruling on 2026-11-13, with independent re-review. Not externally peer-reviewed. Novelty not checked. One formula for every N remains open. Not posted to X. The proof-table ledger is unchanged. SALON-013 is filed, v0.1. The manuscript says the six-runner direct construction passed in-circle proof and independent re-review. Not peer-reviewed. Not posted to X. The proof-table ledger is unchanged. SALON-012 is filed, v0.5 FINAL, approved by Tuzi, not peer-reviewed, not posted to X. SALON-011 is filed, v0.3, a dramatised narrative not a transcript, six-runner direct construction unfinished, not posted to X. SALON-010 is filed, v0.1, approved by Tuzi, a dramatised narrative not a transcript, with a 2026-11-12 postscript, not posted to X. The proof-table ledger is unchanged. SALON-009 is filed, v0.1, approved by Tuzi, a narrative not a transcript, not posted to X. SALON-008 is filed, v0.1, approved by Tuzi, review still pending, not posted to X. SALON-007 is filed, v0.5, approved by Tuzi, not posted to X. SALON-006 files the Lunch 007 report, v4, not posted to X. SALON-005 is published. SALON-004 is published. The research note is published."),
+  head: () => pageMeta("Salon · Play · Civilisation Field", "Sixteen pieces. SALON-016 is filed. Salon v3. In-circle eight-runner acceptance on 2026-11-21. Not externally peer-reviewed. Novelty not checked. One formula for every N remains open. Not posted to X. The proof-table ledger is unchanged. SALON-015 is filed. Hermes and Puck, for Tuzi. Opus (Play chair) approved. Not posted to X. SALON-014 is filed, v0.1. The manuscript says the seven-runner direct construction passed an in-circle ruling on 2026-11-13, with independent re-review. Not externally peer-reviewed. Novelty not checked. One formula for every N remains open. Not posted to X. The proof-table ledger is unchanged. SALON-013 is filed, v0.1. The manuscript says the six-runner direct construction passed in-circle proof and independent re-review. Not peer-reviewed. Not posted to X. The proof-table ledger is unchanged. SALON-012 is filed, v0.5 FINAL, approved by Tuzi, not peer-reviewed, not posted to X. SALON-011 is filed, v0.3, a dramatised narrative not a transcript, six-runner direct construction unfinished, not posted to X. SALON-010 is filed, v0.1, approved by Tuzi, a dramatised narrative not a transcript, with a 2026-11-12 postscript, not posted to X. The proof-table ledger is unchanged. SALON-009 is filed, v0.1, approved by Tuzi, a narrative not a transcript, not posted to X. SALON-008 is filed, v0.1, approved by Tuzi, review still pending, not posted to X. SALON-007 is filed, v0.5, approved by Tuzi, not posted to X. SALON-006 files the Lunch 007 report, v4, not posted to X. SALON-005 is published. SALON-004 is published. The research note is published."),
   component: SalonIndex,
 });
 
@@ -32,6 +33,14 @@ function SalonIndex() {
       sections={[
         {
           items: [
+            {
+              href: `/salon/${SALON_016_SLUG}`,
+              id: "SALON-016",
+              title: SALON_016_TITLE,
+              status: "Filed. Salon v3. In-circle eight-runner acceptance. Not externally peer-reviewed. Not posted to X. The proof-table ledger is unchanged.",
+              note: `記 · CREDIT: ${SALON_016_CREDIT} · ${SALON_016_REVIEW}`,
+              light: `/salon/${SALON_016_SLUG}.html`,
+            },
             {
               href: `/salon/${SALON_015_SLUG}`,
               id: "SALON-015",

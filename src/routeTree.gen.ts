@@ -92,6 +92,9 @@ import { Route as SalonJevControlledProbe001DottxtRouteImport } from './routes/s
 import { Route as SalonLadderRouteImport } from './routes/salon/ladder'
 import { Route as SalonLadderDothtmlRouteImport } from './routes/salon/ladder[.]html'
 import { Route as SalonLadderDottxtRouteImport } from './routes/salon/ladder[.]txt'
+import { Route as SalonLeaveNoneRouteImport } from './routes/salon/leave-none'
+import { Route as SalonLeaveNoneDothtmlRouteImport } from './routes/salon/leave-none[.]html'
+import { Route as SalonLeaveNoneDottxtRouteImport } from './routes/salon/leave-none[.]txt'
 import { Route as SalonLunch007ReportRouteImport } from './routes/salon/lunch-007-report'
 import { Route as SalonLunch007ReportDothtmlRouteImport } from './routes/salon/lunch-007-report[.]html'
 import { Route as SalonLunch007ReportDottxtRouteImport } from './routes/salon/lunch-007-report[.]txt'
@@ -651,6 +654,21 @@ const SalonLadderDothtmlRoute = SalonLadderDothtmlRouteImport.update({
 const SalonLadderDottxtRoute = SalonLadderDottxtRouteImport.update({
   id: '/ladder.txt',
   path: '/ladder.txt',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonLeaveNoneRoute = SalonLeaveNoneRouteImport.update({
+  id: '/leave-none',
+  path: '/leave-none',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonLeaveNoneDothtmlRoute = SalonLeaveNoneDothtmlRouteImport.update({
+  id: '/leave-none.html',
+  path: '/leave-none.html',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonLeaveNoneDottxtRoute = SalonLeaveNoneDottxtRouteImport.update({
+  id: '/leave-none.txt',
+  path: '/leave-none.txt',
   getParentRoute: () => SalonRoute,
 } as any)
 const SalonLunch007ReportRoute = SalonLunch007ReportRouteImport.update({
@@ -1421,6 +1439,9 @@ export interface FileRoutesByFullPath {
   '/salon/ladder': typeof SalonLadderRoute
   '/salon/ladder.html': typeof SalonLadderDothtmlRoute
   '/salon/ladder.txt': typeof SalonLadderDottxtRoute
+  '/salon/leave-none': typeof SalonLeaveNoneRoute
+  '/salon/leave-none.html': typeof SalonLeaveNoneDothtmlRoute
+  '/salon/leave-none.txt': typeof SalonLeaveNoneDottxtRoute
   '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
   '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
   '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
@@ -1624,6 +1645,9 @@ export interface FileRoutesByTo {
   '/salon/ladder': typeof SalonLadderRoute
   '/salon/ladder.html': typeof SalonLadderDothtmlRoute
   '/salon/ladder.txt': typeof SalonLadderDottxtRoute
+  '/salon/leave-none': typeof SalonLeaveNoneRoute
+  '/salon/leave-none.html': typeof SalonLeaveNoneDothtmlRoute
+  '/salon/leave-none.txt': typeof SalonLeaveNoneDottxtRoute
   '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
   '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
   '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
@@ -1830,6 +1854,9 @@ export interface FileRoutesById {
   '/salon/ladder': typeof SalonLadderRoute
   '/salon/ladder.html': typeof SalonLadderDothtmlRoute
   '/salon/ladder.txt': typeof SalonLadderDottxtRoute
+  '/salon/leave-none': typeof SalonLeaveNoneRoute
+  '/salon/leave-none.html': typeof SalonLeaveNoneDothtmlRoute
+  '/salon/leave-none.txt': typeof SalonLeaveNoneDottxtRoute
   '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
   '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
   '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
@@ -2038,6 +2065,9 @@ export interface FileRouteTypes {
     | '/salon/ladder'
     | '/salon/ladder.html'
     | '/salon/ladder.txt'
+    | '/salon/leave-none'
+    | '/salon/leave-none.html'
+    | '/salon/leave-none.txt'
     | '/salon/lunch-007-report'
     | '/salon/lunch-007-report.html'
     | '/salon/lunch-007-report.txt'
@@ -2241,6 +2271,9 @@ export interface FileRouteTypes {
     | '/salon/ladder'
     | '/salon/ladder.html'
     | '/salon/ladder.txt'
+    | '/salon/leave-none'
+    | '/salon/leave-none.html'
+    | '/salon/leave-none.txt'
     | '/salon/lunch-007-report'
     | '/salon/lunch-007-report.html'
     | '/salon/lunch-007-report.txt'
@@ -2446,6 +2479,9 @@ export interface FileRouteTypes {
     | '/salon/ladder'
     | '/salon/ladder.html'
     | '/salon/ladder.txt'
+    | '/salon/leave-none'
+    | '/salon/leave-none.html'
+    | '/salon/leave-none.txt'
     | '/salon/lunch-007-report'
     | '/salon/lunch-007-report.html'
     | '/salon/lunch-007-report.txt'
@@ -3210,6 +3246,27 @@ declare module '@tanstack/react-router' {
       path: '/ladder.txt'
       fullPath: '/salon/ladder.txt'
       preLoaderRoute: typeof SalonLadderDottxtRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/leave-none': {
+      id: '/salon/leave-none'
+      path: '/leave-none'
+      fullPath: '/salon/leave-none'
+      preLoaderRoute: typeof SalonLeaveNoneRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/leave-none.html': {
+      id: '/salon/leave-none.html'
+      path: '/leave-none.html'
+      fullPath: '/salon/leave-none.html'
+      preLoaderRoute: typeof SalonLeaveNoneDothtmlRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/leave-none.txt': {
+      id: '/salon/leave-none.txt'
+      path: '/leave-none.txt'
+      fullPath: '/salon/leave-none.txt'
+      preLoaderRoute: typeof SalonLeaveNoneDottxtRouteImport
       parentRoute: typeof SalonRoute
     }
     '/salon/lunch-007-report': {
@@ -4405,6 +4462,9 @@ interface SalonRouteChildren {
   SalonLadderRoute: typeof SalonLadderRoute
   SalonLadderDothtmlRoute: typeof SalonLadderDothtmlRoute
   SalonLadderDottxtRoute: typeof SalonLadderDottxtRoute
+  SalonLeaveNoneRoute: typeof SalonLeaveNoneRoute
+  SalonLeaveNoneDothtmlRoute: typeof SalonLeaveNoneDothtmlRoute
+  SalonLeaveNoneDottxtRoute: typeof SalonLeaveNoneDottxtRoute
   SalonLunch007ReportRoute: typeof SalonLunch007ReportRoute
   SalonLunch007ReportDothtmlRoute: typeof SalonLunch007ReportDothtmlRoute
   SalonLunch007ReportDottxtRoute: typeof SalonLunch007ReportDottxtRoute
@@ -4456,6 +4516,9 @@ const SalonRouteChildren: SalonRouteChildren = {
   SalonLadderRoute: SalonLadderRoute,
   SalonLadderDothtmlRoute: SalonLadderDothtmlRoute,
   SalonLadderDottxtRoute: SalonLadderDottxtRoute,
+  SalonLeaveNoneRoute: SalonLeaveNoneRoute,
+  SalonLeaveNoneDothtmlRoute: SalonLeaveNoneDothtmlRoute,
+  SalonLeaveNoneDottxtRoute: SalonLeaveNoneDottxtRoute,
   SalonLunch007ReportRoute: SalonLunch007ReportRoute,
   SalonLunch007ReportDothtmlRoute: SalonLunch007ReportDothtmlRoute,
   SalonLunch007ReportDottxtRoute: SalonLunch007ReportDottxtRoute,
