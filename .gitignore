@@ -11,3 +11,6 @@ artifacts
 docs/tests
 
 .secrets
+
+__pycache__/
+*.pyc
