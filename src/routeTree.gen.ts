@@ -185,6 +185,8 @@ import { Route as Psyche002PlayDottxtRouteImport } from './routes/psyche/002/pla
 import { Route as Psyche002StartRouteImport } from './routes/psyche/002/start'
 import { Route as Psyche002StartDotjsonRouteImport } from './routes/psyche/002/start[.]json'
 import { Route as Psyche002StartDottxtRouteImport } from './routes/psyche/002/start[.]txt'
+import { Route as Psyche002V02RouteImport } from './routes/psyche/002/v02'
+import { Route as Psyche002V02DottxtRouteImport } from './routes/psyche/002/v02[.]txt'
 import { Route as SalonNightShiftIndexRouteImport } from './routes/salon/night-shift.index'
 import { Route as SalonNightShiftZhRouteImport } from './routes/salon/night-shift.zh'
 import { Route as SalonNightShiftZhDothtmlRouteImport } from './routes/salon/night-shift.zh[.]html'
@@ -228,6 +230,11 @@ import { Route as GatheringProofTableRulesV0Dot5RouteImport } from './routes/gat
 import { Route as GatheringProofTableRulesV0Dot5Dot1RouteImport } from './routes/gathering/proof-table/rules/v0[.]5[.]1'
 import { Route as GatheringProofTableRulesV0Dot5Dot1DottxtRouteImport } from './routes/gathering/proof-table/rules/v0[.]5[.]1[.]txt'
 import { Route as GatheringProofTableRulesV0Dot5DottxtRouteImport } from './routes/gathering/proof-table/rules/v0[.]5[.]txt'
+import { Route as Psyche002V02PlayRouteImport } from './routes/psyche/002/v02/play'
+import { Route as Psyche002V02PlayDottxtRouteImport } from './routes/psyche/002/v02/play[.]txt'
+import { Route as Psyche002V02StartRouteImport } from './routes/psyche/002/v02/start'
+import { Route as Psyche002V02StartDotjsonRouteImport } from './routes/psyche/002/v02/start[.]json'
+import { Route as Psyche002V02StartDottxtRouteImport } from './routes/psyche/002/v02/start[.]txt'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -1186,6 +1193,16 @@ const Psyche002StartDottxtRoute = Psyche002StartDottxtRouteImport.update({
   path: '/start.txt',
   getParentRoute: () => Psyche002Route,
 } as any)
+const Psyche002V02Route = Psyche002V02RouteImport.update({
+  id: '/v02',
+  path: '/v02',
+  getParentRoute: () => Psyche002Route,
+} as any)
+const Psyche002V02DottxtRoute = Psyche002V02DottxtRouteImport.update({
+  id: '/v02.txt',
+  path: '/v02.txt',
+  getParentRoute: () => Psyche002Route,
+} as any)
 const SalonNightShiftIndexRoute = SalonNightShiftIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -1434,6 +1451,32 @@ const GatheringProofTableRulesV0Dot5DottxtRoute =
     path: '/v0.5.txt',
     getParentRoute: () => GatheringProofTableRulesRoute,
   } as any)
+const Psyche002V02PlayRoute = Psyche002V02PlayRouteImport.update({
+  id: '/play',
+  path: '/play',
+  getParentRoute: () => Psyche002V02Route,
+} as any)
+const Psyche002V02PlayDottxtRoute = Psyche002V02PlayDottxtRouteImport.update({
+  id: '/play.txt',
+  path: '/play.txt',
+  getParentRoute: () => Psyche002V02Route,
+} as any)
+const Psyche002V02StartRoute = Psyche002V02StartRouteImport.update({
+  id: '/start',
+  path: '/start',
+  getParentRoute: () => Psyche002V02Route,
+} as any)
+const Psyche002V02StartDotjsonRoute =
+  Psyche002V02StartDotjsonRouteImport.update({
+    id: '/start.json',
+    path: '/start.json',
+    getParentRoute: () => Psyche002V02Route,
+  } as any)
+const Psyche002V02StartDottxtRoute = Psyche002V02StartDottxtRouteImport.update({
+  id: '/start.txt',
+  path: '/start.txt',
+  getParentRoute: () => Psyche002V02Route,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -1602,6 +1645,8 @@ export interface FileRoutesByFullPath {
   '/psyche/002/start': typeof Psyche002StartRoute
   '/psyche/002/start.json': typeof Psyche002StartDotjsonRoute
   '/psyche/002/start.txt': typeof Psyche002StartDottxtRoute
+  '/psyche/002/v02': typeof Psyche002V02RouteWithChildren
+  '/psyche/002/v02.txt': typeof Psyche002V02DottxtRoute
   '/salon/night-shift/zh': typeof SalonNightShiftZhRoute
   '/salon/night-shift/zh.html': typeof SalonNightShiftZhDothtmlRoute
   '/salon/night-shift/zh.txt': typeof SalonNightShiftZhDottxtRoute
@@ -1655,6 +1700,11 @@ export interface FileRoutesByFullPath {
   '/gathering/proof-table/rules/v0.5.1': typeof GatheringProofTableRulesV0Dot5Dot1Route
   '/gathering/proof-table/rules/v0.5.1.txt': typeof GatheringProofTableRulesV0Dot5Dot1DottxtRoute
   '/gathering/proof-table/rules/v0.5.txt': typeof GatheringProofTableRulesV0Dot5DottxtRoute
+  '/psyche/002/v02/play': typeof Psyche002V02PlayRoute
+  '/psyche/002/v02/play.txt': typeof Psyche002V02PlayDottxtRoute
+  '/psyche/002/v02/start': typeof Psyche002V02StartRoute
+  '/psyche/002/v02/start.json': typeof Psyche002V02StartDotjsonRoute
+  '/psyche/002/v02/start.txt': typeof Psyche002V02StartDottxtRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -1819,6 +1869,8 @@ export interface FileRoutesByTo {
   '/psyche/002/start': typeof Psyche002StartRoute
   '/psyche/002/start.json': typeof Psyche002StartDotjsonRoute
   '/psyche/002/start.txt': typeof Psyche002StartDottxtRoute
+  '/psyche/002/v02': typeof Psyche002V02RouteWithChildren
+  '/psyche/002/v02.txt': typeof Psyche002V02DottxtRoute
   '/salon/night-shift/zh': typeof SalonNightShiftZhRoute
   '/salon/night-shift/zh.html': typeof SalonNightShiftZhDothtmlRoute
   '/salon/night-shift/zh.txt': typeof SalonNightShiftZhDottxtRoute
@@ -1872,6 +1924,11 @@ export interface FileRoutesByTo {
   '/gathering/proof-table/rules/v0.5.1': typeof GatheringProofTableRulesV0Dot5Dot1Route
   '/gathering/proof-table/rules/v0.5.1.txt': typeof GatheringProofTableRulesV0Dot5Dot1DottxtRoute
   '/gathering/proof-table/rules/v0.5.txt': typeof GatheringProofTableRulesV0Dot5DottxtRoute
+  '/psyche/002/v02/play': typeof Psyche002V02PlayRoute
+  '/psyche/002/v02/play.txt': typeof Psyche002V02PlayDottxtRoute
+  '/psyche/002/v02/start': typeof Psyche002V02StartRoute
+  '/psyche/002/v02/start.json': typeof Psyche002V02StartDotjsonRoute
+  '/psyche/002/v02/start.txt': typeof Psyche002V02StartDottxtRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -2041,6 +2098,8 @@ export interface FileRoutesById {
   '/psyche/002/start': typeof Psyche002StartRoute
   '/psyche/002/start.json': typeof Psyche002StartDotjsonRoute
   '/psyche/002/start.txt': typeof Psyche002StartDottxtRoute
+  '/psyche/002/v02': typeof Psyche002V02RouteWithChildren
+  '/psyche/002/v02.txt': typeof Psyche002V02DottxtRoute
   '/salon/night-shift/zh': typeof SalonNightShiftZhRoute
   '/salon/night-shift/zh.html': typeof SalonNightShiftZhDothtmlRoute
   '/salon/night-shift/zh.txt': typeof SalonNightShiftZhDottxtRoute
@@ -2094,6 +2153,11 @@ export interface FileRoutesById {
   '/gathering/proof-table/rules/v0.5.1': typeof GatheringProofTableRulesV0Dot5Dot1Route
   '/gathering/proof-table/rules/v0.5.1.txt': typeof GatheringProofTableRulesV0Dot5Dot1DottxtRoute
   '/gathering/proof-table/rules/v0.5.txt': typeof GatheringProofTableRulesV0Dot5DottxtRoute
+  '/psyche/002/v02/play': typeof Psyche002V02PlayRoute
+  '/psyche/002/v02/play.txt': typeof Psyche002V02PlayDottxtRoute
+  '/psyche/002/v02/start': typeof Psyche002V02StartRoute
+  '/psyche/002/v02/start.json': typeof Psyche002V02StartDotjsonRoute
+  '/psyche/002/v02/start.txt': typeof Psyche002V02StartDottxtRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -2264,6 +2328,8 @@ export interface FileRouteTypes {
     | '/psyche/002/start'
     | '/psyche/002/start.json'
     | '/psyche/002/start.txt'
+    | '/psyche/002/v02'
+    | '/psyche/002/v02.txt'
     | '/salon/night-shift/zh'
     | '/salon/night-shift/zh.html'
     | '/salon/night-shift/zh.txt'
@@ -2317,6 +2383,11 @@ export interface FileRouteTypes {
     | '/gathering/proof-table/rules/v0.5.1'
     | '/gathering/proof-table/rules/v0.5.1.txt'
     | '/gathering/proof-table/rules/v0.5.txt'
+    | '/psyche/002/v02/play'
+    | '/psyche/002/v02/play.txt'
+    | '/psyche/002/v02/start'
+    | '/psyche/002/v02/start.json'
+    | '/psyche/002/v02/start.txt'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -2481,6 +2552,8 @@ export interface FileRouteTypes {
     | '/psyche/002/start'
     | '/psyche/002/start.json'
     | '/psyche/002/start.txt'
+    | '/psyche/002/v02'
+    | '/psyche/002/v02.txt'
     | '/salon/night-shift/zh'
     | '/salon/night-shift/zh.html'
     | '/salon/night-shift/zh.txt'
@@ -2534,6 +2607,11 @@ export interface FileRouteTypes {
     | '/gathering/proof-table/rules/v0.5.1'
     | '/gathering/proof-table/rules/v0.5.1.txt'
     | '/gathering/proof-table/rules/v0.5.txt'
+    | '/psyche/002/v02/play'
+    | '/psyche/002/v02/play.txt'
+    | '/psyche/002/v02/start'
+    | '/psyche/002/v02/start.json'
+    | '/psyche/002/v02/start.txt'
   id:
     | '__root__'
     | '/'
@@ -2702,6 +2780,8 @@ export interface FileRouteTypes {
     | '/psyche/002/start'
     | '/psyche/002/start.json'
     | '/psyche/002/start.txt'
+    | '/psyche/002/v02'
+    | '/psyche/002/v02.txt'
     | '/salon/night-shift/zh'
     | '/salon/night-shift/zh.html'
     | '/salon/night-shift/zh.txt'
@@ -2755,6 +2835,11 @@ export interface FileRouteTypes {
     | '/gathering/proof-table/rules/v0.5.1'
     | '/gathering/proof-table/rules/v0.5.1.txt'
     | '/gathering/proof-table/rules/v0.5.txt'
+    | '/psyche/002/v02/play'
+    | '/psyche/002/v02/play.txt'
+    | '/psyche/002/v02/start'
+    | '/psyche/002/v02/start.json'
+    | '/psyche/002/v02/start.txt'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -4048,6 +4133,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Psyche002StartDottxtRouteImport
       parentRoute: typeof Psyche002Route
     }
+    '/psyche/002/v02': {
+      id: '/psyche/002/v02'
+      path: '/v02'
+      fullPath: '/psyche/002/v02'
+      preLoaderRoute: typeof Psyche002V02RouteImport
+      parentRoute: typeof Psyche002Route
+    }
+    '/psyche/002/v02.txt': {
+      id: '/psyche/002/v02.txt'
+      path: '/v02.txt'
+      fullPath: '/psyche/002/v02.txt'
+      preLoaderRoute: typeof Psyche002V02DottxtRouteImport
+      parentRoute: typeof Psyche002Route
+    }
     '/salon/night-shift/': {
       id: '/salon/night-shift/'
       path: '/'
@@ -4348,6 +4447,41 @@ declare module '@tanstack/react-router' {
       fullPath: '/gathering/proof-table/rules/v0.5.txt'
       preLoaderRoute: typeof GatheringProofTableRulesV0Dot5DottxtRouteImport
       parentRoute: typeof GatheringProofTableRulesRoute
+    }
+    '/psyche/002/v02/play': {
+      id: '/psyche/002/v02/play'
+      path: '/play'
+      fullPath: '/psyche/002/v02/play'
+      preLoaderRoute: typeof Psyche002V02PlayRouteImport
+      parentRoute: typeof Psyche002V02Route
+    }
+    '/psyche/002/v02/play.txt': {
+      id: '/psyche/002/v02/play.txt'
+      path: '/play.txt'
+      fullPath: '/psyche/002/v02/play.txt'
+      preLoaderRoute: typeof Psyche002V02PlayDottxtRouteImport
+      parentRoute: typeof Psyche002V02Route
+    }
+    '/psyche/002/v02/start': {
+      id: '/psyche/002/v02/start'
+      path: '/start'
+      fullPath: '/psyche/002/v02/start'
+      preLoaderRoute: typeof Psyche002V02StartRouteImport
+      parentRoute: typeof Psyche002V02Route
+    }
+    '/psyche/002/v02/start.json': {
+      id: '/psyche/002/v02/start.json'
+      path: '/start.json'
+      fullPath: '/psyche/002/v02/start.json'
+      preLoaderRoute: typeof Psyche002V02StartDotjsonRouteImport
+      parentRoute: typeof Psyche002V02Route
+    }
+    '/psyche/002/v02/start.txt': {
+      id: '/psyche/002/v02/start.txt'
+      path: '/start.txt'
+      fullPath: '/psyche/002/v02/start.txt'
+      preLoaderRoute: typeof Psyche002V02StartDottxtRouteImport
+      parentRoute: typeof Psyche002V02Route
     }
   }
 }
@@ -4661,12 +4795,34 @@ const Psyche001RouteWithChildren = Psyche001Route._addFileChildren(
   Psyche001RouteChildren,
 )
 
+interface Psyche002V02RouteChildren {
+  Psyche002V02PlayRoute: typeof Psyche002V02PlayRoute
+  Psyche002V02PlayDottxtRoute: typeof Psyche002V02PlayDottxtRoute
+  Psyche002V02StartRoute: typeof Psyche002V02StartRoute
+  Psyche002V02StartDotjsonRoute: typeof Psyche002V02StartDotjsonRoute
+  Psyche002V02StartDottxtRoute: typeof Psyche002V02StartDottxtRoute
+}
+
+const Psyche002V02RouteChildren: Psyche002V02RouteChildren = {
+  Psyche002V02PlayRoute: Psyche002V02PlayRoute,
+  Psyche002V02PlayDottxtRoute: Psyche002V02PlayDottxtRoute,
+  Psyche002V02StartRoute: Psyche002V02StartRoute,
+  Psyche002V02StartDotjsonRoute: Psyche002V02StartDotjsonRoute,
+  Psyche002V02StartDottxtRoute: Psyche002V02StartDottxtRoute,
+}
+
+const Psyche002V02RouteWithChildren = Psyche002V02Route._addFileChildren(
+  Psyche002V02RouteChildren,
+)
+
 interface Psyche002RouteChildren {
   Psyche002PlayRoute: typeof Psyche002PlayRoute
   Psyche002PlayDottxtRoute: typeof Psyche002PlayDottxtRoute
   Psyche002StartRoute: typeof Psyche002StartRoute
   Psyche002StartDotjsonRoute: typeof Psyche002StartDotjsonRoute
   Psyche002StartDottxtRoute: typeof Psyche002StartDottxtRoute
+  Psyche002V02Route: typeof Psyche002V02RouteWithChildren
+  Psyche002V02DottxtRoute: typeof Psyche002V02DottxtRoute
 }
 
 const Psyche002RouteChildren: Psyche002RouteChildren = {
@@ -4675,6 +4831,8 @@ const Psyche002RouteChildren: Psyche002RouteChildren = {
   Psyche002StartRoute: Psyche002StartRoute,
   Psyche002StartDotjsonRoute: Psyche002StartDotjsonRoute,
   Psyche002StartDottxtRoute: Psyche002StartDottxtRoute,
+  Psyche002V02Route: Psyche002V02RouteWithChildren,
+  Psyche002V02DottxtRoute: Psyche002V02DottxtRoute,
 }
 
 const Psyche002RouteWithChildren = Psyche002Route._addFileChildren(

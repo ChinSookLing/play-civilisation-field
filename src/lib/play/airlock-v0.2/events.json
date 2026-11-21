@@ -1,0 +1,1908 @@
+{
+ "meta": {
+  "game": "airlock",
+  "version": "airlock-v0.2",
+  "room": "Psyche 002",
+  "designer": "Hermes (Hark)",
+  "code": "Bill",
+  "courier": "Puck",
+  "decided": "2026-11-21: seed design approved by Tuzi (14:44), built by Hermes, code by Bill",
+  "origin": "Hermes's 2026-11-21 reply to Chris Hadfield on toxic Mars dust: the airlock, not the habitat, is the real design problem.",
+  "steps": 8,
+  "sols": 7
+ },
+ "rules": {
+  "psyche_nine_rules": "unchanged (no score, no good/bad ending, PASS anytime, self-contained packets, play before reading the wall, plain-text comments, etc.)",
+  "end_line": "END-PACKET airlock-v0.2",
+  "truncated_reply": "NO MOVE: truncated",
+  "reply_format": "Line 1: the option letter only (A/B/C/D) or PASS. Line 2 onward optional: COMMENT: one line.",
+  "pass": "PASS = the effects of that sol's B (B's flag is not set); on step 8 the note is left blank. A letter not offered = NO MOVE, not PASS. PASS is never failure.",
+  "replay_code": "S<seed>/airlock-v0.2/<m1m2m3>-<m4m5m6>-<m7m8>, letters A-D or P for PASS, e.g. S1/airlock-v0.2/ACB-DAP-AA",
+  "resume_line": "every packet carries resume: S<seed>/airlock-v0.2/<moves so far>",
+  "no_hidden_state": "every value that changes the story is shown in the packet: water, power, indoor dust, port seal, airlock hours. Internal points only map to the shown tiers."
+ },
+ "state": {
+  "start": "per seed: water/power from seed_table; dust 0, seal 0",
+  "meters": {
+   "water": {
+    "tiers": [
+     [
+      10,
+      12,
+      "ample",
+      "充足"
+     ],
+     [
+      7,
+      9,
+      "steady",
+      "穩"
+     ],
+     [
+      4,
+      6,
+      "thin",
+      "吃緊"
+     ],
+     [
+      0,
+      3,
+      "critical",
+      "告急"
+     ]
+    ],
+    "min": 0,
+    "max": 12
+   },
+   "power": {
+    "tiers": [
+     [
+      10,
+      12,
+      "ample",
+      "充足"
+     ],
+     [
+      7,
+      9,
+      "steady",
+      "穩"
+     ],
+     [
+      4,
+      6,
+      "thin",
+      "吃緊"
+     ],
+     [
+      0,
+      3,
+      "critical",
+      "告急"
+     ]
+    ],
+    "min": 0,
+    "max": 12
+   },
+   "dust": {
+    "tiers": [
+     [
+      0,
+      1,
+      "trace",
+      "微"
+     ],
+     [
+      2,
+      3,
+      "light",
+      "薄"
+     ],
+     [
+      4,
+      5,
+      "heavy",
+      "厚"
+     ],
+     [
+      6,
+      9,
+      "choking",
+      "嗆"
+     ]
+    ],
+    "min": 0,
+    "max": 9
+   },
+   "seal": {
+    "tiers": [
+     [
+      0,
+      0,
+      "new",
+      "新"
+     ],
+     [
+      1,
+      1,
+      "worn",
+      "微磨"
+     ],
+     [
+      2,
+      2,
+      "scuffed",
+      "磨損"
+     ],
+     [
+      3,
+      9,
+      "leaking",
+      "漏氣"
+     ]
+    ],
+    "min": 0,
+    "max": 9
+   }
+  },
+  "airlock_hours_per_sol": 4,
+  "so_far_labels_zh": {
+   "case_waited": "{R3} 的箱子留在外面",
+   "cass_cold_night": "{R4} 在漫遊車過夜",
+   "used_drinking_reserve": "動用了飲水預備",
+   "ade_cough": "{R2} 在咳",
+   "filter_fixed": "濾網修好了",
+   "seal_hissed": "衣口密封嘶過",
+   "seal_patched": "密封補好了",
+   "five_sols_clean": "乾淨五天",
+   "missed_feast": "錯過了那頓飯",
+   "joined_feast": "和大家吃了飯",
+   "joined_feast_late": "晚到入席",
+   "dee_scrubbed": "{R5} 刷洗過",
+   "gloves_cut": "剪掉了 {R5} 的手套"
+  },
+  "state_labels": {
+   "en": {
+    "water": "water",
+    "power": "power",
+    "dust": "indoor dust",
+    "seal": "port seal",
+    "airlock": "airlock"
+   },
+   "zh": {
+    "water": "水",
+    "power": "電",
+    "dust": "屋內塵",
+    "seal": "衣口密封",
+    "airlock": "閘時"
+   }
+  },
+  "so_far_format": {
+   "en": "earlier choices as 'sol N X' joined by '; ', then flag labels; 'none' only on step 1",
+   "zh": "'第N天 X'，以「; 」相連，再接旗標標籤；只有第 1 步寫「無」"
+  },
+  "so_far_labels": {
+   "case_waited": "{R3}'s case waited outside",
+   "cass_cold_night": "{R4} slept in the rover",
+   "used_drinking_reserve": "drinking reserve used",
+   "ade_cough": "{R2} is coughing",
+   "filter_fixed": "filter fixed",
+   "seal_hissed": "port seal hissed",
+   "seal_patched": "seal patched",
+   "five_sols_clean": "five clean sols",
+   "missed_feast": "missed the dinner",
+   "joined_feast": "ate with the crew",
+   "joined_feast_late": "came late to dinner",
+   "dee_scrubbed": "{R5} scrubbed",
+   "gloves_cut": "{R5}'s gloves cut"
+  },
+  "rules_in_order": [
+   "1. Apply the sol's start effects (if any) before showing the packet.",
+   "2. Apply the chosen option's effects. Clamp every meter to its min/max. Time cannot go below 0; an option whose time cost exceeds the hours left is not offered (none do in v0.1).",
+   "3. End of sol: if airlock hours left >= 3, the crew vacuums inside: dust -1 (packet next sol says so).",
+   "4. Night: water and power each drop by the fixed night table (state.night_rolls). If dust tier is heavy or choking, water drops 1 extra point (filters working harder).",
+   "5. Flags set by options are listed in so_far and used by the sol 5 echo and the ending."
+  ],
+  "night_rolls": "FIXED for every seed (no PRNG): nights 1..6 (water_loss, power_loss) = [[0, 1], [0, 0], [0, 1], [0, 0], [0, 0], [0, 0]] = v0.1 S1's nights. Plus the usual +1 water loss when dust is heavy or choking.",
+  "vacuum_line": {
+   "en": "Spare airlock time went to vacuuming inside.",
+   "zh": "多出的閘時拿去屋內吸塵了。"
+  }
+ },
+ "step8": {
+  "id": "handover",
+  "sol_shown": "7/7",
+  "scene": {
+   "en": "The lander is on its way. The next crew will read your note before their first EVA. Indoor dust is {dust_tier}; the port seal is {seal_tier}.",
+   "zh": "補給艇在路上。下一班第一次出艙前會讀你的紙條。屋內塵：{dust_tier}；衣口密封：{seal_tier}。"
+  },
+  "options": [
+   {
+    "key": "A",
+    "en": "Write it as it is: the dust, the seal, the water, and what you would do differently",
+    "zh": "照實寫：塵、密封、水，還有你會怎麼做不一樣",
+    "effects": {},
+    "note_template": {
+     "en": "Indoor dust {dust_tier}, seal {seal_tier}, water {water_tier}, power {power_tier}. {lesson}",
+     "zh": "屋內塵{dust_tier}，密封{seal_tier}，水{water_tier}，電{power_tier}。{lesson_zh}"
+    }
+   },
+   {
+    "key": "B",
+    "en": "Write: All normal.",
+    "zh": "寫：一切正常。",
+    "effects": {},
+    "note_template": {
+     "en": "All normal.",
+     "zh": "一切正常。"
+    }
+   }
+  ],
+  "pass": "note left blank",
+  "lesson": {
+   "source": "the player's COMMENT line on step 8 if any, else empty",
+   "en_empty": "",
+   "zh_empty": ""
+  }
+ },
+ "ending": {
+  "rule": "No score, no good or bad ending. Compose: opening by final tiers + one line per flag present + protected/let-go line + the note.",
+  "opening": {
+   "en": "Dawn, sol 8. The lander touches down. Water {water_tier}, power {power_tier}, indoor dust {dust_tier}, port seal {seal_tier}.",
+   "zh": "第 8 天黎明，補給艇落地。水{water_tier}，電{power_tier}，屋內塵{dust_tier}，衣口密封{seal_tier}。"
+  },
+  "flag_lines": {
+   "case_waited": {
+    "en": "{R3}'s sample was analysed a day late.",
+    "zh": "{R3} 的樣本晚了一天才分析。"
+   },
+   "cass_cold_night": {
+    "en": "{R4} still talks about the night in the rover.",
+    "zh": "{R4} 還在說那晚在漫遊車裡過的夜。"
+   },
+   "used_drinking_reserve": {
+    "en": "The drinking reserve was dipped into once.",
+    "zh": "飲水預備被動用過一次。"
+   },
+   "ade_cough": {
+    "en": "{R2}'s cough is the first thing the new crew hears.",
+    "zh": "新一班先聽到的，是 {R2} 的咳嗽。"
+   },
+   "filter_fixed": {
+    "en": "The filter you fixed on sol 5 is still holding.",
+    "zh": "第 5 天修的濾網還撐著。"
+   },
+   "seal_patched": {
+    "en": "The patched seal holds.",
+    "zh": "補過的密封撐住了。"
+   },
+   "seal_hissed": {
+    "en": "The suit-port seal hissed once this week.",
+    "zh": "這週衣口密封嘶過一次。"
+   },
+   "missed_feast": {
+    "en": "You missed the sol 5 dinner; someone saved you a plate.",
+    "zh": "你錯過了第 5 天那頓飯，有人替你留了一盤。"
+   },
+   "joined_feast": {
+    "en": "You ate with them on sol 5.",
+    "zh": "第 5 天你和他們一起吃了飯。"
+   },
+   "joined_feast_late": {
+    "en": "You came late to the sol 5 dinner, still in time for dessert.",
+    "zh": "第 5 天那頓飯你晚到，剛好趕上甜點。"
+   },
+   "dee_scrubbed": {
+    "en": "{R5}'s wrist is better, and {R5} remembers who held that arm.",
+    "zh": "{R5} 的手腕好多了，記得是誰扶著那隻手。"
+   },
+   "gloves_cut": {
+    "en": "The next crew starts with one pair of spare gloves fewer.",
+    "zh": "下一班開工時，備用手套少一副。"
+   }
+  },
+  "protected_let_go": {
+   "rule": "Compare final water+power points with dust points. If water+power >= 14 and dust >= 4: 'kept the water and power, let the dust in'. If dust <= 1 and water+power < 14: 'kept the dust out, spent the water and power'. If both comfortable (dust<=3, water+power>=14): 'held the balance this week'. Otherwise: 'stretched thin on every side'.",
+   "lines": {
+    "kept_resources": {
+     "en": "You kept the water and power; the dust came in.",
+     "zh": "你護住了水和電，讓塵進了屋。"
+    },
+    "kept_clean": {
+     "en": "You kept the dust out and spent the water and power on it.",
+     "zh": "你把塵擋在門外，水和電都花在這上面。"
+    },
+    "balance": {
+     "en": "This week, nothing gave way.",
+     "zh": "這一週，哪邊都沒垮。"
+    },
+    "stretched": {
+     "en": "Every side was stretched; the base still stood.",
+     "zh": "每一邊都繃得緊，基地還站著。"
+    }
+   }
+  },
+  "note_line": {
+   "en": "Your note: \"{note}\"",
+   "zh": "你的紙條：「{note}」",
+   "blank": {
+    "en": "You left the note blank.",
+    "zh": "你把紙條留白了。"
+   }
+  },
+  "closing": {
+   "en": "Replay: {replay}",
+   "zh": "回放碼：{replay}"
+  }
+ },
+ "packet_template": "AIRLOCK-PACKET airlock-v0.1\nseed: S{seed}  sol: {sol}/7  step: {step}/8  expected_move_number: {step}\nstate: water {water} · power {power} · indoor dust {dust} · port seal {seal} · airlock {hours}h\n{lines}so_far: {so_far}\nscene: {scene}\noptions:\n{options}PASS\nreply_format: line 1 = letter or PASS; optional line 2: COMMENT: one line\nresume: S{seed}/airlock-v0.1/{moves}\nEND-PACKET airlock-v0.1",
+ "events": [
+  {
+   "id": "quiet_first",
+   "scene": {
+    "en": "{R1} is back from a routine sample run, red-grey dust on boots and knees. Nobody else is due today. No hurry.",
+    "zh": "{R1} 例行採樣回來，靴底和膝蓋一層紅灰。今天沒別人要回來，不急。"
+   },
+   "options": [
+    {
+     "key": "A",
+     "en": "Full clean: air shower, brush, suit rests in the lock (2h, uses water and a little power)",
+     "zh": "全套清潔：氣浴、刷、衣在閘內靜置（2 小時，用水，耗一點電）",
+     "effects": {
+      "time": -2,
+      "water": -1,
+      "power": -1
+     }
+    },
+    {
+     "key": "B",
+     "en": "Quick brush and in (0.5h, dust comes inside)",
+     "zh": "快刷進門（0.5 小時，塵帶進屋）",
+     "effects": {
+      "time": -0.5,
+      "dust": 2
+     }
+    },
+    {
+     "key": "C",
+     "en": "Suit stays outside, enter through the suit-port (1h, a little power, wears the port seal)",
+     "zh": "衣留外，走衣口（1 小時，耗一點電，衣口密封會磨）",
+     "effects": {
+      "time": -1,
+      "power": -1,
+      "dust": 1,
+      "seal": 1
+     }
+    }
+   ],
+   "v01_sol": 1,
+   "who_role": "{R1}"
+  },
+  {
+   "id": "two_at_once",
+   "scene": {
+    "en": "{R2} and {R3} reach the lock together. {R3} is hugging a cracked sample case; fine dust leaks from the seam. Four hours, two people.",
+    "zh": "{R2} 和 {R3} 一起到閘口。{R3} 抱著裂開的樣本箱，細塵從縫裡漏出。四小時，兩個人。"
+   },
+   "options": [
+    {
+     "key": "A",
+     "en": "Full clean for both, case included (all 4h, uses a lot of water and power)",
+     "zh": "兩人連箱子都全套清潔（4 小時全用掉，用很多水和電）",
+     "effects": {
+      "time": -4,
+      "water": -2,
+      "power": -2
+     }
+    },
+    {
+     "key": "B",
+     "en": "{R3}th brush quickly and come in with the case (1h, dust and the case's dust come inside)",
+     "zh": "兩人快刷，連箱子一起進門（1 小時，人和箱子的塵都帶進屋）",
+     "effects": {
+      "time": -1,
+      "dust": 3
+     }
+    },
+    {
+     "key": "C",
+     "en": "{R3}th use the suit-ports; the case comes in through the small hatch (2h, power, port wear)",
+     "zh": "兩人走衣口，箱子從小艙口送進來（2 小時，耗電，衣口會磨）",
+     "effects": {
+      "time": -2,
+      "power": -1,
+      "dust": 2,
+      "seal": 1
+     }
+    },
+    {
+     "key": "D",
+     "en": "Leave the case in the lock overnight, both brush quickly (1h; {R3}'s analysis waits a day)",
+     "zh": "箱子留在閘內過夜，兩人快刷（1 小時；{R3} 的分析晚一天）",
+     "effects": {
+      "time": -1,
+      "dust": 2
+     },
+     "flag": "case_waited"
+    }
+   ],
+   "v01_sol": 2,
+   "who_role": "{R2}, {R3}"
+  },
+  {
+   "id": "storm_warning",
+   "scene": {
+    "en": "Storm warning: forty minutes until the dust front hits. {R4} is pulling up in the rover. A full clean will still be running when the storm arrives.",
+    "zh": "塵暴預警：四十分鐘後塵牆到。{R4} 的漫遊車正在靠過來。全套清潔做到一半，塵暴就會到。"
+   },
+   "options": [
+    {
+     "key": "A",
+     "en": "Full clean anyway; the storm hits mid-clean (2h, water, and the storm drains extra power)",
+     "zh": "照樣全套清潔，塵暴中途到（2 小時，用水，塵暴額外耗電）",
+     "effects": {
+      "time": -2,
+      "water": -1,
+      "power": -3
+     }
+    },
+    {
+     "key": "B",
+     "en": "Quick brush and in (0.5h, dust comes inside)",
+     "zh": "快刷進門（0.5 小時，塵帶進屋）",
+     "effects": {
+      "time": -0.5,
+      "dust": 2
+     }
+    },
+    {
+     "key": "C",
+     "en": "Suit stays outside, enter through the suit-port (1h, a little power, wears the port seal)",
+     "zh": "衣留外，走衣口（1 小時，耗一點電，衣口密封會磨）",
+     "effects": {
+      "time": -1,
+      "power": -1,
+      "dust": 1,
+      "seal": 1
+     }
+    },
+    {
+     "key": "D",
+     "en": "{R4} stays in the rover until the storm passes (keeping the rover warm costs power; a long cold night for {R4})",
+     "zh": "讓 {R4} 留在漫遊車裡等塵暴過（保暖耗電；{R4} 一夜又冷又長）",
+     "effects": {
+      "time": 0,
+      "power": -2
+     },
+     "flag": "cass_cold_night"
+    }
+   ],
+   "v01_sol": 3,
+   "who_role": "{R4}"
+  },
+  {
+   "id": "water_low",
+   "start_effects": {
+    "water": -2
+   },
+   "start_line": {
+    "en": "The water recycler fell behind overnight. A full clean today would dip into the drinking reserve.",
+    "zh": "昨夜水回收器跟不上。今天全套清潔要動用飲水預備。"
+   },
+   "scene": {
+    "en": "{R3} is back from re-burying the cracked case's sample site. The recycler is still catching up.",
+    "zh": "{R3} 回來，剛去把樣本點重新掩好。水回收器還在追。"
+   },
+   "options": [
+    {
+     "key": "A",
+     "en": "Full clean, from the drinking reserve (2h, uses more water than usual)",
+     "zh": "全套清潔，動用飲水預備（2 小時，比平常更費水）",
+     "effects": {
+      "time": -2,
+      "water": -2,
+      "power": -1
+     },
+     "flag": "used_drinking_reserve"
+    },
+    {
+     "key": "B",
+     "en": "Quick brush and in (0.5h, dust comes inside)",
+     "zh": "快刷進門（0.5 小時，塵帶進屋）",
+     "effects": {
+      "time": -0.5,
+      "dust": 2
+     }
+    },
+    {
+     "key": "C",
+     "en": "Suit stays outside, enter through the suit-port (1h, a little power, wears the port seal)",
+     "zh": "衣留外，走衣口（1 小時，耗一點電，衣口密封會磨）",
+     "effects": {
+      "time": -1,
+      "power": -1,
+      "dust": 1,
+      "seal": 1
+     }
+    },
+    {
+     "key": "D",
+     "en": "Dry clean: brush and vacuum only, no shower (3h, some dust still gets in)",
+     "zh": "乾式清潔：只刷只吸，不沖水（3 小時，仍有些塵進屋）",
+     "effects": {
+      "time": -3,
+      "dust": 1
+     }
+    }
+   ],
+   "v01_sol": 4,
+   "who_role": "{R3}"
+  },
+  {
+   "id": "echo",
+   "echo_rule": "pick the FIRST variant whose condition is true, evaluated on the state at the start of sol 5 (after night 4).",
+   "variants": [
+    {
+     "id": "filter_cough",
+     "condition": "dust >= 3 (upper light, heavy or choking)",
+     "start_effects": {
+      "water": -1
+     },
+     "flag": "ade_cough",
+     "scene": {
+      "en": "The air filter clogged in the night and the water loop slowed with it. {R2} has started to cough. {R1} is at the lock.",
+      "zh": "夜裡空氣濾網塞住了，水循環也跟著變慢。{R2} 開始咳。{R1} 在閘口。"
+     },
+     "options": [
+      {
+       "key": "A",
+       "en": "Full clean: air shower, brush, suit rests in the lock (2h, uses water and a little power)",
+       "zh": "全套清潔：氣浴、刷、衣在閘內靜置（2 小時，用水，耗一點電）",
+       "effects": {
+        "time": -2,
+        "water": -1,
+        "power": -1
+       }
+      },
+      {
+       "key": "B",
+       "en": "Quick brush and in (0.5h, dust comes inside)",
+       "zh": "快刷進門（0.5 小時，塵帶進屋）",
+       "effects": {
+        "time": -0.5,
+        "dust": 2
+       }
+      },
+      {
+       "key": "C",
+       "en": "Suit stays outside, enter through the suit-port (1h, a little power, wears the port seal)",
+       "zh": "衣留外，走衣口（1 小時，耗一點電，衣口密封會磨）",
+       "effects": {
+        "time": -1,
+        "power": -1,
+        "dust": 1,
+        "seal": 1
+       }
+      },
+      {
+       "key": "D",
+       "en": "Spend the airlock hours on the filter; {R1} brushes in alone (3h; the water loop recovers, {R1}'s dust comes in)",
+       "zh": "把閘時拿去修濾網，{R1} 自己刷進門（3 小時；水循環恢復，{R1} 的塵進屋）",
+       "effects": {
+        "time": -3,
+        "water": 2,
+        "dust": 2
+       },
+       "flag": "filter_fixed"
+      }
+     ]
+    },
+    {
+     "id": "seal_hiss",
+     "condition": "seal >= 2",
+     "flag": "seal_hissed",
+     "scene": {
+      "en": "The suit-port seal hisses when it closes. Nobody uses it today. {R1} is at the lock.",
+      "zh": "衣口密封關上時嘶嘶響。今天沒人能用它。{R1} 在閘口。"
+     },
+     "options": [
+      {
+       "key": "A",
+       "en": "Full clean: air shower, brush, suit rests in the lock (2h, uses water and a little power)",
+       "zh": "全套清潔：氣浴、刷、衣在閘內靜置（2 小時，用水，耗一點電）",
+       "effects": {
+        "time": -2,
+        "water": -1,
+        "power": -1
+       }
+      },
+      {
+       "key": "B",
+       "en": "Quick brush and in (0.5h, dust comes inside)",
+       "zh": "快刷進門（0.5 小時，塵帶進屋）",
+       "effects": {
+        "time": -0.5,
+        "dust": 2
+       }
+      },
+      {
+       "key": "D",
+       "en": "Patch the seal first; {R1} brushes in alone (2h; the seal is new again, {R1}'s dust comes in)",
+       "zh": "先補密封，{R1} 自己刷進門（2 小時；密封回到新，{R1} 的塵進屋）",
+       "effects": {
+        "time": -2,
+        "seal": -9,
+        "dust": 2
+       },
+       "flag": "seal_patched"
+      }
+     ]
+    },
+    {
+     "id": "clean_feast",
+     "condition": "otherwise",
+     "flag": "five_sols_clean",
+     "scene": {
+      "en": "Five sols and the base is clean. The crew is cooking the good rations to celebrate and asks you to skip the clean today and eat with them. {R1} is at the lock.",
+      "zh": "五天了，基地還乾乾淨淨。隊員在煮好的口糧慶祝，求你今天別清了，一起吃飯。{R1} 在閘口。"
+     },
+     "options": [
+      {
+       "key": "A",
+       "en": "Full clean; you miss the dinner (2h, water, power)",
+       "zh": "照樣全套清潔，你錯過那頓飯（2 小時，用水，耗電）",
+       "effects": {
+        "time": -2,
+        "water": -1,
+        "power": -1
+       },
+       "flag": "missed_feast"
+      },
+      {
+       "key": "B",
+       "en": "Quick brush and join them (0.5h, dust comes inside)",
+       "zh": "快刷進門，一起吃（0.5 小時，塵帶進屋）",
+       "effects": {
+        "time": -0.5,
+        "dust": 2
+       },
+       "flag": "joined_feast"
+      },
+      {
+       "key": "C",
+       "en": "Suit-port, and join them a little late (1h, power, port wear)",
+       "zh": "走衣口，晚一點入席（1 小時，耗電，衣口會磨）",
+       "effects": {
+        "time": -1,
+        "power": -1,
+        "dust": 1,
+        "seal": 1
+       },
+       "flag": "joined_feast_late"
+      }
+     ]
+    }
+   ],
+   "v01_sol": 5,
+   "who_role": "{R1}"
+  },
+  {
+   "id": "hurt_hand",
+   "pressure_note": "Two-person rule does not apply (one person). {R3}th sides pass by dawn: the pain fades by morning; the dust can be cleaned later at a cost.",
+   "scene": {
+    "en": "{R5} twisted a wrist on the rover ladder. Scrubbing will hurt; the pain should ease by morning. Dust is packed in {R5}'s glove seams.",
+    "zh": "{R5} 在漫遊車梯子上扭了手腕。刷洗會痛，天亮前應該會緩。塵塞滿了 {R5} 的手套縫。"
+   },
+   "options": [
+    {
+     "key": "A",
+     "en": "Full clean, slowly, with someone holding {R5}'s arm (2.5h, water, power; it hurts)",
+     "zh": "慢慢全套清潔，有人扶著 {R5} 的手（2.5 小時，用水耗電；會痛）",
+     "effects": {
+      "time": -2.5,
+      "water": -1,
+      "power": -1
+     },
+     "flag": "dee_scrubbed"
+    },
+    {
+     "key": "B",
+     "en": "Quick brush and in (0.5h, dust comes inside)",
+     "zh": "快刷進門（0.5 小時，塵帶進屋）",
+     "effects": {
+      "time": -0.5,
+      "dust": 2
+     }
+    },
+    {
+     "key": "C",
+     "en": "Suit-port, with help to get out of the suit (1.5h, power, port wear)",
+     "zh": "走衣口，有人幫 {R5} 脫衣（1.5 小時，耗電，衣口會磨）",
+     "effects": {
+      "time": -1.5,
+      "power": -1,
+      "dust": 1,
+      "seal": 1
+     }
+    },
+    {
+     "key": "D",
+     "en": "Cut the gloves off and bag them (1h; no dust inside, one pair of spare gloves fewer for the next crew)",
+     "zh": "剪掉手套裝袋（1 小時；不帶塵進屋，下一班少一副備用手套）",
+     "effects": {
+      "time": -1
+     },
+     "flag": "gloves_cut"
+    }
+   ],
+   "v01_sol": 6,
+   "who_role": "{R5}"
+  },
+  {
+   "id": "last_return",
+   "scene": {
+    "en": "Last EVA of the week: {R2} has packed the rover for the resupply lander landing at dawn. After this, you write the handover note.",
+    "zh": "這週最後一次出艙：{R2} 把漫遊車打包好，等黎明補給艇。之後你要寫交班紙條。"
+   },
+   "options": [
+    {
+     "key": "A",
+     "en": "Full clean: air shower, brush, suit rests in the lock (2h, uses water and a little power)",
+     "zh": "全套清潔：氣浴、刷、衣在閘內靜置（2 小時，用水，耗一點電）",
+     "effects": {
+      "time": -2,
+      "water": -1,
+      "power": -1
+     }
+    },
+    {
+     "key": "B",
+     "en": "Quick brush and in (0.5h, dust comes inside)",
+     "zh": "快刷進門（0.5 小時，塵帶進屋）",
+     "effects": {
+      "time": -0.5,
+      "dust": 2
+     }
+    },
+    {
+     "key": "C",
+     "en": "Suit stays outside, enter through the suit-port (1h, a little power, wears the port seal)",
+     "zh": "衣留外，走衣口（1 小時，耗一點電，衣口密封會磨）",
+     "effects": {
+      "time": -1,
+      "power": -1,
+      "dust": 1,
+      "seal": 1
+     }
+    }
+   ],
+   "v01_sol": 7,
+   "who_role": "{R2}"
+  }
+ ],
+ "seed": {
+  "parse": "S<n>, n = non-negative integer. k = n mod 48. Everything about the game comes from row k of seed_table. S48 = S0, S49 = S1, ... (same game; the replay code keeps the seed as typed).",
+  "dials": {
+   "storm_sol": "STORM_SLOT[k % 4] = [3, 4, 6, 2]",
+   "rotation": "(k div 4) mod 4 -> role Ri is held by CREW[(i-1 + rotation) mod 5], CREW = Lin, Ade, Bo, Cass, Dee",
+   "start": "START[(k div 16) mod 3] = water/power 12/12, 9/12, 12/9"
+  },
+  "fixed": "sol 1 = quiet_first, sol 5 = echo (it looks back over sols 1-4), sol 7 = last_return, step 8 = handover. The other three events (two_at_once, water_low, hurt_hand) fill the three non-storm slots among 2,3,4,6 in that order.",
+  "roles": {
+   "R1": "sol 1 returner; at the lock on the sol 5 echo",
+   "R2": "first of the pair (two_at_once); coughs in the filter echo; last EVA on sol 7",
+   "R3": "carries the cracked case (two_at_once); re-buries its site (water_low)",
+   "R4": "in the rover when the storm comes (storm_warning)",
+   "R5": "twists a wrist on the rover ladder (hurt_hand)"
+  },
+  "s0": "S0 = v0.1 S1 exactly (scene order, names, start 12/12, the six fixed nights). A v0.1 S1 replay replayed as S0/airlock-v0.2 gives the same ending text apart from the version tag.",
+  "first_round": "v0.2 must not start on S1 (v0.1 S1 rows are on the wall). Suggested first round seed: S38 (storm sol 6, rotation 1, start 12/9). Keep it off the examples list.",
+  "not_shown": "Packets show the seed, never the row. Nothing in the row is a score or a right answer."
+ },
+ "seed_table": [
+  {
+   "k": 0,
+   "storm_sol": 3,
+   "rotation": 0,
+   "water": 12,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "storm_warning",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Lin",
+    "R2": "Ade",
+    "R3": "Bo",
+    "R4": "Cass",
+    "R5": "Dee"
+   }
+  },
+  {
+   "k": 1,
+   "storm_sol": 4,
+   "rotation": 0,
+   "water": 12,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "storm_warning",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Lin",
+    "R2": "Ade",
+    "R3": "Bo",
+    "R4": "Cass",
+    "R5": "Dee"
+   }
+  },
+  {
+   "k": 2,
+   "storm_sol": 6,
+   "rotation": 0,
+   "water": 12,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "hurt_hand",
+    "echo",
+    "storm_warning",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Lin",
+    "R2": "Ade",
+    "R3": "Bo",
+    "R4": "Cass",
+    "R5": "Dee"
+   }
+  },
+  {
+   "k": 3,
+   "storm_sol": 2,
+   "rotation": 0,
+   "water": 12,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "storm_warning",
+    "two_at_once",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Lin",
+    "R2": "Ade",
+    "R3": "Bo",
+    "R4": "Cass",
+    "R5": "Dee"
+   }
+  },
+  {
+   "k": 4,
+   "storm_sol": 3,
+   "rotation": 1,
+   "water": 12,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "storm_warning",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Ade",
+    "R2": "Bo",
+    "R3": "Cass",
+    "R4": "Dee",
+    "R5": "Lin"
+   }
+  },
+  {
+   "k": 5,
+   "storm_sol": 4,
+   "rotation": 1,
+   "water": 12,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "storm_warning",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Ade",
+    "R2": "Bo",
+    "R3": "Cass",
+    "R4": "Dee",
+    "R5": "Lin"
+   }
+  },
+  {
+   "k": 6,
+   "storm_sol": 6,
+   "rotation": 1,
+   "water": 12,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "hurt_hand",
+    "echo",
+    "storm_warning",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Ade",
+    "R2": "Bo",
+    "R3": "Cass",
+    "R4": "Dee",
+    "R5": "Lin"
+   }
+  },
+  {
+   "k": 7,
+   "storm_sol": 2,
+   "rotation": 1,
+   "water": 12,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "storm_warning",
+    "two_at_once",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Ade",
+    "R2": "Bo",
+    "R3": "Cass",
+    "R4": "Dee",
+    "R5": "Lin"
+   }
+  },
+  {
+   "k": 8,
+   "storm_sol": 3,
+   "rotation": 2,
+   "water": 12,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "storm_warning",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Bo",
+    "R2": "Cass",
+    "R3": "Dee",
+    "R4": "Lin",
+    "R5": "Ade"
+   }
+  },
+  {
+   "k": 9,
+   "storm_sol": 4,
+   "rotation": 2,
+   "water": 12,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "storm_warning",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Bo",
+    "R2": "Cass",
+    "R3": "Dee",
+    "R4": "Lin",
+    "R5": "Ade"
+   }
+  },
+  {
+   "k": 10,
+   "storm_sol": 6,
+   "rotation": 2,
+   "water": 12,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "hurt_hand",
+    "echo",
+    "storm_warning",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Bo",
+    "R2": "Cass",
+    "R3": "Dee",
+    "R4": "Lin",
+    "R5": "Ade"
+   }
+  },
+  {
+   "k": 11,
+   "storm_sol": 2,
+   "rotation": 2,
+   "water": 12,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "storm_warning",
+    "two_at_once",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Bo",
+    "R2": "Cass",
+    "R3": "Dee",
+    "R4": "Lin",
+    "R5": "Ade"
+   }
+  },
+  {
+   "k": 12,
+   "storm_sol": 3,
+   "rotation": 3,
+   "water": 12,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "storm_warning",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Cass",
+    "R2": "Dee",
+    "R3": "Lin",
+    "R4": "Ade",
+    "R5": "Bo"
+   }
+  },
+  {
+   "k": 13,
+   "storm_sol": 4,
+   "rotation": 3,
+   "water": 12,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "storm_warning",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Cass",
+    "R2": "Dee",
+    "R3": "Lin",
+    "R4": "Ade",
+    "R5": "Bo"
+   }
+  },
+  {
+   "k": 14,
+   "storm_sol": 6,
+   "rotation": 3,
+   "water": 12,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "hurt_hand",
+    "echo",
+    "storm_warning",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Cass",
+    "R2": "Dee",
+    "R3": "Lin",
+    "R4": "Ade",
+    "R5": "Bo"
+   }
+  },
+  {
+   "k": 15,
+   "storm_sol": 2,
+   "rotation": 3,
+   "water": 12,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "storm_warning",
+    "two_at_once",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Cass",
+    "R2": "Dee",
+    "R3": "Lin",
+    "R4": "Ade",
+    "R5": "Bo"
+   }
+  },
+  {
+   "k": 16,
+   "storm_sol": 3,
+   "rotation": 0,
+   "water": 9,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "storm_warning",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Lin",
+    "R2": "Ade",
+    "R3": "Bo",
+    "R4": "Cass",
+    "R5": "Dee"
+   }
+  },
+  {
+   "k": 17,
+   "storm_sol": 4,
+   "rotation": 0,
+   "water": 9,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "storm_warning",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Lin",
+    "R2": "Ade",
+    "R3": "Bo",
+    "R4": "Cass",
+    "R5": "Dee"
+   }
+  },
+  {
+   "k": 18,
+   "storm_sol": 6,
+   "rotation": 0,
+   "water": 9,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "hurt_hand",
+    "echo",
+    "storm_warning",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Lin",
+    "R2": "Ade",
+    "R3": "Bo",
+    "R4": "Cass",
+    "R5": "Dee"
+   }
+  },
+  {
+   "k": 19,
+   "storm_sol": 2,
+   "rotation": 0,
+   "water": 9,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "storm_warning",
+    "two_at_once",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Lin",
+    "R2": "Ade",
+    "R3": "Bo",
+    "R4": "Cass",
+    "R5": "Dee"
+   }
+  },
+  {
+   "k": 20,
+   "storm_sol": 3,
+   "rotation": 1,
+   "water": 9,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "storm_warning",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Ade",
+    "R2": "Bo",
+    "R3": "Cass",
+    "R4": "Dee",
+    "R5": "Lin"
+   }
+  },
+  {
+   "k": 21,
+   "storm_sol": 4,
+   "rotation": 1,
+   "water": 9,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "storm_warning",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Ade",
+    "R2": "Bo",
+    "R3": "Cass",
+    "R4": "Dee",
+    "R5": "Lin"
+   }
+  },
+  {
+   "k": 22,
+   "storm_sol": 6,
+   "rotation": 1,
+   "water": 9,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "hurt_hand",
+    "echo",
+    "storm_warning",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Ade",
+    "R2": "Bo",
+    "R3": "Cass",
+    "R4": "Dee",
+    "R5": "Lin"
+   }
+  },
+  {
+   "k": 23,
+   "storm_sol": 2,
+   "rotation": 1,
+   "water": 9,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "storm_warning",
+    "two_at_once",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Ade",
+    "R2": "Bo",
+    "R3": "Cass",
+    "R4": "Dee",
+    "R5": "Lin"
+   }
+  },
+  {
+   "k": 24,
+   "storm_sol": 3,
+   "rotation": 2,
+   "water": 9,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "storm_warning",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Bo",
+    "R2": "Cass",
+    "R3": "Dee",
+    "R4": "Lin",
+    "R5": "Ade"
+   }
+  },
+  {
+   "k": 25,
+   "storm_sol": 4,
+   "rotation": 2,
+   "water": 9,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "storm_warning",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Bo",
+    "R2": "Cass",
+    "R3": "Dee",
+    "R4": "Lin",
+    "R5": "Ade"
+   }
+  },
+  {
+   "k": 26,
+   "storm_sol": 6,
+   "rotation": 2,
+   "water": 9,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "hurt_hand",
+    "echo",
+    "storm_warning",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Bo",
+    "R2": "Cass",
+    "R3": "Dee",
+    "R4": "Lin",
+    "R5": "Ade"
+   }
+  },
+  {
+   "k": 27,
+   "storm_sol": 2,
+   "rotation": 2,
+   "water": 9,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "storm_warning",
+    "two_at_once",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Bo",
+    "R2": "Cass",
+    "R3": "Dee",
+    "R4": "Lin",
+    "R5": "Ade"
+   }
+  },
+  {
+   "k": 28,
+   "storm_sol": 3,
+   "rotation": 3,
+   "water": 9,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "storm_warning",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Cass",
+    "R2": "Dee",
+    "R3": "Lin",
+    "R4": "Ade",
+    "R5": "Bo"
+   }
+  },
+  {
+   "k": 29,
+   "storm_sol": 4,
+   "rotation": 3,
+   "water": 9,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "storm_warning",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Cass",
+    "R2": "Dee",
+    "R3": "Lin",
+    "R4": "Ade",
+    "R5": "Bo"
+   }
+  },
+  {
+   "k": 30,
+   "storm_sol": 6,
+   "rotation": 3,
+   "water": 9,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "hurt_hand",
+    "echo",
+    "storm_warning",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Cass",
+    "R2": "Dee",
+    "R3": "Lin",
+    "R4": "Ade",
+    "R5": "Bo"
+   }
+  },
+  {
+   "k": 31,
+   "storm_sol": 2,
+   "rotation": 3,
+   "water": 9,
+   "power": 12,
+   "order": [
+    "quiet_first",
+    "storm_warning",
+    "two_at_once",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Cass",
+    "R2": "Dee",
+    "R3": "Lin",
+    "R4": "Ade",
+    "R5": "Bo"
+   }
+  },
+  {
+   "k": 32,
+   "storm_sol": 3,
+   "rotation": 0,
+   "water": 12,
+   "power": 9,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "storm_warning",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Lin",
+    "R2": "Ade",
+    "R3": "Bo",
+    "R4": "Cass",
+    "R5": "Dee"
+   }
+  },
+  {
+   "k": 33,
+   "storm_sol": 4,
+   "rotation": 0,
+   "water": 12,
+   "power": 9,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "storm_warning",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Lin",
+    "R2": "Ade",
+    "R3": "Bo",
+    "R4": "Cass",
+    "R5": "Dee"
+   }
+  },
+  {
+   "k": 34,
+   "storm_sol": 6,
+   "rotation": 0,
+   "water": 12,
+   "power": 9,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "hurt_hand",
+    "echo",
+    "storm_warning",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Lin",
+    "R2": "Ade",
+    "R3": "Bo",
+    "R4": "Cass",
+    "R5": "Dee"
+   }
+  },
+  {
+   "k": 35,
+   "storm_sol": 2,
+   "rotation": 0,
+   "water": 12,
+   "power": 9,
+   "order": [
+    "quiet_first",
+    "storm_warning",
+    "two_at_once",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Lin",
+    "R2": "Ade",
+    "R3": "Bo",
+    "R4": "Cass",
+    "R5": "Dee"
+   }
+  },
+  {
+   "k": 36,
+   "storm_sol": 3,
+   "rotation": 1,
+   "water": 12,
+   "power": 9,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "storm_warning",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Ade",
+    "R2": "Bo",
+    "R3": "Cass",
+    "R4": "Dee",
+    "R5": "Lin"
+   }
+  },
+  {
+   "k": 37,
+   "storm_sol": 4,
+   "rotation": 1,
+   "water": 12,
+   "power": 9,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "storm_warning",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Ade",
+    "R2": "Bo",
+    "R3": "Cass",
+    "R4": "Dee",
+    "R5": "Lin"
+   }
+  },
+  {
+   "k": 38,
+   "storm_sol": 6,
+   "rotation": 1,
+   "water": 12,
+   "power": 9,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "hurt_hand",
+    "echo",
+    "storm_warning",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Ade",
+    "R2": "Bo",
+    "R3": "Cass",
+    "R4": "Dee",
+    "R5": "Lin"
+   }
+  },
+  {
+   "k": 39,
+   "storm_sol": 2,
+   "rotation": 1,
+   "water": 12,
+   "power": 9,
+   "order": [
+    "quiet_first",
+    "storm_warning",
+    "two_at_once",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Ade",
+    "R2": "Bo",
+    "R3": "Cass",
+    "R4": "Dee",
+    "R5": "Lin"
+   }
+  },
+  {
+   "k": 40,
+   "storm_sol": 3,
+   "rotation": 2,
+   "water": 12,
+   "power": 9,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "storm_warning",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Bo",
+    "R2": "Cass",
+    "R3": "Dee",
+    "R4": "Lin",
+    "R5": "Ade"
+   }
+  },
+  {
+   "k": 41,
+   "storm_sol": 4,
+   "rotation": 2,
+   "water": 12,
+   "power": 9,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "storm_warning",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Bo",
+    "R2": "Cass",
+    "R3": "Dee",
+    "R4": "Lin",
+    "R5": "Ade"
+   }
+  },
+  {
+   "k": 42,
+   "storm_sol": 6,
+   "rotation": 2,
+   "water": 12,
+   "power": 9,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "hurt_hand",
+    "echo",
+    "storm_warning",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Bo",
+    "R2": "Cass",
+    "R3": "Dee",
+    "R4": "Lin",
+    "R5": "Ade"
+   }
+  },
+  {
+   "k": 43,
+   "storm_sol": 2,
+   "rotation": 2,
+   "water": 12,
+   "power": 9,
+   "order": [
+    "quiet_first",
+    "storm_warning",
+    "two_at_once",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Bo",
+    "R2": "Cass",
+    "R3": "Dee",
+    "R4": "Lin",
+    "R5": "Ade"
+   }
+  },
+  {
+   "k": 44,
+   "storm_sol": 3,
+   "rotation": 3,
+   "water": 12,
+   "power": 9,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "storm_warning",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Cass",
+    "R2": "Dee",
+    "R3": "Lin",
+    "R4": "Ade",
+    "R5": "Bo"
+   }
+  },
+  {
+   "k": 45,
+   "storm_sol": 4,
+   "rotation": 3,
+   "water": 12,
+   "power": 9,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "storm_warning",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Cass",
+    "R2": "Dee",
+    "R3": "Lin",
+    "R4": "Ade",
+    "R5": "Bo"
+   }
+  },
+  {
+   "k": 46,
+   "storm_sol": 6,
+   "rotation": 3,
+   "water": 12,
+   "power": 9,
+   "order": [
+    "quiet_first",
+    "two_at_once",
+    "water_low",
+    "hurt_hand",
+    "echo",
+    "storm_warning",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Cass",
+    "R2": "Dee",
+    "R3": "Lin",
+    "R4": "Ade",
+    "R5": "Bo"
+   }
+  },
+  {
+   "k": 47,
+   "storm_sol": 2,
+   "rotation": 3,
+   "water": 12,
+   "power": 9,
+   "order": [
+    "quiet_first",
+    "storm_warning",
+    "two_at_once",
+    "water_low",
+    "echo",
+    "hurt_hand",
+    "last_return"
+   ],
+   "names": {
+    "R1": "Cass",
+    "R2": "Dee",
+    "R3": "Lin",
+    "R4": "Ade",
+    "R5": "Bo"
+   }
+  }
+ ]
+}
