@@ -45,8 +45,9 @@ function Psyche002() {
           </ul>
         </section>
         <p className="mt-8">
-          <a href={`${PSYCHE_002_NOW_PLAY}?seed=S38`}>
-            <img src={PSYCHE_002_CARD} alt="氣閘 Airlock — Play" className="w-full" />
+          <a href={`${PSYCHE_002_NOW_PLAY}?seed=S38`} className="relative block">
+            <img src={PSYCHE_002_CARD} alt="氣閘 Airlock — Play" className="block w-full" />
+            <span className="absolute bottom-[14%] left-[5%] rounded-full bg-[#f1a649] px-5 py-2 text-base font-semibold text-[#1a1208]">Play ▶</span>
           </a>
         </p>
         <section className="mt-8">
