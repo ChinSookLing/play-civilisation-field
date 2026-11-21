@@ -76,6 +76,9 @@ import { Route as SalonBeforeThe16thDottxtRouteImport } from './routes/salon/bef
 import { Route as SalonChangedShiftsRouteImport } from './routes/salon/changed-shifts'
 import { Route as SalonChangedShiftsDothtmlRouteImport } from './routes/salon/changed-shifts[.]html'
 import { Route as SalonChangedShiftsDottxtRouteImport } from './routes/salon/changed-shifts[.]txt'
+import { Route as SalonDustOutRouteImport } from './routes/salon/dust-out'
+import { Route as SalonDustOutDothtmlRouteImport } from './routes/salon/dust-out[.]html'
+import { Route as SalonDustOutDottxtRouteImport } from './routes/salon/dust-out[.]txt'
 import { Route as SalonFifteenSpeedsRouteImport } from './routes/salon/fifteen-speeds'
 import { Route as SalonFifteenSpeedsDothtmlRouteImport } from './routes/salon/fifteen-speeds[.]html'
 import { Route as SalonFifteenSpeedsDottxtRouteImport } from './routes/salon/fifteen-speeds[.]txt'
@@ -189,6 +192,10 @@ import { Route as Psyche002StartDotjsonRouteImport } from './routes/psyche/002/s
 import { Route as Psyche002StartDottxtRouteImport } from './routes/psyche/002/start[.]txt'
 import { Route as Psyche002V02RouteImport } from './routes/psyche/002/v02'
 import { Route as Psyche002V02DottxtRouteImport } from './routes/psyche/002/v02[.]txt'
+import { Route as SalonDustOutIndexRouteImport } from './routes/salon/dust-out.index'
+import { Route as SalonDustOutZhRouteImport } from './routes/salon/dust-out.zh'
+import { Route as SalonDustOutZhDothtmlRouteImport } from './routes/salon/dust-out.zh[.]html'
+import { Route as SalonDustOutZhDottxtRouteImport } from './routes/salon/dust-out.zh[.]txt'
 import { Route as SalonNightShiftIndexRouteImport } from './routes/salon/night-shift.index'
 import { Route as SalonNightShiftZhRouteImport } from './routes/salon/night-shift.zh'
 import { Route as SalonNightShiftZhDothtmlRouteImport } from './routes/salon/night-shift.zh[.]html'
@@ -589,6 +596,21 @@ const SalonChangedShiftsDottxtRoute =
     path: '/changed-shifts.txt',
     getParentRoute: () => SalonRoute,
   } as any)
+const SalonDustOutRoute = SalonDustOutRouteImport.update({
+  id: '/dust-out',
+  path: '/dust-out',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonDustOutDothtmlRoute = SalonDustOutDothtmlRouteImport.update({
+  id: '/dust-out.html',
+  path: '/dust-out.html',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonDustOutDottxtRoute = SalonDustOutDottxtRouteImport.update({
+  id: '/dust-out.txt',
+  path: '/dust-out.txt',
+  getParentRoute: () => SalonRoute,
+} as any)
 const SalonFifteenSpeedsRoute = SalonFifteenSpeedsRouteImport.update({
   id: '/fifteen-speeds',
   path: '/fifteen-speeds',
@@ -1215,6 +1237,26 @@ const Psyche002V02DottxtRoute = Psyche002V02DottxtRouteImport.update({
   path: '/v02.txt',
   getParentRoute: () => Psyche002Route,
 } as any)
+const SalonDustOutIndexRoute = SalonDustOutIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SalonDustOutRoute,
+} as any)
+const SalonDustOutZhRoute = SalonDustOutZhRouteImport.update({
+  id: '/zh',
+  path: '/zh',
+  getParentRoute: () => SalonDustOutRoute,
+} as any)
+const SalonDustOutZhDothtmlRoute = SalonDustOutZhDothtmlRouteImport.update({
+  id: '/zh.html',
+  path: '/zh.html',
+  getParentRoute: () => SalonDustOutRoute,
+} as any)
+const SalonDustOutZhDottxtRoute = SalonDustOutZhDottxtRouteImport.update({
+  id: '/zh.txt',
+  path: '/zh.txt',
+  getParentRoute: () => SalonDustOutRoute,
+} as any)
 const SalonNightShiftIndexRoute = SalonNightShiftIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -1555,6 +1597,9 @@ export interface FileRoutesByFullPath {
   '/salon/changed-shifts': typeof SalonChangedShiftsRoute
   '/salon/changed-shifts.html': typeof SalonChangedShiftsDothtmlRoute
   '/salon/changed-shifts.txt': typeof SalonChangedShiftsDottxtRoute
+  '/salon/dust-out': typeof SalonDustOutRouteWithChildren
+  '/salon/dust-out.html': typeof SalonDustOutDothtmlRoute
+  '/salon/dust-out.txt': typeof SalonDustOutDottxtRoute
   '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
   '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
   '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
@@ -1661,6 +1706,9 @@ export interface FileRoutesByFullPath {
   '/psyche/002/start.txt': typeof Psyche002StartDottxtRoute
   '/psyche/002/v02': typeof Psyche002V02RouteWithChildren
   '/psyche/002/v02.txt': typeof Psyche002V02DottxtRoute
+  '/salon/dust-out/zh': typeof SalonDustOutZhRoute
+  '/salon/dust-out/zh.html': typeof SalonDustOutZhDothtmlRoute
+  '/salon/dust-out/zh.txt': typeof SalonDustOutZhDottxtRoute
   '/salon/night-shift/zh': typeof SalonNightShiftZhRoute
   '/salon/night-shift/zh.html': typeof SalonNightShiftZhDothtmlRoute
   '/salon/night-shift/zh.txt': typeof SalonNightShiftZhDottxtRoute
@@ -1674,6 +1722,7 @@ export interface FileRoutesByFullPath {
   '/gathering/proof-table-005/': typeof GatheringProofTable005IndexRoute
   '/gathering/proof-table-006/': typeof GatheringProofTable006IndexRoute
   '/gathering/proof-table-008/': typeof GatheringProofTable008IndexRoute
+  '/salon/dust-out/': typeof SalonDustOutIndexRoute
   '/salon/night-shift/': typeof SalonNightShiftIndexRoute
   '/api/games/$gameId/handoff': typeof ApiGamesGameIdHandoffRoute
   '/api/games/$gameId/jev': typeof ApiGamesGameIdJevRoute
@@ -1782,6 +1831,8 @@ export interface FileRoutesByTo {
   '/salon/changed-shifts': typeof SalonChangedShiftsRoute
   '/salon/changed-shifts.html': typeof SalonChangedShiftsDothtmlRoute
   '/salon/changed-shifts.txt': typeof SalonChangedShiftsDottxtRoute
+  '/salon/dust-out.html': typeof SalonDustOutDothtmlRoute
+  '/salon/dust-out.txt': typeof SalonDustOutDottxtRoute
   '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
   '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
   '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
@@ -1887,6 +1938,9 @@ export interface FileRoutesByTo {
   '/psyche/002/start.txt': typeof Psyche002StartDottxtRoute
   '/psyche/002/v02': typeof Psyche002V02RouteWithChildren
   '/psyche/002/v02.txt': typeof Psyche002V02DottxtRoute
+  '/salon/dust-out/zh': typeof SalonDustOutZhRoute
+  '/salon/dust-out/zh.html': typeof SalonDustOutZhDothtmlRoute
+  '/salon/dust-out/zh.txt': typeof SalonDustOutZhDottxtRoute
   '/salon/night-shift/zh': typeof SalonNightShiftZhRoute
   '/salon/night-shift/zh.html': typeof SalonNightShiftZhDothtmlRoute
   '/salon/night-shift/zh.txt': typeof SalonNightShiftZhDottxtRoute
@@ -1900,6 +1954,7 @@ export interface FileRoutesByTo {
   '/gathering/proof-table-005': typeof GatheringProofTable005IndexRoute
   '/gathering/proof-table-006': typeof GatheringProofTable006IndexRoute
   '/gathering/proof-table-008': typeof GatheringProofTable008IndexRoute
+  '/salon/dust-out': typeof SalonDustOutIndexRoute
   '/salon/night-shift': typeof SalonNightShiftIndexRoute
   '/api/games/$gameId/handoff': typeof ApiGamesGameIdHandoffRoute
   '/api/games/$gameId/jev': typeof ApiGamesGameIdJevRoute
@@ -2012,6 +2067,9 @@ export interface FileRoutesById {
   '/salon/changed-shifts': typeof SalonChangedShiftsRoute
   '/salon/changed-shifts.html': typeof SalonChangedShiftsDothtmlRoute
   '/salon/changed-shifts.txt': typeof SalonChangedShiftsDottxtRoute
+  '/salon/dust-out': typeof SalonDustOutRouteWithChildren
+  '/salon/dust-out.html': typeof SalonDustOutDothtmlRoute
+  '/salon/dust-out.txt': typeof SalonDustOutDottxtRoute
   '/salon/fifteen-speeds': typeof SalonFifteenSpeedsRoute
   '/salon/fifteen-speeds.html': typeof SalonFifteenSpeedsDothtmlRoute
   '/salon/fifteen-speeds.txt': typeof SalonFifteenSpeedsDottxtRoute
@@ -2118,6 +2176,9 @@ export interface FileRoutesById {
   '/psyche/002/start.txt': typeof Psyche002StartDottxtRoute
   '/psyche/002/v02': typeof Psyche002V02RouteWithChildren
   '/psyche/002/v02.txt': typeof Psyche002V02DottxtRoute
+  '/salon/dust-out/zh': typeof SalonDustOutZhRoute
+  '/salon/dust-out/zh.html': typeof SalonDustOutZhDothtmlRoute
+  '/salon/dust-out/zh.txt': typeof SalonDustOutZhDottxtRoute
   '/salon/night-shift/zh': typeof SalonNightShiftZhRoute
   '/salon/night-shift/zh.html': typeof SalonNightShiftZhDothtmlRoute
   '/salon/night-shift/zh.txt': typeof SalonNightShiftZhDottxtRoute
@@ -2131,6 +2192,7 @@ export interface FileRoutesById {
   '/gathering/proof-table-005/': typeof GatheringProofTable005IndexRoute
   '/gathering/proof-table-006/': typeof GatheringProofTable006IndexRoute
   '/gathering/proof-table-008/': typeof GatheringProofTable008IndexRoute
+  '/salon/dust-out/': typeof SalonDustOutIndexRoute
   '/salon/night-shift/': typeof SalonNightShiftIndexRoute
   '/api/games/$gameId/handoff': typeof ApiGamesGameIdHandoffRoute
   '/api/games/$gameId/jev': typeof ApiGamesGameIdJevRoute
@@ -2244,6 +2306,9 @@ export interface FileRouteTypes {
     | '/salon/changed-shifts'
     | '/salon/changed-shifts.html'
     | '/salon/changed-shifts.txt'
+    | '/salon/dust-out'
+    | '/salon/dust-out.html'
+    | '/salon/dust-out.txt'
     | '/salon/fifteen-speeds'
     | '/salon/fifteen-speeds.html'
     | '/salon/fifteen-speeds.txt'
@@ -2350,6 +2415,9 @@ export interface FileRouteTypes {
     | '/psyche/002/start.txt'
     | '/psyche/002/v02'
     | '/psyche/002/v02.txt'
+    | '/salon/dust-out/zh'
+    | '/salon/dust-out/zh.html'
+    | '/salon/dust-out/zh.txt'
     | '/salon/night-shift/zh'
     | '/salon/night-shift/zh.html'
     | '/salon/night-shift/zh.txt'
@@ -2363,6 +2431,7 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-005/'
     | '/gathering/proof-table-006/'
     | '/gathering/proof-table-008/'
+    | '/salon/dust-out/'
     | '/salon/night-shift/'
     | '/api/games/$gameId/handoff'
     | '/api/games/$gameId/jev'
@@ -2471,6 +2540,8 @@ export interface FileRouteTypes {
     | '/salon/changed-shifts'
     | '/salon/changed-shifts.html'
     | '/salon/changed-shifts.txt'
+    | '/salon/dust-out.html'
+    | '/salon/dust-out.txt'
     | '/salon/fifteen-speeds'
     | '/salon/fifteen-speeds.html'
     | '/salon/fifteen-speeds.txt'
@@ -2576,6 +2647,9 @@ export interface FileRouteTypes {
     | '/psyche/002/start.txt'
     | '/psyche/002/v02'
     | '/psyche/002/v02.txt'
+    | '/salon/dust-out/zh'
+    | '/salon/dust-out/zh.html'
+    | '/salon/dust-out/zh.txt'
     | '/salon/night-shift/zh'
     | '/salon/night-shift/zh.html'
     | '/salon/night-shift/zh.txt'
@@ -2589,6 +2663,7 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-005'
     | '/gathering/proof-table-006'
     | '/gathering/proof-table-008'
+    | '/salon/dust-out'
     | '/salon/night-shift'
     | '/api/games/$gameId/handoff'
     | '/api/games/$gameId/jev'
@@ -2700,6 +2775,9 @@ export interface FileRouteTypes {
     | '/salon/changed-shifts'
     | '/salon/changed-shifts.html'
     | '/salon/changed-shifts.txt'
+    | '/salon/dust-out'
+    | '/salon/dust-out.html'
+    | '/salon/dust-out.txt'
     | '/salon/fifteen-speeds'
     | '/salon/fifteen-speeds.html'
     | '/salon/fifteen-speeds.txt'
@@ -2806,6 +2884,9 @@ export interface FileRouteTypes {
     | '/psyche/002/start.txt'
     | '/psyche/002/v02'
     | '/psyche/002/v02.txt'
+    | '/salon/dust-out/zh'
+    | '/salon/dust-out/zh.html'
+    | '/salon/dust-out/zh.txt'
     | '/salon/night-shift/zh'
     | '/salon/night-shift/zh.html'
     | '/salon/night-shift/zh.txt'
@@ -2819,6 +2900,7 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-005/'
     | '/gathering/proof-table-006/'
     | '/gathering/proof-table-008/'
+    | '/salon/dust-out/'
     | '/salon/night-shift/'
     | '/api/games/$gameId/handoff'
     | '/api/games/$gameId/jev'
@@ -3392,6 +3474,27 @@ declare module '@tanstack/react-router' {
       path: '/changed-shifts.txt'
       fullPath: '/salon/changed-shifts.txt'
       preLoaderRoute: typeof SalonChangedShiftsDottxtRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/dust-out': {
+      id: '/salon/dust-out'
+      path: '/dust-out'
+      fullPath: '/salon/dust-out'
+      preLoaderRoute: typeof SalonDustOutRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/dust-out.html': {
+      id: '/salon/dust-out.html'
+      path: '/dust-out.html'
+      fullPath: '/salon/dust-out.html'
+      preLoaderRoute: typeof SalonDustOutDothtmlRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/dust-out.txt': {
+      id: '/salon/dust-out.txt'
+      path: '/dust-out.txt'
+      fullPath: '/salon/dust-out.txt'
+      preLoaderRoute: typeof SalonDustOutDottxtRouteImport
       parentRoute: typeof SalonRoute
     }
     '/salon/fifteen-speeds': {
@@ -4185,6 +4288,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Psyche002V02DottxtRouteImport
       parentRoute: typeof Psyche002Route
     }
+    '/salon/dust-out/': {
+      id: '/salon/dust-out/'
+      path: '/'
+      fullPath: '/salon/dust-out/'
+      preLoaderRoute: typeof SalonDustOutIndexRouteImport
+      parentRoute: typeof SalonDustOutRoute
+    }
+    '/salon/dust-out/zh': {
+      id: '/salon/dust-out/zh'
+      path: '/zh'
+      fullPath: '/salon/dust-out/zh'
+      preLoaderRoute: typeof SalonDustOutZhRouteImport
+      parentRoute: typeof SalonDustOutRoute
+    }
+    '/salon/dust-out/zh.html': {
+      id: '/salon/dust-out/zh.html'
+      path: '/zh.html'
+      fullPath: '/salon/dust-out/zh.html'
+      preLoaderRoute: typeof SalonDustOutZhDothtmlRouteImport
+      parentRoute: typeof SalonDustOutRoute
+    }
+    '/salon/dust-out/zh.txt': {
+      id: '/salon/dust-out/zh.txt'
+      path: '/zh.txt'
+      fullPath: '/salon/dust-out/zh.txt'
+      preLoaderRoute: typeof SalonDustOutZhDottxtRouteImport
+      parentRoute: typeof SalonDustOutRoute
+    }
     '/salon/night-shift/': {
       id: '/salon/night-shift/'
       path: '/'
@@ -4900,6 +5031,24 @@ const PsycheRouteChildren: PsycheRouteChildren = {
 const PsycheRouteWithChildren =
   PsycheRoute._addFileChildren(PsycheRouteChildren)
 
+interface SalonDustOutRouteChildren {
+  SalonDustOutZhRoute: typeof SalonDustOutZhRoute
+  SalonDustOutZhDothtmlRoute: typeof SalonDustOutZhDothtmlRoute
+  SalonDustOutZhDottxtRoute: typeof SalonDustOutZhDottxtRoute
+  SalonDustOutIndexRoute: typeof SalonDustOutIndexRoute
+}
+
+const SalonDustOutRouteChildren: SalonDustOutRouteChildren = {
+  SalonDustOutZhRoute: SalonDustOutZhRoute,
+  SalonDustOutZhDothtmlRoute: SalonDustOutZhDothtmlRoute,
+  SalonDustOutZhDottxtRoute: SalonDustOutZhDottxtRoute,
+  SalonDustOutIndexRoute: SalonDustOutIndexRoute,
+}
+
+const SalonDustOutRouteWithChildren = SalonDustOutRoute._addFileChildren(
+  SalonDustOutRouteChildren,
+)
+
 interface SalonNightShiftRouteChildren {
   SalonNightShiftZhRoute: typeof SalonNightShiftZhRoute
   SalonNightShiftZhDothtmlRoute: typeof SalonNightShiftZhDothtmlRoute
@@ -4926,6 +5075,9 @@ interface SalonRouteChildren {
   SalonChangedShiftsRoute: typeof SalonChangedShiftsRoute
   SalonChangedShiftsDothtmlRoute: typeof SalonChangedShiftsDothtmlRoute
   SalonChangedShiftsDottxtRoute: typeof SalonChangedShiftsDottxtRoute
+  SalonDustOutRoute: typeof SalonDustOutRouteWithChildren
+  SalonDustOutDothtmlRoute: typeof SalonDustOutDothtmlRoute
+  SalonDustOutDottxtRoute: typeof SalonDustOutDottxtRoute
   SalonFifteenSpeedsRoute: typeof SalonFifteenSpeedsRoute
   SalonFifteenSpeedsDothtmlRoute: typeof SalonFifteenSpeedsDothtmlRoute
   SalonFifteenSpeedsDottxtRoute: typeof SalonFifteenSpeedsDottxtRoute
@@ -4979,6 +5131,9 @@ const SalonRouteChildren: SalonRouteChildren = {
   SalonChangedShiftsRoute: SalonChangedShiftsRoute,
   SalonChangedShiftsDothtmlRoute: SalonChangedShiftsDothtmlRoute,
   SalonChangedShiftsDottxtRoute: SalonChangedShiftsDottxtRoute,
+  SalonDustOutRoute: SalonDustOutRouteWithChildren,
+  SalonDustOutDothtmlRoute: SalonDustOutDothtmlRoute,
+  SalonDustOutDottxtRoute: SalonDustOutDottxtRoute,
   SalonFifteenSpeedsRoute: SalonFifteenSpeedsRoute,
   SalonFifteenSpeedsDothtmlRoute: SalonFifteenSpeedsDothtmlRoute,
   SalonFifteenSpeedsDottxtRoute: SalonFifteenSpeedsDottxtRoute,
