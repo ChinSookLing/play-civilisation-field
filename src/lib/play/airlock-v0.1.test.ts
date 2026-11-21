@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
 import test from "node:test";
-import { airlockEcho, airlockMeters, airlockMove, airlockPacket, airlockView } from "./airlock-v0.1";
-import { airlockDoorProblems } from "./psyche-002-start.server";
+import { AIRLOCK_END, airlockEcho, airlockMeters, airlockMove, airlockPacket, airlockView } from "./airlock-v0.1";
+import { airlockDoorProblems, airlockStartText } from "./psyche-002-start.server";
+import { PSYCHE_002_ROWS } from "./psyche-002";
 
 test("night drain and echo match the reference when nobody passes", () => {
   const rows = execFileSync("python3", ["-c", `
@@ -78,4 +79,12 @@ test("an unoffered letter is NO MOVE, and PASS matches that sol's B", () => {
   assert.equal(packet.includes('"'), false);
   assert.equal(packet.includes("Line 1: A"), true);
   assert.equal(airlockDoorProblems().join("\n"), "");
+});
+
+test("round 1 replay endings match the wall", () => {
+  const letters = ["AABCBDAA", "ADBCBCAA", "AACDBDAA"] as const;
+  PSYCHE_002_ROWS.forEach((row, index) => {
+    const text = airlockStartText("S1", "en", letters[index] ?? "");
+    assert.equal(text, `${row.ending}\nReplay: ${row.replay}\n${AIRLOCK_END}\n`);
+  });
 });

@@ -43,7 +43,7 @@ function walked(query: AirlockQuery): { text: string; offered: string[]; finishe
   }
   const view = airlockView(query.seed, soFar, query.lang, soFar.length === 8 ? query.comment : "");
   if ("error" in view) return { text: `${view.error}\n`, offered: [], finished: false, at: soFar };
-  if (view.finished) return { text: `${view.ending}\n`, offered: [], finished: true, at: soFar };
+  if (view.finished) return { text: `${view.ending}\n${AIRLOCK_END}\n`, offered: [], finished: true, at: soFar };
   return { text: view.packet, offered: view.offered, finished: false, at: soFar };
 }
 
@@ -105,9 +105,10 @@ export function airlockStartHtml(seed: string, lang: "en" | "zh", moves = "", co
   const body = lines.map((line) => `<p>${escapeHtml(line)}</p>`).join("\n");
   const q = querySuffix(seed, lang, moves);
   const isPacket = packet.includes(AIRLOCK_END);
+  const ended = packet.includes("Replay:") || packet.includes("回放碼：");
   const after = isPacket
-    ? `<hr>\n<p>The packet ends above.</p>\n<p>Play's Type-C approach. One turn. No JavaScript.</p>\n<p>P = PASS. The reply block in the packet is the reply format.</p>\n`
-    : `<p>No JavaScript. ${packet.startsWith("NO MOVE:") ? "That letter was not offered." : "The week is over. The replay code is above."}</p>\n`;
+    ? `<hr>\n<p>The packet ends above.</p>\n${ended ? "<p>The week is over. The replay code is above.</p>\n" : "<p>Play's Type-C approach. One turn. No JavaScript.</p>\n<p>P = PASS. The reply block in the packet is the reply format.</p>\n"}`
+    : `<p>No JavaScript. That letter was not offered.</p>\n`;
   return `<!DOCTYPE html>
 <html lang="${lang === "zh" ? "zh" : "en"}">
 <head>
@@ -209,10 +210,11 @@ export function airlockDoorProblems(): string[] {
   const note = airlockStartText("S1", "en", "AAAAAAA");
   if (!note.includes("expected_move_number: 8") || !note.includes("sol: 7/7")) problems.push("step 8 note missing");
   const ending = airlockStartText("S1", "en", "AAAAAAAA");
-  if (!ending.includes("Replay: S1/airlock-v0.1/AAA-AAA-AA") || ending.includes(AIRLOCK_END)) problems.push("ending missing");
+  if (!ending.endsWith(`${AIRLOCK_END}\n`) || !ending.includes("Replay: S1/airlock-v0.1/AAA-AAA-AA")) problems.push("ending missing");
   const refused = airlockStartText("S1", "en", "CCCCC");
   if (refused !== "NO MOVE: C is not offered\n") problems.push(`unoffered: ${refused}`);
   const play = airlockPlayHtml({ seed: "S1", lang: "en", moves: "", comment: "" });
   if (!play.includes("AIRLOCK-PACKET") || !play.includes(">A</a>") || !play.includes(">PASS</a>")) problems.push("play page has no choices");
+  if (play.includes("气闸教会") || airlockStartText("S1", "en").includes("气闸教会")) problems.push("wall text in a door");
   return problems;
 }

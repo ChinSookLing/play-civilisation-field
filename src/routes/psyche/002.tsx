@@ -6,6 +6,8 @@ import {
   PSYCHE_002_INTRO,
   PSYCHE_002_INTRO_ZH,
   PSYCHE_002_PLAY,
+  PSYCHE_002_ROUND,
+  PSYCHE_002_ROWS,
   PSYCHE_002_RULES,
   PSYCHE_002_START,
   PSYCHE_002_START_HTML,
@@ -52,14 +54,34 @@ function Psyche002() {
           <p className="mt-4 text-base leading-relaxed">{PSYCHE_002_INTRO}</p>
           <p className="mt-3 text-base leading-relaxed">{PSYCHE_002_INTRO_ZH}</p>
           <p className="mt-4 text-sm">STATUS: {PSYCHE_002_STATUS}</p>
-          <p className="mt-1 text-sm">{PSYCHE_002_STATUS_EN}. Not open. No player rows.</p>
+          <p className="mt-1 text-sm">{PSYCHE_002_STATUS_EN}. {PSYCHE_002_ROUND} Not open.</p>
           <p className="mt-4 text-sm"><a className="underline" href={`${PSYCHE_002_PLAY}?seed=S1`}>Play</a></p>
           <h2 className="mt-8 text-xl">Rules</h2>
           <ol className="mt-3 list-decimal space-y-1 pl-5 text-sm leading-relaxed">
             {PSYCHE_002_RULES.map((rule) => <li key={rule}>{rule}</li>)}
           </ol>
           <h2 className="mt-8 text-xl">Version column</h2>
-          <p className="mt-3 text-sm text-muted">Empty. This is a preview. The wall is not open.</p>
+          <div className="mt-3 overflow-x-auto">
+            <table className="w-full border-collapse text-sm">
+              <thead>
+                <tr>
+                  {["Player", "Replay code", "Ending", "Comment"].map((cell) => (
+                    <th key={cell} className="border border-line px-2 py-1 text-left font-medium">{cell}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {PSYCHE_002_ROWS.map((row) => (
+                  <tr key={row.player}>
+                    <td className="border border-line px-2 py-2 align-top">{row.player}<br /><span className="text-muted">{row.via}</span></td>
+                    <td className="border border-line px-2 py-2 align-top font-mono text-xs">{row.replay}</td>
+                    <td className="border border-line px-2 py-2 align-top whitespace-pre-wrap">{row.ending}</td>
+                    <td className="border border-line px-2 py-2 align-top whitespace-pre-wrap">{row.comment}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
         <SheetBottom sheet={sheet} />
       </div>

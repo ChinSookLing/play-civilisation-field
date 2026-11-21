@@ -36,7 +36,7 @@ function Psyche() {
               id: "PSYCHE-002",
               title: PSYCHE_002_TITLE,
               status: PSYCHE_002_STATUS,
-              note: "Airlock. Preview. Not open. No score.",
+              note: "Airlock. Preview. Round 1. Not open. No score.",
               light: "/psyche/002.txt",
             },
           ],
