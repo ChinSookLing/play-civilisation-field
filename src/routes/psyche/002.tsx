@@ -5,13 +5,13 @@ import {
   PSYCHE_002_CARD,
   PSYCHE_002_INTRO,
   PSYCHE_002_INTRO_ZH,
-  PSYCHE_002_PLAY,
+  PSYCHE_002_NOW_HTML,
+  PSYCHE_002_NOW_JSON,
+  PSYCHE_002_NOW_PLAY,
+  PSYCHE_002_NOW_START,
   PSYCHE_002_ROUND,
   PSYCHE_002_ROWS,
   PSYCHE_002_RULES,
-  PSYCHE_002_START,
-  PSYCHE_002_START_HTML,
-  PSYCHE_002_START_JSON,
   PSYCHE_002_STATUS,
   PSYCHE_002_STATUS_EN,
   PSYCHE_002_TITLE,
@@ -38,14 +38,14 @@ function Psyche002() {
           <p className="text-xs tracking-[0.14em] text-muted uppercase">For an AI</p>
           <p className="mt-2">Play's Type-C approach. Read one door. They are the same turn. A seed is ?seed= on that path. Moves so far are &moves=. Chinese is &lang=zh.</p>
           <ul className="mt-2 space-y-1">
-            <li><a className="text-fg underline" href={`${PSYCHE_002_START_HTML}?seed=S1`}>HTML</a></li>
-            <li><a className="text-fg underline" href={`${PSYCHE_002_START}?seed=S1`}>Plain text (.txt)</a></li>
-            <li><a className="text-fg underline" href={`${PSYCHE_002_START_JSON}?seed=S1`}>JSON (.json)</a></li>
-            <li>Packet — the text in those doors. Paste it if you cannot browse. The last line is END-PACKET airlock-v0.1.</li>
+            <li><a className="text-fg underline" href={`${PSYCHE_002_NOW_HTML}?seed=S38`}>HTML</a></li>
+            <li><a className="text-fg underline" href={`${PSYCHE_002_NOW_START}?seed=S38`}>Plain text (.txt)</a></li>
+            <li><a className="text-fg underline" href={`${PSYCHE_002_NOW_JSON}?seed=S38`}>JSON (.json)</a></li>
+            <li>Packet — the text in those doors. Paste it if you cannot browse. The last line is END-PACKET airlock-v0.2.</li>
           </ul>
         </section>
         <p className="mt-8">
-          <a href={PSYCHE_002_PLAY}>
+          <a href={`${PSYCHE_002_NOW_PLAY}?seed=S38`}>
             <img src={PSYCHE_002_CARD} alt="氣閘 Airlock — Play" className="w-full" />
           </a>
         </p>
@@ -54,13 +54,14 @@ function Psyche002() {
           <p className="mt-4 text-base leading-relaxed">{PSYCHE_002_INTRO}</p>
           <p className="mt-3 text-base leading-relaxed">{PSYCHE_002_INTRO_ZH}</p>
           <p className="mt-4 text-sm">STATUS: {PSYCHE_002_STATUS}</p>
-          <p className="mt-1 text-sm">{PSYCHE_002_STATUS_EN}. {PSYCHE_002_ROUND}</p>
-          <p className="mt-4 text-sm"><a className="underline" href={`${PSYCHE_002_PLAY}?seed=S1`}>Play</a></p>
+          <p className="mt-1 text-sm">{PSYCHE_002_STATUS_EN}. Current seed S38. No v0.2 wall rows yet.</p>
+          <p className="mt-4 text-sm"><a className="underline" href={`${PSYCHE_002_NOW_PLAY}?seed=S38`}>Play</a></p>
           <h2 className="mt-8 text-xl">Rules</h2>
           <ol className="mt-3 list-decimal space-y-1 pl-5 text-sm leading-relaxed">
             {PSYCHE_002_RULES.map((rule) => <li key={rule}>{rule}</li>)}
           </ol>
           <h2 className="mt-8 text-xl">Version column</h2>
+          <p className="mt-3 text-sm">{PSYCHE_002_ROUND} A v0.2 round goes on the wall only after it closes.</p>
           <div className="mt-3 overflow-x-auto">
             <table className="w-full border-collapse text-sm">
               <thead>

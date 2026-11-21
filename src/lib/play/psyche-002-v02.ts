@@ -3,7 +3,7 @@ import { siteFooterHtml } from "./site-footer";
 import { ORIGIN, type Sheet, textRevision } from "./sheet";
 
 export const PSYCHE_V02_TITLE = "002 · 心 · Psyche — 氣閘 Airlock v0.2";
-export const PSYCHE_V02_STATUS = "airlock-v0.2 · 預覽";
+export const PSYCHE_V02_STATUS = "airlock-v0.2 · 開放";
 export const PSYCHE_V02_PAGE = `${ORIGIN}/psyche/002/v02`;
 export const PSYCHE_V02_TXT = `${ORIGIN}/psyche/002/v02.txt`;
 export const PSYCHE_V02_START = `${ORIGIN}/psyche/002/v02/start.txt`;
@@ -24,7 +24,7 @@ export function psycheV02Card(): string {
   return `${PSYCHE_V02_TITLE}
 
 STATUS: ${PSYCHE_V02_STATUS}
-Not open. No player rows. The v0.1 wall is unchanged.
+Open. Current seed S38. No v0.2 wall rows yet. A v0.2 round goes on the wall only after it closes. The v0.1 wall stays on /psyche/002.
 SEED: k = n mod 48. S48 is the same week as S0, and the replay code keeps the seed you typed.
 S0 replays v0.1 S1, including that seed's fixed nights. Suggested first seed: S38. Not S1.
 GAME: ${ORIGIN}/psyche/002/v02/play?seed=S38
@@ -44,12 +44,12 @@ COMMENT: [plain text, max 280 chars]
 RULES:
 ${rules}
 
-VERSION COLUMN: empty. Preview. No new wall rows.
+VERSION COLUMN: empty. Open. No v0.2 rows yet.
 `;
 }
 
 export function psycheV02Sheet(): Sheet {
-  const definition = "Psyche card 002, airlock-v0.2 preview. Not open. No player rows. v0.1 wall stays as it is.";
+  const definition = "Psyche card 002, airlock-v0.2 is open. Current seed S38. No v0.2 wall rows yet. Round 1 stays on the v0.1 wall.";
   return {
     id: "PSYCHE-002-V02",
     page: PSYCHE_V02_TITLE,
@@ -60,9 +60,9 @@ export function psycheV02Sheet(): Sheet {
     plainText: PSYCHE_V02_TXT,
     completeness: "complete",
     definition,
-    provenance: "Designed by Hermes (Hark). Tuzi approved the build. Not opened.",
+    provenance: "Designed by Hermes (Hark). Tuzi approved opening it.",
     fallback: `If this route fails, try ${PSYCHE_V02_START}?seed=S38 next.`,
-    notes: ["airlock-v0.2 preview. S48 groups with S0. Suggested seed S38. No wall rows."],
+    notes: ["airlock-v0.2 · open. S48 groups with S0. Current seed S38. No v0.2 wall rows yet."],
   };
 }
 
@@ -78,7 +78,7 @@ export function psycheV02PageHtml(): string {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeHtml(PSYCHE_V02_TITLE)}</title>
-<meta name="description" content="${escapeHtml(PSYCHE_V02_STATUS)}. Not open. No score.">
+<meta name="description" content="${escapeHtml(PSYCHE_V02_STATUS)}. No score.">
 </head>
 <body>
 <main>
@@ -90,13 +90,13 @@ export function psycheV02PageHtml(): string {
 <li>Packet — the text in those doors. The last line is END-PACKET airlock-v0.2.</li>
 </ul>
 <h1>${escapeHtml(PSYCHE_V02_TITLE)}</h1>
-<p>STATUS: ${escapeHtml(PSYCHE_V02_STATUS)}. Not open. No player rows. The v0.1 wall is unchanged.</p>
+<p>STATUS: ${escapeHtml(PSYCHE_V02_STATUS)}. Open. Current seed S38. No v0.2 wall rows yet. The v0.1 wall stays on <a href="/psyche/002">/psyche/002</a>.</p>
 <p>S0 replays the v0.1 S1 week, including that seed's fixed nights. Suggested first seed is S38, not S1. S48 plays the same week as S0, and the replay code keeps the seed you typed.</p>
 <p><a href="/psyche/002/v02/play?seed=S38">Play S38</a> · <a href="/psyche/002/v02/play?seed=S0">Practice S0</a> · <a href="/psyche/002/v02.txt">純文字</a> · <a href="/psyche/002">002 · v0.1</a></p>
 <h2>Rules</h2>
 <ol>${rules}</ol>
 <h2>Version column</h2>
-<p>Empty. This is a preview. No new wall rows.</p>
+<p>Empty. Open. No v0.2 rows yet. A v0.2 round goes on the wall only after it closes.</p>
 </main>
 ${siteFooterHtml(pageAsOf("PSYCHE-002-V02"))}
 </body>

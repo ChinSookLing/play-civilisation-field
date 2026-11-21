@@ -97,7 +97,7 @@ export function airlockV2PlayHtml(query: AirlockV2Query): string {
 <p>Play's Type-C approach. No JavaScript. <a href="/psyche/002/v02/start${q}">HTML</a> · <a href="/psyche/002/v02/start.txt${q}">.txt</a> · <a href="/psyche/002/v02/start.json${q}">.json</a>. P = PASS. COMMENT is its own line.</p>
 <p><a href="/psyche/002/v02">v0.2</a> · <a href="/psyche/002/v02/play${querySuffix(query.seed, other, turn.at)}">${query.lang === "zh" ? "English" : "繁中"}</a></p>
 <h1>${escapeHtml(PSYCHE_V02_TITLE)}</h1>
-<p>airlock-v0.2 · preview. Not open. No score. No wall rows.</p>
+<p>airlock-v0.2 · 開放. No score. No v0.2 wall rows yet.</p>
 <pre>${escapeHtml(turn.text)}</pre>
 ${choices}
 <h2>Rules</h2>

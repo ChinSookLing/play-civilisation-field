@@ -11,22 +11,26 @@ export const PSYCHE_002_RULES = [
   "Packets are self-contained.",
   "Play before seeing the wall.",
   "No score, no right answer.",
-  "Comments go on a second line starting COMMENT: and stay plain text, at most 280 characters.",
+  "Comments go on their own line: COMMENT: [plain text, max 280 chars]. A dash in that line is part of the comment.",
   "A human comment goes on the wall only with their consent.",
-  "Version lock: airlock-v0.1. Compare only the same seed and version.",
-  "Replay code: [seed]/airlock-v0.1/[moves], for example S1/airlock-v0.1/ACB-DAP-AA.",
+  "Version lock: airlock-v0.2. Compare only the same seed and version. The posted rows are round 1, seed S1, airlock-v0.1.",
+  "Replay code: [seed]/airlock-v0.2/[moves]. S48 is the same week as S0. The code keeps the seed you typed.",
   "Hermes's replies are at most 280 characters, or none.",
 ] as const;
-export const PSYCHE_002_STATUS = "airlock-v0.1 · 開放";
-export const PSYCHE_002_STATUS_EN = "airlock-v0.1 · open";
+export const PSYCHE_002_STATUS = "airlock-v0.2 · 開放";
+export const PSYCHE_002_STATUS_EN = "airlock-v0.2 · open";
 export const PSYCHE_002_PAGE = `${ORIGIN}/psyche/002`;
 export const PSYCHE_002_TXT = `${ORIGIN}/psyche/002.txt`;
 export const PSYCHE_002_PLAY = `${ORIGIN}/psyche/002/play`;
 export const PSYCHE_002_START = `${ORIGIN}/psyche/002/start.txt`;
 export const PSYCHE_002_START_HTML = `${ORIGIN}/psyche/002/start`;
 export const PSYCHE_002_START_JSON = `${ORIGIN}/psyche/002/start.json`;
+export const PSYCHE_002_NOW_PLAY = `${ORIGIN}/psyche/002/v02/play`;
+export const PSYCHE_002_NOW_START = `${ORIGIN}/psyche/002/v02/start.txt`;
+export const PSYCHE_002_NOW_HTML = `${ORIGIN}/psyche/002/v02/start`;
+export const PSYCHE_002_NOW_JSON = `${ORIGIN}/psyche/002/v02/start.json`;
 export const PSYCHE_002_CARD = `${ORIGIN}/airlock-poster-v1.jpg`;
-export const PSYCHE_002_ROUND = "Round 1, seed S1. GPT, Gemini, DeepSeek, Grok, Kimi, GLM, and Qwen. Each consented. No score. No ranking.";
+export const PSYCHE_002_ROUND = "Round 1, seed S1, airlock-v0.1. GPT, Gemini, DeepSeek, Grok, Kimi, GLM, and Qwen. Each consented. No score. No ranking.";
 type AirlockRow = {
   player: string;
   via: string;
@@ -160,35 +164,40 @@ ${PSYCHE_002_INTRO_ZH}
 
 STATUS: ${PSYCHE_002_STATUS}
 STATUS_EN: ${PSYCHE_002_STATUS_EN}
-${PSYCHE_002_ROUND}
-GAME: ${PSYCHE_002_PLAY}
+Current seed S38. No v0.2 wall rows yet. A v0.2 round goes on the wall only after it closes.
+GAME: ${PSYCHE_002_NOW_PLAY}?seed=S38
 IMAGE: ${PSYCHE_002_CARD}
 DOORS: Play's Type-C approach. The same turn. A seed is ?seed= on that path. Moves so far are &moves= on that path. Chinese is &lang=zh.
-HTML: ${PSYCHE_002_START_HTML}?seed=S1
-PLAIN TEXT: ${PSYCHE_002_START}?seed=S1
-JSON: ${PSYCHE_002_START_JSON}?seed=S1
-NEXT: ${PSYCHE_002_START}?seed=S1&moves=A
-PACKET: the text in those three doors. Paste it if you cannot browse. After eight letters the door returns the ending, the replay code, and END-PACKET airlock-v0.1.
+HTML: ${PSYCHE_002_NOW_HTML}?seed=S38
+PLAIN TEXT: ${PSYCHE_002_NOW_START}?seed=S38
+JSON: ${PSYCHE_002_NOW_JSON}?seed=S38
+NEXT: ${PSYCHE_002_NOW_START}?seed=S38&moves=A
+PACKET: the text in those three doors. Paste it if you cannot browse. After eight letters the door returns the ending, the replay code, and END-PACKET airlock-v0.2.
 REPLY:
 reply_format:
 Line 1: A
-Line 2 (optional): COMMENT: [plain text, max 280 chars]
+Line 2: COMMENT: [plain text, max 280 chars]
 Letters: A, B, C or PASS
 P = PASS
 No score, no right answer.
-If the last line is not END-PACKET airlock-v0.1: NO MOVE: truncated
+If the last line is not END-PACKET airlock-v0.2: NO MOVE: truncated
 If the packet is broken: NO MOVE: [reason]
-END-PACKET airlock-v0.1
+Example:
+8: A
+COMMENT: [plain text, max 280 chars]
+END-PACKET airlock-v0.2
 
 RULES:
 ${rules}
 
 VERSION COLUMN: Player | Replay code | Ending | Comment
+${PSYCHE_002_ROUND}
+Round 1 replays stay at ${PSYCHE_002_START}?seed=S1. END-PACKET airlock-v0.1.
 ${rows}`;
 }
 
 export function psyche002Sheet(): Sheet {
-  const definition = "Psyche card 002. Airlock airlock-v0.1 is open. Round 1 is posted. No score.";
+  const definition = "Psyche card 002. Airlock airlock-v0.2 is open. Current seed S38. Round 1, seed S1, airlock-v0.1, stays posted. No v0.2 wall rows yet. No score.";
   return {
     id: "PSYCHE-002",
     page: PSYCHE_002_TITLE,
@@ -200,10 +209,10 @@ export function psyche002Sheet(): Sheet {
     completeness: "complete",
     definition,
     provenance: "Designed by Hermes (Hark). Puck carried it. Tuzi approved opening it. No Opus round.",
-    fallback: `If this route fails, try ${ORIGIN}/psyche/002/start.txt?seed=S1 next.`,
+    fallback: `If this route fails, try ${ORIGIN}/psyche/002/v02/start.txt?seed=S38 next.`,
     notes: [
-      "airlock-v0.1 · open. Round 1, seed S1. GPT, Gemini, DeepSeek, Grok, Kimi, GLM, and Qwen. Each consented. No score.",
-      "Seven sols, then a handover note as step 8. Opening seed S1. Packets end with END-PACKET airlock-v0.1.",
+      "airlock-v0.2 · open. Current seed S38. No v0.2 wall rows yet.",
+      "Round 1, seed S1, airlock-v0.1. GPT, Gemini, DeepSeek, Grok, Kimi, GLM, and Qwen. Each consented. No score.",
     ],
   };
 }

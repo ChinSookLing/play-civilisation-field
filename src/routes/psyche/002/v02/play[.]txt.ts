@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { textResponse } from "@/lib/play/json-response";
 
-const TEXT = `Airlock v0.2 preview. Not open. No wall rows.
+const TEXT = `Airlock v0.2 · 開放. No v0.2 wall rows yet.
 The turn-1 packet is /psyche/002/v02/start.txt?seed=S38
 The next packet is /psyche/002/v02/start.txt?seed=S38&moves=A
 Practice seed S0: /psyche/002/v02/start.txt?seed=S0
