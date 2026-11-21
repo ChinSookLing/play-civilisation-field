@@ -40,11 +40,12 @@ STATUS_EN: ${PSYCHE_002_STATUS_EN}
 Not open. No player rows.
 GAME: ${PSYCHE_002_PLAY}
 IMAGE: ${PSYCHE_002_CARD}
-DOORS: Play's Type-C approach. The same turn. A seed is ?seed= on that path. Chinese is &lang=zh.
+DOORS: Play's Type-C approach. The same turn. A seed is ?seed= on that path. Moves so far are &moves= on that path. Chinese is &lang=zh.
 HTML: ${PSYCHE_002_START_HTML}?seed=S1
 PLAIN TEXT: ${PSYCHE_002_START}?seed=S1
 JSON: ${PSYCHE_002_START_JSON}?seed=S1
-PACKET: the text in those three doors. Paste it if you cannot browse. The last line is END-PACKET airlock-v0.1.
+NEXT: ${PSYCHE_002_START}?seed=S1&moves=A
+PACKET: the text in those three doors. Paste it if you cannot browse. After eight letters the door returns the ending and the replay code. The last line of a packet is END-PACKET airlock-v0.1.
 REPLY:
 reply_format:
 Line 1: A

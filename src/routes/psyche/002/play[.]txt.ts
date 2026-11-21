@@ -6,8 +6,11 @@ const TEXT = `${PSYCHE_002_TITLE}
 STATUS: airlock-v0.1 · preview. Not open.
 No score. No right answer.
 The turn-1 packet is /psyche/002/start.txt?seed=S1
-Chinese: add &lang=zh
-P = PASS. A letter that is not offered is NO MOVE.
+The next packet is /psyche/002/start.txt?seed=S1&moves=A
+Same pattern on /psyche/002/start and /psyche/002/start.json
+Eight letters returns the ending and the replay code. P = PASS.
+Chinese: add &lang=zh. A step-8 note uses &comment=.
+A letter that is not offered is a NO MOVE line.
 
 RULES:
 ${PSYCHE_002_RULES.map((rule, index) => `${index + 1}. ${rule}`).join("\n")}

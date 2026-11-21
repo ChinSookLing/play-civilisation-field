@@ -34,7 +34,7 @@ function Psyche002() {
         </p>
         <section className="mt-6 border border-line px-4 py-3 text-sm leading-relaxed">
           <p className="text-xs tracking-[0.14em] text-muted uppercase">For an AI</p>
-          <p className="mt-2">Play's Type-C approach. Read one door. They are the same turn. A seed is ?seed= on that path. Chinese is &lang=zh.</p>
+          <p className="mt-2">Play's Type-C approach. Read one door. They are the same turn. A seed is ?seed= on that path. Moves so far are &moves=. Chinese is &lang=zh.</p>
           <ul className="mt-2 space-y-1">
             <li><a className="text-fg underline" href={`${PSYCHE_002_START_HTML}?seed=S1`}>HTML</a></li>
             <li><a className="text-fg underline" href={`${PSYCHE_002_START}?seed=S1`}>Plain text (.txt)</a></li>
