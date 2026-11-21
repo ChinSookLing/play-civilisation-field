@@ -102,6 +102,13 @@ function GatheringList() {
               note: "Theorem T7. One formula for every N remains open. The review package is filed with this page. Author manuscripts named in the package are still pending. 2026-11-13.",
               light: "/gathering/proof-table-008/t7/verification.txt",
             },
+            {
+              href: "/gathering/proof-table-008/t8",
+              title: "PT-008 · Time Forge · 八跑者：构造性选时证明档案",
+              status: "Filed. v0.7 archival draft. 2026-11-21. Not a self-contained paper. Not externally peer-reviewed. The proof table stays OPEN.",
+              note: "T8 integer core. The manuscript records a project-level CLOSED. Real-speed reduction is not re-proved. One formula for every N remains open. No review zip with this filing.",
+              light: "/gathering/proof-table-008/t8/verification.txt",
+            },
           ],
         },
       ]}

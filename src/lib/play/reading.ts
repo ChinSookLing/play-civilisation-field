@@ -115,6 +115,17 @@ export function recordsText(extra?: {
   lines.push(`FORMATS: ${ORIGIN}/gathering/proof-table-008/t7.txt | ${ORIGIN}/gathering/proof-table-008/t7/verification.txt | ${ORIGIN}/gathering/proof-table-008/t7/verification.md | ${ORIGIN}/gathering/proof-table-008/t7/PT008-T7-Gathering-Review-v0.3.zip`);
   lines.push("RECORD: filed at Tuzi's request on 2026-11-13. Theorem T7. The review package is the uploaded zip. At filing, its three SHA256SUMS lists checked OK. The Python sweeps were not re-run. Author manuscripts named in proofs/README.md are still pending. One formula for every N remains open. The proof table stays open. T6 is not closed.");
   lines.push("");
+  lines.push("RECORD_ID: PT008-T8");
+  lines.push("TYPE: gathering");
+  lines.push("TITLE: PT-008 · Time Forge · 八跑者：构造性选时、分支闭合与计算机辅助证明档案");
+  lines.push("ENGLISH: The Eighth Runner — A Constructive Time-Selection Proof Dossier");
+  lines.push("RECORD_STATUS: Filed. Gathering v0.7 archival draft. Not a change to the proof-table ledger.");
+  lines.push("RULING: project-level T8 CLOSED for the integer core, as written. Not externally peer-reviewed. Novelty not checked. Real-to-integer reduction not re-proved. One formula for every N remains open.");
+  lines.push("MANUSCRIPT_SHA256: 233db8f2d354e3262078288973dfb3febd5b0810eb56a7088bf65294f3c31897");
+  lines.push(`RECORD_URL: ${ORIGIN}/gathering/proof-table-008/t8`);
+  lines.push(`FORMATS: ${ORIGIN}/gathering/proof-table-008/t8.txt | ${ORIGIN}/gathering/proof-table-008/t8/verification.txt | ${ORIGIN}/gathering/proof-table-008/t8/verification.md`);
+  lines.push("RECORD: filed at Tuzi's request on 2026-11-21. The plain verification text is that file. It is an archival draft, not a self-contained paper. No review zip is attached. The proof table stays open.");
+  lines.push("");
   lines.push("RECORD_ID: PROOF-TABLE-006");
   lines.push("TYPE: gathering");
   lines.push("TITLE: Together · Proof Table 006 · 孤圈 · Lonely Circle (one ticked speed picture)");

@@ -28,7 +28,7 @@ test("SALON-016 manuscript is the filed text", () => {
 test("plain text is the manuscript, and the proof-table ledger is untouched", () => {
   const source = readFileSync(sourcePath, "utf8");
   assert.equal(
-    source.includes("export function salon016Plain(): string {\n  return SALON_016_TEXT;\n}"),
+    source.includes("return `${SALON_016_TEXT}\\n${SALON_016_READING.label}\\n${ORIGIN}${SALON_016_READING.href}\\n`;"),
     true,
   );
   assert.equal(source.includes(EXPECTED), true);

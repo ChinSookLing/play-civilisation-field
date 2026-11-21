@@ -19,9 +19,13 @@ const TXT = `${ORIGIN}/salon/${SALON_016_SLUG}.txt`;
 
 /** The filed manuscript. Plain text is this string and nothing in front of it. */
 export const SALON_016_TEXT = manuscript;
+export const SALON_016_READING = {
+  label: "T8 Gathering (v0.7)",
+  href: "/gathering/proof-table-008/t8",
+} as const;
 
 export function salon016Plain(): string {
-  return SALON_016_TEXT;
+  return `${SALON_016_TEXT}\n${SALON_016_READING.label}\n${ORIGIN}${SALON_016_READING.href}\n`;
 }
 
 export function salon016Updated(): string {
@@ -54,6 +58,7 @@ export function salon016StaticHtml(): string {
 <p>TEXT_SHA256: ${SALON_016_SHA256}</p>
 <p>Not posted to X. The proof-table ledger is unchanged.</p>
 <pre>${escapeText(SALON_016_TEXT)}</pre>
+<p><a href="${ORIGIN}${SALON_016_READING.href}">${escapeText(SALON_016_READING.label)}</a></p>
 </main>
 </body>
 </html>

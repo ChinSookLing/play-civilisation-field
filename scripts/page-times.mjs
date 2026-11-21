@@ -26,6 +26,13 @@ const files = {
     "src/routes/gathering/proof-table-008/table.tsx",
     ...shared,
   ],
+  "PT008-T8": [
+    "src/lib/play/proof-table-008-t8.ts",
+    "docs/gathering/PT008-T8-v0.7.md",
+    "src/routes/gathering/proof-table-008/t8.tsx",
+    "src/routes/gathering/proof-table-008/t8/verification.tsx",
+    ...shared,
+  ],
   "PT008-T7": [
     "src/lib/play/proof-table-008-t7.ts",
     "docs/gathering/PT008-T7-v0.3.md",

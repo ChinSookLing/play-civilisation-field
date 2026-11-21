@@ -37,6 +37,8 @@ https://play.civilisationfield.com/gathering/proof-table-008/t6.txt
 https://play.civilisationfield.com/gathering/proof-table-008/t6/verification.txt
 https://play.civilisationfield.com/gathering/proof-table-008/t7.txt
 https://play.civilisationfield.com/gathering/proof-table-008/t7/verification.txt
+https://play.civilisationfield.com/gathering/proof-table-008/t8.txt
+https://play.civilisationfield.com/gathering/proof-table-008/t8/verification.txt
 https://play.civilisationfield.com/gathering/proof-table-006/table.txt
 https://play.civilisationfield.com/gathering/proof-table-005/table.txt
 https://play.civilisationfield.com/gathering/proof-table-004/table.txt
@@ -238,6 +240,11 @@ https://play.civilisationfield.com/gathering/proof-table-008/t7
 Verification: https://play.civilisationfield.com/gathering/proof-table-008/t7/verification.txt
 Markdown: https://play.civilisationfield.com/gathering/proof-table-008/t7/verification.md
 Package: https://play.civilisationfield.com/gathering/proof-table-008/t7/PT008-T7-Gathering-Review-v0.3.zip
+https://play.civilisationfield.com/gathering/proof-table-008/t8
+PT008-T8. Gathering v0.7 archival draft. Filed 2026-11-21. Not a self-contained paper. Project-level T8 CLOSED is for the integer core, as written. Not externally peer-reviewed. The proof table stays OPEN.
+Verification: https://play.civilisationfield.com/gathering/proof-table-008/t8/verification.txt
+Markdown: https://play.civilisationfield.com/gathering/proof-table-008/t8/verification.md
+MANUSCRIPT_SHA256: 233db8f2d354e3262078288973dfb3febd5b0810eb56a7088bf65294f3c31897
 Proof Table 006 is prepared. One ticked speed picture on one shared t. Problem: 孤圈 · Lonely Circle. Not a proof of every speed tuple. Rules v0.5.1. No lines yet.
 https://play.civilisationfield.com/gathering/proof-table-006/table
 Plain text: https://play.civilisationfield.com/gathering/proof-table-006/table.txt
