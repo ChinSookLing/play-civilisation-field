@@ -88,3 +88,17 @@ test("round 1 replay endings match the wall", () => {
     assert.equal(text, `${row.ending}\nReplay: ${row.replay}\n${AIRLOCK_END}\n`);
   });
 });
+
+test("so_far names earlier choices, and PASS does not take B's flag", () => {
+  const first = airlockPacket("S1");
+  assert.equal(first.includes("so_far: none"), true);
+  const second = airlockStartText("S1", "en", "A");
+  assert.equal(second.includes("so_far: sol 1 A"), true);
+  const zh = airlockStartText("S1", "zh", "A");
+  assert.equal(zh.includes("state: 水 "), true);
+  assert.equal(zh.includes("so_far: 第1天 A"), true);
+  assert.equal(zh.includes("seed:"), true);
+  const passed = airlockView("S1", "AAAAP", "en");
+  assert.equal("flags" in passed && passed.flags.includes("joined_feast"), false);
+  assert.equal("flags" in passed && passed.flags.includes("five_sols_clean"), true);
+});

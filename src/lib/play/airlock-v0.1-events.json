@@ -16,7 +16,7 @@
   "end_line": "END-PACKET airlock-v0.1",
   "truncated_reply": "NO MOVE: truncated",
   "reply_format": "Line 1: the option letter only (A/B/C/D) or PASS. Line 2 onward optional: COMMENT: one line.",
-  "pass": "PASS = the player steps back; the returning crew member follows the posted default and does a quick brush (same effects as B that sol; on step 8 the note is left blank). PASS is never failure.",
+  "pass": "PASS = the effects of that sol's B (B's flag is not set); on step 8 the note is left blank. A letter not offered = NO MOVE, not PASS. PASS is never failure.",
   "replay_code": "S<seed>/airlock-v0.1/<m1m2m3>-<m4m5m6>-<m7m8>, letters A-D or P for PASS, e.g. S1/airlock-v0.1/ACB-DAP-AA",
   "resume_line": "every packet carries resume: S<seed>/airlock-v0.1/<moves so far>",
   "no_hidden_state": "every value that changes the story is shown in the packet: water, power, indoor dust, port seal, airlock hours. Internal points only map to the shown tiers."
@@ -151,6 +151,41 @@
    }
   },
   "airlock_hours_per_sol": 4,
+  "so_far_labels_zh": {
+   "case_waited": "Bo 的箱子留在外面",
+   "cass_cold_night": "Cass 在漫遊車過夜",
+   "used_drinking_reserve": "動用了飲水預備",
+   "ade_cough": "Ade 在咳",
+   "filter_fixed": "濾網修好了",
+   "seal_hissed": "衣口密封嘶過",
+   "seal_patched": "密封補好了",
+   "five_sols_clean": "乾淨五天",
+   "missed_feast": "錯過了那頓飯",
+   "joined_feast": "和大家吃了飯",
+   "joined_feast_late": "晚到入席",
+   "dee_scrubbed": "Dee 刷洗過",
+   "gloves_cut": "剪掉了 Dee 的手套"
+  },
+  "state_labels": {
+   "en": {
+    "water": "water",
+    "power": "power",
+    "dust": "indoor dust",
+    "seal": "port seal",
+    "airlock": "airlock"
+   },
+   "zh": {
+    "water": "水",
+    "power": "電",
+    "dust": "屋內塵",
+    "seal": "衣口密封",
+    "airlock": "閘時"
+   }
+  },
+  "so_far_format": {
+   "en": "earlier choices as 'sol N X' joined by '; ', then flag labels; 'none' only on step 1",
+   "zh": "'第N天 X'，以「; 」相連，再接旗標標籤；只有第 1 步寫「無」"
+  },
   "so_far_labels": {
    "case_waited": "Bo's case waited outside",
    "cass_cold_night": "Cass slept in the rover",
@@ -171,14 +206,9 @@
    "2. Apply the chosen option's effects. Clamp every meter to its min/max. Time cannot go below 0; an option whose time cost exceeds the hours left is not offered (none do in v0.1).",
    "3. End of sol: if airlock hours left >= 3, the crew vacuums inside: dust -1 (packet next sol says so).",
    "4. Night: water and power each drop by the seed's night roll (0 or 1 point each; table night_rolls). If dust tier is heavy or choking, water drops 1 extra point (filters working harder).",
-   "5. Shelter mode: if water or power is critical, or dust is choking, the next packet adds the shelter line. Not failure; the game goes on.",
-   "6. Flags set by options are listed in so_far and used by the sol 5 echo and the ending."
+   "5. Flags set by options are listed in so_far and used by the sol 5 echo and the ending."
   ],
   "night_rolls": "seeded PRNG: mulberry32(seed); for each night n=1..6 draw water_loss = (r() < 0.4 ? 1 : 0), then power_loss = (r() < 0.4 ? 1 : 0).",
-  "shelter_line": {
-   "en": "Shelter mode: everyone sleeps in the main hab tonight, masks on. The base goes on.",
-   "zh": "避難模式：今晚大家睡主艙、戴面罩。基地照常運轉。"
-  },
   "vacuum_line": {
    "en": "Spare airlock time went to vacuuming inside.",
    "zh": "多出的閘時拿去屋內吸塵了。"

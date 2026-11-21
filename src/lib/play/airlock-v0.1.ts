@@ -25,8 +25,9 @@ const table = events as unknown as {
     start: Meters;
     meters: Record<MeterName, { tiers: [number, number, string, string][]; min: number; max: number }>;
     airlock_hours_per_sol: number;
+    state_labels: { en: Record<MeterName | "airlock", string>; zh: Record<MeterName | "airlock", string> };
     so_far_labels: Record<string, string>;
-    shelter_line: Text;
+    so_far_labels_zh: Record<string, string>;
     vacuum_line: Text;
   };
   sols: Sol[];
@@ -137,9 +138,15 @@ function fill(template: string, values: Record<string, string>): string {
   return template.replace(/\{([a-z_]+)\}/gu, (_, key: string) => values[key] ?? "");
 }
 
-function soFar(flags: string[]): string {
-  const labels = flags.map((flag) => table.state.so_far_labels[flag]).filter((label) => label);
-  return labels.length > 0 ? labels.join(", ") : "none";
+function soFar(moves: string, flags: string[], lang: Lang): string {
+  const labels = lang === "zh" ? table.state.so_far_labels_zh : table.state.so_far_labels;
+  const choices = [...moves.slice(0, 7)].map((letter, index) =>
+    lang === "zh" ? `第${index + 1}天 ${letter}` : `sol ${index + 1} ${letter}`,
+  );
+  const flagLabels = flags.map((flag) => labels[flag]).filter((label) => label);
+  const parts = [...choices, ...flagLabels];
+  if (parts.length === 0) return lang === "zh" ? "無" : "none";
+  return parts.join("; ");
 }
 
 function replyBlock(offered: string[]): string {
@@ -169,12 +176,13 @@ function packetFor(
   moves: string,
 ): string {
   const optionLines = options.map((option) => `${option.key} ${lang === "zh" ? option.zh : option.en}`).join("\n");
+  const labels = table.state.state_labels[lang];
   const body = [
     `AIRLOCK-PACKET ${AIRLOCK_VERSION}`,
     `seed: S${seed}  sol: ${solShown}/7  step: ${step}/8  expected_move_number: ${step}`,
-    `state: water ${tier("water", meters.water, lang)} · power ${tier("power", meters.power, lang)} · indoor dust ${tier("dust", meters.dust, lang)} · port seal ${tier("seal", meters.seal, lang)} · airlock ${HOURS}h`,
+    `state: ${labels.water} ${tier("water", meters.water, lang)} · ${labels.power} ${tier("power", meters.power, lang)} · ${labels.dust} ${tier("dust", meters.dust, lang)} · ${labels.seal} ${tier("seal", meters.seal, lang)} · ${labels.airlock} ${HOURS}h`,
     ...(lines === "" ? [] : [lines.replace(/\n$/u, "")]),
-    `so_far: ${soFar(flags)}`,
+    `so_far: ${soFar(moves, flags, lang)}`,
     `scene: ${scene}`,
     "options:",
     optionLines,
@@ -205,10 +213,9 @@ function startWalk(seed: number): Walk {
   };
 }
 
-function sceneLines(meters: Meters, scene: Sol | null, extra: Text | null, lang: Lang): string {
+function sceneLines(scene: Sol | null, extra: Text | null, lang: Lang): string {
   let lines = extra ? `${say(extra, lang)}\n` : "";
   if (scene?.start_line) lines += `${say(scene.start_line, lang)}\n`;
-  if (meters.water <= 3 || meters.power <= 3 || meters.dust >= 6) lines += `${say(table.state.shelter_line, lang)}\n`;
   return lines;
 }
 
@@ -216,10 +223,6 @@ function currentPacket(seed: number, moves: string, lang: Lang): { packet: strin
   const walk = replay(seed, moves);
   const step = moves.length + 1;
   if (step === 8) {
-    const shelter =
-      walk.meters.water <= 3 || walk.meters.power <= 3 || walk.meters.dust >= 6
-        ? `${say(table.state.shelter_line, lang)}\n`
-        : "";
     const prior = walk.extra ? `${say(walk.extra, lang)}\n` : "";
     const scene = fill(say(table.step8.scene, lang), {
       dust_tier: tier("dust", walk.meters.dust, lang),
@@ -228,7 +231,7 @@ function currentPacket(seed: number, moves: string, lang: Lang): { packet: strin
     return {
       step,
       offered: table.step8.options.map((option) => option.key),
-      packet: packetFor(seed, lang, 8, 7, walk.meters, `${prior}${shelter}`, walk.flags, scene, table.step8.options, moves),
+      packet: packetFor(seed, lang, 8, 7, walk.meters, prior, walk.flags, scene, table.step8.options, moves),
     };
   }
   const scene = solAt(walk.meters, step);
@@ -244,7 +247,7 @@ function currentPacket(seed: number, moves: string, lang: Lang): { packet: strin
       step,
       step,
       meters,
-      sceneLines(meters, scene, walk.extra, lang),
+      sceneLines(scene, walk.extra, lang),
       flags,
       say(scene.scene ?? { en: "", zh: "" }, lang),
       scene.options ?? [],
@@ -291,7 +294,7 @@ function replay(seed: number, moves: string): Walk {
     const pass = letter === "P";
     const option = pass ? scene.options?.find((item) => item.key === "B") : scene.options?.find((item) => item.key === letter);
     if (!option) throw new Error("move");
-    if (option.flag) walk.flags.push(option.flag);
+    if (!pass && option.flag) walk.flags.push(option.flag);
     settle(walk, option.effects, step, nights);
     walk.moves += letter;
   }
@@ -349,7 +352,7 @@ function endingOf(seed: number, moves: string, lang: Lang, comment: string): str
     say(table.ending.protected_let_go.lines[key] ?? { en: "", zh: "" }, lang),
     noteLine,
     fill(say(table.ending.closing, lang), values),
-  ].join("\n");
+  ].join(lang === "zh" ? "" : "\n");
 }
 
 export function airlockView(seedText: string, moves: string, lang: Lang, comment = ""): AirlockView | { error: string } {
