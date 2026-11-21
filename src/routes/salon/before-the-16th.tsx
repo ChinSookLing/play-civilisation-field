@@ -7,6 +7,7 @@ import {
   SALON_014_CATEGORY,
   SALON_014_CREDIT,
   SALON_014_ENGLISH,
+  SALON_014_READING,
   SALON_014_REVIEW,
   SALON_014_SHA256,
   SALON_014_SLUG,
@@ -47,6 +48,11 @@ function Salon014Page() {
         <p className="mt-1 text-sm text-muted">Not posted to X. The proof-table ledger is unchanged.</p>
         <pre className="mt-8 whitespace-pre-wrap text-sm leading-relaxed text-fg">{SALON_014_TEXT}</pre>
         <pre className="mt-8 whitespace-pre-wrap text-sm leading-relaxed text-fg">{SALON_014_ADDENDUM}</pre>
+        <p className="mt-4 text-sm">
+          <Link to={SALON_014_READING.href} className="text-fg underline decoration-1 underline-offset-4">
+            {SALON_014_READING.label}
+          </Link>
+        </p>
         <p className="mt-8 text-sm">
           <a href={`/salon/${SALON_014_SLUG}.txt`} className="text-fg underline decoration-1 underline-offset-4">
             Plain text

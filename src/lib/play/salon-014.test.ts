@@ -37,7 +37,7 @@ test("SALON-014 manuscript is the filed text", () => {
 test("plain text is the manuscript, and the proof-table ledger is untouched", () => {
   const source = readFileSync(sourcePath, "utf8");
   assert.equal(
-    source.includes("return `${SALON_014_TEXT}\\n${SALON_014_ADDENDUM}`;"),
+    source.includes("return `${SALON_014_TEXT}\\n${SALON_014_ADDENDUM}\\n${SALON_014_READING.label}\\n${ORIGIN}${SALON_014_READING.href}\\n`;"),
     true,
   );
   assert.equal(source.includes("BEGIN SALON-014 INDEX"), false);

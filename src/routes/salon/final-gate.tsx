@@ -7,6 +7,7 @@ import {
   SALON_010_CATEGORY,
   SALON_010_CREDIT,
   SALON_010_ENGLISH,
+  SALON_010_READING,
   SALON_010_REVIEW,
   SALON_010_SHA256,
   SALON_010_SLUG,
@@ -47,6 +48,11 @@ function Salon010Page() {
         <p className="mt-1 text-sm text-muted">Not posted to X.</p>
         <pre className="mt-8 whitespace-pre-wrap text-sm leading-relaxed text-fg">{SALON_010_TEXT}</pre>
         <pre className="mt-8 whitespace-pre-wrap text-sm leading-relaxed text-fg">{SALON_010_ADDENDUM}</pre>
+        <p className="mt-4 text-sm">
+          <Link to={SALON_010_READING.href} className="text-fg underline decoration-1 underline-offset-4">
+            {SALON_010_READING.label}
+          </Link>
+        </p>
         <p className="mt-8 text-sm">
           <a href={`/salon/${SALON_010_SLUG}.txt`} className="text-fg underline decoration-1 underline-offset-4">
             Plain text

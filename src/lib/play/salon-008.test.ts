@@ -26,7 +26,7 @@ test("SALON-008 manuscript is the filed text", () => {
 test("plain text is the manuscript, with no index in front", () => {
   const source = readFileSync(sourcePath, "utf8");
   assert.equal(
-    source.includes("return `${SALON_008_TEXT}\\n${SALON_008_ADDENDUM}`;"),
+    source.includes("return `${SALON_008_TEXT}\\n${SALON_008_ADDENDUM}\\n${SALON_008_READING.label}\\n${ORIGIN}${SALON_008_READING.href}\\n`;"),
     true,
   );
   assert.equal(source.includes("BEGIN SALON-008 INDEX"), false);

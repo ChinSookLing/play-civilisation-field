@@ -23,9 +23,13 @@ const TXT = `${ORIGIN}/salon/${SALON_010_SLUG}.txt`;
 export const SALON_010_TEXT = manuscript;
 /** Dated note appended after the manuscript. It does not replace it. */
 export const SALON_010_ADDENDUM = addendum;
+export const SALON_010_READING = {
+  label: "T1–T5 Gathering (v0.3)",
+  href: "/gathering/proof-table-008/new-branch",
+} as const;
 
 export function salon010Plain(): string {
-  return `${SALON_010_TEXT}\n${SALON_010_ADDENDUM}`;
+  return `${SALON_010_TEXT}\n${SALON_010_ADDENDUM}\n${SALON_010_READING.label}\n${ORIGIN}${SALON_010_READING.href}\n`;
 }
 
 export function salon010Updated(): string {
@@ -60,6 +64,7 @@ export function salon010StaticHtml(): string {
 <p>Not posted to X.</p>
 <pre>${escapeText(SALON_010_TEXT)}</pre>
 <pre>${escapeText(SALON_010_ADDENDUM)}</pre>
+<p><a href="${ORIGIN}${SALON_010_READING.href}">${escapeText(SALON_010_READING.label)}</a></p>
 </main>
 </body>
 </html>
