@@ -58,7 +58,7 @@ export function psycheSheet(): Sheet {
     fallback: `If this route fails, try ${ORIGIN}/psyche/001.txt next.`,
     notes: [
       "001 · 心 · Psyche — Polar City Night Shift. v0.6 · 開放. First round (GPT, Gemini, DeepSeek), seed S95. No score. https://play.civilisationfield.com/psyche/001",
-      "002 · 心 · Psyche — 氣閘 Airlock. airlock-v0.1 · 開放. Round 1, seed S1. GPT, Gemini, DeepSeek, and Grok. No score. https://play.civilisationfield.com/psyche/002",
+      "002 · 心 · Psyche — 氣閘 Airlock. airlock-v0.1 · 開放. Round 1, seed S1. GPT, Gemini, DeepSeek, Grok, Kimi, GLM, and Qwen. No score. https://play.civilisationfield.com/psyche/002",
       "There is no score and no right answer on that card.",
     ],
   });
