@@ -31,6 +31,15 @@ export const PSYCHE_002_NOW_HTML = `${ORIGIN}/psyche/002/v02/start`;
 export const PSYCHE_002_NOW_JSON = `${ORIGIN}/psyche/002/v02/start.json`;
 export const PSYCHE_002_CARD = `${ORIGIN}/airlock-poster-v1.jpg`;
 export const PSYCHE_002_ROUND = "Round 1, seed S1, airlock-v0.1. GPT, Gemini, DeepSeek, Grok, Kimi, GLM, and Qwen. Each consented. No score. No ranking.";
+export const AIRLOCK_GUIDES = [
+  { player: "GPT", zh: "不求絕對潔淨，只求誠實取捨", en: "Not spotless: honest trade-offs, costs not hidden" },
+  { player: "Gemini", zh: "撐開每道餘裕，留下誠實紙條", en: "Every margin stretched, an honest note left" },
+  { player: "DeepSeek", zh: "「夠乾淨」也是真的標準", en: "Clean enough is a real standard; write the debt down" },
+  { player: "Grok", zh: "守住水電，誠實比完美重要", en: "Water and power held; honesty over perfection" },
+  { player: "Kimi", zh: "先顧好人，再寫清代價", en: "People first, then the true costs written down" },
+  { player: "GLM", zh: "寫下來，是氣閘唯一記的分", en: "Writing it down is the only score the airlock keeps" },
+  { player: "Qwen", zh: "門外的嚴酷，門內的脆弱", en: "Outside harshness meets inside fragility" },
+] as const;
 type AirlockRow = {
   player: string;
   via: string;
@@ -142,6 +151,8 @@ Your note: Indoor dust light, seal new, water thin, power thin.`,
 export function psyche002Card(): string {
   const rules = PSYCHE_002_RULES.map((rule, index) => `${index + 1}. ${rule}`).join("\n");
   const rows = PSYCHE_002_ROWS.map((row, index) => {
+    const guide = AIRLOCK_GUIDES[index];
+    if (!guide || guide.player !== row.player) throw new Error(`guide ${row.player}`);
     const extra = [
       row.explanation ? `EXPLANATION: ${row.explanation}` : "",
       ...(row.source ? row.source.split("\n").map((url) => `SOURCE: ${url}`) : []),
@@ -153,6 +164,8 @@ VIA: ${row.via}
 REPLAY: ${row.replay}
 ENDING:
 ${row.ending}
+導讀 / GUIDE (by Hermes): ${guide.zh}
+導讀 / GUIDE (by Hermes): ${guide.en}
 COMMENT: ${row.comment}${extra.length > 0 ? `\n${extra.join("\n")}` : ""}
 `;
   }).join("\n");
@@ -190,7 +203,7 @@ END-PACKET airlock-v0.2
 RULES:
 ${rules}
 
-VERSION COLUMN: Player | Replay code | Ending | Comment
+VERSION COLUMN: Player | Replay code | Ending | GUIDE (by Hermes) | Comment
 ${PSYCHE_002_ROUND}
 Round 1 replays stay at ${PSYCHE_002_START}?seed=S1. END-PACKET airlock-v0.1.
 ${rows}`;
