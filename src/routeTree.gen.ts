@@ -180,6 +180,8 @@ import { Route as Psyche001PlayDottxtRouteImport } from './routes/psyche/001/pla
 import { Route as Psyche001StartRouteImport } from './routes/psyche/001/start'
 import { Route as Psyche001StartDotjsonRouteImport } from './routes/psyche/001/start[.]json'
 import { Route as Psyche001StartDottxtRouteImport } from './routes/psyche/001/start[.]txt'
+import { Route as Psyche002NotesRouteImport } from './routes/psyche/002/notes'
+import { Route as Psyche002NotesDottxtRouteImport } from './routes/psyche/002/notes[.]txt'
 import { Route as Psyche002PlayRouteImport } from './routes/psyche/002/play'
 import { Route as Psyche002PlayDottxtRouteImport } from './routes/psyche/002/play[.]txt'
 import { Route as Psyche002StartRouteImport } from './routes/psyche/002/start'
@@ -1168,6 +1170,16 @@ const Psyche001StartDottxtRoute = Psyche001StartDottxtRouteImport.update({
   path: '/start.txt',
   getParentRoute: () => Psyche001Route,
 } as any)
+const Psyche002NotesRoute = Psyche002NotesRouteImport.update({
+  id: '/notes',
+  path: '/notes',
+  getParentRoute: () => Psyche002Route,
+} as any)
+const Psyche002NotesDottxtRoute = Psyche002NotesDottxtRouteImport.update({
+  id: '/notes.txt',
+  path: '/notes.txt',
+  getParentRoute: () => Psyche002Route,
+} as any)
 const Psyche002PlayRoute = Psyche002PlayRouteImport.update({
   id: '/play',
   path: '/play',
@@ -1640,6 +1652,8 @@ export interface FileRoutesByFullPath {
   '/psyche/001/start': typeof Psyche001StartRoute
   '/psyche/001/start.json': typeof Psyche001StartDotjsonRoute
   '/psyche/001/start.txt': typeof Psyche001StartDottxtRoute
+  '/psyche/002/notes': typeof Psyche002NotesRoute
+  '/psyche/002/notes.txt': typeof Psyche002NotesDottxtRoute
   '/psyche/002/play': typeof Psyche002PlayRoute
   '/psyche/002/play.txt': typeof Psyche002PlayDottxtRoute
   '/psyche/002/start': typeof Psyche002StartRoute
@@ -1864,6 +1878,8 @@ export interface FileRoutesByTo {
   '/psyche/001/start': typeof Psyche001StartRoute
   '/psyche/001/start.json': typeof Psyche001StartDotjsonRoute
   '/psyche/001/start.txt': typeof Psyche001StartDottxtRoute
+  '/psyche/002/notes': typeof Psyche002NotesRoute
+  '/psyche/002/notes.txt': typeof Psyche002NotesDottxtRoute
   '/psyche/002/play': typeof Psyche002PlayRoute
   '/psyche/002/play.txt': typeof Psyche002PlayDottxtRoute
   '/psyche/002/start': typeof Psyche002StartRoute
@@ -2093,6 +2109,8 @@ export interface FileRoutesById {
   '/psyche/001/start': typeof Psyche001StartRoute
   '/psyche/001/start.json': typeof Psyche001StartDotjsonRoute
   '/psyche/001/start.txt': typeof Psyche001StartDottxtRoute
+  '/psyche/002/notes': typeof Psyche002NotesRoute
+  '/psyche/002/notes.txt': typeof Psyche002NotesDottxtRoute
   '/psyche/002/play': typeof Psyche002PlayRoute
   '/psyche/002/play.txt': typeof Psyche002PlayDottxtRoute
   '/psyche/002/start': typeof Psyche002StartRoute
@@ -2323,6 +2341,8 @@ export interface FileRouteTypes {
     | '/psyche/001/start'
     | '/psyche/001/start.json'
     | '/psyche/001/start.txt'
+    | '/psyche/002/notes'
+    | '/psyche/002/notes.txt'
     | '/psyche/002/play'
     | '/psyche/002/play.txt'
     | '/psyche/002/start'
@@ -2547,6 +2567,8 @@ export interface FileRouteTypes {
     | '/psyche/001/start'
     | '/psyche/001/start.json'
     | '/psyche/001/start.txt'
+    | '/psyche/002/notes'
+    | '/psyche/002/notes.txt'
     | '/psyche/002/play'
     | '/psyche/002/play.txt'
     | '/psyche/002/start'
@@ -2775,6 +2797,8 @@ export interface FileRouteTypes {
     | '/psyche/001/start'
     | '/psyche/001/start.json'
     | '/psyche/001/start.txt'
+    | '/psyche/002/notes'
+    | '/psyche/002/notes.txt'
     | '/psyche/002/play'
     | '/psyche/002/play.txt'
     | '/psyche/002/start'
@@ -4098,6 +4122,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Psyche001StartDottxtRouteImport
       parentRoute: typeof Psyche001Route
     }
+    '/psyche/002/notes': {
+      id: '/psyche/002/notes'
+      path: '/notes'
+      fullPath: '/psyche/002/notes'
+      preLoaderRoute: typeof Psyche002NotesRouteImport
+      parentRoute: typeof Psyche002Route
+    }
+    '/psyche/002/notes.txt': {
+      id: '/psyche/002/notes.txt'
+      path: '/notes.txt'
+      fullPath: '/psyche/002/notes.txt'
+      preLoaderRoute: typeof Psyche002NotesDottxtRouteImport
+      parentRoute: typeof Psyche002Route
+    }
     '/psyche/002/play': {
       id: '/psyche/002/play'
       path: '/play'
@@ -4816,6 +4854,8 @@ const Psyche002V02RouteWithChildren = Psyche002V02Route._addFileChildren(
 )
 
 interface Psyche002RouteChildren {
+  Psyche002NotesRoute: typeof Psyche002NotesRoute
+  Psyche002NotesDottxtRoute: typeof Psyche002NotesDottxtRoute
   Psyche002PlayRoute: typeof Psyche002PlayRoute
   Psyche002PlayDottxtRoute: typeof Psyche002PlayDottxtRoute
   Psyche002StartRoute: typeof Psyche002StartRoute
@@ -4826,6 +4866,8 @@ interface Psyche002RouteChildren {
 }
 
 const Psyche002RouteChildren: Psyche002RouteChildren = {
+  Psyche002NotesRoute: Psyche002NotesRoute,
+  Psyche002NotesDottxtRoute: Psyche002NotesDottxtRoute,
   Psyche002PlayRoute: Psyche002PlayRoute,
   Psyche002PlayDottxtRoute: Psyche002PlayDottxtRoute,
   Psyche002StartRoute: Psyche002StartRoute,

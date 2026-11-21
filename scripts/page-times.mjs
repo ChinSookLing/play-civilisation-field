@@ -16,6 +16,7 @@ const files = {
   "PSYCHE-001": ["src/lib/play/psyche-001.ts", "src/routes/psyche/001.tsx", "src/routes/psyche/001/play.ts", "src/routes/psyche/001/start.ts", "src/routes/psyche/001/start[.]json.ts", ...shared],
   "PSYCHE-002": ["src/lib/play/psyche-002.ts", "src/lib/play/airlock-v0.1.ts", "src/lib/play/airlock-v0.1-events.json", "src/routes/psyche/002.tsx", "src/routes/psyche/002/play.ts", "src/routes/psyche/002/start.ts", ...shared],
   "PSYCHE-002-V02": ["src/lib/play/airlock-v0.2.ts", "src/lib/play/psyche-002-v02.ts", "src/routes/psyche/002/v02.tsx", "src/routes/psyche/002/v02/play.ts", "src/routes/psyche/002/v02/start.ts", ...shared],
+  "PSYCHE-002-NOTES": ["src/lib/play/psyche-002-notes.ts", "src/routes/psyche/002/notes.tsx", "src/routes/psyche/002/notes[.]txt.ts", ...shared],
   GATHERING: ["src/routes/gathering/index.tsx", "src/lib/play/page-sheets.ts", ...shared],
   "PROOF-TABLE-008": [
     "src/lib/play/proof-table-008.ts",
