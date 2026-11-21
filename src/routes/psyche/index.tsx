@@ -9,7 +9,7 @@ export const Route = createFileRoute("/psyche/")({
   head: () =>
     pageMeta(
       "Psyche · Play · Civilisation Field",
-      "Card 001 is up. Card 002 is a preview. No score.",
+      "Card 001 is up. Card 002 is airlock-v0.1 · 開放. No score.",
     ),
   component: Psyche,
 });
@@ -36,7 +36,7 @@ function Psyche() {
               id: "PSYCHE-002",
               title: PSYCHE_002_TITLE,
               status: PSYCHE_002_STATUS,
-              note: "Airlock. Preview. Round 1. Not open. No score.",
+              note: "Airlock. airlock-v0.1 · 開放. Round 1. No score.",
               light: "/psyche/002.txt",
             },
           ],

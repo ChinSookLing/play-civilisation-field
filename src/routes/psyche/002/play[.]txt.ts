@@ -3,7 +3,7 @@ import { textResponse } from "@/lib/play/json-response";
 import { PSYCHE_002_RULES, PSYCHE_002_TITLE } from "@/lib/play/psyche-002";
 
 const TEXT = `${PSYCHE_002_TITLE}
-STATUS: airlock-v0.1 · preview. Not open.
+STATUS: airlock-v0.1 · 開放.
 No score. No right answer.
 The turn-1 packet is /psyche/002/start.txt?seed=S1
 The next packet is /psyche/002/start.txt?seed=S1&moves=A

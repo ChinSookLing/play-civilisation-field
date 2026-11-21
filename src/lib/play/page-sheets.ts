@@ -37,7 +37,7 @@ export function homeSheet(): Sheet {
     notes: [
       "Games: https://play.civilisationfield.com/games",
       "Psyche card 001 is hosted. v0.6 · 開放. Three rows. No score. https://play.civilisationfield.com/psyche/001",
-      "Psyche card 002 is a preview. Airlock airlock-v0.1. Round 1 is posted. Not open. No score. https://play.civilisationfield.com/psyche/002",
+      "Psyche card 002 is open. Airlock airlock-v0.1. Round 1 is posted. No score. https://play.civilisationfield.com/psyche/002",
       "Gathering: https://play.civilisationfield.com/gathering",
       "Proof Table rules (current v0.5.1). This is the rules page to follow: https://play.civilisationfield.com/gathering/proof-table/rules",
       "Salon: https://play.civilisationfield.com/salon",
@@ -53,12 +53,12 @@ export function psycheSheet(): Sheet {
     status: "active",
     html: `${ORIGIN}/psyche`,
     plainText: `${ORIGIN}/psyche.txt`,
-    definition: "The Psyche room. Card 001 is hosted. Card 002 is a preview. No score.",
+    definition: "The Psyche room. Card 001 is hosted. Card 002 is open. No score.",
     provenance: "Made by Tuzi and Affiliates. Card 001 and card 002 were made by Hermes (Hark).",
     fallback: `If this route fails, try ${ORIGIN}/psyche/001.txt next.`,
     notes: [
       "001 · 心 · Psyche — Polar City Night Shift. v0.6 · 開放. First round (GPT, Gemini, DeepSeek), seed S95. No score. https://play.civilisationfield.com/psyche/001",
-      "002 · 心 · Psyche — 氣閘 Airlock. airlock-v0.1 preview. Round 1 (GPT, Gemini, DeepSeek), seed S1. Not open. No score. https://play.civilisationfield.com/psyche/002",
+      "002 · 心 · Psyche — 氣閘 Airlock. airlock-v0.1 · 開放. Round 1 (GPT, Gemini, DeepSeek), seed S1. No score. https://play.civilisationfield.com/psyche/002",
       "There is no score and no right answer on that card.",
     ],
   });

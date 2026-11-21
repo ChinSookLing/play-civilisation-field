@@ -20,7 +20,7 @@ import {
 } from "@/lib/play/psyche-002";
 
 export const Route = createFileRoute("/psyche/002")({
-  head: () => pageMeta(PSYCHE_002_TITLE, `${PSYCHE_002_STATUS}. ${PSYCHE_002_STATUS_EN}. Not open. No score.`),
+  head: () => pageMeta(PSYCHE_002_TITLE, `${PSYCHE_002_STATUS}. ${PSYCHE_002_STATUS_EN}. No score.`),
   component: Psyche002,
 });
 
@@ -54,7 +54,7 @@ function Psyche002() {
           <p className="mt-4 text-base leading-relaxed">{PSYCHE_002_INTRO}</p>
           <p className="mt-3 text-base leading-relaxed">{PSYCHE_002_INTRO_ZH}</p>
           <p className="mt-4 text-sm">STATUS: {PSYCHE_002_STATUS}</p>
-          <p className="mt-1 text-sm">{PSYCHE_002_STATUS_EN}. {PSYCHE_002_ROUND} Not open.</p>
+          <p className="mt-1 text-sm">{PSYCHE_002_STATUS_EN}. {PSYCHE_002_ROUND}</p>
           <p className="mt-4 text-sm"><a className="underline" href={`${PSYCHE_002_PLAY}?seed=S1`}>Play</a></p>
           <h2 className="mt-8 text-xl">Rules</h2>
           <ol className="mt-3 list-decimal space-y-1 pl-5 text-sm leading-relaxed">

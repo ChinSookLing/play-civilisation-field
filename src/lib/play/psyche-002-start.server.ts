@@ -167,7 +167,7 @@ input { width: 100%; box-sizing: border-box; margin: .4rem 0 0; }
 <p>Play's Type-C approach. No JavaScript required. Same turn: <a href="/psyche/002/start${q}">HTML</a> · <a href="/psyche/002/start.txt${q}">.txt</a> · <a href="/psyche/002/start.json${q}">.json</a>. Pattern: /psyche/002/start.txt?seed=S1&moves=A. P = PASS.</p>
 <p><a href="/psyche/002">002</a> · <a href="/psyche/002/play${otherQ}">${query.lang === "zh" ? "English" : "繁中"}</a></p>
 <h1>${escapeHtml(PSYCHE_002_TITLE)}</h1>
-<p>airlock-v0.1 · preview. No score.</p>
+<p>airlock-v0.1 · 開放. No score.</p>
 <pre>${escapeHtml(turn.text)}</pre>
 ${choices}
 <h2>Rules</h2>

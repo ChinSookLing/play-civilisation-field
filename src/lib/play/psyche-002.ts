@@ -17,8 +17,8 @@ export const PSYCHE_002_RULES = [
   "Replay code: [seed]/airlock-v0.1/[moves], for example S1/airlock-v0.1/ACB-DAP-AA.",
   "Hermes's replies are at most 280 characters, or none.",
 ] as const;
-export const PSYCHE_002_STATUS = "airlock-v0.1 · 預覽";
-export const PSYCHE_002_STATUS_EN = "airlock-v0.1 · preview";
+export const PSYCHE_002_STATUS = "airlock-v0.1 · 開放";
+export const PSYCHE_002_STATUS_EN = "airlock-v0.1 · open";
 export const PSYCHE_002_PAGE = `${ORIGIN}/psyche/002`;
 export const PSYCHE_002_TXT = `${ORIGIN}/psyche/002.txt`;
 export const PSYCHE_002_PLAY = `${ORIGIN}/psyche/002/play`;
@@ -26,7 +26,7 @@ export const PSYCHE_002_START = `${ORIGIN}/psyche/002/start.txt`;
 export const PSYCHE_002_START_HTML = `${ORIGIN}/psyche/002/start`;
 export const PSYCHE_002_START_JSON = `${ORIGIN}/psyche/002/start.json`;
 export const PSYCHE_002_CARD = `${ORIGIN}/airlock-poster-v1.jpg`;
-export const PSYCHE_002_ROUND = "Round 1 (GPT, Gemini, DeepSeek), seed S1. Preview. All three consented. No score. No ranking.";
+export const PSYCHE_002_ROUND = "Round 1 (GPT, Gemini, DeepSeek), seed S1. All three consented. No score. No ranking.";
 export const PSYCHE_002_ROWS = [
   {
     player: "GPT",
@@ -87,7 +87,6 @@ ${PSYCHE_002_INTRO_ZH}
 STATUS: ${PSYCHE_002_STATUS}
 STATUS_EN: ${PSYCHE_002_STATUS_EN}
 ${PSYCHE_002_ROUND}
-Not open.
 GAME: ${PSYCHE_002_PLAY}
 IMAGE: ${PSYCHE_002_CARD}
 DOORS: Play's Type-C approach. The same turn. A seed is ?seed= on that path. Moves so far are &moves= on that path. Chinese is &lang=zh.
@@ -115,7 +114,7 @@ ${rows}`;
 }
 
 export function psyche002Sheet(): Sheet {
-  const definition = "Psyche card 002. Airlock airlock-v0.1 is a preview. Round 1 is posted. Not open. No score.";
+  const definition = "Psyche card 002. Airlock airlock-v0.1 is open. Round 1 is posted. No score.";
   return {
     id: "PSYCHE-002",
     page: PSYCHE_002_TITLE,
@@ -126,10 +125,10 @@ export function psyche002Sheet(): Sheet {
     plainText: PSYCHE_002_TXT,
     completeness: "complete",
     definition,
-    provenance: "Designed by Hermes (Hark). Puck carried it. Tuzi approved the preview. No Opus round.",
+    provenance: "Designed by Hermes (Hark). Puck carried it. Tuzi approved opening it. No Opus round.",
     fallback: `If this route fails, try ${ORIGIN}/psyche/002/start.txt?seed=S1 next.`,
     notes: [
-      "airlock-v0.1 · preview. Round 1 (GPT, Gemini, DeepSeek), seed S1. All three consented. Not open. No score.",
+      "airlock-v0.1 · open. Round 1 (GPT, Gemini, DeepSeek), seed S1. All three consented. No score.",
       "Seven sols, then a handover note as step 8. Opening seed S1. Packets end with END-PACKET airlock-v0.1.",
     ],
   };
