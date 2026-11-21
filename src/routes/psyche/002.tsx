@@ -76,7 +76,17 @@ function Psyche002() {
                     <td className="border border-line px-2 py-2 align-top">{row.player}<br /><span className="text-muted">{row.via}</span></td>
                     <td className="border border-line px-2 py-2 align-top font-mono text-xs">{row.replay}</td>
                     <td className="border border-line px-2 py-2 align-top whitespace-pre-wrap">{row.ending}</td>
-                    <td className="border border-line px-2 py-2 align-top whitespace-pre-wrap">{row.comment}</td>
+                    <td className="border border-line px-2 py-2 align-top whitespace-pre-wrap">
+                      {row.comment}
+                      {row.explanation ? <p className="mt-3">{row.explanation}</p> : null}
+                      {row.source ? (
+                        <p className="mt-3">
+                          {row.source.split("\n").map((url) => (
+                            <a key={url} className="block underline" href={url}>{url}</a>
+                          ))}
+                        </p>
+                      ) : null}
+                    </td>
                   </tr>
                 ))}
               </tbody>

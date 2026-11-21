@@ -82,11 +82,11 @@ test("an unoffered letter is NO MOVE, and PASS matches that sol's B", () => {
 });
 
 test("round 1 replay endings match the wall", () => {
-  const letters = ["AABCBDAA", "ADBCBCAA", "AACDBDAA"] as const;
-  PSYCHE_002_ROWS.forEach((row, index) => {
-    const text = airlockStartText("S1", "en", letters[index] ?? "");
+  for (const row of PSYCHE_002_ROWS) {
+    const letters = row.replay.split("/").at(-1)?.replaceAll("-", "") ?? "";
+    const text = airlockStartText("S1", "en", letters);
     assert.equal(text, `${row.ending}\nReplay: ${row.replay}\n${AIRLOCK_END}\n`);
-  });
+  }
 });
 
 test("so_far names earlier choices, and PASS does not take B's flag", () => {
