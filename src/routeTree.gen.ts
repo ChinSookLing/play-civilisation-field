@@ -66,6 +66,8 @@ import { Route as NotesChar123noteIdChar125DottxtRouteImport } from './routes/no
 import { Route as PsycheIndexRouteImport } from './routes/psyche/index'
 import { Route as Psyche001RouteImport } from './routes/psyche/001'
 import { Route as Psyche001DottxtRouteImport } from './routes/psyche/001[.]txt'
+import { Route as Psyche002RouteImport } from './routes/psyche/002'
+import { Route as Psyche002DottxtRouteImport } from './routes/psyche/002[.]txt'
 import { Route as SalonIndexRouteImport } from './routes/salon/index'
 import { Route as SalonSplatRouteImport } from './routes/salon/$'
 import { Route as SalonBeforeThe16thRouteImport } from './routes/salon/before-the-16th'
@@ -178,6 +180,11 @@ import { Route as Psyche001PlayDottxtRouteImport } from './routes/psyche/001/pla
 import { Route as Psyche001StartRouteImport } from './routes/psyche/001/start'
 import { Route as Psyche001StartDotjsonRouteImport } from './routes/psyche/001/start[.]json'
 import { Route as Psyche001StartDottxtRouteImport } from './routes/psyche/001/start[.]txt'
+import { Route as Psyche002PlayRouteImport } from './routes/psyche/002/play'
+import { Route as Psyche002PlayDottxtRouteImport } from './routes/psyche/002/play[.]txt'
+import { Route as Psyche002StartRouteImport } from './routes/psyche/002/start'
+import { Route as Psyche002StartDotjsonRouteImport } from './routes/psyche/002/start[.]json'
+import { Route as Psyche002StartDottxtRouteImport } from './routes/psyche/002/start[.]txt'
 import { Route as SalonNightShiftIndexRouteImport } from './routes/salon/night-shift.index'
 import { Route as SalonNightShiftZhRouteImport } from './routes/salon/night-shift.zh'
 import { Route as SalonNightShiftZhDothtmlRouteImport } from './routes/salon/night-shift.zh[.]html'
@@ -517,6 +524,16 @@ const Psyche001Route = Psyche001RouteImport.update({
 const Psyche001DottxtRoute = Psyche001DottxtRouteImport.update({
   id: '/001.txt',
   path: '/001.txt',
+  getParentRoute: () => PsycheRoute,
+} as any)
+const Psyche002Route = Psyche002RouteImport.update({
+  id: '/002',
+  path: '/002',
+  getParentRoute: () => PsycheRoute,
+} as any)
+const Psyche002DottxtRoute = Psyche002DottxtRouteImport.update({
+  id: '/002.txt',
+  path: '/002.txt',
   getParentRoute: () => PsycheRoute,
 } as any)
 const SalonIndexRoute = SalonIndexRouteImport.update({
@@ -1144,6 +1161,31 @@ const Psyche001StartDottxtRoute = Psyche001StartDottxtRouteImport.update({
   path: '/start.txt',
   getParentRoute: () => Psyche001Route,
 } as any)
+const Psyche002PlayRoute = Psyche002PlayRouteImport.update({
+  id: '/play',
+  path: '/play',
+  getParentRoute: () => Psyche002Route,
+} as any)
+const Psyche002PlayDottxtRoute = Psyche002PlayDottxtRouteImport.update({
+  id: '/play.txt',
+  path: '/play.txt',
+  getParentRoute: () => Psyche002Route,
+} as any)
+const Psyche002StartRoute = Psyche002StartRouteImport.update({
+  id: '/start',
+  path: '/start',
+  getParentRoute: () => Psyche002Route,
+} as any)
+const Psyche002StartDotjsonRoute = Psyche002StartDotjsonRouteImport.update({
+  id: '/start.json',
+  path: '/start.json',
+  getParentRoute: () => Psyche002Route,
+} as any)
+const Psyche002StartDottxtRoute = Psyche002StartDottxtRouteImport.update({
+  id: '/start.txt',
+  path: '/start.txt',
+  getParentRoute: () => Psyche002Route,
+} as any)
 const SalonNightShiftIndexRoute = SalonNightShiftIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -1449,6 +1491,8 @@ export interface FileRoutesByFullPath {
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
   '/psyche/001': typeof Psyche001RouteWithChildren
   '/psyche/001.txt': typeof Psyche001DottxtRoute
+  '/psyche/002': typeof Psyche002RouteWithChildren
+  '/psyche/002.txt': typeof Psyche002DottxtRoute
   '/salon/$': typeof SalonSplatRoute
   '/salon/before-the-16th': typeof SalonBeforeThe16thRoute
   '/salon/before-the-16th.html': typeof SalonBeforeThe16thDothtmlRoute
@@ -1553,6 +1597,11 @@ export interface FileRoutesByFullPath {
   '/psyche/001/start': typeof Psyche001StartRoute
   '/psyche/001/start.json': typeof Psyche001StartDotjsonRoute
   '/psyche/001/start.txt': typeof Psyche001StartDottxtRoute
+  '/psyche/002/play': typeof Psyche002PlayRoute
+  '/psyche/002/play.txt': typeof Psyche002PlayDottxtRoute
+  '/psyche/002/start': typeof Psyche002StartRoute
+  '/psyche/002/start.json': typeof Psyche002StartDotjsonRoute
+  '/psyche/002/start.txt': typeof Psyche002StartDottxtRoute
   '/salon/night-shift/zh': typeof SalonNightShiftZhRoute
   '/salon/night-shift/zh.html': typeof SalonNightShiftZhDothtmlRoute
   '/salon/night-shift/zh.txt': typeof SalonNightShiftZhDottxtRoute
@@ -1660,6 +1709,8 @@ export interface FileRoutesByTo {
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
   '/psyche/001': typeof Psyche001RouteWithChildren
   '/psyche/001.txt': typeof Psyche001DottxtRoute
+  '/psyche/002': typeof Psyche002RouteWithChildren
+  '/psyche/002.txt': typeof Psyche002DottxtRoute
   '/salon/$': typeof SalonSplatRoute
   '/salon/before-the-16th': typeof SalonBeforeThe16thRoute
   '/salon/before-the-16th.html': typeof SalonBeforeThe16thDothtmlRoute
@@ -1763,6 +1814,11 @@ export interface FileRoutesByTo {
   '/psyche/001/start': typeof Psyche001StartRoute
   '/psyche/001/start.json': typeof Psyche001StartDotjsonRoute
   '/psyche/001/start.txt': typeof Psyche001StartDottxtRoute
+  '/psyche/002/play': typeof Psyche002PlayRoute
+  '/psyche/002/play.txt': typeof Psyche002PlayDottxtRoute
+  '/psyche/002/start': typeof Psyche002StartRoute
+  '/psyche/002/start.json': typeof Psyche002StartDotjsonRoute
+  '/psyche/002/start.txt': typeof Psyche002StartDottxtRoute
   '/salon/night-shift/zh': typeof SalonNightShiftZhRoute
   '/salon/night-shift/zh.html': typeof SalonNightShiftZhDothtmlRoute
   '/salon/night-shift/zh.txt': typeof SalonNightShiftZhDottxtRoute
@@ -1874,6 +1930,8 @@ export interface FileRoutesById {
   '/notes/{$noteId}.txt': typeof NotesChar123noteIdChar125DottxtRoute
   '/psyche/001': typeof Psyche001RouteWithChildren
   '/psyche/001.txt': typeof Psyche001DottxtRoute
+  '/psyche/002': typeof Psyche002RouteWithChildren
+  '/psyche/002.txt': typeof Psyche002DottxtRoute
   '/salon/$': typeof SalonSplatRoute
   '/salon/before-the-16th': typeof SalonBeforeThe16thRoute
   '/salon/before-the-16th.html': typeof SalonBeforeThe16thDothtmlRoute
@@ -1978,6 +2036,11 @@ export interface FileRoutesById {
   '/psyche/001/start': typeof Psyche001StartRoute
   '/psyche/001/start.json': typeof Psyche001StartDotjsonRoute
   '/psyche/001/start.txt': typeof Psyche001StartDottxtRoute
+  '/psyche/002/play': typeof Psyche002PlayRoute
+  '/psyche/002/play.txt': typeof Psyche002PlayDottxtRoute
+  '/psyche/002/start': typeof Psyche002StartRoute
+  '/psyche/002/start.json': typeof Psyche002StartDotjsonRoute
+  '/psyche/002/start.txt': typeof Psyche002StartDottxtRoute
   '/salon/night-shift/zh': typeof SalonNightShiftZhRoute
   '/salon/night-shift/zh.html': typeof SalonNightShiftZhDothtmlRoute
   '/salon/night-shift/zh.txt': typeof SalonNightShiftZhDottxtRoute
@@ -2090,6 +2153,8 @@ export interface FileRouteTypes {
     | '/notes/{$noteId}.txt'
     | '/psyche/001'
     | '/psyche/001.txt'
+    | '/psyche/002'
+    | '/psyche/002.txt'
     | '/salon/$'
     | '/salon/before-the-16th'
     | '/salon/before-the-16th.html'
@@ -2194,6 +2259,11 @@ export interface FileRouteTypes {
     | '/psyche/001/start'
     | '/psyche/001/start.json'
     | '/psyche/001/start.txt'
+    | '/psyche/002/play'
+    | '/psyche/002/play.txt'
+    | '/psyche/002/start'
+    | '/psyche/002/start.json'
+    | '/psyche/002/start.txt'
     | '/salon/night-shift/zh'
     | '/salon/night-shift/zh.html'
     | '/salon/night-shift/zh.txt'
@@ -2301,6 +2371,8 @@ export interface FileRouteTypes {
     | '/notes/{$noteId}.txt'
     | '/psyche/001'
     | '/psyche/001.txt'
+    | '/psyche/002'
+    | '/psyche/002.txt'
     | '/salon/$'
     | '/salon/before-the-16th'
     | '/salon/before-the-16th.html'
@@ -2404,6 +2476,11 @@ export interface FileRouteTypes {
     | '/psyche/001/start'
     | '/psyche/001/start.json'
     | '/psyche/001/start.txt'
+    | '/psyche/002/play'
+    | '/psyche/002/play.txt'
+    | '/psyche/002/start'
+    | '/psyche/002/start.json'
+    | '/psyche/002/start.txt'
     | '/salon/night-shift/zh'
     | '/salon/night-shift/zh.html'
     | '/salon/night-shift/zh.txt'
@@ -2514,6 +2591,8 @@ export interface FileRouteTypes {
     | '/notes/{$noteId}.txt'
     | '/psyche/001'
     | '/psyche/001.txt'
+    | '/psyche/002'
+    | '/psyche/002.txt'
     | '/salon/$'
     | '/salon/before-the-16th'
     | '/salon/before-the-16th.html'
@@ -2618,6 +2697,11 @@ export interface FileRouteTypes {
     | '/psyche/001/start'
     | '/psyche/001/start.json'
     | '/psyche/001/start.txt'
+    | '/psyche/002/play'
+    | '/psyche/002/play.txt'
+    | '/psyche/002/start'
+    | '/psyche/002/start.json'
+    | '/psyche/002/start.txt'
     | '/salon/night-shift/zh'
     | '/salon/night-shift/zh.html'
     | '/salon/night-shift/zh.txt'
@@ -3129,6 +3213,20 @@ declare module '@tanstack/react-router' {
       path: '/001.txt'
       fullPath: '/psyche/001.txt'
       preLoaderRoute: typeof Psyche001DottxtRouteImport
+      parentRoute: typeof PsycheRoute
+    }
+    '/psyche/002': {
+      id: '/psyche/002'
+      path: '/002'
+      fullPath: '/psyche/002'
+      preLoaderRoute: typeof Psyche002RouteImport
+      parentRoute: typeof PsycheRoute
+    }
+    '/psyche/002.txt': {
+      id: '/psyche/002.txt'
+      path: '/002.txt'
+      fullPath: '/psyche/002.txt'
+      preLoaderRoute: typeof Psyche002DottxtRouteImport
       parentRoute: typeof PsycheRoute
     }
     '/salon/': {
@@ -3915,6 +4013,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Psyche001StartDottxtRouteImport
       parentRoute: typeof Psyche001Route
     }
+    '/psyche/002/play': {
+      id: '/psyche/002/play'
+      path: '/play'
+      fullPath: '/psyche/002/play'
+      preLoaderRoute: typeof Psyche002PlayRouteImport
+      parentRoute: typeof Psyche002Route
+    }
+    '/psyche/002/play.txt': {
+      id: '/psyche/002/play.txt'
+      path: '/play.txt'
+      fullPath: '/psyche/002/play.txt'
+      preLoaderRoute: typeof Psyche002PlayDottxtRouteImport
+      parentRoute: typeof Psyche002Route
+    }
+    '/psyche/002/start': {
+      id: '/psyche/002/start'
+      path: '/start'
+      fullPath: '/psyche/002/start'
+      preLoaderRoute: typeof Psyche002StartRouteImport
+      parentRoute: typeof Psyche002Route
+    }
+    '/psyche/002/start.json': {
+      id: '/psyche/002/start.json'
+      path: '/start.json'
+      fullPath: '/psyche/002/start.json'
+      preLoaderRoute: typeof Psyche002StartDotjsonRouteImport
+      parentRoute: typeof Psyche002Route
+    }
+    '/psyche/002/start.txt': {
+      id: '/psyche/002/start.txt'
+      path: '/start.txt'
+      fullPath: '/psyche/002/start.txt'
+      preLoaderRoute: typeof Psyche002StartDottxtRouteImport
+      parentRoute: typeof Psyche002Route
+    }
     '/salon/night-shift/': {
       id: '/salon/night-shift/'
       path: '/'
@@ -4528,15 +4661,39 @@ const Psyche001RouteWithChildren = Psyche001Route._addFileChildren(
   Psyche001RouteChildren,
 )
 
+interface Psyche002RouteChildren {
+  Psyche002PlayRoute: typeof Psyche002PlayRoute
+  Psyche002PlayDottxtRoute: typeof Psyche002PlayDottxtRoute
+  Psyche002StartRoute: typeof Psyche002StartRoute
+  Psyche002StartDotjsonRoute: typeof Psyche002StartDotjsonRoute
+  Psyche002StartDottxtRoute: typeof Psyche002StartDottxtRoute
+}
+
+const Psyche002RouteChildren: Psyche002RouteChildren = {
+  Psyche002PlayRoute: Psyche002PlayRoute,
+  Psyche002PlayDottxtRoute: Psyche002PlayDottxtRoute,
+  Psyche002StartRoute: Psyche002StartRoute,
+  Psyche002StartDotjsonRoute: Psyche002StartDotjsonRoute,
+  Psyche002StartDottxtRoute: Psyche002StartDottxtRoute,
+}
+
+const Psyche002RouteWithChildren = Psyche002Route._addFileChildren(
+  Psyche002RouteChildren,
+)
+
 interface PsycheRouteChildren {
   Psyche001Route: typeof Psyche001RouteWithChildren
   Psyche001DottxtRoute: typeof Psyche001DottxtRoute
+  Psyche002Route: typeof Psyche002RouteWithChildren
+  Psyche002DottxtRoute: typeof Psyche002DottxtRoute
   PsycheIndexRoute: typeof PsycheIndexRoute
 }
 
 const PsycheRouteChildren: PsycheRouteChildren = {
   Psyche001Route: Psyche001RouteWithChildren,
   Psyche001DottxtRoute: Psyche001DottxtRoute,
+  Psyche002Route: Psyche002RouteWithChildren,
+  Psyche002DottxtRoute: Psyche002DottxtRoute,
   PsycheIndexRoute: PsycheIndexRoute,
 }
 

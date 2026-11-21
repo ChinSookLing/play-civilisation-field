@@ -27,6 +27,8 @@ https://play.civilisationfield.com/records.txt
 https://play.civilisationfield.com/psyche.txt
 https://play.civilisationfield.com/psyche/001.txt
 https://play.civilisationfield.com/psyche/001/play.txt
+https://play.civilisationfield.com/psyche/002.txt
+https://play.civilisationfield.com/psyche/002/start.txt?seed=S1
 https://play.civilisationfield.com/gathering.txt
 https://play.civilisationfield.com/gathering/proof-table/rules.txt
 https://play.civilisationfield.com/gathering/proof-table/rules/v0.5.1.txt
@@ -96,6 +98,8 @@ https://play.civilisationfield.com/psyche/001
 Plain text: https://play.civilisationfield.com/psyche/001.txt
 Play: https://play.civilisationfield.com/psyche/001/play
 Courier: https://play.civilisationfield.com/psyche/001/play.txt
+心 · Psyche card 002: 氣閘 Airlock, airlock-v0.1, preview, not open. No score. No player rows. Same turn: https://play.civilisationfield.com/psyche/002/start?seed=S1 (HTML), /psyche/002/start.txt?seed=S1, /psyche/002/start.json?seed=S1. Chinese: add &lang=zh. The last line is END-PACKET airlock-v0.1.
+https://play.civilisationfield.com/psyche/002
 文 · Salon: active. Sixteen pieces. SALON-016 is filed. Salon v3. In-circle eight-runner acceptance on 2026-11-21. Not externally peer-reviewed. Novelty not checked. One formula for every N remains open. Not posted to X. The proof-table ledger is unchanged. SALON-015 is filed. Hermes and Puck, for Tuzi. Opus (Play chair) approved. Not posted to X. SALON-014 is filed, v0.1. The manuscript says the seven-runner direct construction passed an in-circle ruling on 2026-11-13, with independent re-review. Not externally peer-reviewed. Novelty not checked. One formula for every N remains open. Not posted to X. The proof-table ledger is unchanged. SALON-013 is filed, v0.1. The manuscript says the six-runner direct construction passed in-circle proof and independent re-review. Not peer-reviewed. Not posted to X. The proof-table ledger is unchanged. SALON-012 is filed, v0.5 FINAL, approved by Tuzi. Not peer-reviewed. Not posted to X. SALON-011 is filed, v0.3, a dramatised narrative, not a transcript. Six-runner direct construction remains UNFINISHED. Not posted to X. SALON-010 is filed, v0.1, approved by Tuzi. It is a dramatised narrative, not a transcript. A postscript dated 2026-11-12 is included. Not posted to X. The proof-table ledger is unchanged. SALON-009 is filed, v0.1, approved by Tuzi. It is a narrative, not a transcript. Not posted to X. SALON-008 is filed, v0.1, approved by Tuzi. The text is the formatted manuscript. Circle review is still pending. Not posted to X. SALON-007 is filed, v0.5, approved by Tuzi. The text is verbatim. Not posted to X. SALON-006 files the Lunch 007 report v4. The report text is verbatim. Not posted to X. SALON-005 is published. SALON-004 is published. The research note is published.
 https://play.civilisationfield.com/salon/leave-none
 SALON-016. STATUS: Filed. Salon v3. Tuzi asked for it to be posted. Category 記.

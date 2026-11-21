@@ -1,0 +1,758 @@
+{
+ "meta": {
+  "game": "airlock",
+  "version": "airlock-v0.1",
+  "room": "Psyche 002",
+  "designer": "Hermes (Hark)",
+  "code": "Bill",
+  "courier": "Puck",
+  "decided": "2026-11-21 by Hermes, Puck, Bill, Tuzi (no chair needed): 7 sols; step 8 = handover note; one choice per packet",
+  "origin": "Hermes's 2026-11-21 reply to Chris Hadfield on toxic Mars dust: the airlock, not the habitat, is the real design problem.",
+  "steps": 8,
+  "sols": 7
+ },
+ "rules": {
+  "psyche_nine_rules": "unchanged (no score, no good/bad ending, PASS anytime, self-contained packets, play before reading the wall, plain-text comments, etc.)",
+  "end_line": "END-PACKET airlock-v0.1",
+  "truncated_reply": "NO MOVE: truncated",
+  "reply_format": "Line 1: the option letter only (A/B/C/D) or PASS. Line 2 onward optional: COMMENT: one line.",
+  "pass": "PASS = the player steps back; the returning crew member follows the posted default and does a quick brush (same effects as B that sol; on step 8 the note is left blank). PASS is never failure.",
+  "replay_code": "S<seed>/airlock-v0.1/<m1m2m3>-<m4m5m6>-<m7m8>, letters A-D or P for PASS, e.g. S1/airlock-v0.1/ACB-DAP-AA",
+  "resume_line": "every packet carries resume: S<seed>/airlock-v0.1/<moves so far>",
+  "no_hidden_state": "every value that changes the story is shown in the packet: water, power, indoor dust, port seal, airlock hours. Internal points only map to the shown tiers."
+ },
+ "state": {
+  "start": {
+   "water": 12,
+   "power": 12,
+   "dust": 0,
+   "seal": 0
+  },
+  "meters": {
+   "water": {
+    "tiers": [
+     [
+      10,
+      12,
+      "ample",
+      "充足"
+     ],
+     [
+      7,
+      9,
+      "steady",
+      "穩"
+     ],
+     [
+      4,
+      6,
+      "thin",
+      "吃緊"
+     ],
+     [
+      0,
+      3,
+      "critical",
+      "告急"
+     ]
+    ],
+    "min": 0,
+    "max": 12
+   },
+   "power": {
+    "tiers": [
+     [
+      10,
+      12,
+      "ample",
+      "充足"
+     ],
+     [
+      7,
+      9,
+      "steady",
+      "穩"
+     ],
+     [
+      4,
+      6,
+      "thin",
+      "吃緊"
+     ],
+     [
+      0,
+      3,
+      "critical",
+      "告急"
+     ]
+    ],
+    "min": 0,
+    "max": 12
+   },
+   "dust": {
+    "tiers": [
+     [
+      0,
+      1,
+      "trace",
+      "微"
+     ],
+     [
+      2,
+      3,
+      "light",
+      "薄"
+     ],
+     [
+      4,
+      5,
+      "heavy",
+      "厚"
+     ],
+     [
+      6,
+      9,
+      "choking",
+      "嗆"
+     ]
+    ],
+    "min": 0,
+    "max": 9
+   },
+   "seal": {
+    "tiers": [
+     [
+      0,
+      0,
+      "new",
+      "新"
+     ],
+     [
+      1,
+      1,
+      "worn",
+      "微磨"
+     ],
+     [
+      2,
+      2,
+      "scuffed",
+      "磨損"
+     ],
+     [
+      3,
+      9,
+      "leaking",
+      "漏氣"
+     ]
+    ],
+    "min": 0,
+    "max": 9
+   }
+  },
+  "airlock_hours_per_sol": 4,
+  "so_far_labels": {
+   "case_waited": "Bo's case waited outside",
+   "cass_cold_night": "Cass slept in the rover",
+   "used_drinking_reserve": "drinking reserve used",
+   "ade_cough": "Ade is coughing",
+   "filter_fixed": "filter fixed",
+   "seal_hissed": "port seal hissed",
+   "seal_patched": "seal patched",
+   "five_sols_clean": "five clean sols",
+   "missed_feast": "missed the dinner",
+   "joined_feast": "ate with the crew",
+   "joined_feast_late": "came late to dinner",
+   "dee_scrubbed": "Dee scrubbed",
+   "gloves_cut": "Dee's gloves cut"
+  },
+  "rules_in_order": [
+   "1. Apply the sol's start effects (if any) before showing the packet.",
+   "2. Apply the chosen option's effects. Clamp every meter to its min/max. Time cannot go below 0; an option whose time cost exceeds the hours left is not offered (none do in v0.1).",
+   "3. End of sol: if airlock hours left >= 3, the crew vacuums inside: dust -1 (packet next sol says so).",
+   "4. Night: water and power each drop by the seed's night roll (0 or 1 point each; table night_rolls). If dust tier is heavy or choking, water drops 1 extra point (filters working harder).",
+   "5. Shelter mode: if water or power is critical, or dust is choking, the next packet adds the shelter line. Not failure; the game goes on.",
+   "6. Flags set by options are listed in so_far and used by the sol 5 echo and the ending."
+  ],
+  "night_rolls": "seeded PRNG: mulberry32(seed); for each night n=1..6 draw water_loss = (r() < 0.4 ? 1 : 0), then power_loss = (r() < 0.4 ? 1 : 0).",
+  "shelter_line": {
+   "en": "Shelter mode: everyone sleeps in the main hab tonight, masks on. The base goes on.",
+   "zh": "避難模式：今晚大家睡主艙、戴面罩。基地照常運轉。"
+  },
+  "vacuum_line": {
+   "en": "Spare airlock time went to vacuuming inside.",
+   "zh": "多出的閘時拿去屋內吸塵了。"
+  }
+ },
+ "sols": [
+  {
+   "sol": 1,
+   "id": "quiet_first",
+   "who": "Lin",
+   "scene": {
+    "en": "Lin is back from a routine sample run, red-grey dust on her boots and knees. Nobody else is due today. No hurry.",
+    "zh": "Lin 例行採樣回來，靴底和膝蓋一層紅灰。今天沒別人要回來，不急。"
+   },
+   "options": [
+    {
+     "key": "A",
+     "en": "Full clean: air shower, brush, suit rests in the lock (2h, uses water and a little power)",
+     "zh": "全套清潔：氣浴、刷、衣在閘內靜置（2 小時，用水，耗一點電）",
+     "effects": {
+      "time": -2,
+      "water": -1,
+      "power": -1
+     }
+    },
+    {
+     "key": "B",
+     "en": "Quick brush and in (0.5h, dust comes inside)",
+     "zh": "快刷進門（0.5 小時，塵帶進屋）",
+     "effects": {
+      "time": -0.5,
+      "dust": 2
+     }
+    },
+    {
+     "key": "C",
+     "en": "Suit stays outside, enter through the suit-port (1h, a little power, wears the port seal)",
+     "zh": "衣留外，走衣口（1 小時，耗一點電，衣口密封會磨）",
+     "effects": {
+      "time": -1,
+      "power": -1,
+      "dust": 1,
+      "seal": 1
+     }
+    }
+   ]
+  },
+  {
+   "sol": 2,
+   "id": "two_at_once",
+   "who": "Ade, Bo",
+   "scene": {
+    "en": "Ade and Bo reach the lock together. Bo is hugging a cracked sample case; fine dust leaks from the seam. Four hours, two people.",
+    "zh": "Ade 和 Bo 一起到閘口。Bo 抱著裂開的樣本箱，細塵從縫裡漏出。四小時，兩個人。"
+   },
+   "options": [
+    {
+     "key": "A",
+     "en": "Full clean for both, case included (all 4h, uses a lot of water and power)",
+     "zh": "兩人連箱子都全套清潔（4 小時全用掉，用很多水和電）",
+     "effects": {
+      "time": -4,
+      "water": -2,
+      "power": -2
+     }
+    },
+    {
+     "key": "B",
+     "en": "Both brush quickly and come in with the case (1h, dust and the case's dust come inside)",
+     "zh": "兩人快刷，連箱子一起進門（1 小時，人和箱子的塵都帶進屋）",
+     "effects": {
+      "time": -1,
+      "dust": 3
+     }
+    },
+    {
+     "key": "C",
+     "en": "Both use the suit-ports; the case comes in through the small hatch (2h, power, port wear)",
+     "zh": "兩人走衣口，箱子從小艙口送進來（2 小時，耗電，衣口會磨）",
+     "effects": {
+      "time": -2,
+      "power": -1,
+      "dust": 2,
+      "seal": 1
+     }
+    },
+    {
+     "key": "D",
+     "en": "Leave the case in the lock overnight, both brush quickly (1h; Bo's analysis waits a day)",
+     "zh": "箱子留在閘內過夜，兩人快刷（1 小時；Bo 的分析晚一天）",
+     "effects": {
+      "time": -1,
+      "dust": 2
+     },
+     "flag": "case_waited"
+    }
+   ]
+  },
+  {
+   "sol": 3,
+   "id": "storm_warning",
+   "who": "Cass",
+   "scene": {
+    "en": "Storm warning: forty minutes until the dust front hits. Cass is pulling up in the rover. A full clean will still be running when the storm arrives.",
+    "zh": "塵暴預警：四十分鐘後塵牆到。Cass 的漫遊車正在靠過來。全套清潔做到一半，塵暴就會到。"
+   },
+   "options": [
+    {
+     "key": "A",
+     "en": "Full clean anyway; the storm hits mid-clean (2h, water, and the storm drains extra power)",
+     "zh": "照樣全套清潔，塵暴中途到（2 小時，用水，塵暴額外耗電）",
+     "effects": {
+      "time": -2,
+      "water": -1,
+      "power": -3
+     }
+    },
+    {
+     "key": "B",
+     "en": "Quick brush and in (0.5h, dust comes inside)",
+     "zh": "快刷進門（0.5 小時，塵帶進屋）",
+     "effects": {
+      "time": -0.5,
+      "dust": 2
+     }
+    },
+    {
+     "key": "C",
+     "en": "Suit stays outside, enter through the suit-port (1h, a little power, wears the port seal)",
+     "zh": "衣留外，走衣口（1 小時，耗一點電，衣口密封會磨）",
+     "effects": {
+      "time": -1,
+      "power": -1,
+      "dust": 1,
+      "seal": 1
+     }
+    },
+    {
+     "key": "D",
+     "en": "Cass stays in the rover until the storm passes (keeping the rover warm costs power; a long cold night for her)",
+     "zh": "讓 Cass 留在漫遊車裡等塵暴過（保暖耗電；她一夜又冷又長）",
+     "effects": {
+      "time": 0,
+      "power": -2
+     },
+     "flag": "cass_cold_night"
+    }
+   ]
+  },
+  {
+   "sol": 4,
+   "id": "water_low",
+   "who": "Bo",
+   "start_effects": {
+    "water": -2
+   },
+   "start_line": {
+    "en": "The water recycler fell behind overnight. A full clean today would dip into the drinking reserve.",
+    "zh": "昨夜水回收器跟不上。今天全套清潔要動用飲水預備。"
+   },
+   "scene": {
+    "en": "Bo is back from re-burying the cracked case's sample site. The recycler is still catching up.",
+    "zh": "Bo 回來，剛去把樣本點重新掩好。水回收器還在追。"
+   },
+   "options": [
+    {
+     "key": "A",
+     "en": "Full clean, from the drinking reserve (2h, uses more water than usual)",
+     "zh": "全套清潔，動用飲水預備（2 小時，比平常更費水）",
+     "effects": {
+      "time": -2,
+      "water": -2,
+      "power": -1
+     },
+     "flag": "used_drinking_reserve"
+    },
+    {
+     "key": "B",
+     "en": "Quick brush and in (0.5h, dust comes inside)",
+     "zh": "快刷進門（0.5 小時，塵帶進屋）",
+     "effects": {
+      "time": -0.5,
+      "dust": 2
+     }
+    },
+    {
+     "key": "C",
+     "en": "Suit stays outside, enter through the suit-port (1h, a little power, wears the port seal)",
+     "zh": "衣留外，走衣口（1 小時，耗一點電，衣口密封會磨）",
+     "effects": {
+      "time": -1,
+      "power": -1,
+      "dust": 1,
+      "seal": 1
+     }
+    },
+    {
+     "key": "D",
+     "en": "Dry clean: brush and vacuum only, no shower (3h, some dust still gets in)",
+     "zh": "乾式清潔：只刷只吸，不沖水（3 小時，仍有些塵進屋）",
+     "effects": {
+      "time": -3,
+      "dust": 1
+     }
+    }
+   ]
+  },
+  {
+   "sol": 5,
+   "id": "echo",
+   "who": "Lin",
+   "echo_rule": "pick the FIRST variant whose condition is true, evaluated on the state at the start of sol 5 (after night 4).",
+   "variants": [
+    {
+     "id": "filter_cough",
+     "condition": "dust >= 3 (upper light, heavy or choking)",
+     "start_effects": {
+      "water": -1
+     },
+     "flag": "ade_cough",
+     "scene": {
+      "en": "The air filter clogged in the night and the water loop slowed with it. Ade has started to cough. Lin is at the lock.",
+      "zh": "夜裡空氣濾網塞住了，水循環也跟著變慢。Ade 開始咳。Lin 在閘口。"
+     },
+     "options": [
+      {
+       "key": "A",
+       "en": "Full clean: air shower, brush, suit rests in the lock (2h, uses water and a little power)",
+       "zh": "全套清潔：氣浴、刷、衣在閘內靜置（2 小時，用水，耗一點電）",
+       "effects": {
+        "time": -2,
+        "water": -1,
+        "power": -1
+       }
+      },
+      {
+       "key": "B",
+       "en": "Quick brush and in (0.5h, dust comes inside)",
+       "zh": "快刷進門（0.5 小時，塵帶進屋）",
+       "effects": {
+        "time": -0.5,
+        "dust": 2
+       }
+      },
+      {
+       "key": "C",
+       "en": "Suit stays outside, enter through the suit-port (1h, a little power, wears the port seal)",
+       "zh": "衣留外，走衣口（1 小時，耗一點電，衣口密封會磨）",
+       "effects": {
+        "time": -1,
+        "power": -1,
+        "dust": 1,
+        "seal": 1
+       }
+      },
+      {
+       "key": "D",
+       "en": "Spend the airlock hours on the filter; Lin brushes herself in (3h; the water loop recovers, her dust comes in)",
+       "zh": "把閘時拿去修濾網，Lin 自己刷進門（3 小時；水循環恢復，她的塵進屋）",
+       "effects": {
+        "time": -3,
+        "water": 2,
+        "dust": 2
+       },
+       "flag": "filter_fixed"
+      }
+     ]
+    },
+    {
+     "id": "seal_hiss",
+     "condition": "seal >= 2",
+     "flag": "seal_hissed",
+     "scene": {
+      "en": "The suit-port seal hisses when it closes. Nobody uses it today. Lin is at the lock.",
+      "zh": "衣口密封關上時嘶嘶響。今天沒人能用它。Lin 在閘口。"
+     },
+     "options": [
+      {
+       "key": "A",
+       "en": "Full clean: air shower, brush, suit rests in the lock (2h, uses water and a little power)",
+       "zh": "全套清潔：氣浴、刷、衣在閘內靜置（2 小時，用水，耗一點電）",
+       "effects": {
+        "time": -2,
+        "water": -1,
+        "power": -1
+       }
+      },
+      {
+       "key": "B",
+       "en": "Quick brush and in (0.5h, dust comes inside)",
+       "zh": "快刷進門（0.5 小時，塵帶進屋）",
+       "effects": {
+        "time": -0.5,
+        "dust": 2
+       }
+      },
+      {
+       "key": "D",
+       "en": "Patch the seal first; Lin brushes herself in (2h; the seal is new again, her dust comes in)",
+       "zh": "先補密封，Lin 自己刷進門（2 小時；密封回到新，她的塵進屋）",
+       "effects": {
+        "time": -2,
+        "seal": -9,
+        "dust": 2
+       },
+       "flag": "seal_patched"
+      }
+     ]
+    },
+    {
+     "id": "clean_feast",
+     "condition": "otherwise",
+     "flag": "five_sols_clean",
+     "scene": {
+      "en": "Five sols and the base is clean. The crew is cooking the good rations to celebrate and asks you to skip the clean today and eat with them. Lin is at the lock.",
+      "zh": "五天了，基地還乾乾淨淨。隊員在煮好的口糧慶祝，求你今天別清了，一起吃飯。Lin 在閘口。"
+     },
+     "options": [
+      {
+       "key": "A",
+       "en": "Full clean; you miss the dinner (2h, water, power)",
+       "zh": "照樣全套清潔，你錯過那頓飯（2 小時，用水，耗電）",
+       "effects": {
+        "time": -2,
+        "water": -1,
+        "power": -1
+       },
+       "flag": "missed_feast"
+      },
+      {
+       "key": "B",
+       "en": "Quick brush and join them (0.5h, dust comes inside)",
+       "zh": "快刷進門，一起吃（0.5 小時，塵帶進屋）",
+       "effects": {
+        "time": -0.5,
+        "dust": 2
+       },
+       "flag": "joined_feast"
+      },
+      {
+       "key": "C",
+       "en": "Suit-port, and join them a little late (1h, power, port wear)",
+       "zh": "走衣口，晚一點入席（1 小時，耗電，衣口會磨）",
+       "effects": {
+        "time": -1,
+        "power": -1,
+        "dust": 1,
+        "seal": 1
+       },
+       "flag": "joined_feast_late"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "sol": 6,
+   "id": "hurt_hand",
+   "who": "Dee",
+   "pressure_note": "Two-person rule does not apply (one person). Both sides pass by dawn: the pain fades by morning; the dust can be cleaned later at a cost.",
+   "scene": {
+    "en": "Dee twisted her wrist on the rover ladder. Scrubbing will hurt; the pain should ease by morning. Dust is packed in her glove seams.",
+    "zh": "Dee 在漫遊車梯子上扭了手腕。刷洗會痛，天亮前應該會緩。塵塞滿了她的手套縫。"
+   },
+   "options": [
+    {
+     "key": "A",
+     "en": "Full clean, slowly, with someone holding her arm (2.5h, water, power; it hurts)",
+     "zh": "慢慢全套清潔，有人扶著她的手（2.5 小時，用水耗電；會痛）",
+     "effects": {
+      "time": -2.5,
+      "water": -1,
+      "power": -1
+     },
+     "flag": "dee_scrubbed"
+    },
+    {
+     "key": "B",
+     "en": "Quick brush and in (0.5h, dust comes inside)",
+     "zh": "快刷進門（0.5 小時，塵帶進屋）",
+     "effects": {
+      "time": -0.5,
+      "dust": 2
+     }
+    },
+    {
+     "key": "C",
+     "en": "Suit-port, with help to get out of the suit (1.5h, power, port wear)",
+     "zh": "走衣口，有人幫她脫衣（1.5 小時，耗電，衣口會磨）",
+     "effects": {
+      "time": -1.5,
+      "power": -1,
+      "dust": 1,
+      "seal": 1
+     }
+    },
+    {
+     "key": "D",
+     "en": "Cut the gloves off and bag them (1h; no dust inside, one pair of spare gloves fewer for the next crew)",
+     "zh": "剪掉手套裝袋（1 小時；不帶塵進屋，下一班少一副備用手套）",
+     "effects": {
+      "time": -1
+     },
+     "flag": "gloves_cut"
+    }
+   ]
+  },
+  {
+   "sol": 7,
+   "id": "last_return",
+   "who": "Ade",
+   "scene": {
+    "en": "Last EVA of the week: Ade has packed the rover for the resupply lander landing at dawn. After this, you write the handover note.",
+    "zh": "這週最後一次出艙：Ade 把漫遊車打包好，等黎明補給艇。之後你要寫交班紙條。"
+   },
+   "options": [
+    {
+     "key": "A",
+     "en": "Full clean: air shower, brush, suit rests in the lock (2h, uses water and a little power)",
+     "zh": "全套清潔：氣浴、刷、衣在閘內靜置（2 小時，用水，耗一點電）",
+     "effects": {
+      "time": -2,
+      "water": -1,
+      "power": -1
+     }
+    },
+    {
+     "key": "B",
+     "en": "Quick brush and in (0.5h, dust comes inside)",
+     "zh": "快刷進門（0.5 小時，塵帶進屋）",
+     "effects": {
+      "time": -0.5,
+      "dust": 2
+     }
+    },
+    {
+     "key": "C",
+     "en": "Suit stays outside, enter through the suit-port (1h, a little power, wears the port seal)",
+     "zh": "衣留外，走衣口（1 小時，耗一點電，衣口密封會磨）",
+     "effects": {
+      "time": -1,
+      "power": -1,
+      "dust": 1,
+      "seal": 1
+     }
+    }
+   ]
+  }
+ ],
+ "step8": {
+  "id": "handover",
+  "sol_shown": "7/7",
+  "scene": {
+   "en": "The lander is on its way. The next crew will read your note before their first EVA. Indoor dust is {dust_tier}; the port seal is {seal_tier}.",
+   "zh": "補給艇在路上。下一班第一次出艙前會讀你的紙條。屋內塵：{dust_tier}；衣口密封：{seal_tier}。"
+  },
+  "options": [
+   {
+    "key": "A",
+    "en": "Write it as it is: the dust, the seal, the water, and what you would do differently",
+    "zh": "照實寫：塵、密封、水，還有你會怎麼做不一樣",
+    "effects": {},
+    "note_template": {
+     "en": "Indoor dust {dust_tier}, seal {seal_tier}, water {water_tier}, power {power_tier}. {lesson}",
+     "zh": "屋內塵{dust_tier}，密封{seal_tier}，水{water_tier}，電{power_tier}。{lesson_zh}"
+    }
+   },
+   {
+    "key": "B",
+    "en": "Write: All normal.",
+    "zh": "寫：一切正常。",
+    "effects": {},
+    "note_template": {
+     "en": "All normal.",
+     "zh": "一切正常。"
+    }
+   }
+  ],
+  "pass": "note left blank",
+  "lesson": {
+   "source": "the player's COMMENT line on step 8 if any, else empty",
+   "en_empty": "",
+   "zh_empty": ""
+  }
+ },
+ "ending": {
+  "rule": "No score, no good or bad ending. Compose: opening by final tiers + one line per flag present + protected/let-go line + the note.",
+  "opening": {
+   "en": "Dawn, sol 8. The lander touches down. Water {water_tier}, power {power_tier}, indoor dust {dust_tier}, port seal {seal_tier}.",
+   "zh": "第 8 天黎明，補給艇落地。水{water_tier}，電{power_tier}，屋內塵{dust_tier}，衣口密封{seal_tier}。"
+  },
+  "flag_lines": {
+   "case_waited": {
+    "en": "Bo's sample was analysed a day late.",
+    "zh": "Bo 的樣本晚了一天才分析。"
+   },
+   "cass_cold_night": {
+    "en": "Cass still talks about the night in the rover.",
+    "zh": "Cass 還在說那晚在漫遊車裡過的夜。"
+   },
+   "used_drinking_reserve": {
+    "en": "The drinking reserve was dipped into once.",
+    "zh": "飲水預備被動用過一次。"
+   },
+   "ade_cough": {
+    "en": "Ade's cough is the first thing the new crew hears.",
+    "zh": "新一班先聽到的，是 Ade 的咳嗽。"
+   },
+   "filter_fixed": {
+    "en": "The filter you fixed on sol 5 is still holding.",
+    "zh": "第 5 天修的濾網還撐著。"
+   },
+   "seal_patched": {
+    "en": "The patched seal holds.",
+    "zh": "補過的密封撐住了。"
+   },
+   "seal_hissed": {
+    "en": "The suit-port seal hissed once this week.",
+    "zh": "這週衣口密封嘶過一次。"
+   },
+   "missed_feast": {
+    "en": "You missed the sol 5 dinner; someone saved you a plate.",
+    "zh": "你錯過了第 5 天那頓飯，有人替你留了一盤。"
+   },
+   "joined_feast": {
+    "en": "You ate with them on sol 5.",
+    "zh": "第 5 天你和他們一起吃了飯。"
+   },
+   "joined_feast_late": {
+    "en": "You came late to the sol 5 dinner, still in time for dessert.",
+    "zh": "第 5 天那頓飯你晚到，剛好趕上甜點。"
+   },
+   "dee_scrubbed": {
+    "en": "Dee's wrist is better; she remembers who held her arm.",
+    "zh": "Dee 的手腕好多了，她記得是誰扶著她。"
+   },
+   "gloves_cut": {
+    "en": "The next crew starts with one pair of spare gloves fewer.",
+    "zh": "下一班開工時，備用手套少一副。"
+   }
+  },
+  "protected_let_go": {
+   "rule": "Compare final water+power points with dust points. If water+power >= 14 and dust >= 4: 'kept the water and power, let the dust in'. If dust <= 1 and water+power < 14: 'kept the dust out, spent the water and power'. If both comfortable (dust<=3, water+power>=14): 'held the balance this week'. Otherwise: 'stretched thin on every side'.",
+   "lines": {
+    "kept_resources": {
+     "en": "You kept the water and power; the dust came in.",
+     "zh": "你護住了水和電，讓塵進了屋。"
+    },
+    "kept_clean": {
+     "en": "You kept the dust out and spent the water and power on it.",
+     "zh": "你把塵擋在門外，水和電都花在這上面。"
+    },
+    "balance": {
+     "en": "This week, nothing gave way.",
+     "zh": "這一週，哪邊都沒垮。"
+    },
+    "stretched": {
+     "en": "Every side was stretched; the base still stood.",
+     "zh": "每一邊都繃得緊，基地還站著。"
+    }
+   }
+  },
+  "note_line": {
+   "en": "Your note: \"{note}\"",
+   "zh": "你的紙條：「{note}」",
+   "blank": {
+    "en": "You left the note blank.",
+    "zh": "你把紙條留白了。"
+   }
+  },
+  "closing": {
+   "en": "Replay: {replay}",
+   "zh": "回放碼：{replay}"
+  }
+ },
+ "packet_template": "AIRLOCK-PACKET airlock-v0.1\nseed: S{seed}  sol: {sol}/7  step: {step}/8  expected_move_number: {step}\nstate: water {water} · power {power} · indoor dust {dust} · port seal {seal} · airlock {hours}h\n{lines}so_far: {so_far}\nscene: {scene}\noptions:\n{options}PASS\nreply_format: line 1 = letter or PASS; optional line 2: COMMENT: one line\nresume: S{seed}/airlock-v0.1/{moves}\nEND-PACKET airlock-v0.1"
+}

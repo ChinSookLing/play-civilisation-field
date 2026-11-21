@@ -3,12 +3,13 @@ import { RoomIndex } from "@/components/play/RoomIndex";
 import { psycheSheet } from "@/lib/play/page-sheets";
 import { pageMeta } from "@/lib/play/page-meta";
 import { PSYCHE_001_STATUS, PSYCHE_001_TITLE } from "@/lib/play/psyche-001";
+import { PSYCHE_002_STATUS, PSYCHE_002_TITLE } from "@/lib/play/psyche-002";
 
 export const Route = createFileRoute("/psyche/")({
   head: () =>
     pageMeta(
       "Psyche · Play · Civilisation Field",
-      "Card 001 is up. v0.6 · 開放. No score.",
+      "Card 001 is up. Card 002 is a preview. No score.",
     ),
   component: Psyche,
 });
@@ -29,6 +30,14 @@ function Psyche() {
               status: PSYCHE_001_STATUS,
               note: "First round (GPT, Gemini, DeepSeek), seed S95. No score.",
               light: "/psyche/001.txt",
+            },
+            {
+              href: "/psyche/002",
+              id: "PSYCHE-002",
+              title: PSYCHE_002_TITLE,
+              status: PSYCHE_002_STATUS,
+              note: "Airlock. Preview. Not open. No score.",
+              light: "/psyche/002.txt",
             },
           ],
         },
