@@ -32,7 +32,7 @@ test("SALON-013 manuscript is the filed text", () => {
 test("plain text is the manuscript, with no index in front", () => {
   const source = readFileSync(sourcePath, "utf8");
   assert.equal(
-    source.includes("export function salon013Plain(): string {\n  return SALON_013_TEXT;\n}"),
+    source.includes("return `${SALON_013_TEXT}\\n${SALON_013_ADDENDUM}`;"),
     true,
   );
   assert.equal(source.includes("BEGIN SALON-013 INDEX"), false);

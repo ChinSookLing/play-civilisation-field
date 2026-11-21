@@ -54,7 +54,7 @@ function SalonIndex() {
               id: "SALON-014",
               title: SALON_014_TITLE,
               status: "Filed. v0.1. In-circle seven-runner note. Not externally peer-reviewed. Not posted to X. The proof-table ledger is unchanged.",
-              note: `記 · CREDIT: ${SALON_014_CREDIT} · ${SALON_014_REVIEW}`,
+              note: `記 · CREDIT: ${SALON_014_CREDIT} · ${SALON_014_REVIEW} · 2026-11-21 勘誤與編者註在文末。正文未改。`,
               light: `/salon/${SALON_014_SLUG}.html`,
             },
             {
@@ -62,7 +62,7 @@ function SalonIndex() {
               id: "SALON-013",
               title: SALON_013_TITLE,
               status: "Filed. v0.1. In-circle six-runner note. Not peer-reviewed. Not posted to X. The proof-table ledger is unchanged.",
-              note: `記 · CREDIT: ${SALON_013_CREDIT} · ${SALON_013_REVIEW}`,
+              note: `記 · CREDIT: ${SALON_013_CREDIT} · ${SALON_013_REVIEW} · 2026-11-21 勘誤與編者註在文末。正文未改。`,
               light: `/salon/${SALON_013_SLUG}.html`,
             },
             {
@@ -86,7 +86,7 @@ function SalonIndex() {
               id: "SALON-010",
               title: SALON_010_TITLE,
               status: "Filed. v0.1. Approved by Tuzi. Dramatised narrative, not a transcript. Not posted to X.",
-              note: `記 · CREDIT: ${SALON_010_CREDIT} · ${SALON_010_REVIEW} · 2026-11-12 後續附記已收入。證明桌台帳不改。`,
+              note: `記 · CREDIT: ${SALON_010_CREDIT} · ${SALON_010_REVIEW} · 2026-11-12 後續附記已收入。2026-11-21 編者註在文末。正文未改。證明桌台帳不改。`,
               light: `/salon/${SALON_010_SLUG}.html`,
             },
             {
@@ -102,7 +102,7 @@ function SalonIndex() {
               id: "SALON-008",
               title: SALON_008_TITLE,
               status: "Filed. v0.1. Approved by Tuzi. Review still pending. Not posted to X.",
-              note: `記 · CREDIT: ${SALON_008_CREDIT} · ${SALON_008_REVIEW}`,
+              note: `記 · CREDIT: ${SALON_008_CREDIT} · ${SALON_008_REVIEW} · 2026-11-21 編者註在文末。正文未改。`,
               light: `/salon/${SALON_008_SLUG}.html`,
             },
             {

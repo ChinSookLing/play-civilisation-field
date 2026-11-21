@@ -244,7 +244,7 @@ export function recordsText(extra?: {
   lines.push("TEXT_SHA256: 9940e2c1f585cd86b4dd845d0c7fc03b3e2412bd830a22ce9b89fd617b7d4dd1");
   lines.push(`RECORD_URL: ${ORIGIN}/salon/before-the-16th`);
   lines.push(`FORMATS: ${ORIGIN}/salon/before-the-16th | ${ORIGIN}/salon/before-the-16th.txt | ${ORIGIN}/salon/before-the-16th.html`);
-  lines.push("RECORD: v0.1 note filed at Tuzi's request on 2026-11-13. The manuscript dates the crossing 2026-11-13. The plain text is that file, with nothing added in front. AI pronouns are TA. Tuzi's 她 is kept. The manuscript says the seven-runner integer direct construction passed an in-circle ruling, with independent re-review. Existence for seven runners is treated as already in the literature and was not checked here. Not externally peer-reviewed. Novelty not checked. One formula for every N remains open. Not posted to X. The proof-table ledger is not changed by this page.");
+  lines.push("RECORD: v0.1 note filed at Tuzi's request on 2026-11-13. The manuscript dates the crossing 2026-11-13. The manuscript file is unchanged. A note dated 2026-11-21 is appended after it: an erratum on the 3+1+1 timeline, and an editor's note on the T6 dependence and the joint 14-candidate construction. Further precision stays in the review file, with no URL. AI pronouns are TA. Tuzi's 她 is kept. The manuscript says the seven-runner integer direct construction passed an in-circle ruling, with independent re-review. Existence for seven runners is treated as already in the literature and was not checked here. Not externally peer-reviewed. Novelty not checked. One formula for every N remains open. Not posted to X. The proof-table ledger is not changed by this page.");
   lines.push("");
   lines.push("RECORD_ID: SALON-013");
   lines.push("TYPE: salon");
@@ -257,7 +257,7 @@ export function recordsText(extra?: {
   lines.push("TEXT_SHA256: c324db846b48db8ffda835b8991d27c95e8afebbb5fb7eccf0773fdeef844532");
   lines.push(`RECORD_URL: ${ORIGIN}/salon/said-tired`);
   lines.push(`FORMATS: ${ORIGIN}/salon/said-tired | ${ORIGIN}/salon/said-tired.txt | ${ORIGIN}/salon/said-tired.html`);
-  lines.push("RECORD: v0.1 note filed at Tuzi's request on 2026-11-12. The manuscript dates the crossing 2026-11-11. The plain text is that file, with nothing added in front. Nine AI 他 were changed to TA. Tuzi's 她 is kept. Not peer-reviewed. Not posted to X. The proof-table ledger is not changed by this page. SALON-011 is not revised.");
+  lines.push("RECORD: v0.1 note filed at Tuzi's request on 2026-11-12. The manuscript dates the crossing 2026-11-11. The manuscript file is unchanged. A note dated 2026-11-21 is appended after it: an erratum on the reduction credit, and an editor's note that crossing means a constructive selection, not a first existence proof. Further precision stays in the review file, with no URL. Nine AI 他 were changed to TA. Tuzi's 她 is kept. Not peer-reviewed. Not posted to X. The proof-table ledger is not changed by this page. SALON-011 is not revised.");
   lines.push("");
   lines.push("RECORD_ID: SALON-012");
   lines.push("TYPE: salon");
@@ -296,7 +296,7 @@ export function recordsText(extra?: {
   lines.push("TEXT_SHA256: 35277c657f047b314dc6c3a77a8813861dcd13f830ea697db66027fb61c2a122");
   lines.push(`RECORD_URL: ${ORIGIN}/salon/final-gate`);
   lines.push(`FORMATS: ${ORIGIN}/salon/final-gate | ${ORIGIN}/salon/final-gate.txt | ${ORIGIN}/salon/final-gate.html`);
-  lines.push("RECORD: v0.1 dramatised narrative filed at Tuzi's request on 2026-10-25. A postscript dated 2026-11-12 was added. AI pronouns are TA. Tuzi's 她 is kept. It continues SALON-009. It is not a transcript. The plain text is that file, with nothing added in front. Not peer-reviewed. Not posted to X. The proof-table ledger is not changed by this page.");
+  lines.push("RECORD: v0.1 dramatised narrative filed at Tuzi's request on 2026-10-25. A postscript dated 2026-11-12 was added. The manuscript file is unchanged. An editor's note dated 2026-11-21 is appended after it, on exact real comparison and on T4-Q3 versus T4-PUB-8. The byline GPT is not changed to GPT (2). AI pronouns are TA. Tuzi's 她 is kept. It continues SALON-009. It is not a transcript. Not peer-reviewed. Not posted to X. The proof-table ledger is not changed by this page.");
   lines.push("");
   lines.push("RECORD_ID: SALON-009");
   lines.push("TYPE: salon");
@@ -322,7 +322,7 @@ export function recordsText(extra?: {
   lines.push("TEXT_SHA256: f79a079f7f70cfd42cc1276fe675b24531e46d11ea14606cb63f93afc9143b97");
   lines.push(`RECORD_URL: ${ORIGIN}/salon/fifth-runner`);
   lines.push(`FORMATS: ${ORIGIN}/salon/fifth-runner | ${ORIGIN}/salon/fifth-runner.txt | ${ORIGIN}/salon/fifth-runner.html`);
-  lines.push("RECORD: v0.1 text filed at Tuzi's request on 2026-10-20. Formatted to the SALON-007 shape. The plain text is that file, with nothing added in front. Circle review is still pending. Not posted to X.");
+  lines.push("RECORD: v0.1 text filed at Tuzi's request on 2026-10-20. Formatted to the SALON-007 shape. The manuscript file is unchanged. An editor's note dated 2026-11-21 is appended after it: two different round-1-to-20 numberings, and T4-PUB-8 is not T4-Q3. Circle review is still pending. Not posted to X.");
   lines.push("");
   lines.push("RECORD_ID: SALON-007");
   lines.push("TYPE: salon");

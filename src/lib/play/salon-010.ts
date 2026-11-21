@@ -1,4 +1,5 @@
 import manuscript from "../../../docs/salon/SALON-010-v0.1.md?raw";
+import addendum from "../../../docs/salon/SALON-010-note-2026-11-21.md?raw";
 import { pageAsOf } from "./page-times";
 import { ORIGIN } from "./sheet";
 
@@ -13,15 +14,18 @@ export const SALON_010_CREDIT =
 export const SALON_010_REVIEW =
   "武俠電影式敘事改編（dramatised narrative）。並非逐字紀錄。未經外部同行評審（not peer-reviewed），新穎性未查。";
 export const SALON_010_SHA256 = "35277c657f047b314dc6c3a77a8813861dcd13f830ea697db66027fb61c2a122";
+export const SALON_010_ADDENDUM_SHA256 = "a36f517667bc548265da0080b5374e067aa124743bee9e708bc08f31fb81a350";
 
 const PAGE = `${ORIGIN}/salon/${SALON_010_SLUG}`;
 const TXT = `${ORIGIN}/salon/${SALON_010_SLUG}.txt`;
 
-/** The filed manuscript. Plain text is this string and nothing in front of it. */
+/** The filed manuscript. Its bytes are unchanged. */
 export const SALON_010_TEXT = manuscript;
+/** Dated note appended after the manuscript. It does not replace it. */
+export const SALON_010_ADDENDUM = addendum;
 
 export function salon010Plain(): string {
-  return SALON_010_TEXT;
+  return `${SALON_010_TEXT}\n${SALON_010_ADDENDUM}`;
 }
 
 export function salon010Updated(): string {
@@ -52,8 +56,10 @@ export function salon010StaticHtml(): string {
 <p>CREDIT: ${escapeText(SALON_010_CREDIT)}</p>
 <p>REVIEW_NATURE: ${escapeText(SALON_010_REVIEW)}</p>
 <p>TEXT_SHA256: ${SALON_010_SHA256}</p>
+<p>ADDENDUM: 2026-11-21. The manuscript is unchanged. TEXT_SHA256 is that manuscript. ADDENDUM_SHA256: ${SALON_010_ADDENDUM_SHA256}</p>
 <p>Not posted to X.</p>
 <pre>${escapeText(SALON_010_TEXT)}</pre>
+<pre>${escapeText(SALON_010_ADDENDUM)}</pre>
 </main>
 </body>
 </html>

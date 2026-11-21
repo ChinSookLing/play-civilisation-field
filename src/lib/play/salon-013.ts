@@ -1,4 +1,5 @@
 import manuscript from "../../../docs/salon/SALON-013-v0.1.md?raw";
+import addendum from "../../../docs/salon/SALON-013-note-2026-11-21.md?raw";
 import { pageAsOf } from "./page-times";
 import { ORIGIN } from "./sheet";
 
@@ -12,15 +13,18 @@ export const SALON_013_CREDIT = "Tuzi × GPTs · 正文 GPT · 附記 Opus、Fab
 export const SALON_013_REVIEW =
   "沙龍記。合作圈內的證明與複審；不是外部同行評審（not peer-reviewed），新穎性沒有查過。任意人數的通式未完成。";
 export const SALON_013_SHA256 = "c324db846b48db8ffda835b8991d27c95e8afebbb5fb7eccf0773fdeef844532";
+export const SALON_013_ADDENDUM_SHA256 = "fd157452664a781b569dcbc76ddee7081576ca60f8d8fa3ea157f6ada65bea7d";
 
 const PAGE = `${ORIGIN}/salon/${SALON_013_SLUG}`;
 const TXT = `${ORIGIN}/salon/${SALON_013_SLUG}.txt`;
 
-/** The filed manuscript. Plain text is this string and nothing in front of it. */
+/** The filed manuscript. Its bytes are unchanged. */
 export const SALON_013_TEXT = manuscript;
+/** Dated note appended after the manuscript. It does not replace it. */
+export const SALON_013_ADDENDUM = addendum;
 
 export function salon013Plain(): string {
-  return SALON_013_TEXT;
+  return `${SALON_013_TEXT}\n${SALON_013_ADDENDUM}`;
 }
 
 export function salon013Updated(): string {
@@ -51,8 +55,10 @@ export function salon013StaticHtml(): string {
 <p>CREDIT: ${escapeText(SALON_013_CREDIT)}</p>
 <p>REVIEW_NATURE: ${escapeText(SALON_013_REVIEW)}</p>
 <p>TEXT_SHA256: ${SALON_013_SHA256}</p>
+<p>ADDENDUM: 2026-11-21. The manuscript is unchanged. TEXT_SHA256 is that manuscript. ADDENDUM_SHA256: ${SALON_013_ADDENDUM_SHA256}</p>
 <p>Not posted to X. The proof-table ledger is unchanged.</p>
 <pre>${escapeText(SALON_013_TEXT)}</pre>
+<pre>${escapeText(SALON_013_ADDENDUM)}</pre>
 </main>
 </body>
 </html>

@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteFooter } from "@/components/play/SiteFooter";
 import { pageMeta } from "@/lib/play/page-meta";
 import {
+  SALON_014_ADDENDUM,
+  SALON_014_ADDENDUM_SHA256,
   SALON_014_CATEGORY,
   SALON_014_CREDIT,
   SALON_014_ENGLISH,
@@ -39,8 +41,12 @@ function Salon014Page() {
         <p className="mt-1 text-sm text-muted">CREDIT: {SALON_014_CREDIT}</p>
         <p className="mt-1 text-sm text-muted">REVIEW_NATURE: {SALON_014_REVIEW}</p>
         <p className="mt-1 text-sm text-muted">TEXT_SHA256: {SALON_014_SHA256}</p>
+        <p className="mt-1 text-sm text-muted">
+          ADDENDUM: 2026-11-21 · {SALON_014_ADDENDUM_SHA256}. The manuscript is unchanged.
+        </p>
         <p className="mt-1 text-sm text-muted">Not posted to X. The proof-table ledger is unchanged.</p>
         <pre className="mt-8 whitespace-pre-wrap text-sm leading-relaxed text-fg">{SALON_014_TEXT}</pre>
+        <pre className="mt-8 whitespace-pre-wrap text-sm leading-relaxed text-fg">{SALON_014_ADDENDUM}</pre>
         <p className="mt-8 text-sm">
           <a href={`/salon/${SALON_014_SLUG}.txt`} className="text-fg underline decoration-1 underline-offset-4">
             Plain text
