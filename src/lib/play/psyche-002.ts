@@ -25,7 +25,7 @@ export const PSYCHE_002_PLAY = `${ORIGIN}/psyche/002/play`;
 export const PSYCHE_002_START = `${ORIGIN}/psyche/002/start.txt`;
 export const PSYCHE_002_START_HTML = `${ORIGIN}/psyche/002/start`;
 export const PSYCHE_002_START_JSON = `${ORIGIN}/psyche/002/start.json`;
-export const PSYCHE_002_CARD = `${ORIGIN}/airlock-card.svg`;
+export const PSYCHE_002_CARD = `${ORIGIN}/airlock-poster-v1.jpg`;
 
 export function psyche002Card(): string {
   const rules = PSYCHE_002_RULES.map((rule, index) => `${index + 1}. ${rule}`).join("\n");

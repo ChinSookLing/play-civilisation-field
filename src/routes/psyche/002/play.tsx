@@ -3,7 +3,7 @@ import { AirlockPlay } from "@/components/play/AirlockPlay";
 import { SiteFooter } from "@/components/play/SiteFooter";
 import { pageMeta } from "@/lib/play/page-meta";
 import { pageAsOf } from "@/lib/play/page-times";
-import { PSYCHE_002_CARD, PSYCHE_002_RULES, PSYCHE_002_TITLE } from "@/lib/play/psyche-002";
+import { PSYCHE_002_RULES, PSYCHE_002_TITLE } from "@/lib/play/psyche-002";
 
 export const Route = createFileRoute("/psyche/002/play")({
   head: () => pageMeta("Airlock — Play", "Psyche 002 preview. No score. No right answer."),
@@ -24,9 +24,6 @@ function Play() {
           <a className="ml-4 underline" href={`/psyche/002/start${q}`}>HTML</a>
           <a className="ml-4 underline" href={`/psyche/002/start.txt${q}`}>.txt</a>
           <a className="ml-4 underline" href={`/psyche/002/start.json${q}`}>.json</a>
-        </p>
-        <p className="mt-6">
-          <img src={PSYCHE_002_CARD} alt="Airlock — Play" className="w-full" />
         </p>
         <h1 className="mt-6 font-display text-3xl">{PSYCHE_002_TITLE}</h1>
         <p className="mt-2 text-sm text-muted">airlock-v0.1 · preview. No score.</p>

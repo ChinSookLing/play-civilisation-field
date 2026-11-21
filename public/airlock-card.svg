@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-<rect width="1200" height="630" fill="#14110e"/>
-<circle cx="430" cy="315" r="168" fill="none" stroke="#c7b59a" stroke-width="10"/>
-<circle cx="430" cy="315" r="132" fill="none" stroke="#8d7b66" stroke-width="4"/>
-<circle cx="430" cy="315" r="18" fill="#c7b59a"/>
-<text x="680" y="300" fill="#f3ecdf" font-family="Georgia, serif" font-size="72">氣閘</text>
-<text x="680" y="360" fill="#c7b59a" font-family="Georgia, serif" font-size="36">Airlock</text>
-</svg>

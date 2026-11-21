@@ -44,7 +44,7 @@ function Psyche002() {
         </section>
         <p className="mt-8">
           <a href={PSYCHE_002_PLAY}>
-            <img src={PSYCHE_002_CARD} alt="Airlock — Play" className="w-full" />
+            <img src={PSYCHE_002_CARD} alt="氣閘 Airlock — Play" className="w-full" />
           </a>
         </p>
         <section className="mt-8">
