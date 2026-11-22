@@ -67,6 +67,7 @@ const files = {
   "SALON-JEV-001": ["src/lib/play/salon-jev.ts", "src/lib/play/salon-jev-001.md", "src/routes/salon/jev-controlled-probe-001.tsx", ...shared],
   "SALON-016": ["src/lib/play/salon-016.ts", "docs/salon/SALON-016-v3.md", "src/routes/salon/leave-none.tsx", ...shared],
   "SALON-017": ["src/lib/play/salon-017.ts", "docs/salon/SALON-017.md", "docs/salon/SALON-017.zh.md", "src/routes/salon/dust-out.tsx", "src/routes/salon/dust-out.index.tsx", "src/routes/salon/dust-out.zh.tsx", ...shared],
+  "SALON-018": ["src/lib/play/salon-018.ts", "docs/salon/SALON-018-v0.2.md", "src/routes/salon/close-the-drawer.tsx", ...shared],
   "SALON-015": ["src/lib/play/salon-015.ts", "docs/salon/SALON-015.md", "docs/salon/SALON-015.zh.md", "src/routes/salon/night-shift.tsx", "src/routes/salon/night-shift.index.tsx", "src/routes/salon/night-shift.zh.tsx", ...shared],
   "SALON-014": ["src/lib/play/salon-014.ts", "docs/salon/SALON-014-v0.1.md", "docs/salon/SALON-014-note-2026-11-21.md", "src/routes/salon/before-the-16th.tsx", ...shared],
   "SALON-013": ["src/lib/play/salon-013.ts", "docs/salon/SALON-013-v0.1.md", "docs/salon/SALON-013-note-2026-11-21.md", "src/routes/salon/said-tired.tsx", ...shared],
