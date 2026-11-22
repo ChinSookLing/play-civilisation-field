@@ -6,6 +6,12 @@ Allow: /
 Disallow: /courier
 Disallow: /puck
 
+User-agent: ClaudeBot
+Disallow: /courier
+Disallow: /puck
+Disallow: /psyche/002/play
+Disallow: /psyche/002/v02/play
+
 Sitemap: https://play.civilisationfield.com/sitemap.xml
 # https://play.civilisationfield.com/llms.txt
 `;

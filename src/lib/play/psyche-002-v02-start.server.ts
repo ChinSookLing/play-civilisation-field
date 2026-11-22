@@ -87,7 +87,7 @@ export function airlockV2PlayHtml(query: AirlockV2Query): string {
     ? ""
     : `<p>${[...turn.offered, "PASS"].map((letter) => {
         const next = turn.at + (letter === "PASS" ? "P" : letter);
-        return `<a href="/psyche/002/v02/play${querySuffix(query.seed, query.lang, next)}">${escapeHtml(letter)}</a>`;
+        return `<a rel="nofollow" href="/psyche/002/v02/play${querySuffix(query.seed, query.lang, next)}">${escapeHtml(letter)}</a>`;
       }).join(" ")}</p>`;
   const rules = PSYCHE_V02_RULES.map((rule) => `<li>${escapeHtml(rule)}</li>`).join("");
   return `<!DOCTYPE html>

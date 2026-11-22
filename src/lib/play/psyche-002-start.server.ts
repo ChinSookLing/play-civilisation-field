@@ -139,7 +139,7 @@ export function airlockPlayHtml(query: AirlockQuery): string {
     : `<p>${[...turn.offered, "PASS"].map((letter) => {
         const next = turn.at + (letter === "PASS" ? "P" : letter);
         const href = querySuffix(query.seed, query.lang, next);
-        return `<a class="choice" href="/psyche/002/play${href}">${escapeHtml(letter)}</a>`;
+        return `<a class="choice" rel="nofollow" href="/psyche/002/play${href}">${escapeHtml(letter)}</a>`;
       }).join(" ")}</p>
 <form method="get" action="/psyche/002/play">
 <input type="hidden" name="seed" value="${escapeHtml(query.seed)}">
