@@ -225,7 +225,7 @@ export function recordsText(extra?: {
   lines.push("CATEGORY: 記");
   lines.push("CREDIT: 撰寫 Gemini（Neon）· 故事與研究發起 Tuzi · 本段研究與核閱涉及 Hesper、GPT、Fable、Opus、DeepSeek、Kimi、Sol、Gemini（Neon）；具體技術貢獻由正式證明稿依原始材料另列 · 上牆整理 Bill");
   lines.push("REVIEW_NATURE: 敘事改編（dramatised narrative）。並非逐字紀錄。G19（C46）與 G20（C48）已獲主席獨立重算核驗。T5 實數接合為有明確推導之候選，尚待獨立邊界核驗。未經外部同行評審（not externally peer-reviewed）。");
-  lines.push("TEXT_SHA256: 5d827c834a2c1dca88d84ea16b8bb4122c93180560df040d8e59cec0807746f5");
+  lines.push("TEXT_SHA256: 7721524e823d97bca4634ccdf2679082c30f45459ea910d1fdac1b2a8cc9453d");
   lines.push(`RECORD_URL: ${ORIGIN}/salon/close-the-drawer`);
   lines.push(`FORMATS: ${ORIGIN}/salon/close-the-drawer | ${ORIGIN}/salon/close-the-drawer.txt | ${ORIGIN}/salon/close-the-drawer.html`);
   lines.push("RECORD: v0.2 dramatised narrative filed at Tuzi's request on 2026-11-23. It continues SALON-010, the third Time Forge salon piece. The supplied draft was numbered SALON-011, which is already filed, so this piece is SALON-018. AI pronouns are TA. Tuzi's 她 is kept. The fifth and sixth runners keep 他. It is not a transcript. G19 (C46) and G20 (C48) were re-run by the chair. The T5 real join is a derived candidate, pending an independent boundary check. The plain text is that file, with nothing added in front. Not posted to X. The proof-table ledger is not changed by this page.");

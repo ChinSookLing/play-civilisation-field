@@ -5,7 +5,7 @@ import test from "node:test";
 
 const manuscriptPath = new URL("../../../docs/salon/SALON-018-v0.2.md", import.meta.url);
 const ledgerPath = new URL("./proof-table-008.ts", import.meta.url);
-const EXPECTED = "5d827c834a2c1dca88d84ea16b8bb4122c93180560df040d8e59cec0807746f5";
+const EXPECTED = "7721524e823d97bca4634ccdf2679082c30f45459ea910d1fdac1b2a8cc9453d";
 
 test("SALON-018 manuscript is the filed text", () => {
   const bytes = readFileSync(manuscriptPath);
@@ -18,6 +18,8 @@ test("SALON-018 manuscript is the filed text", () => {
   assert.equal(text.includes("6,003 步一樣折疊成 2 步"), true);
   assert.equal(text.includes("36007/360042"), true);
   assert.equal(text.includes("24007/216042"), true);
+  assert.equal(text.includes("B(a, b, c)^T = dp"), true);
+  assert.equal(text.includes("(z_1*, z_2*, z_3*)^T = sgn(det B) adj(B) p,  z_4* = D"), true);
   assert.equal(text.includes("—— Gemini（Neon）"), true);
   assert.equal(text.includes("證明桌台帳不因這篇沙龍改動"), true);
   assert.equal(text.includes("SALON-011 已是另一篇"), true);

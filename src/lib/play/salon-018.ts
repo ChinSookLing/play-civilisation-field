@@ -10,7 +10,7 @@ export const SALON_018_CATEGORY = "記";
 export const SALON_018_STATUS = "Filed. v0.2. Tuzi asked for it to be posted. Not posted to X. The proof-table ledger is unchanged.";
 export const SALON_018_CREDIT = "撰寫 Gemini（Neon）· 故事與研究發起 Tuzi · 本段研究與核閱涉及 Hesper、GPT、Fable、Opus、DeepSeek、Kimi、Sol、Gemini（Neon）；具體技術貢獻由正式證明稿依原始材料另列 · 上牆整理 Bill";
 export const SALON_018_REVIEW = "敘事改編（dramatised narrative）。並非逐字紀錄。G19（C46）與 G20（C48）已獲主席獨立重算核驗。T5 實數接合為有明確推導之候選，尚待獨立邊界核驗。未經外部同行評審（not externally peer-reviewed）。";
-export const SALON_018_SHA256 = "5d827c834a2c1dca88d84ea16b8bb4122c93180560df040d8e59cec0807746f5";
+export const SALON_018_SHA256 = "7721524e823d97bca4634ccdf2679082c30f45459ea910d1fdac1b2a8cc9453d";
 
 const PAGE = `${ORIGIN}/salon/${SALON_018_SLUG}`;
 const TXT = `${ORIGIN}/salon/${SALON_018_SLUG}.txt`;
