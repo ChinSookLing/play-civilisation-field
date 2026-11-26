@@ -6,7 +6,7 @@ import { parseT6Dossier } from "./proof-table-008-t6-dossier-read.ts";
 
 const manuscriptPath = new URL("../../../docs/gathering/PT008-T6-Gathering-v0.1.md", import.meta.url);
 const ledgerPath = new URL("./proof-table-008.ts", import.meta.url);
-const EXPECTED = "a6bf1bd0a6aa808c420767ea7e311d723578cc317dfce1ef580f6b5c00172317";
+const EXPECTED = "1f42babc2a8299623855ad5d48162f97fc9a6bd5ab7e039915fb6a1bd8829e0a";
 
 test("T6 dossier manuscript is the filed text and stays off the ledger", () => {
   const bytes = readFileSync(manuscriptPath);
@@ -28,7 +28,8 @@ test("T6 dossier manuscript is the filed text and stays off the ledger", () => {
     })
     .join("\n");
   assert.equal(blocks.filter((block) => block.kind === "image").length, 1);
-  assert.equal(rendered.includes("鏡像待補"), true);
+  assert.equal(rendered.includes("鏡像待補"), false);
+  assert.equal(rendered.includes("bf9140ab1d2f33740212762c9b5f8864b9af40e9"), true);
   assert.equal(rendered.includes("f8e9be66fd2611c30eadd98760944f688ff659b0"), true);
   assert.equal(rendered.includes("歷史補檔"), false);
   assert.equal(rendered.includes("chatgpt.com"), false);

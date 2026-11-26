@@ -3,7 +3,7 @@ import { pageAsOf } from "./page-times";
 import { ORIGIN } from "./sheet";
 
 export const T6_DOSSIER_ID = "PT008-T6-DOSSIER";
-export const T6_DOSSIER_SHA256 = "a6bf1bd0a6aa808c420767ea7e311d723578cc317dfce1ef580f6b5c00172317";
+export const T6_DOSSIER_SHA256 = "1f42babc2a8299623855ad5d48162f97fc9a6bd5ab7e039915fb6a1bd8829e0a";
 export const T6_DOSSIER_PAGE = `${ORIGIN}/gathering/proof-table-008/t6-dossier`;
 export const T6_DOSSIER_TXT = `${ORIGIN}/gathering/proof-table-008/t6-dossier.txt`;
 export const T6_DOSSIER_VERIFICATION = `${ORIGIN}/gathering/proof-table-008/t6-dossier/verification`;
@@ -18,7 +18,7 @@ TITLE: 六跑者構造性選時證明檔案
 ENGLISH: The Sixth Runner — A Constructive Time-Selection Proof Dossier
 STATUS: Filed on Gathering at Tuzi's request. Gathering v0.1. 2026-11-26.
 RULING: The manuscript says the T6 integer core is closed inside the project. Not externally peer-reviewed. The terminal formula for every number of runners remains open.
-SCOPE: Five nonzero integer relative speeds. Selector v0.1, sealed under A49-C02. The appendix gives a public mirror. Two originals are still waiting.
+SCOPE: Five nonzero integer relative speeds. Selector v0.1, sealed under A49-C02. The appendix gives a public mirror of every original.
 MANUSCRIPT_SHA256: ${T6_DOSSIER_SHA256}
 VERIFICATION: ${T6_DOSSIER_VERIFICATION_TXT}
 MARKDOWN: ${T6_DOSSIER_MARKDOWN}

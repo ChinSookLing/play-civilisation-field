@@ -121,10 +121,10 @@ export function recordsText(extra?: {
   lines.push("ENGLISH: The Sixth Runner — A Constructive Time-Selection Proof Dossier");
   lines.push("RECORD_STATUS: Filed. Gathering v0.1. 2026-11-26. Not a change to the proof-table ledger.");
   lines.push("RULING: The manuscript says the T6 integer core is closed inside the project. Not externally peer-reviewed. The terminal formula for every N remains open.");
-  lines.push("MANUSCRIPT_SHA256: a6bf1bd0a6aa808c420767ea7e311d723578cc317dfce1ef580f6b5c00172317");
+  lines.push("MANUSCRIPT_SHA256: 1f42babc2a8299623855ad5d48162f97fc9a6bd5ab7e039915fb6a1bd8829e0a");
   lines.push(`RECORD_URL: ${ORIGIN}/gathering/proof-table-008/t6-dossier`);
   lines.push(`FORMATS: ${ORIGIN}/gathering/proof-table-008/t6-dossier.txt | ${ORIGIN}/gathering/proof-table-008/t6-dossier/verification.txt | ${ORIGIN}/gathering/proof-table-008/t6-dossier/verification.md`);
-  lines.push("RECORD: filed at Tuzi's request on 2026-11-26. Selector v0.1, sealed under A49-C02. The appendix gives a public mirror. Two originals are still waiting. The earlier T6 v0.2 page stays at /gathering/proof-table-008/t6. SALON-019 points at the appendix. The proof table stays open.");
+  lines.push("RECORD: filed at Tuzi's request on 2026-11-26. Selector v0.1, sealed under A49-C02. The appendix gives a public mirror of every original. The earlier T6 v0.2 page stays at /gathering/proof-table-008/t6. SALON-019 points at the appendix. The proof table stays open.");
   lines.push("");
   lines.push("RECORD_ID: PT008-T8");
   lines.push("TYPE: gathering");

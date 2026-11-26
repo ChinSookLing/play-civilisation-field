@@ -55,7 +55,7 @@ function ProofTable008() {
             <Link to="/gathering/proof-table-008/t6-dossier" className="text-fg underline decoration-1 underline-offset-4">
               封版證明與重放
             </Link>
-            <span className="text-muted"> · A49-C02 封版檔案。附錄提供公開鏡像，另有兩件待補。這張證明桌的原文沒有改。</span>
+            <span className="text-muted"> · A49-C02 封版檔案。附錄提供全部原件的公開鏡像。這張證明桌的原文沒有改。</span>
           </p>
           <p className="mt-2 text-sm">
             <Link to="/gathering/proof-table-008/t7" className="text-fg underline decoration-1 underline-offset-4">

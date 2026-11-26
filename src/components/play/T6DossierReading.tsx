@@ -213,7 +213,7 @@ export function T6DossierReading() {
         <p className="mt-2 text-sm text-muted">The Sixth Runner — A Constructive Time-Selection Proof Dossier</p>
         <p className="mt-4 text-sm text-muted">Gathering v0.1 · 2026-11-26（Asia/Kuala_Lumpur）</p>
         <p className="mt-1 text-sm text-muted">
-          稿內記錄 T6 整數核心已在項目內閉合。這不是外部同行評審。任意人數的終端公式仍開放。證明桌維持 OPEN。附錄提供公開鏡像，另有兩件待補。
+          稿內記錄 T6 整數核心已在項目內閉合。這不是外部同行評審。任意人數的終端公式仍開放。證明桌維持 OPEN。附錄提供全部原件的公開鏡像。
         </p>
         <nav className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-sm" aria-label="目錄">
           {TOC.map(([id, label]) => (

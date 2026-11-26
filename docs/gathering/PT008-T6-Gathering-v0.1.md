@@ -301,7 +301,7 @@ python3 indep46.py all 1 2
 
 ## 附錄 A 版本與附件清冊
 
-原件依證明用途排列。已上線項目固定於[公開鏡像提交](https://github.com/ChinSookLing/pt008-proofs/tree/f8e9be66fd2611c30eadd98760944f688ff659b0)，可免登入下載。完整雜湊見本附錄及[鏡像 SHA-256 清單](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/SHA256SUMS)。兩件尚待上傳的原件各標為「鏡像待補」，並列原件雜湊。
+原件依證明用途排列。二十四項固定於[公開鏡像提交](https://github.com/ChinSookLing/pt008-proofs/tree/f8e9be66fd2611c30eadd98760944f688ff659b0)，可免登入下載。A49-C02 原件與 A45／A46 精確重放補在提交 bf9140a。完整雜湊見本附錄及[鏡像 SHA-256 清單](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/bf9140ab1d2f33740212762c9b5f8864b9af40e9/SHA256SUMS)（26 行）。附錄提供全部原件的公開鏡像。
 
 ### A.1 封版及兩項全量重放
 
@@ -314,7 +314,7 @@ SHA-256　`6b1bcf0bc2a8183714e007baf8a269bd33568c4228afb6d22aac07680b86a401`
 **A49-O01**　Opus 獨立驗收、有限窮舉與壓力測試原件。21,463 bytes。[原件 PT008-TF-R002-A49-O01.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/PT008-TF-R002-A49-O01.zip)  
 SHA-256　`4e577f6ff7588cc2be16b058934e477804f04060d20f242c835e640895a0db03`
 
-**A49-C02**　封版裁決、平面飽和性與兩種計數口徑。3,786 bytes。原件 PT008-T6-CLOSING-A49-C02.md · **鏡像待補**  
+**A49-C02**　封版裁決、平面飽和性與兩種計數口徑。3,786 bytes。[原件 PT008-T6-CLOSING-A49-C02.md](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/bf9140ab1d2f33740212762c9b5f8864b9af40e9/packages/PT008-T6-CLOSING-A49-C02.md)  
 SHA-256　`d205d20b941ad63bb9c0de80e8abc0de4b30ef7a089704b43452580140f90559`
 
 **A47-C11**　低範數獨立見證及 Z=5 尾端全量重放。402,750 bytes。[原件 PT008-TF-R002-A47-C11-replay.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/PT008-TF-R002-A47-C11-replay.zip)  
@@ -346,7 +346,7 @@ sha256sum a45_t01_certs.zip
   
 SHA-256　`973f8fac18be82c072bfc0581b1f23dfc2078d26a8d6a0aefbc44b0ea380d0b7`
 
-**A45／A46 精確重放**　主席續存的獨立核對原碼、重放入口和參照輸出。14,913 bytes。原件 PT008-T6-A45-A46-exact-replay.zip · **鏡像待補**  
+**A45／A46 精確重放**　主席續存的獨立核對原碼、重放入口和參照輸出。14,913 bytes。[原件 PT008-T6-A45-A46-exact-replay.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/bf9140ab1d2f33740212762c9b5f8864b9af40e9/packages/PT008-T6-A45-A46-exact-replay.zip)  
 SHA-256　`0cebd90e830ed318806bbab0d96973f3a587e68b82e7d54cb2afdb7804d27b03`
 
 **A44**　Z=8 原證書。317,019 bytes。[原件 a44_code.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/a44_code.zip)  
@@ -403,6 +403,6 @@ SHA-256　`43614fc4254f95835fa8baf1ea69bec1a840565c7c7999b65a675f03feb6ce6f`
 | A45 上段原 78 項清單 SHA256SUMS_certs | 1fe18b61fe08804067b438f7377a97bd1f916004daf1366747fb1edad80f6640 |
 | A47-C11 重生 planes.bin | a4321d3bfa440459f5c8604028da9af1ff65a4f80609fc96d0b28a5a9bcbc481 |
 
-附錄的外層 ZIP 摘要按留存檔重算，ZIP CRC 已檢查。內層清單以各原包所列為準。A45-O01 的 Lean 驗算適用於其形式化取時引理。A49 的全域銜接與各有限計算證書應按第 9 節逐組查閱。本頁列明公開鏡像範圍與仍待補的兩件原件。
+附錄的外層 ZIP 摘要按留存檔重算，ZIP CRC 已檢查。內層清單以各原包所列為準。A45-O01 的 Lean 驗算適用於其形式化取時引理。A49 的全域銜接與各有限計算證書應按第 9 節逐組查閱。附錄提供全部原件的公開鏡像。
 
 **相關頁面與歷程。** [PT-008 證明桌](https://play.civilisationfield.com/gathering/proof-table-008/table) · [Gathering 八跑者檔案](https://play.civilisationfield.com/gathering/proof-table-008/t8) · [Salon No.019 敘事版](https://play.civilisationfield.com/salon/last-two-remainders)
