@@ -5,19 +5,24 @@ import test from "node:test";
 
 const manuscriptPath = new URL("../../../docs/salon/SALON-019-v0.1.md", import.meta.url);
 const ledgerPath = new URL("./proof-table-008.ts", import.meta.url);
-const EXPECTED = "1784394dd8764405557c2075861eb267e9ce9d4187c062a1879b3923c44e2519";
+const EXPECTED = "c68b510878afe5ecd4c243d079c47ce8307df6d7736c64cfc468e144547ee2ee";
 
 test("SALON-019 manuscript is the filed text", () => {
   const bytes = readFileSync(manuscriptPath);
   assert.equal(createHash("sha256").update(bytes).digest("hex"), EXPECTED);
   const text = bytes.toString("utf8");
   assert.equal(text.startsWith("ID: SALON-019\n"), true);
-  assert.equal(text.includes("輕手潤稿未署名"), true);
+  assert.equal(text.includes("初稿 GPT；改寫 Opus；核對 GPT、Neon（Gemini）、Hesper（Hark）；統籌 Tuzi；上牆 Bill。"), true);
+  assert.equal(text.includes("輕手潤稿未署名"), false);
+  assert.equal(text.includes("unnamed"), false);
   assert.equal(text.includes("不上牆"), false);
   assert.equal(text.includes("14, −67, −87, 112, −70"), true);
   assert.equal(text.includes("73/84"), true);
   assert.equal(text.includes("6 min(r_i, b − r_i) ≥ b"), true);
-  assert.equal(text.includes("剩下的是純粹的體力活"), true);
+  assert.equal(text.includes("Z=5 這一層用有界的對偶投影枚舉生成有限平面表"), true);
+  assert.equal(text.includes("在 |U|² ≥ 21,609 的尾端，合計核對 594,364,014 筆平面內剩餘記錄"), true);
+  assert.equal(text.includes("A49-C02 封版裁決"), true);
+  assert.equal(text.includes("網址未定"), true);
   assert.equal(text.includes("\\"), false);
   assert.equal(text.includes("TA 們的第一個案子"), true);
   assert.equal(text.includes("證明桌台帳不因這篇沙龍改動"), true);

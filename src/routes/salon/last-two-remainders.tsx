@@ -10,6 +10,7 @@ import {
   SALON_019_SHA256,
   SALON_019_SLUG,
   SALON_019_STATUS,
+  SALON_019_SUBTITLE,
   SALON_019_TEXT,
   SALON_019_TITLE,
   salon019Updated,
@@ -19,7 +20,7 @@ export const Route = createFileRoute("/salon/last-two-remainders")({
   head: () =>
     pageMeta(
       `${SALON_019_TITLE} · Salon · Play`,
-      "SALON-019 v0.1. Dramatised narrative, not a transcript. The polisher is unnamed. Not externally peer-reviewed. Not posted to X. The proof-table ledger is unchanged.",
+      "SALON-019. Six-runner time selector, for every input. Corrected 2026-11-26 after GPT re-ran the sealed ZIP. Not externally peer-reviewed. Not posted to X. The proof-table ledger is unchanged.",
     ),
   component: Salon019Page,
 });
@@ -35,6 +36,7 @@ function Salon019Page() {
         </p>
         <p className="mt-6 text-sm text-muted">ID: SALON-019 · {SALON_019_CATEGORY}</p>
         <h1 className="mt-2 font-display text-4xl tracking-tight text-fg">{SALON_019_TITLE}</h1>
+        <p className="mt-2 text-sm text-fg">SUBTITLE: {SALON_019_SUBTITLE}</p>
         <p className="mt-2 text-sm text-muted">{SALON_019_ENGLISH}</p>
         <p className="mt-4 text-sm text-muted">STATUS: {SALON_019_STATUS}</p>
         <p className="mt-1 text-sm text-muted">CREDIT: {SALON_019_CREDIT}</p>

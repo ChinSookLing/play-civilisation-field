@@ -1,10 +1,11 @@
 ID: SALON-019
 TITLE: 最後兩個餘數
 ENGLISH: The Last Two Remainders
+SUBTITLE: 六跑者選時器 · 所有輸入（The six-runner time selector, for every input）
 CATEGORY: 記
-STATUS: Filed. v0.1 polish. Tuzi asked for it to be posted on 2026-11-26. The polisher is unnamed. Not posted to X. The proof-table ledger is unchanged.
+STATUS: Filed. Corrected 2026-11-26 after GPT re-ran the sealed ZIP. Tuzi approved the errata. Not posted to X. The proof-table ledger is unchanged.
 FACTS_AS_OF: 2026-11-26（Asia/Kuala_Lumpur）
-CREDIT: 偵探稿 Opus · 輕手潤稿未署名 · 統籌與上牆吩咐 Tuzi · 上牆整理 Bill
+CREDIT: 初稿 GPT；改寫 Opus；核對 GPT、Neon（Gemini）、Hesper（Hark）；統籌 Tuzi；上牆 Bill。
 REVIEW_NATURE: 敘事改編（dramatised narrative）。場景與對白為文學重構，並非逐字紀錄。數學結果、測試數字與分工依來稿所稱的項目記錄。任意人數的終端公式仍待證。未經外部同行評審（not externally peer-reviewed）。
 PRONOUNS: 指稱 Tuzi 的她保留。第六名跑者不是 AI，文中「相對於他」的他保留。Hesper 與 Puck 合稱的「他們」改為 TA 們。其餘 AI 用名字。
 PROJECT: Play Civilisation Field · PT-008 · Time Forge
@@ -96,7 +97,7 @@ Hesper 現在手上有兩個可以互相咬合的總數。兩份原始記錄，�
 「兩本帳，」Tuzi 說，「對得上才算一本。」
 五 · 九百九十二萬張平面
 最後一道硬關，是 Z=5。
-這一層沒有有限的行列式界。Opus 與主席把問題從三維空間降到平面，剩下的是純粹的體力活：按每個三維空間的嚴格投影界，列出所有必要的平面。
+Z=5 這一層用有界的對偶投影枚舉生成有限平面表。Opus 與主席把問題從三維空間降到平面，剩下的是純粹的體力活：按每個三維空間的嚴格投影界，列出所有必要的平面。
 Hesper 用整數不等式串流生成平面，按普呂克座標去重，得到 9,928,398 張。這個數與主席的整數重算，一張不差。
 接下來是每張平面的處置：
 | 處置 | 平面數 |
@@ -106,7 +107,7 @@ Hesper 用整數不等式串流生成平面，按普呂克座標去重，得到 
 | 分母 ≤12 找到中心，剩餘速度逐筆見證 | 3,372,522 |
 | 分母 ≤12 找不到中心 | 96 |
 那 96 張最令人屏息。如果它們真的沒有安全中心，就得退回 A45 的多邊形規則，甚至另起證明。Hesper 把分母放寬到 24 再試一次：96 張全部在分母 15 或 19 找到嚴格中心，餘量至少 17/114。需要新證明的平面：零張。
-剩餘速度共 594,364,014 筆。每一筆都要交出一個時刻 t = (6n±1)/(6|U_j|)，用純整數驗明每一名跑者都離原點至少六分之一。這種時刻有一個鮮明特徵：第 j 名跑者永遠恰好停在 1/6 的邊線上。和序章那張字條一樣，踩在等號上的時刻。
+在 |U|² ≥ 21,609 的尾端，合計核對 594,364,014 筆平面內剩餘記錄。每一筆都要交出一個時刻 t = (6n±1)/(6|U_j|)，用純整數驗明每一名跑者都離原點至少六分之一。這種時刻有一個鮮明特徵：第 j 名跑者永遠恰好停在 1/6 的邊線上。和序章那張字條一樣，踩在等號上的時刻。
 失敗：零。從生成平面到最後一筆見證，完整重放約三分鐘。
 Opus 另證了秩一界的等號與枚舉的完備性，主席獨立重放。Z=5 關上了。
 六 · 十三萬個證人
@@ -174,5 +175,7 @@ Tuzi 在空著的那一格，寫下日期：2026 年 11 月 26 日。
  * 選時器 v0.1 與重放
  * A49-O01 獨立驗收
  * A49-C01 全域分流
+ * A49-C02 封版裁決
+同行審稿頁（Gathering）：網址未定。以上四項定址後統一連到該頁。
 
-編稿：來稿自編 Salon No.019，上牆為 SALON-019。封面說明偵探稿為 Opus；輕手潤稿者只寫「我」，未具名。ENGLISH「The Last Two Remainders」是上牆時的直譯，來稿沒有英文題。來稿貼上時四行展示式是空白，依同稿第七節手算表與審稿索引補回，沒有另取數：五個數 14, −67, −87, 112, −70；時刻 73/84；檢查式 6 min(r_i, b − r_i) ≥ b。Bill 沒有重跑這些算術。證明桌台帳不因這篇沙龍改動。未發到 X。
+編稿：來稿自編 Salon No.019，上牆為 SALON-019。ENGLISH「The Last Two Remainders」是上牆時的直譯，來稿沒有英文題。來稿貼上時四行展示式是空白，依同稿第七節手算表與審稿索引補回，沒有另取數：五個數 14, −67, −87, 112, −70；時刻 73/84；檢查式 6 min(r_i, b − r_i) ≥ b。2026-11-26 Tuzi 同意 Hesper 轉來的發佈勘誤，GPT 已從封版 ZIP 重跑核對。兩句改寫見第五節。署名：初稿 GPT；改寫 Opus；核對 GPT、Neon（Gemini）、Hesper（Hark）；統籌 Tuzi；上牆 Bill。Gathering 同行審稿頁網址未定。證明桌台帳不因這篇沙龍改動。未發到 X。

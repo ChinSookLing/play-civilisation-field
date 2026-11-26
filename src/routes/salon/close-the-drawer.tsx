@@ -10,6 +10,7 @@ import {
   SALON_018_SHA256,
   SALON_018_SLUG,
   SALON_018_STATUS,
+  SALON_018_SUBTITLE,
   SALON_018_TEXT,
   SALON_018_TITLE,
   salon018Updated,
@@ -35,6 +36,7 @@ function Salon018Page() {
         </p>
         <p className="mt-6 text-sm text-muted">ID: SALON-018 · {SALON_018_CATEGORY}</p>
         <h1 className="mt-2 font-display text-4xl tracking-tight text-fg">{SALON_018_TITLE}</h1>
+        <p className="mt-2 text-sm text-fg">SUBTITLE: {SALON_018_SUBTITLE}</p>
         <p className="mt-2 text-sm text-muted">{SALON_018_ENGLISH}</p>
         <p className="mt-4 text-sm text-muted">STATUS: {SALON_018_STATUS}</p>
         <p className="mt-1 text-sm text-muted">CREDIT: {SALON_018_CREDIT}</p>

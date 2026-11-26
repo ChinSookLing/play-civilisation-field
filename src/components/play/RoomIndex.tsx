@@ -5,6 +5,7 @@ import type { Sheet } from "@/lib/play/sheet";
 export type RoomItem = {
   href: string;
   title: string;
+  subtitle?: string;
   note: string;
   status?: string;
   light?: string;
@@ -50,6 +51,7 @@ export function RoomIndex({
                       {numbered ? <span className="mr-3 text-muted">{String(index + 1).padStart(2, "0")}</span> : null}
                       {item.title}
                     </a>
+                    {item.subtitle ? <p className="mt-1 text-sm text-fg">{item.subtitle}</p> : null}
                     {item.status ? <p className="mt-1 text-sm text-fg">{item.status}</p> : null}
                     <p className="mt-1 text-sm text-muted">{item.note}</p>
                     {item.light ? (

@@ -6,6 +6,7 @@ export const SALON_018_ID = "SALON-018";
 export const SALON_018_SLUG = "close-the-drawer";
 export const SALON_018_TITLE = "SALON-018 · 矩陣裡早就有答案——從六千零三步的折疊，到把抽屜收起來";
 export const SALON_018_ENGLISH = "The Answer Was Already in the Matrix: Folding 6,003 Steps and Closing the Drawer";
+export const SALON_018_SUBTITLE = "六跑者 · 1:1:2:2 家族（Six runners, the 1:1:2:2 family）";
 export const SALON_018_CATEGORY = "記";
 export const SALON_018_STATUS = "Filed. v0.2. Tuzi asked for it to be posted. Not posted to X. The proof-table ledger is unchanged.";
 export const SALON_018_CREDIT = "撰寫 Gemini（Neon）· 故事與研究發起 Tuzi · 本段研究與核閱涉及 Hesper、GPT、Fable、Opus、DeepSeek、Kimi、Sol、Gemini（Neon）；具體技術貢獻由正式證明稿依原始材料另列 · 上牆整理 Bill";
