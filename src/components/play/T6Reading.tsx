@@ -171,6 +171,9 @@ export function T6Reading() {
           <a href={T6_MARKDOWN} className="ml-4 text-fg underline decoration-1 underline-offset-4">
             Markdown
           </a>
+          <a href="/gathering/proof-table-008/t6-dossier" className="ml-4 text-fg underline decoration-1 underline-offset-4">
+            閱讀 A49-C02 封版檔案
+          </a>
         </p>
         <h1 className="mt-6 font-display text-4xl tracking-tight">六跑者的安全時間構造</h1>
         <p className="mt-3 text-sm text-muted">整合修訂稿 v0.2 · 2026-11-12（Asia/Kuala_Lumpur）</p>

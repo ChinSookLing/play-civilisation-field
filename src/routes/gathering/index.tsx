@@ -90,16 +90,16 @@ function GatheringList() {
             },
             {
               href: "/gathering/proof-table-008/t6",
-              title: "PT-008 · Time Forge · 六跑者的安全時間構造",
+              title: "PT-008 · Time Forge · 六跑者的安全時間構造 · 早期稿",
               status: "Filed. v0.2. In-circle ruling 2026-11-11. Not externally peer-reviewed. The proof table stays OPEN.",
-              note: "Theorem T6. One formula for every N remains open. Manuscript only; the replay package was not in this filing. 2026-11-12.",
+              note: "早期稿。Theorem T6. One formula for every N remains open. Manuscript only; the replay package was not in this filing. 2026-11-12.",
               light: "/gathering/proof-table-008/t6/verification.txt",
             },
             {
               href: "/gathering/proof-table-008/t6-dossier",
-              title: "PT-008 · Time Forge · 六跑者構造性選時證明檔案",
+              title: "PT-008 · Time Forge · 六跑者構造性選時證明檔案 · A49-C02 封版檔案",
               status: "Filed. Gathering v0.1. 2026-11-26. Integer core closed inside the project. Not externally peer-reviewed. The proof table stays OPEN.",
-              note: "Selector v0.1, sealed under A49-C02. Five nonzero integer speeds. The terminal formula for every N remains open. Original ZIPs are linked, not attached.",
+              note: "A49-C02 封版檔案。Selector v0.1. The appendix gives a public mirror. Two originals are still waiting. The terminal formula for every N remains open. 2026-11-26.",
               light: "/gathering/proof-table-008/t6-dossier/verification.txt",
             },
             {

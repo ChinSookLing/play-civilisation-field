@@ -5,7 +5,7 @@ import test from "node:test";
 
 const manuscriptPath = new URL("../../../docs/salon/SALON-019-v0.1.md", import.meta.url);
 const ledgerPath = new URL("./proof-table-008.ts", import.meta.url);
-const EXPECTED = "f25ab83c4858a87a40cb144d83a4b4ebb5d6e6930c8622f339936c07ece4ca68";
+const EXPECTED = "cb3069841fb3638eb49a81732df91717a3ce025314e20117597278c8aa41753a";
 
 test("SALON-019 manuscript is the filed text", () => {
   const bytes = readFileSync(manuscriptPath);
@@ -22,7 +22,7 @@ test("SALON-019 manuscript is the filed text", () => {
   assert.equal(text.includes("Z=5 這一層用有界的對偶投影枚舉生成有限平面表"), true);
   assert.equal(text.includes("在 |U|² ≥ 21,609 的尾端，合計核對 594,364,014 筆平面內剩餘記錄"), true);
   assert.equal(text.includes("A49-C02 封版裁決"), true);
-  assert.equal(text.includes("https://play.civilisationfield.com/gathering/proof-table-008/t6-dossier"), true);
+  assert.equal(text.includes("六跑者證明與重現資料：https://play.civilisationfield.com/gathering/proof-table-008/t6-dossier#appendix"), true);
   assert.equal(text.includes("網址未定"), false);
   assert.equal(text.includes("\\"), false);
   assert.equal(text.includes("TA 們的第一個案子"), true);

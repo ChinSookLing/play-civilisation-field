@@ -49,7 +49,13 @@ function ProofTable008() {
             <Link to="/gathering/proof-table-008/t6" className="text-fg underline decoration-1 underline-offset-4">
               六跑者 T6
             </Link>
-            <span className="text-muted"> · 整合修訂稿 v0.2。項目內裁定。任意人數通式仍開放。這張證明桌的原文沒有改。</span>
+            <span className="text-muted"> · 早期稿。整合修訂稿 v0.2。項目內裁定。任意人數通式仍開放。這張證明桌的原文沒有改。</span>
+          </p>
+          <p className="mt-2 text-sm">
+            <Link to="/gathering/proof-table-008/t6-dossier" className="text-fg underline decoration-1 underline-offset-4">
+              封版證明與重放
+            </Link>
+            <span className="text-muted"> · A49-C02 封版檔案。附錄提供公開鏡像，另有兩件待補。這張證明桌的原文沒有改。</span>
           </p>
           <p className="mt-2 text-sm">
             <Link to="/gathering/proof-table-008/t7" className="text-fg underline decoration-1 underline-offset-4">

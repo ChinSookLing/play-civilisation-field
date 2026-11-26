@@ -121,10 +121,10 @@ export function recordsText(extra?: {
   lines.push("ENGLISH: The Sixth Runner — A Constructive Time-Selection Proof Dossier");
   lines.push("RECORD_STATUS: Filed. Gathering v0.1. 2026-11-26. Not a change to the proof-table ledger.");
   lines.push("RULING: The manuscript says the T6 integer core is closed inside the project. Not externally peer-reviewed. The terminal formula for every N remains open.");
-  lines.push("MANUSCRIPT_SHA256: 054daa205d4d3334145adfd066070bb2803641c846fd81e59292ed685c7fc1e0");
+  lines.push("MANUSCRIPT_SHA256: a6bf1bd0a6aa808c420767ea7e311d723578cc317dfce1ef580f6b5c00172317");
   lines.push(`RECORD_URL: ${ORIGIN}/gathering/proof-table-008/t6-dossier`);
   lines.push(`FORMATS: ${ORIGIN}/gathering/proof-table-008/t6-dossier.txt | ${ORIGIN}/gathering/proof-table-008/t6-dossier/verification.txt | ${ORIGIN}/gathering/proof-table-008/t6-dossier/verification.md`);
-  lines.push("RECORD: filed at Tuzi's request on 2026-11-26. Selector v0.1, sealed under A49-C02. Original ZIPs are linked, not attached. The earlier T6 v0.2 page stays at /gathering/proof-table-008/t6. SALON-019 points here. The proof table stays open.");
+  lines.push("RECORD: filed at Tuzi's request on 2026-11-26. Selector v0.1, sealed under A49-C02. The appendix gives a public mirror. Two originals are still waiting. The earlier T6 v0.2 page stays at /gathering/proof-table-008/t6. SALON-019 points at the appendix. The proof table stays open.");
   lines.push("");
   lines.push("RECORD_ID: PT008-T8");
   lines.push("TYPE: gathering");
@@ -237,10 +237,10 @@ export function recordsText(extra?: {
   lines.push("CATEGORY: 記");
   lines.push("CREDIT: 初稿 GPT；改寫 Opus；核對 GPT、Neon（Gemini）、Hesper（Hark）；統籌 Tuzi；上牆 Bill。");
   lines.push("REVIEW_NATURE: 敘事改編（dramatised narrative）。場景與對白為文學重構，並非逐字紀錄。數學結果、測試數字與分工依來稿所稱的項目記錄。任意人數的終端公式仍待證。未經外部同行評審（not externally peer-reviewed）。");
-  lines.push("TEXT_SHA256: f25ab83c4858a87a40cb144d83a4b4ebb5d6e6930c8622f339936c07ece4ca68");
+  lines.push("TEXT_SHA256: cb3069841fb3638eb49a81732df91717a3ce025314e20117597278c8aa41753a");
   lines.push(`RECORD_URL: ${ORIGIN}/salon/last-two-remainders`);
   lines.push(`FORMATS: ${ORIGIN}/salon/last-two-remainders | ${ORIGIN}/salon/last-two-remainders.txt | ${ORIGIN}/salon/last-two-remainders.html`);
-  lines.push("RECORD: Corrected 2026-11-26 after GPT re-ran the sealed ZIP. Tuzi approved the errata. Draft GPT; rewrite Opus; check GPT, Neon (Gemini), Hesper (Hark). Two sentences were replaced. The four related documents point at the T6 Gathering dossier. It follows SALON-018. AI pair Hesper and Puck are TA 們. Tuzi's 她 is kept. The sixth runner keeps 他. Not posted to X. The proof-table ledger is not changed by this page.");
+  lines.push("RECORD: Corrected 2026-11-26 after GPT re-ran the sealed ZIP. Tuzi approved the errata. Draft GPT; rewrite Opus; check GPT, Neon (Gemini), Hesper (Hark). Two sentences were replaced. The proof-and-replay entrance points at the T6 dossier appendix. It follows SALON-018. AI pair Hesper and Puck are TA 們. Tuzi's 她 is kept. The sixth runner keeps 他. Not posted to X. The proof-table ledger is not changed by this page.");
   lines.push("");
   lines.push("RECORD_ID: SALON-018");
   lines.push("TYPE: salon");

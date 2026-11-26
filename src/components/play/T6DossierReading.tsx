@@ -124,6 +124,13 @@ function BlockView({ block }: { block: ReadBlock }) {
     if (!html) return <pre className="my-4 overflow-x-auto font-mono text-xs leading-relaxed">{block.tex}</pre>;
     return <div className="my-4 overflow-x-auto text-fg" dangerouslySetInnerHTML={{ __html: html }} />;
   }
+  if (block.kind === "image") {
+    return (
+      <figure className="my-4">
+        <img src={block.src} alt={block.alt} className="w-full border border-line" />
+      </figure>
+    );
+  }
   if (block.kind === "code") {
     return (
       <pre className="my-4 overflow-x-auto border border-line p-3 font-mono text-xs leading-relaxed">
@@ -206,7 +213,7 @@ export function T6DossierReading() {
         <p className="mt-2 text-sm text-muted">The Sixth Runner — A Constructive Time-Selection Proof Dossier</p>
         <p className="mt-4 text-sm text-muted">Gathering v0.1 · 2026-11-26（Asia/Kuala_Lumpur）</p>
         <p className="mt-1 text-sm text-muted">
-          稿內記錄 T6 整數核心已在項目內閉合。這不是外部同行評審。任意人數的終端公式仍開放。證明桌維持 OPEN。原件 ZIP 沒有附在這頁，附錄保留原連結與 SHA-256。
+          稿內記錄 T6 整數核心已在項目內閉合。這不是外部同行評審。任意人數的終端公式仍開放。證明桌維持 OPEN。附錄提供公開鏡像，另有兩件待補。
         </p>
         <nav className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-sm" aria-label="目錄">
           {TOC.map(([id, label]) => (

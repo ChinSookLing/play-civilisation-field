@@ -50,21 +50,7 @@ $$
 
 設 $L=\mathbb{Z}^5\cap U^\perp$，取最短非零關係 $z_1\in L$ 並令 $Z=\lVert z_1\rVert_2^2$。最短關係本原。平方範數 1 強迫某個速度為零，平方範數 2 強迫兩個速度的絕對值相同，因此正規化後 $Z\ge 3$。
 
-<!-- FIGURE-1-START -->
-```mermaid
-flowchart TD
-    I["正規化速度 U"] --> N{"平方範數 Q"}
-    N -->|"Q ≤ 21608"| F["有限遮罩"]
-    N -->|"Q ≥ 21609"| Z{"最短關係 Z"}
-    Z -->|"Z ≥ 14"| H["四維或三維取整"]
-    Z -->|"Z = 6–13"| M["三維取整或有界平面"]
-    Z -->|"Z = 3–5"| L["投影降維及秩一取時"]
-    F --> V["還原 t 並驗原始五速"]
-    H --> V
-    M --> V
-    L --> V
-```
-<!-- FIGURE-1-END -->
+![先正規化速度，再按平方範數分流。小於 21,609 用有限遮罩，其餘按最短整數關係分支，必要時使用平面取時。最後還原時間並驗算原始五個相對速度。](https://play.civilisationfield.com/gathering/proof-table-008/t6-dossier/figure-1.png)
 
 **圖 1　六跑者選時器的證明分流。** 中、低 $Z$ 分支若保留平面剩餘，均以第 4 節的閉相位胞取時。程式的九條路徑如下。
 
@@ -315,94 +301,98 @@ python3 indep46.py all 1 2
 
 ## 附錄 A 版本與附件清冊
 
-下列原件入口按證明用途排列。ChatGPT 個人檔案的存取權限由持有者控制；對外送審需要與下列摘要相同的公開鏡像。正式公開版的連結應指向同版原件，讓讀者能以完整 SHA-256 驗證。A45 的 Hesper 檔案庫另按 p1–p6 分片保存；此處固定引用原作者整包，分片定位依 Hesper 的 `MANIFEST`／`INVENTORY`（檔案庫回報分支 `snapshot/r002-a02-a10`，提交 `c6b19a5`）。
+原件依證明用途排列。已上線項目固定於[公開鏡像提交](https://github.com/ChinSookLing/pt008-proofs/tree/f8e9be66fd2611c30eadd98760944f688ff659b0)，可免登入下載。完整雜湊見本附錄及[鏡像 SHA-256 清單](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/SHA256SUMS)。兩件尚待上傳的原件各標為「鏡像待補」，並列原件雜湊。
 
 ### A.1 封版及兩項全量重放
 
-**A49-T01**　封版原程式、固定例、遮罩及重放日誌。57,657 bytes。[原件 PT008-TF-R002-A49-T01-selector-v0.1.zip](https://chatgpt.com/library?file_id=libfile_9d8bc423b0dc8191a3375931de9cd79e&account_id=personal)  
+**A49-T01**　封版原程式、固定例、遮罩及重放日誌。57,657 bytes。[原件 PT008-TF-R002-A49-T01-selector-v0.1.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/PT008-TF-R002-A49-T01-selector-v0.1.zip)  
 SHA-256　`f2a09e1251c71b2bb25f7f564521f0a5236eb08dd3c2d3a0cc2e2b8c5997a54a`
 
-**A49-C01**　全域銜接證明與橋接界。3,987 bytes。[原件 PT008-TF-R002-A49-C01-stitch.zip](https://chatgpt.com/library?file_id=libfile_916f55818de08191b0a54a2c9743e444&account_id=personal)  
+**A49-C01**　全域銜接證明與橋接界。3,987 bytes。[原件 PT008-TF-R002-A49-C01-stitch.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/PT008-TF-R002-A49-C01-stitch.zip)  
 SHA-256　`6b1bcf0bc2a8183714e007baf8a269bd33568c4228afb6d22aac07680b86a401`
 
-**A49-O01**　Opus 獨立驗收、有限窮舉與壓力測試原件。21,463 bytes。[原件 PT008-TF-R002-A49-O01.zip](https://chatgpt.com/library?file_id=libfile_e083eaf3d42c81918a5ad1f4309f177b&account_id=personal)  
+**A49-O01**　Opus 獨立驗收、有限窮舉與壓力測試原件。21,463 bytes。[原件 PT008-TF-R002-A49-O01.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/PT008-TF-R002-A49-O01.zip)  
 SHA-256　`4e577f6ff7588cc2be16b058934e477804f04060d20f242c835e640895a0db03`
 
-**A49-C02**　封版裁決、平面飽和性與兩種計數口徑。3,786 bytes。[原件 PT008-T6-CLOSING-A49-C02.md](https://chatgpt.com/library?file_id=libfile_1ee268eed5d08191b6e83a447df29203&account_id=personal)  
+**A49-C02**　封版裁決、平面飽和性與兩種計數口徑。3,786 bytes。原件 PT008-T6-CLOSING-A49-C02.md · **鏡像待補**  
 SHA-256　`d205d20b941ad63bb9c0de80e8abc0de4b30ef7a089704b43452580140f90559`
 
-**A47-C11**　低範數獨立見證及 Z=5 尾端全量重放。402,750 bytes。[原件 PT008-TF-R002-A47-C11-replay.zip](https://chatgpt.com/library?file_id=libfile_c4243e97740881918d5c9863ad03fc9a&account_id=personal)  
+**A47-C11**　低範數獨立見證及 Z=5 尾端全量重放。402,750 bytes。[原件 PT008-TF-R002-A47-C11-replay.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/PT008-TF-R002-A47-C11-replay.zip)  
 SHA-256　`7d4fef0664e68315fa859fa3dba57da0d494e5ba8025fc5345591ae0c393313e`
 
-**A48-C01**　Z=3、4 尾端全量重放。60,550 bytes。[原件 PT008-TF-R002-A48-C01-replay.zip](https://chatgpt.com/library?file_id=libfile_77e3d6c506e48191860b22ba80f00049&account_id=personal)  
+**A48-C01**　Z=3、4 尾端全量重放。60,550 bytes。[原件 PT008-TF-R002-A48-C01-replay.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/PT008-TF-R002-A48-C01-replay.zip)  
 SHA-256　`4dfe57239f767157ede18858256b641c9dbc0a2b5b09e9d75a9486324b25cce9`
 
 ### A.2 中段證書與精確重放補件
 
-**A46-T01**　Z=6，含原 31 批證書及精確核對。2,130,430 bytes。[原件 a46_t01.zip](https://chatgpt.com/library?file_id=libfile_9eea039902548191be0ccbe531893467&account_id=personal)  
+**A46-T01**　Z=6，含原 31 批證書及精確核對。2,130,430 bytes。[原件 a46_t01.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/a46_t01.zip)  
 SHA-256　`5151053275c6c1a0f109b68169c511a9cc9270b6463de6017d5c8605e505c7f1`
 
-**A45 開放清單**　Z=7、D≤728，原全表及開放表。3,250,119 bytes。[原件 a45_open.zip](https://chatgpt.com/library?file_id=libfile_93d7fbcd212c81919bcf14cd99c4c1a9&account_id=personal)  
+**A45 開放清單**　Z=7、D≤728，原全表及開放表。3,250,119 bytes。[原件 a45_open.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/a45_open.zip)  
 SHA-256　`78f048d82d7889e856b51a04294da4e594270a8bfb047150f4f5dc3334809880`
 
-**A45-O03**　Z=7、D≤728，Opus 精確核對。1,098,294 bytes。[原件 PT008-TF-R002-A45-O03.zip](https://chatgpt.com/library?file_id=libfile_108a792cd60881918473eea56537d69f&account_id=personal)  
+**A45-O03**　Z=7、D≤728，Opus 精確核對。1,098,294 bytes。[原件 PT008-TF-R002-A45-O03.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/PT008-TF-R002-A45-O03.zip)  
 SHA-256　`6fa83d5d2e0111f299c4388fb01d2d02c6ce7cca7fceb42ac8f879f49cc0eedc`
 
-**A45-T01**　Z=7 上段的程式、批表及例外。2,709,742 bytes。[原件 a45_t01.zip](https://chatgpt.com/library?file_id=libfile_167b31cff4908191ab720367812d9f3b&account_id=personal)  
+**A45-T01**　Z=7 上段的程式、批表及例外。2,709,742 bytes。[原件 a45_t01.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/a45_t01.zip)  
 SHA-256　`50b19e99c6dcab9035643a66f6c94e1608d57a5d9cc5955182eafd35518248cc`
 
-**A45-T01 資料**　Z=7 上段 78 批原資料。115,167,798 bytes。[原件 a45_t01_certs.zip](https://chatgpt.com/library?file_id=libfile_4fe8260ec61481919c7a023129bf6e75&account_id=personal)  
+**A45-T01 資料**　Z=7 上段 78 批原資料。115,167,798 bytes。原件 a45_t01_certs.zip 分兩段下載。[第 1 段 part00](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/a45_t01_certs.zip.part00) · [第 2 段 part01](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/a45_t01_certs.zip.part01) · [分片雜湊](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/PARTS.sha256)。依序合併後驗原包摘要。
+
+```sh
+cat a45_t01_certs.zip.part00 a45_t01_certs.zip.part01 > a45_t01_certs.zip
+sha256sum a45_t01_certs.zip
+```
+  
 SHA-256　`973f8fac18be82c072bfc0581b1f23dfc2078d26a8d6a0aefbc44b0ea380d0b7`
 
-**A45／A46 精確重放**　主席續存的獨立核對原碼、重放入口和參照輸出。14,913 bytes。[原件 PT008-T6-A45-A46-exact-replay.zip](https://chatgpt.com/library?file_id=libfile_8a850929eb548191b1beba0b59a9fc5c&account_id=personal)  
+**A45／A46 精確重放**　主席續存的獨立核對原碼、重放入口和參照輸出。14,913 bytes。原件 PT008-T6-A45-A46-exact-replay.zip · **鏡像待補**  
 SHA-256　`0cebd90e830ed318806bbab0d96973f3a587e68b82e7d54cb2afdb7804d27b03`
 
-**A44**　Z=8 原證書。317,019 bytes。[原件 a44_code.zip](https://chatgpt.com/library?file_id=libfile_04ef40ea032c8191a011e687fd22d3ea&account_id=personal)  
+**A44**　Z=8 原證書。317,019 bytes。[原件 a44_code.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/a44_code.zip)  
 SHA-256　`bfbff4fe44a42054761f4020de13349f59e4687064e55baa2adfccd8258e8bb6`
 
-**A43**　Z=9 原證書。86,631,357 bytes。[原件 a43_code.zip](https://chatgpt.com/library?file_id=libfile_d9b989159a9c819180e696a7d8101033&account_id=personal)  
+**A43**　Z=9 原證書。86,631,357 bytes。[原件 a43_code.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/a43_code.zip)  
 SHA-256　`e2d1c778273c567bbedd53c7134542a0eeade20ee175641582d9e2a216f65e9e`
 
-**A42**　Z=10 原證書。11,343,122 bytes。[原件 a42_code.zip](https://chatgpt.com/library?file_id=libfile_a7b9cd3adad08191946c2df6e76efc36&account_id=personal)  
+**A42**　Z=10 原證書。11,343,122 bytes。[原件 a42_code.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/a42_code.zip)  
 SHA-256　`692ed57f061b512d4e52c82aefb1eb4f746561380bb70301c46f27afa9d903fb`
 
-**A41**　Z=11 原證書。30,027,508 bytes。[原件 a41_code.zip](https://chatgpt.com/library?file_id=libfile_6f6259fd3820819198c8726d974d86f6&account_id=personal)  
+**A41**　Z=11 原證書。30,027,508 bytes。[原件 a41_code.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/a41_code.zip)  
 SHA-256　`f2e636e561483abb2f8b1472b94d4f684ef43703a4b300bf4341dbe15311a1ae`
 
-**A40**　Z=12 原證書。3,048,438 bytes。[原件 a40_code.zip](https://chatgpt.com/library?file_id=libfile_4ff7b337eb5c81919fc66ca23b45120d&account_id=personal)  
+**A40**　Z=12 原證書。3,048,438 bytes。[原件 a40_code.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/a40_code.zip)  
 SHA-256　`8172162b8974cab4cd21d79fa08db9999ae094d00e67502e8ae48b5153e9c663`
 
-**A38**　Z=13 原證書，資料表在包內，剩餘見證可按 README 重建。2,139,811 bytes。[原件 a38_code.zip](https://chatgpt.com/library?file_id=libfile_7c1def7199b481918effc502cf3e740a&account_id=personal)  
+**A38**　Z=13 原證書，資料表在包內，剩餘見證可按 README 重建。2,139,811 bytes。[原件 a38_code.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/a38_code.zip)  
 SHA-256　`b0f923174952abe1e00278f879f006ade38415c4a2a0242b6020f5bec9257dda`
 
 ### A.3 手證審核與作者原交付
 
-**A39 G1**　圓盤取時引理獨立審核與 Lean 環境紀錄。11,250 bytes。[原件 PT008-TF-R002-A39-G1-OPUS-REVIEW.zip](https://chatgpt.com/library?file_id=libfile_4d0fa97791f88191b92b316210d970c8&account_id=personal)  
+**A39 G1**　圓盤取時引理獨立審核與 Lean 環境紀錄。11,250 bytes。[原件 PT008-TF-R002-A39-G1-OPUS-REVIEW.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/PT008-TF-R002-A39-G1-OPUS-REVIEW.zip)  
 SHA-256　`f00735a281bf83a0d904d6b09a060f68f745748ca47283eba61f1d874e454de4`
 
-**A45-O01**　閉胞讀出及完備性，PolyT45.lean 與檢查紀錄。142,714 bytes。[原件 PT008-TF-R002-A45-O01.zip](https://chatgpt.com/library?file_id=libfile_b0d946cc8a9c8191ad1587827c303cfc&account_id=personal)  
+**A45-O01**　閉胞讀出及完備性，PolyT45.lean 與檢查紀錄。142,714 bytes。[原件 PT008-TF-R002-A45-O01.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/PT008-TF-R002-A45-O01.zip)  
 SHA-256　`fd824ac061536ace11b9e9a101cfdebb3c5ad549662feb5171d82cf579fe0754`
 
-**降維審核 O01**　Z=5 的 HKZ 及第二關係界。14,606 bytes。[原件 PT008-TF-R002-Z5-DESCENT-LEMMA-REVIEW-O01.zip](https://chatgpt.com/library?file_id=libfile_3caf3dad60708191bb32f50b2962f58d&account_id=personal)  
+**降維審核 O01**　Z=5 的 HKZ 及第二關係界。14,606 bytes。[原件 PT008-TF-R002-Z5-DESCENT-LEMMA-REVIEW-O01.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/PT008-TF-R002-Z5-DESCENT-LEMMA-REVIEW-O01.zip)  
 SHA-256　`57342029affad3a1b0635ef81d8c5e469b7f99997becb7f40da2551f0e6a486a`
 
-**A47-O08**　三維空間到平面及秩一降維。320,886 bytes。[原件 PT008-TF-R002-A47-O08.zip](https://chatgpt.com/library?file_id=libfile_d99da9c5586881918e864865460bc1ff&account_id=personal)  
+**A47-O08**　三維空間到平面及秩一降維。320,886 bytes。[原件 PT008-TF-R002-A47-O08.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/PT008-TF-R002-A47-O08.zip)  
 SHA-256　`da0a523bf48b2907141e5e04c333a5c98366e49eb3a491a4873ff8f432eba12e`
 
-**A47-O09**　秩一等號、剩餘枚舉完備性及退化分支。47,110 bytes。[原件 PT008-TF-R002-A47-O09.zip](https://chatgpt.com/library?file_id=libfile_aa938768aed881919bbd09b2f570ce91&account_id=personal)  
+**A47-O09**　秩一等號、剩餘枚舉完備性及退化分支。47,110 bytes。[原件 PT008-TF-R002-A47-O09.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/PT008-TF-R002-A47-O09.zip)  
 SHA-256　`74c32ad95b7938fddc940cd0f688479fac96dfc58e9645391620fff517487f8d`
 
-**A47-T11**　Hesper 的 Z=5 原程式與輸出摘要。75,897 bytes。[原件 t11_hesper.zip](https://chatgpt.com/library?file_id=libfile_9cb45119982481918a254c4f404c6b11&account_id=personal)  
+**A47-T11**　Hesper 的 Z=5 原程式與輸出摘要。75,897 bytes。[原件 t11_hesper.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/t11_hesper.zip)  
 SHA-256　`71ac2f3524d01d415e792ed771ced27da186b3d774d1a1ae1facd3e7947514b5`
 
-**A48-T01**　Hesper 的 Z=3、4 首輪三維中心表。53,334 bytes。[原件 a48_t01.zip](https://chatgpt.com/library?file_id=libfile_c23365df72648191820883521293077f&account_id=personal)  
+**A48-T01**　Hesper 的 Z=3、4 首輪三維中心表。53,334 bytes。[原件 a48_t01.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/a48_t01.zip)  
 SHA-256　`11692a6a8c3834b555e667cb2415b2ed782e4a68354817e9339596d7b5bad31f`
 
-**A48-O01**　Z=3、4 上界及全一型 Z=5 改進。25,783 bytes。[原件 PT008-TF-R002-A48-O01.zip](https://chatgpt.com/library?file_id=libfile_ba217a2284888191a84c6874e16554b6&account_id=personal)  
+**A48-O01**　Z=3、4 上界及全一型 Z=5 改進。25,783 bytes。[原件 PT008-TF-R002-A48-O01.zip](https://raw.githubusercontent.com/ChinSookLing/pt008-proofs/f8e9be66fd2611c30eadd98760944f688ff659b0/packages/PT008-TF-R002-A48-O01.zip)  
 SHA-256　`43614fc4254f95835fa8baf1ea69bec1a840565c7c7999b65a675f03feb6ce6f`
 
-**R002 歷史補檔**　裁決、審閱與早期探索來源的補充清冊。20,354,320 bytes。[原件 PT008-R002-Hesper-Archive-Supplement-c6b19a5.zip](https://chatgpt.com/library?file_id=libfile_16244d911f988191b0108ea67cf3b7ff&account_id=personal)  
-SHA-256　`2f275fe58bae00de38a0844a9858835bb3574eb9378e40440f89270ec9dbdc01`
 
 ### A.4 檔內基準與核驗範圍
 
@@ -413,6 +403,6 @@ SHA-256　`2f275fe58bae00de38a0844a9858835bb3574eb9378e40440f89270ec9dbdc01`
 | A45 上段原 78 項清單 SHA256SUMS_certs | 1fe18b61fe08804067b438f7377a97bd1f916004daf1366747fb1edad80f6640 |
 | A47-C11 重生 planes.bin | a4321d3bfa440459f5c8604028da9af1ff65a4f80609fc96d0b28a5a9bcbc481 |
 
-附錄的外層 ZIP 摘要按留存檔重算，ZIP CRC 已檢查。內層清單以各原包所列為準。A45-O01 的 Lean 驗算適用於其形式化取時引理。A49 的全域銜接與各有限計算證書應按第 9 節逐組查閱。審稿版文稿未宣稱已有公開、免登入的證據鏡像。
+附錄的外層 ZIP 摘要按留存檔重算，ZIP CRC 已檢查。內層清單以各原包所列為準。A45-O01 的 Lean 驗算適用於其形式化取時引理。A49 的全域銜接與各有限計算證書應按第 9 節逐組查閱。本頁列明公開鏡像範圍與仍待補的兩件原件。
 
 **相關頁面與歷程。** [PT-008 證明桌](https://play.civilisationfield.com/gathering/proof-table-008/table) · [Gathering 八跑者檔案](https://play.civilisationfield.com/gathering/proof-table-008/t8) · [Salon No.019 敘事版](https://play.civilisationfield.com/salon/last-two-remainders)

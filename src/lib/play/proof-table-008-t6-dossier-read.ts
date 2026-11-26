@@ -4,7 +4,8 @@ export type ReadBlock =
   | { kind: "list"; items: string[] }
   | { kind: "table"; header: string[]; rows: string[][] }
   | { kind: "math"; tex: string }
-  | { kind: "code"; lang: string; text: string };
+  | { kind: "code"; lang: string; text: string }
+  | { kind: "image"; alt: string; src: string };
 
 const SECTION_IDS: Array<[string, string]> = [
   ["摘要", "abstract"],
@@ -76,6 +77,14 @@ export function parseT6Dossier(source: string): ReadBlock[] {
       index += 1;
       continue;
     }
+    if (trimmed.startsWith("![")) {
+      const mark = trimmed.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+      if (mark) {
+        blocks.push({ kind: "image", alt: mark[1] ?? "", src: mark[2] ?? "" });
+        index += 1;
+        continue;
+      }
+    }
     if (trimmed.startsWith("```")) {
       const lang = trimmed.slice(3).trim();
       const code: string[] = [];
@@ -137,6 +146,7 @@ export function parseT6Dossier(source: string): ReadBlock[] {
         next === "" ||
         next.startsWith("<!--") ||
         next.startsWith("```") ||
+        next.startsWith("![") ||
         next === "$$" ||
         next.startsWith("## ") ||
         next.startsWith("### ") ||

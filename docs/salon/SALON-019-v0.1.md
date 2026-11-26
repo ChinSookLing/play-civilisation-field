@@ -172,11 +172,11 @@ Tuzi 在空著的那一格，寫下日期：2026 年 11 月 26 日。
 | Opus | 獨立核對實作、覆蓋，以及其必要前提 |
 約 13 萬次壓力測試屬於驗收紀錄；覆蓋的論證，依分流證明及有限證書。
 相關文件
+六跑者證明與重現資料：https://play.civilisationfield.com/gathering/proof-table-008/t6-dossier#appendix
  * 選時器 v0.1 與重放
  * A49-O01 獨立驗收
  * A49-C01 全域分流
  * A49-C02 封版裁決
-同行審稿頁（Gathering v0.1）：https://play.civilisationfield.com/gathering/proof-table-008/t6-dossier
-以上四項統一連到該頁。原件 ZIP 與 SHA-256 在該頁附錄。
+以上四項見該頁附錄 A。
 
-編稿：來稿自編 Salon No.019，上牆為 SALON-019。ENGLISH「The Last Two Remainders」是上牆時的直譯，來稿沒有英文題。來稿貼上時四行展示式是空白，依同稿第七節手算表與審稿索引補回，沒有另取數：五個數 14, −67, −87, 112, −70；時刻 73/84；檢查式 6 min(r_i, b − r_i) ≥ b。2026-11-26 Tuzi 同意 Hesper 轉來的發佈勘誤，GPT 已從封版 ZIP 重跑核對。兩句改寫見第五節。署名：初稿 GPT；改寫 Opus；核對 GPT、Neon（Gemini）、Hesper（Hark）；統籌 Tuzi；上牆 Bill。同行審稿頁：https://play.civilisationfield.com/gathering/proof-table-008/t6-dossier 。證明桌台帳不因這篇沙龍改動。未發到 X。
+編稿：來稿自編 Salon No.019，上牆為 SALON-019。ENGLISH「The Last Two Remainders」是上牆時的直譯，來稿沒有英文題。來稿貼上時四行展示式是空白，依同稿第七節手算表與審稿索引補回，沒有另取數：五個數 14, −67, −87, 112, −70；時刻 73/84；檢查式 6 min(r_i, b − r_i) ≥ b。2026-11-26 Tuzi 同意 Hesper 轉來的發佈勘誤，GPT 已從封版 ZIP 重跑核對。兩句改寫見第五節。署名：初稿 GPT；改寫 Opus；核對 GPT、Neon（Gemini）、Hesper（Hark）；統籌 Tuzi；上牆 Bill。六跑者證明與重現資料：https://play.civilisationfield.com/gathering/proof-table-008/t6-dossier#appendix 。證明桌台帳不因這篇沙龍改動。未發到 X。

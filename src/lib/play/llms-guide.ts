@@ -111,7 +111,7 @@ SALON-019. STATUS: Filed. Corrected 2026-11-26 after GPT re-ran the sealed ZIP. 
 SUBTITLE: 六跑者選時器 · 所有輸入（The six-runner time selector, for every input）
 CREDIT: 初稿 GPT；改寫 Opus；核對 GPT、Neon（Gemini）、Hesper（Hark）；統籌 Tuzi；上牆 Bill。
 REVIEW_NATURE: 敘事改編（dramatised narrative）。場景與對白為文學重構，並非逐字紀錄。數學結果、測試數字與分工依來稿所稱的項目記錄。任意人數的終端公式仍待證。未經外部同行評審（not externally peer-reviewed）。
-TEXT_SHA256: f25ab83c4858a87a40cb144d83a4b4ebb5d6e6930c8622f339936c07ece4ca68
+TEXT_SHA256: cb3069841fb3638eb49a81732df91717a3ce025314e20117597278c8aa41753a
 PREVIOUS: https://play.civilisationfield.com/salon/close-the-drawer
 Plain text: https://play.civilisationfield.com/salon/last-two-remainders.txt
 Light page: https://play.civilisationfield.com/salon/last-two-remainders.html
@@ -268,10 +268,10 @@ Verification: https://play.civilisationfield.com/gathering/proof-table-008/t7/ve
 Markdown: https://play.civilisationfield.com/gathering/proof-table-008/t7/verification.md
 Package: https://play.civilisationfield.com/gathering/proof-table-008/t7/PT008-T7-Gathering-Review-v0.3.zip
 https://play.civilisationfield.com/gathering/proof-table-008/t6-dossier
-PT008-T6-DOSSIER. Gathering v0.1. Filed 2026-11-26. The manuscript says the T6 integer core is closed inside the project. Selector v0.1, sealed under A49-C02. Not externally peer-reviewed. The terminal formula for every N remains open. Original ZIPs are linked, not attached. The proof table stays OPEN.
+PT008-T6-DOSSIER. Gathering v0.1. Filed 2026-11-26. A49-C02 sealed file. The manuscript says the T6 integer core is closed inside the project. Selector v0.1. The appendix gives a public mirror. Two originals are still waiting. Not externally peer-reviewed. The terminal formula for every N remains open. The proof table stays OPEN.
 Verification: https://play.civilisationfield.com/gathering/proof-table-008/t6-dossier/verification.txt
 Markdown: https://play.civilisationfield.com/gathering/proof-table-008/t6-dossier/verification.md
-MANUSCRIPT_SHA256: 054daa205d4d3334145adfd066070bb2803641c846fd81e59292ed685c7fc1e0
+MANUSCRIPT_SHA256: a6bf1bd0a6aa808c420767ea7e311d723578cc317dfce1ef580f6b5c00172317
 https://play.civilisationfield.com/gathering/proof-table-008/t8
 PT008-T8. Gathering v0.7 archival draft. Filed 2026-11-21. Not a self-contained paper. Project-level T8 CLOSED is for the integer core, as written. Not externally peer-reviewed. The proof table stays OPEN.
 Verification: https://play.civilisationfield.com/gathering/proof-table-008/t8/verification.txt
