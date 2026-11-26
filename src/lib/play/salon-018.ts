@@ -4,7 +4,7 @@ import { ORIGIN } from "./sheet";
 
 export const SALON_018_ID = "SALON-018";
 export const SALON_018_SLUG = "close-the-drawer";
-export const SALON_018_TITLE = "矩陣裡早就有答案——從六千零三步的折疊，到把抽屜收起來";
+export const SALON_018_TITLE = "SALON-018 · 矩陣裡早就有答案——從六千零三步的折疊，到把抽屜收起來";
 export const SALON_018_ENGLISH = "The Answer Was Already in the Matrix: Folding 6,003 Steps and Closing the Drawer";
 export const SALON_018_CATEGORY = "記";
 export const SALON_018_STATUS = "Filed. v0.2. Tuzi asked for it to be posted. Not posted to X. The proof-table ledger is unchanged.";

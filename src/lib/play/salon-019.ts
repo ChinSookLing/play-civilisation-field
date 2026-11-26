@@ -4,7 +4,7 @@ import { ORIGIN } from "./sheet";
 
 export const SALON_019_ID = "SALON-019";
 export const SALON_019_SLUG = "last-two-remainders";
-export const SALON_019_TITLE = "最後兩個餘數";
+export const SALON_019_TITLE = "SALON-019 · 最後兩個餘數";
 export const SALON_019_ENGLISH = "The Last Two Remainders";
 export const SALON_019_CATEGORY = "記";
 export const SALON_019_STATUS = "Filed. v0.1 polish. Tuzi asked for it to be posted on 2026-11-26. The polisher is unnamed. Not posted to X. The proof-table ledger is unchanged.";

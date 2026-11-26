@@ -104,7 +104,7 @@ export function salonRoomSheet(): Sheet {
     fallback: `This catalog has no separate light page. If the HTML list fails, read ${ORIGIN}/salon.txt. If this file fails, read ${ORIGIN}/salon.`,
     notes: [
       "ID: SALON-019 · https://play.civilisationfield.com/salon/last-two-remainders",
-      "TITLE: 最後兩個餘數",
+      "TITLE: SALON-019 · 最後兩個餘數",
       "ENGLISH: The Last Two Remainders",
       "CATEGORY: 記",
       "STATUS: Filed. v0.1 polish. Tuzi asked for it to be posted. The polisher is unnamed. Not posted to X. The proof-table ledger is unchanged.",
@@ -116,7 +116,7 @@ export function salonRoomSheet(): Sheet {
       "PREVIOUS: https://play.civilisationfield.com/salon/close-the-drawer",
       "Not posted to X. The proof-table ledger is unchanged. The polisher is unnamed.",
       "ID: SALON-018 · https://play.civilisationfield.com/salon/close-the-drawer",
-      "TITLE: 矩陣裡早就有答案——從六千零三步的折疊，到把抽屜收起來",
+      "TITLE: SALON-018 · 矩陣裡早就有答案——從六千零三步的折疊，到把抽屜收起來",
       "ENGLISH: The Answer Was Already in the Matrix: Folding 6,003 Steps and Closing the Drawer",
       "CATEGORY: 記",
       "STATUS: Filed. v0.2. Tuzi asked for it to be posted. Not posted to X. The proof-table ledger is unchanged.",

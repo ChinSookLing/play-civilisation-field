@@ -219,7 +219,7 @@ export function recordsText(extra?: {
   lines.push("");
   lines.push("RECORD_ID: SALON-019");
   lines.push("TYPE: salon");
-  lines.push("TITLE: 最後兩個餘數");
+  lines.push("TITLE: SALON-019 · 最後兩個餘數");
   lines.push("ENGLISH: The Last Two Remainders");
   lines.push("RECORD_STATUS: Filed. v0.1 polish. Tuzi asked for it to be posted. The polisher is unnamed. Not posted to X. The proof-table ledger is unchanged.");
   lines.push("CATEGORY: 記");
@@ -232,7 +232,7 @@ export function recordsText(extra?: {
   lines.push("");
   lines.push("RECORD_ID: SALON-018");
   lines.push("TYPE: salon");
-  lines.push("TITLE: 矩陣裡早就有答案——從六千零三步的折疊，到把抽屜收起來");
+  lines.push("TITLE: SALON-018 · 矩陣裡早就有答案——從六千零三步的折疊，到把抽屜收起來");
   lines.push("ENGLISH: The Answer Was Already in the Matrix: Folding 6,003 Steps and Closing the Drawer");
   lines.push("RECORD_STATUS: Filed. v0.2. Tuzi asked for it to be posted. Not posted to X. The proof-table ledger is unchanged.");
   lines.push("CATEGORY: 記");
