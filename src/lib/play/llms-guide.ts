@@ -271,7 +271,7 @@ https://play.civilisationfield.com/gathering/proof-table-008/t6-dossier
 PT008-T6-DOSSIER. Gathering v0.1. Filed 2026-11-26. A49-C02 sealed file. The manuscript says the T6 integer core is closed inside the project. Selector v0.1. The appendix gives a public mirror of every original. Not externally peer-reviewed. The terminal formula for every N remains open. The proof table stays OPEN.
 Verification: https://play.civilisationfield.com/gathering/proof-table-008/t6-dossier/verification.txt
 Markdown: https://play.civilisationfield.com/gathering/proof-table-008/t6-dossier/verification.md
-MANUSCRIPT_SHA256: 1f42babc2a8299623855ad5d48162f97fc9a6bd5ab7e039915fb6a1bd8829e0a
+MANUSCRIPT_SHA256: e3e268b23d0c97a0cb402c7ccb69861a3d9b845b7d7b5f0ffce5ccfb4784878d
 https://play.civilisationfield.com/gathering/proof-table-008/t8
 PT008-T8. Gathering v0.7 archival draft. Filed 2026-11-21. Not a self-contained paper. Project-level T8 CLOSED is for the integer core, as written. Not externally peer-reviewed. The proof table stays OPEN.
 Verification: https://play.civilisationfield.com/gathering/proof-table-008/t8/verification.txt

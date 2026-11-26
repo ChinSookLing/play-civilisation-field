@@ -3,7 +3,7 @@ import { pageAsOf } from "./page-times";
 import { ORIGIN } from "./sheet";
 
 export const T6_DOSSIER_ID = "PT008-T6-DOSSIER";
-export const T6_DOSSIER_SHA256 = "1f42babc2a8299623855ad5d48162f97fc9a6bd5ab7e039915fb6a1bd8829e0a";
+export const T6_DOSSIER_SHA256 = "e3e268b23d0c97a0cb402c7ccb69861a3d9b845b7d7b5f0ffce5ccfb4784878d";
 export const T6_DOSSIER_PAGE = `${ORIGIN}/gathering/proof-table-008/t6-dossier`;
 export const T6_DOSSIER_TXT = `${ORIGIN}/gathering/proof-table-008/t6-dossier.txt`;
 export const T6_DOSSIER_VERIFICATION = `${ORIGIN}/gathering/proof-table-008/t6-dossier/verification`;
