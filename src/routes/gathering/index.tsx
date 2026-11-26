@@ -96,6 +96,13 @@ function GatheringList() {
               light: "/gathering/proof-table-008/t6/verification.txt",
             },
             {
+              href: "/gathering/proof-table-008/t6-dossier",
+              title: "PT-008 · Time Forge · 六跑者構造性選時證明檔案",
+              status: "Filed. Gathering v0.1. 2026-11-26. Integer core closed inside the project. Not externally peer-reviewed. The proof table stays OPEN.",
+              note: "Selector v0.1, sealed under A49-C02. Five nonzero integer speeds. The terminal formula for every N remains open. Original ZIPs are linked, not attached.",
+              light: "/gathering/proof-table-008/t6-dossier/verification.txt",
+            },
+            {
               href: "/gathering/proof-table-008/t7",
               title: "PT-008 · Time Forge · 七跑者的直接選時構造",
               status: "Filed. v0.3. In-circle ruling 2026-11-13. Not externally peer-reviewed. The proof table stays OPEN.",

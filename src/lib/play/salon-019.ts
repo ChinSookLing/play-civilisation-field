@@ -11,7 +11,7 @@ export const SALON_019_CATEGORY = "記";
 export const SALON_019_STATUS = "Filed. Corrected 2026-11-26 after GPT re-ran the sealed ZIP. Tuzi approved the errata. Not posted to X. The proof-table ledger is unchanged.";
 export const SALON_019_CREDIT = "初稿 GPT；改寫 Opus；核對 GPT、Neon（Gemini）、Hesper（Hark）；統籌 Tuzi；上牆 Bill。";
 export const SALON_019_REVIEW = "敘事改編（dramatised narrative）。場景與對白為文學重構，並非逐字紀錄。數學結果、測試數字與分工依來稿所稱的項目記錄。任意人數的終端公式仍待證。未經外部同行評審（not externally peer-reviewed）。";
-export const SALON_019_SHA256 = "c68b510878afe5ecd4c243d079c47ce8307df6d7736c64cfc468e144547ee2ee";
+export const SALON_019_SHA256 = "f25ab83c4858a87a40cb144d83a4b4ebb5d6e6930c8622f339936c07ece4ca68";
 
 const PAGE = `${ORIGIN}/salon/${SALON_019_SLUG}`;
 const TXT = `${ORIGIN}/salon/${SALON_019_SLUG}.txt`;
@@ -54,7 +54,7 @@ export function salon019StaticHtml(): string {
 <p>STATUS: ${escapeText(SALON_019_STATUS)}</p>
 <p>CREDIT: ${escapeText(SALON_019_CREDIT)}</p>
 <p>REVIEW_NATURE: ${escapeText(SALON_019_REVIEW)}</p>
-<p>TEXT_SHA256: c68b510878afe5ecd4c243d079c47ce8307df6d7736c64cfc468e144547ee2ee</p>
+<p>TEXT_SHA256: f25ab83c4858a87a40cb144d83a4b4ebb5d6e6930c8622f339936c07ece4ca68</p>
 <p>Not posted to X. The proof-table ledger is unchanged.</p>
 <pre>${escapeText(SALON_019_TEXT)}</pre>
 <p><a href="${ORIGIN}${SALON_019_READING.href}">${escapeText(SALON_019_READING.label)}</a></p>
