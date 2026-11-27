@@ -99,10 +99,10 @@ export function recordsText(extra?: {
   lines.push("TITLE: PT-008 · Time Forge · 六跑者的安全時間構造");
   lines.push("RECORD_STATUS: Filed. v0.2. Not a change to the proof-table ledger.");
   lines.push("RULING: in-circle, 2026-11-11, as written in the manuscript. Not externally peer-reviewed.");
-  lines.push("MANUSCRIPT_SHA256: 08d8898e8ee4add10816003ca5f218d087d08a3584cbd852f027caa690b594fd");
+  lines.push("MANUSCRIPT_SHA256: d2be570b4937ddbbf3aba757528e3e9933d0df3aee6e7dca635225ace3fc778e");
   lines.push(`RECORD_URL: ${ORIGIN}/gathering/proof-table-008/t6`);
-  lines.push(`FORMATS: ${ORIGIN}/gathering/proof-table-008/t6.txt | ${ORIGIN}/gathering/proof-table-008/t6/verification.txt | ${ORIGIN}/gathering/proof-table-008/t6/verification.md`);
-  lines.push("RECORD: filed at Tuzi's request on 2026-11-12. Theorem T6. The replay package named in the manuscript was not included. One formula for every N remains open. The proof table stays open.");
+  lines.push(`FORMATS: ${ORIGIN}/gathering/proof-table-008/t6.txt | ${ORIGIN}/gathering/proof-table-008/t6/verification.txt | ${ORIGIN}/gathering/proof-table-008/t6/verification.md | ${ORIGIN}/gathering/proof-table-008/t6/PT008-TF-R003a-C36-certificate.zip`);
+  lines.push("RECORD: filed at Tuzi's request on 2026-11-12. Theorem T6. The replay package named in the manuscript was not included. 2026-11-28 adds the C36 supplement after the v0.2 text. One formula for every N remains open. The proof table stays open.");
   lines.push("");
   lines.push("RECORD_ID: PT008-T7");
   lines.push("TYPE: gathering");

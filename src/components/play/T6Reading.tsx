@@ -43,6 +43,24 @@ function Inline({ text }: { text: string }) {
   let index = 0;
   let key = 0;
   while (index < text.length) {
+    if (text.startsWith("[", index)) {
+      const close = text.indexOf("](", index + 1);
+      const end = close > index ? text.indexOf(")", close + 2) : -1;
+      if (close > index + 1 && end > close + 2) {
+        const label = text.slice(index + 1, close);
+        const href = text.slice(close + 2, end);
+        if (href.startsWith("https://") && !href.includes(" ")) {
+          nodes.push(
+            <a key={key} href={href} className="text-fg underline decoration-1 underline-offset-4">
+              {label}
+            </a>,
+          );
+          key += 1;
+          index = end + 1;
+          continue;
+        }
+      }
+    }
     if (text[index] === "$") {
       const end = text.indexOf("$", index + 1);
       if (end > index + 1) {
@@ -69,7 +87,7 @@ function Inline({ text }: { text: string }) {
       }
     }
     let end = index + 1;
-    while (end < text.length && text[end] !== "$" && text[end] !== "`") end += 1;
+    while (end < text.length && text[end] !== "$" && text[end] !== "`" && text[end] !== "[") end += 1;
     nodes.push(text.slice(index, end));
     key += 1;
     index = end;
