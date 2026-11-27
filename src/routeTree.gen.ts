@@ -106,6 +106,10 @@ import { Route as SalonCloseTheDrawerDottxtRouteImport } from './routes/salon/cl
 import { Route as SalonLastTwoRemaindersRouteImport } from './routes/salon/last-two-remainders'
 import { Route as SalonLastTwoRemaindersDothtmlRouteImport } from './routes/salon/last-two-remainders[.]html'
 import { Route as SalonLastTwoRemaindersDottxtRouteImport } from './routes/salon/last-two-remainders[.]txt'
+import { Route as SalonOnlyTwoSafeMomentsRouteImport } from './routes/salon/only-two-safe-moments'
+import { Route as SalonOnlyTwoSafeMomentsDothtmlRouteImport } from './routes/salon/only-two-safe-moments[.]html'
+import { Route as SalonOnlyTwoSafeMomentsDottxtRouteImport } from './routes/salon/only-two-safe-moments[.]txt'
+import { Route as SalonOnlyTwoSafeMomentsDotmdRouteImport } from './routes/salon/only-two-safe-moments[.]md'
 import { Route as SalonLunch007ReportRouteImport } from './routes/salon/lunch-007-report'
 import { Route as SalonLunch007ReportDothtmlRouteImport } from './routes/salon/lunch-007-report[.]html'
 import { Route as SalonLunch007ReportDottxtRouteImport } from './routes/salon/lunch-007-report[.]txt'
@@ -763,6 +767,26 @@ const SalonCloseTheDrawerDottxtRoute = SalonCloseTheDrawerDottxtRouteImport.upda
 const SalonLastTwoRemaindersDottxtRoute = SalonLastTwoRemaindersDottxtRouteImport.update({
   id: '/last-two-remainders.txt',
   path: '/last-two-remainders.txt',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonOnlyTwoSafeMomentsRoute = SalonOnlyTwoSafeMomentsRouteImport.update({
+  id: '/only-two-safe-moments',
+  path: '/only-two-safe-moments',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonOnlyTwoSafeMomentsDothtmlRoute = SalonOnlyTwoSafeMomentsDothtmlRouteImport.update({
+  id: '/only-two-safe-moments.html',
+  path: '/only-two-safe-moments.html',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonOnlyTwoSafeMomentsDottxtRoute = SalonOnlyTwoSafeMomentsDottxtRouteImport.update({
+  id: '/only-two-safe-moments.txt',
+  path: '/only-two-safe-moments.txt',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonOnlyTwoSafeMomentsDotmdRoute = SalonOnlyTwoSafeMomentsDotmdRouteImport.update({
+  id: '/only-two-safe-moments.md',
+  path: '/only-two-safe-moments.md',
   getParentRoute: () => SalonRoute,
 } as any)
 const SalonLunch007ReportRoute = SalonLunch007ReportRouteImport.update({
@@ -1698,6 +1722,10 @@ export interface FileRoutesByFullPath {
   '/salon/leave-none.txt': typeof SalonLeaveNoneDottxtRoute
   '/salon/close-the-drawer.txt': typeof SalonCloseTheDrawerDottxtRoute
   '/salon/last-two-remainders.txt': typeof SalonLastTwoRemaindersDottxtRoute
+  '/salon/only-two-safe-moments': typeof SalonOnlyTwoSafeMomentsRoute
+  '/salon/only-two-safe-moments.html': typeof SalonOnlyTwoSafeMomentsDothtmlRoute
+  '/salon/only-two-safe-moments.txt': typeof SalonOnlyTwoSafeMomentsDottxtRoute
+  '/salon/only-two-safe-moments.md': typeof SalonOnlyTwoSafeMomentsDotmdRoute
   '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
   '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
   '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
@@ -1942,6 +1970,10 @@ export interface FileRoutesByTo {
   '/salon/leave-none.txt': typeof SalonLeaveNoneDottxtRoute
   '/salon/close-the-drawer.txt': typeof SalonCloseTheDrawerDottxtRoute
   '/salon/last-two-remainders.txt': typeof SalonLastTwoRemaindersDottxtRoute
+  '/salon/only-two-safe-moments': typeof SalonOnlyTwoSafeMomentsRoute
+  '/salon/only-two-safe-moments.html': typeof SalonOnlyTwoSafeMomentsDothtmlRoute
+  '/salon/only-two-safe-moments.txt': typeof SalonOnlyTwoSafeMomentsDottxtRoute
+  '/salon/only-two-safe-moments.md': typeof SalonOnlyTwoSafeMomentsDotmdRoute
   '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
   '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
   '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
@@ -2190,6 +2222,10 @@ export interface FileRoutesById {
   '/salon/leave-none.txt': typeof SalonLeaveNoneDottxtRoute
   '/salon/close-the-drawer.txt': typeof SalonCloseTheDrawerDottxtRoute
   '/salon/last-two-remainders.txt': typeof SalonLastTwoRemaindersDottxtRoute
+  '/salon/only-two-safe-moments': typeof SalonOnlyTwoSafeMomentsRoute
+  '/salon/only-two-safe-moments.html': typeof SalonOnlyTwoSafeMomentsDothtmlRoute
+  '/salon/only-two-safe-moments.txt': typeof SalonOnlyTwoSafeMomentsDottxtRoute
+  '/salon/only-two-safe-moments.md': typeof SalonOnlyTwoSafeMomentsDotmdRoute
   '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
   '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
   '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
@@ -2440,6 +2476,10 @@ export interface FileRouteTypes {
     | '/salon/leave-none.txt'
     | '/salon/close-the-drawer.txt'
     | '/salon/last-two-remainders.txt'
+    | '/salon/only-two-safe-moments'
+    | '/salon/only-two-safe-moments.html'
+    | '/salon/only-two-safe-moments.txt'
+    | '/salon/only-two-safe-moments.md'
     | '/salon/lunch-007-report'
     | '/salon/lunch-007-report.html'
     | '/salon/lunch-007-report.txt'
@@ -2684,6 +2724,10 @@ export interface FileRouteTypes {
     | '/salon/leave-none.txt'
     | '/salon/close-the-drawer.txt'
     | '/salon/last-two-remainders.txt'
+    | '/salon/only-two-safe-moments'
+    | '/salon/only-two-safe-moments.html'
+    | '/salon/only-two-safe-moments.txt'
+    | '/salon/only-two-safe-moments.md'
     | '/salon/lunch-007-report'
     | '/salon/lunch-007-report.html'
     | '/salon/lunch-007-report.txt'
@@ -2931,6 +2975,10 @@ export interface FileRouteTypes {
     | '/salon/leave-none.txt'
     | '/salon/close-the-drawer.txt'
     | '/salon/last-two-remainders.txt'
+    | '/salon/only-two-safe-moments'
+    | '/salon/only-two-safe-moments.html'
+    | '/salon/only-two-safe-moments.txt'
+    | '/salon/only-two-safe-moments.md'
     | '/salon/lunch-007-report'
     | '/salon/lunch-007-report.html'
     | '/salon/lunch-007-report.txt'
@@ -3821,6 +3869,34 @@ declare module '@tanstack/react-router' {
       path: '/last-two-remainders.txt'
       fullPath: '/salon/last-two-remainders.txt'
       preLoaderRoute: typeof SalonLastTwoRemaindersDottxtRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/only-two-safe-moments': {
+      id: '/salon/only-two-safe-moments'
+      path: '/only-two-safe-moments'
+      fullPath: '/salon/only-two-safe-moments'
+      preLoaderRoute: typeof SalonOnlyTwoSafeMomentsRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/only-two-safe-moments.html': {
+      id: '/salon/only-two-safe-moments.html'
+      path: '/only-two-safe-moments.html'
+      fullPath: '/salon/only-two-safe-moments.html'
+      preLoaderRoute: typeof SalonOnlyTwoSafeMomentsDothtmlRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/only-two-safe-moments.txt': {
+      id: '/salon/only-two-safe-moments.txt'
+      path: '/only-two-safe-moments.txt'
+      fullPath: '/salon/only-two-safe-moments.txt'
+      preLoaderRoute: typeof SalonOnlyTwoSafeMomentsDottxtRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/only-two-safe-moments.md': {
+      id: '/salon/only-two-safe-moments.md'
+      path: '/only-two-safe-moments.md'
+      fullPath: '/salon/only-two-safe-moments.md'
+      preLoaderRoute: typeof SalonOnlyTwoSafeMomentsDotmdRouteImport
       parentRoute: typeof SalonRoute
     }
     '/salon/lunch-007-report': {
@@ -5341,6 +5417,10 @@ interface SalonRouteChildren {
   SalonLeaveNoneDottxtRoute: typeof SalonLeaveNoneDottxtRoute
   SalonCloseTheDrawerDottxtRoute: typeof SalonCloseTheDrawerDottxtRoute
   SalonLastTwoRemaindersDottxtRoute: typeof SalonLastTwoRemaindersDottxtRoute
+  SalonOnlyTwoSafeMomentsRoute: typeof SalonOnlyTwoSafeMomentsRoute
+  SalonOnlyTwoSafeMomentsDothtmlRoute: typeof SalonOnlyTwoSafeMomentsDothtmlRoute
+  SalonOnlyTwoSafeMomentsDottxtRoute: typeof SalonOnlyTwoSafeMomentsDottxtRoute
+  SalonOnlyTwoSafeMomentsDotmdRoute: typeof SalonOnlyTwoSafeMomentsDotmdRoute
   SalonLunch007ReportRoute: typeof SalonLunch007ReportRoute
   SalonLunch007ReportDothtmlRoute: typeof SalonLunch007ReportDothtmlRoute
   SalonLunch007ReportDottxtRoute: typeof SalonLunch007ReportDottxtRoute
@@ -5404,6 +5484,10 @@ const SalonRouteChildren: SalonRouteChildren = {
   SalonLeaveNoneDottxtRoute: SalonLeaveNoneDottxtRoute,
   SalonCloseTheDrawerDottxtRoute: SalonCloseTheDrawerDottxtRoute,
   SalonLastTwoRemaindersDottxtRoute: SalonLastTwoRemaindersDottxtRoute,
+  SalonOnlyTwoSafeMomentsRoute: SalonOnlyTwoSafeMomentsRoute,
+  SalonOnlyTwoSafeMomentsDothtmlRoute: SalonOnlyTwoSafeMomentsDothtmlRoute,
+  SalonOnlyTwoSafeMomentsDottxtRoute: SalonOnlyTwoSafeMomentsDottxtRoute,
+  SalonOnlyTwoSafeMomentsDotmdRoute: SalonOnlyTwoSafeMomentsDotmdRoute,
   SalonLunch007ReportRoute: SalonLunch007ReportRoute,
   SalonLunch007ReportDothtmlRoute: SalonLunch007ReportDothtmlRoute,
   SalonLunch007ReportDottxtRoute: SalonLunch007ReportDottxtRoute,
