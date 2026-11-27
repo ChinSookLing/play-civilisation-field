@@ -99,7 +99,7 @@ function GatheringList() {
               href: "/gathering/proof-table-008/t6-dossier",
               title: "PT-008 · Time Forge · 六跑者構造性選時證明檔案 · A49-C02 封版檔案",
               status: "Filed. Gathering v0.1. 2026-11-26. Integer core closed inside the project. Not externally peer-reviewed. The proof table stays OPEN.",
-              note: "A49-C02 封版檔案。Selector v0.1. The appendix gives a public mirror of every original. The terminal formula for every N remains open. 2026-11-26.",
+              note: "A49-C02 封版檔案。Selector v0.1. The appendix gives a public mirror of every original. C36 supplement added 2026-11-28. The terminal formula for every N remains open. 2026-11-26.",
               light: "/gathering/proof-table-008/t6-dossier/verification.txt",
             },
             {

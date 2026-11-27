@@ -258,21 +258,21 @@ PT-008 new branch T1–T5 is filed separately. v0.3. 2026-11-12 adds Appendix U.
 https://play.civilisationfield.com/gathering/proof-table-008/new-branch
 Verification: https://play.civilisationfield.com/gathering/proof-table-008/new-branch/verification.txt
 Markdown: https://play.civilisationfield.com/gathering/proof-table-008/new-branch/verification.md
-PT-008 six-runner construction T6 is filed separately. 整合修訂稿 v0.2. In-circle ruling 2026-11-11, as written in the manuscript. A C36 supplement was added on 2026-11-28 after that text. Not externally peer-reviewed. One formula for every N remains open. The replay package was not included. The C36 certificate zip is public. The proof table stays OPEN.
+PT-008 six-runner construction T6 is filed separately. 整合修訂稿 v0.2. In-circle ruling 2026-11-11, as written in the manuscript. Not externally peer-reviewed. One formula for every N remains open. The replay package was not included. The proof table stays OPEN.
 https://play.civilisationfield.com/gathering/proof-table-008/t6
 Verification: https://play.civilisationfield.com/gathering/proof-table-008/t6/verification.txt
 Markdown: https://play.civilisationfield.com/gathering/proof-table-008/t6/verification.md
-C36 certificate: https://play.civilisationfield.com/gathering/proof-table-008/t6/PT008-TF-R003a-C36-certificate.zip
 PT-008 seven-runner construction T7 is filed separately. 外審準備稿 v0.3. In-circle ruling 2026-11-13, as written in the manuscript. Not externally peer-reviewed. Novelty not checked. One formula for every N remains open. The review package is included. Author manuscripts named in that package are still pending. The proof table stays OPEN.
 https://play.civilisationfield.com/gathering/proof-table-008/t7
 Verification: https://play.civilisationfield.com/gathering/proof-table-008/t7/verification.txt
 Markdown: https://play.civilisationfield.com/gathering/proof-table-008/t7/verification.md
 Package: https://play.civilisationfield.com/gathering/proof-table-008/t7/PT008-T7-Gathering-Review-v0.3.zip
 https://play.civilisationfield.com/gathering/proof-table-008/t6-dossier
-PT008-T6-DOSSIER. Gathering v0.1. Filed 2026-11-26. A49-C02 sealed file. The manuscript says the T6 integer core is closed inside the project. Selector v0.1. The appendix gives a public mirror of every original. Not externally peer-reviewed. The terminal formula for every N remains open. The proof table stays OPEN.
+PT008-T6-DOSSIER. Gathering v0.1. Filed 2026-11-26. A49-C02 sealed file. The manuscript says the T6 integer core is closed inside the project. Selector v0.1. The appendix gives a public mirror of every original. A C36 supplement was added on 2026-11-28 after that file. Not externally peer-reviewed. The terminal formula for every N remains open. The proof table stays OPEN.
 Verification: https://play.civilisationfield.com/gathering/proof-table-008/t6-dossier/verification.txt
 Markdown: https://play.civilisationfield.com/gathering/proof-table-008/t6-dossier/verification.md
-MANUSCRIPT_SHA256: e3e268b23d0c97a0cb402c7ccb69861a3d9b845b7d7b5f0ffce5ccfb4784878d
+C36 certificate: https://play.civilisationfield.com/gathering/proof-table-008/t6-dossier/PT008-TF-R003a-C36-certificate.zip
+MANUSCRIPT_SHA256: 8ce3ad59311d896ce61d5e0b3e1867a713d8ccf23805e979a6bd5dc588595182
 https://play.civilisationfield.com/gathering/proof-table-008/t8
 PT008-T8. Gathering v0.7 archival draft. Filed 2026-11-21. Not a self-contained paper. Project-level T8 CLOSED is for the integer core, as written. Not externally peer-reviewed. The proof table stays OPEN.
 Verification: https://play.civilisationfield.com/gathering/proof-table-008/t8/verification.txt

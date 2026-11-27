@@ -99,10 +99,10 @@ export function recordsText(extra?: {
   lines.push("TITLE: PT-008 · Time Forge · 六跑者的安全時間構造");
   lines.push("RECORD_STATUS: Filed. v0.2. Not a change to the proof-table ledger.");
   lines.push("RULING: in-circle, 2026-11-11, as written in the manuscript. Not externally peer-reviewed.");
-  lines.push("MANUSCRIPT_SHA256: d2be570b4937ddbbf3aba757528e3e9933d0df3aee6e7dca635225ace3fc778e");
+  lines.push("MANUSCRIPT_SHA256: 08d8898e8ee4add10816003ca5f218d087d08a3584cbd852f027caa690b594fd");
   lines.push(`RECORD_URL: ${ORIGIN}/gathering/proof-table-008/t6`);
-  lines.push(`FORMATS: ${ORIGIN}/gathering/proof-table-008/t6.txt | ${ORIGIN}/gathering/proof-table-008/t6/verification.txt | ${ORIGIN}/gathering/proof-table-008/t6/verification.md | ${ORIGIN}/gathering/proof-table-008/t6/PT008-TF-R003a-C36-certificate.zip`);
-  lines.push("RECORD: filed at Tuzi's request on 2026-11-12. Theorem T6. The replay package named in the manuscript was not included. 2026-11-28 adds the C36 supplement after the v0.2 text. One formula for every N remains open. The proof table stays open.");
+  lines.push(`FORMATS: ${ORIGIN}/gathering/proof-table-008/t6.txt | ${ORIGIN}/gathering/proof-table-008/t6/verification.txt | ${ORIGIN}/gathering/proof-table-008/t6/verification.md`);
+  lines.push("RECORD: filed at Tuzi's request on 2026-11-12. Theorem T6. The replay package named in the manuscript was not included. One formula for every N remains open. The proof table stays open.");
   lines.push("");
   lines.push("RECORD_ID: PT008-T7");
   lines.push("TYPE: gathering");
@@ -121,10 +121,10 @@ export function recordsText(extra?: {
   lines.push("ENGLISH: The Sixth Runner — A Constructive Time-Selection Proof Dossier");
   lines.push("RECORD_STATUS: Filed. Gathering v0.1. 2026-11-26. Not a change to the proof-table ledger.");
   lines.push("RULING: The manuscript says the T6 integer core is closed inside the project. Not externally peer-reviewed. The terminal formula for every N remains open.");
-  lines.push("MANUSCRIPT_SHA256: e3e268b23d0c97a0cb402c7ccb69861a3d9b845b7d7b5f0ffce5ccfb4784878d");
+  lines.push("MANUSCRIPT_SHA256: 8ce3ad59311d896ce61d5e0b3e1867a713d8ccf23805e979a6bd5dc588595182");
   lines.push(`RECORD_URL: ${ORIGIN}/gathering/proof-table-008/t6-dossier`);
-  lines.push(`FORMATS: ${ORIGIN}/gathering/proof-table-008/t6-dossier.txt | ${ORIGIN}/gathering/proof-table-008/t6-dossier/verification.txt | ${ORIGIN}/gathering/proof-table-008/t6-dossier/verification.md`);
-  lines.push("RECORD: filed at Tuzi's request on 2026-11-26. Selector v0.1, sealed under A49-C02. The appendix gives a public mirror of every original. The earlier T6 v0.2 page stays at /gathering/proof-table-008/t6. SALON-019 points at the appendix. The proof table stays open.");
+  lines.push(`FORMATS: ${ORIGIN}/gathering/proof-table-008/t6-dossier.txt | ${ORIGIN}/gathering/proof-table-008/t6-dossier/verification.txt | ${ORIGIN}/gathering/proof-table-008/t6-dossier/verification.md | ${ORIGIN}/gathering/proof-table-008/t6-dossier/PT008-TF-R003a-C36-certificate.zip`);
+  lines.push("RECORD: filed at Tuzi's request on 2026-11-26. Selector v0.1, sealed under A49-C02. The appendix gives a public mirror of every original. 2026-11-28 adds the C36 supplement after that file. The earlier T6 v0.2 page stays at /gathering/proof-table-008/t6. SALON-019 points at the appendix. The proof table stays open.");
   lines.push("");
   lines.push("RECORD_ID: PT008-T8");
   lines.push("TYPE: gathering");

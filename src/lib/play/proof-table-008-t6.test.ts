@@ -7,11 +7,11 @@ import { parseT6, uncoveredT6Lines } from "./proof-table-008-t6-read.ts";
 
 const manuscriptPath = new URL("../../../docs/gathering/PT008-T6-v0.2.md", import.meta.url);
 const ledgerPath = new URL("./proof-table-008.ts", import.meta.url);
-const EXPECTED = "d2be570b4937ddbbf3aba757528e3e9933d0df3aee6e7dca635225ace3fc778e";
+const EXPECTED = "08d8898e8ee4add10816003ca5f218d087d08a3584cbd852f027caa690b594fd";
 
 test("the T6 manuscript is the filed v0.2 file", () => {
   const bytes = readFileSync(manuscriptPath);
-  assert.equal(bytes.length, 40310);
+  assert.equal(bytes.length, 38740);
   assert.equal(createHash("sha256").update(bytes).digest("hex"), EXPECTED);
   assert.equal(bytes.subarray(-1)[0] !== 0x0a, true);
   const text = bytes.toString("utf8");
@@ -19,13 +19,6 @@ test("the T6 manuscript is the filed v0.2 file", () => {
   assert.equal(text.includes("定理 T6。"), true);
   assert.equal(text.includes("整合修訂稿 v0.2 · 2026-11-12"), true);
   assert.equal(text.includes("SALON-013 記錄這一輪的過程與當事人附記。"), true);
-  assert.equal(text.includes("C36 · 六跑者的兩組孤立安全時刻"), true);
-  assert.equal(
-    text.includes(
-      "[C36 可重現證書（ZIP）](https://play.civilisationfield.com/gathering/proof-table-008/t6/PT008-TF-R003a-C36-certificate.zip)",
-    ),
-    true,
-  );
   assert.equal(text.includes("任意人數的通式（One Formula）仍為開放目標。"), true);
 });
 

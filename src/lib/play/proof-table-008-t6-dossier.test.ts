@@ -6,7 +6,7 @@ import { parseT6Dossier } from "./proof-table-008-t6-dossier-read.ts";
 
 const manuscriptPath = new URL("../../../docs/gathering/PT008-T6-Gathering-v0.1.md", import.meta.url);
 const ledgerPath = new URL("./proof-table-008.ts", import.meta.url);
-const EXPECTED = "e3e268b23d0c97a0cb402c7ccb69861a3d9b845b7d7b5f0ffce5ccfb4784878d";
+const EXPECTED = "8ce3ad59311d896ce61d5e0b3e1867a713d8ccf23805e979a6bd5dc588595182";
 
 test("T6 dossier manuscript is the filed text and stays off the ledger", () => {
   const bytes = readFileSync(manuscriptPath);
@@ -42,6 +42,14 @@ test("T6 dossier manuscript is the filed text and stays off the ledger", () => {
   assert.equal(rendered.includes("可將各相位胞與閉基本方形"), true);
   assert.equal(text.includes("$Z\\ge 15$"), false);
   assert.equal(text.includes("可以交閉基本方形"), false);
+  assert.equal(text.includes("C36 · 六跑者的兩組孤立安全時刻"), true);
+  assert.equal(
+    text.includes(
+      "[C36 可重現證書（ZIP）](https://play.civilisationfield.com/gathering/proof-table-008/t6-dossier/PT008-TF-R003a-C36-certificate.zip)",
+    ),
+    true,
+  );
+  assert.equal(readFileSync(new URL("../../../docs/gathering/PT008-T6-v0.2.md", import.meta.url), "utf8").includes("C36"), false);
   assert.equal(readFileSync(ledgerPath, "utf8").includes("PT008-T6-DOSSIER"), false);
   assert.equal(readFileSync(ledgerPath, "utf8").includes("t6-dossier"), false);
 });
