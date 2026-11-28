@@ -18,7 +18,7 @@ export const Route = createFileRoute("/gathering/proof-table-008/t7-c45")({
   head: () =>
     pageMeta(
       `PT-008 · ${T7_C45_TITLE}`,
-      "C45 closes the seven-runner integer classification inside the project. Q46 independent review is still open. Not externally peer-reviewed. The proof table stays OPEN.",
+      "C45 closes the seven-runner integer classification inside the project. Q46 independent review is complete. Not externally peer-reviewed. The proof table stays OPEN.",
     ),
   component: T7C45Page,
 });

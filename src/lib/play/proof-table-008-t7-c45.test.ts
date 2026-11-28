@@ -12,7 +12,7 @@ const rulingPath = new URL("../../../public/gathering/proof-table-008/t7-c45/PT0
 
 test("T7 C45 record and SALON-021 stay off the old pages", () => {
   assert.equal(createHash("sha256").update(readFileSync(t7Path)).digest("hex"), "8efb3c94f268d6606f18587b8399f025a2d9ee44ce9d8818c4678b49d892bd22");
-  assert.equal(createHash("sha256").update(readFileSync(c45Path)).digest("hex"), "7a9c5c968fdf303caaadb3c50892e5f900bc6cd9f222b55c73311d341f85b86f");
+  assert.equal(createHash("sha256").update(readFileSync(c45Path)).digest("hex"), "02e8f0f968d84449cb5c1956cc3eb2d7340a35562d499c4125171f9511f3e62e");
   assert.equal(createHash("sha256").update(readFileSync(zipPath)).digest("hex"), "39e22f4e8f46d6a2186b6a61e9745329a42e88521cd8cbb783fc54d0dfa1bfdd");
   assert.equal(readFileSync(zipPath).length, 67597);
   assert.equal(createHash("sha256").update(readFileSync(rulingPath)).digest("hex"), "087a5113f77ceed153ee92cfbe32398f8371b9be262d1a89504b14f2740fde26");

@@ -112,7 +112,7 @@ function GatheringList() {
             {
               href: "/gathering/proof-table-008/t7-c45",
               title: "PT-008 · Time Forge · 七位跑者 · 整數選時與唯一邊界例",
-              status: "Filed. C45 closed inside the project. Q46 independent review still open. Not externally peer-reviewed. The proof table stays OPEN.",
+              status: "七跑者（T7）項目內閉合（CLOSED） · Q46 三席獨立覆核完成. Not externally peer-reviewed. The proof table stays OPEN.",
               note: "C45 完成七跑者的整數分類。唯有等距組 (1,2,3,4,5,6) 沒有嚴格安全時刻。它仍有閉安全時刻。其他每一組皆可由讀時器選出精確有理的嚴格安全時刻。2026-11-28.",
               light: "/gathering/proof-table-008/t7-c45.txt",
             },

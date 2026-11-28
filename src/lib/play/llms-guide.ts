@@ -289,11 +289,11 @@ Verification: https://play.civilisationfield.com/gathering/proof-table-008/t7/ve
 Markdown: https://play.civilisationfield.com/gathering/proof-table-008/t7/verification.md
 Package: https://play.civilisationfield.com/gathering/proof-table-008/t7/PT008-T7-Gathering-Review-v0.3.zip
 https://play.civilisationfield.com/gathering/proof-table-008/t7-c45
-PT008-T7-C45. 七位跑者 · 整數選時與唯一邊界例. Filed 2026-11-28. C45 closed inside the project. Q46 independent review still open. The earlier T7 page is unchanged. Not externally peer-reviewed. One formula for every N remains open. The proof table stays OPEN.
+PT008-T7-C45. 七位跑者 · 整數選時與唯一邊界例. Filed 2026-11-28. C45 closed inside the project. Q46 independent review is complete. The earlier T7 page is unchanged. Not externally peer-reviewed. One formula for every N remains open. The proof table stays OPEN.
 Plain text: https://play.civilisationfield.com/gathering/proof-table-008/t7-c45.txt
 Ruling: https://play.civilisationfield.com/gathering/proof-table-008/t7-c45/PT008-TF-R003a-C45-Q46.md
 Evidence: https://play.civilisationfield.com/gathering/proof-table-008/t7-c45/PT008-TF-R003a-C45-evidence.zip
-MANUSCRIPT_SHA256: 7a9c5c968fdf303caaadb3c50892e5f900bc6cd9f222b55c73311d341f85b86f
+MANUSCRIPT_SHA256: 02e8f0f968d84449cb5c1956cc3eb2d7340a35562d499c4125171f9511f3e62e
 ZIP_SHA256: 39e22f4e8f46d6a2186b6a61e9745329a42e88521cd8cbb783fc54d0dfa1bfdd
 https://play.civilisationfield.com/gathering/proof-table-008/t6-dossier
 PT008-T6-DOSSIER. Gathering v0.1. Filed 2026-11-26. A49-C02 sealed file. The manuscript says the T6 integer core is closed inside the project. Selector v0.1. The appendix gives a public mirror of every original. A C36 supplement was added on 2026-11-28 after that file. Not externally peer-reviewed. The terminal formula for every N remains open. The proof table stays OPEN.

@@ -118,8 +118,8 @@ export function recordsText(extra?: {
   lines.push("RECORD_ID: PT008-T7-C45");
   lines.push("TYPE: gathering");
   lines.push("TITLE: 七位跑者 · 整數選時與唯一邊界例");
-  lines.push("RECORD_STATUS: Filed. 2026-11-28. C45 closed inside the project. Q46 independent review still open. Not a change to the proof-table ledger.");
-  lines.push("MANUSCRIPT_SHA256: 7a9c5c968fdf303caaadb3c50892e5f900bc6cd9f222b55c73311d341f85b86f");
+  lines.push("RECORD_STATUS: Filed. 2026-11-28. C45 closed inside the project. Q46 independent review is complete. Not a change to the proof-table ledger.");
+  lines.push("MANUSCRIPT_SHA256: 02e8f0f968d84449cb5c1956cc3eb2d7340a35562d499c4125171f9511f3e62e");
   lines.push("ZIP_SHA256: 39e22f4e8f46d6a2186b6a61e9745329a42e88521cd8cbb783fc54d0dfa1bfdd");
   lines.push(`RECORD_URL: ${ORIGIN}/gathering/proof-table-008/t7-c45`);
   lines.push(`FORMATS: ${ORIGIN}/gathering/proof-table-008/t7-c45.txt | ${ORIGIN}/gathering/proof-table-008/t7-c45/PT008-TF-R003a-C45-Q46.md | ${ORIGIN}/gathering/proof-table-008/t7-c45/PT008-TF-R003a-C45-evidence.zip`);
