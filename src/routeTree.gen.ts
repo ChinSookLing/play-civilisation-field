@@ -110,6 +110,10 @@ import { Route as SalonOnlyTwoSafeMomentsRouteImport } from './routes/salon/only
 import { Route as SalonOnlyTwoSafeMomentsDothtmlRouteImport } from './routes/salon/only-two-safe-moments[.]html'
 import { Route as SalonOnlyTwoSafeMomentsDottxtRouteImport } from './routes/salon/only-two-safe-moments[.]txt'
 import { Route as SalonOnlyTwoSafeMomentsDotmdRouteImport } from './routes/salon/only-two-safe-moments[.]md'
+import { Route as SalonOnlyOneOnTheLineRouteImport } from './routes/salon/only-one-on-the-line'
+import { Route as SalonOnlyOneOnTheLineDothtmlRouteImport } from './routes/salon/only-one-on-the-line[.]html'
+import { Route as SalonOnlyOneOnTheLineDottxtRouteImport } from './routes/salon/only-one-on-the-line[.]txt'
+import { Route as SalonOnlyOneOnTheLineDotmdRouteImport } from './routes/salon/only-one-on-the-line[.]md'
 import { Route as SalonLunch007ReportRouteImport } from './routes/salon/lunch-007-report'
 import { Route as SalonLunch007ReportDothtmlRouteImport } from './routes/salon/lunch-007-report[.]html'
 import { Route as SalonLunch007ReportDottxtRouteImport } from './routes/salon/lunch-007-report[.]txt'
@@ -181,6 +185,8 @@ import { Route as GatheringProofTable008T6RouteImport } from './routes/gathering
 import { Route as GatheringProofTable008T6DottxtRouteImport } from './routes/gathering/proof-table-008/t6[.]txt'
 import { Route as GatheringProofTable008T7RouteImport } from './routes/gathering/proof-table-008/t7'
 import { Route as GatheringProofTable008T7DottxtRouteImport } from './routes/gathering/proof-table-008/t7[.]txt'
+import { Route as GatheringProofTable008T7C45RouteImport } from './routes/gathering/proof-table-008/t7-c45'
+import { Route as GatheringProofTable008T7C45DottxtRouteImport } from './routes/gathering/proof-table-008/t7-c45[.]txt'
 import { Route as GatheringProofTable008T8RouteImport } from './routes/gathering/proof-table-008/t8'
 import { Route as GatheringProofTable008T8DottxtRouteImport } from './routes/gathering/proof-table-008/t8[.]txt'
 import { Route as GatheringProofTable008T6DossierRouteImport } from './routes/gathering/proof-table-008/t6-dossier'
@@ -789,6 +795,26 @@ const SalonOnlyTwoSafeMomentsDotmdRoute = SalonOnlyTwoSafeMomentsDotmdRouteImpor
   path: '/only-two-safe-moments.md',
   getParentRoute: () => SalonRoute,
 } as any)
+const SalonOnlyOneOnTheLineRoute = SalonOnlyOneOnTheLineRouteImport.update({
+  id: '/only-one-on-the-line',
+  path: '/only-one-on-the-line',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonOnlyOneOnTheLineDothtmlRoute = SalonOnlyOneOnTheLineDothtmlRouteImport.update({
+  id: '/only-one-on-the-line.html',
+  path: '/only-one-on-the-line.html',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonOnlyOneOnTheLineDottxtRoute = SalonOnlyOneOnTheLineDottxtRouteImport.update({
+  id: '/only-one-on-the-line.txt',
+  path: '/only-one-on-the-line.txt',
+  getParentRoute: () => SalonRoute,
+} as any)
+const SalonOnlyOneOnTheLineDotmdRoute = SalonOnlyOneOnTheLineDotmdRouteImport.update({
+  id: '/only-one-on-the-line.md',
+  path: '/only-one-on-the-line.md',
+  getParentRoute: () => SalonRoute,
+} as any)
 const SalonLunch007ReportRoute = SalonLunch007ReportRouteImport.update({
   id: '/lunch-007-report',
   path: '/lunch-007-report',
@@ -1189,6 +1215,18 @@ const GatheringProofTable008T7DottxtRoute =
   GatheringProofTable008T7DottxtRouteImport.update({
     id: '/proof-table-008/t7.txt',
     path: '/proof-table-008/t7.txt',
+    getParentRoute: () => GatheringRoute,
+  } as any)
+const GatheringProofTable008T7C45Route =
+  GatheringProofTable008T7C45RouteImport.update({
+    id: '/proof-table-008/t7-c45',
+    path: '/proof-table-008/t7-c45',
+    getParentRoute: () => GatheringRoute,
+  } as any)
+const GatheringProofTable008T7C45DottxtRoute =
+  GatheringProofTable008T7C45DottxtRouteImport.update({
+    id: '/proof-table-008/t7-c45.txt',
+    path: '/proof-table-008/t7-c45.txt',
     getParentRoute: () => GatheringRoute,
   } as any)
 const GatheringProofTable008T8Route =
@@ -1726,6 +1764,10 @@ export interface FileRoutesByFullPath {
   '/salon/only-two-safe-moments.html': typeof SalonOnlyTwoSafeMomentsDothtmlRoute
   '/salon/only-two-safe-moments.txt': typeof SalonOnlyTwoSafeMomentsDottxtRoute
   '/salon/only-two-safe-moments.md': typeof SalonOnlyTwoSafeMomentsDotmdRoute
+  '/salon/only-one-on-the-line': typeof SalonOnlyOneOnTheLineRoute
+  '/salon/only-one-on-the-line.html': typeof SalonOnlyOneOnTheLineDothtmlRoute
+  '/salon/only-one-on-the-line.txt': typeof SalonOnlyOneOnTheLineDottxtRoute
+  '/salon/only-one-on-the-line.md': typeof SalonOnlyOneOnTheLineDotmdRoute
   '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
   '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
   '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
@@ -1790,6 +1832,8 @@ export interface FileRoutesByFullPath {
   '/gathering/proof-table-008/t6.txt': typeof GatheringProofTable008T6DottxtRoute
   '/gathering/proof-table-008/t7': typeof GatheringProofTable008T7RouteWithChildren
   '/gathering/proof-table-008/t7.txt': typeof GatheringProofTable008T7DottxtRoute
+  '/gathering/proof-table-008/t7-c45': typeof GatheringProofTable008T7C45Route
+  '/gathering/proof-table-008/t7-c45.txt': typeof GatheringProofTable008T7C45DottxtRoute
   '/gathering/proof-table-008/t8': typeof GatheringProofTable008T8RouteWithChildren
   '/gathering/proof-table-008/t8.txt': typeof GatheringProofTable008T8DottxtRoute
   '/gathering/proof-table-008/t6-dossier': typeof GatheringProofTable008T6DossierRouteWithChildren
@@ -1974,6 +2018,10 @@ export interface FileRoutesByTo {
   '/salon/only-two-safe-moments.html': typeof SalonOnlyTwoSafeMomentsDothtmlRoute
   '/salon/only-two-safe-moments.txt': typeof SalonOnlyTwoSafeMomentsDottxtRoute
   '/salon/only-two-safe-moments.md': typeof SalonOnlyTwoSafeMomentsDotmdRoute
+  '/salon/only-one-on-the-line': typeof SalonOnlyOneOnTheLineRoute
+  '/salon/only-one-on-the-line.html': typeof SalonOnlyOneOnTheLineDothtmlRoute
+  '/salon/only-one-on-the-line.txt': typeof SalonOnlyOneOnTheLineDottxtRoute
+  '/salon/only-one-on-the-line.md': typeof SalonOnlyOneOnTheLineDotmdRoute
   '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
   '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
   '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
@@ -2037,6 +2085,8 @@ export interface FileRoutesByTo {
   '/gathering/proof-table-008/t6.txt': typeof GatheringProofTable008T6DottxtRoute
   '/gathering/proof-table-008/t7': typeof GatheringProofTable008T7RouteWithChildren
   '/gathering/proof-table-008/t7.txt': typeof GatheringProofTable008T7DottxtRoute
+  '/gathering/proof-table-008/t7-c45': typeof GatheringProofTable008T7C45Route
+  '/gathering/proof-table-008/t7-c45.txt': typeof GatheringProofTable008T7C45DottxtRoute
   '/gathering/proof-table-008/t8': typeof GatheringProofTable008T8RouteWithChildren
   '/gathering/proof-table-008/t8.txt': typeof GatheringProofTable008T8DottxtRoute
   '/gathering/proof-table-008/t6-dossier': typeof GatheringProofTable008T6DossierRouteWithChildren
@@ -2226,6 +2276,10 @@ export interface FileRoutesById {
   '/salon/only-two-safe-moments.html': typeof SalonOnlyTwoSafeMomentsDothtmlRoute
   '/salon/only-two-safe-moments.txt': typeof SalonOnlyTwoSafeMomentsDottxtRoute
   '/salon/only-two-safe-moments.md': typeof SalonOnlyTwoSafeMomentsDotmdRoute
+  '/salon/only-one-on-the-line': typeof SalonOnlyOneOnTheLineRoute
+  '/salon/only-one-on-the-line.html': typeof SalonOnlyOneOnTheLineDothtmlRoute
+  '/salon/only-one-on-the-line.txt': typeof SalonOnlyOneOnTheLineDottxtRoute
+  '/salon/only-one-on-the-line.md': typeof SalonOnlyOneOnTheLineDotmdRoute
   '/salon/lunch-007-report': typeof SalonLunch007ReportRoute
   '/salon/lunch-007-report.html': typeof SalonLunch007ReportDothtmlRoute
   '/salon/lunch-007-report.txt': typeof SalonLunch007ReportDottxtRoute
@@ -2290,6 +2344,8 @@ export interface FileRoutesById {
   '/gathering/proof-table-008/t6.txt': typeof GatheringProofTable008T6DottxtRoute
   '/gathering/proof-table-008/t7': typeof GatheringProofTable008T7RouteWithChildren
   '/gathering/proof-table-008/t7.txt': typeof GatheringProofTable008T7DottxtRoute
+  '/gathering/proof-table-008/t7-c45': typeof GatheringProofTable008T7C45Route
+  '/gathering/proof-table-008/t7-c45.txt': typeof GatheringProofTable008T7C45DottxtRoute
   '/gathering/proof-table-008/t8': typeof GatheringProofTable008T8RouteWithChildren
   '/gathering/proof-table-008/t8.txt': typeof GatheringProofTable008T8DottxtRoute
   '/gathering/proof-table-008/t6-dossier': typeof GatheringProofTable008T6DossierRouteWithChildren
@@ -2480,6 +2536,10 @@ export interface FileRouteTypes {
     | '/salon/only-two-safe-moments.html'
     | '/salon/only-two-safe-moments.txt'
     | '/salon/only-two-safe-moments.md'
+    | '/salon/only-one-on-the-line'
+    | '/salon/only-one-on-the-line.html'
+    | '/salon/only-one-on-the-line.txt'
+    | '/salon/only-one-on-the-line.md'
     | '/salon/lunch-007-report'
     | '/salon/lunch-007-report.html'
     | '/salon/lunch-007-report.txt'
@@ -2544,6 +2604,8 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-008/t6.txt'
     | '/gathering/proof-table-008/t7'
     | '/gathering/proof-table-008/t7.txt'
+    | '/gathering/proof-table-008/t7-c45'
+    | '/gathering/proof-table-008/t7-c45.txt'
     | '/gathering/proof-table-008/t8'
     | '/gathering/proof-table-008/t8.txt'
     | '/gathering/proof-table-008/t6-dossier'
@@ -2728,6 +2790,10 @@ export interface FileRouteTypes {
     | '/salon/only-two-safe-moments.html'
     | '/salon/only-two-safe-moments.txt'
     | '/salon/only-two-safe-moments.md'
+    | '/salon/only-one-on-the-line'
+    | '/salon/only-one-on-the-line.html'
+    | '/salon/only-one-on-the-line.txt'
+    | '/salon/only-one-on-the-line.md'
     | '/salon/lunch-007-report'
     | '/salon/lunch-007-report.html'
     | '/salon/lunch-007-report.txt'
@@ -2791,6 +2857,8 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-008/t6.txt'
     | '/gathering/proof-table-008/t7'
     | '/gathering/proof-table-008/t7.txt'
+    | '/gathering/proof-table-008/t7-c45'
+    | '/gathering/proof-table-008/t7-c45.txt'
     | '/gathering/proof-table-008/t8'
     | '/gathering/proof-table-008/t8.txt'
     | '/gathering/proof-table-008/t6-dossier'
@@ -2979,6 +3047,10 @@ export interface FileRouteTypes {
     | '/salon/only-two-safe-moments.html'
     | '/salon/only-two-safe-moments.txt'
     | '/salon/only-two-safe-moments.md'
+    | '/salon/only-one-on-the-line'
+    | '/salon/only-one-on-the-line.html'
+    | '/salon/only-one-on-the-line.txt'
+    | '/salon/only-one-on-the-line.md'
     | '/salon/lunch-007-report'
     | '/salon/lunch-007-report.html'
     | '/salon/lunch-007-report.txt'
@@ -3043,6 +3115,8 @@ export interface FileRouteTypes {
     | '/gathering/proof-table-008/t6.txt'
     | '/gathering/proof-table-008/t7'
     | '/gathering/proof-table-008/t7.txt'
+    | '/gathering/proof-table-008/t7-c45'
+    | '/gathering/proof-table-008/t7-c45.txt'
     | '/gathering/proof-table-008/t8'
     | '/gathering/proof-table-008/t8.txt'
     | '/gathering/proof-table-008/t6-dossier'
@@ -3899,6 +3973,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SalonOnlyTwoSafeMomentsDotmdRouteImport
       parentRoute: typeof SalonRoute
     }
+    '/salon/only-one-on-the-line': {
+      id: '/salon/only-one-on-the-line'
+      path: '/only-one-on-the-line'
+      fullPath: '/salon/only-one-on-the-line'
+      preLoaderRoute: typeof SalonOnlyOneOnTheLineRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/only-one-on-the-line.html': {
+      id: '/salon/only-one-on-the-line.html'
+      path: '/only-one-on-the-line.html'
+      fullPath: '/salon/only-one-on-the-line.html'
+      preLoaderRoute: typeof SalonOnlyOneOnTheLineDothtmlRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/only-one-on-the-line.txt': {
+      id: '/salon/only-one-on-the-line.txt'
+      path: '/only-one-on-the-line.txt'
+      fullPath: '/salon/only-one-on-the-line.txt'
+      preLoaderRoute: typeof SalonOnlyOneOnTheLineDottxtRouteImport
+      parentRoute: typeof SalonRoute
+    }
+    '/salon/only-one-on-the-line.md': {
+      id: '/salon/only-one-on-the-line.md'
+      path: '/only-one-on-the-line.md'
+      fullPath: '/salon/only-one-on-the-line.md'
+      preLoaderRoute: typeof SalonOnlyOneOnTheLineDotmdRouteImport
+      parentRoute: typeof SalonRoute
+    }
     '/salon/lunch-007-report': {
       id: '/salon/lunch-007-report'
       path: '/lunch-007-report'
@@ -4394,6 +4496,20 @@ declare module '@tanstack/react-router' {
       path: '/proof-table-008/t7.txt'
       fullPath: '/gathering/proof-table-008/t7.txt'
       preLoaderRoute: typeof GatheringProofTable008T7DottxtRouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/proof-table-008/t7-c45': {
+      id: '/gathering/proof-table-008/t7-c45'
+      path: '/proof-table-008/t7-c45'
+      fullPath: '/gathering/proof-table-008/t7-c45'
+      preLoaderRoute: typeof GatheringProofTable008T7C45RouteImport
+      parentRoute: typeof GatheringRoute
+    }
+    '/gathering/proof-table-008/t7-c45.txt': {
+      id: '/gathering/proof-table-008/t7-c45.txt'
+      path: '/proof-table-008/t7-c45.txt'
+      fullPath: '/gathering/proof-table-008/t7-c45.txt'
+      preLoaderRoute: typeof GatheringProofTable008T7C45DottxtRouteImport
       parentRoute: typeof GatheringRoute
     }
     '/gathering/proof-table-008/t8': {
@@ -5140,6 +5256,8 @@ interface GatheringRouteChildren {
   GatheringProofTable008T6DottxtRoute: typeof GatheringProofTable008T6DottxtRoute
   GatheringProofTable008T7Route: typeof GatheringProofTable008T7RouteWithChildren
   GatheringProofTable008T7DottxtRoute: typeof GatheringProofTable008T7DottxtRoute
+  GatheringProofTable008T7C45Route: typeof GatheringProofTable008T7C45Route
+  GatheringProofTable008T7C45DottxtRoute: typeof GatheringProofTable008T7C45DottxtRoute
   GatheringProofTable008T8Route: typeof GatheringProofTable008T8RouteWithChildren
   GatheringProofTable008T8DottxtRoute: typeof GatheringProofTable008T8DottxtRoute
   GatheringProofTable008T6DossierRoute: typeof GatheringProofTable008T6DossierRouteWithChildren
@@ -5230,6 +5348,8 @@ const GatheringRouteChildren: GatheringRouteChildren = {
   GatheringProofTable008T6DottxtRoute: GatheringProofTable008T6DottxtRoute,
   GatheringProofTable008T7Route: GatheringProofTable008T7RouteWithChildren,
   GatheringProofTable008T7DottxtRoute: GatheringProofTable008T7DottxtRoute,
+  GatheringProofTable008T7C45Route: GatheringProofTable008T7C45Route,
+  GatheringProofTable008T7C45DottxtRoute: GatheringProofTable008T7C45DottxtRoute,
   GatheringProofTable008T8Route: GatheringProofTable008T8RouteWithChildren,
   GatheringProofTable008T8DottxtRoute: GatheringProofTable008T8DottxtRoute,
   GatheringProofTable008T6DossierRoute: GatheringProofTable008T6DossierRouteWithChildren,
@@ -5421,6 +5541,10 @@ interface SalonRouteChildren {
   SalonOnlyTwoSafeMomentsDothtmlRoute: typeof SalonOnlyTwoSafeMomentsDothtmlRoute
   SalonOnlyTwoSafeMomentsDottxtRoute: typeof SalonOnlyTwoSafeMomentsDottxtRoute
   SalonOnlyTwoSafeMomentsDotmdRoute: typeof SalonOnlyTwoSafeMomentsDotmdRoute
+  SalonOnlyOneOnTheLineRoute: typeof SalonOnlyOneOnTheLineRoute
+  SalonOnlyOneOnTheLineDothtmlRoute: typeof SalonOnlyOneOnTheLineDothtmlRoute
+  SalonOnlyOneOnTheLineDottxtRoute: typeof SalonOnlyOneOnTheLineDottxtRoute
+  SalonOnlyOneOnTheLineDotmdRoute: typeof SalonOnlyOneOnTheLineDotmdRoute
   SalonLunch007ReportRoute: typeof SalonLunch007ReportRoute
   SalonLunch007ReportDothtmlRoute: typeof SalonLunch007ReportDothtmlRoute
   SalonLunch007ReportDottxtRoute: typeof SalonLunch007ReportDottxtRoute
@@ -5488,6 +5612,10 @@ const SalonRouteChildren: SalonRouteChildren = {
   SalonOnlyTwoSafeMomentsDothtmlRoute: SalonOnlyTwoSafeMomentsDothtmlRoute,
   SalonOnlyTwoSafeMomentsDottxtRoute: SalonOnlyTwoSafeMomentsDottxtRoute,
   SalonOnlyTwoSafeMomentsDotmdRoute: SalonOnlyTwoSafeMomentsDotmdRoute,
+  SalonOnlyOneOnTheLineRoute: SalonOnlyOneOnTheLineRoute,
+  SalonOnlyOneOnTheLineDothtmlRoute: SalonOnlyOneOnTheLineDothtmlRoute,
+  SalonOnlyOneOnTheLineDottxtRoute: SalonOnlyOneOnTheLineDottxtRoute,
+  SalonOnlyOneOnTheLineDotmdRoute: SalonOnlyOneOnTheLineDotmdRoute,
   SalonLunch007ReportRoute: SalonLunch007ReportRoute,
   SalonLunch007ReportDothtmlRoute: SalonLunch007ReportDothtmlRoute,
   SalonLunch007ReportDottxtRoute: SalonLunch007ReportDottxtRoute,

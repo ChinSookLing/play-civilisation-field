@@ -74,6 +74,8 @@ const files = {
   "SALON-JEV-001": ["src/lib/play/salon-jev.ts", "src/lib/play/salon-jev-001.md", "src/routes/salon/jev-controlled-probe-001.tsx", ...shared],
   "SALON-016": ["src/lib/play/salon-016.ts", "docs/salon/SALON-016-v3.md", "src/routes/salon/leave-none.tsx", ...shared],
   "SALON-017": ["src/lib/play/salon-017.ts", "docs/salon/SALON-017.md", "docs/salon/SALON-017.zh.md", "src/routes/salon/dust-out.tsx", "src/routes/salon/dust-out.index.tsx", "src/routes/salon/dust-out.zh.tsx", ...shared],
+  "PT008-T7-C45": ["src/lib/play/proof-table-008-t7-c45.ts", "docs/gathering/PT008-T7-C45.md", "src/routes/gathering/proof-table-008/t7-c45.tsx", ...shared],
+  "SALON-021": ["src/lib/play/salon-021.ts", "docs/salon/SALON-021-v0.1.md", "src/routes/salon/only-one-on-the-line.tsx", ...shared],
   "SALON-020": ["src/lib/play/salon-020.ts", "docs/salon/SALON-020-v0.1.md", "src/routes/salon/only-two-safe-moments.tsx", ...shared],
   "SALON-019": ["src/lib/play/salon-019.ts", "docs/salon/SALON-019-v0.1.md", "src/routes/salon/last-two-remainders.tsx", ...shared],
   "SALON-018": ["src/lib/play/salon-018.ts", "docs/salon/SALON-018-v0.2.md", "src/routes/salon/close-the-drawer.tsx", ...shared],

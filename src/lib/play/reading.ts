@@ -115,6 +115,16 @@ export function recordsText(extra?: {
   lines.push(`FORMATS: ${ORIGIN}/gathering/proof-table-008/t7.txt | ${ORIGIN}/gathering/proof-table-008/t7/verification.txt | ${ORIGIN}/gathering/proof-table-008/t7/verification.md | ${ORIGIN}/gathering/proof-table-008/t7/PT008-T7-Gathering-Review-v0.3.zip`);
   lines.push("RECORD: filed at Tuzi's request on 2026-11-13. Theorem T7. The review package is the uploaded zip. At filing, its three SHA256SUMS lists checked OK. The Python sweeps were not re-run. Author manuscripts named in proofs/README.md are still pending. One formula for every N remains open. The proof table stays open. T6 is not closed.");
   lines.push("");
+  lines.push("RECORD_ID: PT008-T7-C45");
+  lines.push("TYPE: gathering");
+  lines.push("TITLE: 七位跑者 · 整數選時與唯一邊界例");
+  lines.push("RECORD_STATUS: Filed. 2026-11-28. C45 closed inside the project. Q46 independent review still open. Not a change to the proof-table ledger.");
+  lines.push("MANUSCRIPT_SHA256: 7a9c5c968fdf303caaadb3c50892e5f900bc6cd9f222b55c73311d341f85b86f");
+  lines.push("ZIP_SHA256: 39e22f4e8f46d6a2186b6a61e9745329a42e88521cd8cbb783fc54d0dfa1bfdd");
+  lines.push(`RECORD_URL: ${ORIGIN}/gathering/proof-table-008/t7-c45`);
+  lines.push(`FORMATS: ${ORIGIN}/gathering/proof-table-008/t7-c45.txt | ${ORIGIN}/gathering/proof-table-008/t7-c45/PT008-TF-R003a-C45-Q46.md | ${ORIGIN}/gathering/proof-table-008/t7-c45/PT008-TF-R003a-C45-evidence.zip`);
+  lines.push("RECORD: filed at Tuzi's request on 2026-11-28. The earlier T7 v0.3 page is unchanged. Only (1,2,3,4,5,6) has no strict safe time. It still has closed safe times. One formula for every N remains open. The proof table stays open.");
+  lines.push("");
   lines.push("RECORD_ID: PT008-T6-DOSSIER");
   lines.push("TYPE: gathering");
   lines.push("TITLE: 六跑者構造性選時證明檔案");
@@ -227,6 +237,20 @@ export function recordsText(extra?: {
     `FORMATS: ${ORIGIN}/gathering/dinner-001.txt | ${ORIGIN}/gathering/dinner-001.html | ${ORIGIN}/gathering/dinner-001-index.txt | ${ORIGIN}/gathering/dinner-001-index.html | ${ORIGIN}/gathering/dinner-001.json`,
   );
   lines.push("RECORD: practice. Not a Field gathering.");
+  lines.push("");
+  lines.push("RECORD_ID: SALON-021");
+  lines.push("TYPE: salon");
+  lines.push("TITLE: SALON-021 · 第七位跑者：只有一組剛好踩線");
+  lines.push("ENGLISH: The Seventh Runner: Only One Set on the Line");
+  lines.push("SUBTITLE: 七跑者 · 整數分類（C45）");
+  lines.push("RECORD_STATUS: Filed. 2026-11-28. Not posted to X. The proof-table ledger is unchanged.");
+  lines.push("CATEGORY: 記");
+  lines.push("CREDIT: 初稿 Neon · 數學與文字校訂 GPT · 數字核對 Hesper · 統籌 Tuzi · 上牆 Bill。");
+  lines.push("REVIEW_NATURE: 敘事說明（narrative account）。不是證明全文，也不是逐字會議紀錄。數學結論依 C45 裁決。Q46 獨立覆核待完成。未經外部同行評審（not externally peer-reviewed）。");
+  lines.push("TEXT_SHA256: 690bf9a17769e2f9ff75ba3568639430b035f53793b1867ab86de309eb08b7b5");
+  lines.push(`RECORD_URL: ${ORIGIN}/salon/only-one-on-the-line`);
+  lines.push(`FORMATS: ${ORIGIN}/salon/only-one-on-the-line | ${ORIGIN}/salon/only-one-on-the-line.txt | ${ORIGIN}/salon/only-one-on-the-line.md | ${ORIGIN}/salon/only-one-on-the-line.html`);
+  lines.push("RECORD: Filed at Tuzi's request on 2026-11-28. Draft Neon. Mathematics and wording checked by GPT. Figures checked by Hesper. Tuzi coordinated. The story words are the supplied draft. Gathering 的 PT008 紀錄 links to the new T7 C45 page. It follows SALON-020. Not posted to X. The proof-table ledger is not changed by this page.");
   lines.push("");
   lines.push("RECORD_ID: SALON-020");
   lines.push("TYPE: salon");
